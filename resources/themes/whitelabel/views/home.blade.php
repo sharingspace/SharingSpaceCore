@@ -14,7 +14,7 @@
           @endif
         </p>
 
-        <p class="text-center"><a href="" class="btn btn-default">Browse Here</a></p>
+        <p class="text-center"><a href="" class="btn btn-default">{{ trans('general.browse_button') }}</a></p>
   </div><!--end row-->
 </section>
 @stop
