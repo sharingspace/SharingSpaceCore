@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+  
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -149,6 +149,8 @@ return [
          * Vendor service providers
         */
         YAAP\Theme\ThemeServiceProvider::class,
+        Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -199,6 +201,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Theme'     => YAAP\Theme\Facades\Theme::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 
     ],
 
