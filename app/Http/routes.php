@@ -41,7 +41,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
 });
 
-
+Route::get('/', array('as' => 'home', 'uses' => 'GroupsController@getListview'));
 
 Route::get('home', function () {
     return redirect('/');
