@@ -45,6 +45,7 @@ class SubdomainMiddleware
     $now = Carbon::now();
 
     $group = Group::where('subdomain', '=', $subdomain)
+    ->whereNotNull('subdomain')
     ->where('subdomain_expires_at', '>', $now)->first();
 
     if ($group) {
