@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,13 +10,7 @@
 |
 */
 
-Route::group(array('domain' => "{account}.".Config::get('app.domain')), function()
-{
 
-    Route::get('/', array(
-        'uses' 	=> 'PagesController@getHomepage'), function($account){
-    });
-});
 /*
 |--------------------------------------------------------------------------
 | Authentication and Authorization Routes
@@ -52,7 +45,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
 Route::get('home', function () {
     return redirect('/');
-});
+ });
 
 
 
