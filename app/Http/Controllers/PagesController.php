@@ -12,12 +12,14 @@ class PagesController extends Controller
 
   public function getHomepage()
   {
+
     if (Auth::check()) {
         // The user is logged in...
         $user = Auth::user();
         return view('home')->with('user',$user);
     }
-    return view('hello');
+
+    return view('home');
 
   }
 
