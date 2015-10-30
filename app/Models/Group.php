@@ -27,4 +27,18 @@ class Group extends Model
    	return $this->belongsToMany('User', 'hubgroups_users', 'hubgroup_id', 'user_id');
   }
 
+  public function getCover() {
+
+		if ($this->cover_img) {
+			$cover_img = Config::get('app.cdn.insecure').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->cover_img;
+		} else {
+			if($whiteLabel) {
+				$cover_img = Config::get('app.cdn.default').'/img/whitelabel/banner.jpg';
+			} else {
+				$cover_img = Config::get('app.cdn.default').'/img/mosaic_banner.jpg';
+			}
+		}
+		return $cover_img;
+	}
+
 }

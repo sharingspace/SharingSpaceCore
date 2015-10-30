@@ -52,6 +52,7 @@ class SubdomainMiddleware
       $request->valid_whitelabel = true;
       $request->whitelabel_group = $group;
       view()->share('whitelabel_group',$request->whitelabel_group);
+      view()->share('valid_whitelabel',$request->valid_whitelabel);
 
     } else {
       $request->valid_whitelabel = false;

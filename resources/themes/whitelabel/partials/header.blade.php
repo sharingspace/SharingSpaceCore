@@ -10,7 +10,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ url('home') }}">{{ $whitelabel_group->name }}</a>
+      <a class="navbar-brand" href="{{ url('home') }}">
+        @if ($whitelabel_group->logo!='')
+          <img src="{{ $whitelabel_group->getCover() }}" style="max-height: 30px;">
+        @else
+          {{ $whitelabel_group->name }}
+        @endif
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'cdn' => array(
+        'secure' => env('CDN_HTTPS'),
+        'insecure' => env('CDN_HTTP'),
+        'default' => env('CDN_DEFAULT'),
+	  ),
+
 ];
