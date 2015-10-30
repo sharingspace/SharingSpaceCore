@@ -5,7 +5,7 @@
 
 <section class="container">
    <div class="row">
-       <h2>Oh hai!</h2>
+       <h2>Welcome to AnySha.re</h2>
 </div><!--end row-->
 </section>
 @stop
