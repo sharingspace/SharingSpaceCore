@@ -48,5 +48,4 @@ Route::get('home', function () {
  });
 
 
-
-Route::get('/', 'PagesController@getHomepage');
+Route::get('/', array('as' => 'home', 'uses' => 'PagesController@getHomepage'));
