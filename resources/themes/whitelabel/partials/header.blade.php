@@ -12,7 +12,7 @@
       </button>
       <a class="navbar-brand" href="{{ url('home') }}">
         @if ($whitelabel_group->logo!='')
-          <img src="{{ $whitelabel_group->getCover() }}" style="max-height: 30px;">
+          <img src="{{ $whitelabel_group->getLogo() }}" style="max-height: 30px;">
         @else
           {{ $whitelabel_group->name }}
         @endif
@@ -44,6 +44,10 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
+
+<img src="{{ $whitelabel_group->getCover() }}">
 
 <section class="container">
     <div class="row">

@@ -31,15 +31,31 @@ class Group extends Model
   public function getCover() {
 
 		if ($this->cover_img) {
-			$cover_img = Config::get('app.cdn.insecure').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->cover_img;
+			$cover_img = Config::get('app.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->cover_img;
 		} else {
-			if($whiteLabel) {
-				$cover_img = Config::get('app.cdn.default').'/img/whitelabel/banner.jpg';
-			} else {
-				$cover_img = Config::get('app.cdn.default').'/img/mosaic_banner.jpg';
-			}
+			$cover_img = Config::get('services.cdn.default').'/img/whitelabel/banner.jpg';
 		}
 		return $cover_img;
+	}
+
+
+
+  public function getLogo() {
+
+		if ($this->logo) {
+			return Config::get('services.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->logo;
+		} else {
+			return null;
+		}
+	}
+
+	public function getProfileImg() {
+
+		if ($this->profile_img) {
+			return Config::get('app.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->profile_img;
+		} else {
+			return null;
+		}
 	}
 
 }
