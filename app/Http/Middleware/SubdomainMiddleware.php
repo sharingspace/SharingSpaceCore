@@ -44,20 +44,26 @@ class SubdomainMiddleware
     $subdomain = extract_subdomains($parsed_url['host']);
     $now = Carbon::now();
 
-    $group = Group::where('subdomain', '=', $subdomain)
-    ->whereNotNull('subdomain')
-    ->where('subdomain_expires_at', '>', $now)->first();
+    if ($subdomain!='') {
+      $group = Group::where('subdomain', '=', $subdomain)
+      ->whereNotNull('subdomain')
+      ->where('subdomain_expires_at', '>', $now)->first();
 
-    if ($group) {
+      if ($group) {
 
-      $request->valid_whitelabel = true;
-      $request->whitelabel_group = $group;
-      view()->share('whitelabel_group',$request->whitelabel_group);
-      view()->share('valid_whitelabel',$request->valid_whitelabel);
+        $request->valid_whitelabel = true;
+        $request->whitelabel_group = $group;
+        view()->share('whitelabel_group',$request->whitelabel_group);
+        view()->share('valid_whitelabel',$request->valid_whitelabel);
 
+      } else {
+        $request->valid_whitelabel = false;
+      }
+      
     } else {
       $request->valid_whitelabel = false;
     }
+
     return $next($request);
 
   }
