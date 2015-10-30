@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1de6140a3029d03ee425349edf347c0b",
+    "hash": "8ef5b9ebf374e59df18bca72ad4a1906",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -457,6 +457,51 @@
             "time": "2015-07-29 01:01:35"
         },
         {
+            "name": "chrisbjr/api-guard",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chrisbjr/api-guard.git",
+                "reference": "10ea99587972034318be2ecf44818114d03e4c21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chrisbjr/api-guard/zipball/10ea99587972034318be2ecf44818114d03e4c21",
+                "reference": "10ea99587972034318be2ecf44818114d03e4c21",
+                "shasum": ""
+            },
+            "require": {
+                "ellipsesynergie/api-response": "0.9.*",
+                "illuminate/database": "*",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chrisbjr\\ApiGuard\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Chris Bautista",
+                    "email": "chrisbjr@gmail.com"
+                }
+            ],
+            "description": "A simple way of authenticating your APIs with API keys using Laravel",
+            "homepage": "https://github.com/chrisbjr/api-guard",
+            "keywords": [
+                "api",
+                "api authentication",
+                "api keys",
+                "json",
+                "laravel",
+                "rest"
+            ],
+            "time": "2015-08-06 10:22:26"
+        },
+        {
             "name": "classpreloader/classpreloader",
             "version": "2.0.0",
             "source": {
@@ -777,6 +822,66 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
+        },
+        {
+            "name": "ellipsesynergie/api-response",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ellipsesynergie/api-response.git",
+                "reference": "62f0028fc5ca2011aa5ed61e5eac2c85e1883fb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ellipsesynergie/api-response/zipball/62f0028fc5ca2011aa5ed61e5eac2c85e1883fb5",
+                "reference": "62f0028fc5ca2011aa5ed61e5eac2c85e1883fb5",
+                "shasum": ""
+            },
+            "require": {
+                "league/fractal": "0.12.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/contracts": "~5.0",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EllipseSynergie\\ApiResponse\\": "src",
+                    "EllipseSynergie\\ApiResponse\\Tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Beaudoin",
+                    "email": "maxime.beaudoin@ellipse-synergie.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "email@philsturgeon.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple package to handle response properly in your API",
+            "homepage": "https://github.com/ellipsesynergie/api-response",
+            "keywords": [
+                "api",
+                "fractal",
+                "json"
+            ],
+            "time": "2015-03-19 17:10:02"
         },
         {
             "name": "erusev/parsedown",
@@ -1879,6 +1984,69 @@
                 "storage"
             ],
             "time": "2015-09-30 22:26:59"
+        },
+        {
+            "name": "league/fractal",
+            "version": "0.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/fractal.git",
+                "reference": "0a51dcb6398dc2377d086210d0624996a1df8322"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/0a51dcb6398dc2377d086210d0624996a1df8322",
+                "reference": "0a51dcb6398dc2377d086210d0624996a1df8322",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "illuminate/contracts": "~5.0",
+                "mockery/mockery": "~0.9",
+                "pagerfanta/pagerfanta": "~1.0.0",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5",
+                "zendframework/zend-paginator": "~2.3"
+            },
+            "suggest": {
+                "illuminate/pagination": "The Illuminate Pagination component.",
+                "pagerfanta/pagerfanta": "Pagerfanta Paginator",
+                "zendframework/zend-paginator": "Zend Framework Paginator"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "me@philsturgeon.uk",
+                    "homepage": "http://philsturgeon.uk/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle the output of complex data structures ready for API output.",
+            "homepage": "http://fractal.thephpleague.com/",
+            "keywords": [
+                "api",
+                "json",
+                "league",
+                "rest"
+            ],
+            "time": "2015-03-19 15:16:43"
         },
         {
             "name": "league/oauth1-client",

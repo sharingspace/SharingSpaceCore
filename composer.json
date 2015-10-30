@@ -17,7 +17,8 @@
       "laravel/framework": "5.1.*",
       "laravel/socialite": "^2.0",
       "php": ">=5.5.9",
-      "yaap/theme": "2.*"
+      "yaap/theme": "2.*",
+      "chrisbjr/api-guard": "^2.3"
     },
     "repositories": [
 		{
