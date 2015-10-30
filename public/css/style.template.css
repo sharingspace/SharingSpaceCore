@@ -1,0 +1,171 @@
+html { color:$ch_textcolor;}
+a { color:$ch_linkscolor;}
+#main article.hentry a { transition: color, background 200ms ease-in-out; -webkit-transition: color, background 200ms ease-in-out; -moz-transition: color, background 200ms ease-in-out; -o-transition: color, background 200ms ease-in-out; }
+#main article.hentry a:hover {color:$ch_textcolor; transition: color, background 200ms ease-in-out; -webkit-transition: color, background 200ms ease-in-out; -moz-transition: color, background 200ms ease-in-out; -o-transition: color, background 200ms ease-in-out; }
+#main article.hentry a.simple_button_link:hover, #main article.hentry a.simple_button_black:hover, #main article.hentry a.churchope_button:hover { color:#fff }
+header { background:$ch_headerbgcolor url('$ch_headerpattern') $ch_headerpattern_repeat $ch_headerpattern_x $ch_headerpattern_y;color:$ch_headertextcolor;}
+header a, header .grid_6 .widget_event li .descr { color:$ch_headertextcolor;}
+.logo a { font-family:$ch_gfont, Arial, Helvetica, sans-serif; letter-spacing:-3px }
+#color_header {background:$ch_menubgcolor url('$ch_menupattern') $ch_menupattern_repeat $ch_menupattern_x $ch_menupattern_y; }
+header .ribbon { border-top: 16px solid $ch_menubgcolor;border-left: 16px solid $ch_menubgcolor;border-right: 17px solid $ch_menubgcolor;}
+.sf-menu>li>a { text-transform:uppercase; color:$ch_menutextcolor;font-size:16px; font-family:$ch_gfont, Arial, Helvetica, sans-serif; letter-spacing:-1px; text-shadow: 1px 1px 0 rgba(0,0,0,0.2); }
+.sf-menu ul { background:#f9f9f9; }
+.sf-menu ul a { display:block; padding:12px 25px 14px; color:#403b3c; font-size: 13px; font-family:$ch_gfont, Arial, Helvetica, sans-serif; }
+.sf-menu ul a:hover, .sf-menu ul li.sfHover>a, .sf-menu ul li.active > a { color:#e8e8e8; background:#2b2324;}
+@media only screen and (max-width: 767px){ 
+	.sf-menu li.sfhover > a,
+	.sf-menu li:hover > a,
+	.sf-menu li.active > a,
+	.sf-menu li.current-menu-item > a  {color:#e8e8e8; background:#2b2324;}
+
+	.main_menu .sf-menu > li.active,
+	.main_menu .sf-menu  li  li.active,
+	.main_menu .sf-menu > li.sfHover,
+	.main_menu .sf-menu > li:hover,
+	.main_menu .sf-menu > li.current-menu-item,
+	.main_menu .sf-menu li  li.current-menu-item  {border-top:2px solid #c4c4c4; margin-top: -2px;}
+ }
+.sf-menu ul li:hover, .sf-menu ul li.sfHover { background:#2b2324; border-top:2px solid #c4c4c4; margin-top: -2px; transition: background 100ms ease-in-out; -webkit-transition: background 100ms ease-in-out; -moz-transition: background 100ms ease-in-out; -o-transition: background 100ms ease-in-out; }
+.events_calendar .calendar_header #previous_month, .events_calendar .calendar_header #next_month { color:$ch_textcolor;color:rgba($ch_textcolor_rgb, .8)}
+.events_calendar .day.today { border:4px solid $ch_linkscolor}
+.events_calendar .other_events,
+.events_calendar .today  .more a {background:$ch_linkscolor;}
+.events_calendar .multi:before {border-bottom-color:$ch_linkscolor;}
+.events_calendar .day:not(.empty):hover { border:4px solid $ch_linkscolor}
+.lt-ie9 .events_calendar .day:hover { border:4px solid $ch_linkscolor}
+.multi_button { background:$ch_linkscolor}
+#pagetitle, .cycle_content, .cycle_content a, .rev_slider,.rev_slider a { color:$ch_menutextcolor;}
+#menu-icon {color:$ch_menutextcolor;}
+#menu-icon em {background:$ch_menutextcolor;}
+#pagetitle h1, .cycle_content, .rev_slider, .teaser_title, .events_calendar .week span, .events_calendar .calendar_header span.month, #title_sidebar .textwidget h1, #title_sidebar .textwidget h2, #title_sidebar .textwidget h3, #title_sidebar .textwidget h4, #title_sidebar .textwidget h5, .offer_group .offer .title, .offer_group .offer .price, #stylechanger a.section_toggle { font-family:$ch_gfont, Arial, Helvetica, sans-serif; }
+#breadcrumbs { color: $ch_menutextcolor;color: rgba($ch_menutextcolor_rgb, .5)}
+#breadcrumbs a { color: $ch_menutextcolor;color: rgba($ch_menutextcolor_rgb, .8)}
+.events_calendar .day.has_event .event a, .offer_group .offer .title { color:$ch_headingscolor}
+.events_calendar .day.has_event .event a:hover { color:$ch_linkscolor !important}
+.events_calendar .day.has_event .event a .time { color:$ch_textcolor}
+.events_calendar .day.has_event .event a:hover .time { color:$ch_textcolor !important}
+#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {color:$ch_headingscolor; font-family:$ch_gfont, Arial, Helvetica, sans-serif; font-weight: 400; margin-top: 0; }
+#main h1, #main h2, #main h3 { letter-spacing: -1px; }
+
+.t_ico, .social_links:hover {background-color: $ch_linkscolor; transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+
+.jp-title { color:$ch_textcolor;color:rgba($ch_textcolor_rgb, .6)}
+.jp-play, .jp-pause, #main .jp-play, #main .jp-pause, .jp-play-bar, .jp-volume-bar-value {
+    background-color: $ch_linkscolor;
+}
+h4.trigger a, .ui-tabs .ui-tabs-nav li a { color:$ch_headingscolor;color:rgba($ch_headingscolor_rgb, .7)}
+h4.trigger.active a, .ui-tabs .ui-tabs-nav li.ui-tabs-selected a { color:$ch_headingscolor}
+div.filters ul li a { color:$ch_headingscolor;color:rgba($ch_headingscolor_rgb, .8)}
+div.filters ul li a.selected { color:$ch_headingscolor}
+.teaser_more, .blog_shortcode h2.entry-title:hover:after { background-color:$ch_linkscolor;}
+.simple_button_link {background:$ch_linkscolor; padding: 3px 9px 4px; display: inline-block; color:#fff; text-decoration: none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; margin-right: 7px; margin-bottom: 7px; }
+.simple_button_link:hover { background:#281e1f !important; }
+.simple_button_black { background:#281e1f; padding: 3px 9px 4px; display: inline-block; color:#fff; text-decoration: none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; margin-right: 7px; margin-bottom: 7px; }
+.simple_button_black:hover, .comment-reply-link:hover { background:$ch_linkscolor;}
+.imghover {background: $ch_linkscolor;background: rgba($ch_linkscolor_rgb, .9); position:absolute; z-index:2; }
+.adp-placemark { color:$ch_linkscolor !important;}
+.post_title_area .entry-title a, #main .gallery_listing h2.entry-title a, .blog_shortcode h2.entry-title a, .jp-title strong { color:$ch_headingscolor;}
+.post_title_area .entry-title a:hover, .postmeta a:hover, #main .gallery_listing h2.entry-title a:hover, .blog_shortcode h2.entry-title a:hover { color:$ch_linkscolor !important;}
+.postmeta a { color:$ch_textcolor;}
+.events .events_meta li.event_time { color:$ch_linkscolor;}
+.events .events_meta li.event_address { color:$ch_headingscolor;}
+.location-map-travelmode.selected, .location-map-travelmode:hover { background-color: $ch_linkscolor}
+.widget-title, .widget-title a, .widget_calendar caption {color:$ch_headingscolor; font-family:$ch_gfont, Arial, Helvetica, sans-serif; letter-spacing:-1px; font-size: 20px; font-weight: 400; text-decoration: none; }
+header .widget-title a, header .widget-title, header .widget_calendar caption {color:$ch_headertextcolor; text-decoration: none; text-transform: uppercase; font-size: 14px }
+#authorbox h5 { color:$ch_textcolor}
+.comment-meta .fn, .comment-meta .fn a, #authorbox h5 span { color:$ch_headingscolor;}
+.postdate strong.day, .schedule_time strong.time {color:$ch_headingscolor; font-family:$ch_gfont, Arial, Helvetica, sans-serif; letter-spacing:-1px; font-size: 36px; font-weight: 700; }
+.schedule_time strong.time {font-size: 20px;}
+.postdate strong.day img { margin-top: -8px }
+.postdate strong.month, .schedule_time_ampm {color:$ch_headingscolor; font-family:$ch_gfont, Arial, Helvetica, sans-serif; letter-spacing:-1px; font-size: 20px; font-weight: 400;line-height: 1.2 }
+.page-numbers li > a { color:$ch_headingscolor;}
+.page-numbers li > span { color:$ch_linkscolor;}
+
+.churchope_button, #commentform #submit {
+	position: relative;
+	text-decoration: none; font-size:12px; line-height: 15px; padding: 15px 23px 14px; 
+	display: inline-block; color:#fff; border:none; margin-bottom: 10px; margin-right: 7px;
+	border-radius: 3px;
+	text-align: center;
+}
+.churchope_button { background-color: $ch_linkscolor;}
+#commentform #submit, input.churchope_button {background: url(../images/bg_button.png) repeat-x 0 0 $ch_linkscolor; border-radius:3px;}
+
+.churchope_button:before, .churchope_button:after {content: '';display: block; position: absolute;width: 100%;left: 0;background-image: url(../images/bg_button.png);}
+.churchope_button:before { background-position: 0 0; height: 10px; top: 0;border-radius: 3px 3px 0 0;}
+.churchope_button:after { background-position: 0 100%; height: 10px; bottom: 0; border-radius: 0 0 3px 3px;}
+
+.churchope_button:hover, #commentform #submit:hover { padding-bottom: 12px; margin-top: 2px; vertical-align: bottom }
+
+
+#commentform #submit:hover { margin-top: 7px; }
+
+.location-map-button:hover { margin-top: 12px; margin-right: 6px }
+.widget_twitter .twitter-date, .widget_tag_cloud a { color:$ch_textcolor;}
+.widget_twitter ul li:hover:before { background-color: $ch_linkscolor}
+.widget_tag_cloud a:hover { color: $ch_linkscolor;}
+footer .widget_twitter .twitter-date, .widget_tag_cloud a { color:$ch_footertextcolor;}
+footer { background:$ch_footerbgcolor url('../images/bg_footer.png') repeat-x 0 0;color:$ch_footertextcolor}
+footer a { color:$ch_footerlinkscolor}
+.widget_nav_menu li:before, .widget_links li:before, .widget_meta li:before, .entry-content ul li:before { content: '\00b7'; color: $ch_headingscolor;font-size: 46px; position: absolute; top: 7px; left: 4px; font-family: "Times New Roman", sans-serif; }
+.widget_nav_menu a:hover, .widget_links a:hover, .widget_meta a:hover, .widget_nav_menu .current-menu-item>a { background-color: #fbfbfb; color:$ch_linkscolor;transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+.widget_nav_menu a, .widget_links a, .widget_meta a { color:$ch_textcolor;}
+header .widget_nav_menu a, header .widget_links a, header .widget_meta a { color:$ch_headertextcolor;}
+footer .widget_nav_menu a, footer .widget_links a, footer .widget_meta a { color:$ch_footertextcolor;}
+header .widget_nav_menu a:hover, header .widget_links a:hover, header .widget_meta a:hover { background: none }
+footer .widget_nav_menu a:hover, footer .widget_links a:hover, footer .widget_meta a:hover { background: #f0f0f0; color:$ch_footerlinkscolor; }
+header .widget_nav_menu li:before, header .widget_links li:before, header .widget_meta li:before { color: $ch_headertextcolor;}
+footer .widget_nav_menu li:before, footer .widget_links li:before, footer .widget_meta li:before { color: $ch_footerheadingscolor;}
+.widget_calendar td#today {border-color: $ch_linkscolor;background-color: $ch_linkscolor; color:#fff; box-shadow: none; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
+.widget_calendar tbody td a { color: #fff; text-decoration: none; background: $ch_headingscolor;padding: 7px 7px 18px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; display: block; margin: -7px -7px -18px }
+.widget_calendar tbody td#today a {background-color: $ch_linkscolor; color:#fff; }
+footer .widget_calendar td#today {border-color: $ch_footerlinkscolor;background-color: $ch_footerlinkscolor; color:#fff; }
+footer .widget_calendar tbody td a { color: #fff; background: $ch_footerheadingscolor;}
+
+.widget_archive li a, .widget_categories li a, .widget_pages li a, .widget_rss li a, .widget_sermon_categories li a { color:$ch_textcolor;}
+.widget_archive li a:hover, .widget_categories li a:hover, .widget_pages li a:hover, .widget_rss li a:hover, .widget_sermon_categories li a:hover { color:$ch_linkscolor;}
+
+header .widget_archive li a, header .widget_categories li a, header .widget_pages li a, header .widget_rss li a { color:$ch_headertextcolor;}
+.widget_archive li:before, .widget_categories li:before, .widget_pages li:before, .widget_rss li:before, .widget_sermon_categories li:before { content: '\00b7'; color: $ch_headingscolor;font-size: 46px; position: absolute; top: 0; left: 0; font-family: "Times New Roman", sans-serif; }
+header .widget_archive li:before, header .widget_categories li:before, header .widget_pages li:before, header .widget_rss li:before { color: $ch_headertextcolor;}
+footer .widget_archive li:before, footer .widget_categories li:before, footer .widget_pages li:before, footer .widget_rss li:before { color: $ch_footerheadingscolor;}
+
+.widget_recent_posts a, .widget_popular_posts a, .widget_recent_sermons a, .widget_sermon_speakers a, .widget_upcoming .entry-title, ul.upcoming_events .entry-title { color: $ch_headingscolor;}
+.widget_recent_sermons .recent_sermon_date, .widget_recent_posts p a, .widget_popular_posts p a, .widget_upcoming p a, .widget_recent_posts p, .widget_popular_posts p, .widget_upcoming p, ul.upcoming_events p { color: $ch_textcolor;color:rgba($ch_textcolor_rgb, .61)}
+.widget_recent_posts a:hover, .widget_recent_sermons a:hover, .widget_sermon_speakers a:hover, .widget_popular_posts li:hover a, .widget_upcoming li:hover .entry-title, ul.upcoming_events li:hover a.entry-title { color: $ch_linkscolor !important;}
+
+header .widget_recent_posts a, header .widget_popular_posts a, header .widget_upcoming .entry-title { color: $ch_headertextcolor;}
+header .widget_recent_posts a:hover, header .widget_popular_posts a:hover, header .widget_upcoming .entry-title:hover { color: $ch_headertextcolor;}
+
+footer .widget_recent_sermons a, footer .widget_sermon_speakers a,
+footer .widget_recent_posts a, footer .widget_popular_posts a, footer .widget_upcoming .entry-title { color: $ch_footerheadingscolor;}
+footer .widget_recent_sermons .recent_sermon_date, footer .widget_recent_posts p a, footer .widget_popular_posts p a, footer .widget_upcoming p a, footer .widget_recent_posts p, footer .widget_popular_posts p, footer .widget_upcoming p, footer ul.upcoming_events p { color: $ch_footertextcolor;color:rgba($ch_footertextcolor_rgb, .75)}
+
+footer .widget_recent_sermons a:hover, footer .widget_sermon_speakers a:hover,
+footer .widget_recent_posts a:hover, footer .widget_popular_posts a:hover, footer .widget_upcoming .entry-title:hover { color: $ch_footerlinkscolor;}
+
+.widget_feedburner button, .widget_contactform button, .mailchimp_button {background: $ch_linkscolor; border: none; color:#fff; padding: 5px 9px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+.widget_feedburner button:hover, .widget_contactform button:hover, .mailchimp_button:hover { background:#281e1f; transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+header .widget_feedburner button, header .widget_contactform button {background: $ch_menubgcolor; transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+footer .widget_feedburner button, footer .widget_contactform button {background: $ch_footerlinkscolor; transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+header .widget_testimonial .quote { color:$ch_textcolor;}
+.widget_testimonial .testimonial_author, .testimonial .testimonial_author { color:$ch_linkscolor;}
+header .widget_testimonial .testimonial_author { color:$ch_headertextcolor;}
+footer .widget_testimonial .testimonial_author { color:$ch_footerlinkscolor;}
+footer .widget-title, footer .widget-title a, footer .widget_calendar caption {color:$ch_footerheadingscolor; text-transform: uppercase; font-size: 16px; font-family:$ch_gfont, Arial, Helvetica, sans-serif; letter-spacing:-1px; font-weight: 500; text-decoration:none }
+#copyright p { color:$ch_footercopyrightcolor}
+#copyright p a { color:$ch_footercopyrightcolor}
+#copyright nav li a, footer .widget_social_links a, footer .widget_archive li a, footer .widget_categories li a, footer .widget_pages li a { color:$ch_footertextcolor;}
+footer .widget_social_links a:hover, footer .widget_archive li a:hover, footer .widget_categories li a:hover, footer .widget_pages li a:hover, footer .widget_tag_cloud a:hover { color:$ch_footerlinkscolor}
+#copyright nav li a:hover, #copyright nav li.current-menu-item a {color:$ch_footeractivemenucolor; background:#f0f0f0; transition: background 200ms ease-in-out; -webkit-transition: background 200ms ease-in-out; -moz-transition: background 200ms ease-in-out; -o-transition: background 200ms ease-in-out; }
+footer a, footer a:hover {transition: all 200ms ease-in-out; -webkit-transition: all 200ms ease-in-out; -moz-transition: all 200ms ease-in-out; -o-transition: all 200ms ease-in-out;}
+.sermon_attrs a.active, #main .th_sermons .sermon_attrs a.active:hover {background-color: $ch_linkscolor;}
+#main .th_sermons .sermon_attrs_blog a:hover{color: $ch_linkscolor;}
+.sermon_attrs a.active:after {border-bottom: 3px solid $ch_linkscolor;}
+#authorbox h5 .sermon_speaker {color:$ch_textcolor;}
+.sermon_speaker a {text-decoration: none; color: $ch_headingscolor;}
+.sermon_speaker a:hover {color: $ch_linkscolor;}
+
+body.boxed { 
+	background:$ch_boxedbackground url('$ch_boxedpattern') $ch_boxedpattern_repeat $ch_boxedpattern_x $ch_boxedpattern_y;
+}

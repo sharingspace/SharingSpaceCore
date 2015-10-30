@@ -1,0 +1,469 @@
+/* ==================================================================================================
+	BACKGROUND SIZE
+================================================================================================== */
+/* 	image size form main
+---------------------------------------------------------------------------------------------*/
+	header .ribbon_bg 											{ background-size: 41px 79px;}
+	header .ribbon span 										{ background-size: 41px 79px;}
+	
+	.mainmenu li.active > em,
+	.mainmenu li.active:hover > em,
+	.mainmenu li.sfHover.active > em 							{ background-size: 8px 4px;}
+
+	.mainmenu li:hover > em,
+	.mainmenu li.sfHover > em,
+	.mainmenu li.current-menu-item > em  						{ background-size: 4px 8px;}
+
+	.main_menu .hover 											{ background-size: 1px 67px;}
+	.sf-menu ul li.dropdown:before 								{ background-size: 4px 8px;}
+	#breadcrumbs 												{ background-size: 1px 200px;}
+	.jcyclemain .cycle_image .holder 							{ background-size: 1px 351px;}
+	a.cycle_btn,
+	.dialog_insert_button a.cycle_btn,
+	.rev_slider_wrapper a.cycle_btn,
+	.edit_slide_wrapper a.cycle_btn 							{ background-size: 19px 14px;}
+	.location-map-a 											{ background-size: 22px 22px;}
+	.location-map-b 											{ background-size: 22px 22px;}
+	#main 														{ background-size: 970px 214px;}
+	.imghover span 												{ background-size: 27px 27px;}
+	a.video .imghover span 										{ background-size: 11px 21px;}
+	.postdate 													{ background-size: 73px 73px;}
+	.postdate span 												{ background-size: 73px 73px;}
+	.location-map-swap 											{ background-size: 29px 31px;}
+	.events_calendar .calendar_header #next_month 				{ background-size: 17px 12px;}
+	.events_calendar .calendar_header #previous_month 			{ background-size: 17px 12px;}
+	.multi_button span 											{ background-size: 2px 1px;} 
+	.blog_shortcode h2.entry-title:after 						{ background-size: 4px 34px;}
+	.jp-volume 													{ background-size: 9px 12px;}
+	.th_notification.notification_mark 							{ background-size: 35px 35px;}
+	.th_notification.notification_error 						{ background-size: 35px 35px;}
+	.th_notification.notification_info 							{ background-size: 35px 35px;}
+	.th_notification.notification_warning 						{ background-size: 35px 35px;}
+	.th_notification.notification_mark_tiny 					{ background-size: 21px 20px;}
+	.th_notification.notification_error_tiny 					{ background-size: 21px 20px;}
+	.th_notification.notification_info_tiny 					{ background-size: 21px 20px;}
+	.th_notification.notification_warning_tiny 					{ background-size: 21px 20px;}
+	pre 														{ background-size: 1px 42px;}
+	.t_ico 														{ background-size: 13px 40px;}
+	.ui-tabs .ui-tabs-nav li 									{ background-size: 1px 11px;}
+	.dropcaps 													{ background-size: 44px 43px;}
+	a.th_totop 													{ background-size: 24px 14px;}
+	.stoggle  													{ background-size: 76px 154px;}
+	.widget_recent_sermons .recent_sermon_date					{ background-size: 13px 13px;}
+	.widget_event strong.three_ints 							{ background-size: 50px 45px;}
+	.widget_search #searchsubmit 								{ background-size: 27px 16px;}
+	.schedule_time  											{ background-size: 120px 63px;}
+	.schedule_time:after  										{ background-size: 14px 63px;}
+	.schedule_time > span  										{ background-size: 1px 73px;}
+	.widget_recent_posts ul li .recent_txt p 					{ background-size: 13px 13px;}
+	
+	.social_links, 												
+	.widget_social_links a:before 										{ background-size: 120px 1200px;}
+
+	.main_menu .hoverL, .main_menu .hoverR 						{ background-size: 21px 134px;}
+
+	#menu-icon div 												{ background-size: 19px 15px;}
+	.mainmenu 													{ background-size: 1px 10px;}
+	.jp-play 													{ background-size: 34px 26px;}
+	.jp-pause 													{ background-size: 34px 26px;}
+	.widget_twitter ul li:before 								{ background-size: 15px 12px;}
+	.widget_feedburner input,
+	.widget_mailchimp input.mailchimp_input,
+	.widget_contactform input, .widget_contactform textarea  	{ background-size: 29px 15px;}
+
+	.events_calendar .day.has_event .number a,
+	ul.upcoming_events p.meta_date a,
+	.widget_upcoming p.meta_date a,
+	.widget_event li a 											{ background-size: 41px 20px;}
+
+	header .widget_upcoming p.meta_date,
+	header .grid_6 .widget_event strong 						{ background-size: 46px 45px;}
+
+	header .grid_6 .widget_event strong.three_ints 				{ background-size: 50px 45px;}
+
+	header .widget_upcoming p.meta_date a,
+	header .grid_6 .widget_event li a 							{ background-size: 41px 20px;}
+
+	.postmeta .commentslink,
+	.widget_popular_posts ul li .recent_txt p,
+	.widget_recent_comments ul li 								{ background-size: 11px 10px;}
+
+	.quote:before, .entry-content blockquote:before,
+	.quote:before  												{ background-size: 44px 43px;}
+
+	#stylechanger a.section_toggle, 							
+	#stylechanger a.section_toggle.active  						{ background-size: 354px 68px;}
+
+	#slide_prev, #slide_next,
+	.tp-leftarrow.default, .tp-rightarrow.default				{ background-size: 100px 200px;}
+
+	.events_calendar .day.has_event .number,
+	ul.upcoming_events p.meta_date, 							
+	.widget_upcoming p.meta_date,  								
+	.widget_event strong 										{ background-size: 46px 45px;}
+
+	.tp-bullets.simplebullets.round .bullet,
+	#navjcycle a,
+	#navjcycle a:hover,
+	#navjcycle a.activeSlide 									{ background-size: 14px 7px;}
+
+	.page-template-template-rightsidebar-php #main,
+	.layout_right_sidebar #main 								{ background-size: 972px 214px;}
+
+	.page-template-template-leftsidebar-php #main,
+	.layout_left_sidebar #main 									{ background-size: 968px 214px;}
+
+	.autolink .imghover span, .jpg .imghover span,
+	.png .imghover span, .gif .imghover span 					{ background-size: 24px 24px;}
+
+	#commentform input#author,
+	.widget_contactform input.name,
+	.th_contact-form input.name,
+	.contact-form input.name,
+	.widget_mailchimp input.mailchimp-name,
+	.widget_mailchimp input.mailchimp-lastname					{ background-size: 29px 15px;}
+
+	#commentform input#email,
+	.th_contact-form input.email,
+	.contact-form input.email 									{ background-size: 29px 15px;}
+
+	#commentform input#url,
+	.th_contact-form input.url,
+	.contact-form input.url 									{ background-size: 29px 17px;}
+
+	.location-map-address-error,
+	.widget_contactform label.error,
+	.th_contact-form label.error,
+	.contact-form label.error 									{ background-size: 23px 21px;}
+
+	ul.page-numbers li > a, ul.page-numbers li > span 			{ background-size: 1px 7px;}
+
+	ul.page-numbers a.next, ul.page-numbers a.prev 				{ background-size: 68px 68px;}
+
+	.widget_recent_posts a.imgborder > span.placeholder span,
+	.widget_popular_posts a.imgborder > span.placeholder span,
+	.widget_recent_sermons a.imgborder > span.placeholder span 	{ background-size: 24px 28px;}
+
+	.widget_calendar tfoot #prev a,
+	.widget_calendar tfoot #next a,
+	.widget_testimonial .controls .prev,
+	.widget_testimonial .controls .next  						{ background-size: 41px 34px;}
+
+	.sermon_attrs li a:before,
+	.sermon_attrs_blog li a:before,
+	.widget_recent_sermons span a:before  						{ background-size: 10px 74px;} 
+
+	#commentform #submit, 
+	.churchope_button:before, .churchope_button:after 	{ background-size: 1px 44px;}
+
+	#main .gallery_listing .buttons, 							
+	.post_title_area,											
+	.events .events_meta, 										
+	.adp-list, 													
+	.adp-placemark, 												
+	.events_calendar .week, 										
+	.events_calendar .event_line, 								
+	.jp-title, 													
+	#footer_widgets .dotted, 									
+	.entry-content ul > li, 										
+	.entry-content ol > li,							
+	ul.upcoming_events li, 										
+	.widget_upcoming ul li,  									
+	.widget_calendar caption, 									
+	.widget_event, 												
+	.widget_event ul, 											
+	.widget_twitter ul li:after, 								
+	.widget_recent_comments ul li:after, 						
+	.single-th_galleries #main article h1.entry-title,
+	#main .gallery_listing h2.entry-title, 						
+	.grid_12 .widget_event:before,
+	.grid_6 .widget_event:before 								
+	.widget_nav_menu>div>ul >li, .widget_links >ul >li,
+	.widget_meta >ul >li,
+	.widget_nav_menu ul ul li, .widget_links ul ul li,
+	.widget_meta ul ul li, 										
+	.widget_recent_posts ul li,
+	.widget_popular_posts ul li,
+	.widget_recent_sermons ul li,
+	.widget_sermon_speakers ul li 								{ background-size: 2px 1px;}
+
+	div.filters ul li a, 										
+	div.filters ul li a.selected 								{ background-size: 3px 2px;}
+
+/* 	image size form @media
+---------------------------------------------------------------------------------------------*/
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		.page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main 							{ background-size: 776px 214px;}
+
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 								{ background-size: 776px 214px;}
+
+		.grid_6 .widget_event ul 								{ background-size: 2px 1px;}
+	}
+	@media only screen and (max-width: 767px) {
+		#main,
+		.page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main, 
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 								{ background-size: 336px 214px;}
+		
+		.grid_12 .widget_event ul,
+		.grid_6 .widget_event ul 								{ background-size: 2px 1px;}
+	}
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+		#main, .page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main,
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 								{ background-size: 492px 214px;}
+		
+		.grid_12 .widget_event:before,
+		.grid_6 .widget_event:before, .widget_event:before 		{ background-size: 2px 1px;}
+	}
+
+
+/* LIST IMAGES NOT FOUND
+---------------------------------------------------------------------------------------------*/	
+	.header_top 												{ /*-*/ background-size: 1px 4px; 		/*background-image: url('../images/retina/bg_header_top@2x.png');*/}
+	.header_bottom 												{ /*-*/ background-size: 1px 4px; 		/*background-image: url('../images/retina/bg_header_bottom@2x.png');*/}
+	.mainmenu li em 											{ /*-*/ background-size: 4px 8px; 		/*background-image: url("../images/retina/bg_dropdown.png");*/}
+	.mainmenu_inner 											{ /*-*/ background-size: 1px 3000px; 	/*background-image: url('../images/retina/bg_mainmenu_inner@2x.png');*/}
+	.sf-menu ul li 												{ /*-*/ background-size: 215px 25px; 	/*background-image: url('../images/retina/bg_dropdown_item@2x.png');*/}
+	.gray_line 													{ /*-*/ background-size: 1px 28px; 		/*background-image: url('../images/retina/bg_gray_line@2x.png');*/}
+	.location-map-travelmode 									{ /*-*/ background-size: 132px 90px; 	/*background-image: url('../images/retina/sprite_directions@2x.png');*/}
+	#sreset button  											{ /*-*/ background-size: 8px 8px; 		/*background-image: url('../images/retina/i_reset@2x.png');*/}
+	footer 														{ /*-*/ background-size: 1px 8px; 		/*background-image: url('../images/retina/bg_footer@2x.png');*/}
+	
+@media only screen and (max-width: 767px) {
+	.sf-menu > li 												{ /*-*/ background-size: 215px 25px; 	/*background-image: url('../images/retina/bg_dropdown_item@2x.png');*/}
+}
+
+
+/* ==================================================================================================
+	@2X IAMGES
+================================================================================================== */
+	@media only screen and ( -webkit-min-device-pixel-ratio: 1.5), only screen and ( min--moz-device-pixel-ratio: 1.5), only screen and ( -o-min-device-pixel-ratio: 3/2), only screen and ( min-device-pixel-ratio: 1.5) {
+		header .ribbon_bg 											{ background-image: url('../images/retina/ribbon_bg@2x.png');}
+		header .ribbon span 										{ background-image: url('../images/retina/ribbon@2x.png');}
+		
+		.mainmenu li.active > em,
+		.mainmenu li.active:hover > em,
+		.mainmenu li.sfHover.active > em 							{ background-image: url("../images/retina/bg_dropdown_d@2x.png");}
+		
+		.mainmenu li:hover > em,
+		.mainmenu li.sfHover > em,
+		.mainmenu li.current-menu-item > em  						{ background-image: url("../images/retina/bg_dropdown_white@2x.png");}
+
+		.main_menu .hover 											{ /*background-image: url('../images/retina/bg_active_menu@2x.png');*/}
+		.sf-menu ul li.dropdown:before 								{ background-image: url('../images/retina/bg_dropdown@2x.png');}
+		#breadcrumbs 												{ background-image: url('../images/retina/bg_breadcrumbs@2x.png');}
+		.jcyclemain .cycle_image .holder 							{ background-image: url('../images/retina/bg_cycle_image@2x.png');}
+		
+		a.cycle_btn,
+		.dialog_insert_button a.cycle_btn,
+		.rev_slider_wrapper a.cycle_btn,
+		.edit_slide_wrapper a.cycle_btn 							{ background-image: url('../images/retina/i_arrow@2x.png');}
+		
+		.location-map-a 											{ background-image: url('../images/retina/a@2x.png');}
+		.location-map-b 											{ background-image: url('../images/retina/b@2x.png');}
+		#main 														{ background-image: url('../images/retina/bg_main@2x.png');}
+		.imghover span 												{ background-image: url('../images/retina/i_more@2x.png');}
+		a.video .imghover span 										{ background-image: url('../images/retina/i_video@2x.png');}
+		.postdate 													{ background-image: url('../images/retina/bg_post_date@2x.png');}
+		.postdate span 												{ background-image: url('../images/retina/bg_post_date_span@2x.png');}
+		.location-map-swap 											{ background-image: url('../images/retina/i_swap@2x.png');}
+		.events_calendar .calendar_header #next_month 				{ background-image: url('../images/retina/bg_next_month@2x.png');}
+		.events_calendar .calendar_header #previous_month 			{ background-image: url('../images/retina/bg_previous_month@2x.png');}
+		.multi_button span 											{ background-image: url('../images/retina/bg_dots_white@2x.png');} 
+		.blog_shortcode h2.entry-title:after 						{ background-image: url('../images/retina/arrow_transparent@2x.png');}
+		.jp-volume 													{ background-image: url('../images/retina/i_volume@2x.png');}
+		.th_notification.notification_mark 							{ background-image: url('../images/retina/i_successful@2x.png');}
+		.th_notification.notification_error 						{ background-image: url('../images/retina/i_errorn@2x.png');}
+		.th_notification.notification_info 							{ background-image: url('../images/retina/i_info@2x.png');}
+		.th_notification.notification_warning 						{ background-image: url('../images/retina/i_warning@2x.png');}
+		.th_notification.notification_mark_tiny 					{ background-image: url('../images/retina/i_successful_tiny@2x.png');}
+		.th_notification.notification_error_tiny 					{ background-image: url('../images/retina/i_errorn_tiny@2x.png');}
+		.th_notification.notification_info_tiny 					{ background-image: url('../images/retina/i_info_tiny@2x.png');}
+		.th_notification.notification_warning_tiny 					{ background-image: url('../images/retina/i_warning_tiny@2x.png');}
+		pre 														{ background-image: url('../images/retina/bg_code@2x.png');}
+		.t_ico 														{ background-image: url('../images/retina/toggle@2x.png');}
+		.ui-tabs .ui-tabs-nav li 									{ background-image: url('../images/retina/separator@2x.png');}
+		.dropcaps 													{ background-image: url('../images/retina/dropcaps@2x.png');}
+		a.th_totop 													{ background-image: url('../images/retina/totop@2x.png');}
+		.stoggle  													{ background-image: url('../images/retina/bg_stoggle@2x.png');}
+		.widget_recent_sermons .recent_sermon_date					{ background-image: url('../images/retina/i_date_dark@2x.png');}
+		.widget_event strong.three_ints 							{ background-image: url('../images/retina/bg_counter_light_big@2x.png');}
+		.widget_search #searchsubmit 								{ background-image: url('../images/retina/b_search@2x.png'); background-position: 0 9px;}
+		.schedule_time  											{ background-image: url('../images/retina/bg_schedule_time_left@2x.png');}
+		.schedule_time:after  										{ background-image: url('../images/retina/bg_schedule_time_right@2x.png');}
+		.schedule_time > span  										{ background-image: url('../images/retina/bg_schedule_span@2x.png');}
+		.widget_recent_posts ul li .recent_txt p 					{ background-image: url('../images/retina/i_date@2x.png');}
+		
+		.social_links, 												
+		.widget_social_links a:before 										{ background-image: url('../images/retina/sprite_socialbuttons@2x.png');}
+
+		.main_menu .hoverL, .main_menu .hoverR 						{ background-image: url('../images/retina/bg_active_menu_shadows@2x.png');}
+
+		.events_calendar .day.has_event .number a,
+		ul.upcoming_events p.meta_date a,
+		.widget_upcoming p.meta_date a,
+		.widget_event li a 											{ background-image: url('../images/retina/bg_counter_a_light@2x.png');}
+
+		header .widget_upcoming p.meta_date,
+		header .grid_6 .widget_event strong 						{ background-image: url('../images/retina/bg_counter@2x.png');}
+
+		header .grid_6 .widget_event strong.three_ints 				{ background-image: url('../images/retina/bg_counter_big@2x.png');}
+
+		header .widget_upcoming p.meta_date a,
+		header .grid_6 .widget_event li a 							{ background-image: url('../images/retina/bg_counter_a@2x.png');}
+
+		.postmeta .commentslink,
+		.widget_popular_posts ul li .recent_txt p,
+		.widget_recent_comments ul li 								{ background-image: url('../images/retina/i_comments@2x.png');}
+
+		.quote:before, .entry-content blockquote:before,
+		.quote:before  												{ background-image: url('../images/retina/i_quote@2x.png');}
+
+		#stylechanger a.section_toggle, 							
+		#stylechanger a.section_toggle.active  						{ background-image: url('../images/retina/bg_preview_toggle@2x.png');}
+
+		#slide_prev, #slide_next,
+		.tp-leftarrow.default, .tp-rightarrow.default 				{ background-image: url('../images/retina/slide_navigation@2x.png');}
+
+		
+		#menu-icon div 												{ background-image: url("../images/retina/menu_icon@2x.png");}
+		.mainmenu 													{ background-image: url('../images/retina/bg_mainmenu@2x.png');}
+		.jp-play 													{ background-image: url('../images/retina/i_play@2x.png');}
+		.jp-pause 													{ background-image: url('../images/retina/i_pause@2x.png');}
+		.widget_twitter ul li:before 								{ background-image: url('../images/retina/i_twitter@2x.png');}
+		.widget_feedburner input,
+		.widget_mailchimp input.mailchimp_input,
+		.widget_contactform input, .widget_contactform textarea  	{ background-image: url('../images/retina/i_feedburner@2x.png');}
+
+
+
+		.events_calendar .day.has_event .number,
+		ul.upcoming_events p.meta_date, 							
+		.widget_upcoming p.meta_date,  								
+		.widget_event strong 										{ background-image: url('../images/retina/bg_counter_light@2x.png');}
+
+		.tp-bullets.simplebullets.round .bullet,
+		#navjcycle a,
+		#navjcycle a:hover,
+		#navjcycle a.activeSlide 									{ background-image: url('../images/retina/bg_dots@2x.png');}
+
+		.page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main 								{ background-image: url('../images/retina/bg_main_right@2x.png');}
+
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 									{ background-image: url('../images/retina/bg_main_left@2x.png');}
+
+		.autolink .imghover span, .jpg .imghover span,
+		.png .imghover span, .gif .imghover span 					{ background-image: url('../images/retina/i_zoom@2x.png');}
+
+		#commentform input#author,
+		.widget_contactform input.name,
+		.th_contact-form input.name,
+		.contact-form input.name,
+		.widget_mailchimp input.mailchimp-name,
+		.widget_mailchimp input.mailchimp-lastname					{ background-image: url('../images/retina/i_name@2x.png');}
+
+		#commentform input#email,
+		.th_contact-form input.email,
+		.contact-form input.email 									{ background-image: url('../images/retina/i_feedburner@2x.png');}
+
+		#commentform input#url,
+		.th_contact-form input.url,
+		.contact-form input.url 									{ background-image: url('../images/retina/i_website@2x.png');}
+
+		.location-map-address-error,
+		.widget_contactform label.error,
+		.th_contact-form label.error,
+		.contact-form label.error 									{ background-image: url('../images/retina/error@2x.png');}
+
+		ul.page-numbers li > a, ul.page-numbers li > span 			{ background-image: url('../images/retina/bg_pagination_dots@2x.png');}
+
+		ul.page-numbers a.next, ul.page-numbers a.prev 				{ background-image: url('../images/retina/bg_pagination@2x.png'); border-radius: 2px;}
+
+		.widget_recent_posts a.imgborder > span.placeholder span,
+		.widget_popular_posts a.imgborder > span.placeholder span,
+		.widget_recent_sermons a.imgborder > span.placeholder span 	{ background-image: url('../images/retina/i_placeholder@2x.png');}
+
+		.widget_calendar tfoot #prev a,
+		.widget_calendar tfoot #next a,
+		.widget_testimonial .controls .prev,
+		.widget_testimonial .controls .next  						{ background-image: url('../images/retina/i_cal_nav@2x.png');}
+
+		.sermon_attrs li a:before, .sermon_attrs_blog li a:before,
+		.widget_recent_sermons span a:before  						{ background-image: url('../images/retina/sermon_icons_sprite@2x.png');} 
+
+		#commentform #submit, 
+		.churchope_button:before, .churchope_button:after 	{ /*background-image: url('../images/retina/bg_button@2x.png');*/}
+		
+		#main .gallery_listing .buttons, 							
+		.post_title_area,											
+		.events .events_meta, 										
+		.adp-list, 													
+		.adp-placemark, 												
+		.events_calendar .week, 										
+		.events_calendar .event_line, 								
+		.jp-title, 													
+		#footer_widgets .dotted, 									
+		.entry-content ul > li, 										
+		.entry-content ol > li,							
+		ul.upcoming_events li, 										
+		.widget_upcoming ul li,  									
+		.widget_calendar caption, 									
+		.widget_event, 												
+		.widget_event ul, 											
+		.widget_twitter ul li:after, 								
+		.widget_recent_comments ul li:after, 						
+		.single-th_galleries #main article h1.entry-title,
+		#main .gallery_listing h2.entry-title, 						
+		.grid_12 .widget_event:before,
+		.grid_6 .widget_event:before 								
+		.widget_nav_menu>div>ul >li, .widget_links >ul >li,
+		.widget_meta >ul >li,
+		.widget_nav_menu ul ul li, .widget_links ul ul li,
+		.widget_meta ul ul li, 										
+		.widget_recent_posts ul li,
+		.widget_popular_posts ul li,
+		.widget_recent_sermons ul li,
+		.widget_sermon_speakers ul li 								{ background-image: url('../images/retina/bg_footer_widgets@2x.png');}
+
+		div.filters ul li a, 										
+		div.filters ul li a.selected 								{ background-image: url('../images/retina/bg_filter@2x.png');}
+
+	}
+
+/*		retina iamges on @media
+---------------------------------------------------------------------------------------------*/
+	@media only screen and ( -webkit-min-device-pixel-ratio: 1.5) and (min-width: 768px) and (max-width: 959px), only screen and ( min--moz-device-pixel-ratio: 1.5) and (min-width: 768px) and (max-width: 959px), only screen and ( -o-min-device-pixel-ratio: 3/2) and (min-width: 768px) and (max-width: 959px), only screen and ( min-device-pixel-ratio: 1.5) and (min-width: 768px) and (max-width: 959px) {
+		.page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main 								{ background-image: url('../images/retina/bg_main_right_2@2x.png');}
+
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 									{ background-image: url('../images/retina/bg_main_left_2@2x.png');}
+
+		.grid_6 .widget_event ul 									{ background-image: url('../images/retina/bg_footer_widgets@2x.png');}
+	}
+	@media only screen and ( -webkit-min-device-pixel-ratio: 1.5) and (max-width: 767px), only screen and ( min--moz-device-pixel-ratio: 1.5) and (max-width: 767px), only screen and ( -o-min-device-pixel-ratio: 3/2) and (max-width: 767px), only screen and ( min-device-pixel-ratio: 1.5) and (max-width: 767px) {
+		#main,
+		.page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main, 
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 									{ background-image: url('../images/retina/bg_main_4@2x.png');}
+
+		.grid_12 .widget_event ul,
+		.grid_6 .widget_event ul 									{ background-image: url('../images/retina/bg_footer_widgets@2x.png');}
+	}
+
+	@media only screen and ( -webkit-min-device-pixel-ratio: 1.5) and (min-width: 480px) and (max-width: 767px), only screen and ( min--moz-device-pixel-ratio: 1.5) and (min-width: 480px) and (max-width: 767px), only screen and ( -o-min-device-pixel-ratio: 3/2) and (min-width: 480px) and (max-width: 767px), only screen and ( min-device-pixel-ratio: 1.5) and (min-width: 480px) and (max-width: 767px) {
+		#main, .page-template-template-rightsidebar-php #main,
+		.layout_right_sidebar #main,
+		.page-template-template-leftsidebar-php #main,
+		.layout_left_sidebar #main 									{ background-image: url('../images/retina/bg_main_3@2x.png');}
+
+		.grid_12 .widget_event:before,
+		.grid_6 .widget_event:before, .widget_event:before 			{ background-image: url('../images/retina/bg_footer_widgets@2x.png');}
+	}
