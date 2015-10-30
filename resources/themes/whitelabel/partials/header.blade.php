@@ -46,8 +46,11 @@
 </nav>
 
 
+<div class="col-md-12" style="height: 200px;background-image: url({{ $whitelabel_group->getCover() }});">
 
-<img src="{{ $whitelabel_group->getCover() }}">
+</div>
+
+
 
 <section class="container">
     <div class="row">
