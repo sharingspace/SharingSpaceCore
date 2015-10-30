@@ -22,12 +22,22 @@ class Group extends Model
   }
 
 
-  /* Groups belong to many users by way of the hubgroups_users table */
+  /**
+  * Get the members of a group.
+  * Groups belong to many users by way of the hubgroups_users table.
+  *
+  * @return collection
+  */
   public function members()
   {
    	return $this->belongsToMany('User', 'hubgroups_users', 'hubgroup_id', 'user_id');
   }
 
+  /**
+  * Get the cover image url based on app environment
+  *
+  * @return string
+  */
   public function getCover() {
 
 		if ($this->cover_img!='') {
@@ -39,7 +49,11 @@ class Group extends Model
 	}
 
 
-
+  /**
+  * Get the logo image url based on app environment
+  *
+  * @return string
+  */
   public function getLogo() {
 
 		if ($this->logo) {
@@ -49,6 +63,11 @@ class Group extends Model
 		}
 	}
 
+  /**
+  * Get the profile image url based on app environment
+  *
+  * @return string
+  */
 	public function getProfileImg() {
 
 		if ($this->profile_img) {
