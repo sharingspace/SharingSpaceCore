@@ -30,7 +30,7 @@ class Group extends Model
 
   public function getCover() {
 
-		if ($this->cover_img) {
+		if ($this->cover_img!='') {
 			$cover_img = Config::get('services.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->cover_img;
 		} else {
 			$cover_img = Config::get('services.cdn.default').'/img/whitelabel/banner.jpg';
