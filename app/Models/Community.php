@@ -1,12 +1,11 @@
 <?php
-
 namespace App;
-
 
 use Illuminate\Database\Eloquent\Model;
 use Config;
+use App\User;
 
-class Group extends Model
+class Community extends Model
 {
 
   /**
@@ -30,7 +29,7 @@ class Group extends Model
   */
   public function members()
   {
-   	return $this->belongsToMany('User', 'hubgroups_users', 'hubgroup_id', 'user_id');
+   	return $this->belongsToMany('App\User', 'hubgroups_users', 'hubgroup_id', 'user_id');
   }
 
   /**

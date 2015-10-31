@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0bdb0b8f8a638539f2c4e485397a7c27",
+    "hash": "8e2344b10656486888a115a94256eef5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -889,12 +889,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "b008290917647a11cc9fb69dc3a3d4ed0bf403c7"
+                "reference": "c046a6b6469f7ffc99ccfdc96dbe63b3587f4eca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/b008290917647a11cc9fb69dc3a3d4ed0bf403c7",
-                "reference": "b008290917647a11cc9fb69dc3a3d4ed0bf403c7",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c046a6b6469f7ffc99ccfdc96dbe63b3587f4eca",
+                "reference": "c046a6b6469f7ffc99ccfdc96dbe63b3587f4eca",
                 "shasum": ""
             },
             "type": "library",
@@ -920,7 +920,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-10-25 14:42:45"
+            "time": "2015-10-31 18:08:48"
         },
         {
             "name": "graham-campbell/digitalocean",

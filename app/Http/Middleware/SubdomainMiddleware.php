@@ -44,7 +44,7 @@ class SubdomainMiddleware
     $subdomain = extract_subdomains($parsed_url['host']);
     $now = Carbon::now();
 
-    if ($subdomain!='') {
+    if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api')) {
       $group = Group::where('subdomain', '=', $subdomain)
       ->whereNotNull('subdomain')
       ->where('subdomain_expires_at', '>', $now)->first();
@@ -59,7 +59,7 @@ class SubdomainMiddleware
       } else {
         $request->valid_whitelabel = false;
       }
-      
+
     } else {
       $request->valid_whitelabel = false;
     }
