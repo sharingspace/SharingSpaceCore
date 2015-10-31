@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Config;
-use App\Group;
+use App\Community;
 use Carbon\Carbon;
 
 function extract_domain($domain)
@@ -45,7 +45,7 @@ class SubdomainMiddleware
     $now = Carbon::now();
 
     if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api')) {
-      $group = Group::where('subdomain', '=', $subdomain)
+      $group = Community::where('subdomain', '=', $subdomain)
       ->whereNotNull('subdomain')
       ->where('subdomain_expires_at', '>', $now)->first();
 
