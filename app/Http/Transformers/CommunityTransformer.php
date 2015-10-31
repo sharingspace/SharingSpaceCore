@@ -6,6 +6,7 @@ class CommunityTransformer {
 
     public function transform(Community $community) {
         return [
+            'id' => $community->hubgroup_id,
             'name' => $community->name,
             'about' => $community->about,
             'created_at' => $community->created_at,
