@@ -10,6 +10,16 @@ use App\Http\Transformers\CommunityTransformer;
 class CommunitiesController extends ApiGuardController
 {
 
+  protected $apiMethods = [
+      'all' => [
+          'keyAuthentication' => false
+      ],
+      'show' => [
+          'keyAuthentication' => false
+      ],
+  ];
+
+
     public function all()
     {
         $communities = Community::with('members')->get();
