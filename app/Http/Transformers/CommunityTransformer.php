@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Transformers;
 use App\Community;
+use App\User;
 
 class CommunityTransformer {
 
@@ -21,4 +22,16 @@ class CommunityTransformer {
         ];
     }
 
+
+}
+
+class MemberlistTransformer {
+
+  public function transform(User $members) {
+      return [
+          'id' => $members->id,
+          'name' => $members->displayname,
+
+      ];
+  }
 }

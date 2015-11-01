@@ -116,4 +116,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return static::create($data);
     }
+
+
+    public function communities()
+    {
+        return $this->belongsToMany('Community', 'hubgroups_users','user_id','hubgroup_id');
+    }
 }

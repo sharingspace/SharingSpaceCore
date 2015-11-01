@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use App\Community;
 use App\Http\Transformers\CommunityTransformer;
+use App\Http\Transformers\MemberlistTransformer;
 
 class CommunitiesController extends ApiGuardController
 {
@@ -15,6 +16,9 @@ class CommunitiesController extends ApiGuardController
           'keyAuthentication' => false
       ],
       'show' => [
+          'keyAuthentication' => false
+      ],
+      'memberlist' => [
           'keyAuthentication' => false
       ],
   ];
@@ -39,5 +43,17 @@ class CommunitiesController extends ApiGuardController
         }
     }
 
+    public function memberlist($id)
+    {
+        try {
+
+            $members = Community::find($id)->members;
+            return $this->response->withCollection($members, new MemberlistTransformer);
+
+        } catch (ModelNotFoundException $e) {
+            return $this->response->errorNotFound();
+
+        }
+    }
 
 }
