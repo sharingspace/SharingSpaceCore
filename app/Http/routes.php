@@ -14,7 +14,9 @@
 Route::get('api/v1/groups', '\App\Http\Controllers\Api\CommunitiesController@all');
 Route::get('api/v1/groups/{id}', '\App\Http\Controllers\Api\CommunitiesController@show');
 Route::get('api/v1/groups/{id}/members', '\App\Http\Controllers\Api\CommunitiesController@memberlist');
-
+Route::get('api/v1/groups/{id}/entries', '\App\Http\Controllers\Api\EntriesController@entrylist');
+Route::get('api/v1/entries/{id}', '\App\Http\Controllers\Api\EntriesController@show');
+Route::get('api/v1/entries', '\App\Http\Controllers\Api\EntriesController@all');
 
 
 
