@@ -30,7 +30,7 @@ class MemberlistTransformer {
   public function transform(User $members) {
       return [
           'id' => $members->id,
-          'name' => $members->displayname,
+          'name' => $members->fullName(),
           'admin' => $members->is_admin,
 
       ];
