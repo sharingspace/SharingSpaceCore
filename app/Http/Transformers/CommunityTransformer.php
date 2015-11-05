@@ -31,6 +31,7 @@ class MemberlistTransformer {
       return [
           'id' => $members->id,
           'name' => $members->displayname,
+          'admin' => $members->is_admin,
 
       ];
   }
