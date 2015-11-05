@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ Config::get('app.url') }}">AnySha.re</a>
+      <a class="navbar-brand" href="{{ Config::get('app.url') }}"><img src="/img/any-share-logo-cloud-400.png" class="logo" style="max-height: 30px;"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
