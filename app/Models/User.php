@@ -122,4 +122,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('Community', 'hubgroups_users','user_id','hubgroup_id');
     }
+
+
+    /**
+    * Returns the user full name, it simply concatenates
+    * the user first and last name.
+    *
+    * @return string
+    */
+    public function fullName()
+    {
+
+      if ($this->displayname){
+        return ucwords($this->displayname);
+      } elseif (($this->first_name) && ($this->last_name)){
+      	 return "{$this->first_name} {$this->last_name}";
+      } elseif ($this->first_name){
+      	 return $this->first_name;
+      } else {
+      	 return "Anonymous";
+      }
+
+    }
 }
