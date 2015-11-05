@@ -25,7 +25,7 @@ class EntriesController extends ApiGuardController
 
     public function all()
     {
-        $entries = Entry::with('author')->get();
+        $entries = Entry::with('author')->paginate(50);
         return $this->response->withCollection($entries, new \App\Http\Transformers\EntriesTransformer);
     }
 

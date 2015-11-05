@@ -26,7 +26,7 @@ class CommunitiesController extends ApiGuardController
 
     public function all()
     {
-        $communities = Community::with('members')->get();
+        $communities = Community::with('members')->paginate(50);
         return $this->response->withCollection($communities, new CommunityTransformer);
     }
 
