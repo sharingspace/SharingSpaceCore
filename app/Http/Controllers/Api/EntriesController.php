@@ -17,6 +17,9 @@ class EntriesController extends ApiGuardController
       'show' => [
           'keyAuthentication' => false
       ],
+      'entrylist' => [
+          'keyAuthentication' => false
+      ],
   ];
 
 
