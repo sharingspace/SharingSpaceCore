@@ -13,6 +13,8 @@
 
 Route::get('api/v1/groups', '\App\Http\Controllers\Api\CommunitiesController@all');
 Route::get('api/v1/groups/{id}', '\App\Http\Controllers\Api\CommunitiesController@show');
+Route::get('api/v1/members/{id}', '\App\Http\Controllers\Api\UsersController@show');
+Route::get('api/v1/members', '\App\Http\Controllers\Api\UsersController@all');
 Route::get('api/v1/groups/{id}/members', '\App\Http\Controllers\Api\CommunitiesController@memberlist');
 Route::get('api/v1/groups/{id}/entries', '\App\Http\Controllers\Api\EntriesController@entrylist');
 Route::get('api/v1/entries/{id}', '\App\Http\Controllers\Api\EntriesController@show');
