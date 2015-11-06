@@ -21,7 +21,7 @@ class UsersController extends ApiGuardController
 
   public function all()
   {
-      $users = User::paginate(50);
+      $users = User::paginate(20);
       return $this->response->withCollection($users, new \App\Http\Transformers\UserTransformer);
   }
 
