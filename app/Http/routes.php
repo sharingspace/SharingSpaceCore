@@ -40,6 +40,9 @@ Route::group(array('prefix' => 'api/v1'), function () {
 
 });
 
+
+Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
+
 /*
 |--------------------------------------------------------------------------
 | Authentication and Authorization Routes
@@ -79,6 +82,7 @@ Route::get('browse', array('as' => 'browse', 'uses' => 'CommunitiesController@ge
 Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'CommunitiesController@getEntriesDataView'));
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Default homepage stuff
@@ -91,3 +95,4 @@ Route::get('home', function () {
 
 
 Route::get('/', array('as' => 'home', 'uses' => 'PagesController@getHomepage'));
+});
