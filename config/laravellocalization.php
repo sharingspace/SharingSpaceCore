@@ -46,7 +46,7 @@ return [
 		//'en-AU'       => ['name' => 'Australian English',     'script' => 'Latn', 'native' => 'Australian English'],
 		//'en-GB'       => ['name' => 'British English',        'script' => 'Latn', 'native' => 'British English'],
 		//'en-US'       => ['name' => 'U.S. English',           'script' => 'Latn', 'native' => 'U.S. English'],
-		//'es'          => ['name' => 'Spanish',                'script' => 'Latn', 'native' => 'español'],
+		'es'          => ['name' => 'Spanish',                'script' => 'Latn', 'native' => 'español'],
 		//'eo'          => ['name' => 'Esperanto',              'script' => 'Latn', 'native' => 'esperanto'],
 		//'eu'          => ['name' => 'Basque',                 'script' => 'Latn', 'native' => 'euskara'],
 		//'ewo'         => ['name' => 'Ewondo',                 'script' => 'Latn', 'native' => 'ewondo'],
