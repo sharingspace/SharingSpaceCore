@@ -23,8 +23,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Browse <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Add <span class="sr-only">(current)</span></a></li>
+        <li><a href="{{ route('browse') }}">Browse <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Add </a></li>
 
 		  @if (Auth::check())
 		  <li class="dropdown">
