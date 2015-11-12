@@ -18,7 +18,8 @@
       "laravel/socialite": "^2.0",
       "php": ">=5.5.9",
       "yaap/theme": "2.*",
-      "chrisbjr/api-guard": "^2.3"
+      "chrisbjr/api-guard": "^2.3",
+      "mcamara/laravel-localization": "1.0.*"
     },
     "repositories": [
 		{
