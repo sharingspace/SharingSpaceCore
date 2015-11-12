@@ -24,13 +24,13 @@
 		  <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ $user->gravatar() }}" class="avatar">{{ $user->name }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="{{ route('logout') }}">Logout</a></li>
+              <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} <</a></li>
             </ul>
           </li>
 
 		  @else
-		  	<li><a href="{{ route('login') }}">Login</a> </li>
-			<li><a href="{{ route('register') }}">Register</a></li>
+		  	<li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} <</a> </li>
+			<li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} <</a></li>
 		  @endif
 
 
