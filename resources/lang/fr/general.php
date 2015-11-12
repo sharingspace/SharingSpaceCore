@@ -27,5 +27,14 @@ return [
           'created_at' => 'Crée',
     ],
 
+    'user'  => [
+      'first_name'  => 'Prénom',
+      'last_name'  => 'Nom de famille',
+      'display_name'  => 'Du nom d\'affichage',
+      'email'  => 'Courriel',
+      'password'  => 'Mot de passe',
+      'confirm_password'  => 'Confirmer mot de passe',
+    ],
+
 
 ];

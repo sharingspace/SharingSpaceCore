@@ -20,7 +20,7 @@
 
             <div class="form-group col-md-12 {{ $errors->first('first_name', ' has-error') }}">
                 <div class="col-md-3">
-                    <label for="first_name"{{ $errors->first('first_name', ' aria-invalid="true"') }}>First Name</label>
+                    <label for="first_name"{{ $errors->first('first_name', ' aria-invalid="true"') }}>{{ trans('general.user.first_name') }}</label>
                 </div>
                 <div class="col-md-9">
                     <input type="text" name="first_name" value="{{ old('first_name') }}">
@@ -30,7 +30,7 @@
 
             <div class="form-group col-md-12 {{ $errors->first('last_name', ' has-error') }}">
                 <div class="col-md-3">
-                    <label for="last_name"{{ $errors->first('last_name', ' aria-invalid="true"') }}>Last Name</label>
+                    <label for="last_name"{{ $errors->first('last_name', ' aria-invalid="true"') }}>{{ trans('general.user.last_name') }}</label>
                 </div>
                 <div class="col-md-9">
                     <input type="text" name="last_name" value="{{ old('last_name') }}">
@@ -40,7 +40,7 @@
 
             <div class="form-group col-md-12 {{ $errors->first('email', ' has-error') }}">
                 <div class="col-md-3">
-                    <label for="email"{{ $errors->first('email', ' aria-invalid="true"') }}>Email</label>
+                    <label for="email"{{ $errors->first('email', ' aria-invalid="true"') }}>{{ trans('general.user.email') }}</label>
                 </div>
                 <div class="col-md-9">
                     <input type="email" name="email" value="{{ old('email') }}">
@@ -50,7 +50,7 @@
 
             <div class="form-group col-md-12 {{ $errors->first('password', ' has-error') }}">
                 <div class="col-md-3">
-                    <label for="password"{{ $errors->first('password', ' aria-invalid="true"') }}>Password</label>
+                    <label for="password"{{ $errors->first('password', ' aria-invalid="true"') }}>{{ trans('general.user.password') }}</label>
                 </div>
                 <div class="col-md-9">
                     <input type="password" name="password" value="{{ old('password') }}">
@@ -60,7 +60,7 @@
 
             <div class="form-group col-md-12 {{ $errors->first('password_confirmation', ' has-error') }}">
                 <div class="col-md-3">
-                    <label for="password_confirmation"{{ $errors->first('password_confirmation', ' aria-invalid="true"') }}>Confirm Password</label>
+                    <label for="password_confirmation"{{ $errors->first('password_confirmation', ' aria-invalid="true"') }}>{{ trans('general.user.confirm_password') }}</label>
                 </div>
                 <div class="col-md-9">
                     <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}">
@@ -70,7 +70,7 @@
 
 
             <div class="form-group col-md-3">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">{{ trans('general.nav.register') }}</button>
             </div>
         </form>
 

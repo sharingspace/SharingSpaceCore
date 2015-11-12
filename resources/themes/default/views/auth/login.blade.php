@@ -22,10 +22,10 @@
                 <input name="password" type="password" placeholder="Password">
                 <div class="checkbox">
                     <input id="check-log" name="remember" type="checkbox" checked>
-                    <label for="check-log">Remember me</label>
+                    <label for="check-log">{{ trans('auth.remember_me') }}</label>
                 </div>
-                <a class="form__link" href="#" title="Forgot password">Forgot password?</a>
-                <button type="submit" class="btn btn-primary btn-submit">Login</button>
+                <a class="form__link" href="#" title="Forgot password">{{ trans('auth.forgot_password') }}</a>
+                <button type="submit" class="btn btn-primary btn-submit">{{ trans('general.login') }}</button>
             </form>
         </div><!--end col-sm-6-->
         <!-- End login form -->

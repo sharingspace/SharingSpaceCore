@@ -20,7 +20,7 @@
 
             <div class="form-group col-md-12 {{ $errors->first('first_name', ' has-error') }}">
                 <div class="col-md-3">
-                    <label for="first_name"{{ $errors->first('first_name', ' aria-invalid="true"') }}>First Name</label>
+                    <label for="first_name"{{ $errors->first('first_name', ' aria-invalid="true"') }}>{{ trans('general.users.first_name') }}</label>
                 </div>
                 <div class="col-md-9">
                     <input type="text" name="first_name" value="{{ old('first_name') }}">

@@ -27,4 +27,13 @@ return [
           'created_at' => 'Created',
     ],
 
+    'user'  => [
+      'first_name'  => 'First Name',
+      'last_name'  => 'Last Name',
+      'display_name'  => 'Display Name',
+      'email'  => 'Email',
+      'password'  => 'Password',
+      'confirm_password'  => 'Confirm Password',
+    ],
+
 ];

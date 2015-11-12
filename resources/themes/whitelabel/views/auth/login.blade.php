@@ -15,17 +15,17 @@
     <div class="row">
         <!-- Login form -->
         <div class="col-sm-6">
-            <h3>Login</h3>
+            <h3>{{ trans('general.nav.login') }}</h3>
             <form class="form" id="login-form" name="login-form" action="/auth/login" method="post">
                 {!! csrf_field() !!}
                 <input name="email" type="text" placeholder="Email">
                 <input name="password" type="password" placeholder="Password">
                 <div class="checkbox">
                     <input id="check-log" name="remember" type="checkbox" checked>
-                    <label for="check-log">Remember me</label>
+                    <label for="check-log">{{ trans('auth.remember_me') }}</label>
                 </div>
-                <a class="form__link" href="#" title="Forgot password">Forgot password?</a>
-                <button type="submit" class="btn btn-primary btn-submit">Login</button>
+                <a class="form__link" href="#" title="Forgot password">{{ trans('auth.forgot_password') }}</a>
+                <button type="submit" class="btn btn-primary btn-submit">{{ trans('general.nav.login') }}</button>
             </form>
         </div><!--end col-sm-6-->
         <!-- End login form -->
@@ -34,19 +34,19 @@
         <div class="col-sm-6 col-md-3 col-xs-12">
 
             <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
-                <i class="fa fa-facebook"></i> Sign in with Facebook
+                <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
             </a>
 
             <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
-             <i class="fa fa-twitter"></i> Sign in with Twitter
+             <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
             </a>
 
             <a class="btn btn-block btn-social btn-google" href="/auth/google">
-              <i class="fa fa-google"></i> Sign in with Google
+              <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
             </a>
 
             <a class="btn btn-block btn-social btn-github" href="/auth/github">
-               <i class="fa fa-github"></i> Sign in with Github
+               <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
             </a>
 
 

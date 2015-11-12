@@ -15,5 +15,8 @@ return [
 
     'failed' => 'Ces informations d\'identification ne correspondent pas à nos dossiers.',
     'throttle' => 'Trop de tentatives de connexion. S\'il vous plaît essayer à nouveau dans :seconds secondes.',
+    'remember_me' => 'Se souvenir de moi',
+    'forgot_password' => 'Mot de passe oublié?',
+    'sign_in_with' => 'Connectez-vous avec :social_network',
 
 ];
