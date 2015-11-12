@@ -163,6 +163,7 @@ return [
         YAAP\Theme\ThemeServiceProvider::class,
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
     ],
 
@@ -214,6 +215,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Theme'     => YAAP\Theme\Facades\Theme::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
 
     ],
 
