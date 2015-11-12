@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
 
+
 class Community extends Model
 {
 
@@ -18,6 +19,16 @@ class Community extends Model
 
   public function user() {
       return $this->belongsTo('User', 'user_id');
+  }
+
+
+  /**
+   * Relationship for entries and communities
+   *
+   * @return collection
+   */
+  public function entries() {
+    return $this->belongsToMany('App\Entry', 'tile_hubgroup_join', 'hubgroup_id', 'tile_id');
   }
 
 
@@ -75,5 +86,21 @@ class Community extends Model
 			return null;
 		}
 	}
+
+  /**
+   * scopeEntriesInCommunity
+   * Get all entries that are in the current community
+   *
+   * @param       $query
+   * @param array $categoryIdListing
+   *
+   * @return mixed
+   * @version v1.0
+   */
+  public function scopeEntriesInCommunity($query)
+  {
+      return $query->whereIn( 'category_id', $categoryIdListing );
+  }
+
 
 }
