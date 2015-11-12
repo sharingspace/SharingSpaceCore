@@ -36,8 +36,26 @@
 
 		  @else
 		  	<li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
-			<li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
+			  <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
 		  @endif
+
+
+
+      <li>
+            <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">{{ LaravelLocalization::getCurrentLocaleName() }}</a>
+
+            <ul class="dropdown-menu">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <li>
+                        <a rel="alternate" hreflang="{{$localeCode}}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
+                          <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
+                            {{{ $properties['native'] }}}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+          </li>
+
 
 
       </ul>
