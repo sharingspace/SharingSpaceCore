@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ Config::get('app.url') }}"><img src="/img/any-share-logo-cloud-400.png" class="logo" style="max-height: 30px;"></a>
+      <a class="navbar-brand" href="{{ route('home') }}"><img src="/assets/img/any-share-logo-cloud-400.png" class="logo" style="max-height: 30px;"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -22,15 +22,15 @@
           <li><a href="#">Get Started</a></li>
 		  @if (Auth::check())
 		  <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ $user->gravatar() }}" class="avatar">{{ $user->name }} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} <</a></li>
-            </ul>
-          </li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ $user->gravatar() }}" class="avatar">{{ $user->name }} <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
+        </ul>
+      </li>
 
 		  @else
-		  	<li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} <</a> </li>
-			<li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} <</a></li>
+		    <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
+			  <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
 		  @endif
 
 

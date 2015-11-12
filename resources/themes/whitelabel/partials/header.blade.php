@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ url('home') }}">
+      <a class="navbar-brand" href="{{ route('home') }}">
         @if ($whitelabel_group->logo!='')
           <img src="{{ $whitelabel_group->getLogo() }}" style="max-height: 30px;">
         @else
