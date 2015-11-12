@@ -17,7 +17,33 @@ class Entry extends Model
   protected $primaryKey = 'tile_id';
 
   public function author() {
-      return $this->belongsTo('App\User', 'user_id');
+    return $this->belongsTo('App\User', 'user_id');
+  }
+
+
+  public function communities()
+  {
+    return $this->belongsToMany('Hubgroup', 'tile_hubgroup_join', 'tile_id', 'hubgroup_id');
+  }
+
+  /**
+  * Query builder scope to search on text
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  text                              $search      Search term
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
+  public function scopeTextSearch($query, $search)
+  {
+
+    return $query->where('title', 'LIKE', "%$search%")
+      ->orWhere('location', 'LIKE', "%$search%")
+      ->orWhere(function($query) use ($search) {
+          $query->whereHas('author', function($query) use ($search) {
+              $query->where('displayname','LIKE','%'.$search.'%');
+          });
+      });
   }
 
 }
