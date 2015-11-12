@@ -1,18 +1,6 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-
-/*
-|--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 */
@@ -82,7 +70,20 @@ Route::group(array('prefix' => 'auth'), function () {
 
 });
 
-Route::get('/', array('as' => 'home', 'uses' => 'GroupsController@getListview'));
+/*
+|--------------------------------------------------------------------------
+| Entry routes
+|--------------------------------------------------------------------------
+*/
+Route::get('browse', array('as' => 'browse', 'uses' => 'CommunitiesController@getEntriesView'));
+Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'CommunitiesController@getEntriesDataView'));
+
+
+/*
+|--------------------------------------------------------------------------
+| Default homepage stuff
+|--------------------------------------------------------------------------
+*/
 
 Route::get('home', function () {
     return redirect('/');
