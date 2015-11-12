@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     Login ::
+     {{ trans('general.nav.login') }} ::
 @parent
 @stop
 

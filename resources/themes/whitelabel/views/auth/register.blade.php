@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     Register ::
+     {{ trans('general.nav.register') }} ::
 @parent
 @stop
 
