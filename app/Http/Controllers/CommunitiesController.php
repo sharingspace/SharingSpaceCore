@@ -76,7 +76,7 @@ class CommunitiesController extends Controller
 
       $rows[] = array(
         'title' => $entry->title,
-        'author' => $entry->author->displayname,
+        'author' => $entry->author->getDisplayName(),
         'location' => $entry->location,
         'created_at' => $entry->created_at->format('M d Y g:iA'),
       );

@@ -130,7 +130,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     *
     * @return string
     */
-    public function fullName()
+    public function getDisplayName()
     {
 
       if ($this->displayname){
