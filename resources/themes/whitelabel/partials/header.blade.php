@@ -125,11 +125,7 @@
 
   </div>
 
-
-
-<section class="container padding-xxs">
     <div class="row">
 	<!-- Notifications -->
 	@include('notifications')
 	</div>
-</section>
