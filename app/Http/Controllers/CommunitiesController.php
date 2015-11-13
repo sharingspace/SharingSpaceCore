@@ -67,6 +67,7 @@ class CommunitiesController extends Controller
 
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
     $count = $entries->count();
+    $entries = $entries->orderBy($sort, $order);
     $entries = $entries->skip($offset)->take($limit)->get();
 
     $rows = array();

@@ -12,7 +12,7 @@
     id="table"
     data-url="{{ route('json.browse') }}"
     data-cookie="true"
-    data-cookie-id-table="communityListings">
+    data-cookie-id-table="communityListingssddf">
       <thead>
           <tr>
               <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
