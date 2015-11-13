@@ -6660,9 +6660,6 @@ ul > li > i {
 .line-through {
   text-decoration: line-through; }
 
-.btn > i {
-  padding-right: 6px; }
-
 video.fullvideo {
   width: 100%;
   height: 100%; }
