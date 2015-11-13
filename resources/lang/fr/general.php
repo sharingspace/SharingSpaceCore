@@ -38,5 +38,10 @@ return [
       'confirm_password'  => 'Confirmer mot de passe',
     ],
 
+    'community'  => [
+      'members'  => 'Membre|Des membres',
+
+    ],
+
 
 ];
