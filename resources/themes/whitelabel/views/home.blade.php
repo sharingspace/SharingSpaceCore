@@ -18,7 +18,7 @@
 			</div>
 
 			<div class="col-sm-4">
-				<i class="glyphicon glyphicon-users"></i>
+				<i class="glyphicon glyphicon-user"></i>
 				<h3>99 Members</h3>
 				<p>Since December 3, 2014</p>
 			</div>
