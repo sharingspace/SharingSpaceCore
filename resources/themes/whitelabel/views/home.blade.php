@@ -368,6 +368,7 @@
 
 										</span>
 									</span>
+                  
 									<img class="img-responsive" src="/assets/img/demo/720x400/2-min.jpg" width="600" height="399" alt="">
 								</figure>
 							</div>

@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
 
 <section class="container">
 <div class="row">
