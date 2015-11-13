@@ -1,68 +1,120 @@
 
+<!-- Top Bar -->
+  <div id="topBar">
+    <div class="container">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ route('home') }}">
-        @if ($whitelabel_group->logo!='')
-          <img src="{{ $whitelabel_group->getLogo() }}" style="max-height: 30px;">
+      <!-- right -->
+      <ul class="top-links list-inline pull-right">
+
+
+        @if (Auth::check())
+        <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ $user->gravatar() }}" class="avatar">{{ $user->name }} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
+              </ul>
+            </li>
+
         @else
-          {{ $whitelabel_group->name }}
+          <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
+          <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
         @endif
-      </a>
-    </div>
+      </ul>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!-- left -->
+      <ul class="top-links list-inline">
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ route('browse') }}">{{ trans('general.nav.browse') }} <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">{{ trans('general.nav.add') }}  </a></li>
-
-		  @if (Auth::check())
-		  <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ $user->gravatar() }}" class="avatar">{{ $user->name }} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
-            </ul>
-          </li>
-
-		  @else
-		  	<li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
-			  <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
-		  @endif
-
-
-
-      <li>
-            <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">{{ LaravelLocalization::getCurrentLocaleName() }}</a>
-
-            <ul class="dropdown-menu">
-                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                    <li>
-                        <a rel="alternate" hreflang="{{$localeCode}}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
-                          <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
-                            {{{ $properties['native'] }}}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-          </li>
-
-
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <li>
+                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
+                      <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
+                        {{{ $properties['native'] }}}
+                    </a>
+                </li>
+            @endforeach
 
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
 
+
+    </div>
+  </div>
+  <!-- /Top Bar -->
+
+
+      <!--
+				AVAILABLE HEADER CLASSES
+
+				Default nav height: 96px
+				.header-md 		= 70px nav height
+				.header-sm 		= 60px nav height
+
+				.noborder 		= remove bottom border (only with transparent use)
+				.transparent	= transparent header
+				.translucent	= translucent header
+				.sticky			= sticky header
+				.static			= static header
+				.dark			= dark header
+				.bottom			= header on bottom
+
+				shadow-before-1 = shadow 1 header top
+				shadow-after-1 	= shadow 1 header bottom
+				shadow-before-2 = shadow 2 header top
+				shadow-after-2 	= shadow 2 header bottom
+				shadow-before-3 = shadow 3 header top
+				shadow-after-3 	= shadow 3 header bottom
+
+				.clearfix		= required for mobile menu, do not remove!
+
+				Example Usage:  class="clearfix sticky header-sm transparent noborder"
+			-->
+			<div id="header" class="sticky clearfix header-sm">
+
+				<!-- TOP NAV -->
+				<header id="topNav">
+					<div class="container">
+
+						<!-- Mobile Menu Button -->
+						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<!-- Logo -->
+            <a class="logo pull-left navbar-brand" href="{{ route('home') }}">
+              @if ($whitelabel_group->logo!='')
+                <img src="{{ $whitelabel_group->getLogo() }}">
+              @else
+                {{ $whitelabel_group->name }}
+              @endif
+            </a>
+
+						<!--
+							Top Nav
+
+							AVAILABLE CLASSES:
+							submenu-dark = dark sub menu
+						-->
+						<div class="navbar-collapse pull-right nav-main-collapse collapse">
+							<nav class="nav-main">
+
+								<!--
+									.nav-onepage
+									Required for onepage navigation links
+
+									Add .external for an external link!
+								-->
+								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+                  <li{{ (Route::is('browse') ? ' class="active"' : '') }}><a href="{{ route('browse') }}">{{ trans('general.nav.browse') }} <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">{{ trans('general.nav.add') }}  </a></li>
+								</ul>
+
+							</nav>
+						</div>
+
+					</div>
+				</header>
+				<!-- /Top Nav -->
+
+			</div>
 
 <div class="col-md-12" style="height: 200px;background-image: url({{ $whitelabel_group->getCover() }});">
 
