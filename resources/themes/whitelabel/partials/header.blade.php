@@ -86,6 +86,11 @@
                 {{ $whitelabel_group->name }}
               @endif
             </a>
+            @if ($whitelabel_group->location!='')
+              <div class="pull-left" style="padding-left: 10px; padding-top: 23px;">
+                {{ $whitelabel_group->location}}
+              </div>
+            @endif
 
 						<!--
 							Top Nav
