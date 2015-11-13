@@ -38,4 +38,11 @@ return [
       'confirm_password'  => 'Confirm Password',
     ],
 
+    'community'  => [
+      'members'  => 'Member|Members',
+
+    ],
+
+
+
 ];

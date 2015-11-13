@@ -19,8 +19,9 @@
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-user"></i>
-				<h3>99 Members</h3>
-				<p>Since December 3, 2014</p>
+
+				<h3>{{ $whitelabel_group->members->count() }} {{ trans_choice('general.community.members', $whitelabel_group->members->count()) }}</h3>
+				<p>Since {{ $whitelabel_group->created_at->format('M d, Y') }}</p>
 			</div>
 
 			<div class="col-sm-4">
