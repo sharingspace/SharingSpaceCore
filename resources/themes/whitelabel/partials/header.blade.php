@@ -103,7 +103,7 @@
 									Add .external for an external link!
 								-->
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li{{ (Route::is('browse') ? ' class="active"' : '') }}><a href="{{ route('browse') }}">{{ trans('general.nav.browse') }} <span class="sr-only">(current)</span></a></li>
+                  <li{!! (Route::is('browse') ? ' class="active"' : '') !!}><a href="{{ route('browse') }}">{{ trans('general.nav.browse') }} <span class="sr-only">(current)</span></a></li>
                   <li><a href="#">{{ trans('general.nav.add') }}  </a></li>
 								</ul>
 
@@ -116,9 +116,9 @@
 
 			</div>
 
-<div class="col-md-12 wl_usercover" style="100px;background-image: url({{ $whitelabel_group->getCover() }});">
+  <div class="col-md-12 wl_usercover" style="100px;background-image: url({{ $whitelabel_group->getCover() }});">
 
-</div>
+  </div>
 
 
 
