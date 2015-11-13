@@ -78,13 +78,11 @@ body {
   }
 }
 
-/* example usage: index-onepage-youtube.html */
 
 section {
   display: block;
   position: relative;
   padding: 20px 0;
-  border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
   -webkit-transition: all .400s;
   -moz-transition: all .400s;
   -o-transition: all .400s;
@@ -115,6 +113,9 @@ div.alternate {
 section {
   &.alternate {
     background-color: rgba(0, 0, 0, 0.02);
+  }
+  &.bottom-bordered {
+    border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
   }
   &.dark {
     background-color: #212121;

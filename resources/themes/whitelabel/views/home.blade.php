@@ -2,6 +2,39 @@
 
 @section('content')
 
+<!--
+	INFO BAR
+	inside .container
+-->
+<section class="info-bar">
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-sm-4">
+				<i class="glyphicon glyphicon-globe"></i>
+				<h3>OPEN COMMUNITY</h3>
+				<p>99 Members</p>
+			</div>
+
+			<div class="col-sm-4">
+				<i class="glyphicon glyphicon-user"></i>
+				<h3>CREATED BY ERIC D.</h3>
+				<p>On December 3, 2014</p>
+			</div>
+
+			<div class="col-sm-4">
+				<i class="glyphicon glyphicon-flag"></i>
+				<h3>EXCHANGE TYPES</h3>
+				<p>Gift, Trade, Buy/Sell</p>
+			</div>
+
+		</div>
+
+	</div>
+</section>
+<!-- /INFO BAR -->
+
 <section class="container padding-none">
   <div class="row">
           @if ($whitelabel_group->about!='')

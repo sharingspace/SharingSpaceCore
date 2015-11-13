@@ -68,12 +68,10 @@ body {
     body.bg-grey #wrapper {
       background-color: #f1f2f7; }
 
-/* example usage: index-onepage-youtube.html */
 section {
   display: block;
   position: relative;
   padding: 20px 0;
-  border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
   transition: all .400s;
   background-attachment: fixed;
   background-position: center center;
@@ -96,6 +94,9 @@ div.alternate {
 
 section.alternate {
   background-color: rgba(0, 0, 0, 0.02); }
+
+section.bottom-bordered {
+  border-bottom: rgba(0, 0, 0, 0.1) 1px solid; }
 
 section.dark {
   background-color: #212121;
