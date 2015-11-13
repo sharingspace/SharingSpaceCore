@@ -10,16 +10,18 @@ use Theme;
 class PagesController extends Controller
 {
 
-  public function getHomepage()
+  public function getHomepage(Request $request)
   {
+
+    $entries = $request->whitelabel_group->entries()->with('author')->get();
 
     if (Auth::check()) {
         // The user is logged in...
         $user = Auth::user();
-        return view('home')->with('user',$user);
+        return view('home')->with('user',$user)->with('entries',$entries);
     }
 
-    return view('home');
+    return view('home')->with('entries',$entries);
 
   }
 

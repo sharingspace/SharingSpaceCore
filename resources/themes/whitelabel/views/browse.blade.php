@@ -4,7 +4,6 @@
 
 <section class="container">
 <div class="row">
-  <div class="table-responsive">
 
     <!-- Begin entries table -->
     <table class="table table-condensed"
@@ -24,7 +23,6 @@
     </table>
     <!-- End entries table -->
   </div>
-</div>
 </section>
 
 
@@ -36,33 +34,33 @@
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
-        undefinedText: '',
-        iconsPrefix: 'fa',
-        showRefresh: true,
-        search: true,
-        pageSize: 20,
-        pagination: true,
-        sidePagination: 'server',
-        sortable: true,
-        cookie: true,
-        mobileResponsive: true,
-        showExport: true,
-        showColumns: true,
-        exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
-        maintainSelected: true,
-        paginationFirstText: "@lang('pagination.first')",
-        paginationLastText: "@lang('pagination.last')",
-        paginationPreText: "@lang('pagination.previous')",
-        paginationNextText: "@lang('pagination.next')",
-        pageList: ['10','25','50','100','150','200'],
-        icons: {
-            paginationSwitchDown: 'fa-caret-square-o-down',
-            paginationSwitchUp: 'fa-caret-square-o-up',
-            columns: 'fa-columns',
-            refresh: 'fa-refresh'
-        },
+      classes: 'table table-responsive table-no-bordered',
+      undefinedText: '',
+      iconsPrefix: 'fa',
+      showRefresh: true,
+      search: true,
+      pageSize: 20,
+      pagination: true,
+      sidePagination: 'server',
+      sortable: true,
+      cookie: true,
+      mobileResponsive: true,
+      showExport: true,
+      showColumns: true,
+      exportDataType: 'all',
+      exportTypes: ['csv', 'txt','json', 'xml'],
+      maintainSelected: true,
+      paginationFirstText: "@lang('pagination.first')",
+      paginationLastText: "@lang('pagination.last')",
+      paginationPreText: "@lang('pagination.previous')",
+      paginationNextText: "@lang('pagination.next')",
+      pageList: ['10','25','50','100','150','200'],
+      icons: {
+          paginationSwitchDown: 'fa-caret-square-o-down',
+          paginationSwitchUp: 'fa-caret-square-o-up',
+          columns: 'fa-columns',
+          refresh: 'fa-refresh'
+      },
 
     });
 </script>
