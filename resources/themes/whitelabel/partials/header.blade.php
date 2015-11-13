@@ -116,7 +116,7 @@
 
 			</div>
 
-  <div class="col-md-12 wl_usercover" style="100px;background-image: url({{ $whitelabel_group->getCover() }});">
+  <div class="col-md-12 wl_usercover" style="background-image: url({{ $whitelabel_group->getCover() }});">
 
   </div>
 
