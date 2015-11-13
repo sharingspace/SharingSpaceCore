@@ -12,8 +12,6 @@
             {{ trans('general.no_about_data') }}
           @endif
         </p>
-
-        <p class="text-center"><a href="{{ route('browse') }}" class="btn btn-default">{{ trans('general.browse_button') }}</a></p>
   </div><!--end row-->
 </section>
 
@@ -26,6 +24,7 @@
 						<li class="filter"><a data-filter=".gift" href="#">Gift</a></li>
 						<li class="filter"><a data-filter=".buy" href="#">Buy / Sell</a></li>
 						<li class="filter"><a data-filter=".trade" href="#">Trade</a></li>
+            <li class="filter"><a href="{{ route('browse') }}">Browse More</a></li>
 					</ul>
 
 					<div id="portfolio" class="clearfix portfolio-isotope portfolio-isotope-5">
