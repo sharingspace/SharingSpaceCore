@@ -14,13 +14,13 @@
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-globe"></i>
 				<h3>OPEN COMMUNITY</h3>
-				<p>99 Members</p>
+				<p>Anyone can join</p>
 			</div>
 
 			<div class="col-sm-4">
-				<i class="glyphicon glyphicon-user"></i>
-				<h3>CREATED BY ERIC D.</h3>
-				<p>On December 3, 2014</p>
+				<i class="glyphicon glyphicon-users"></i>
+				<h3>99 Members</h3>
+				<p>Since December 3, 2014</p>
 			</div>
 
 			<div class="col-sm-4">
