@@ -18,6 +18,8 @@ return [
           'login' => 'Connexion',
           'logout' => 'Déconnexion',
           'register' => 'Inscrivez-vous',
+          'about' => 'A propos de nous',
+          'examples' => 'Des exemples',
     ],
 
     'entries'  => [

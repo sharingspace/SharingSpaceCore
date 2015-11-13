@@ -125,7 +125,6 @@
 
   </div>
 
-    <div class="row">
+
 	<!-- Notifications -->
 	@include('notifications')
-	</div>

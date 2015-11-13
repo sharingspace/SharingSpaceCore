@@ -5,22 +5,26 @@
 
 <section class="container">
 <div class="row">
-<table
+  <div class="table-responsive">
+
+    <!-- Begin entries table -->
+    <table class="table table-condensed"
     name="communityListings"
     id="table"
     data-url="{{ route('json.browse') }}"
     data-cookie="true"
-    data-click-to-select="true"
-    data-cookie-id-table="communityListingsTablesdkgjlg">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
-                <th data-sortable="true" data-field="author">{{ trans('general.entries.author') }}</th>
-                <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
-                <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-            </tr>
-        </thead>
+    data-cookie-id-table="communityListings">
+      <thead>
+          <tr>
+              <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+              <th data-sortable="true" data-field="author">{{ trans('general.entries.author') }}</th>
+              <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
+              <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+          </tr>
+      </thead>
     </table>
+    <!-- End entries table -->
+  </div>
 </div>
 </section>
 

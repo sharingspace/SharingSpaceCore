@@ -18,6 +18,8 @@ return [
           'login' => 'Sign-Up',
           'logout' => 'Logout',
           'register' => 'Sign-In',
+          'about' => 'About',
+          'examples' => 'Examples',
     ],
 
     'entries'  => [

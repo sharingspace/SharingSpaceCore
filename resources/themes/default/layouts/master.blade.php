@@ -1,52 +1,57 @@
 <!DOCTYPE html>
 <html lang="en-us">
+  <head>
+    <!-- *** General page information *** -->
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta charset="UTF-8"/>
+    <title>
+      @section('title')
+        AnySha.re
+      @show
+    </title>
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-	<!-- *** General page information *** -->
-		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
-		<meta charset="UTF-8"/>
-        <title>
-            @section('title')
-             My Awesome Site
-            @show
-        </title>
-		<!-- Mobile Specific Metas-->
-		<metja name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Template info -->
-		<meta name="author" content="A. Gianotto">
-		<meta name="description" content="">
-		<meta name="keywords" content="">
+    <!-- Template info -->
+    <meta name="author" content="A. Gianotto">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
 
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/css/bootstrap-social.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/compiled/bootstrap-social.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/compiled/app.css') }}">
+    <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}">
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!-- PAGE LEVEL SCRIPTS -->
+		<link href="{{ asset('assets/css/header-1.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/color_scheme/orange.css') }}" rel="stylesheet" type="text/css" />
 
-		<!-- Bootstrap Table style -->
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css" type="text/css" media="screen" />
+    <!-- Bootstrap Table style -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css" type="text/css" media="screen" />
 
-		<!-- jQuery 2.1.3-->
-		<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
 
-		<!-- Bootstrap 3 and Bootstrap Table Javascript -->
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table-all.js"></script>
+    <!-- jQuery 2.1.3-->
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 
-		<link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}"/>
+    <!-- Bootstrap 3 and Bootstrap Table Javascript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+  </head>
 
-</head>
+<body class="smoothscroll enable-animation">
+  <!-- wrapper -->
+		<div id="wrapper">
 
-<body>
+      <div>@include('partials.header')</div>
 
-	<div>@include('partials.header')</div>
+      <div>@yield('content')</div>
 
-	<div>@yield('content')</div>
+      <div>@include('partials.footer')</div>
 
-	<div>@include('partials.footer')</div>
+    </div>
+    <!-- /wrapper -->
 
 </body>
 </html>

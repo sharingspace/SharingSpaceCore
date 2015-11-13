@@ -18,6 +18,8 @@ return [
           'login' => 'Inscríbase',
           'logout' => 'Salir',
           'register' => 'Acceso Cuenta',
+          'about' => 'Quiénes somos',
+          'examples' => 'Ejemplos',
     ],
 
     'entries'  => [
