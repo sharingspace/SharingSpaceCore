@@ -40,6 +40,20 @@ return [
 
     'community'  => [
       'members'  => 'Membre|Des membres',
+      'exchange_types' => 'Moyen d\'échanger des|Moyens d\'échange',
+      
+        'open'  => [
+          'title'  => 'Communauté ouverte',
+          'text'  => 'Tout le monde peut rejoindre',
+        ],
+        'closed'  => [
+          'title'  => 'Communauté fermée',
+          'text'  => 'Pour poster sur invitation seulement',
+        ],
+        'secret'  => [
+          'title'  => 'SCommunauté secrète',
+          'text'  => 'Seuls les membres peuvent consulter',
+        ],
 
     ],
 

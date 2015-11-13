@@ -39,8 +39,22 @@ return [
     ],
 
     'community'  => [
+      'community'  => 'Community',
       'members'  => 'Member|Members',
-
+      'exchange_types' => 'Exchange Type|Exchange Types',
+      
+        'open'  => [
+          'title'  => 'Open Community',
+          'text'  => 'Anyone can join',
+        ],
+        'closed'  => [
+          'title'  => 'Closed Community',
+          'text'  => 'Invite-only to post',
+        ],
+        'secret'  => [
+          'title'  => 'Secret Community',
+          'text'  => 'Only members can view',
+        ],
     ],
 
 

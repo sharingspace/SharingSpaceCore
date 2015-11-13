@@ -4,6 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
+use App\Exchange;
 
 class Entry extends Model
 {
@@ -23,7 +24,7 @@ class Entry extends Model
 
   public function communities()
   {
-    return $this->belongsToMany('Hubgroup', 'tile_hubgroup_join', 'tile_id', 'hubgroup_id');
+    return $this->belongsToMany('App\Community', 'tile_hubgroup_join', 'tile_id', 'hubgroup_id');
   }
 
   /**

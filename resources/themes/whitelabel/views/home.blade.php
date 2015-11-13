@@ -13,21 +13,33 @@
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-globe"></i>
-				<h3>OPEN COMMUNITY</h3>
-				<p>Anyone can join</p>
+          @if ($whitelabel_group->group_type == 'O')
+            <h3 class="uppercase">{{ trans('general.community.open.title') }}</h3>
+            <p>{{ trans('general.community.open.text') }}</p>
+          @elseif ($whitelabel_group->group_type == 'C')
+            <h3 class="uppercase">{{ trans('general.community.closed.title') }}</h3>
+            <p>{{ trans('general.community.closed.text') }}</p>
+          @elseif ($whitelabel_group->group_type == 'S')
+            <h3 class="uppercase">{{ trans('general.community.secret.title') }}</h3>
+            <p>{{ trans('general.community.secret.text') }}</p>
+          @endif
 			</div>
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-user"></i>
 
-				<h3>{{ $whitelabel_group->members->count() }} {{ trans_choice('general.community.members', $whitelabel_group->members->count()) }}</h3>
+				<h3 class="uppercase">{{ $whitelabel_group->members->count() }} {{ trans_choice('general.community.members', $whitelabel_group->members->count()) }}</h3>
 				<p>Since {{ $whitelabel_group->created_at->format('M d, Y') }}</p>
 			</div>
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-flag"></i>
-				<h3>EXCHANGE TYPES</h3>
-				<p>Gift, Trade, Buy/Sell</p>
+				<h3 class="uppercase">{{ trans_choice('general.community.exchange_types', $whitelabel_group->exchange_types->count()) }}</h3>
+				<ul class="exchange_types">
+          @foreach ($whitelabel_group->exchange_types as $exchange_types)
+            <li>{{ $exchange_types->type_name }}</li>
+          @endforeach
+        </ul>
 			</div>
 
 		</div>

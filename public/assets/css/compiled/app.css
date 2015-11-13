@@ -5666,6 +5666,21 @@ footer.sticky {
   margin-top: -26px;
   background-position: 50% 0; }
 
+ul.exchange_types {
+  font-size: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+ul.exchange_types li {
+  display: inline; }
+
+ul.exchange_types li:after {
+  content: ", "; }
+
+ul.exchange_types li:last-child:after {
+  content: ""; }
+
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

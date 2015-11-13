@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
-
+use App\Exchange;
 
 class Community extends Model
 {
@@ -18,7 +18,7 @@ class Community extends Model
   protected $primaryKey = 'hubgroup_id';
 
   public function user() {
-      return $this->belongsTo('User', 'user_id');
+      return $this->belongsTo('App\User', 'user_id');
   }
 
 
@@ -86,6 +86,20 @@ class Community extends Model
 			return null;
 		}
 	}
+
+
+  /**
+  * Get the exchnage types allowed in this community.
+  * Exchange Types belong to many communities by way of the group_allowed_types table.
+  *
+  * @return collection
+  */
+	public function exchange_types()
+    {
+    	$exchanges = $this->belongsToMany('App\Exchange', 'group_allowed_types', 'hubgroup_id', 'type_id')->withTimestamps();
+    	return $exchanges;
+    }
+
 
   /**
    * scopeEntriesInCommunity
