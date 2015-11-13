@@ -41,7 +41,12 @@ return [
     'community'  => [
       'members'  => 'Membre|Des membres',
       'exchange_types' => 'Moyen d\'échanger des|Moyens d\'échange',
-      
+
+      'exchange_types' => [
+        'title' => 'Moyen d\'échanger des|Moyens d\'échange',
+        'all_allowed' => 'Tout échange de types Bienvenue',
+      ],
+
         'open'  => [
           'title'  => 'Communauté ouverte',
           'text'  => 'Tout le monde peut rejoindre',

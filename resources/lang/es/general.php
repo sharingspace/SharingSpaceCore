@@ -40,8 +40,12 @@ return [
 
     'community'  => [
       'members'  => 'Miembro|Miembros',
-      'exchange_types' => 'Forma de intercambio|Formas de intercambio',
-      
+
+        'exchange_types' => [
+          'title' => 'Forma de intercambio|Formas de intercambio',
+          'all_allowed' => 'Todo intercambio de tipos bienvenida',
+        ],
+
         'open'  => [
           'title'  => 'Comunidad abierta',
           'text'  => 'Cualquiera puede unirse a',

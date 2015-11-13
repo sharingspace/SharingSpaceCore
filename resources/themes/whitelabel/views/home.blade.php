@@ -34,11 +34,17 @@
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-flag"></i>
-				<h3 class="uppercase">{{ trans_choice('general.community.exchange_types', $whitelabel_group->exchange_types->count()) }}</h3>
+				<h3 class="uppercase">{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchange_types->count()) }}</h3>
 				<ul class="exchange_types">
-          @foreach ($whitelabel_group->exchange_types as $exchange_types)
-            <li>{{ $exchange_types->type_name }}</li>
-          @endforeach
+          @if ($whitelabel_group->exchange_types->count() == 10)
+            <li>{{ trans('general.community.exchange_types.all_allowed') }}</li>
+          @else
+            @foreach ($whitelabel_group->exchange_types as $exchange_types)
+              <li>{{ $exchange_types->type_name }}</li>
+            @endforeach
+          @endif
+
+
         </ul>
 			</div>
 

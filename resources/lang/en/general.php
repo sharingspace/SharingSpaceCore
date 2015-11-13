@@ -41,8 +41,12 @@ return [
     'community'  => [
       'community'  => 'Community',
       'members'  => 'Member|Members',
-      'exchange_types' => 'Exchange Type|Exchange Types',
-      
+
+        'exchange_types' => [
+          'title' => 'Exchange Type|Exchange Types',
+          'all_allowed' => 'All exchange types welcome',
+        ],
+
         'open'  => [
           'title'  => 'Open Community',
           'text'  => 'Anyone can join',
