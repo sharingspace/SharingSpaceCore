@@ -11,7 +11,7 @@
     </title>
     <!-- Mobile Specific Metas-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Template info -->
     <meta name="author" content="A. Gianotto">
     <meta name="description" content="">
@@ -29,15 +29,6 @@
 
     <!-- Bootstrap Table style -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css" type="text/css" media="screen" />
-
-    <!-- jQuery 2.1.3-->
-    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-
-    <!-- Bootstrap 3 and Bootstrap Table Javascript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table-all.js"></script>
-
-
 
   </head>
 
