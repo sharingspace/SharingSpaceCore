@@ -13,7 +13,7 @@ class PagesController extends Controller
   public function getHomepage(Request $request)
   {
 
-    $entries = $request->whitelabel_group->entries()->with('author')->get();
+    $entries = $request->whitelabel_group->entries()->with('author','exchangeTypesNames')->get();
 
     if (Auth::check()) {
         // The user is logged in...
