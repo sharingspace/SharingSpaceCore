@@ -68,8 +68,13 @@
 
 					<ul id="portfolio_filter" class="nav nav-pills margin-bottom-60">
 
+            <li class="filter active">
+              <a data-filter="*" href="#">All</a>
+            </li>
             @foreach ($whitelabel_group->exchange_types as $exchange_types)
-              <li class="filter"><a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->type_name }}</a></li>
+              <li class="filter">
+                <a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->type_name }}</a>
+              </li>
             @endforeach
 
 					</ul>
@@ -80,7 +85,7 @@
             <div class="portfolio-item
             @if (count($entry->exchangeTypesNames) > 0)
               @for ($i = 0; $i < count($entry->exchangeTypesNames); $i++)
-              {{ strtolower($entry->exchangeTypesNames[$i]->type_name) }}
+                {{ strtolower($entry->exchangeTypesNames[$i]->type_name) }}
               @endfor
             @endif
             "><!-- item -->
