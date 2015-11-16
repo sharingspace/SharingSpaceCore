@@ -18,5 +18,7 @@ return [
     'remember_me' => 'Se souvenir de moi',
     'forgot_password' => 'Mot de passe oublié?',
     'sign_in_with' => 'Connectez-vous avec :social_network',
+    'accept_tos' => 'J\'accepte les <a href="#" data-toggle="modal" data-target="#termsModal">conditions de service</a>',
+    'already_have_account' => '¿Ya tienes una cuenta? <a href="../auth/login">Inicio de sesión ahora</a>',
 
 ];
