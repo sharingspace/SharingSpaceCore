@@ -15,9 +15,9 @@ return [
     'nav'  => [
           'browse' => 'Browse',
           'add' => 'Add',
-          'login' => 'Sign-Up',
+          'login' => 'Sign-In',
           'logout' => 'Logout',
-          'register' => 'Sign-In',
+          'register' => 'Sign-Up',
           'about' => 'About',
           'examples' => 'Examples',
     ],

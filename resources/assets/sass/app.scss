@@ -4164,50 +4164,6 @@ section.dark .event-item {
   }
 }
 
-/** TEAM ITEM
-	example usage:
-	index-thematics-wedding.html
-
-
-	<div class="team-item clearfix">
-		<img class="team-item-image rounded" src="assets/images/demo/thematics/wedding/him-min.jpg" alt="wedding" width="150" height="150" />
-
-		<div class="team-item-desc">
-			<h4 class="nomargin">MIKE BAKER</h4>
-			<h5><span>Groom</span></h5>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, pariatur, magni! Omnis reiciendis architecto, cupiditate fuga dolores nam accusamus iste molestias quos mollitia totam eius porro culpa incidunt, sunt rerum molestiae aliquid non hic.</p>
-			<hr />
-
-			<!-- Social Icons -->
-			<div class="margin-top-20">
-				<a href="#" class="social-icon social-icon-sm social-icon-transparent  social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-
-					<i class="icon-facebook"></i>
-					<i class="icon-facebook"></i>
-				</a>
-
-				<a href="#" class="social-icon social-icon-sm social-icon-transparent  social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-					<i class="icon-twitter"></i>
-					<i class="icon-twitter"></i>
-				</a>
-
-				<a href="#" class="social-icon social-icon-sm social-icon-transparent  social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-					<i class="icon-gplus"></i>
-					<i class="icon-gplus"></i>
-				</a>
-
-				<a href="#" class="social-icon social-icon-sm social-icon-transparent  social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
-					<i class="icon-linkedin"></i>
-					<i class="icon-linkedin"></i>
-				</a>
-
-			</div>
-			<!-- /Social Icons -->
-
-		</div>
-	</div>
-
- ********************** **/
 
 .team-item {
   position: relative;
@@ -7715,7 +7671,6 @@ footer.sticky {
   min-height: 300px;
   max-height: 300px;
   margin-top: -26px;
-  margin-bottom: 40px;
   background-position: 50% 0;
 }
 

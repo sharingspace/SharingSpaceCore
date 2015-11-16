@@ -10,50 +10,104 @@
 {{-- Page content --}}
 @section('content')
 
-<!-- *** Page section *** -->
-<section class="container">
+
+<!-- -->
+<section class="margin-top-30">
+  <div class="container margin-top-40">
+
     <div class="row">
-        <!-- Login form -->
-        <div class="col-sm-6">
-            <h3>{{ trans('general.nav.login') }}</h3>
-            <form class="form" id="login-form" name="login-form" action="/auth/login" method="post">
-                {!! csrf_field() !!}
-                <input name="email" type="text" placeholder="Email">
-                <input name="password" type="password" placeholder="Password">
-                <div class="checkbox">
-                    <input id="check-log" name="remember" type="checkbox" checked>
-                    <label for="check-log">{{ trans('auth.remember_me') }}</label>
-                </div>
-                <a class="form__link" href="#" title="Forgot password">{{ trans('auth.forgot_password') }}</a>
-                <button type="submit" class="btn btn-primary btn-submit">{{ trans('general.nav.login') }}</button>
-            </form>
-        </div><!--end col-sm-6-->
-        <!-- End login form -->
 
-        <!-- Begin social login form -->
-        <div class="col-sm-6 col-md-3 col-xs-12">
+      <!-- LOGIN -->
+      <div class="col-md-6 col-sm-6">
 
-            <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
-                <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
-            </a>
+        <!-- register form -->
+        <form class="nomargin sky-form boxed" method="post">
+          {!! csrf_field() !!}
+          <header>
+            <i class="fa fa-users"></i>  {{ trans('general.nav.login') }}
+            </header>
 
-            <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
-             <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
-            </a>
+          <fieldset class="nomargin">
 
-            <a class="btn btn-block btn-social btn-google" href="/auth/google">
-              <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
-            </a>
+            <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">
+              <label class="input">
+                <i class="ico-append fa fa-envelope"></i>
+                <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
+                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
+              </label>
+            </div>
 
-            <a class="btn btn-block btn-social btn-github" href="/auth/github">
-               <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
-            </a>
+            <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
+              <label class="input">
+                <i class="ico-append fa fa-lock"></i>
+                <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
+                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
+              </label>
+            </div>
 
 
-        </div><!--end col-sm-6-->
+          <div class="row margin-bottom-20">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
+            </div>
+          </div>
 
-    </div><!--end row-->
+        </form>
+        <!-- /register form -->
+
+      </div>
+      <!-- /LOGIN -->
+
+      <!-- SOCIAL LOGIN -->
+      <div class="col-md-6 col-sm-6">
+        <form action="#" method="post" class="sky-form boxed">
+
+          <header class="size-18 margin-bottom-20">
+            Register using your favourite social network
+          </header>
+
+          <fieldset class="nomargin">
+
+            <div class="row">
+
+              <div class="col-md-8 col-md-offset-2">
+
+                <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/auth/facebook">
+                    <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
+                </a>
+
+                <a class="btn btn-block btn-social btn-twitter margin-bottom-10" href="/auth/twitter">
+                 <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
+                </a>
+
+                <a class="btn btn-block btn-social btn-google margin-bottom-10" href="/auth/google">
+                  <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
+                </a>
+
+                <a class="btn btn-block btn-social btn-github margin-bottom-10" href="/auth/github">
+                   <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
+                </a>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <footer>
+            <!-- {!! trans('auth.dont_have_account') !!} -->
+          </footer>
+
+        </form>
+
+      </div>
+      <!-- /SOCIAL LOGIN -->
+
+    </div>
+
+
+  </div>
 </section>
-
+<!-- / -->
 
 @stop
