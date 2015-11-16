@@ -67,17 +67,23 @@
 				<div class="container">
 
 					<ul id="portfolio_filter" class="nav nav-pills margin-bottom-60">
-						<li class="filter active"><a data-filter="*" href="#">All</a></li>
-						<li class="filter"><a data-filter=".gift" href="#">Gift</a></li>
-						<li class="filter"><a data-filter=".buy" href="#">Buy / Sell</a></li>
-						<li class="filter"><a data-filter=".trade" href="#">Trade</a></li>
-            <li><a href="{{ route('browse') }}">Browse More</a></li>
+
+            @foreach ($whitelabel_group->exchange_types as $exchange_types)
+              <li class="filter"><a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->type_name }}</a></li>
+            @endforeach
+
 					</ul>
 
 					<div id="portfolio" class="clearfix portfolio-isotope portfolio-isotope-5">
 
             @foreach ($entries as $entry)
-            <div class="portfolio-item trade"><!-- item -->
+            <div class="portfolio-item
+            @if (count($entry->exchangeTypesNames) > 0)
+              @for ($i = 0; $i < count($entry->exchangeTypesNames); $i++)
+              {{ strtolower($entry->exchangeTypesNames[$i]->type_name) }}
+              @endfor
+            @endif
+            "><!-- item -->
 
 							<div class="item-box">
 								<figure>
@@ -85,6 +91,7 @@
 										<span class="overlay dark-5"></span>
 										<span class="inner">
                       <h2 style="color: white;">{{ ucwords($entry->title) }}</h2>
+                      <br><br>
 											<!-- lightbox -->
 											<!-- <a class="ico-rounded lightbox" href="/assets/img/demo/mockups/1200x800/3-min.jpg" data-plugin-options='{"type":"image"}'>
 												<span class="fa fa-plus size-20"></span>
@@ -92,11 +99,14 @@
                       -->
 
 											<!-- details -->
-                      <!--
+
 											<a class="ico-rounded" href="#">
 												<span class="glyphicon glyphicon-option-horizontal size-20"></span>
 											</a>
-                      -->
+                      <a class="ico-rounded" href="#">
+												<span class="glyphicon glyphicon-heart size-20"></span>
+											</a>
+
 
 										</span>
 									</span>

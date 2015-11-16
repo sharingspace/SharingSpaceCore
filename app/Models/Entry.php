@@ -47,4 +47,10 @@ class Entry extends Model
       });
   }
 
+
+  public function exchangeTypesNames()
+  {
+      return $this->belongsToMany('App\Exchange', 'tile_exchange_types', 'tile_id', 'type_id');
+  }
+
 }
