@@ -125,6 +125,7 @@
 
   </div>
 
-
+<div class="col-md-12">
 	<!-- Notifications -->
 	@include('notifications')
+</div>

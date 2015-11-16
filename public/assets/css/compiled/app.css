@@ -4429,9 +4429,9 @@ section.alternate .item-box {
   .item-box .item-hover .inner {
     position: absolute;
     display: block;
-    left: 0;
-    right: 0;
-    top: 50%;
+    left: 5px;
+    right: 5px;
+    top: 20%;
     margin-top: -10px;
     margin-bottom: 0;
     width: 100%;
@@ -4450,12 +4450,7 @@ section.alternate .item-box {
   line-height: 50px !important;
   margin: -20px  5px 0 5px;
   transition: all 0.3s;
-  -webkit-border-bottom-right-radius: 20px;
-  -webkit-border-top-left-radius: 20px;
-  -moz-border-radius-bottomright: 20px;
-  -moz-border-radius-topleft: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 20px; }
+  border-radius: 30px; }
 
 /* hover */
 .nav-pills > li.active > a {
@@ -5664,6 +5659,7 @@ footer.sticky {
   min-height: 300px;
   max-height: 300px;
   margin-top: -26px;
+  margin-bottom: 40px;
   background-position: 50% 0; }
 
 ul.exchange_types {
@@ -5680,6 +5676,14 @@ ul.exchange_types li:after {
 
 ul.exchange_types li:last-child:after {
   content: ""; }
+
+.avatar {
+  height: 20px;
+  /* fallback for older browsers */
+  width: 20px;
+  margin: 0px 5px 0px 0px;
+  border-radius: 3px;
+  float: left; }
 
 /** ************************************* **
 
