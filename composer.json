@@ -38,7 +38,8 @@
         "classmap": [
             "database",
             "app/Models",
-            "app/Http/Transformers"
+            "app/Http/Transformers",
+            "app/Helpers/Helper.php"
         ],
         "psr-4": {
             "App\\": "app/"
