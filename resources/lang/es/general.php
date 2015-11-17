@@ -20,6 +20,7 @@ return [
           'register' => 'Acceso Cuenta',
           'about' => 'Quiénes somos',
           'examples' => 'Ejemplos',
+          'features' => 'Características',
     ],
 
     'entries'  => [

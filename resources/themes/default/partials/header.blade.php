@@ -101,6 +101,7 @@
 								-->
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
                   <li><a href="#about">{{ trans('general.nav.about') }} <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#features">{{ trans('general.nav.features') }}</a></li>
                   <li><a href="#examples">{{ trans('general.nav.examples') }}  </a></li>
 								</ul>
 

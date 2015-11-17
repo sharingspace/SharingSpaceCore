@@ -20,6 +20,7 @@ return [
           'register' => 'Sign-Up',
           'about' => 'About',
           'examples' => 'Examples',
+          'features' => 'Features',
     ],
 
     'entries'  => [

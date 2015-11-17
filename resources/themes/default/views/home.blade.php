@@ -40,7 +40,7 @@
 
 
       <!-- ABOUT -->
-			<section id="about" class="padding-xs">
+			<section id="about" class="padding-xs bottom-bordered">
 				<div class="container">
 
 					<header class="text-center margin-bottom-60">
@@ -92,7 +92,91 @@
 			</section>
 			<!-- /ABOUT -->
 
-      <!-- WORK -->
+      <!-- -->
+			<section id="features" class="bottom-bordered">
+				<div class="container">
+
+					<header class="text-center">
+						<h2 class="nomargin">Features</h2>
+					</header>
+
+					<hr />
+
+
+					<div class="row margin-top-80">
+
+						<div class="col-lg-4 col-md-4 col-md-push-4 text-center">
+
+							<img class="img-responsive" src="assets/img/demo/iphone-min.png" alt="" />
+
+						</div>
+
+						<div class="col-lg-4 col-md-4 col-sm-6 col-md-pull-4">
+
+							<div class="box-icon box-icon-right">
+								<a class="box-icon-title" href="#">
+									<i class="fa fa-eye"></i>
+									<h2>Advanced Privacy Settings</h2>
+								</a>
+								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+							</div>
+
+							<div class="box-icon box-icon-right">
+								<a class="box-icon-title" href="#">
+									<i class="fa fa-check"></i>
+									<h2>Multi-Lingual</h2>
+								</a>
+								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+							</div>
+
+							<div class="box-icon box-icon-right">
+								<a class="box-icon-title" href="#">
+									<i class="fa fa-flash"></i>
+									<h2>Your Own Subdomain</h2>
+								</a>
+								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+							</div>
+
+						</div>
+
+						<div class="col-lg-4 col-md-4 col-sm-6">
+
+
+
+							<div class="box-icon box-icon-left">
+								<a class="box-icon-title" href="#">
+									<i class="fa fa-random"></i>
+									<h2>Whitelabel Solution</h2>
+								</a>
+								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+							</div>
+
+							<div class="box-icon box-icon-left">
+								<a class="box-icon-title" href="#">
+									<i class="fa fa-tint"></i>
+									<h2>Limit Exchange Types</h2>
+								</a>
+								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+							</div>
+
+							<div class="box-icon box-icon-left">
+								<a class="box-icon-title" href="#">
+									<i class="fa fa-cogs"></i>
+									<h2>Multipurpose</h2>
+								</a>
+								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+							</div>
+
+						</div>
+
+					</div>
+
+
+				</div>
+			</section>
+			<!-- / -->
+
+      <!-- COMMUNITIES -->
       <section id="examples">
         <div class="container">
 
@@ -103,7 +187,7 @@
           </header>
 
 
-          <!-- PORTFOLIO -->
+          <!-- Communities  -->
           <div id="portfolio" class="clearfix portfolio-isotope portfolio-isotope-5">
 
             <!-- <ul class="nav nav-pills mix-filter margin-bottom-60">
@@ -152,31 +236,17 @@
               @endforeach
 
             </div>
-
           </div>
-          <!-- /PORTFOLIO -->
+      </section>
+<!-- /COMMUNITIES  -->
 
-
-          <!-- CONTACT US -->
-                    <div class="callout alert alert-transparent noborder margin-top-60 margin-bottom-60">
-
-                      <div class="text-center">
-
-                        <h3>Call now at <strong>+800-565-2390</strong> and get 15% discount!</h3>
-                        <p class="font-lato size-20">
-                          We truly care about our users and our product.
-                        </p>
-
-                        <a href="#contact" class="scrollTo btn btn-default btn-lg margin-top-30">CONTACT US</a>
-
-                      </div>
-
-                    </div>
-                    <!-- /CONTACT US -->
-
-                  </div>
-                </section>
-                <!-- /WORK -->
-
+<!-- BUTTON CALLOUT -->
+<a href="#" class="btn btn-xlg btn-primary size-20 fullwidth nomargin noradius padding-40">
+	<span class="font-lato size-30">
+		Get started today!
+		<strong>Sign-Up Free</strong>
+	</span>
+</a>
+<!-- /BUTTON CALLOUT -->
 
 @stop
