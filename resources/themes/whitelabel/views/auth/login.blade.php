@@ -24,8 +24,8 @@
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
           <header>
-            <i class="fa fa-users"></i>  {{ trans('general.nav.login') }}
-            </header>
+            <i class="fa fa-sign-in"></i>  {{ trans('general.nav.login') }}
+          </header>
 
           <fieldset class="nomargin">
 
@@ -64,8 +64,8 @@
       <div class="col-md-6 col-sm-6">
         <form action="#" method="post" class="sky-form boxed">
 
-          <header class="size-18 margin-bottom-20">
-            Register using your favourite social network
+          <header>
+            <i class="fa fa-globe"></i> Register using your favourite social network
           </header>
 
           <fieldset class="nomargin">
