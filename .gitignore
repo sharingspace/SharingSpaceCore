@@ -7,3 +7,4 @@ Homestead.json
 storage/debugbar
 
 tests/_output/*
+public/assets/uploads/*

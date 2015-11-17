@@ -20,7 +20,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/compiled/bootstrap-social.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/compiled/app.css') }}">
+    <link rel="stylesheet" href="{{ elixir('assets/css/compiled/app.css') }}">
     <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}">
 
     <!-- PAGE LEVEL SCRIPTS -->

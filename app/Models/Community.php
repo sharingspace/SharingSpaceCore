@@ -51,7 +51,7 @@ class Community extends Model
   public function getCover() {
 
 		if ($this->cover_img!='') {
-			$cover_img = Config::get('services.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->cover_img;
+			$cover_img = Config::get('services.cdn.default').'/uploads/communities/'.$this->hubgroup_id.'/'.$this->cover_img;
 		} else {
 			$cover_img = Config::get('services.cdn.default').'/img/covers/default-heart-cover.jpg';
 		}
@@ -67,7 +67,7 @@ class Community extends Model
   public function getLogo() {
 
 		if ($this->logo) {
-			return Config::get('services.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->logo;
+			return Config::get('services.cdn.default').'/uploads/communities/'.$this->hubgroup_id.'/'.$this->logo;
 		} else {
 			return null;
 		}
@@ -81,7 +81,7 @@ class Community extends Model
 	public function getProfileImg() {
 
 		if ($this->profile_img) {
-			return Config::get('app.cdn.default').'/uploads/hubgroups/'.$this->hubgroup_id.'/'.$this->profile_img;
+			return Config::get('app.cdn.default').'/uploads/communities/'.$this->hubgroup_id.'/'.$this->profile_img;
 		} else {
 			return null;
 		}
