@@ -80,7 +80,7 @@
 
 						<!-- Logo -->
             <a class="logo pull-left navbar-brand scrollTo" href="#top">
-              <img src="/assets/img/any-share-logo-cloud-400.png" class="logo" style="max-height: 30px;">
+              <img src="/assets/img/any-share-logo-cloud-400.png">
             </a>
 
 
