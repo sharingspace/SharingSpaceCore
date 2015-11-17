@@ -29,7 +29,7 @@
 
           <fieldset class="nomargin">
 
-            <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">
+            <div class="margin-bottom-10{{ $errors->first('email', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
@@ -38,7 +38,7 @@
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
-            <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
+            <div class="margin-bottom-10{{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
