@@ -45,6 +45,7 @@ class AuthController extends Controller
             'displayname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'terms_and_conditions' => 'accepted',
         ]);
     }
 

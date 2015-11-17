@@ -62,8 +62,10 @@
               </label>
             </div>
 
-            <div class="margin-top-30">
-              <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="checkbox"><i></i>{!! trans('auth.accept_tos') !!}</label>
+            <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
+              <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms_and_conditions"><i></i>{!! trans('auth.accept_tos') !!}
+              {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
+            </label>
             </div>
           </fieldset>
 
