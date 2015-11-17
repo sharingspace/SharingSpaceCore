@@ -54,13 +54,17 @@
 </section>
 <!-- /INFO BAR -->
 
+@if ($whitelabel_group->about!='')
 <section class="container padding-none">
   <div class="row">
-          @if ($whitelabel_group->about!='')
+      <div class="col-md-12 col-sm-12">
+
             <p>{{ $whitelabel_group->about }}</p>
-          @endif
+
+      </div>
   </div><!--end row-->
 </section>
+@endif
 
 <!-- -->
 			<section>
