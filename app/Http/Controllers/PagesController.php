@@ -13,15 +13,15 @@ class PagesController extends Controller
   public function getHomepage(Request $request)
   {
 
-    $entries = $request->whitelabel_group->entries()->with('author','exchangeTypesNames')->get();
-
-    if (Auth::check()) {
-        // The user is logged in...
-        $user = Auth::user();
-        return view('home')->with('user',$user)->with('entries',$entries);
+    if ($request->whitelabel_group) {
+      $entries = $request->whitelabel_group->entries()->with('author','exchangeTypesNames')->get();
+      return view('home')->with('entries',$entries);
+    } else {
+      $communities = \App\Community::orderBy('created_at','DESC')->take(20)->get();
+      return view('home')->with('communities',$communities);
     }
 
-    return view('home')->with('entries',$entries);
+
 
   }
 
