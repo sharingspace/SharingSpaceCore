@@ -1,7 +1,8 @@
 @if ($errors->any())
 <div class="alert alert-danger alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <strong>Error:</strong> {{ trans('validation.generic_form_error')}}
+    <i class="fa fa-exclamation-circle"></i>
+    <strong>Error:</strong> {{ trans('validation.generic_form_error')}}
 </div> <!-- alert -->
 @endif
 

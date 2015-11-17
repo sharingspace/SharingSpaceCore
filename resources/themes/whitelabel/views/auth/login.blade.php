@@ -34,8 +34,8 @@
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
-                {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
               </label>
+              {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
@@ -43,8 +43,8 @@
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
                 <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
-                {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
               </label>
+              {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
 
 

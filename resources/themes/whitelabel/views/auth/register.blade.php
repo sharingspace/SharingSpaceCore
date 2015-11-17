@@ -31,8 +31,8 @@
             <div class=" margin-bottom-10{{ $errors->first('displayname', ' has-error') }}">
               <label class="input">
                 <input type="text" placeholder="{{ trans('general.user.display_name') }}" name="displayname" value="{{ old('displayname') }}">
-                {!! $errors->first('displayname', '<span class="help-block">:message</span>') !!}
               </label>
+              {!! $errors->first('displayname', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">
@@ -40,8 +40,8 @@
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
-                {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
               </label>
+              {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
@@ -49,8 +49,8 @@
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
                 <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
-                {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
               </label>
+              {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class=" margin-bottom-10{{ $errors->first('password_confirmation', ' has-error') }}">
@@ -58,14 +58,14 @@
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
                 <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
-                  {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
               </label>
+              {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
               <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms_and_conditions"><i></i>{!! trans('auth.accept_tos') !!}
+              </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
-            </label>
             </div>
           </fieldset>
 

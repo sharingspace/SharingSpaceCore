@@ -28732,3 +28732,19 @@ section.dark .md-editor {
     background-color: #333 !important;
   }
 }
+
+
+.has-error input {
+  color: #a94442;
+  border: 2px solid #a94442 !important;
+}
+
+.has-error .checkbox i {
+  color: #a94442 !important;
+  border: 2px solid #a94442 !important;
+}
+
+
+.has-error .ico-append {
+  color: #a94442;
+}
