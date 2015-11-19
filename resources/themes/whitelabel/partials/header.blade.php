@@ -9,11 +9,41 @@
 
         @if (Auth::check())
         <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar() }}" class="avatar">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
+                <li><a href="{{ route('user.settings') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
+                <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
               </ul>
-            </li>
+        </li>
+
+        <!-- QUICK SHOP CART -->
+				<li class="quick-cart">
+					<a href="#">
+						<span class="badge badge-red btn-xs badge-corner">2</span>
+						<i class="fa fa-envelope-o"></i>
+					</a>
+					<div class="quick-cart-box" style="display: none;">
+						<h4>Messages</h4>
+
+						<div class="quick-cart-wrapper">
+							<a class="text-center" href="#">
+								<h6>0 MESSAGES</h6>
+							</a>
+						</div>
+
+						<!-- quick cart footer -->
+						<div class="quick-cart-footer clearfix">
+							<a href="/user/messages" class="btn btn-primary btn-xs pull-right">VIEW MESSAGES</a>
+							<!-- <span class="pull-left"><strong>TOTAL:</strong> $54.39</span> -->
+						</div>
+						<!-- /quick cart footer -->
+
+					</div>
+				</li>
+				<!-- /QUICK SHOP CART -->
+
+
+
 
         @else
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
@@ -26,7 +56,7 @@
 
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                 <li>
-                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
+                    <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
                       <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
                         {{{ $properties['native'] }}}
                     </a>
@@ -108,8 +138,24 @@
 									Add .external for an external link!
 								-->
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li{!! (Route::is('browse') ? ' class="active"' : '') !!}><a href="{{ route('browse') }}">{{ trans('general.nav.browse') }} <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#">{{ trans('general.nav.add') }}  </a></li>
+                  <li{!! (Route::is('browse') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('browse') }}">
+                      {{ trans('general.nav.browse') }}
+                      {!! (Route::is('browse') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      {{ trans('general.nav.add') }}
+                      {!! (Route::is('browse') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
+                  <li{!! (Route::is('members') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('members') }}">
+                      {{ trans('general.nav.members') }}
+                      {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
 								</ul>
 
 							</nav>
