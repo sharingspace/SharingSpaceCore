@@ -19,7 +19,7 @@
         <!-- QUICK SHOP CART -->
 				<li class="quick-cart">
 					<a href="#">
-						<span class="badge badge-red btn-xs badge-corner">2</span>
+						<span class="badge badge-red btn-xs badge-corner-sm">2</span>
 						<i class="fa fa-envelope-o"></i>
 					</a>
 					<div class="quick-cart-box" style="display: none;">

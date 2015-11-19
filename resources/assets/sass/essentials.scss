@@ -19103,6 +19103,14 @@ section {
   color: #fff !important;
 }
 
+.badge.badge-corner-sm {
+  top: 2px !important;
+  right: -1px !important;
+  position: absolute !important;
+  color: #fff !important;
+  font-size: 8px;
+}
+
 /* colors */
 
 span {
