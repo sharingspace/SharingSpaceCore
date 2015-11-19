@@ -21,6 +21,8 @@ return [
           'about' => 'About',
           'examples' => 'Examples',
           'features' => 'Features',
+          'members' => 'Members',
+          'settings' => 'Settings',
     ],
 
     'entries'  => [
