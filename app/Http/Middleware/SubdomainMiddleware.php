@@ -44,10 +44,10 @@ class SubdomainMiddleware
     $subdomain = extract_subdomains($parsed_url['host']);
     $now = Carbon::now();
 
+    // FIXME - add   ->where('subdomain_expires_at', '>', $now) back in
     if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api')) {
       $group = Community::where('subdomain', '=', $subdomain)
-      ->whereNotNull('subdomain')
-      ->where('subdomain_expires_at', '>', $now)->first();
+      ->whereNotNull('subdomain')->first();
 
       if ($group) {
 
