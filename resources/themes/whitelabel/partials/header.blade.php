@@ -17,22 +17,34 @@
         </li>
 
         <!-- QUICK SHOP CART -->
-				<li class="quick-cart">
+				<li class="notifications-popdown">
 					<a href="#">
 						<span class="badge badge-red btn-xs badge-corner-sm">2</span>
 						<i class="fa fa-envelope-o"></i>
 					</a>
-					<div class="quick-cart-box" style="display: none;">
-						<h4>Messages</h4>
+					<div class="notifications-popdown-box" style="display: none;">
+						<div class="notifications-popdown-wrapper">
 
-						<div class="quick-cart-wrapper">
-							<a class="text-center" href="#">
-								<h6>0 MESSAGES</h6>
-							</a>
+              <div class="clearfix margin-bottom-20"><!-- notification item -->
+  							<span class="label label-success label-square pull-left">
+  								<i class="fa fa-comment"></i>
+  							</span>
+  							<span class="size-14 text-muted">
+                  <b>New Comment</b>: Lorem ipsum Dolor
+                </span>
+              </div><!-- /notification item -->
+
+              <div class="clearfix margin-bottom-20"><!-- notification item -->
+								<span class="label label-danger label-square pull-left">
+									<i class="fa fa-heart-o"></i>
+								</span>
+								<span class="size-14 text-muted"><b>Fav'd</b>: Lorem ipsum Dolor</span>
+							</div><!-- /notification item -->
+
 						</div>
 
 						<!-- quick cart footer -->
-						<div class="quick-cart-footer clearfix">
+						<div class="notifications-popdown-footer clearfix">
 							<a href="/user/messages" class="btn btn-primary btn-xs pull-right">VIEW MESSAGES</a>
 							<!-- <span class="pull-left"><strong>TOTAL:</strong> $54.39</span> -->
 						</div>
