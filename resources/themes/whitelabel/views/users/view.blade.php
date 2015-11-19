@@ -9,7 +9,7 @@
 
 @section('content')
 
-<!-- -->
+<!-- Profile -->
 			<section>
 				<div class="container">
 
@@ -23,7 +23,8 @@
 						</div>
 
 						<!-- info -->
-						<div class="box-light margin-bottom-30"><!-- .box-light OR .box-light -->
+						<div class="box-light margin-bottom-30">
+
 							<div class="row margin-bottom-20">
 								<div class="col-md-4 col-sm-4 col-xs-4 text-center bold">
 									<h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway">12</h2>
@@ -42,6 +43,7 @@
 							</div>
 							<!-- /info -->
 
+              <!-- social / stats -->
 							<div class="text-muted">
 
 								<ul class="list-unstyled nomargin">
@@ -67,6 +69,7 @@
 
 								</ul>
 							</div>
+              <!-- /social / stats -->
 
 						</div>
 
