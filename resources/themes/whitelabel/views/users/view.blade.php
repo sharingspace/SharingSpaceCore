@@ -38,8 +38,9 @@
 
 								<div class="col-md-4 col-sm-4 col-xs-4 text-center bold">
 									<h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway">32</h2>
-									<h3 class="size-11 margin-top-0 margin-bottom-10 text-info">UPLOADS</h3>
+									<h3 class="size-11 margin-top-0 margin-bottom-10 text-info">COMMUNITIES</h3>
 								</div>
+                
 							</div>
 							<!-- /info -->
 
@@ -78,24 +79,22 @@
 
 					<!-- RIGHT -->
 					<div class="col-lg-9 col-md-9 col-sm-8">
-
-						<!-- BIO BOX -->
-						<div class="box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
-							<div class="front">
-								<div class="box1 noradius">
-									<div class="box-icon-title">
-										<h2>{{ $user->getDisplayName() }} &ndash; Profile</h2>
-									</div>
-									<p>{{ $user->bio }}</p>
-								</div>
-							</div>
-						</div>
-						<!-- /BIO BOX -->
-
-
-						<div class="box-light"><!-- .box-light OR .box-dark -->
-
+				    <div class="box-light"><!-- .box-light OR .box-dark -->
 							<div class="row">
+
+                <!-- BIO BOX -->
+    						<div class="box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+    							<div class="front">
+    								<div class="box1 noradius">
+    									<div class="box-icon-title">
+    										<h2>{{ $user->getDisplayName() }} &ndash; Profile</h2>
+    									</div>
+    									<p>{{ $user->bio }}</p>
+    								</div>
+    							</div>
+    						</div>
+    						<!-- /BIO BOX -->
+
 
 								<!-- ENTRIES -->
 								<div class="col-md-12 col-sm-12">
