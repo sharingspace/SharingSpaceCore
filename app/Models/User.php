@@ -63,85 +63,85 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 
 
-    /*
-    * Get social accounts associated with this user
-    */
-    public static function saveSocialAccount($socialUser, $provider) {
+  /*
+  * Get social accounts associated with this user
+  */
+  public static function saveSocialAccount($socialUser, $provider) {
 
-        // Check to see if a user exists in the users table first
-        $user =  User::where('email', '=', $socialUser->getEmail())->first();
+      // Check to see if a user exists in the users table first
+      $user =  User::where('email', '=', $socialUser->getEmail())->first();
 
-         // There is NOT a matching email address in the user table
-         if (!$user) {
-             $user = new User;
-             $user->email = $socialUser->getEmail();
-             $user->first_name = $socialUser->getName();
-             if (!$user->save()) {
-                 return false;
-             }
-         }
+       // There is NOT a matching email address in the user table
+       if (!$user) {
+           $user = new User;
+           $user->email = $socialUser->getEmail();
+           $user->first_name = $socialUser->getName();
+           if (!$user->save()) {
+               return false;
+           }
+       }
 
-        $social = $user->social()->firstOrNew
-            (
-            ['user_id' => $user->id,
-            'service'=>$provider,
-            'uid' => $socialUser->getId()
-            ]);
+      $social = $user->social()->firstOrNew
+          (
+          ['user_id' => $user->id,
+          'service'=>$provider,
+          'uid' => $socialUser->getId()
+          ]);
 
-            $social->access_token = $socialUser->token;
-            $social->save();
-
-
-        return $user;
+          $social->access_token = $socialUser->token;
+          $social->save();
 
 
+      return $user;
+
+
+  }
+
+  /*
+  * Check whether they have social logins stored
+  */
+  public static function checkForSocialLoginDBRecord($user, $provider) {
+      return DB::table( 'social' )
+       ->where( 'access_token', '=', $user->token )
+       ->where('service','=',$provider)
+       ->get();
+
+  }
+
+  /**
+   * @param array $data
+   * @return User
+   */
+  public static function register($data = [])
+  {
+      return static::create($data);
+  }
+
+
+  public function communities()
+  {
+      return $this->belongsToMany('Community', 'hubgroups_users','user_id','hubgroup_id');
+  }
+
+
+  /**
+  * Returns the user full name, it simply concatenates
+  * the user first and last name.
+  *
+  * @return string
+  */
+  public function getDisplayName()
+  {
+
+    if ($this->displayname){
+      return ucwords($this->displayname);
+    } elseif (($this->first_name) && ($this->last_name)){
+    	 return "{$this->first_name} {$this->last_name}";
+    } elseif ($this->first_name){
+    	 return $this->first_name;
+    } else {
+    	 return "Anonymous";
     }
 
-    /*
-    * Check whether they have social logins stored
-    */
-    public static function checkForSocialLoginDBRecord($user, $provider) {
-        return DB::table( 'social' )
-         ->where( 'access_token', '=', $user->token )
-         ->where('service','=',$provider)
-         ->get();
-
-    }
-
-    /**
-     * @param array $data
-     * @return User
-     */
-    public static function register($data = [])
-    {
-        return static::create($data);
-    }
-
-
-    public function communities()
-    {
-        return $this->belongsToMany('Community', 'hubgroups_users','user_id','hubgroup_id');
-    }
-
-
-    /**
-    * Returns the user full name, it simply concatenates
-    * the user first and last name.
-    *
-    * @return string
-    */
-    public function getDisplayName()
-    {
-
-      if ($this->displayname){
-        return ucwords($this->displayname);
-      } elseif (($this->first_name) && ($this->last_name)){
-      	 return "{$this->first_name} {$this->last_name}";
-      } elseif ($this->first_name){
-      	 return $this->first_name;
-      } else {
-      	 return "Anonymous";
-      }
-
-    }
+  }
 }
