@@ -92,17 +92,11 @@
 						-->
 						<div class="navbar-collapse pull-right nav-main-collapse collapse">
 							<nav class="nav-main">
-
-								<!--
-									.nav-onepage
-									Required for onepage navigation links
-
-									Add .external for an external link!
-								-->
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li><a href="#about">{{ trans('general.nav.about') }} <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#features">{{ trans('general.nav.features') }}</a></li>
-                  <li><a href="#examples">{{ trans('general.nav.examples') }}  </a></li>
+                  <li><a href="/community/new">Create Community</a></li>
+                  <li><a href="/#about">{{ trans('general.nav.about') }} <span class="sr-only">(current)</span></a></li>
+                  <li><a href="/#features">{{ trans('general.nav.features') }}</a></li>
+                  <li><a href="/#examples">{{ trans('general.nav.examples') }}  </a></li>
 								</ul>
 
 							</nav>
