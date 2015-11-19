@@ -44,7 +44,7 @@
             <li>{{ trans('general.community.exchange_types.all_allowed') }}</li>
           @else
             @foreach ($whitelabel_group->exchange_types as $exchange_types)
-              <li>{{ $exchange_types->type_name }}</li>
+              <li>{{ $exchange_types->name }}</li>
             @endforeach
           @endif
 
@@ -81,7 +81,7 @@
             </li>
             @foreach ($whitelabel_group->exchange_types as $exchange_types)
               <li class="filter">
-                <a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->type_name }}</a>
+                <a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->name }}</a>
               </li>
             @endforeach
 
