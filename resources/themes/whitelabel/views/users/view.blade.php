@@ -50,11 +50,19 @@
                   @endif
 
                   @if ($user->twitter_url)
-                    <li class="margin-bottom-10"><i class="fa fa-twitter width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->twitter_url }}">{{ '@'.$user->twitter_url }}</a></li>
+                    <li class="margin-bottom-10"><i class="fa fa-twitter width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->twitter_url }}">Twitter</a></li>
                   @endif
 
                   @if ($user->fb_url)
-                    <li class="margin-bottom-10"><i class="fa fa-facebook width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->fb_url }}">{{ '@'.$user->fb_url }}</a></li>
+                    <li class="margin-bottom-10"><i class="fa fa-facebook width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->fb_url }}">Facebook</a></li>
+                  @endif
+
+                  @if ($user->pinterest_url)
+                    <li class="margin-bottom-10"><i class="fa fa-pinterest width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->pinterest_url }}">Pinterest</a></li>
+                  @endif
+
+                  @if ($user->gplus_url)
+                    <li class="margin-bottom-10"><i class="fa fa-google width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->gplus_url }}">Google +</a></li>
                   @endif
 
 								</ul>
