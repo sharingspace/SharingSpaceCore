@@ -18,4 +18,9 @@ class UserController extends Controller
 
     }
 
+    public function getSettings()
+    {
+        return view('user.settings');
+    }
+
 }
