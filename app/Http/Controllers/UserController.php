@@ -20,7 +20,18 @@ class UserController extends Controller
 
     public function getSettings()
     {
-        return view('user.settings');
+        return view('account.settings');
+    }
+
+
+    public function getProfile($id)
+    {
+        if ($user = \App\User::findOrFail($id)) {
+          return view('users.view')->with('user',$user);
+        } else {
+          echo 'Invalid user';
+        }
+
     }
 
 }
