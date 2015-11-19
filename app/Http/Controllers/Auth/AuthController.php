@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Socialite;
 
 class AuthController extends Controller
 {
@@ -31,6 +32,44 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+    }
+
+    /**
+     * Redirect the user to the OAuth authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from the provider.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        try {
+
+            $user = Socialite::driver($provider)->user();
+
+            if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
+                Auth::login($getUser);
+                return redirect('/')->with('success','You have been logged in!');
+            } else {
+                $newUser = User::saveSocialAccount($user, $provider);
+                Auth::login($newUser);
+                return redirect('/')->with('success','Welcome aboard!');
+            }
+
+        } catch  (Exception $e) {
+            return redirect('/')->with('error','We couldn\'t log you in :(');
+        }
+
+
+
     }
 
     /**
