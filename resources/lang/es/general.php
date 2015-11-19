@@ -21,8 +21,9 @@ return [
           'about' => 'Quiénes somos',
           'examples' => 'Ejemplos',
           'features' => 'Características',
-          'members' => 'Members',
-          'settings' => 'Settings',
+          'members' => 'Miembros',
+          'settings' => 'Ajustes',
+          'profile' => 'Perfil',
     ],
 
     'entries'  => [

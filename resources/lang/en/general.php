@@ -23,6 +23,7 @@ return [
           'features' => 'Features',
           'members' => 'Members',
           'settings' => 'Settings',
+          'profile' => 'Profile',
     ],
 
     'entries'  => [
