@@ -87,4 +87,13 @@ class CommunitiesController extends Controller
 
   }
 
+  /*
+  Get the members in current community
+  */
+  public function getMembers(Request $request)
+  {
+    $members = $request->whitelabel_group->members()->get();
+    return view('members')->with('members',$members);
+  }
+
 }
