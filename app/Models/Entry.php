@@ -14,11 +14,11 @@ class Entry extends Model
    *
    * @var string
    */
-  protected $table = 'tiles';
-  protected $primaryKey = 'tile_id';
+  protected $table = 'entries';
+  protected $primaryKey = 'id';
 
   public function author() {
-    return $this->belongsTo('App\User', 'user_id');
+    return $this->belongsTo('App\User', 'created_by');
   }
 
 

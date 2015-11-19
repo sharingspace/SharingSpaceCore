@@ -14,17 +14,16 @@ class Exchange extends Model
   * @var string
   */
   protected $table = 'exchange_types';
-  protected $primaryKey = 'type_id';
 
   public function exchange()
    {
-       return $this->belongsToMany('App\Entry', 'exchange_types', 'tile_id', 'type_id');
+       return $this->belongsToMany('App\Entry', 'exchange_types', 'entry_id', 'type_id');
    }
 
 
   public function communities()
    {
-       return $this->belongsToMany('App\Community', 'type_id', 'hubgroup_id');
+       return $this->belongsToMany('App\Community', 'type_id', 'community_id');
    }
 
 }

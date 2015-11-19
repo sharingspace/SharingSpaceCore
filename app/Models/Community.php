@@ -14,11 +14,17 @@ class Community extends Model
    *
    * @var string
    */
-  protected $table = 'hubgroups';
-  protected $primaryKey = 'hubgroup_id';
+  protected $table = 'communities';
+
+  // FIXME - This is poopy and not the right L5 way to do it
+  public $rules = [
+      'name'            => 'required|string|min:2|max:255',
+      'subdomain'            => 'required|alpha_dash|min:2|max:255',
+  ];
+
 
   public function user() {
-      return $this->belongsTo('App\User', 'user_id');
+      return $this->belongsTo('App\User', 'created_by');
   }
 
 
@@ -28,19 +34,19 @@ class Community extends Model
    * @return collection
    */
   public function entries() {
-    return $this->belongsToMany('App\Entry', 'tile_hubgroup_join', 'hubgroup_id', 'tile_id');
+    return $this->belongsToMany('App\Entry', 'entries_community_join', 'community_id', 'entry_id');
   }
 
 
   /**
   * Get the members of a group.
-  * Groups belong to many users by way of the hubgroups_users table.
+  * Groups belong to many users by way of the communities_users table.
   *
   * @return collection
   */
   public function members()
   {
-   	return $this->belongsToMany('App\User', 'hubgroups_users', 'hubgroup_id', 'user_id');
+   	return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id');
   }
 
   /**
@@ -51,7 +57,7 @@ class Community extends Model
   public function getCover() {
 
 		if ($this->cover_img!='') {
-			$cover_img = Config::get('services.cdn.default').'/uploads/communities/'.$this->hubgroup_id.'/'.$this->cover_img;
+			$cover_img = Config::get('services.cdn.default').'/uploads/communities/'.$this->community_id.'/'.$this->cover_img;
 		} else {
 			$cover_img = Config::get('services.cdn.default').'/img/covers/default-heart-cover.jpg';
 		}
@@ -67,7 +73,7 @@ class Community extends Model
   public function getLogo() {
 
 		if ($this->logo) {
-			return Config::get('services.cdn.default').'/uploads/communities/'.$this->hubgroup_id.'/'.$this->logo;
+			return Config::get('services.cdn.default').'/uploads/communities/'.$this->community_id.'/'.$this->logo;
 		} else {
 			return null;
 		}
@@ -81,7 +87,7 @@ class Community extends Model
 	public function getProfileImg() {
 
 		if ($this->profile_img) {
-			return Config::get('app.cdn.default').'/uploads/communities/'.$this->hubgroup_id.'/'.$this->profile_img;
+			return Config::get('app.cdn.default').'/uploads/communities/'.$this->community_id.'/'.$this->profile_img;
 		} else {
 			return null;
 		}
@@ -96,7 +102,7 @@ class Community extends Model
   */
 	public function exchange_types()
     {
-    	$exchanges = $this->belongsToMany('App\Exchange', 'group_allowed_types', 'hubgroup_id', 'type_id')->withTimestamps();
+    	$exchanges = $this->belongsToMany('App\Exchange', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
     	return $exchanges;
     }
 
