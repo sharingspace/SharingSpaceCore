@@ -82,6 +82,8 @@ Route::get('browse', array('as' => 'browse', 'uses' => 'CommunitiesController@ge
 Route::get('members', array('as' => 'members', 'uses' => 'CommunitiesController@getMembers'));
 Route::get('account/settings', array('as' => 'user.settings', 'uses' => 'UserController@getSettings'));
 Route::get('users/{userID}', array('as' => 'user.profile', 'uses' => 'UserController@getProfile'));
+Route::get('community/new', array('as' => 'community.create.new', 'uses' => 'CommunitiesController@getCreate'));
+Route::post('community/new', array('as' => 'community.create.save', 'uses' => 'CommunitiesController@postCreate'));
 Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'CommunitiesController@getEntriesDataView'));
 
 
