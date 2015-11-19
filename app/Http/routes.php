@@ -79,6 +79,8 @@ Route::group(array('prefix' => 'auth'), function () {
 |--------------------------------------------------------------------------
 */
 Route::get('browse', array('as' => 'browse', 'uses' => 'CommunitiesController@getEntriesView'));
+Route::get('members', array('as' => 'members', 'uses' => 'CommunitiesController@getMembers'));
+Route::get('user/settings', array('as' => 'user.settings', 'uses' => 'UserController@getSettings'));
 Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'CommunitiesController@getEntriesDataView'));
 
 
