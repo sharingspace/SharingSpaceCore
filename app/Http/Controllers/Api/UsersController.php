@@ -32,5 +32,11 @@ class UsersController extends ApiGuardController
       return $this->response->withCollection($user, new \App\Http\Transformers\UserTransformer);
   }
 
+  public function entries()
+  {
+      $user = User::findOrFail($id)->with('entries');
+      return $this->response->withCollection($user, new \App\Http\Transformers\EntriesTransformer);
+  }
+
 
 }
