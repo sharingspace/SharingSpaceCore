@@ -1,11 +1,15 @@
-@extends('layouts.master')
+@extends('layouts/master')
 
+{{-- Page title --}}
+@section('title')
+     {{ trans('general.nav.browse') }} ::
+@parent
+@stop
+
+
+{{-- Page content --}}
 @section('content')
 
-<!--
-	INFO BAR
-	inside .container
--->
 <section class="info-bar">
 	<div class="container">
 
@@ -92,7 +96,8 @@
                 {{ strtolower($entry->exchangeTypesNames[$i]->type_name) }}
               @endfor
             @endif
-            "><!-- item -->
+            ">
+            <!-- item -->
 
 							<div class="item-box">
 								<figure>
