@@ -217,7 +217,7 @@
 
                         <!-- details -->
 
-                        <a class="ico-rounded" href="http://{{ $community->subdomain }}.anysha.re">
+                        <a class="ico-rounded" href="http://{{ $community->subdomain }}.{{ Config::get('app.domain') }}">
                           <span class="glyphicon glyphicon-option-horizontal size-20"></span>
                         </a>
                         <!-- <a class="ico-rounded" href="#">
