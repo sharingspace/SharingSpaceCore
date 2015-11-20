@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
+use Validator;
+use Input;
+use Redirect;
 
 class EntriesController extends Controller
 {
@@ -18,7 +21,7 @@ class EntriesController extends Controller
   }
 
   /*
-  * Save new community
+  * Save new entry
   */
   public function postCreate(Request $request)
   {
@@ -29,14 +32,15 @@ class EntriesController extends Controller
       return Redirect::back()->withInput()->withErrors($validator->messages());
     } else {
 
-      $entry->name	= e(Input::get('name'));
+      $entry->title	= e(Input::get('title'));
+      $entry->created_by	= Auth::user()->id;
 
-      if ($entry->save()) {
+      if ($request->whitelabel_group->entries()->save($entry)) {
         return redirect('/browse')->with('success','Success!');
-
       }
 
     }
+
   }
 
   /*
