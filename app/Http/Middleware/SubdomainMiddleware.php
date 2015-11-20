@@ -58,10 +58,12 @@ class SubdomainMiddleware
 
       } else {
         $request->valid_whitelabel = false;
+        return redirect(Config::get('app.url'));
       }
 
     } else {
       $request->valid_whitelabel = false;
+    
     }
 
     return $next($request);
