@@ -32,6 +32,14 @@ class Entry extends Model
     return $this->belongsToMany('App\Community', 'entries_hubgroup_join', 'entry_id', 'hubgroup_id');
   }
 
+
+  public function exchangeTypesNames()
+  {
+      return $this->belongsToMany('App\Exchange', 'entries_exchange_types', 'entry_id', 'type_id');
+  }
+
+  
+
   /**
   * Query builder scope to search on text
   *
@@ -53,9 +61,6 @@ class Entry extends Model
   }
 
 
-  public function exchangeTypesNames()
-  {
-      return $this->belongsToMany('App\Exchange', 'entries_exchange_types', 'entry_id', 'type_id');
-  }
+
 
 }
