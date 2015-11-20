@@ -29,7 +29,7 @@ class Entry extends Model
 
   public function communities()
   {
-    return $this->belongsToMany('App\Community', 'tile_hubgroup_join', 'tile_id', 'hubgroup_id');
+    return $this->belongsToMany('App\Community', 'entries_hubgroup_join', 'entry_id', 'hubgroup_id');
   }
 
   /**
@@ -55,7 +55,7 @@ class Entry extends Model
 
   public function exchangeTypesNames()
   {
-      return $this->belongsToMany('App\Exchange', 'tile_exchange_types', 'tile_id', 'type_id');
+      return $this->belongsToMany('App\Exchange', 'entries_exchange_types', 'entry_id', 'type_id');
   }
 
 }
