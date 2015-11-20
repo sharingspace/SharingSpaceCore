@@ -6,12 +6,21 @@
 <!-- OWL SLIDER -->
 			<section id="slider">
 
-				<div class="owl-carousel buttons-autohide controlls-over nomargin" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": false, "pagination": false, "transitionStyle":"fade"}'>
+				<div class="owl-carousel buttons-autohide controlls-over nomargin" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": false, "pagination": false, "transitionStyle":"fade", "slideSpeed":300, "paginationSpeed" : 100}'>
 					<div>
-						<img class="img-responsive" src="assets/img/demo/panorama/1-min.jpg" alt="">
+						<div style="background-image: url('assets/img/demo/panorama/1-min.jpg'); height:400px;">
+              <h1 style="padding-top: 100px;">Dramatic Words! </h1>
+              <h3>Catchy tagline.  </h3>
+              <a href="#" class="btn btn-default">A Button</a>
+            </div>
 					</div>
 					<div>
-						<img class="img-responsive" src="assets/img/demo/panorama/2-min.jpg" alt="">
+            <div style="background-image: url('assets/img/demo/panorama/2-min.jpg'); height:400px;">
+              <h1 style="padding-top: 100px;">Dramatic Words! </h1>
+              <h3>Catchy tagline.  </h3>
+              <a href="#" class="btn btn-default">A Button</a>
+            </div>
+
 					</div>
 				</div>
 
