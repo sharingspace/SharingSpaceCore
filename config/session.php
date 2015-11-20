@@ -135,7 +135,7 @@ return [
     |
     */
 
-    'domain' => env('.'.'APP_DOMAIN', '.massmosaic5.dev'),
+    'domain' => env('APP_COOKIE_DOMAIN', 'anysha.re'),
 
     /*
     |--------------------------------------------------------------------------
