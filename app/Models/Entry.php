@@ -15,7 +15,12 @@ class Entry extends Model
    * @var string
    */
   protected $table = 'entries';
-  protected $primaryKey = 'id';
+
+  // FIXME - This is poopy and not the right L5 way to do it
+  public $rules = [
+      'name'            => 'required|string|min:2|max:255',
+  ];
+
 
   public function author() {
     return $this->belongsTo('App\User', 'created_by');
