@@ -48,6 +48,7 @@ class CreateCommnunityTables extends Migration
 
 
 	    Schema::create('communities_users', function($table) {
+          $table->increments('id');
           $table->integer('user_id')->nullable();
           $table->integer('community_id')->nullable();
           $table->integer('is_admin');
