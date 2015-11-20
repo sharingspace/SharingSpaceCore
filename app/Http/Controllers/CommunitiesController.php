@@ -70,6 +70,7 @@ class CommunitiesController extends Controller
 
       $community->name	= e(Input::get('name'));
       $community->subdomain	= e(Input::get('subdomain'));
+      $community->created_by	= Auth::user()->id;
 
       if ($community->save()) {
         return redirect('/')->with('success','Success!');
