@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Socialite;
+use Auth;
+use Config;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -39,8 +42,11 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider($provider)
+    public function redirectToProvider(Request $request, $provider)
     {
+        if ($request->whitelabel_group) {
+          $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
+        }
         return Socialite::driver($provider)->redirect();
     }
 
@@ -49,23 +55,31 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback(Request $request, $provider)
     {
+
+      if ($request->session()->has('auth_subdomain')) {
+        $subdomain = $request->session()->get('auth_subdomain');
+        $request->session()->forget('auth_subdomain');
+        $redirect = 'http://'.$subdomain.'.'.Config::get('app.domain');
+      } else {
+        $redirect = Config::get('app.url');
+      }
         try {
 
             $user = Socialite::driver($provider)->user();
 
             if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
                 Auth::login($getUser);
-                return redirect('/')->with('success','You have been logged in!');
+                return redirect($redirect)->with('success','You have been logged in!');
             } else {
                 $newUser = User::saveSocialAccount($user, $provider);
                 Auth::login($newUser);
-                return redirect('/')->with('success','Welcome aboard!');
+                return redirect($redirect)->with('success','Welcome aboard!');
             }
 
         } catch  (Exception $e) {
-            return redirect('/')->with('error','We couldn\'t log you in :(');
+            return redirect($redirect)->with('error','We couldn\'t log you in :(');
         }
 
 
