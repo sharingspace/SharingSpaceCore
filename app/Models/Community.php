@@ -23,10 +23,9 @@ class Community extends Model
   ];
 
 
-  public function user() {
+  public function owner() {
       return $this->belongsTo('App\User', 'created_by');
   }
-
 
   /**
    * Relationship for entries and communities
@@ -46,7 +45,7 @@ class Community extends Model
   */
   public function members()
   {
-   	return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id');
+   	return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin');
   }
 
   /**
