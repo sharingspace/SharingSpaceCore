@@ -3,28 +3,22 @@
 @section('content')
 
 
-<!-- SLIDER -->
-			<section id="slider" class="halfheight" style="background-image:url('assets/img/demo/1200x800/34-min.jpg');">
-				<div class="overlay dark-5"><!-- dark overlay [0 to 9 opacity] --></div>
+<!-- OWL SLIDER -->
+			<section id="slider">
 
-				<div class="display-table">
-					<div class="display-table-cell vertical-align-middle">
-						<div class="container">
-
-							<div class="slider-featured-text text-center">
-								<h1 class="text-white wow fadeInUp" data-wow-delay="0.4s">
-									{{ trans('home.home_headline') }}
-								</h1>
-								<h2 class="weight-300 text-white wow fadeInUp" data-wow-delay="0.8s">{{ trans('home.home_subheadline') }}</h2>
-								<a class="btn btn-primary btn-lg wow fadeInUp" data-wow-delay="1s" href="#">DO STUFF</a>
-							</div>
-
-						</div>
+				<div class="owl-carousel buttons-autohide controlls-over nomargin" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": false, "pagination": false, "transitionStyle":"fade"}'>
+					<div>
+						<img class="img-responsive" src="assets/img/demo/panorama/1-min.jpg" alt="">
+					</div>
+					<div>
+						<img class="img-responsive" src="assets/img/demo/panorama/2-min.jpg" alt="">
 					</div>
 				</div>
 
 			</section>
-			<!-- /SLIDER -->
+			<!-- /OWL SLIDER -->
+
+
       <!-- CALLOUT -->
 			<section class="callout-light heading-title heading-arrow-bottom" style="z-index:100;">
 				<div class="container">
@@ -40,149 +34,129 @@
 
 
       <!-- ABOUT -->
-			<section id="about" class="padding-xs bottom-bordered">
+			<section id="about" class="padding-md">
 				<div class="container">
 
 					<header class="text-center margin-bottom-60">
-						<h2>We Are AnySha.re</h2>
-						<p class="lead font-lato">Lorem ipsum dolor sit amet adipiscium elit</p>
-						<hr />
+						<h2>The Basics</h2>
+						<p class="lead font-lato">Learn about "Sharing Hubs" and how they help you!</p>
 					</header>
 
 
 					<div class="row">
 
-						<div class="col-sm-6">
-							<img class="img-responsive" src="https://snipeitapp.com/assets/img/demo/desktop_snipe.png" alt="" />
+						<div class="col-sm-5">
+							<img class="img-responsive" src="http://uploads.webflow.com/564b3e094801fab237b6b158/564d8a476299d232614b4711_iPad-%26-iPhone-%26-iMac.png" style="max-width: 350px" alt="" />
 						</div>
 
-						<div class="col-sm-6">
-							<p class="dropcap">Lorem ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+						<div class="col-sm-7">
+							<p>A Sharing Hub is a collection of what people want and have. It's very simple... you can add skills, things, ideas, projects, and much more. </p>
+
+              <p>The Hub then quickly turns a crowd of viewers into a community! People can exchange with you in any way you choose, including gifting, buying, trading, collaborating, and much more.</p>
 
 							<hr />
 
-							<div class="row countTo-sm text-center">
+							<div class="row text-center">
 
-								<div class="col-xs-6 col-sm-4">
-									<i class="fa fa-users size-20"></i> &nbsp;
-									<span class="countTo" data-speed="3000" style="color:#59BA41">1303</span>
-									<h6>HAPPY CLIENTS</h6>
-								</div>
-
-								<div class="col-xs-6 col-sm-4">
-									<i class="fa fa-briefcase size-20"></i> &nbsp;
-									<span class="countTo" data-speed="3000" style="color:#774F38">56000</span>
-									<h6>FINISHED PROJECTS</h6>
-								</div>
-
-								<div class="col-xs-6 col-sm-4">
-									<i class="fa fa-twitter size-20"></i> &nbsp;
-									<span class="countTo" data-speed="3000" style="color:#C02942">4897</span>
-									<h6>TWITTER FOLLOWERS</h6>
-								</div>
+								<img src="http://placehold.it/125x125" class="thumbnail pull-left">
+                <img src="http://placehold.it/125x125" class="thumbnail pull-left">
+                <img src="http://placehold.it/125x125" class="thumbnail pull-left">
 
 							</div>
 
 						</div>
-
 					</div>
-
-
 				</div>
+
 			</section>
 			<!-- /ABOUT -->
+      <!-- BUTTON CALLOUT -->
+      <div class="callout alert alert-success margin-bottom-60">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 col-md-offset-1"><!-- left text -->
+            <h4>Make a multi-person exchange network in 1 minute!</h4>
+          </div><!-- /left text -->
+          <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
+            <a href="#" class="btn btn-success btn-lg">30-day free trial</a>
+          </div><!-- /right btn -->
+        </div>
+      </div>
+      <!-- /BUTTON CALLOUT -->
+
 
       <!-- -->
-			<section id="features" class="bottom-bordered">
-				<div class="container">
+  		<section id="features">
+  			<div class="container">
 
-					<header class="text-center">
-						<h2 class="nomargin">Features</h2>
-					</header>
+  				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet.</p>
 
-					<hr />
+  				<div class="divider divider-center divider-color"><!-- divider -->
+  					<i class="fa fa-chevron-down"></i>
+  				</div>
 
+  				<!-- FEATURED BOXES 3 -->
+  				<div class="row">
 
-					<div class="row margin-top-80">
+  					<div class="col-md-4 col-xs-6">
+  						<div class="text-center">
+  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-compass"></i>
+  							<h4>Something</h4>
+  							<p class="font-lato size-20">Lorem ipsum dolor sit amet.</p>
+  						</div>
+  					</div>
+  					<div class="col-md-4 col-xs-6">
+  						<div class="text-center">
+  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-users"></i>
+  							<h4>Something</h4>
+  							<p class="font-lato size-20">Donec id elit non mi porta gravida.</p>
+  						</div>
+  					</div>
+  					<div class="col-md-4 col-xs-6">
+  						<div class="text-center">
+  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-random"></i>
+  							<h4>Something</h4>
+  							<p class="font-lato size-20">Donec id elit non mi porta gravida.</p>
+  						</div>
+  					</div>
+  					<div class="col-md-4 col-xs-6">
+  						<div class="text-center">
+  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-refresh"></i>
+  							<h4>Something</h4>
+  							<p class="font-lato size-20">Donec id elit non mi porta gravida.</p>
+  						</div>
+  					</div>
 
-						<div class="col-lg-4 col-md-4 col-md-push-4 text-center">
+  					<div class="col-md-4 col-xs-6">
+  						<div class="text-center">
+  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-recycle"></i>
+  							<h4>Something</h4>
+  							<p class="font-lato size-20">Donec id elit non mi porta gravida.</p>
+  						</div>
+  					</div>
+  					<div class="col-md-4 col-xs-6">
+  						<div class="text-center">
+  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-image"></i>
+  							<h4>Something</h4>
+  							<p class="font-lato size-20">Donec id elit non mi porta gravida.</p>
+  						</div>
+  					</div>
 
-							<img class="img-responsive" src="assets/img/demo/iphone-min.png" alt="" />
+  				</div>
+  				<!-- /FEATURED BOXES 3 -->
 
-						</div>
-
-						<div class="col-lg-4 col-md-4 col-sm-6 col-md-pull-4">
-
-							<div class="box-icon box-icon-right">
-								<a class="box-icon-title" href="#">
-									<i class="fa fa-eye"></i>
-									<h2>Advanced Privacy Settings</h2>
-								</a>
-								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-							</div>
-
-							<div class="box-icon box-icon-right">
-								<a class="box-icon-title" href="#">
-									<i class="fa fa-check"></i>
-									<h2>Multi-Lingual</h2>
-								</a>
-								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-							</div>
-
-							<div class="box-icon box-icon-right">
-								<a class="box-icon-title" href="#">
-									<i class="fa fa-flash"></i>
-									<h2>Your Own Subdomain</h2>
-								</a>
-								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-							</div>
-
-						</div>
-
-						<div class="col-lg-4 col-md-4 col-sm-6">
-
-
-
-							<div class="box-icon box-icon-left">
-								<a class="box-icon-title" href="#">
-									<i class="fa fa-random"></i>
-									<h2>Whitelabel Solution</h2>
-								</a>
-								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-							</div>
-
-							<div class="box-icon box-icon-left">
-								<a class="box-icon-title" href="#">
-									<i class="fa fa-tint"></i>
-									<h2>Limit Exchange Types</h2>
-								</a>
-								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-							</div>
-
-							<div class="box-icon box-icon-left">
-								<a class="box-icon-title" href="#">
-									<i class="fa fa-cogs"></i>
-									<h2>Multipurpose</h2>
-								</a>
-								<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-							</div>
-
-						</div>
-
-					</div>
+  			</div>
+  		</section>
+      <!-- / -->
 
 
-				</div>
-			</section>
-			<!-- / -->
 
       <!-- COMMUNITIES -->
-      <section id="examples">
+      <section id="examples" class="dark">
         <div class="container">
 
           <header class="text-center margin-bottom-60">
-            <h2>{{ trans('home.our_communities') }}</h2>
-            <p class="lead font-lato">Lorem ipsum dolor sit amet adipiscium elit</p>
+            <h2>Examples</h2>
+            <p class="lead font-lato">Browse our favorite Sharing Hubs around the world! </p>
             <hr />
           </header>
 
@@ -242,12 +216,22 @@
 <!-- /COMMUNITIES  -->
 
 <!-- BUTTON CALLOUT -->
-<a href="#" class="btn btn-xlg btn-primary size-20 fullwidth nomargin noradius padding-40">
-	<span class="font-lato size-30">
-		Get started today!
-		<strong>Sign-Up Free</strong>
-	</span>
-</a>
+<div class="callout callout-theme-color margin-bottom-0">
+
+  <div class="row">
+
+    <div class="col-md-5 col-sm-12 col-md-offset-1"><!-- left text -->
+      <h4>Make a multi-person exchange network in 1 minute!</h4>
+    </div><!-- /left text -->
+    <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
+      <a href="#" class="btn btn-success btn-lg">30-day free trial</a>
+    </div><!-- /right btn -->
+
+  </div>
+
+</div>
 <!-- /BUTTON CALLOUT -->
+
+
 
 @stop
