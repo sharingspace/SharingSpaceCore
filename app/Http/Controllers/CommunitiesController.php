@@ -10,6 +10,8 @@ use App\Entry;
 use Input;
 use Validator;
 use Redirect;
+use Config;
+use App\Exchange;
 
 class CommunitiesController extends Controller
 {
@@ -61,7 +63,6 @@ class CommunitiesController extends Controller
   public function postCreate(Request $request)
   {
     $community = new \App\Community();
-
     $validator = Validator::make(Input::all(), $community->rules);
 
     if ($validator->fails()) {
@@ -73,9 +74,13 @@ class CommunitiesController extends Controller
       $community->created_by	= Auth::user()->id;
 
       if ($community->save()) {
-        return redirect('/')->with('success','Success!');
-
+        $community->members()->attach(Auth::user(), ['is_admin' => true]);
+        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success','Success! Welcome to your new Community!');
       }
+
+      // Loop through the allowed exchange types and save them
+
+
 
     }
 
