@@ -55,7 +55,7 @@ class Entry extends Model
       ->orWhere('location', 'LIKE', "%$search%")
       ->orWhere(function($query) use ($search) {
           $query->whereHas('author', function($query) use ($search) {
-              $query->where('displayname','LIKE','%'.$search.'%');
+              $query->where('display_name','LIKE','%'.$search.'%');
           });
       });
   }
