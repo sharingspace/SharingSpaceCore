@@ -51,11 +51,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 
 Route::group(array('prefix' => 'auth'), function () {
 
-    # Email required
-    Route::get('email-required', array('as' => 'email-required', 'uses' => 'Auth\AuthController@getUpdateEmail'));
-    Route::post('email-required', array('as' => 'email-required', 'uses' => 'Auth\AuthController@postUpdateEmail'));
-
-	# Logout
+	 # Logout
     Route::get('logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
 
     # Login
