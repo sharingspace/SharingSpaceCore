@@ -28,11 +28,11 @@
 
           <fieldset class="nomargin">
 
-            <div class=" margin-bottom-10{{ $errors->first('displayname', ' has-error') }}">
+            <div class=" margin-bottom-10{{ $errors->first('display_name', ' has-error') }}">
               <label class="input">
-                <input type="text" placeholder="{{ trans('general.user.display_name') }}" name="displayname" value="{{ old('displayname') }}">
+                <input type="text" placeholder="{{ trans('general.user.display_name') }}" name="display_name" value="{{ old('display_name') }}">
               </label>
-              {!! $errors->first('displayname', '<span class="help-block">:message</span>') !!}
+              {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">

@@ -15,7 +15,7 @@ class UserTransformer {
                 ],
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
-            'displayname' => $user->displayname,
+            'display_name' => $user->display_name,
             'bio' => $user->bio,
             'location' =>
                 [
