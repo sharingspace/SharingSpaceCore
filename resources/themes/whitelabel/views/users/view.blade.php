@@ -40,7 +40,7 @@
 									<h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway">32</h2>
 									<h3 class="size-11 margin-top-0 margin-bottom-10 text-info">COMMUNITIES</h3>
 								</div>
-                
+
 							</div>
 							<!-- /info -->
 
@@ -52,20 +52,20 @@
                     <li class="margin-bottom-10"><i class="fa fa-globe width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->website }}">{{ $user->website }}</a></li>
                   @endif
 
-                  @if ($user->twitter_url)
-                    <li class="margin-bottom-10"><i class="fa fa-twitter width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->twitter_url }}">Twitter</a></li>
+                  @if ($user->twitter)
+                    <li class="margin-bottom-10"><i class="fa fa-twitter width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->twitter }}">Twitter</a></li>
                   @endif
 
-                  @if ($user->fb_url)
-                    <li class="margin-bottom-10"><i class="fa fa-facebook width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->fb_url }}">Facebook</a></li>
+                  @if ($user->facebook)
+                    <li class="margin-bottom-10"><i class="fa fa-facebook width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->facebook }}">Facebook</a></li>
                   @endif
 
-                  @if ($user->pinterest_url)
-                    <li class="margin-bottom-10"><i class="fa fa-pinterest width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->pinterest_url }}">Pinterest</a></li>
+                  @if ($user->pinterest)
+                    <li class="margin-bottom-10"><i class="fa fa-pinterest width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->pinterest }}">Pinterest</a></li>
                   @endif
 
-                  @if ($user->gplus_url)
-                    <li class="margin-bottom-10"><i class="fa fa-google width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->gplus_url }}">Google +</a></li>
+                  @if ($user->google)
+                    <li class="margin-bottom-10"><i class="fa fa-google width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->google }}">Google +</a></li>
                   @endif
 
 								</ul>

@@ -133,8 +133,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   public function getDisplayName()
   {
 
-    if ($this->displayname){
-      return ucwords($this->displayname);
+    if ($this->display_name){
+      return ucwords($this->display_name);
     } elseif (($this->first_name) && ($this->last_name)){
     	 return "{$this->first_name} {$this->last_name}";
     } elseif ($this->first_name){
