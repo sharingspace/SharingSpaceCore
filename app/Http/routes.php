@@ -86,7 +86,7 @@ Route::get('community/new', array('middleware' => 'auth','as' => 'community.crea
 Route::post('community/new', array('middleware' => 'auth','as' => 'community.create.save', 'uses' => 'CommunitiesController@postCreate'));
 
 Route::get('entry/new', array('middleware' => 'auth','as' => 'entry.create.form', 'uses' => 'EntriesController@getCreate'));
-
+Route::post('entry/new', array('middleware' => 'auth','as' => 'entry.create.save', 'uses' => 'EntriesController@postCreate'));
 
 Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'EntriesController@getEntriesDataView'));
 
