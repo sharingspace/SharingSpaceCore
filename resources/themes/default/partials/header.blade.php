@@ -107,8 +107,3 @@
 				<!-- /Top Nav -->
 
 			</div>
-
-
-
-	<!-- Notifications -->
-	@include('notifications')

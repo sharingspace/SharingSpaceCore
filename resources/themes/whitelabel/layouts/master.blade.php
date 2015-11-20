@@ -46,6 +46,12 @@
 
       <div>@include('partials.header')</div>
 
+
+      @if (!Route::is('home'))
+          <!-- Notifications -->
+          @include('notifications')
+      @endif
+
       <div>@yield('content')</div>
 
       <div>@include('partials.footer')</div>
