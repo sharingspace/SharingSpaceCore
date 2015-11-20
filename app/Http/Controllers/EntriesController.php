@@ -17,6 +17,27 @@ class EntriesController extends Controller
     return view('entries.edit');
   }
 
+  /*
+  * Save new community
+  */
+  public function postCreate(Request $request)
+  {
+    $entry = new \App\Entry();
+    $validator = Validator::make(Input::all(), $entry->rules);
+
+    if ($validator->fails()) {
+      return Redirect::back()->withInput()->withErrors($validator->messages());
+    } else {
+
+      $entry->name	= e(Input::get('name'));
+
+      if ($entry->save()) {
+        return redirect('/browse')->with('success','Success!');
+
+      }
+
+    }
+  }
 
   /*
   Get the JSON list of entries in the current community
