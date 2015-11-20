@@ -119,9 +119,9 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="{{ route('entry.create.form')}}">
                       {{ trans('general.nav.add') }}
-                      {!! (Route::is('browse') ? '<span class="sr-only">(current)</span>' : '') !!}
+                      {!! (Route::is('entries.create.new') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
                   <li{!! (Route::is('members') ? ' class="active"' : '') !!}>
