@@ -18,7 +18,7 @@ class Entry extends Model
 
   // FIXME - This is poopy and not the right L5 way to do it
   public $rules = [
-      'name'            => 'required|string|min:2|max:255',
+      'title'            => 'required|string|min:2|max:255',
   ];
 
 
