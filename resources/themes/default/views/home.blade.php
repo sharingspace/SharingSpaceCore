@@ -220,9 +220,10 @@
                         <a class="ico-rounded" href="http://{{ $community->subdomain }}.anysha.re">
                           <span class="glyphicon glyphicon-option-horizontal size-20"></span>
                         </a>
-                        <a class="ico-rounded" href="#">
+                        <!-- <a class="ico-rounded" href="#">
                           <span class="glyphicon glyphicon-heart size-20"></span>
                         </a>
+                        -->
 
 
                       </span>
