@@ -38,7 +38,7 @@ class CreateEntryTables extends Migration
 	    Schema::create('entries_exchange_types', function($table) {
         $table->increments('id');
         $table->integer('type_id');
-        $table->integer('entries_id');
+        $table->integer('entry_id');
       });
 
 
@@ -63,7 +63,7 @@ class CreateEntryTables extends Migration
 	    Schema::create('entries_media', function($table)
       {
         $table->increments('id')->unsigned();
-        $table->integer('entries_id')->nullable();
+        $table->integer('entry_id')->nullable();
         $table->string('filename', 50)->nullable();
         $table->string('filetype', 5)->nullable();
         $table->string('caption', 200)->nullable();
@@ -76,7 +76,7 @@ class CreateEntryTables extends Migration
 	     */
 	    Schema::create('messages', function($table) {
         $table->increments('id')->unsigned();
-        $table->integer('entries_id');
+        $table->integer('entry_id');
         $table->integer('sent_to');
         $table->integer('sent_by');
         $table->text('message')->nullable();
