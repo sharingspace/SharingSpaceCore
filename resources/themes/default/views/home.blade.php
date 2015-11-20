@@ -90,10 +90,6 @@
 
   				<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc vehicula lacinia. Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet.</p>
 
-  				<div class="divider divider-center divider-color"><!-- divider -->
-  					<i class="fa fa-chevron-down"></i>
-  				</div>
-
   				<!-- FEATURED BOXES 3 -->
   				<div class="row">
 
