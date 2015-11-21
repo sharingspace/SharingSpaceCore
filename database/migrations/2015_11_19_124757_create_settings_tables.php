@@ -41,6 +41,7 @@ class CreateSettingsTables extends Migration
     public function down()
     {
       Schema::dropIfExists('domain_blacklist');
+      Schema::dropIfExists('settings');
 
     }
 }
