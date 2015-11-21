@@ -72,6 +72,7 @@ class EntriesController extends Controller
       [
         'title',
         'location',
+        'post_type',
         'created_at'
       ];
 
