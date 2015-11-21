@@ -95,7 +95,7 @@ Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'EntriesControl
 */
 
 Route::get('terms', function () {
-  return view('terms');
+  return view('tos');
 });
 
 Route::get('privacy', function () {

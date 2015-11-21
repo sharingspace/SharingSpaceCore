@@ -108,9 +108,9 @@
 				<div class="copyright">
 					<div class="container">
 						<ul class="pull-right nomargin list-inline mobile-block">
-							<li><a href="#">Terms &amp; Conditions</a></li>
+							<li><a href="/terms">Terms &amp; Conditions</a></li>
 							<li>&bull;</li>
-							<li><a href="#">Privacy</a></li>
+							<li><a href="/privacy">Privacy</a></li>
 						</ul>
 						&copy; All Rights Reserved, Critcal Mass Mosaic.
 					</div>
