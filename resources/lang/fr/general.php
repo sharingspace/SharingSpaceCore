@@ -31,6 +31,7 @@ return [
           'author' => 'Auteur',
           'location' => 'Emplacement',
           'created_at' => 'Crée',
+          'post_type' => 'Type de Poste',
     ],
 
     'user'  => [

@@ -9,6 +9,7 @@ class EntriesTransformer {
         return [
             'id' => $entry->tile_id,
             'title' => $entry->title,
+            'post_type' => $entry->post_type,
             'description' => $entry->description,
             'type' => $entry->post_type,
             'location' =>

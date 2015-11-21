@@ -33,6 +33,7 @@ class EntriesController extends Controller
     } else {
 
       $entry->title	= e(Input::get('title'));
+      $entry->post_type	= e(Input::get('post_type'));
       $entry->created_by	= Auth::user()->id;
 
       if ($request->whitelabel_group->entries()->save($entry)) {
@@ -85,6 +86,7 @@ class EntriesController extends Controller
 
       $rows[] = array(
         'title' => $entry->title,
+        'post_type' => strtoupper($entry->post_type),
         'author' => $entry->author->getDisplayName(),
         'location' => $entry->location,
         'created_at' => $entry->created_at->format('M d Y g:iA'),

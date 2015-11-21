@@ -19,6 +19,7 @@ class Entry extends Model
   // FIXME - This is poopy and not the right L5 way to do it
   public $rules = [
       'title'            => 'required|string|min:2|max:255',
+      'post_type'            => 'required',
   ];
 
 
@@ -38,7 +39,7 @@ class Entry extends Model
       return $this->belongsToMany('App\Exchange', 'entries_exchange_types', 'entry_id', 'type_id');
   }
 
-  
+
 
   /**
   * Query builder scope to search on text

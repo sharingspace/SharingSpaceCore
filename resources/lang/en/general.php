@@ -27,6 +27,7 @@ return [
     ],
 
     'entries'  => [
+          'post_type' => 'Type',
           'title' => 'Title',
           'author' => 'Author',
           'location' => 'Location',
