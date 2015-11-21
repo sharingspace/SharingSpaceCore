@@ -94,6 +94,14 @@ Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'EntriesControl
 |--------------------------------------------------------------------------
 */
 
+Route::get('terms', function () {
+  return view('terms');
+});
+
+Route::get('privacy', function () {
+  return view('privacy');
+});
+
 Route::get('home', function () {
     return redirect('/');
  });
