@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.create_entry') }} ::
+     {{ trans('general.entries.create') }} ::
 @parent
 @stop
 

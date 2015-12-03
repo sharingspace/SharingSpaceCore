@@ -32,6 +32,9 @@ return [
           'author' => 'Author',
           'location' => 'Location',
           'created_at' => 'Created',
+          'view' => 'View Entry',
+          'create' => 'Create New Entry',
+          'edit' => 'Edit Entry',
     ],
 
     'user'  => [

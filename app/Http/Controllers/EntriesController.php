@@ -12,6 +12,21 @@ use Redirect;
 
 class EntriesController extends Controller
 {
+
+  /*
+  Get the create entry page
+  */
+  public function getEntry($entryID)
+  {
+    if ($entry = \App\Entry::find($entryID)) {
+      return view('entries.view')->with('entry',$entry);
+    } else {
+      return view('browse')->with('error','Invalid');
+    }
+
+  }
+
+
   /*
   Get the create entry page
   */
@@ -86,9 +101,9 @@ class EntriesController extends Controller
     foreach ($entries as $entry) {
 
       $rows[] = array(
-        'title' => $entry->title,
+        'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
         'post_type' => strtoupper($entry->post_type),
-        'author' => $entry->author->getDisplayName(),
+        'author' => '<a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
         'location' => $entry->location,
         'created_at' => $entry->created_at->format('M d Y g:iA'),
       );
