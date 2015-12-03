@@ -122,9 +122,11 @@
 											<a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
 												<span class="glyphicon glyphicon-option-horizontal size-20"></span>
 											</a>
+                      <!--
                       <a class="ico-rounded" href="#">
 												<span class="glyphicon glyphicon-heart size-20"></span>
 											</a>
+                    -->
 
 
 										</span>
