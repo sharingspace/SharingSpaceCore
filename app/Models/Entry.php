@@ -40,6 +40,25 @@ class Entry extends Model
   }
 
 
+  /**
+	* Convert the tags string to an array so we can loop through it and link to other results
+	* on the tile display
+	*/
+  public function tagsToArray()
+  {
+		if ($this->tags!='') {
+			$array = explode(",", $this->tags);
+			return $array;
+		}
+  }
+
+
+  public function media() {
+      return $this->hasMany('App\Media', 'entry_id');
+  }
+
+
+
 
   /**
   * Query builder scope to search on text

@@ -76,7 +76,8 @@ Route::group(array('prefix' => 'auth'), function () {
 */
 Route::get('browse', array('as' => 'browse', 'uses' => 'CommunitiesController@getEntriesView'));
 Route::get('members', array('as' => 'members', 'uses' => 'CommunitiesController@getMembers'));
-Route::get('account/settings', array('middleware' => 'auth','as' => 'user.settings', 'uses' => 'UserController@getSettings'));
+Route::get('account/settings', array('middleware' => 'auth','as' => 'user.settings.view', 'uses' => 'UserController@getSettings'));
+Route::post('account/settings', array('middleware' => 'auth','as' => 'user.settings.save', 'uses' => 'UserController@postSettings'));
 Route::get('users/{userID}', array('as' => 'user.profile', 'uses' => 'UserController@getProfile'));
 Route::get('community/new', array('middleware' => 'auth','as' => 'community.create.form', 'uses' => 'CommunitiesController@getCreate'));
 Route::post('community/new', array('middleware' => 'auth','as' => 'community.create.save', 'uses' => 'CommunitiesController@postCreate'));

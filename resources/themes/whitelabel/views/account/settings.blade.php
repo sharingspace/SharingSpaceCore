@@ -18,6 +18,7 @@
 
 						<ul class="nav nav-tabs nav-top-border">
 							<li class="active"><a href="#info" data-toggle="tab">Personal Info</a></li>
+              <li><a href="#social" data-toggle="tab">Social</a></li>
 							<li><a href="#avatar" data-toggle="tab">Avatar</a></li>
 							<li><a href="#password" data-toggle="tab">Password</a></li>
 							<li><a href="#privacy" data-toggle="tab">Privacy</a></li>
@@ -25,18 +26,26 @@
 
 						<div class="tab-content margin-top-20">
 
+
 							<!-- PERSONAL INFO TAB -->
 							<div class="tab-pane fade in active" id="info">
-								<form role="form" action="#" method="post">
+
+                <form role="form" method="post" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+
 									<div class="form-group">
 										<label class="control-label">First Name</label>
-										<input type="text" placeholder="Felicia" class="form-control">
+										<input type="text" placeholder="Felicia" class="form-control" name="first_name" value="{{ Input::old('first_name', Auth::user()->first_name) }}">
 									</div>
 									<div class="form-group">
 										<label class="control-label">Last Name</label>
-										<input type="text" placeholder="Doe" class="form-control">
+										<input type="text" placeholder="Doe" class="form-control" name="last_name" value="{{ Input::old('last_name', Auth::user()->last_name) }}">
 									</div>
-									<div class="form-group">
+                  <div class="form-group">
+										<label class="control-label">Display Name</label>
+										<input type="text" placeholder="Felicia" class="form-control" name="display_name" value="{{ Input::old('display_name', Auth::user()->display_name) }}">
+									</div>
+									{{-- <div class="form-group">
 										<label class="control-label">Mobile Number</label>
 										<input type="text" placeholder="+1800-1234-657" class="form-control">
 									</div>
@@ -47,31 +56,60 @@
 									<div class="form-group">
 										<label class="control-label">Occupation</label>
 										<input type="text" placeholder="Webdeveloper" class="form-control">
-									</div>
+									</div> --}}
 									<div class="form-group">
 										<label class="control-label">About</label>
-										<textarea class="form-control" rows="3" placeholder="About Me..."></textarea>
+										<textarea class="form-control" rows="3" placeholder="About Me..." name="bio">{{ Input::old('bio', Auth::user()->bio) }}</textarea>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Website Url</label>
-										<input type="text" placeholder="http://www.yourwebsite.com" class="form-control">
+										<input type="text" placeholder="http://www.yourwebsite.com" class="form-control" name="website" value="{{ Input::old('website', Auth::user()->website) }}">
 									</div>
 									<div class="margiv-top10">
-										<a href="#" class="btn btn-primary"><i class="fa fa-check"></i> Save Changes </a>
+										<button class="btn btn-primary"><i class="fa fa-check"></i> Save Changes </button>
 										<a href="#" class="btn btn-default">Cancel </a>
 									</div>
-								</form>
+
+                </form>
+
 							</div>
 							<!-- /PERSONAL INFO TAB -->
+
+              <!-- SOCIAL TAB -->
+							<div class="tab-pane fade" id="social">
+
+                <form role="form" method="post" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+
+									<div class="form-group">
+										<label class="control-label">Current Password</label>
+										<input type="password" class="form-control" name="password">
+									</div>
+									<div class="form-group">
+										<label class="control-label">New Password</label>
+										<input type="password" class="form-control" name="new_password">
+									</div>
+									<div class="form-group">
+										<label class="control-label">Re-type New Password</label>
+										<input type="password" class="form-control" name="confirm_password">
+									</div>
+
+									<div class="margin-top10">
+										<a href="#" class="btn btn-primary"><i class="fa fa-check"></i> Change Password</a>
+										<a href="#" class="btn btn-default">Cancel </a>
+									</div>
+                </form>
+
+							</div>
+							<!-- /SOCIAL TAB -->
+
 
 							<!-- AVATAR TAB -->
 							<div class="tab-pane fade" id="avatar">
 
-								<form class="clearfix" action="#" method="post" enctype="multipart/form-data">
 									<div class="form-group">
 
 										<div class="row">
-
 											<div class="col-md-3 col-sm-4">
 
 												<div class="thumbnail">
@@ -111,7 +149,6 @@
 										<a href="#" class="btn btn-default">Cancel </a>
 									</div>
 
-								</form>
 
 							</div>
 							<!-- /AVATAR TAB -->
@@ -119,19 +156,17 @@
 							<!-- PASSWORD TAB -->
 							<div class="tab-pane fade" id="password">
 
-								<form action="#" method="post">
-
 									<div class="form-group">
 										<label class="control-label">Current Password</label>
-										<input type="password" class="form-control">
+										<input type="password" class="form-control" name="password">
 									</div>
 									<div class="form-group">
 										<label class="control-label">New Password</label>
-										<input type="password" class="form-control">
+										<input type="password" class="form-control" name="new_password">
 									</div>
 									<div class="form-group">
 										<label class="control-label">Re-type New Password</label>
-										<input type="password" class="form-control">
+										<input type="password" class="form-control" name="confirm_password">
 									</div>
 
 									<div class="margiv-top10">
@@ -139,7 +174,6 @@
 										<a href="#" class="btn btn-default">Cancel </a>
 									</div>
 
-								</form>
 
 							</div>
 							<!-- /PASSWORD TAB -->
@@ -236,57 +270,6 @@
 							<li class="list-group-item active"><a href="#"><i class="fa fa-gears"></i> SUBNAV</a></li>
 						</ul>
 						<!-- /SIDE NAV -->
-
-
-            <!-- info -->
-						<div class="box-light margin-bottom-30">
-
-							<div class="row margin-bottom-20">
-								<div class="col-md-4 col-sm-4 col-xs-4 text-center bold">
-									<h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway">12</h2>
-									<h3 class="size-11 margin-top-0 margin-bottom-10 text-info">ENTRIES</h3>
-								</div>
-
-								<div class="col-md-4 col-sm-4 col-xs-4 text-center bold">
-									<h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway">34</h2>
-									<h3 class="size-11 margin-top-0 margin-bottom-10 text-info">FOLLOWING</h3>
-								</div>
-
-								<div class="col-md-4 col-sm-4 col-xs-4 text-center bold">
-									<h2 class="size-30 margin-top-10 margin-bottom-0 font-raleway">32</h2>
-									<h3 class="size-11 margin-top-0 margin-bottom-10 text-info">COMMUNITIES</h3>
-								</div>
-
-							</div>
-							<!-- /info -->
-
-              <!-- social / stats -->
-              <div class="text-muted">
-
-                <ul class="list-unstyled nomargin">
-                  @if (Auth::user()->website)
-                    <li class="margin-bottom-10"><i class="fa fa-globe width-20 hidden-xs hidden-sm"></i> <a href="{{ Auth::user()->website }}">{{ Auth::user()->website }}</a></li>
-                  @endif
-
-                  @if (Auth::user()->twitter)
-                    <li class="margin-bottom-10"><i class="fa fa-twitter width-20 hidden-xs hidden-sm"></i> <a href="{{ Auth::user()->twitter }}">Twitter</a></li>
-                  @endif
-
-                  @if (Auth::user()->facebook)
-                    <li class="margin-bottom-10"><i class="fa fa-facebook width-20 hidden-xs hidden-sm"></i> <a href="{{ Auth::user()->facebook }}">Facebook</a></li>
-                  @endif
-
-                  @if (Auth::user()->pinterest)
-                    <li class="margin-bottom-10"><i class="fa fa-pinterest width-20 hidden-xs hidden-sm"></i> <a href="{{ Auth::user()->pinterest }}">Pinterest</a></li>
-                  @endif
-
-                  @if (Auth::user()->google)
-                    <li class="margin-bottom-10"><i class="fa fa-google width-20 hidden-xs hidden-sm"></i> <a href="{{ Auth::user()->google }}">Google +</a></li>
-                  @endif
-
-                </ul>
-              </div>
-              <!-- /social / stats -->
 
 						</div>
 
