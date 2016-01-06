@@ -17,12 +17,14 @@ class CreateSettingsTables extends Migration
       */
       Schema::create('domain_blacklist', function(Blueprint $table)
   		{
+        $table->engine = 'InnoDB';
   			$table->increments('id');
   			$table->string('domain');
   			$table->timestamps();
   		});
 
       Schema::create('settings', function($table) {
+        $table->engine = 'InnoDB';
         $table->increments('id')->unsigned();
         $table->string('site_name', 255);
         $table->dateTime('completed_at')->nullable();

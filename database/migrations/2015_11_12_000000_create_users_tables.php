@@ -12,12 +12,13 @@ class CreateUsersTables extends Migration
      */
     public function up()
     {
-      
+
       /*
       * Create users table
       */
       Schema::create('users', function (Blueprint $table)
       {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->string('email')->unique();
         $table->string('password', 60);
@@ -52,6 +53,7 @@ class CreateUsersTables extends Migration
       */
       Schema::create('social', function(Blueprint $table)
       {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->integer('user_id');
         $table->string('service');
@@ -72,6 +74,7 @@ class CreateUsersTables extends Migration
 
       Schema::create('password_resets', function (Blueprint $table)
       {
+        $table->engine = 'InnoDB';
         $table->string('email')->index();
         $table->string('token')->index();
         $table->timestamp('created_at');

@@ -18,6 +18,7 @@ class CreateCommnunityTables extends Migration
        */
       Schema::create('communities', function($table)
       {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->string('name', 99);
         $table->integer('parent_id')->nullable()->default(NULL);
@@ -48,15 +49,17 @@ class CreateCommnunityTables extends Migration
 
 
 	    Schema::create('communities_users', function($table) {
-          $table->increments('id');
-          $table->integer('user_id')->nullable();
-          $table->integer('community_id')->nullable();
-          $table->integer('is_admin');
-      });
+        $table->engine = 'InnoDB';
+        $table->increments('id');
+        $table->integer('user_id')->nullable();
+        $table->integer('community_id')->nullable();
+        $table->integer('is_admin');
+    });
 
 
 	    Schema::create('communities_invites', function($table)
       {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->integer('community_id')->nullable()->default(NULL);
         $table->string('email', 255)->nullable()->default(NULL);

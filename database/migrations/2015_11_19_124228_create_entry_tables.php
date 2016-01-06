@@ -15,6 +15,7 @@ class CreateEntryTables extends Migration
 
 
 	    Schema::create('entries', function($table) {
+        $table->engine = 'InnoDB';
         $table->increments('id')->unsigned();
         $table->string('title', 255);
         $table->text('description')->nullable();
@@ -36,6 +37,7 @@ class CreateEntryTables extends Migration
 
 
 	    Schema::create('entries_exchange_types', function($table) {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->integer('type_id');
         $table->integer('entry_id');
@@ -44,6 +46,7 @@ class CreateEntryTables extends Migration
 
 
 	    Schema::create('entries_community_join', function($table) {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->integer('community_id')->nullable();
         $table->integer('entry_id')->nullable();
@@ -55,6 +58,7 @@ class CreateEntryTables extends Migration
 
       Schema::create('exchange_types', function($table)
       {
+        $table->engine = 'InnoDB';
         $table->increments('id');
         $table->string('name', 255);
       });
@@ -62,6 +66,7 @@ class CreateEntryTables extends Migration
 
 	    Schema::create('entries_media', function($table)
       {
+        $table->engine = 'InnoDB';
         $table->increments('id')->unsigned();
         $table->integer('entry_id')->nullable();
         $table->string('filename', 50)->nullable();
@@ -75,6 +80,7 @@ class CreateEntryTables extends Migration
 	     * Table: messages
 	     */
 	    Schema::create('messages', function($table) {
+        $table->engine = 'InnoDB';
         $table->increments('id')->unsigned();
         $table->integer('entry_id');
         $table->integer('sent_to');

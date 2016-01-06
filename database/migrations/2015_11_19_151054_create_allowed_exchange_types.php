@@ -14,6 +14,7 @@ class CreateAllowedExchangeTypes extends Migration
     {
 
       Schema::create('community_allowed_types', function($table) {
+        $table->engine = 'InnoDB';
         $table->integer('community_id')->nullable();
         $table->integer('type_id')->nullable();
         $table->timestamp('created_at')->nullable()->default(NULL);
