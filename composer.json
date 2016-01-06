@@ -14,7 +14,7 @@
       "illuminate/html" : "5.*",
       "intervention/image": "2.*",
       "jenssegers/rollbar": "^1.4",
-      "laravel/framework": "5.1.*",
+      "laravel/framework": "5.2.*",
       "laravel/socialite": "^2.0",
       "php": ">=5.5.9",
       "yaap/theme": "2.*",
@@ -32,7 +32,9 @@
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
-        "codeception/codeception": "2.1.*"
+        "codeception/codeception": "2.1.*",
+        "symfony/dom-crawler": "~3.0",
+        "symfony/css-selector": "~3.0" 
     },
     "autoload": {
         "classmap": [
