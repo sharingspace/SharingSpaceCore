@@ -12,7 +12,7 @@ Form::macro('community_types', function ($name = "group_type", $selected = null)
     'S'=>"Secret",
     );
 
-    $select = '<select name="'.$name.'">';
+    $select = '<select name="'.$name.'" class="select2" style="width: 100%;">';
     foreach ($types as $key => $value) {
         $select .= '<option value="'.$key.'"'.($selected == $key ? ' selected="selected"' : '').'>'.$value.'</option> ';
     }
