@@ -19,7 +19,8 @@
       "php": ">=5.5.9",
       "yaap/theme": "2.*",
       "chrisbjr/api-guard": "^2.3",
-      "mcamara/laravel-localization": "1.0.*"
+      "mcamara/laravel-localization": "1.0.*",
+      "laravelcollective/html": "~5.0"
     },
     "repositories": [
 		{
@@ -34,7 +35,7 @@
         "phpspec/phpspec": "~2.1",
         "codeception/codeception": "2.1.*",
         "symfony/dom-crawler": "~3.0",
-        "symfony/css-selector": "~3.0" 
+        "symfony/css-selector": "~3.0"
     },
     "autoload": {
         "classmap": [
