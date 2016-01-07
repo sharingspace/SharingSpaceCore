@@ -82,6 +82,10 @@ Route::get('users/{userID}', array('as' => 'user.profile', 'uses' => 'UserContro
 Route::get('community/new', array('middleware' => 'auth','as' => 'community.create.form', 'uses' => 'CommunitiesController@getCreate'));
 Route::post('community/new', array('middleware' => 'auth','as' => 'community.create.save', 'uses' => 'CommunitiesController@postCreate'));
 
+Route::get('community/edit', array('middleware' => 'auth','as' => 'community.edit.form', 'uses' => 'CommunitiesController@getEdit'));
+Route::post('community/edit', array('middleware' => 'auth','as' => 'community.edit.save', 'uses' => 'CommunitiesController@postEdit'));
+
+
 Route::get('entry/new', array('middleware' => 'auth','as' => 'entry.create.form', 'uses' => 'EntriesController@getCreate'));
 Route::post('entry/new', array('middleware' => 'auth','as' => 'entry.create.save', 'uses' => 'EntriesController@postCreate'));
 
