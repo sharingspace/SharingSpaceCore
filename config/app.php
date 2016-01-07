@@ -169,6 +169,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Cartalyst\Stripe\Billing\Laravel\StripeServiceProvider::class,
 
     ],
@@ -225,6 +226,7 @@ return [
         'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
 
     ],
 
