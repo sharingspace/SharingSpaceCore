@@ -48,7 +48,9 @@ return [
 
     'community'  => [
       'community'  => 'Community',
+      'settings'  => 'Community Settings',
       'members'  => 'Member|Members',
+      'save' => 'Save Community',
 
         'exchange_types' => [
           'title' => 'Exchange Type|Exchange Types',
