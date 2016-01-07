@@ -112,7 +112,7 @@ class CommunitiesController extends Controller
 
       if ($community->save()) {
         $community->members()->attach(Auth::user(), ['is_admin' => true]);
-        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success','Welcome to your new Community!');
+        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success','Welcome to your new Community! Get started adding entries now.');
       }
 
     }
