@@ -12,6 +12,8 @@ use Validator;
 use Redirect;
 use Config;
 use App\Exchange;
+use Form;
+use Pagetheme;
 
 class CommunitiesController extends Controller
 {
@@ -68,15 +70,46 @@ class CommunitiesController extends Controller
 
       if ($community->save()) {
         $community->members()->attach(Auth::user(), ['is_admin' => true]);
-        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success','Success! Welcome to your new Community!');
+        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success','Welcome to your new Community!');
       }
-
-      // Loop through the allowed exchange types and save them
-
-
 
     }
 
+  }
+
+
+  /*
+  Get the create community page
+  */
+  public function getEdit(Request $request)
+  {
+    // Fixme - pull this out into a helper
+    $themes = \App\Pagetheme::select('name')->where('public','=',1)->get()->lists('name');
+
+    $community = \App\Community::find($request->whitelabel_group->id);
+    return view('community.edit')->with('community',$community)->with('themes',$themes);
+  }
+
+
+  /*
+  Get the create community page
+  */
+  public function postEdit(Request $request)
+  {
+    $community = \App\Community::find($request->whitelabel_group->id);
+    $validator = Validator::make(Input::all(), $community->rules);
+
+    if ($validator->fails()) {
+      return Redirect::back()->withInput()->withErrors($validator->messages());
+    } else {
+
+      $community->name	= e(Input::get('name'));
+      $community->subdomain	= e(Input::get('subdomain'));
+
+      if ($community->save()) {
+        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
+      }
+    }
   }
 
 
