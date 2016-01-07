@@ -79,23 +79,23 @@
 							<h4 class="letter-spacing-1">NEW COMMUNITIES</h4>
 
 							<div class="footer-gallery lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
-								<a href="assets/img/demo/1200x800/10-min.jpg">
-									<img src="assets/img/demo/150x99/10-min.jpg" width="106" height="70" alt="" />
+								<a href="#">
+									<img src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="106" height="70" alt="" />
 								</a>
-								<a href="assets/img/demo/1200x800/19-min.jpg">
-									<img src="assets/img/demo/150x99/19-min.jpg" width="106" height="70" alt="" />
+								<a href="#">
+									<img src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="106" height="70" alt="" />
 								</a>
 								<a href="assets/img/demo/1200x800/12-min.jpg">
-									<img src="assets/img/demo/150x99/12-min.jpg" width="106" height="70" alt="" />
+									<img src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="106" height="70" alt="" />
 								</a>
-								<a href="assets/img/demo/1200x800/13-min.jpg">
-									<img src="assets/img/demo/150x99/13-min.jpg" width="106" height="70" alt="" />
+								<a href="#">
+									<img src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="106" height="70" alt="" />
 								</a>
-								<a href="assets/img/demo/1200x800/18-min.jpg">
-									<img src="assets/img/demo/150x99/18-min.jpg" width="106" height="70" alt="" />
+								<a href="#">
+									<img src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="106" height="70" alt="" />
 								</a>
-								<a href="assets/img/demo/1200x800/15-min.jpg">
-									<img src="assets/img/demo/150x99/15-min.jpg" width="106" height="70" alt="" />
+								<a href="#">
+									<img src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="106" height="70" alt="" />
 								</a>
 							</div>
 
