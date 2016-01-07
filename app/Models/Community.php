@@ -19,7 +19,7 @@ class Community extends Model
   // FIXME - This is poopy and not the right L5 way to do it
   public $rules = [
       'name'            => 'required|string|min:2|max:255',
-      'subdomain'       => 'required|alpha_dash|min:2|max:255',
+      'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,{id},id,deleted_at,NULL',
       'group_type'      => 'required',
   ];
 
