@@ -48,6 +48,11 @@
 										<input type="text" name="subdomain" class="form-control" placeholder="Subdomain" required="" value="{{ old('subdomain') }}">
 									</div>
 
+                  <!-- Theme -->
+                  <div class="form-group">
+                    {{ Form::select('theme', $themes, old('theme'), array('class'=>'select2', 'style'=>'width:100%')) }}
+                  </div>
+
                   <div class="form-group">
 											<input class="custom-file-upload" type="file" id="file" name="cover_img" data-btn-text="Cover Upload" />
 											<small class="text-muted block">Max file size: 10Mb (gif/jpg/png)</small>

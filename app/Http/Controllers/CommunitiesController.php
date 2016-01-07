@@ -48,7 +48,8 @@ class CommunitiesController extends Controller
   */
   public function getCreate()
   {
-    return view('communities.edit');
+    $themes = \App\Pagetheme::select('name')->where('public','=',1)->get()->lists('name');
+    return view('communities.edit')->with('themes',$themes);
   }
 
 
@@ -83,7 +84,6 @@ class CommunitiesController extends Controller
   */
   public function getEdit(Request $request)
   {
-    // Fixme - pull this out into a helper
     $themes = \App\Pagetheme::select('name')->where('public','=',1)->get()->lists('name');
 
     $community = \App\Community::find($request->whitelabel_group->id);
