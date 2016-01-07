@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'snipe@snipe.net', 'name' => 'AnySha.re'],
 
     /*
     |--------------------------------------------------------------------------
