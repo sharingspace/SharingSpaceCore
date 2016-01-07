@@ -30,7 +30,7 @@
 						<!-- LOGIN -->
 						<div class="col-md-4">
 
-							<h2 class="size-16">NEW COMMUNITY</h2>
+							<h2 class="size-16 uppercase">{{ trans('general.nav.create_community') }}</h2>
 
 							<!-- login form -->
 							<form method="post" action="{{ route('community.create.save') }}" enctype="multipart/form-data" autocomplete="off">

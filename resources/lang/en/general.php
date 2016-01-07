@@ -24,6 +24,7 @@ return [
           'members' => 'Members',
           'settings' => 'Settings',
           'profile' => 'Profile',
+          'create_community' => 'Create Community',
     ],
 
     'entries'  => [
