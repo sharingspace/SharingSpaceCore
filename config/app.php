@@ -157,6 +157,11 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
+         * Custom service provider
+         */
+         App\Providers\MacroServiceProvider::class,
+
+        /*
          * Vendor service providers
         */
         YAAP\Theme\ThemeServiceProvider::class,

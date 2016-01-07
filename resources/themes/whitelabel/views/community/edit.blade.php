@@ -39,6 +39,11 @@
 										<input type="text" name="subdomain" class="form-control" placeholder="Subdomain" required="" value="{{ Input::old('name', $community->subdomain) }}">
 									</div>
 
+                  <!-- Type -->
+                  <div class="form-group">
+                     {!! Form::community_types('group_type', Input::old('group_type', $community->group_type)) !!}
+                  </div>
+
                   <!-- Theme -->
                   <div class="form-group">
                     {{ Form::select('theme', $themes, $community->theme, array('class'=>'select2', 'style'=>'width:100%')) }}

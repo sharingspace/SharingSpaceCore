@@ -105,6 +105,7 @@ class CommunitiesController extends Controller
 
       $community->name	= e(Input::get('name'));
       $community->subdomain	= e(Input::get('subdomain'));
+      $community->group_type	= e(Input::get('group_type'));
 
       if ($community->save()) {
         return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
