@@ -17,7 +17,7 @@
               </ul>
         </li>
 
-        <!-- QUICK SHOP CART -->
+        <!-- NOTIFICATION BOX -->
 				<li class="notifications-popdown">
 					<a href="#">
 						<span class="badge badge-red btn-xs badge-corner-sm">2</span>
@@ -128,6 +128,12 @@
                     <a href="{{ route('members') }}">
                       {{ trans('general.nav.members') }}
                       {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('community.edit.form')}}">
+                      <i class="fa fa-cogs"></i>
+                      {!! (Route::is('community.edit.form') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
 								</ul>
