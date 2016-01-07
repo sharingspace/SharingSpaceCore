@@ -17,7 +17,12 @@ class ThemeMiddleware
     public function handle($request, Closure $next)
     {
         if ($request->valid_whitelabel === true) {
-          Theme::init('whitelabel');
+          if ($request->whitelabel_group->theme!='') {
+              Theme::init($request->whitelabel_group->theme);
+          } else {
+              Theme::init('whitelabel');
+          }
+
         } else {
           Theme::init('default');
         }
