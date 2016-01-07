@@ -24,6 +24,8 @@ class AddThemeToCommunity extends Migration
      */
     public function down()
     {
+      Schema::table('communities', function ($table) {
          $table->dropColumn('theme');
+      });
     }
 }
