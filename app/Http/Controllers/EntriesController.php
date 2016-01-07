@@ -21,7 +21,7 @@ class EntriesController extends Controller
     if ($entry = \App\Entry::find($entryID)) {
       return view('entries.view')->with('entry',$entry);
     } else {
-      return view('browse')->with('error','Invalid');
+      return view('browse')->with('error',trans('general.entries.messages.invalid'));
     }
 
   }
@@ -52,7 +52,9 @@ class EntriesController extends Controller
       $entry->created_by	= Auth::user()->id;
 
       if ($request->whitelabel_group->entries()->save($entry)) {
-        return redirect('/browse')->with('success','Success!');
+        return redirect('/browse')->with('success',trans('general.entries.messages.save_new'));
+      } else {
+        return Redirect::back()->with('error',trans('general.entries.messages.save_failed'));
       }
 
     }

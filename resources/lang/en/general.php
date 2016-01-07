@@ -35,6 +35,13 @@ return [
           'view' => 'View Entry',
           'create' => 'Create New Entry',
           'edit' => 'Edit Entry',
+
+          'messages' => [
+            'invalid' => 'That entry is not valid.',
+            'save_edits' => 'Your entry has been updated!',
+            'save_new' => 'Your new entry has been created!',
+            'save_failed' => 'Something went wrong. Your entry edits have not been saved',
+          ],
     ],
 
     'user'  => [
