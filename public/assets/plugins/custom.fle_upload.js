@@ -1,8 +1,8 @@
 /**
-	Reference: 
+	Reference:
 	http://www.onextrapixel.com/2012/12/10/how-to-create-a-custom-file-input-with-jquery-css3-and-php/
 	http://codepen.io/wallaceerick/pen/fEdrz
-	
+
 	DO NOT REPLACE! MODIFIED FOR BOOTSTRAP! [Dorin grigoras - www.stepofweb.com]
 **/
 ;(function($) {
@@ -19,7 +19,7 @@
 		          $wrap = jQuery('<div class="input-group"><span class="input-group-addon"><i class="fa fa-paperclip"></i></span>'),
 		          $input = jQuery('<input type="text" class="form-control file-upload-input text-left" />'),
 		          // Button that will be used in non-IE browsers
-		          $button = jQuery('<span class="input-group-btn"><button type="button" class="file-upload-button btn btn-primary">' + jQuery(this).attr('data-btn-text') + '</button></span>'),
+		          $button = jQuery('<span class="input-group-btn"><button type="button" class="file-upload-button btn btn-default">' + jQuery(this).attr('data-btn-text') + '</button></span>'),
 		          // Hack for IE
 		          $label = jQuery('<label class="file-upload-button" for="'+ $file[0].id +'">' + jQuery(this).attr('data-btn-text') + '<</label>');
 
