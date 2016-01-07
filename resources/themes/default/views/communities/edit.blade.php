@@ -39,23 +39,42 @@
 								<div class="clearfix">
 
 									<!-- Name -->
-									<div class="form-group">
-										<input type="text" name="name" class="form-control" placeholder="Community Name" required="" value="{{ old('name') }}">
+									<div class="form-group margin-bottom-10{{ $errors->first('name', ' has-error') }}">
+										<label class="input">
+                      <input type="text" name="name" class="form-control" placeholder="Community Name" required="" value="{{ old('name') }}">
+                    </label>
+                    {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
 									</div>
 
                   <!-- Slug -->
-									<div class="form-group">
-										<input type="text" name="subdomain" class="form-control" placeholder="Subdomain" required="" value="{{ old('subdomain') }}">
+									<div class="form-group margin-bottom-10{{ $errors->first('subdomain', ' has-error') }}">
+                    <label class="input">
+										  <input type="text" name="subdomain" class="form-control" placeholder="Subdomain" required="" value="{{ old('subdomain') }}">
+                    </label>
+                    {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
 									</div>
 
+                  <!-- Type -->
+                  <div class="form-group margin-bottom-10{{ $errors->first('group_type', ' has-error') }}">
+                    <label class="input">
+                      {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
+                      </label>
+                      {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
+                  </div>
+
                   <!-- Theme -->
-                  <div class="form-group">
-                    {{ Form::select('theme', $themes, old('theme'), array('class'=>'select2', 'style'=>'width:100%')) }}
+                  <div class="form-group margin-bottom-10{{ $errors->first('theme', ' has-error') }}">
+                    <label class="input">
+                      {{ Form::select('theme', $themes, old('theme'), array('class'=>'select2', 'style'=>'width:100%')) }}
+                    </label>
                   </div>
 
                   <div class="form-group">
+                    <label class="input">
 											<input class="custom-file-upload" type="file" id="file" name="cover_img" data-btn-text="Cover Upload" />
 											<small class="text-muted block">Max file size: 10Mb (gif/jpg/png)</small>
+                    </label>
+                    {!! $errors->first('cover_img', '<span class="help-block">:message</span>') !!}
 									</div>
 
 								</div>

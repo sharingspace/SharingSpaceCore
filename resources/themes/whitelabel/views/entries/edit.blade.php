@@ -41,18 +41,23 @@
 
                   <fieldset class="nomargin">
 
-                    <div class="col-md-3 margin-bottom-10{{ $errors->first('post_type', ' has-error') }}">
-      									<select class="form-control" name="post_type" id="post_type">
+                    <div class="col-md-3 form-group margin-bottom-10{{ $errors->first('post_type', ' has-error') }}">
+                      <label class="input">
+                        <select class="form-control" name="post_type" id="post_type">
                           <option value="want">I want</option>
                           <option value="have">I have</option>
       									</select>
-                    </div>
-                    <div class="col-md-8 margin-bottom-10{{ $errors->first('title', ' has-error') }}">
-                      <!-- Name -->
-                      <label class="input">
-      									<input type="text" name="title" class="form-control" placeholder="Description">
                       </label>
-                    </div>
+  									</div>
+
+
+                    <div class="col-md-8 form-group margin-bottom-10{{ $errors->first('title', ' has-error') }}">
+                      <label class="input">
+  										  <input type="text" name="title" class="form-control" placeholder="Description" required="" value="{{ old('subdomain') }}">
+                      </label>
+                      {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+  									</div>
+
                     <div class="col-md-1">
                       <a href="#" class="btn btn-default"><i class="fa fa-ellipsis-h"></i></a>
                     </div>
