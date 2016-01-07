@@ -76,13 +76,19 @@ class CommunitiesController extends Controller
 
       $customer = Auth::user();
       $metadata = array(
-          'subdomain' => strtolower(e(Input::get('subdomain'))),
-          'email' => $customer->email,
+        //'name' => $customer->name,
+        //'subdomain' => strtolower(e(Input::get('subdomain'))).Config::get('session.domain'),
+        //'email' => $customer->email,
+        //'hub_name' => e(Input::get('name')),
       );
+
+      //print_r($metadata);
+      //exit;
 
       // Create the Stripe customer
       $customer->createStripeCustomer([
           'email' => $customer->email,
+          'description' => 'Name: '.e(Input::get('billing_name')).', Hub Name: '.e(Input::get('name')),
           'metadata' => $metadata,
       ]);
 
