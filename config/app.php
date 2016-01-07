@@ -169,6 +169,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Cartalyst\Stripe\Billing\Laravel\StripeServiceProvider::class,
 
     ],
 

@@ -11,11 +11,13 @@ use DB;
 use App\Social;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cartalyst\Stripe\Billing\Laravel\Billable;
+use Cartalyst\Stripe\Billing\Laravel\BillableContract;
 
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
-    use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword, Billable;
 
     /**
      * The database table used by the model.

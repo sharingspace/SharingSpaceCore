@@ -93,7 +93,8 @@ Route::get('entry/{entryID}', array('as' => 'entry.view', 'uses' => 'EntriesCont
 
 Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'EntriesController@getEntriesDataView'));
 
-
+// Stripe Webhook...
+Route::post('webhook/stripe', [ 'as' => 'stripe.webhook', 'uses' => 'StripeWebhookController@handleWebhook' ]);
 
 /*
 |--------------------------------------------------------------------------

@@ -11,7 +11,7 @@
       "cviebrock/eloquent-sluggable": "^3.0",
       "erusev/parsedown": "dev-master",
       "graham-campbell/digitalocean": "~2.1",
-      "illuminate/html" : "5.*",
+      "laravelcollective/html" : "5.*",
       "intervention/image": "2.*",
       "jenssegers/rollbar": "^1.4",
       "laravel/framework": "5.2.*",
