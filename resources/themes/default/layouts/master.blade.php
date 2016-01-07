@@ -32,8 +32,8 @@
 
     <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
 
-    <!-- jQuery 2.1.3-->
-    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- jQuery 2.1.4-->
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
     <!-- Bootstrap 3 and Bootstrap Table Javascript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
