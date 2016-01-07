@@ -24,7 +24,7 @@
 							<h2 class="size-16">EDIT COMMUNITY</h2>
 
 							<!-- login form -->
-							<form method="post" action="{{ route('community.create.save') }}" enctype="multipart/form-data" autocomplete="off">
+							<form method="post" action="{{ route('community.edit.save') }}" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}
 
 								<div class="clearfix">
