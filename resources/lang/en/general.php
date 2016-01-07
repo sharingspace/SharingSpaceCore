@@ -69,6 +69,13 @@ return [
           'title'  => 'Secret Community',
           'text'  => 'Only members can view',
         ],
+
+        'messages' => [
+          'save_edits' => 'Your community settings have been saved!',
+          'save_new' => 'Your new community has been created!',
+          'save_failed' => 'Something went wrong. Your community settings have not been saved',
+        ],
+
     ],
 
 
