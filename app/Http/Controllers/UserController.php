@@ -21,10 +21,19 @@ class UserController extends Controller
 
     }
 
+    public function getHistory()
+    {
+      $user = Auth::user();
+      $subscriptions = $user->subscriptions;
+      return view('account.history')->with('subscriptions',$subscriptions);
+    }
+
+
     public function getSettings()
     {
       return view('account.settings');
     }
+
 
     /*
     * Save the user's updated settings
