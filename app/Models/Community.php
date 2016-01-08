@@ -94,6 +94,12 @@ class Community extends Model
 	}
 
 
+
+  public function community(){
+      return $this->hasOne( '\App\Subscription','id', 'community_id');
+  }
+
+
   /**
   * Get the exchnage types allowed in this community.
   * Exchange Types belong to many communities by way of the group_allowed_types table.
