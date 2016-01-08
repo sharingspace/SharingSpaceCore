@@ -13,7 +13,7 @@
 								<!-- <img class="footer-logo footer-2" src="assets/img/logo-footer.png" alt="" /> -->
 
 								<!-- Small Description -->
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque.</p>
+								<p>The AnyShare Society is a multi-stakeholder COOP and involved in spreading access, information, and opportunities that promote abundance for Earth. See our news [ link to news.anysha.re ]  here to learn more.</p>
 
 							</div>
 
@@ -76,7 +76,7 @@
 						</div>
 
 						<div class="col-md-4">
-							<h4 class="letter-spacing-1">NEW COMMUNITIES</h4>
+							<h4 class="letter-spacing-1">New Sharing Hubs</h4>
 
 							<div class="footer-gallery lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}'>
 								<a href="#">
@@ -112,7 +112,7 @@
 							<li>&bull;</li>
 							<li><a href="/privacy">Privacy</a></li>
 						</ul>
-						&copy; All Rights Reserved, Critcal Mass Mosaic.
+						&copy; All Rights Reserved, AnyShare Society.
 					</div>
 				</div>
 			</footer>

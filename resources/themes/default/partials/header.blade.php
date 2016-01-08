@@ -81,7 +81,7 @@
 
 						<!-- Logo -->
             <a class="logo pull-left navbar-brand scrollTo" href="/#top">
-              <img src="/assets/img/any-share-logo-cloud-400.png">
+              <img src="/assets/img/anyshare-logo-squares.png">
             </a>
 
 
@@ -94,7 +94,7 @@
 						<div class="navbar-collapse pull-right nav-main-collapse collapse">
 							<nav class="nav-main">
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li><a href="{{ route('community.create.form') }}">{{ trans('general.nav.create_community') }} </a></li>
+                  <li><a href="{{ route('community.create.form') }}">{{ trans('general.nav.create_sharing_hub') }} </a></li>
                   <li><a href="/#about">{{ trans('general.nav.about') }} <span class="sr-only">(current)</span></a></li>
                   <li><a href="/#features">{{ trans('general.nav.features') }}</a></li>
                   <li><a href="/#examples">{{ trans('general.nav.examples') }}  </a></li>
