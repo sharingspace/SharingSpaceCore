@@ -24,8 +24,8 @@ return [
           'members' => 'Members',
           'settings' => 'Settings',
           'profile' => 'Profile',
-          'create_community' => 'Create Community',
-          'order_history' => 'Order History',
+          'create_sharing_hub' => 'Create Sharing Hub',
+					'order_history' => 'Order History',
     ],
 
     'entries'  => [

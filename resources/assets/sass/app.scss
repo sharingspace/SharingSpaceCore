@@ -1,7 +1,7 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 
-/** ********************************************** **
+/** ************************************************
 
 	TABLE CONTENTS
 	-------------------------------
@@ -42,6 +42,7 @@
 		Block Review
 		Footer
 		Responsive
+		HomePage
 *************************************************** **/
 
 /** Globals
@@ -160,6 +161,14 @@ section {
   &.parallax {
     border: 0;
   }
+	&#about {
+		p {
+			font-family: Ubuntu,Helvetica,sans-serif;
+			color: #5A5A5A;
+			font-size: 22px;
+			line-height: 29px;
+		}
+	}
 }
 
 body.bg-grey {
@@ -197,6 +206,28 @@ section.dark {
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: #121212;
+}
+
+h1.main-heading {
+	color: white;
+	font-family: Montserrat,sans-serif;
+	font-size: 65px!important;
+	font-weight: 400;
+	text-align: center;
+	text-shadow: 1px 1px 6px black;
+	padding-top:100px;
+}
+
+.dark-overlay {
+	background-color: rgba(0, 0, 0, 0.4);
+	display: block;
+	left: 0;
+	min-height: 400px;
+	overflow: visible;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	z-index: 5000;
 }
 
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
@@ -2402,6 +2433,8 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
     #topMain > li > a {
       height: 60px;
       line-height: 40px;
+			color: #8a8a8a;
+    	font-family: Montserrat,sans-serif;
     }
   }
   &.fixed {
@@ -5235,20 +5268,33 @@ section#slider {
     text-shadow: rgba(0, 0, 0, 0.16) 1px 1px 1px;
   }
   h1 {
-    font-size: 60px;
-    line-height: 60px;
+    color: white;
+		font-family: Montserrat,sans-serif;
+		font-size: 65px!important;
+		font-weight: 400;
+		text-align: center;
+		text-shadow: 1px 1px 6px black;
+		line-height:44px;
+		padding-top:150px;
+		margin-bottom:10px;
   }
   h2 {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 18px;
+    line-height: 24px;
+		font-family: Montserrat,sans-serif;
+    font-style: italic;
+		margin-bottom:0;
   }
   h3 {
     font-size: 30px;
     line-height: 30px;
   }
   .btn {
-    margin-top: 30px;
-  }
+		margin-top: 15px;
+		margin-right: 5px;
+		font-weight:bold;
+		font-size:14px; 
+	}
   .btn-default {
     color: #fff;
     background-color: transparent;
@@ -7446,3 +7492,28 @@ li.notifications-popdown .notifications-popdown-box {
     border-radius: 3px;
   }
 }
+
+#pricing {
+	table {
+		color:#cecece;
+		font-family: Montserrat,sans-serif;
+		font-size:14px;
+		border-radius:10px;
+		tr th {
+			text-align:center;
+			width:50%;
+			border:none;
+			font-size:18px;
+			color:#5cb85c;
+		}
+		tr td {
+			text-align:center;
+			border:none;
+		}
+		p {
+			margin-bottom:10px;
+		}
+	}
+}
+
+		
