@@ -82,19 +82,17 @@ class CommunitiesController extends Controller
         //'hub_name' => e(Input::get('name')),
       );
 
-      //print_r($metadata);
-      //exit;
 
-      if (is_null($customer->stripe_id)) {
+      if ($customer->stripe_id=='') {
         // Create the Stripe customer
         $customer->createStripeCustomer([
             'email' => $customer->email,
-            'description' => 'Name: '.e(Input::get('billing_name')).', Hub Name: '.e(Input::get('name')),
+            'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e(Input::get('name')),
             'metadata' => $metadata,
         ]);
       }
 
-      $data['name'] = e(Input::get('billing_name'));
+      $data['name'] = $customer->getDisplayName();
       $data['email'] = $customer->email;
       $data['community_name'] = e(Input::get('name'));
       $data['subdomain'] = strtolower(Input::get('subdomain'));
@@ -123,8 +121,8 @@ class CommunitiesController extends Controller
         return Redirect::back()->withInput()->with('error','Something went wrong creating your subscription: '.$e->getMessage().'');
       }
 
+
         $customer->subscription()->syncWithStripe();
-        //$customer->invoice()->syncWithStripe();
         $customer->card()->syncWithStripe();
 
         $community->name	= e(Input::get('name'));
@@ -132,6 +130,12 @@ class CommunitiesController extends Controller
         $community->created_by	= Auth::user()->id;
 
       if ($community->save()) {
+
+        // Save the community_id to the subscriptions table
+        $subscription = \App\Subscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
+        $subscription->community_id = $community->id;
+        $subscription->save();
+
         $community->members()->attach(Auth::user(), ['is_admin' => true]);
         return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success','Welcome to your new Community! Get started adding entries now.');
       }
