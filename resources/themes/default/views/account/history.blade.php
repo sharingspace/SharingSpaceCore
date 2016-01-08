@@ -17,12 +17,31 @@
 					<div class="row">
 
 
-						<div class="col-md-11 col-md-offset-1">
+						<div class="col-md-12">
               <h2 class="size-16 uppercase">{{ trans('general.nav.order_history') }}</h2>
 
-              @foreach ($subscriptions as $subscription)
-                <li>{{ $subscription->community->name }} - {{ $subscription->community->created_at }}
-              @endforeach
+              <div class="table-responsive">
+              	<table class="table table-bordered table-striped">
+              		<thead>
+              			<tr>
+              				<th>Community</th>
+              				<th>Date</th>
+                      <th>Amount</th>
+              			</tr>
+              		</thead>
+              		<tbody>
+                    @foreach ($subscriptions as $subscription)
+                      <tr>
+                        <td>{{ $subscription->community->name }}</td>
+                        <td>{{ $subscription->community->created_at }}</td>
+                        <td>blah</td>
+                      </tr>
+                    @endforeach
+
+                  </tbody>
+                </table>
+              </div>
+
             </div>
 
 					</div>

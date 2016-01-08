@@ -22,14 +22,14 @@
             <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
               {!! csrf_field() !!}
 
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
               <h2 class="size-16">CREATE A COMMUNITY ON ANYSHA.RE</h2>
               <p class="text-muted">Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
             </div>
 
 
 						<!-- LEFT TEXT -->
-						<div class="col-md-5 col-md-offset-1">
+						<div class="col-md-6">
 
               <h2 class="size-16 uppercase">{{ trans('general.nav.create_community') }}</h2>
 
