@@ -14,7 +14,6 @@ use App\Exchange;
 use Form;
 use Pagetheme;
 use Mail;
-use App\Subscription as AnyShareSubscription;
 
 class CommunitiesController extends Controller
 {
@@ -117,6 +116,7 @@ class CommunitiesController extends Controller
         ->subscription()
         ->onPlan(e(Input::get('subscription_type')))
         ->create();
+
       } catch (\Exception $e) {
         return Redirect::back()->withInput()->with('error','Something went wrong creating your subscription: '.$e->getMessage().'');
       }
@@ -132,7 +132,7 @@ class CommunitiesController extends Controller
       if ($community->save()) {
 
         // Save the community_id to the subscriptions table
-        $subscription = \App\Subscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
+        $subscription = \App\CommunitySubscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
         $subscription->community_id = $community->id;
         $subscription->save();
 

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use DB;
 use App\Social;
-use App\Subscriptions;
+use App\CommunitySubscription;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cartalyst\Stripe\Billing\Laravel\Billable;
@@ -50,7 +50,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     public function subscriptions() {
-        return $this->hasMany('App\Subscription', 'billable_id');
+        return $this->hasMany('App\CommunitySubscription', 'billable_id');
     }
 
 
