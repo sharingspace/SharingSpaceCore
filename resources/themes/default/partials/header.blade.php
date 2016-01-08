@@ -11,6 +11,7 @@
         <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><a href="{{ route('user.history') }}">{{ trans('general.nav.order_history') }} </a></li>
                 <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
               </ul>
             </li>
