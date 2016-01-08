@@ -25,6 +25,7 @@ return [
           'settings' => 'Settings',
           'profile' => 'Profile',
           'create_community' => 'Create Community',
+          'order_history' => 'Order History',
     ],
 
     'entries'  => [
