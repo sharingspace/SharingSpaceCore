@@ -69,6 +69,16 @@ Route::group(array('prefix' => 'auth'), function () {
 
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| Account routes
+|--------------------------------------------------------------------------
+*/
+Route::get('account/history', array('middleware' => 'auth','as' => 'user.history', 'uses' => 'UserController@getHistory'));
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Entry routes
