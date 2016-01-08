@@ -21,7 +21,7 @@
               <h2 class="size-16 uppercase">{{ trans('general.nav.order_history') }}</h2>
 
               @foreach ($subscriptions as $subscription)
-                <li>{{ $subscription->community }}
+                <li>{{ $subscription->community->name }} - {{ $subscription->community->created_at }}
               @endforeach
             </div>
 
