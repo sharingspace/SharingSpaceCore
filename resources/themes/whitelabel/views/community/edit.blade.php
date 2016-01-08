@@ -32,21 +32,26 @@
 									<!-- Name -->
 									<div class="form-group">
 										<input type="text" name="name" class="form-control" placeholder="Community Name" required="" value="{{ Input::old('name', $community->name) }}">
+                    {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
 									</div>
 
                   <!-- Slug -->
-									<div class="form-group">
-										<input type="text" name="subdomain" class="form-control" placeholder="Subdomain" required="" value="{{ Input::old('name', $community->subdomain) }}">
-									</div>
+    							<div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
+                    <label for="subdomain">Subdomain *</label>
+    								  <input type="text" name="subdomain" class="form-control" placeholder="awesome.anysha.re" required="" value="{{ Input::old('subdomain', $community->subdomain) }}">
+                    {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
+    							</div>
 
                   <!-- Type -->
                   <div class="form-group">
                      {!! Form::community_types('group_type', Input::old('group_type', $community->group_type)) !!}
+                     {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
                   </div>
 
                   <!-- Theme -->
                   <div class="form-group">
                     {{ Form::select('theme', $themes, $community->theme, array('class'=>'select2', 'style'=>'width:100%')) }}
+                    {!! $errors->first('theme', '<span class="help-block">:message</span>') !!}
                   </div>
 
 								</div>

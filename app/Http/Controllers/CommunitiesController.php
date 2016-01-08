@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
-use App\Entry;
 use Input;
 use Validator;
 use Redirect;
@@ -15,6 +14,7 @@ use App\Exchange;
 use Form;
 use Pagetheme;
 use Mail;
+use App\Subscription as AnyShareSubscription;
 
 class CommunitiesController extends Controller
 {
@@ -85,12 +85,14 @@ class CommunitiesController extends Controller
       //print_r($metadata);
       //exit;
 
-      // Create the Stripe customer
-      $customer->createStripeCustomer([
-          'email' => $customer->email,
-          'description' => 'Name: '.e(Input::get('billing_name')).', Hub Name: '.e(Input::get('name')),
-          'metadata' => $metadata,
-      ]);
+      if (is_null($customer->stripe_id)) {
+        // Create the Stripe customer
+        $customer->createStripeCustomer([
+            'email' => $customer->email,
+            'description' => 'Name: '.e(Input::get('billing_name')).', Hub Name: '.e(Input::get('name')),
+            'metadata' => $metadata,
+        ]);
+      }
 
       $data['name'] = e(Input::get('billing_name'));
       $data['email'] = $customer->email;
@@ -98,17 +100,36 @@ class CommunitiesController extends Controller
       $data['subdomain'] = strtolower(Input::get('subdomain'));
       $data['type'] = e(Input::get('subscription_type'));
 
-        if ($customer->save()) {
-            Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
-            {
-                $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
-            });
-        }
+      if ($customer->save()) {
+        Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
+        {
+          $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+        });
+      }
 
+      try {
+        $card = $customer->card()->makeDefault()->create($token);
+      } catch (\Exception $e) {
+        return Redirect::back()->withInput()->with('error','Something went wrong while trying to authorise your card: '.$e->getMessage().'');
+      }
 
-      $community->name	= e(Input::get('name'));
-      $community->subdomain	= e(Input::get('subdomain'));
-      $community->created_by	= Auth::user()->id;
+      // Create the subscription
+      try {
+        $stripe_subscription = $customer
+        ->subscription()
+        ->onPlan(e(Input::get('subscription_type')))
+        ->create();
+      } catch (\Exception $e) {
+        return Redirect::back()->withInput()->with('error','Something went wrong creating your subscription: '.$e->getMessage().'');
+      }
+
+        $customer->subscription()->syncWithStripe();
+        //$customer->invoice()->syncWithStripe();
+        $customer->card()->syncWithStripe();
+
+        $community->name	= e(Input::get('name'));
+        $community->subdomain	= strtolower(e(Input::get('subdomain')));
+        $community->created_by	= Auth::user()->id;
 
       if ($community->save()) {
         $community->members()->attach(Auth::user(), ['is_admin' => true]);

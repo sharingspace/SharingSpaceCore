@@ -55,23 +55,6 @@
                   {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
                   {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
               </div>
-
-              <!-- Theme -->
-              <div class="form-group{{ $errors->first('theme', ' has-error') }}">
-                <label for="theme">Theme *</label>
-                  {{ Form::select('theme', $themes, old('theme'), array('class'=>'select2', 'style'=>'width:100%')) }}
-
-              </div>
-
-              <div class="form-group">
-                <label for="cover_img">
-                  Cover Image
-									<input class="custom-file-upload" type="file" id="file" name="cover_img" data-btn-text="Cover Upload" />
-									<small class="text-muted block">Max file size: 10Mb (gif/jpg/png)</small>
-                </label>
-                {!! $errors->first('cover_img', '<span class="help-block">:message</span>') !!}
-							</div>
-
 						</div>
 						<!-- /LEFT TEXT -->
 
@@ -79,69 +62,56 @@
 						<div class="col-md-5">
               <h2 class="size-16 uppercase">Payment Information</h2>
 
-                <!-- Billing Name -->
-								<div class="form-group col-md-6 col-sm-6">
-									<label for="billing_name">Name on Card *</label>
-									<input id="billing_name" name="billing_name" required="" type="text" class="form-control" data-stripe="name" placeholder="John Smith" />
-								</div>
-
-                <!-- Billing Email -->
-								<div class="form-group col-md-6 col-sm-6">
-									<label for="billing_email">Billing Email *  </label>
-									<input id="billing_email" name="billing_email" type="email" class="form-control" placeholder="me@mycompany.com" data-stripe="email" />
-
-								</div>
+                <!-- Subscription -->
+                <div class="form-group col-md-12 col-sm-12">
+                   <label for="cvc">Subscription Type *</label>
+                    <select class="form-control" name="subscription_type">
+                        <option value="MONTHLY-HUB-SUBSCRIPTION">Monthly ($1/month)</option>
+                        <option value="ANNUAL-HUB-SUBSCRIPTION">Annual ($12/year)</option>
+                    </select>
+                </div>
 
 
-                  <!-- Subscription -->
-                  <div class="form-group col-md-12 col-sm-12">
-	                   <label for="cvc">Subscription Type *</label>
-                      <select class="form-control" name="subscription_type">
-                          <option value="MONTHLY-HUB-SUBSCRIPTION">Monthly ($1/month)</option>
-                          <option value="ANNUAL-HUB-SUBSCRIPTION">Annual ($12/year)</option>
-	                    </select>
-                  </div>
+                <!-- Error box for payment errors -->
+                <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
+                </div>
 
+              		<div class="form-group col-md-12 col-sm-12" id="form-card-number">
+              			<label for="card-number">Card Number *
+                      <i class="fa fa-cc-visa help-text"></i>
+                      <i class="fa fa-cc-amex"></i>
+                      <i class="fa fa-cc-mastercard"></i>
+                      <i class="fa fa-cc-diners-club"></i>
+                      <i class="fa fa-cc-jcb"></i>
+                      <i class="fa fa-cc-discover"></i>
+                    </label>
+									  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="4242424242424242" />
+								    </div>
 
-                  <!-- Error box for payment errors -->
-                  <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
-                  </div>
+                    <div class="form-group col-md-3 col-sm-2">
+  										<label for="exp_month">Month *</label>
+  										<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" data-stripe="exp-month" value="01" />
+                    </div>
 
+                    <div class="form-group col-md-3 col-sm-3">
+                        <label for="exp_year">Year *</label>
+                        <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="{{ (date('Y') + 3) }}"  data-stripe="exp-year" value="2020" />
+								    </div>
 
-                		<div class="form-group col-md-12 col-sm-12" id="form-card-number">
-                			<label for="card-number">Card Number *
-                        <i class="fa fa-cc-visa help-text"></i>
-                        <i class="fa fa-cc-amex"></i>
-                        <i class="fa fa-cc-mastercard"></i>
-                        <i class="fa fa-cc-diners-club"></i>
-                        <i class="fa fa-cc-jcb"></i>
-                        <i class="fa fa-cc-discover"></i>
-                      </label>
-										  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" />
-									    </div>
+  									<div class="form-group col-md-3 col-sm-3">
+  										<label for="cvc">CVC *</label>
+  										<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" data-stripe="cvc" />
+  									</div>
 
+                    <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
+                        <button type="submit" class="btn btn-primary" id="create_community">Create Community</button>
+                    </div>
 
-                      <div class="form-group col-md-3 col-sm-2">
-    										<label for="exp_month">Month *</label>
-    										<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" data-stripe="exp-month" />
-                      </div>
-                      <div class="form-group col-md-3 col-sm-3">
-                          <label for="exp_year">Year *</label>
-                          <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="{{ (date('Y') + 3) }}"  data-stripe="exp-year" />
-									    </div>
-    									<div class="form-group col-md-3 col-sm-3">
-    										<label for="cvc">CVC *</label>
-    										<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" data-stripe="cvc" />
-    									</div>
-
-                      <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
-                          <button type="submit" class="btn btn-primary" id="create_community">Create Community</button>
-                      </div>
-                      <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                          <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
-                              Something went wrong :(
-                          </div>
-                      </div>
+                    <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
+                            Something went wrong :(
+                        </div>
+                    </div>
 								</div>
 						</div>
             </form>
