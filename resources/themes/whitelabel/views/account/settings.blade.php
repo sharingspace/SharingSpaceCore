@@ -81,23 +81,105 @@
                 <form role="form" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
-									<div class="form-group">
-										<label class="control-label">Current Password</label>
-										<input type="password" class="form-control" name="password">
-									</div>
-									<div class="form-group">
-										<label class="control-label">New Password</label>
-										<input type="password" class="form-control" name="new_password">
-									</div>
-									<div class="form-group">
-										<label class="control-label">Re-type New Password</label>
-										<input type="password" class="form-control" name="confirm_password">
-									</div>
-
-									<div class="margin-top10">
-										<a href="#" class="btn btn-primary"><i class="fa fa-check"></i> Change Password</a>
-										<a href="#" class="btn btn-default">Cancel </a>
-									</div>
+									 <div class="col-md-12">
+          	<h4>Social Links & Connections</h4>
+          </div>
+    
+          <div class="col-md-12 social">
+            <div class="col-md-7">
+              <div class="form-group {{ $errors->first('website', 'has-error') }}">
+                <input type="text" placeholder="http://yourwebsite.com" class="form-control" id="website" name="website" value="{{{ Input::old('website', Auth::user()->website) }}}">
+                <label for="website" class="fa fa-link fa-lg grey" rel="tooltip" title="Link"></label>
+              </div>
+            </div> <!-- col-md-7 -->
+            <div class="col-sm-7">
+              {{ $errors->first('website', '<span class="help-block">:message</span>') }}
+            </div>
+  
+            <div class="col-md-7">
+              <div class="form-group {{ $errors->first('fb_url', 'has-error') }}">
+                  <input type="text" placeholder="https://facebook.com/username" class="form-control" id="fb_url" name="fb_url" value="{{{ Input::old('fb_url', Auth::user()->fb_url) }}}">
+                  <label for="facebookURL" class="fa fa-facebook-square fa-lg grey" rel="tooltip" title="Facebook"></label>
+              </div>
+            </div>  <!-- col-md-7 -->
+            <div class="col-sm-7">
+              {{ $errors->first('facebookURL', '<span class="help-block">:message</span>') }}
+            </div>
+            
+            <div class="col-md-7">
+              <div class="form-group {{ $errors->first('twitter_url', 'has-error') }}">
+                <input type="text" placeholder="https://twitter.com/username" class="form-control" id="twitter_url" name="twitter_url" value="{{{ Input::old('twitter_url', Auth::user()->twitter_url) }}}">
+                <label for="twitter_url" class="fa fa-twitter-square fa-lg grey" rel="tooltip" title="Twitter"></label>
+              </div>
+            </div> <!-- col-md-7 -->
+  
+            <div class="col-sm-7">
+              {{ $errors->first('twitter_url', '<span class="help-block">:message</span>') }}
+            </div>
+  
+            <div class="col-md-7">
+              <div class="form-group {{ $errors->first('gplus_url', 'has-error') }}">
+                <input type="text" placeholder="https://plus.google.com/username" class="form-control" id="gplus_url" name="gplus_url" value="{{{ Input::old('gplus_url', Auth::user()->gplus_url) }}}">
+                <label for="gplus_url" class="fa fa-google-plus-square fa-lg grey" rel="tooltip" title="G+"></label>
+              </div>
+            </div> <!-- col-md-7 -->
+  
+            <div class="col-sm-7">
+              {{ $errors->first('gplus_url', '<span class="help-block">:message</span>') }}
+            </div>
+  
+  
+            <div class="col-md-7">
+              <div class="form-group {{ $errors->first('pinterest_url', 'has-error') }}">
+                <input type="text" placeholder="https://pinterest.com/username" class="form-control" id="pinterestURL" name="pinterest_url" value="{{{ Input::old('pinterest_url', Auth::user()->pinterest_url) }}}">
+                <label for="pinterest_url" class="fa fa-pinterest-square fa-lg grey" rel="tooltip" title="Pinterest"></label>
+              </div>
+            </div> <!-- col-md-7 -->
+  
+            <div class="col-sm-7">
+              {{ $errors->first('pinterest_url', '<span class="help-block">:message</span>') }}
+            </div>
+  
+            <div class="col-md-7">
+              <div class="form-group {{ $errors->first('youtube_url', 'has-error') }}">
+                <input type="text" placeholder="https://youtube.com/username" class="form-control" id="youtube_url" name="youtube_url" value="{{{ Input::old('youtube_url', Auth::user()->youtube_url) }}}">
+                <label for="youtube_url" class="fa fa-youtube-square fa-lg grey" rel="tooltip" title="Youtube"></label>
+              </div>
+            </div> <!-- col-md-7 -->
+  
+            <div class="col-sm-7">
+              {{ $errors->first('youtube_url', '<span class="help-block">:message</span>') }}
+            </div>
+  
+  
+            @if (Auth::user()->fb_user)
+              <div class=" col-sm-10" style="margin-top: -5px">
+                <div class="checkbox">
+                  <label>
+                    {{ Form::checkbox('post_to_fb', '1', Input::old('post_to_fb', Auth::user()->post_to_fb)) }} Post my tiles to my Facebook profile
+                  </label>
+                </div>
+              </div> <!-- col-md-10 -->
+    
+              <div class=" col-sm-10" style="margin-top: -5px">
+                <div class="checkbox">
+                  <label>
+                    {{ Form::checkbox('fave_to_fb', '1', Input::old('fave_to_fb', Auth::user()->fave_to_fb)) }}
+                    Post my faves to my Facebook profile
+                  </label>
+                </div>
+              </div> <!-- col-md-10 -->
+            @endif
+    
+          </div> <!-- col-md-12 -->
+    
+          <!-- Form actions -->
+          <div class="control-group col-sm-12 col-md-12  col-xs-12" style="margin-top: 10px">
+          	<hr>
+          	<div class="controls">
+          		<button type="submit" class="btn btn-default">Save Profile</button>
+          	</div>
+          </div>  <!-- control-group -->
                 </form>
 
 							</div>

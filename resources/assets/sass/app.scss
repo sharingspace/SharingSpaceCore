@@ -46,7 +46,7 @@
 *************************************************** **/
 
 /** Globals
- **************************************************************** **/
+ ******************************************************************/
 
 html {
   height: 100%;
@@ -161,14 +161,7 @@ section {
   &.parallax {
     border: 0;
   }
-	&#about {
-		p {
-			font-family: Ubuntu,Helvetica,sans-serif;
-			color: #5A5A5A;
-			font-size: 22px;
-			line-height: 29px;
-		}
-	}
+
 }
 
 body.bg-grey {
@@ -7493,6 +7486,9 @@ li.notifications-popdown .notifications-popdown-box {
   }
 }
 
+
+/********************** Home page ***********************/
+
 #pricing {
 	table {
 		color:#cecece;
@@ -7516,4 +7512,52 @@ li.notifications-popdown .notifications-popdown-box {
 	}
 }
 
-		
+section {
+	&#about {
+		p {
+			font-family: Ubuntu,Helvetica,sans-serif;
+			color: #5A5A5A;
+			font-size: 28px;
+			line-height:34px;
+		}
+	}
+}
+
+.callout {
+	h4 {
+		font-size:24px;
+		span {
+			font-size:20px;
+			display:inline-block;
+			text-align:center;
+			width:370px;
+			color:white;
+		}
+	}
+}
+
+#coop {
+	h2, p {
+		color:#fff;
+	}
+}
+
+.social {
+	label.fa {
+    position: absolute;
+    z-index: 2;
+    left: 25px;
+		top: 4px;
+    font-size: 20px;
+    width: 20px;
+    margin-left: -2.5px;
+    margin-top: -2px;
+    text-align: center;
+    padding: 10px 0;
+
+	}
+	
+	.form-control {
+		padding-left: 35px;
+	}
+}
