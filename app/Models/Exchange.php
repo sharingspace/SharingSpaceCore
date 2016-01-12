@@ -16,14 +16,16 @@ class Exchange extends Model
   protected $table = 'exchange_types';
 
   public function exchange()
-   {
-       return $this->belongsToMany('App\Entry', 'exchange_types', 'entry_id', 'type_id');
-   }
+	{
+		return $this->belongsToMany('App\Entry', 'exchange_types', 'entry_id', 'type_id');
+	}
 
+	public function communities()
+	{
+		return $this->belongsToMany('App\Community', 'type_id', 'community_id');
+	}
 
-  public function communities()
-   {
-       return $this->belongsToMany('App\Community', 'type_id', 'community_id');
-   }
-
+	public static function getExchangeTypes() {
+		//$exchanges = Exchange::get()	}
+	}
 }

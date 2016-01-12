@@ -42,6 +42,7 @@
 		Footer
 		Responsive
 		HomePage
+		Quick add
 *************************************************** **/
 
 /** Globals
@@ -8073,6 +8074,159 @@ section#about p {
 
 .social .form-control {
   padding-left: 35px;
+}
+
+/* 
+------------------------------------------ 
+Quick add
+------------------------------------------ 
+*/
+
+/* these are bootstraps media breaks */
+
+#add_tile_wrapper .tile_container *[id^='nbutton_'],
+#add_tile_wrapper .tile_container *[class^='nbutton_'] {
+  cursor: pointer;
+  display: block;
+  width: 40px;
+  background-color: #666;
+  height: 40px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+#add_tile_wrapper .tile_info {
+  font-size: 16px;
+  background-color: #eee;
+  height: 40px;
+  padding-top: 7px;
+}
+
+#add_tile_wrapper .image_upload input[type='file'] {
+  opacity: 0;
+}
+
+#add_tile_wrapper h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+#add_tile_wrapper .border {
+  margin-top: 127px;
+  margin-bottom: 10px;
+  padding-top: 72px;
+  border-top: 1px solid #bfbfbf;
+  border-bottom: 1px none #ccc;
+}
+
+#add_tile_wrapper #added_heading {
+  color: #c7bfbf;
+  display: none;
+  margin-bottom: 15px;
+}
+
+#add_tile_wrapper *[class^='show_thumbnail'] img {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 0px;
+  border: 2px #999 solid;
+  transition: width 1000ms;
+}
+
+#add_tile_wrapper .tile_container .percentage {
+  background-color: green;
+  color: white;
+  width: 40px;
+  position: absolute;
+  top: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+#add_tile_wrapper .tile_container .too_large {
+  display: none;
+  background-color: orange;
+  color: white;
+  width: 190px;
+  float: left;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+  margin-left: 10px;
+  line-height: 19px;
+}
+
+#add_tile_wrapper .error_message {
+  font-weight: bold;
+  text-align: center;
+}
+
+#add_tile_wrapper .tile_container .fileUpload {
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+
+#add_tile_wrapper .tile_container .fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+#add_tile_wrapper .upload_text {
+  margin-top: 11px;
+  font-size: 12px;
+}
+
+#add_tile_wrapper .value_text {
+  color: black;
+  font-style: italic;
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#add_tile_wrapper h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#add_tile_wrapper .less_text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #add_tile_wrapper .value_text {
+    font-size: 30px;
+    margin-bottom: 35px;
+  }
+
+  #add_tile_wrapper h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+}
+
+#add_tile_wrapper .tile_container *[class^='bbutton_'] {
+  cursor: pointer;
+  display: block;
+  width: 40px;
+  background-color: #666;
+  height: 40px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
 }
 /** ************************************* **
 
