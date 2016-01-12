@@ -95,12 +95,13 @@ Route::post('community/new', array('middleware' => 'auth','as' => 'community.cre
 Route::get('community/edit', array('middleware' => 'auth','as' => 'community.edit.form', 'uses' => 'CommunitiesController@getEdit'));
 Route::post('community/edit', array('middleware' => 'auth','as' => 'community.edit.save', 'uses' => 'CommunitiesController@postEdit'));
 
-
 Route::get('entry/new', array('middleware' => 'auth','as' => 'entry.create.form', 'uses' => 'EntriesController@getCreate'));
 Route::post('entry/new', array('middleware' => 'auth','as' => 'entry.create.save', 'uses' => 'EntriesController@postCreate'));
-
+Route::get('entry/{entryID}/delete', array('middleware' => 'auth', 'uses' => 'EntriesController@getDelete'));
+Route::post('entry/{entryID}/edit', array('middleware' => 'auth', 'uses' => 'EntriesController@postEdit'));
 Route::get('entry/{entryID}', array('as' => 'entry.view', 'uses' => 'EntriesController@getEntry'));
-
+Route::post('entry/{tileId}/upload', array('middleware' => 'auth', 'uses' => 'EntriesController@ajaxUpload'));
+	
 Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'EntriesController@getEntriesDataView'));
 
 // Stripe Webhook...
