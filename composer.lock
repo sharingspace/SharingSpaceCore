@@ -837,13 +837,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "32de2cedcc98ffb3476f5a413f47bb482691c807"
+                "reference": "94688f21cc5d8bc85f1783b4c8b98b3288d712cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/32de2cedcc98ffb3476f5a413f47bb482691c807",
-                "reference": "32de2cedcc98ffb3476f5a413f47bb482691c807",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/94688f21cc5d8bc85f1783b4c8b98b3288d712cb",
+                "reference": "94688f21cc5d8bc85f1783b4c8b98b3288d712cb",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
             },
             "type": "library",
             "autoload": {
@@ -868,7 +871,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-12-19 14:39:29"
+            "time": "2016-01-07 17:36:51"
         },
         {
             "name": "graham-campbell/digitalocean",
@@ -2135,7 +2138,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/ebd734314f2f36ad9d9444728c19532a4cef5494",
+                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/3300cd3d3f30ef1febf73a4739bc52cd9f5d53bc",
                 "reference": "ebd734314f2f36ad9d9444728c19532a4cef5494",
                 "shasum": ""
             },

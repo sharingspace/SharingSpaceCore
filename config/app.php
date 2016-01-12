@@ -171,6 +171,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Cartalyst\Stripe\Billing\Laravel\StripeServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
 
     ],
 

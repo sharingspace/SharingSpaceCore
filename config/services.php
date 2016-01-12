@@ -65,4 +65,9 @@ return [
         'redirect' => env('TWITTER_REDIRECT'),
     ],
 
+    'rollbar' => array(
+        'access_token' => env('ROLLBAR_TOKEN'),
+        'level' => 'debug',
+    ),
+
 ];
