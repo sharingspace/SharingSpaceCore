@@ -52,14 +52,24 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 Route::group(array('prefix' => 'auth'), function () {
 
 	 # Logout
-    Route::get('logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
+    Route::get('logout', array(
+      'as' => 'logout',
+      'uses' => 'Auth\AuthController@getLogout')
+    );
 
     # Login
-    Route::get('login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
+    Route::get('login', array(
+      'as' => 'login',
+      'uses' => 'Auth\AuthController@getLogin'));
+
     Route::post('login', 'Auth\AuthController@postLogin');
 
     # Register
-    Route::get('register', array('as' => 'register', 'uses' => 'Auth\AuthController@getRegister'));
+    Route::get('register', array(
+      'as' => 'register',
+      'uses' => 'Auth\AuthController@getRegister')
+    );
+
     Route::post('register', 'Auth\AuthController@postRegister');
 
     # Social
@@ -72,11 +82,31 @@ Route::group(array('prefix' => 'auth'), function () {
 
 /*
 |--------------------------------------------------------------------------
-| Account routes
+| User/Account routes
 |--------------------------------------------------------------------------
 */
-Route::get('account/history', array('middleware' => 'auth','as' => 'user.history', 'uses' => 'UserController@getHistory'));
+Route::get('account/history', array(
+  'middleware' => 'auth',
+  'as' => 'user.history',
+  'uses' => 'UserController@getHistory')
+);
 
+Route::get('account/settings', array(
+  'middleware' => 'auth',
+  'as' => 'user.settings.view',
+  'uses' => 'UserController@getSettings')
+);
+
+Route::post('account/settings', array(
+  'middleware' => 'auth',
+  'as' => 'user.settings.save',
+  'uses' => 'UserController@postSettings')
+);
+
+Route::get('users/{userID}', array(
+  'as' => 'user.profile',
+  'uses' => 'UserController@getProfile')
+);
 
 
 /*
@@ -84,28 +114,114 @@ Route::get('account/history', array('middleware' => 'auth','as' => 'user.history
 | Entry routes
 |--------------------------------------------------------------------------
 */
-Route::get('browse', array('as' => 'browse', 'uses' => 'CommunitiesController@getEntriesView'));
-Route::get('members', array('as' => 'members', 'uses' => 'CommunitiesController@getMembers'));
-Route::get('account/settings', array('middleware' => 'auth','as' => 'user.settings.view', 'uses' => 'UserController@getSettings'));
-Route::post('account/settings', array('middleware' => 'auth','as' => 'user.settings.save', 'uses' => 'UserController@postSettings'));
-Route::get('users/{userID}', array('as' => 'user.profile', 'uses' => 'UserController@getProfile'));
-Route::get('community/new', array('middleware' => 'auth','as' => 'community.create.form', 'uses' => 'CommunitiesController@getCreate'));
-Route::post('community/new', array('middleware' => 'auth','as' => 'community.create.save', 'uses' => 'CommunitiesController@postCreate'));
+Route::group(array('prefix' => 'entry'), function () {
 
-Route::get('community/edit', array('middleware' => 'auth','as' => 'community.edit.form', 'uses' => 'CommunitiesController@getEdit'));
-Route::post('community/edit', array('middleware' => 'auth','as' => 'community.edit.save', 'uses' => 'CommunitiesController@postEdit'));
+  Route::get('new', array(
+    'middleware' => 'auth',
+    'as' => 'entry.create.form',
+    'uses' => 'EntriesController@getCreate')
+  );
 
-Route::get('entry/new', array('middleware' => 'auth','as' => 'entry.create.form', 'uses' => 'EntriesController@getCreate'));
-Route::post('entry/new', array('middleware' => 'auth','as' => 'entry.create.save', 'uses' => 'EntriesController@postCreate'));
-Route::get('entry/{entryID}/delete', array('middleware' => 'auth', 'uses' => 'EntriesController@getDelete'));
-Route::post('entry/{entryID}/edit', array('middleware' => 'auth', 'uses' => 'EntriesController@postEdit'));
-Route::get('entry/{entryID}', array('as' => 'entry.view', 'uses' => 'EntriesController@getEntry'));
-Route::post('entry/{tileId}/upload', array('middleware' => 'auth', 'uses' => 'EntriesController@ajaxUpload'));
-	
-Route::get('json.browse', array('as' => 'json.browse', 'uses' => 'EntriesController@getEntriesDataView'));
+  Route::post('new', array(
+    'middleware' => 'auth',
+    'as' => 'entry.create.save',
+    'uses' => 'EntriesController@postCreate')
+  );
+
+  Route::get('{entryID}/delete', array(
+    'middleware' => 'auth',
+    'as' => 'entry.delete.save',
+    'uses' => 'EntriesController@getDelete')
+  );
+
+  Route::get('{entryID}/edit', array(
+    'middleware' => 'auth',
+    'as' => 'entry.edit.form',
+    'uses' => 'EntriesController@getEdit')
+  );
+
+  Route::post('{entryID}/edit', array(
+    'middleware' => 'auth',
+    'as' => 'entry.edit.save',
+    'uses' => 'EntriesController@postEdit')
+  );
+
+  Route::post('{tileId}/upload', array(
+    'middleware' => 'auth',
+    'uses' => 'EntriesController@ajaxUpload')
+  );
+
+  Route::get('json.browse', array(
+    'as' => 'json.browse',
+    'uses' => 'EntriesController@getEntriesDataView')
+  );
+
+  Route::get('{entryID}', array(
+    'as' => 'entry.view',
+    'uses' => 'EntriesController@getEntry')
+  );
+
+});
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Community routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('browse', array(
+  'as' => 'browse',
+  'uses' => 'CommunitiesController@getEntriesView')
+);
+
+Route::get('members', array(
+  'as' => 'members',
+  'uses' => 'CommunitiesController@getMembers')
+);
+
+Route::group(array('prefix' => 'community'), function () {
+
+  Route::get('new', array(
+    'middleware' => 'auth',
+    'as' => 'community.create.form',
+    'uses' => 'CommunitiesController@getCreate')
+  );
+
+  Route::post('new', array(
+    'middleware' => 'auth',
+    'as' => 'community.create.save',
+    'uses' => 'CommunitiesController@postCreate')
+  );
+
+  Route::get('edit', array(
+    'middleware' => 'auth',
+    'as' => 'community.edit.form',
+    'uses' => 'CommunitiesController@getEdit')
+  );
+
+  Route::post('edit',
+    [
+      'middleware' => 'auth',
+      'as' => 'community.edit.save',
+      'uses' => 'CommunitiesController@postEdit'
+    ]
+  );
+
+});
+
+
+
+
+
 
 // Stripe Webhook...
-Route::post('webhook/stripe', [ 'as' => 'stripe.webhook', 'uses' => 'StripeWebhookController@handleWebhook' ]);
+Route::post('webhook/stripe', [
+  'as' => 'stripe.webhook',
+  'uses' => 'StripeWebhookController@handleWebhook' ]
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -126,5 +242,7 @@ Route::get('home', function () {
  });
 
 
-Route::get('/', array('as' => 'home', 'uses' => 'PagesController@getHomepage'));
+Route::get('/', array(
+  'as' => 'home',
+  'uses' => 'PagesController@getHomepage'));
 });
