@@ -19,6 +19,7 @@
               <th data-sortable="true" data-field="author">{{ trans('general.entries.author') }}</th>
               <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
               <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+              <th data-sortable="false" data-field="actions"></th>
           </tr>
       </thead>
     </table>
