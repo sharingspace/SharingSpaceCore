@@ -134,6 +134,16 @@ class EntriesController extends Controller
   public function getDelete($entryID)
   {
     if ($entry = \App\Entry::find($entryID)) {
+      $user = Auth::user();
+      if (!$entry->checkUserCanEditEntry($user)) {
+        return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+      } else {
+        if ($entry->delete()) {
+          return redirect()->route('browse')->with('success',trans('general.entries.messages.deleted'));
+        } else {
+          return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.delete_failed'));
+        }
+      }
 
     } else {
       return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
@@ -211,7 +221,7 @@ class EntriesController extends Controller
 
       $actions = '';
         if ($entry->deleted_at=='') {
-            $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>';
+            $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a><a href="'.route('entry.delete.save', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-trash"></i></a>';
         } else {
             $actions = '';
         }
