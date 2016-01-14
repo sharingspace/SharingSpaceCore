@@ -21,7 +21,7 @@ class EntriesController extends Controller
     if ($entry = \App\Entry::find($entryID)) {
       return view('entries.view')->with('entry',$entry);
     } else {
-      return view('browse')->with('error',trans('general.entries.messages.invalid'));
+      return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
     }
 
   }
@@ -32,7 +32,7 @@ class EntriesController extends Controller
   */
   public function getCreate()
   {
-    return view('entries.edit');
+    return view('entries.create');
   }
 
   /*
@@ -52,22 +52,80 @@ class EntriesController extends Controller
       $entry->created_by	= Auth::user()->id;
 
       if ($request->whitelabel_group->entries()->save($entry)) {
-				return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);			
-				
+				return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+
 			//	return Response::json(['success'=>true,'tile_id'=>$tile->tile_id,'title'=>$tile->title,'post_type'=>$tile->post_type,'hubNames'=>$hubNames,'location'=>$tile->location,'tile_exchange_types'=>$tileExchangeTypesNames]);
 			} else {
-        return Redirect::back()->with('error',trans('general.entries.messages.save_failed'));
+        return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
       }
 
     }
   }
-	
+
 	/*
 	Edit the entry
 	*/
-	public function postEdit($entryID)
+	public function getEdit($entryID)
 	{
-		
+      // This should be pulled into a helper or macro
+      $post_types = array('want'=>'I want', 'have'=>'I have');
+
+		  if ($entry = \App\Entry::find($entryID)) {
+
+        $user = Auth::user();
+
+        if (!$entry->checkUserCanEditEntry($user)) {
+          return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+
+        } else {
+          return view('entries.edit')->with('entry',$entry)->with('post_types',$post_types);
+        }
+
+      } else {
+        return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+      }
+
+  }
+
+
+  /*
+	Save the entry edits
+	*/
+	public function postEdit(Request $request, $entryID)
+	{
+
+		  if ($entry = \App\Entry::find($entryID)) {
+
+        if (Auth::check()) {
+          $user = Auth::user();
+
+        	if (!$entry->checkUserCanEditEntry($user)) {
+				    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+        	} else {
+            $validator = Validator::make(Input::all(), $entry->rules);
+
+            if ($validator->fails()) {
+              return redirect()->back()->withInput()->withErrors($validator->messages());
+            } else {
+
+              $entry->title	= e(Input::get('title'));
+              $entry->post_type	= e(Input::get('post_type'));
+
+              if ($entry->save()) {
+        				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
+              } else {
+                return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.save_failed'));
+              }
+            }
+
+
+          }
+        }
+
+      } else {
+        return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+      }
+
   }
 
 	/*
@@ -75,7 +133,11 @@ class EntriesController extends Controller
   */
   public function getDelete($entryID)
   {
-    
+    if ($entry = \App\Entry::find($entryID)) {
+
+    } else {
+      return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+    }
   }
 
 
@@ -84,7 +146,7 @@ class EntriesController extends Controller
   */
 	public function ajaxUpload($tile_id = null) {
 		if (Input::hasFile('image')) {
-	
+
 			if ($tile_id) {
 				$tile = $this->tile->withTrashed()->find($tile_id);
 				$filename =  $tile->uploadImage('image', 'profile', 250, 250);
@@ -93,13 +155,13 @@ class EntriesController extends Controller
 				$upload_key = Input::get('upload_key');
 				$filename =  Tile::uploadTmpImage('image', 'profile', 250, 250, $upload_key);
 			}
-	
+
 			 if ($filename) {
 				return Response::json('success', 200);
 			 } else {
 				return Response::json('error - unknown', 400);
 			 }
-	
+
 		} else {
 			return Response::json('error - no image', 400);
 		}
@@ -147,12 +209,21 @@ class EntriesController extends Controller
 
     foreach ($entries as $entry) {
 
+      $actions = '';
+        if ($entry->deleted_at=='') {
+            $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>';
+        } else {
+            $actions = '';
+        }
+
+
       $rows[] = array(
         'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
         'post_type' => strtoupper($entry->post_type),
         'author' => '<a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
         'location' => $entry->location,
         'created_at' => $entry->created_at->format('M d Y g:iA'),
+        'actions' => $actions,
       );
     }
 
