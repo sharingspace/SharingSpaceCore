@@ -217,11 +217,18 @@ class EntriesController extends Controller
 
     $rows = array();
 
+    if (Auth::check()) {
+      $user = Auth::user();
+    } else {
+      $user = null;
+    }
+
     foreach ($entries as $entry) {
 
       $actions = '';
-        if ($entry->deleted_at=='') {
-            $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a><a href="'.route('entry.delete.save', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-trash"></i></a>';
+
+        if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
+            $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a><a href="'.route('entry.delete.save', $entry->id).'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
         } else {
             $actions = '';
         }
