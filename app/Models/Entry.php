@@ -57,7 +57,18 @@ class Entry extends Model
       return $this->hasMany('App\Media', 'entry_id');
   }
 
+  /*
+  * Check whether this user can edit the entry
+  * Admin checks can go here later as well
+  */
+  public  function checkUserCanEditEntry($user) {
+      if ($user->id != $this->user_id) {
+        return true;
+      } else {
+        return false;
+      }
 
+  }
 
 
   /**
