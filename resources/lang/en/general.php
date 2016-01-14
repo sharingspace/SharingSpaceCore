@@ -36,14 +36,13 @@ return [
           'location' => 'Location',
           'created_at' => 'Created',
           'view' => 'View Entry',
-          'create' => 'Create',
-					'create_subheadline' => 'What do you want or have? Press "Enter" to make an new entry',
-
+          'create' => 'Create New Entry',
           'edit' => 'Edit Entry',
 
           'messages' => [
             'invalid' => 'That entry is not valid.',
             'save_edits' => 'Your entry has been updated!',
+            'not_allowed' => 'You are not allowed to edit thhis entry.',
             'save_new' => 'Your new entry has been created!',
             'save_failed' => 'Something went wrong. Your entry edits have not been saved',
           ],
