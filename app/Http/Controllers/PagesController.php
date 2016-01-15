@@ -14,7 +14,7 @@ class PagesController extends Controller
   {
 
     if ($request->whitelabel_group) {
-      $entries = $request->whitelabel_group->entries()->with('author','exchangeTypesNames')->get();
+      $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->get();
       return view('home')->with('entries',$entries);
     } else {
       $communities = \App\Community::orderBy('created_at','DESC')->take(20)->get();
