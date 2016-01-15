@@ -141,6 +141,7 @@ class EntriesController extends Controller
         return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
       } else {
         if ($entry->delete()) {
+          $entry->exchangeTypes()->detach();
           return redirect()->route('browse')->with('success',trans('general.entries.messages.deleted'));
         } else {
           return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.delete_failed'));
