@@ -15,7 +15,7 @@ class RoutesCest
     }
     public function routesWithTrailingSlashes(FunctionalTester $I)
     {
-        $I->amOnPage('/browse');
+        $I->amOnPage('/browse/');
         $I->seeCurrentRouteIs('browse');
     }
 }
