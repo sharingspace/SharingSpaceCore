@@ -86,7 +86,7 @@
             </li>
             @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
               <li class="filter">
-                <a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->name }}</a>
+                <a data-filter=".{{ Str::slug(strtolower($exchange_types->name)) }}" href="#">{{ $exchange_types->name }}</a>
               </li>
             @endforeach
 
@@ -97,9 +97,9 @@
             @foreach ($entries as $entry)
             <div class="portfolio-item
             @if (count($entry->exchangeTypes) > 0)
-              @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
-                {{ strtolower($entry->exchangeTypes[$i]->type_name) }}
-              @endfor
+              @foreach ($entry->exchangeTypes as $entry_exchange_types)
+                {{ Str::slug(strtolower($entry_exchange_types->name)) }}
+              @endforeach
             @endif
             ">
             <!-- item -->
