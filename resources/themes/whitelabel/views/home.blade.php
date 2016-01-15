@@ -97,8 +97,8 @@
             @foreach ($entries as $entry)
             <div class="portfolio-item
             @if (count($entry->exchangeTypes) > 0)
-              @for ($i = 0; $i < count($entry->exchangeTypesNames); $i++)
-                {{ strtolower($entry->exchangeTypesNames[$i]->type_name) }}
+              @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
+                {{ strtolower($entry->exchangeTypes[$i]->type_name) }}
               @endfor
             @endif
             ">
