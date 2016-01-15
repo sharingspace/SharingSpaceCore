@@ -41,26 +41,23 @@ class EntriesController extends Controller
   public function postCreate(Request $request)
   {
     $entry = new \App\Entry();
-    $validator = Validator::make(Input::all(), $entry->rules);
+    $entry->title	= e(Input::get('title'));
+    $entry->post_type	= e(Input::get('post_type'));
+    $entry->created_by	= Auth::user()->id;
 
-    if ($validator->fails()) {
-      return Redirect::back()->withInput()->withErrors($validator->messages());
-    } else {
-
-      $entry->title	= e(Input::get('title'));
-      $entry->post_type	= e(Input::get('post_type'));
-      $entry->created_by	= Auth::user()->id;
-
-      if ($request->whitelabel_group->entries()->save($entry)) {
-        $entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
-
-				return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
-
-			} else {
-        return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
-      }
-
+    if ($entry->isInvalid()) {
+       return Redirect::back()->withInput()->withErrors($community->getErrors());
     }
+
+    if ($request->whitelabel_group->entries()->save($entry)) {
+      $entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+
+			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+
+		} else {
+      return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
+    }
+
   }
 
 	/*
@@ -97,31 +94,21 @@ class EntriesController extends Controller
 
 		  if ($entry = \App\Entry::find($entryID)) {
 
-        if (Auth::check()) {
-          $user = Auth::user();
+        $user = Auth::user();
 
-        	if (!$entry->checkUserCanEditEntry($user)) {
-				    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
-        	} else {
-            $validator = Validator::make(Input::all(), $entry->rules);
+      	if (!$entry->checkUserCanEditEntry($user)) {
+			    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+      	} else {
 
-            if ($validator->fails()) {
-              return redirect()->back()->withInput()->withErrors($validator->messages());
-            } else {
+          $entry->title	= e(Input::get('title'));
+          $entry->post_type	= e(Input::get('post_type'));
 
-              $entry->title	= e(Input::get('title'));
-              $entry->post_type	= e(Input::get('post_type'));
-
-              if ($entry->save()) {
-                $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
-        				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
-              } else {
-                return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.save_failed'));
-              }
-            }
-
-
+          if (!$entry->save()) {
+             return Redirect::back()->withInput()->withErrors($entry->getErrors());
           }
+
+          $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
+  				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
         }
 
       } else {

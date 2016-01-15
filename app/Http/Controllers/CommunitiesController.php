@@ -18,6 +18,14 @@ use Mail;
 class CommunitiesController extends Controller
 {
 
+  protected $community;
+
+  public function __construct(\App\Community $community)
+  {
+      $this->community = $community;
+  }
+
+
   public function getHomepage()
   {
     return view('home');
@@ -59,12 +67,6 @@ class CommunitiesController extends Controller
   public function postCreate(Request $request)
   {
 
-    $rules = [
-        'name'            => 'required|string|min:2|max:255',
-        'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
-        'group_type'      => 'required',
-    ];
-
     $token = Input::get('stripeToken');
 
     // No stripe token - something went wrong :(
@@ -73,80 +75,79 @@ class CommunitiesController extends Controller
     }
 
     $community = new \App\Community();
-    $validator = Validator::make(Input::all(), $rules);
 
-    if ($validator->fails()) {
-      return Redirect::back()->withInput()->withErrors($validator->messages());
-    } else {
+    $community->name	= e(Input::get('name'));
+    $community->subdomain	= strtolower(e(Input::get('subdomain')));
+    $community->created_by	= Auth::user()->id;
 
-      $customer = Auth::user();
-      $metadata = array(
-        //'name' => $customer->name,
-        //'subdomain' => strtolower(e(Input::get('subdomain'))).Config::get('session.domain'),
-        //'email' => $customer->email,
-        //'hub_name' => e(Input::get('name')),
-      );
+    if ($community->isInvalid()) {
+       return Redirect::back()->withInput()->withErrors($community->getErrors());
+    }
 
-
-      if ($customer->stripe_id=='') {
-        // Create the Stripe customer
-        $customer->createStripeCustomer([
-            'email' => $customer->email,
-            'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e(Input::get('name')),
-            'metadata' => $metadata,
-        ]);
-      }
-
-      $data['name'] = $customer->getDisplayName();
-      $data['email'] = $customer->email;
-      $data['community_name'] = e(Input::get('name'));
-      $data['subdomain'] = strtolower(Input::get('subdomain'));
-      $data['type'] = e(Input::get('subscription_type'));
-
-      if ($customer->save()) {
-        Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
-        {
-          $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
-        });
-      }
-
-      try {
-        $card = $customer->card()->makeDefault()->create($token);
-      } catch (\Exception $e) {
-        return Redirect::back()->withInput()->with('error','Something went wrong while trying to authorise your card: '.$e->getMessage().'');
-      }
-
-      // Create the subscription
-      try {
-        $stripe_subscription = $customer
-        ->subscription()
-        ->onPlan(e(Input::get('subscription_type')))
-        ->create();
-
-      } catch (\Exception $e) {
-        return Redirect::back()->withInput()->with('error','Something went wrong creating your subscription: '.$e->getMessage().'');
-      }
+    $customer = Auth::user();
+    $metadata = array(
+      //'name' => $customer->name,
+      //'subdomain' => strtolower(e(Input::get('subdomain'))).Config::get('session.domain'),
+      //'email' => $customer->email,
+      //'hub_name' => e(Input::get('name')),
+    );
 
 
-        $customer->subscription()->syncWithStripe();
-        $customer->card()->syncWithStripe();
+    if ($customer->stripe_id=='') {
+      // Create the Stripe customer
+      $customer->createStripeCustomer([
+          'email' => $customer->email,
+          'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e(Input::get('name')),
+          'metadata' => $metadata,
+      ]);
+    }
 
-        $community->name	= e(Input::get('name'));
-        $community->subdomain	= strtolower(e(Input::get('subdomain')));
-        $community->created_by	= Auth::user()->id;
+    $data['name'] = $customer->getDisplayName();
+    $data['email'] = $customer->email;
+    $data['community_name'] = e(Input::get('name'));
+    $data['subdomain'] = strtolower(Input::get('subdomain'));
+    $data['type'] = e(Input::get('subscription_type'));
 
-      if ($community->save()) {
+    if ($customer->save()) {
+      Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
+      {
+        $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+      });
+    }
 
-        // Save the community_id to the subscriptions table
-        $subscription = \App\CommunitySubscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
-        $subscription->community_id = $community->id;
-        $subscription->save();
+    try {
+      $card = $customer->card()->makeDefault()->create($token);
+    } catch (\Exception $e) {
+      return Redirect::back()->withInput()->with('error','Something went wrong while trying to authorise your card: '.$e->getMessage().'');
+    }
 
-        $community->members()->attach(Auth::user(), ['is_admin' => true]);
-        $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+    // Create the subscription
+    try {
+      $stripe_subscription = $customer
+      ->subscription()
+      ->onPlan(e(Input::get('subscription_type')))
+      ->create();
 
-        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success',trans('general.community.save_success'));
-      }
+    } catch (\Exception $e) {
+      return Redirect::back()->withInput()->with('error','Something went wrong creating your subscription: '.$e->getMessage().'');
+    }
+
+
+    $customer->subscription()->syncWithStripe();
+    $customer->card()->syncWithStripe();
+
+
+  if ($community->save()) {
+
+    // Save the community_id to the subscriptions table
+    $subscription = \App\CommunitySubscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
+    $subscription->community_id = $community->id;
+    $subscription->save();
+
+    $community->members()->attach(Auth::user(), ['is_admin' => true]);
+    $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+
+    return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success',trans('general.community.save_success'));
 
     }
 
@@ -172,27 +173,17 @@ class CommunitiesController extends Controller
   {
     $community = \App\Community::find($request->whitelabel_group->id);
 
-    $rules = [
-        'name'            => 'required|string|min:2|max:255',
-        'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,'.$community->id.',id,deleted_at,NULL',
-        'group_type'      => 'required',
-    ];
-
-    $validator = Validator::make(Input::all(), $rules);
-
-    if ($validator->fails()) {
-      return Redirect::back()->withInput()->withErrors($validator->messages());
-    } else {
-
       $community->name	= e(Input::get('name'));
       $community->subdomain	= e(Input::get('subdomain'));
       $community->group_type	= e(Input::get('group_type'));
 
-      if ($community->save()) {
-        $community->exchangeTypes()->sync(Input::get('community_exchange_types'));
-        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
+      if (!$community->save()) {
+         return Redirect::back()->withInput()->withErrors($community->getErrors());
       }
-    }
+
+      $community->exchangeTypes()->sync(Input::get('community_exchange_types'));
+      return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
+
   }
 
 

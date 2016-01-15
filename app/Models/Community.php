@@ -5,18 +5,37 @@ use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
 use App\ExchangeType;
+use Watson\Validating\ValidatingTrait;
 
 class Community extends Model
 {
 
   /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
+  * The database table used by the model.
+  *
+  * @var string
+  */
   protected $table = 'communities';
 
-  
+  /**
+  * Whether the model should inject it's identifier to the unique
+  * validation rules before attempting validation. If this property
+  * is not set in the model it will default to true.
+  *
+  * @var boolean
+  */
+  protected $injectUniqueIdentifier = true;
+
+
+  use ValidatingTrait;
+
+  protected $rules = [
+      'name'            => 'required|string|min:2|max:255',
+      'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
+      'group_type'      => 'required',
+  ];
+
+
   public function owner() {
       return $this->belongsTo('App\User', 'created_by');
   }

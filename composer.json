@@ -20,7 +20,7 @@
       "yaap/theme": "2.*",
       "chrisbjr/api-guard": "^2.3",
       "mcamara/laravel-localization": "1.0.*",
-      "laravelcollective/html": "~5.0"
+      "watson/validating": "^2.0"
     },
     "repositories": [
 		{

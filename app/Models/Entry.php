@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
 use App\ExchangeTypes;
+use Watson\Validating\ValidatingTrait;
 
 class Entry extends Model
 {
@@ -16,8 +17,20 @@ class Entry extends Model
    */
   protected $table = 'entries';
 
-  // FIXME - This is poopy and not the right L5 way to do it
-  public $rules = [
+  /**
+  * Whether the model should inject it's identifier to the unique
+  * validation rules before attempting validation. If this property
+  * is not set in the model it will default to true.
+  *
+  * @var boolean
+  */
+  protected $injectUniqueIdentifier = true;
+
+
+  use ValidatingTrait;
+
+
+  protected $rules = [
       'title'            => 'required|string|min:2|max:255',
       'post_type'            => 'required',
   ];
