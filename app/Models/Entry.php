@@ -35,6 +35,14 @@ class Entry extends Model
       'post_type'            => 'required',
   ];
 
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['title'];
+
+
 
   public function author() {
     return $this->belongsTo('App\User', 'created_by');
