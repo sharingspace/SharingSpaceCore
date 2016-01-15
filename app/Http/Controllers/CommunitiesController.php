@@ -10,7 +10,7 @@ use Input;
 use Validator;
 use Redirect;
 use Config;
-use App\Exchange;
+use App\ExchangeType;
 use Form;
 use Pagetheme;
 use Mail;
