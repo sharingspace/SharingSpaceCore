@@ -10,6 +10,12 @@
 {{-- Page content --}}
 @section('content')
 
+<style>
+.checkbox input {
+  left: 10px;
+}
+</style>
+
 <!-- -->
 			<section>
 				<div class="container margin-top-20">
@@ -69,8 +75,14 @@
             <!-- RIGHT TEXT -->
             <div class="col-md-5">
 
-
-              <p class="text-muted">[checkboxes go here]</p>
+              <div class="checkbox">
+              @foreach (\App\ExchangeType::all() as $exchange_types)
+              <label>
+                {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                {{ $exchange_types->name }}
+              </label>
+              @endforeach
+              </div>
 
             </div>
             <!-- /LEFT TEXT -->
