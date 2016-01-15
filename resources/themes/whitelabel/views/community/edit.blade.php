@@ -72,7 +72,7 @@
 
               <div class="checkbox col-md-12">
               @foreach (\App\ExchangeType::all() as $exchange_types)
-              <div class="col-md-3 pull-left">
+              <div class="col-md-3 pull-left margin-bottom-10">
               <label class="checkbox">
                 {{ Form::checkbox('community_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
                 <i></i> {{ $exchange_types->name }}
