@@ -56,7 +56,6 @@ class EntriesController extends Controller
 
 				return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
 
-			//	return Response::json(['success'=>true,'tile_id'=>$tile->tile_id,'title'=>$tile->title,'post_type'=>$tile->post_type,'hubNames'=>$hubNames,'location'=>$tile->location,'tile_exchange_types'=>$tileExchangeTypesNames]);
 			} else {
         return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
       }
@@ -114,6 +113,7 @@ class EntriesController extends Controller
               $entry->post_type	= e(Input::get('post_type'));
 
               if ($entry->save()) {
+                $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
         				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
               } else {
                 return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.save_failed'));
