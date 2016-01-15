@@ -52,6 +52,8 @@ class EntriesController extends Controller
       $entry->created_by	= Auth::user()->id;
 
       if ($request->whitelabel_group->entries()->save($entry)) {
+        $entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+
 				return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
 
 			//	return Response::json(['success'=>true,'tile_id'=>$tile->tile_id,'title'=>$tile->title,'post_type'=>$tile->post_type,'hubNames'=>$hubNames,'location'=>$tile->location,'tile_exchange_types'=>$tileExchangeTypesNames]);
