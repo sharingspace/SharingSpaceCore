@@ -73,7 +73,7 @@
                       </label>
                     </div>
 
-                    <!-- checkbox -->
+                    <!-- checkboxes for exchange types -->
                     <div class="col-md-12 margin-bottom-10">
                       <div class="checkbox">
                       @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
@@ -87,6 +87,17 @@
                       </div>
                     </div>
 
+                    <!-- file upload -->
+                    <div class="col-md-12 margin-bottom-10">
+                      <div class="fancy-file-upload fancy-file-info">
+                      	<i class="fa fa-upload"></i>
+                      	<input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                      	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
+                      	<span class="button">Choose File</span>
+                      </div>
+                    </div>
+
+                    <!-- save button -->
                     <div class="col-md-12 margin-bottom-10 text-right">
                       <button class="btn btn-success"><i class="fa fa-sign-in fa-lg" style="margin-right:5px;"></i>Save</button>
                     </div>
