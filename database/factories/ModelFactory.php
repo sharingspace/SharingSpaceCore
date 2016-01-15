@@ -46,3 +46,12 @@ $factory->defineAs(App\Entry::class, 'have-entry', function ($faker) {
       'post_type' => 'have',
     ];
 });
+
+
+$factory->defineAs(App\Community::class, 'community', function ($faker) {
+    return [
+      'name' => $faker->catchPhrase,
+      'subdomain' => $faker->domainWord,
+      'group_type' => 'O',
+    ];
+});

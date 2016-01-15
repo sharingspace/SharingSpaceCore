@@ -25,8 +25,6 @@ class Community extends Model
   * @var boolean
   */
   protected $injectUniqueIdentifier = true;
-
-
   use ValidatingTrait;
 
   protected $rules = [
@@ -34,6 +32,13 @@ class Community extends Model
       'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
       'group_type'      => 'required',
   ];
+
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['name','subdomain','group_type'];
 
 
   public function owner() {
@@ -139,6 +144,15 @@ class Community extends Model
   public function scopeEntriesInCommunity($query)
   {
       return $query->whereIn( 'category_id', $categoryIdListing );
+  }
+
+  /**
+   * @param array $data
+   * @return Community
+   */
+  public static function register($data = [])
+  {
+      return static::create($data);
   }
 
 
