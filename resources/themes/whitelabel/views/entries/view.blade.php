@@ -22,6 +22,13 @@
 				<h2 class="size-16">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h2>
 				<p>{{ $entry->description }}</p>
 
+        @if (count($entry->exchangeTypes) > 0)
+          @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
+            <li> {{ strtolower($entry->exchangeTypes[$i]->name) }}
+          @endfor
+        @endif
+
+
 			</div>
 			<!-- /LEFT TEXT -->
 
