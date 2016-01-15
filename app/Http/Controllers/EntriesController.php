@@ -102,6 +102,8 @@ class EntriesController extends Controller
 
           $entry->title	= e(Input::get('title'));
           $entry->post_type	= e(Input::get('post_type'));
+          $entry->description	= e(Input::get('description'));
+          $entry->qty	= e(Input::get('qty'));
 
           if (!$entry->save()) {
              return Redirect::back()->withInput()->withErrors($entry->getErrors());
