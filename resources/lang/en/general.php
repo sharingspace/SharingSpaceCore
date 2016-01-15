@@ -38,6 +38,7 @@ return [
           'view' => 'View Entry',
           'create' => 'Create New Entry',
           'edit' => 'Edit Entry',
+          'create_subheadline' => 'Add anything you want or have.',
 
           'messages' => [
             'invalid' => 'That entry is not valid.',
@@ -62,6 +63,7 @@ return [
       'settings'  => 'Community Settings',
       'members'  => 'Member|Members',
       'save' => 'Save Community',
+      'save_success' => 'Welcome to your new Community! Get started adding entries now.',
 
         'exchange_types' => [
           'title' => 'Exchange Type|Exchange Types',
