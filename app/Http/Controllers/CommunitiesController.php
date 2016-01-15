@@ -59,6 +59,12 @@ class CommunitiesController extends Controller
   public function postCreate(Request $request)
   {
 
+    $rules = [
+        'name'            => 'required|string|min:2|max:255',
+        'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
+        'group_type'      => 'required',
+    ];
+
     $token = Input::get('stripeToken');
 
     // No stripe token - something went wrong :(
@@ -67,7 +73,7 @@ class CommunitiesController extends Controller
     }
 
     $community = new \App\Community();
-    $validator = Validator::make(Input::all(), $community->rules);
+    $validator = Validator::make(Input::all(), $rules);
 
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator->messages());
@@ -165,7 +171,14 @@ class CommunitiesController extends Controller
   public function postEdit(Request $request)
   {
     $community = \App\Community::find($request->whitelabel_group->id);
-    $validator = Validator::make(Input::all(), $community->rules);
+
+    $rules = [
+        'name'            => 'required|string|min:2|max:255',
+        'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,'.$community->id.',id,deleted_at,NULL',
+        'group_type'      => 'required',
+    ];
+
+    $validator = Validator::make(Input::all(), $rules);
 
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator->messages());
