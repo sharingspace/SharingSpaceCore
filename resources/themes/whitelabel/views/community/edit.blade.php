@@ -14,6 +14,9 @@
 .checkbox input {
   left: 10px;
 }
+.checkbox label {
+  padding-left: 5px;
+}
 </style>
 
 <!-- -->
@@ -36,7 +39,7 @@
 								<div class="clearfix">
 
 									<!-- Name -->
-									<div class="form-group">
+									<div class="form-group{{ $errors->first('name', ' has-error') }}">
 										<input type="text" name="name" class="form-control" placeholder="Community Name" required="" value="{{ Input::old('name', $community->name) }}">
                     {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
 									</div>
@@ -73,14 +76,17 @@
 
 						</div>
             <!-- RIGHT TEXT -->
-            <div class="col-md-5">
+            <div class="col-md-8">
+              <h2 class="size-16">HOW SHOULD PEOPLE EXCHANGE?</h2>
 
-              <div class="checkbox">
+              <div class="checkbox col-md-12">
               @foreach (\App\ExchangeType::all() as $exchange_types)
+              <div class="col-md-3 pull-left">
               <label>
                 {{ Form::checkbox('community_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
                 {{ $exchange_types->name }}
               </label>
+            </div>
               @endforeach
               </div>
 
