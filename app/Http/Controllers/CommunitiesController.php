@@ -137,7 +137,9 @@ class CommunitiesController extends Controller
         $subscription->save();
 
         $community->members()->attach(Auth::user(), ['is_admin' => true]);
-        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success','Welcome to your new Community! Get started adding entries now.');
+        $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+
+        return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success',trans('general.community.save_success'));
       }
 
     }
@@ -174,6 +176,7 @@ class CommunitiesController extends Controller
       $community->group_type	= e(Input::get('group_type'));
 
       if ($community->save()) {
+        $community->exchangeTypes()->sync(Input::get('community_exchange_types'));
         return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
       }
     }
