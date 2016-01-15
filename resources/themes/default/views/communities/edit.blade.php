@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.create_community') }} ::
+     {{ trans('general.nav.create_sharing_hub') }} ::
 @parent
 @stop
 
@@ -31,7 +31,7 @@
 						<!-- LEFT TEXT -->
 						<div class="col-md-6">
 
-              <h2 class="size-16 uppercase">{{ trans('general.nav.create_community') }}</h2>
+              <h2 class="size-16 uppercase">{{ trans('general.nav.create_sharing_hub') }}</h2>
 
 							<!-- Name -->
 							<div class="form-group{{ $errors->first('name', ' has-error') }}">
