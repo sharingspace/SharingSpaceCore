@@ -75,7 +75,7 @@ class Entry extends Model
   * Admin checks can go here later as well
   */
   public  function checkUserCanEditEntry($user) {
-      if ($user->id != $this->user_id) {
+      if ($user->id == $this->created_by) {
         return true;
       } else {
         return false;
