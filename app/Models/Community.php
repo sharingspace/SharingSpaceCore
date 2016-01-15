@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
-use App\Exchange;
+use App\ExchangeType;
 
 class Community extends Model
 {
@@ -102,13 +102,14 @@ class Community extends Model
 
   /**
   * Get the exchnage types allowed in this community.
-  * Exchange Types belong to many communities by way of the group_allowed_types table.
+  * ExchangeType Types belong to many communities by way of the group_allowed_types table.
   *
   * @return collection
   */
-	public function exchange_types()
+	public function exchangeTypes()
     {
-    	$exchanges = $this->belongsToMany('App\Exchange', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
+    	$exchanges = $this->belongsToMany('App\ExchangeType', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
+
     	return $exchanges;
     }
 

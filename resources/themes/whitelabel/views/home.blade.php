@@ -38,13 +38,13 @@
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-flag"></i>
-				<h3 class="uppercase">{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchange_types->count()) }}</h3>
+				<h3 class="uppercase">{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchangeTypes->count()) }}</h3>
 				<ul class="exchange_types">
-          @if ($whitelabel_group->exchange_types->count() == 10)
+          @if ($whitelabel_group->exchangeTypes->count() == 10)
             <li>{{ trans('general.community.exchange_types.all_allowed') }}</li>
           @else
-            @foreach ($whitelabel_group->exchange_types as $exchange_types)
-              <li>{{ $exchange_types->name }}</li>
+            @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
+              <li>{{ $exchange_type->name }}</li>
             @endforeach
           @endif
 
@@ -84,7 +84,7 @@
             <li class="filter active">
               <a data-filter="*" href="#">All</a>
             </li>
-            @foreach ($whitelabel_group->exchange_types as $exchange_types)
+            @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
               <li class="filter">
                 <a data-filter=".{{ strtolower($exchange_types->type_name) }}" href="#">{{ $exchange_types->name }}</a>
               </li>
@@ -96,7 +96,7 @@
 
             @foreach ($entries as $entry)
             <div class="portfolio-item
-            @if (count($entry->exchangeTypesNames) > 0)
+            @if (count($entry->exchangeTypes) > 0)
               @for ($i = 0; $i < count($entry->exchangeTypesNames); $i++)
                 {{ strtolower($entry->exchangeTypesNames[$i]->type_name) }}
               @endfor
