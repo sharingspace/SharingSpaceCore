@@ -56,7 +56,7 @@
 
                     <div class="col-md-2 margin-bottom-10">
                       <!-- stepper -->
-                      <input type="text" value="1" min="1" max="1000" class="form-control stepper" name="qty">
+                      <input type="text" value="{{ Input::old('qty', $entry->qty) }}" min="1" max="1000" class="form-control stepper" name="qty">
                     </div>
 
                     <div class="col-md-8 margin-bottom-10 {{ $errors->first('title', ' has-error') }}">
@@ -69,7 +69,7 @@
                     <div class="col-md-12 margin-bottom-10 {{ $errors->first('title', ' has-error') }}">
                       <!-- Description -->
                       <label class="input">
-                        <textarea name="description" rows="5" class="form-control" data-maxlength="200" data-info="textarea-words-info" placeholder="Detailed description..."></textarea>
+                        <textarea name="description" rows="5" class="form-control" data-maxlength="200" data-info="textarea-words-info" placeholder="Detailed description...">{{ Input::old('description', $entry->description) }}</textarea>
                       </label>
                     </div>
 
