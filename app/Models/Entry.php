@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\User;
-use App\Exchange;
+use App\ExchangeTypes;
 
 class Entry extends Model
 {
@@ -33,11 +33,11 @@ class Entry extends Model
     return $this->belongsToMany('App\Community', 'entries_hubgroup_join', 'entry_id', 'hubgroup_id');
   }
 
-
-  public function exchangeTypesNames()
+  public function exchangeTypes()
   {
-      return $this->belongsToMany('App\Exchange', 'entries_exchange_types', 'entry_id', 'type_id');
+      return $this->belongsToMany('App\ExchangeType', 'entries_exchange_types', 'entry_id', 'type_id');
   }
+
 
 
   /**
