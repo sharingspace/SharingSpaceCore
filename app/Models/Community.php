@@ -146,14 +146,5 @@ class Community extends Model
       return $query->whereIn( 'category_id', $categoryIdListing );
   }
 
-  /**
-   * @param array $data
-   * @return Community
-   */
-  public static function register($data = [])
-  {
-      return static::create($data);
-  }
-
 
 }

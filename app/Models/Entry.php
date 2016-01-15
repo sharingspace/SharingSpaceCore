@@ -112,16 +112,6 @@ class Entry extends Model
       });
   }
 
-  /**
-   * @param array $data
-   * @return Entry
-   */
-  public static function register($data = [])
-  {
-      return static::create($data);
-  }
-
-
 
 
 }
