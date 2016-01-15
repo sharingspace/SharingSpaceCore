@@ -99,7 +99,7 @@
 
                     <!-- save button -->
                     <div class="col-md-12 margin-bottom-10 text-right">
-                      <button class="btn btn-success"><i class="fa fa-sign-in fa-lg" style="margin-right:5px;"></i>Save</button>
+                      <button class="btn btn-success">Save</button>
                     </div>
 
 
