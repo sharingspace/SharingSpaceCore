@@ -3,19 +3,29 @@ paths:
     tests: tests
     log: tests/_output
     data: tests/_data
-    support: tests/_support
-    envs: tests/_envs
+    helpers: tests/_support
 settings:
     bootstrap: _bootstrap.php
     colors: true
     memory_limit: 1024M
-extensions:
-    enabled:
-        - Codeception\Extension\RunFailed
+coverage:
+    enabled: true
+    remote: false
+    c3_url: 'https://massmosaic5.dev/index.php'
+    include:
+        - app/*
+    exclude:
+        - app/storage/cache/*
+    remote_context_options:
+        http:
+            timeout: 60
+        ssl:
+            verify_peer: false
 modules:
     config:
         Db:
-            dsn: ''
-            user: ''
+            dsn: 'mysql:host=127.0.0.1;dbname=circle_test'
+            user: 'ubuntu'
             password: ''
             dump: tests/_data/dump.sql
+            cleanup: true
