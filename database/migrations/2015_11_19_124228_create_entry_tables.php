@@ -17,21 +17,21 @@ class CreateEntryTables extends Migration
 	    Schema::create('entries', function($table) {
         $table->engine = 'InnoDB';
         $table->increments('id')->unsigned();
-        $table->string('title', 255);
-        $table->text('description')->nullable();
+        $table->string('title', 255)->nullable()->default(NULL);
+        $table->text('description')->nullable()->default(NULL);
         $table->enum('post_type', array('want','have','whut'));
-        $table->string('location', 255);
-        $table->decimal('latitude', 9,2)->nullable();
-        $table->decimal('longitude', 9,2)->nullable();
-        $table->integer('created_by');
+        $table->string('location', 255)->nullable()->default(NULL);
+        $table->decimal('latitude', 9,2)->nullable()->default(NULL);
+        $table->decimal('longitude', 9,2)->nullable()->default(NULL);
+        $table->integer('created_by')->nullable()->default(NULL);
         $table->boolean('enabled')->default("1");
-        $table->boolean('visible');
+        $table->boolean('visible')->default("1");
         $table->timestamp('created_at')->nullable()->default(NULL);
         $table->timestamp('updated_at')->nullable()->default(NULL);
-        $table->timestamp('deleted_at')->nullable();
+        $table->timestamp('deleted_at')->nullable()->default(NULL);
         $table->string('tags', 250)->nullable();
-        $table->dateTime('expires')->nullable();
-        $table->dateTime('completed_at')->nullable();
+        $table->dateTime('expires')->nullable()->default(NULL);
+        $table->dateTime('completed_at')->nullable()->default(NULL);
 
       });
 
