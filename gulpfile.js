@@ -1,5 +1,5 @@
 var elixir = require('laravel-elixir');
-
+require('laravel-elixir-codeception');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,5 +13,5 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass(['app.scss', 'essentials.scss'],'public/assets/css/compiled');
-      mix.phpUnit;
+      mix.codeception();
 });
