@@ -10,11 +10,6 @@
 {{-- Page content --}}
 @section('content')
 
-<style>
-.checkbox input {
-  left: 0px;
-}
-</style>
 <!-- -->
 			<section>
 
@@ -52,16 +47,16 @@
 
                     </div>
 
-
+                    <!-- checkbox -->
                     <div class="col-md-11 margin-bottom-10">
-                    <div class="checkbox">
-                    @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-                    <label>
-                      {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
-                      {{ $exchange_types->name }}
-                    </label>
-                    @endforeach
-                    </div>
+                      <div class="checkbox">
+                      @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                        <label class="checkbox">
+                          {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                          <i></i> {{ $exchange_types->name }}
+                        </label>
+                      @endforeach
+                      </div>
                     </div>
 
 
