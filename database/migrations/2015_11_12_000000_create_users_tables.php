@@ -33,8 +33,8 @@ class CreateUsersTables extends Migration
         $table->string('gravatar')->nullable()->default(NULL);
         $table->text('bio')->nullable()->default(NULL);
         $table->string('location')->nullable()->default(NULL);
-        $table->decimal('latitude', 9, 2);
-        $table->decimal('longitude', 9, 2);
+        $table->decimal('latitude', 9, 2)->nullable()->default(null);
+        $table->decimal('longitude', 9, 2)->nullable()->default(null);
         $table->string('imagefile')->nullable()->default(NULL);
         $table->char('fb_url', 100)->default(NULL)->nullable()->default(NULL);
   			$table->char('twitter', 100)->default(NULL)->nullable()->default(NULL);
