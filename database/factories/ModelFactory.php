@@ -11,11 +11,38 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->defineAs(App\User::class, 'user', function ($faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+      'first_name' => $faker->firstName,
+      'last_name' => $faker->lastName,
+      'email' => $faker->email,
+      'password' => str_random(10),
+      'remember_token' => str_random(10),
+    ];
+});
+
+
+$factory->defineAs(App\User::class, 'admin', function ($faker) {
+    return [
+      'first_name' => $faker->firstName,
+      'last_name' => $faker->lastName,
+      'email' => $faker->email,
+      'password' => str_random(10),
+      'remember_token' => str_random(10),
+      'admin' => true,
+    ];
+});
+
+$factory->defineAs(App\Entry::class, 'want-entry', function ($faker) {
+    return [
+      'title' => $faker->catchPhrase,
+      'post_type' => 'want',
+    ];
+});
+
+$factory->defineAs(App\Entry::class, 'have-entry', function ($faker) {
+    return [
+      'title' => $faker->catchPhrase,
+      'post_type' => 'have',
     ];
 });

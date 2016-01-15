@@ -1,21 +1,27 @@
 <?php
 use App\Entry;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class EntryTest extends \Codeception\TestCase\Test
 {
     /**
      * @var \UnitTester
      */
     protected $tester;
-    public function testNewEntry()
-    {
-        $title = 'This is a test entry';
-        $post_type = 'want';
+    use DatabaseMigrations;
 
-        Entry::create(['title' => $title, 'post_type' => $post_type]);
-        $this->tester->seeRecord('entries', [
-          'title' => $title,
-          'post_type' => $post_type,
-        ]);
+    public function testNewWantEntry()
+    {
+        $entry = factory(App\Entry::class, 'want-entry')->make();
+        $values = [
+          'title' => $entry->title,
+          'post_type' => $entry->post_type,
+        ];
+
+        Entry::create($values);
+        $this->tester->seeRecord('entries', $values);
     }
 }

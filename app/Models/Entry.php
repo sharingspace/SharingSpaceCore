@@ -40,7 +40,7 @@ class Entry extends Model
    *
    * @var array
    */
-  protected $fillable = ['title'];
+  protected $fillable = ['title','post_type'];
 
 
 
@@ -110,6 +110,15 @@ class Entry extends Model
               $query->where('display_name','LIKE','%'.$search.'%');
           });
       });
+  }
+
+  /**
+   * @param array $data
+   * @return Entry
+   */
+  public static function register($data = [])
+  {
+      return static::create($data);
   }
 
 
