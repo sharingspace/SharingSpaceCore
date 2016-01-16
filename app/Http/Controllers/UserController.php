@@ -50,7 +50,6 @@ class UserController extends Controller
         $user->display_name = e(Input::get('display_name'));
         $user->website = e(Input::get('website'));
         $user->bio = e(Input::get('bio'));
-        $rules=$user->validationRules();
 
         if (!$user->save()) {
            return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());

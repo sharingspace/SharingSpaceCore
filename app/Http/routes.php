@@ -100,7 +100,7 @@ Route::get('account/settings', array(
 Route::post('account/settings', array(
   'middleware' => 'auth',
   'as' => 'user.settings.save',
-  'uses' => 'UserController@postUpdatePassword')
+  'uses' => 'UserController@postSettings')
 );
 
 Route::post('account/password', array(
