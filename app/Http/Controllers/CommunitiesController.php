@@ -78,6 +78,7 @@ class CommunitiesController extends Controller
 
     $community->name	= e(Input::get('name'));
     $community->subdomain	= strtolower(e(Input::get('subdomain')));
+    $community->group_type	= e(Input::get('group_type'));
     $community->created_by	= Auth::user()->id;
 
     if ($community->isInvalid()) {
