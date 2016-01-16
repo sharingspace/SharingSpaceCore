@@ -82,9 +82,9 @@
                   {{ csrf_field() }}
 
 									 <div class="col-md-12">
-          	<h4>Social Links & Connections</h4>
+          	<h4>Social Links &amp; Connections</h4>
           </div>
-    
+
           <div class="col-md-12 social">
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('website', 'has-error') }}">
@@ -95,7 +95,7 @@
             <div class="col-sm-7">
               {{ $errors->first('website', '<span class="help-block">:message</span>') }}
             </div>
-  
+
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('fb_url', 'has-error') }}">
                   <input type="text" placeholder="https://facebook.com/username" class="form-control" id="fb_url" name="fb_url" value="{{{ Input::old('fb_url', Auth::user()->fb_url) }}}">
@@ -105,53 +105,53 @@
             <div class="col-sm-7">
               {{ $errors->first('facebookURL', '<span class="help-block">:message</span>') }}
             </div>
-            
+
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('twitter_url', 'has-error') }}">
                 <input type="text" placeholder="https://twitter.com/username" class="form-control" id="twitter_url" name="twitter_url" value="{{{ Input::old('twitter_url', Auth::user()->twitter_url) }}}">
                 <label for="twitter_url" class="fa fa-twitter-square fa-lg grey" rel="tooltip" title="Twitter"></label>
               </div>
             </div> <!-- col-md-7 -->
-  
+
             <div class="col-sm-7">
               {{ $errors->first('twitter_url', '<span class="help-block">:message</span>') }}
             </div>
-  
+
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('gplus_url', 'has-error') }}">
                 <input type="text" placeholder="https://plus.google.com/username" class="form-control" id="gplus_url" name="gplus_url" value="{{{ Input::old('gplus_url', Auth::user()->gplus_url) }}}">
                 <label for="gplus_url" class="fa fa-google-plus-square fa-lg grey" rel="tooltip" title="G+"></label>
               </div>
             </div> <!-- col-md-7 -->
-  
+
             <div class="col-sm-7">
               {{ $errors->first('gplus_url', '<span class="help-block">:message</span>') }}
             </div>
-  
-  
+
+
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('pinterest_url', 'has-error') }}">
                 <input type="text" placeholder="https://pinterest.com/username" class="form-control" id="pinterestURL" name="pinterest_url" value="{{{ Input::old('pinterest_url', Auth::user()->pinterest_url) }}}">
                 <label for="pinterest_url" class="fa fa-pinterest-square fa-lg grey" rel="tooltip" title="Pinterest"></label>
               </div>
             </div> <!-- col-md-7 -->
-  
+
             <div class="col-sm-7">
               {{ $errors->first('pinterest_url', '<span class="help-block">:message</span>') }}
             </div>
-  
+
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('youtube_url', 'has-error') }}">
                 <input type="text" placeholder="https://youtube.com/username" class="form-control" id="youtube_url" name="youtube_url" value="{{{ Input::old('youtube_url', Auth::user()->youtube_url) }}}">
                 <label for="youtube_url" class="fa fa-youtube-square fa-lg grey" rel="tooltip" title="Youtube"></label>
               </div>
             </div> <!-- col-md-7 -->
-  
+
             <div class="col-sm-7">
               {{ $errors->first('youtube_url', '<span class="help-block">:message</span>') }}
             </div>
-  
-  
+
+
             @if (Auth::user()->fb_user)
               <div class=" col-sm-10" style="margin-top: -5px">
                 <div class="checkbox">
@@ -160,7 +160,7 @@
                   </label>
                 </div>
               </div> <!-- col-md-10 -->
-    
+
               <div class=" col-sm-10" style="margin-top: -5px">
                 <div class="checkbox">
                   <label>
@@ -170,9 +170,9 @@
                 </div>
               </div> <!-- col-md-10 -->
             @endif
-    
+
           </div> <!-- col-md-12 -->
-    
+
           <!-- Form actions -->
           <div class="control-group col-sm-12 col-md-12  col-xs-12" style="margin-top: 10px">
           	<hr>
