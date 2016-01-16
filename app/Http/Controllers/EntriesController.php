@@ -56,7 +56,7 @@ class EntriesController extends Controller
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
-			 //$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
 			if( $ajaxAdd ) {
 			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
 			}
@@ -190,11 +190,11 @@ class EntriesController extends Controller
 	/*
   * Process an uploaded image
   */
-	public function ajaxUpload($tile_id = null) {
+	public function ajaxUpload($entry_id = null) {
 		if (Input::hasFile('image')) {
 
-			if ($tile_id) {
-				$tile = $this->tile->withTrashed()->find($tile_id);
+			if ($entry_id) {
+				$tile = $this->tile->withTrashed()->find($entry_id);
 				$filename =  $tile->uploadImage('image', 'profile', 250, 250);
 			} else {
 				$user = Sentry::getUser();
@@ -203,13 +203,13 @@ class EntriesController extends Controller
 			}
 
 			 if ($filename) {
-				return Response::json('success', 200);
+				return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
 			 } else {
-				return Response::json('error - unknown', 400);
+				return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
 			 }
 
 		} else {
-			return Response::json('error - no image', 400);
+			return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
 		}
 	}
 
