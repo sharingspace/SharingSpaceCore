@@ -46,7 +46,7 @@ class EntriesController extends Controller
     $entry->created_by	= Auth::user()->id;
 
     if ($entry->isInvalid()) {
-       return Redirect::back()->withInput()->withErrors($community->getErrors());
+       return redirect()->back()->withInput()->withErrors($community->getErrors());
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
