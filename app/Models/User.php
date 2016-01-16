@@ -57,7 +57,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'website'           => 'url',
         'fb_url'           => 'url',
         'twitter'      => 'url',
-        'gplus'        => 'url',
+        'google'        => 'url',
         'pinterest'    => 'url',
         'youtube'      => 'url',
     ];

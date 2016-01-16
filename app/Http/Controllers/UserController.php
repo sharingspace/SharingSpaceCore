@@ -71,13 +71,16 @@ class UserController extends Controller
     public function postUpdateSocial()
     {
 
+      // print_r($_POST);
+      // exit;
+
       if ($user = \App\User::find(Auth::user()->id)) {
 
         $user->fb_url = e(Input::get('fb_url'));
-        $user->twitter = e(Input::get('twitter_url'));
-        $user->google = e(Input::get('gplus_url'));
-        $user->pinterest = e(Input::get('pinterest_url'));
-        $user->youtube = e(Input::get('youtube_url'));
+        $user->twitter = e(Input::get('twitter'));
+        $user->google = e(Input::get('google'));
+        $user->pinterest = e(Input::get('pinterest'));
+        $user->youtube = e(Input::get('youtube'));
 
         if (!$user->save()) {
            return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
