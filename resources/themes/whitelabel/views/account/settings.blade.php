@@ -45,18 +45,6 @@
 										<label class="control-label">Display Name</label>
 										<input type="text" placeholder="Felicia" class="form-control" name="display_name" value="{{ Input::old('display_name', Auth::user()->display_name) }}">
 									</div>
-									{{-- <div class="form-group">
-										<label class="control-label">Mobile Number</label>
-										<input type="text" placeholder="+1800-1234-657" class="form-control">
-									</div>
-									<div class="form-group">
-										<label class="control-label">Interests</label>
-										<input type="text" placeholder="Development, C++, etc." class="form-control">
-									</div>
-									<div class="form-group">
-										<label class="control-label">Occupation</label>
-										<input type="text" placeholder="Webdeveloper" class="form-control">
-									</div> --}}
 									<div class="form-group">
 										<label class="control-label">About</label>
 										<textarea class="form-control" rows="3" placeholder="About Me..." name="bio">{{ Input::old('bio', Auth::user()->bio) }}</textarea>
@@ -90,67 +78,52 @@
               <div class="form-group {{ $errors->first('website', 'has-error') }}">
                 <input type="text" placeholder="http://yourwebsite.com" class="form-control" id="website" name="website" value="{{{ Input::old('website', Auth::user()->website) }}}">
                 <label for="website" class="fa fa-link fa-lg grey" rel="tooltip" title="Link"></label>
+                {!! $errors->first('website', '<span class="help-block">:message</span>') !!}
               </div>
             </div> <!-- col-md-7 -->
-            <div class="col-sm-7">
-              {{ $errors->first('website', '<span class="help-block">:message</span>') }}
-            </div>
 
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('fb_url', 'has-error') }}">
                   <input type="text" placeholder="https://facebook.com/username" class="form-control" id="fb_url" name="fb_url" value="{{{ Input::old('fb_url', Auth::user()->fb_url) }}}">
-                  <label for="facebookURL" class="fa fa-facebook-square fa-lg grey" rel="tooltip" title="Facebook"></label>
+                  <label for="fb_url" class="fa fa-facebook-square fa-lg grey" rel="tooltip" title="Facebook"></label>
+                  {!! $errors->first('fb_url', '<span class="help-block">:message</span>') !!}
               </div>
             </div>  <!-- col-md-7 -->
-            <div class="col-sm-7">
-              {{ $errors->first('facebookURL', '<span class="help-block">:message</span>') }}
-            </div>
 
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('twitter_url', 'has-error') }}">
                 <input type="text" placeholder="https://twitter.com/username" class="form-control" id="twitter_url" name="twitter_url" value="{{{ Input::old('twitter_url', Auth::user()->twitter_url) }}}">
                 <label for="twitter_url" class="fa fa-twitter-square fa-lg grey" rel="tooltip" title="Twitter"></label>
+                {!! $errors->first('twitter_url', '<span class="help-block">:message</span>') !!}
               </div>
             </div> <!-- col-md-7 -->
-
-            <div class="col-sm-7">
-              {{ $errors->first('twitter_url', '<span class="help-block">:message</span>') }}
-            </div>
 
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('gplus_url', 'has-error') }}">
                 <input type="text" placeholder="https://plus.google.com/username" class="form-control" id="gplus_url" name="gplus_url" value="{{{ Input::old('gplus_url', Auth::user()->gplus_url) }}}">
                 <label for="gplus_url" class="fa fa-google-plus-square fa-lg grey" rel="tooltip" title="G+"></label>
+                {!! $errors->first('gplus_url', '<span class="help-block">:message</span>') !!}
               </div>
             </div> <!-- col-md-7 -->
 
-            <div class="col-sm-7">
-              {{ $errors->first('gplus_url', '<span class="help-block">:message</span>') }}
-            </div>
+
 
 
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('pinterest_url', 'has-error') }}">
                 <input type="text" placeholder="https://pinterest.com/username" class="form-control" id="pinterestURL" name="pinterest_url" value="{{{ Input::old('pinterest_url', Auth::user()->pinterest_url) }}}">
                 <label for="pinterest_url" class="fa fa-pinterest-square fa-lg grey" rel="tooltip" title="Pinterest"></label>
+                {!! $errors->first('pinterest_url', '<span class="help-block">:message</span>') !!}
               </div>
             </div> <!-- col-md-7 -->
-
-            <div class="col-sm-7">
-              {{ $errors->first('pinterest_url', '<span class="help-block">:message</span>') }}
-            </div>
 
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('youtube_url', 'has-error') }}">
                 <input type="text" placeholder="https://youtube.com/username" class="form-control" id="youtube_url" name="youtube_url" value="{{{ Input::old('youtube_url', Auth::user()->youtube_url) }}}">
                 <label for="youtube_url" class="fa fa-youtube-square fa-lg grey" rel="tooltip" title="Youtube"></label>
+                {!! $errors->first('youtube_url', '<span class="help-block">:message</span>') !!}
               </div>
             </div> <!-- col-md-7 -->
-
-            <div class="col-sm-7">
-              {{ $errors->first('youtube_url', '<span class="help-block">:message</span>') }}
-            </div>
-
 
             @if (Auth::user()->fb_user)
               <div class=" col-sm-10" style="margin-top: -5px">
@@ -248,7 +221,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label">Re-type New Password</label>
-										<input type="password" class="form-control" name="confirm_password">
+										<input type="password" class="form-control" name="password_confirmation">
 									</div>
 
 									<div class="margiv-top10">
