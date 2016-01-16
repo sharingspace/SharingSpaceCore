@@ -14,11 +14,14 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cartalyst\Stripe\Billing\Laravel\Billable;
 use Cartalyst\Stripe\Billing\Laravel\BillableContract;
-
+use Watson\Validating\ValidatingTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
     use Authenticatable, CanResetPassword, Billable;
+    use SluggableTrait;
+    use ValidatingTrait;
+
 
     /**
      * The database table used by the model.
@@ -26,13 +29,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
+    protected $injectUniqueIdentifier = true;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['first_name', 'last_name', 'email', 'password','stripe_id'];
+    protected $fillable = ['first_name', 'last_name', 'email','password','stripe_id','display_name'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -41,7 +45,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    use SluggableTrait;
+
+    /**
+     * Model validation rules
+     *
+     * @var array
+     */
+    protected $rules = [
+        'display_name'     => 'required|string|min:2|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|min:6',
+        'website'           => 'url',
+        'fb_url'           => 'url',
+        'twitter_url'      => 'url',
+        'gplus_url'        => 'url',
+        'pinterest_url'    => 'url',
+        'youtube_url'      => 'url',
+    ];
 
     protected $sluggable = [
         'build_from' => 'first_name',

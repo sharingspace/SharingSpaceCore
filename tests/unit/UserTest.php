@@ -17,11 +17,14 @@ class UserTest extends \Codeception\TestCase\Test
     {
         $user = factory(App\User::class, 'user')->make();
         $values = [
+          'display_name' => $user->display_name,
           'email' => $user->email,
           'password' => $user->password,
           'first_name' => $user->first_name,
           'last_name' => $user->last_name
         ];
+
+
         User::register($values);
         $this->tester->seeRecord('users', $values);
     }

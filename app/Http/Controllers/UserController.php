@@ -41,18 +41,28 @@ class UserController extends Controller
     */
     public function postSettings()
     {
-      $user = \App\User::find(Auth::user()->id);
 
-      $user->first_name = e(Input::get('first_name'));
-      $user->last_name = e(Input::get('last_name'));
-      $user->display_name = e(Input::get('display_name'));
-      $user->website = e(Input::get('website'));
-      $user->bio = e(Input::get('bio'));
+      if ($user = \App\User::find(Auth::user()->id)) {
+        
+        // 'password_confirmation' => 'same:password',
+        $user->first_name = e(Input::get('first_name'));
+        $user->last_name = e(Input::get('last_name'));
+        $user->display_name = e(Input::get('display_name'));
+        $user->website = e(Input::get('website'));
+        $user->bio = e(Input::get('bio'));
+        $user->fb_url = e(Input::get('fb_url'));
+        $user->twitter_url = e(Input::get('twitter_url'));
+        $user->gplus_url = e(Input::get('gplus_url'));
+        $user->pinterest_url = e(Input::get('pinterest_url'));
+        $user->youtube_url = e(Input::get('youtube_url'));
 
-      if ($user->save()) {
-         return Redirect::route('user.settings.view')->with('success','Success!');
-      } else {
+        if (!$user->save()) {
+           return Redirect::back()->withInput()->withErrors($user->getErrors());
+        }
         return view('account.settings')->with('error','Success!');
+
+      } else {
+        return Redirect::back()->withInput()->with('error','Invalid user');
       }
 
     }

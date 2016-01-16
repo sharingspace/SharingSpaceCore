@@ -13,10 +13,11 @@
 
 $factory->defineAs(App\User::class, 'user', function ($faker) {
     return [
+      'display_name' => $faker->name,
       'first_name' => $faker->firstName,
       'last_name' => $faker->lastName,
       'email' => $faker->email,
-      'password' => str_random(10),
+      'password' => $faker->address,
       'remember_token' => str_random(10),
     ];
 });
@@ -24,10 +25,11 @@ $factory->defineAs(App\User::class, 'user', function ($faker) {
 
 $factory->defineAs(App\User::class, 'admin', function ($faker) {
     return [
+      'display_name' => $faker->name,
       'first_name' => $faker->firstName,
       'last_name' => $faker->lastName,
       'email' => $faker->email,
-      'password' => str_random(10),
+      'password' => $faker->address,
       'remember_token' => str_random(10),
       'admin' => true,
     ];
