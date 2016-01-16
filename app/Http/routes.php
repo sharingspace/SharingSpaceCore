@@ -100,7 +100,25 @@ Route::get('account/settings', array(
 Route::post('account/settings', array(
   'middleware' => 'auth',
   'as' => 'user.settings.save',
-  'uses' => 'UserController@postSettings')
+  'uses' => 'UserController@postUpdatePassword')
+);
+
+Route::post('account/password', array(
+  'middleware' => 'auth',
+  'as' => 'user.password.save',
+  'uses' => 'UserController@postUpdatePassword')
+);
+
+Route::post('account/social', array(
+  'middleware' => 'auth',
+  'as' => 'user.social.save',
+  'uses' => 'UserController@postUpdateSocial')
+);
+
+Route::post('account/notification', array(
+  'middleware' => 'auth',
+  'as' => 'user.notifications.save',
+  'uses' => 'UserController@postUpdateNotifications')
 );
 
 Route::get('users/{userID}', array(
