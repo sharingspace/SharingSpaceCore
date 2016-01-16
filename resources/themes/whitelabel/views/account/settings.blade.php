@@ -43,7 +43,7 @@
                   <!-- Email  -->
                   <div class="col-md-12 form-group {{ $errors->first('email', 'has-error') }}">
                      <label class="control-label" for="last_name">Email</label>
-                      <input type="text" placeholder="you@example.com" class="form-control" name="email" value="{{ Input::old('email', Auth::user()->email) }}">
+                      <input type="text" placeholder="you@example.com" class="form-control" name="email" autocomplete="off" value="{{ Input::old('email', Auth::user()->email) }}">
                       {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                   </div>
 
@@ -100,56 +100,45 @@
                       <div class="form-group {{ $errors->first('fb_url', 'has-error') }}">
                           <input type="text" placeholder="https://facebook.com/username" class="form-control" id="fb_url" name="fb_url" value="{{{ Input::old('fb_url', Auth::user()->fb_url) }}}">
                           <label for="facebookURL" class="fa fa-facebook-square fa-lg grey" rel="tooltip" title="Facebook"></label>
+                            {!! $errors->first('fb_url', '<span class="help-block">:message</span>') !!}
                       </div>
                     </div>  <!-- col-md-7 -->
-                    <div class="col-sm-7">
-                      {{ $errors->first('facebookURL', '<span class="help-block">:message</span>') }}
-                    </div>
-
-                    <div class="col-md-7">
-                      <div class="form-group {{ $errors->first('twitter_url', 'has-error') }}">
-                        <input type="text" placeholder="https://twitter.com/username" class="form-control" id="twitter_url" name="twitter_url" value="{{{ Input::old('twitter_url', Auth::user()->twitter_url) }}}">
-                        <label for="twitter_url" class="fa fa-twitter-square fa-lg grey" rel="tooltip" title="Twitter"></label>
-                      </div>
-                    </div> <!-- col-md-7 -->
-
-                    <div class="col-sm-7">
-                      {{ $errors->first('twitter_url', '<span class="help-block">:message</span>') }}
-                    </div>
-
-                    <div class="col-md-7">
-                      <div class="form-group {{ $errors->first('gplus_url', 'has-error') }}">
-                        <input type="text" placeholder="https://plus.google.com/username" class="form-control" id="gplus_url" name="gplus_url" value="{{{ Input::old('gplus_url', Auth::user()->gplus_url) }}}">
-                        <label for="gplus_url" class="fa fa-google-plus-square fa-lg grey" rel="tooltip" title="G+"></label>
-                      </div>
-                    </div> <!-- col-md-7 -->
-
-                    <div class="col-sm-7">
-                      {{ $errors->first('gplus_url', '<span class="help-block">:message</span>') }}
-                    </div>
 
 
                     <div class="col-md-7">
-                      <div class="form-group {{ $errors->first('pinterest_url', 'has-error') }}">
-                        <input type="text" placeholder="https://pinterest.com/username" class="form-control" id="pinterestURL" name="pinterest_url" value="{{{ Input::old('pinterest_url', Auth::user()->pinterest_url) }}}">
-                        <label for="pinterest_url" class="fa fa-pinterest-square fa-lg grey" rel="tooltip" title="Pinterest"></label>
+                      <div class="form-group {{ $errors->first('twitter', 'has-error') }}">
+                        <input type="text" placeholder="https://twitter.com/username" class="form-control" id="twitter" name="twitter" value="{{{ Input::old('twitter', Auth::user()->twitter) }}}">
+                        <label for="twitter" class="fa fa-twitter-square fa-lg grey" rel="tooltip" title="Twitter"></label>
+                        {!! $errors->first('twitter', '<span class="help-block">:message</span>') !!}
                       </div>
                     </div> <!-- col-md-7 -->
-
-                    <div class="col-sm-7">
-                      {{ $errors->first('pinterest_url', '<span class="help-block">:message</span>') }}
-                    </div>
 
                     <div class="col-md-7">
-                      <div class="form-group {{ $errors->first('youtube_url', 'has-error') }}">
-                        <input type="text" placeholder="https://youtube.com/username" class="form-control" id="youtube_url" name="youtube_url" value="{{{ Input::old('youtube_url', Auth::user()->youtube_url) }}}">
-                        <label for="youtube_url" class="fa fa-youtube-square fa-lg grey" rel="tooltip" title="Youtube"></label>
+                      <div class="form-group {{ $errors->first('google', 'has-error') }}">
+                        <input type="text" placeholder="https://plus.google.com/username" class="form-control" id="google" name="google" value="{{{ Input::old('google', Auth::user()->google) }}}">
+                        <label for="google" class="fa fa-google-plus-square fa-lg grey" rel="tooltip" title="G+"></label>
+                        {!! $errors->first('google', '<span class="help-block">:message</span>') !!}
                       </div>
                     </div> <!-- col-md-7 -->
 
-                    <div class="col-sm-7">
-                      {{ $errors->first('youtube_url', '<span class="help-block">:message</span>') }}
-                    </div>
+
+                    <div class="col-md-7">
+                      <div class="form-group {{ $errors->first('pinterest', 'has-error') }}">
+                        <input type="text" placeholder="https://pinterest.com/username" class="form-control" id="pinterestURL" name="pinterest" value="{{{ Input::old('pinterest', Auth::user()->pinterest) }}}">
+                        <label for="pinterest" class="fa fa-pinterest-square fa-lg grey" rel="tooltip" title="Pinterest"></label>
+                        {!! $errors->first('pinterest', '<span class="help-block">:message</span>') !!}
+                      </div>
+                    </div> <!-- col-md-7 -->
+
+
+                    <div class="col-md-7">
+                      <div class="form-group {{ $errors->first('youtube', 'has-error') }}">
+                        <input type="text" placeholder="https://youtube.com/username" class="form-control" id="youtube" name="youtube" value="{{{ Input::old('youtube', Auth::user()->youtube) }}}">
+                        <label for="youtube" class="fa fa-youtube-square fa-lg grey" rel="tooltip" title="Youtube"></label>
+                        {!! $errors->first('youtube', '<span class="help-block">:message</span>') !!}
+                      </div>
+                    </div> <!-- col-md-7 -->
+
 
 
                     @if (Auth::user()->fb_user)
