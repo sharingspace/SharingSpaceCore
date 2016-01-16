@@ -43,29 +43,104 @@ class UserController extends Controller
     {
 
       if ($user = \App\User::find(Auth::user()->id)) {
-        
-        // 'password_confirmation' => 'same:password',
+
         $user->first_name = e(Input::get('first_name'));
         $user->last_name = e(Input::get('last_name'));
+        $user->email = e(Input::get('email'));
         $user->display_name = e(Input::get('display_name'));
         $user->website = e(Input::get('website'));
         $user->bio = e(Input::get('bio'));
-        $user->fb_url = e(Input::get('fb_url'));
-        $user->twitter_url = e(Input::get('twitter_url'));
-        $user->gplus_url = e(Input::get('gplus_url'));
-        $user->pinterest_url = e(Input::get('pinterest_url'));
-        $user->youtube_url = e(Input::get('youtube_url'));
+        $rules=$user->validationRules();
 
         if (!$user->save()) {
-           return Redirect::back()->withInput()->withErrors($user->getErrors());
+           return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
         }
-        return view('account.settings')->with('error','Success!');
 
-      } else {
-        return Redirect::back()->withInput()->with('error','Invalid user');
+        return redirect()->route('user.settings.view')->with('success','Saved!');
+
       }
 
+      // That user wasn't valid
+      return redirect()->route('user.settings.view')->withInput()->with('error','Invalid user');
+
     }
+
+    /*
+    * Save the user's updated settings
+    *
+    */
+    public function postUpdateSocial()
+    {
+
+      if ($user = \App\User::find(Auth::user()->id)) {
+
+        $user->fb_url = e(Input::get('fb_url'));
+        $user->twitter = e(Input::get('twitter_url'));
+        $user->google = e(Input::get('gplus_url'));
+        $user->pinterest = e(Input::get('pinterest_url'));
+        $user->youtube = e(Input::get('youtube_url'));
+
+        if (!$user->save()) {
+           return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
+        }
+
+        return redirect()->route('user.settings.view')->with('success','Saved!');
+
+      }
+
+      // That user wasn't valid
+      return redirect()->route('user.settings.view')->withInput()->with('error','Invalid user');
+
+    }
+
+    /*
+    * Save the user's updated password
+    *
+    */
+    public function postUpdatePassword()
+    {
+
+      if ($user = \App\User::find(Auth::user()->id)) {
+
+        $user->password = e(Input::get('password'));
+
+        if (!$user->save()) {
+           return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
+        }
+
+        return redirect()->route('user.settings.view')->with('success','Saved!');
+
+      }
+
+      // That user wasn't valid
+      return redirect()->route('user.settings.view')->withInput()->with('error','Invalid user');
+
+    }
+
+
+    /*
+    * Save the user's updated settings
+    *
+    */
+    public function postUpdateNotifications()
+    {
+
+      if ($user = \App\User::find(Auth::user()->id)) {
+
+        if (!$user->save()) {
+           return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
+        }
+
+        return redirect()->route('user.settings.view')->with('success','Saved!');
+
+      }
+
+      // That user wasn't valid
+      return redirect()->route('user.settings.view')->withInput()->with('error','Invalid user');
+
+    }
+
+
 
 
     public function getProfile($id)
