@@ -103,6 +103,24 @@ Route::post('account/settings', array(
   'uses' => 'UserController@postSettings')
 );
 
+Route::post('account/password', array(
+  'middleware' => 'auth',
+  'as' => 'user.password.save',
+  'uses' => 'UserController@postUpdatePassword')
+);
+
+Route::post('account/social', array(
+  'middleware' => 'auth',
+  'as' => 'user.social.save',
+  'uses' => 'UserController@postUpdateSocial')
+);
+
+Route::post('account/notification', array(
+  'middleware' => 'auth',
+  'as' => 'user.notifications.save',
+  'uses' => 'UserController@postUpdateNotifications')
+);
+
 Route::get('users/{userID}', array(
   'as' => 'user.profile',
   'uses' => 'UserController@getProfile')
@@ -128,10 +146,10 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postCreate')
   );
 
-  Route::get('{entryID}/delete', array(
+  Route::post('{entryID}/delete', array(
     'middleware' => 'auth',
     'as' => 'entry.delete.save',
-    'uses' => 'EntriesController@getDelete')
+    'uses' => 'EntriesController@postDelete')
   );
 
   Route::get('{entryID}/edit', array(

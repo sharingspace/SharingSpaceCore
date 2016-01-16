@@ -59,8 +59,19 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 tile_container" id="tile_1" style="display:none;">
                       <div class="row" style="margin-bottom:7px;">
                         <div class="tile_info col-md-11 col-sm-11 col-xs-11" >
-                          <!-- exchange types, location etc -->
+													<div class="col-md-11 margin-bottom-10">
+                    				<div class="checkbox">
+                              @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                              <label>
+                                {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                                {{ $exchange_types->name }}
+                              </label>
+                              @endforeach
+                             </div>
+                          </div>
                         </div> <!-- col-md-10 tile_info  -->
+                        <div class="delete_error col-md-11 col-sm-11 col-xs-11" style="display:none"></div>
+
             
                         <div class="col-md-1 col-sm-1 col-xs-1">
                         	<button type="button" class="more_button btn btn-info btn-md" style="float:right;">more</i> <i class="fa fa-caret-down fa-lg"></i></button>
@@ -109,8 +120,15 @@
                             <legend style="border:none;" class="sr-only">Exchange by:</legend>
                             {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
             
-                            <div class="exchange_types" style="display:none;">
-                             
+                            <div class="exchange_types">
+                             <div class="checkbox">
+                    @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                    <label>
+                      {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                      {{ $exchange_types->name }}
+                    </label>
+                    @endforeach
+                    </div>
                             </div> <!-- exchange_types  -->
                           </fieldset>
                         </div> <!-- form-group -->
@@ -201,7 +219,7 @@ $(function() {
 
 	$(document).on( "click", "#pref_button", function( e ) {
 		e.preventDefault();
-		console.log("preferences clicked");
+		// console.log("preferences clicked");
 		$('#pref_button').find('i:nth-child(2)').toggleClass('fa-caret-down fa-caret-up');
 		//$('#pref_button').find('i').toggleClass('fa-caret-up');
 
@@ -212,7 +230,7 @@ $(function() {
 
 	$(document).on( "click", "#example_button", function( e ) {
 		e.preventDefault();
-		console.log("example clicked");
+		// console.log("example clicked");
 
 		$('#example_button').find('i').toggleClass('fa-caret-down fa-caret-up');
 		$('#example_panel').toggle();
@@ -220,7 +238,7 @@ $(function() {
 
 	$(document).on( "click", ".more_button", function( e ) {
 		e.preventDefault();
-		console.log("more clicked");
+		// console.log("more clicked");
 		$(this).find('i').toggleClass('fa-caret-down fa-caret-up');
 
 		$(this).closest('.tile_container').find('.more_controls').toggle();
@@ -230,11 +248,11 @@ $(function() {
 		e.preventDefault();
 		tile_info = $(this).closest('.tile_container').find('.tile_info').text();
 		tile_info = tile_info.substr(6);
-		console.log("edit clicked"+tile_info);
+		// console.log("edit clicked"+tile_info);
 
 		var tile = $(this).closest('.tile_container').prop("id");
 		var tile_id = parseInt( tile.match(/\d+/g), 10 );
-		console.log("edit clicked"+tile_id);
+		// console.log("edit clicked"+tile_id);
 		document.getElementById("title").value = tile_info;
 		$("#title").css('background-color','FFFFCC').animate({
             'background-color': 'white'
@@ -249,7 +267,7 @@ $(function() {
 		e.preventDefault();
 		var tile = $(this).closest('.tile_container').prop("id");
 		var tile_id = parseInt( tile.match(/\d+/g), 10 );
-		console.log("delete clicked"+tile_id);
+		// console.log("delete clicked on tile id: "+tile_id);
 		deleteTile(tile_id);
 	});
 
@@ -265,7 +283,7 @@ function getExchangeList() {
 			if(exchanges[i] != "all") exchangeList = exchangeList + "&tile_exchange_type["+exchanges[i]+"]="+exchanges[i];
 		};
 		
-		console.log("exchangeList: "+exchangeList);
+		// console.log("exchangeList: "+exchangeList);
 		return exchangeList;
 	}
 
@@ -281,7 +299,7 @@ function getExchangeList() {
 			hubList = hubList + "&groups["+hubs[i]+"]="+hubs[i];
 		};
 
-		console.log("hubList: "+hubList);
+		// console.log("hubList: "+hubList);
 		return hubList;
 	}
 
@@ -289,7 +307,7 @@ function getExchangeList() {
 		// has title text changed?
 		$focusedTitle = $(':focus');
 		if( $focusedTitle ) {
-			console.log("Current value "+ $focusedTitle.val()+", initial value "+$focusedTitle.data().initail);
+			// console.log("Current value "+ $focusedTitle.val()+", initial value "+$focusedTitle.data().initail);
 
 			return !($focusedTitle.val() == $focusedTitle.data().initail)
 		}
@@ -304,7 +322,7 @@ function getExchangeList() {
 	}
 
 	$(document).on( "click", "#quickAdd", function( e ) {
-		console.log("add or return hit");
+		// console.log("add or return hit");
 
 		e.preventDefault();
 		edit = false;
@@ -320,22 +338,22 @@ function getExchangeList() {
 		}
 		else if(title) // step 1. Anything to save?
 		{
-			console.log("title of new tile = "+title);
+			// console.log("title of new tile = "+title);
 
 			// step 2. Get the id of the last div with id starting with tile_xx
 			// this is where we will store the results if this tile saves successfully
 			var lastTileDiv = $('div[id^="tile_"]:last');
-			console.log("last = "+lastTileDiv.attr("id"));
+			// console.log("last = "+lastTileDiv.attr("id"));
 			var tile_id = parseInt( lastTileDiv.prop("id").match(/\d+/g), 10 );
-			console.log("On success save tile at id = tile_"+tile_id);
+			// console.log("On success save tile at id = tile_"+tile_id);
 
 
 			tileClasses = $('#title').attr('class');
-			console.log("work ?  "+tileClasses.match(/\d+/g));
+			// console.log("work ?  "+tileClasses.match(/\d+/g));
 			position = tileClasses.indexOf("update_");
 			if(position>=0) {
 				tile_id = tileClasses.match(/\d+/g);
-				console.log("update, edit = true "+tile_id+"  "+tileClasses);
+				// console.log("update, edit = true "+tile_id+"  "+tileClasses);
 				edit = true;
 			}
 
@@ -347,7 +365,7 @@ function getExchangeList() {
 			if (document.getElementById('private_checkbox').checked == true) var public =0;
 			else var public =1;
 			var visible =1; // always visible for quick add
-			console.log("Private checkbox checked:" + document.getElementById('private_checkbox').checked);
+			// console.log("Private checkbox checked:" + document.getElementById('private_checkbox').checked);
 
 			// step 4. Create the ajax call
 			saveTile(tile_id, title, want_have, exchangeList, location, hubList, visible, public, edit);
@@ -373,7 +391,7 @@ function getExchangeList() {
 	
 	function updateTileIds(temp_tile_id, tile_id)
 	{
-		console.log("updateTileIds temp_tile_id = "+temp_tile_id +", tile_id = " +tile_id);
+		// console.log("updateTileIds temp_tile_id = "+temp_tile_id +", tile_id = " +tile_id);
 		document.getElementById("tile_"+temp_tile_id).id="tile_"+tile_id;
 		document.getElementById("fileupload_").id = "fileupload_"+tile_id;
 
@@ -381,13 +399,11 @@ function getExchangeList() {
 	}
 
 
-
-
 	// step 4. Create the ajax call
 	function saveTile(tile_id, title, post_type, exchangeTypes, location, hubList, visible, public, edit){
 		var xhr = createRequest();
 
-		console.log("saveTile: " +title+"  "+ post_type+"  "+exchangeTypes+"  "+location+"  "+hubList+ ", tile_id = "+tile_id + ", visible = "+visible + ", edit = "+edit);
+		// console.log("saveTile: " +title+"  "+ post_type+"  "+exchangeTypes+"  "+location+"  "+hubList+ ", tile_id = "+tile_id + ", visible = "+visible + ", edit = "+edit);
 
 		// step 4a. Create the ajax callback
 		xhr.onreadystatechange = function () {
@@ -395,18 +411,18 @@ function getExchangeList() {
 		};
 
 		if(edit) {
-			xhr.open("POST", '/entry/'+tile_id+"/edit", true);
-			token='';
+			xhr.open("POST", tile_id+"/edit", true);
 		}
 		else {
 			xhr.open("POST", "new", true);
-			token="_token="+$('input[name=_token]').val()+"&";
 		}
+		
+		token ='_token='+$('input[name=_token]').val() +'&';
 
-		//console.log('token = ' + $('input[name=_token]').val());
+		//// console.log('token = ' + $('input[name=_token]').val());
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		var parameters =token+"quickAdd=true&title="+title+"&post_type="+ post_type+exchangeTypes+"&tiletype_id=1&location="+location+"&visible="+visible+"&public="+public+"&hubList="+hubList;
-		console.log("parameters: "+parameters);
+		var parameters =token+"ajaxAdd=true&title="+title+"&post_type="+ post_type+exchangeTypes+"&tiletype_id=1&location="+location+"&visible="+visible+"&public="+public+"&hubList="+hubList;
+		// console.log("parameters: "+parameters);
 
 		// step 4b. Fire off the ajax call
 		xhr.send(parameters);
@@ -419,15 +435,18 @@ function getExchangeList() {
 
 			if (xhr.readyState==4 && xhr.status==200)
 			{
+				// console.log("success!!!!!  "+xhr.responseText) ;
+
 				replyData = JSON.parse(xhr.responseText);
-				console.log("JSON response  "+replyData.success) ;
+				
 
 				if(replyData.success)
 				{
-					console.log("success!!!!!  "+xhr.responseText) ;
+					// console.log("success!!!!! "+xhr.responseText) ;
 
 					if(edit)
 					{
+						// console.log("Edit response  "+replyData.success) ;
 						// step 4d. Find existing tile div and update contents
 						$("#title").removeClass( "update_"+tile_id);
 
@@ -448,17 +467,18 @@ function getExchangeList() {
 					}
 					else
 					{
+						// console.log("Create response  "+replyData.success) ;
 						// step 4d. Clone existing div ready for the next want/have and set focus.
 						// Note we clone it here before it has actual values in it
 						//var div_id = "tile_"+tile_id;
 						var lastTileDiv = $("#tile_"+tile_id);
-						console.log("last = "+lastTileDiv.attr("id"));
+						// console.log("last = "+lastTileDiv.attr("id"));
 						newDivId = tile_id +1;
 						var newTileDiv = lastTileDiv.clone().prop('id', 'tile_'+newDivId );
 						$(lastTileDiv).after(newTileDiv);
 						$("#title").val('');
 						$("#title").find('input:text').focus();
-						console.log("stateChanged  "+$("#title").val());
+						// console.log("stateChanged  "+$("#title").val());
 
 						// step 4e. Start filling up the tile div with the successful want/have
 						tile_info = "I "+replyData.post_type + " "+replyData.title;
@@ -468,13 +488,12 @@ function getExchangeList() {
 						//if(replyData.hubNames) tile_info +=". Within hubs: "+replyData.hubNames;
 						updateTileIds(tile_id, replyData.tile_id);
 
-
 						document.getElementById("button_").id = "button_"+replyData.tile_id;
 						$("#tile_"+replyData.tile_id +" .show_thumbnail").show();
 						$("#tile_"+replyData.tile_id +" .tile_info").html(trimString(tile_info,70));
 						document.getElementById('added_heading').style.display = 'block';
 						$("#tile_"+replyData.tile_id).toggle();
-						console.log("stateChanged, tile_info: "+tile_info);
+						// console.log("stateChanged, tile_info: "+tile_info);
 					}
 				}
 				else
@@ -493,48 +512,57 @@ function getExchangeList() {
 	{
 		var xhr = new XMLHttpRequest();
 
-		console.log("deleteTile: tile_id = "+tile_id);
+		// console.log("deleteTile: tile_id = "+tile_id);
 
 		// step 4a. Create the ajax callback
 		xhr.onreadystatechange = function () {
 			deleteChanged();
 		};
 
-		xhr.open("GET", '/entry/'+tile_id+"/delete", true);
+		xhr.open("POST", tile_id+"/delete", true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
-
 		// step 4b. Fire off the ajax call
-		xhr.send();
-
+		xhr.send("_token="+$('input[name=_token]').val()+'&ajaxAdd=true');
+		setTimeout(function() {  xhr.abort()  },20000); //abort after 20 seconds 
+		
 
 		function deleteChanged()
 		{
 			var data;
-
+			// console.log("statusText: "+xhr.statusText +"  "+xhr.responseText);
 			if (xhr.readyState==4 && xhr.status==200)
 			{
-					$('#tile_'+tile_id).remove();
-					console.log("delete success!!!!!  "+'.tile_'+tile_id);
+					replyData = JSON.parse(xhr.responseText);
 
-					// count how many tiles we have, if none, remove the "recently added" text
-					// Note we always have 1 hidden #tile_
-					if( $("div[id^='tile_']").length == 1) {
-						document.getElementById('added_heading').style.display = 'none';
+					if(replyData.success) {
+						// console.log("delete success :-)  "+replyData.entry_id);
+
+						$('#tile_'+replyData.entry_id).remove();
+
+						// count how many tiles we have, if none, remove the "recently added" text
+						// Note we always have 1 hidden #tile_
+						if( $("div[id^='tile_']").length == 1) {
+							document.getElementById('added_heading').style.display = 'none';
+						}
+					}
+					else {
+						// console.log("delete failed :-(  "+replyData.entry_id + "   "+replyData.error);
+						$('#tile_'+tile_id +' .delete_error').html('<p style="margin-top:5px">'+replyData.error+'</p>').show();
 					}
 				}
-			}
+			} 
 		}
 
 
 	$(document).on("click", '[id^=button_]', function () {
-		console.log('Upload image click');
+		// console.log('Upload image click');
 		var parent_div = $(this).parents( '.tile_container').attr('id');
-		console.log("Upload click: div: "+parent_div);
+		// console.log("Upload click: div: "+parent_div);
 
 		if(parent_div) {
 			var buttonArray = parent_div.split('_');
-			console.log("Upload click: tile id: #tile_"+buttonArray[1]);
+			// console.log("Upload click: tile id: #tile_"+buttonArray[1]);
 			$('#tile_' + buttonArray[1]+' input[type=file]').trigger('click');
 		}
 	});
@@ -546,14 +574,14 @@ function getExchangeList() {
 		var fileReader = new FileReader();
 		var imageElem = document.createElement("img");
 		var id_array  = tile_id.split('_');
-		console.log("handleFile: tile_id = "+id_array[1]+", file = "+image.name);
+		// console.log("handleFile: tile_id = "+id_array[1]+", file = "+image.name);
 		id = id_array[1];
 
 		fileReader.onload=(function(img){return function(e){img.src = e.target.result;};})(imageElem);
 		fileReader.readAsDataURL(image);
 
 		var maxSize = document.getElementById('MAX_FILE_SIZE').value;
-		console.log("handleFile: " +image.name+"  id = "+ id+",  file size = "+image.size);
+		// console.log("handleFile: " +image.name+"tile id = "+ id+",  file size = "+image.size);
 		
 		if(image.size < maxSize) {
 			$("#tile_"+id +" .show_thumbnail").append(imageElem);
@@ -564,24 +592,25 @@ function getExchangeList() {
 		else
 		{
 			$("#tile_"+id +" .too_large").show().addClass("error_message").fadeOut(9000, "linear");
-			console.log("handleFile: file too big");
+			// console.log("handleFile: file too big");
 		}
    }
 
 
 function uploadFile(image, tile_id){
 	var xhr = new XMLHttpRequest();
+	var form_data = new FormData();
+	
+	// console.log("uploadFile: " +image.name+"  "+ tile_id+JSON.stringify(formData));
 
-	var formData = new FormData();
-	formData.append('image', image);
-	formData.append('tile_id', tile_id);
-	console.log("uploadFile: " +image.name+"  "+ tile_id+JSON.stringify(formData));
+	form_data.append('image', image);
+	form_data.append('tile_id', tile_id);
 
 	xhr.upload.onprogress = function(e) {
 		if (e.lengthComputable) {
 			var percentage =  parseInt((e.loaded / e.total) * 100);
 			$("#tile_"+tile_id+ " .percentage").html(percentage+"%");
-			console.log("progress: "+percentage+"% complete");
+			// console.log("progress: "+percentage+"% complete");
 		}
 	};
 
@@ -594,10 +623,10 @@ function uploadFile(image, tile_id){
 	}, false);
 
 	xhr.onreadystatechange = function () {
-		console.log("uploadFile: status change");
+		// console.log("uploadFile: status change");
 		if (xhr.readyState==4 && xhr.status==200)
 		{
-			console.log("uploadFile: success!!!!!!!!!!");
+			// console.log("uploadFile: success!!!!!!!!!!");
 			$("#tile_"+tile_id+ " .percentage").fadeOut( 1200);//,"linear");
 			//$("#tile_"+tile_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');
 
@@ -605,7 +634,7 @@ function uploadFile(image, tile_id){
 	};
 	xhr.open("POST", '/entry'+tile_id+"/upload");
 	xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
-	xhr.send(formData);
+	xhr.send(form_data);
 }
 
 $(document).ready(function() {
@@ -614,7 +643,7 @@ $(document).ready(function() {
 		{
 			if(this.checked)
 			{
-				console.log("select currently checked");
+				// console.log("select currently checked");
 				$('.exc_checkbox').each(function(e)
 				{
 					this.checked = true;
@@ -623,7 +652,7 @@ $(document).ready(function() {
 			}
 			else
 			{
-				console.log("select currently unchecked");
+				// console.log("select currently unchecked");
 				$('.exc_checkbox').each(function(e)
 				{
 					this.checked = false;
@@ -661,7 +690,7 @@ function trimString(yourString, maxLength) {
 
 function toggleBoxes(source) {
   checkboxes = document.querySelectorAll("input[name^='tile_exchange_type[']");
-	console.log(checkboxes.length);
+	// console.log(checkboxes.length);
   for (i=0; i < checkboxes.length; i++) {
 		checkboxes[i].checked = source.checked;
 	}
