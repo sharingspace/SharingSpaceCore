@@ -54,13 +54,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $rules = [
         'display_name'     => 'required|string|min:2|max:255',
         'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|min:6',
         'website'           => 'url',
         'fb_url'           => 'url',
-        'twitter_url'      => 'url',
-        'gplus_url'        => 'url',
-        'pinterest_url'    => 'url',
-        'youtube_url'      => 'url',
+        'twitter'      => 'url',
+        'gplus'        => 'url',
+        'pinterest'    => 'url',
+        'youtube'      => 'url',
     ];
 
     protected $sluggable = [
