@@ -73,15 +73,6 @@
           	<h4>Social Links &amp; Connections</h4>
           </div>
 
-          <div class="col-md-12 social">
-            <div class="col-md-7">
-              <div class="form-group {{ $errors->first('website', 'has-error') }}">
-                <input type="text" placeholder="http://yourwebsite.com" class="form-control" id="website" name="website" value="{{{ Input::old('website', Auth::user()->website) }}}">
-                <label for="website" class="fa fa-link fa-lg grey" rel="tooltip" title="Link"></label>
-                {!! $errors->first('website', '<span class="help-block">:message</span>') !!}
-              </div>
-            </div> <!-- col-md-7 -->
-
             <div class="col-md-7">
               <div class="form-group {{ $errors->first('fb_url', 'has-error') }}">
                   <input type="text" placeholder="https://facebook.com/username" class="form-control" id="fb_url" name="fb_url" value="{{{ Input::old('fb_url', Auth::user()->fb_url) }}}">
