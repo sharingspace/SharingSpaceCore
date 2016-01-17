@@ -146,10 +146,10 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postCreate')
   );
 
-  Route::get('{entryID}/delete', array(
+  Route::post('{entryID}/delete', array(
     'middleware' => 'auth',
     'as' => 'entry.delete.save',
-    'uses' => 'EntriesController@getDelete')
+    'uses' => 'EntriesController@postDelete')
   );
 
   Route::get('{entryID}/edit', array(

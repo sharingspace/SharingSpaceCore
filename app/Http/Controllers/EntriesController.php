@@ -44,20 +44,31 @@ class EntriesController extends Controller
     $entry->title	= e(Input::get('title'));
     $entry->post_type	= e(Input::get('post_type'));
     $entry->created_by	= Auth::user()->id;
+		$ajaxAdd = e(Input::get('ajaxAdd'));
 
     if ($entry->isInvalid()) {
+			if( $ajaxAdd ) {
+				return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+			}
+			else {
        return redirect()->back()->withInput()->withErrors($community->getErrors());
+    }
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
-      $entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
-
+			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+			if( $ajaxAdd ) {
 			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+			}
 
 		} else {
+      if( $ajaxAdd ) {
+				return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+			}
+			else {
       return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
     }
-
+  }
   }
 
 	/*
@@ -95,9 +106,15 @@ class EntriesController extends Controller
 		  if ($entry = \App\Entry::find($entryID)) {
 
         $user = Auth::user();
+				$ajaxAdd = e(Input::get('ajaxAdd'));
 
       	if (!$entry->checkUserCanEditEntry($user)) {
+					if($ajaxAdd) {
+						return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
+					}
+					else {
 			    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+					}
       	} else {
 
           $entry->title	= e(Input::get('title'));
@@ -106,15 +123,31 @@ class EntriesController extends Controller
           $entry->qty	= e(Input::get('qty'));
 
           if (!$entry->save()) {
+						if($ajaxAdd) {
+							return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+						}
+						else {
              return Redirect::back()->withInput()->withErrors($entry->getErrors());
           }
+          }
 
+					if( $ajaxAdd ) {
+						return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
+					}
+					else {
           $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
+
   				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
+        }
         }
 
       } else {
+				if($ajaxAdd) {
+					return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
+				}
+				else {       
         return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+      }
       }
 
   }
@@ -122,16 +155,27 @@ class EntriesController extends Controller
 	/*
   Delete the entry
   */
-  public function getDelete($entryID)
+  public function postDelete($entryID)
   {
     if ($entry = \App\Entry::find($entryID)) {
       $user = Auth::user();
       if (!$entry->checkUserCanEditEntry($user)) {
-        return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+        if($ajaxAdd) {
+					return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.delete_not_allowed')]);
+				}
+				else {   
+					return redirect()->route('browse')->with('error',trans('general.entries.messages.delete_not_allowed'));
+				}
       } else {
         if ($entry->delete()) {
+					$ajaxAdd = e(Input::get('ajaxAdd'));
           $entry->exchangeTypes()->detach();
+					if($ajaxAdd) {
+						return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
+					}
+					else {
           return redirect()->route('browse')->with('success',trans('general.entries.messages.deleted'));
+					}
         } else {
           return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.delete_failed'));
         }
@@ -146,11 +190,11 @@ class EntriesController extends Controller
 	/*
   * Process an uploaded image
   */
-	public function ajaxUpload($tile_id = null) {
+	public function ajaxUpload($entry_id = null) {
 		if (Input::hasFile('image')) {
 
-			if ($tile_id) {
-				$tile = $this->tile->withTrashed()->find($tile_id);
+			if ($entry_id) {
+				$tile = $this->tile->withTrashed()->find($entry_id);
 				$filename =  $tile->uploadImage('image', 'profile', 250, 250);
 			} else {
 				$user = Sentry::getUser();
@@ -159,13 +203,13 @@ class EntriesController extends Controller
 			}
 
 			 if ($filename) {
-				return Response::json('success', 200);
+				return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
 			 } else {
-				return Response::json('error - unknown', 400);
+				return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
 			 }
 
 		} else {
-			return Response::json('error - no image', 400);
+			return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
 		}
 	}
 
