@@ -68,6 +68,18 @@
                       {!! $errors->first('bio', '<span class="help-block">:message</span>') !!}
                   </div>
 
+                  <!-- Location -->
+                  <div class="col-md-12 form-group {{ $errors->first('location', 'has-error') }}">
+                    <label class="control-label" for="location">Location</label>
+                    <div class="input-group">
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}" placeholder="Address, City, Country">
+                    <div class="input-group-addon" id="basic-addon2"><i class="fa fa-location-arrow" id="geolocate"></i></div>
+                     {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
+                   </div>
+                  </div>
+
+
+
                   <!-- Website -->
                   <div class="col-md-12 form-group {{ $errors->first('website', 'has-error') }}">
                      <label class="control-label" for="website">Website Url</label>
