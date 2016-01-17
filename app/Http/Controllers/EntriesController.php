@@ -9,6 +9,7 @@ use Theme;
 use Validator;
 use Input;
 use Redirect;
+use Helper;
 
 class EntriesController extends Controller
 {
@@ -44,6 +45,17 @@ class EntriesController extends Controller
     $entry->title	= e(Input::get('title'));
     $entry->post_type	= e(Input::get('post_type'));
     $entry->created_by	= Auth::user()->id;
+
+    if (Input::get('location')) {
+      $entry->location = e(Input::get('location'));
+      $latlong = Helper::latlong(Input::get('location'));
+    }
+
+    if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+      $entry->latitude 		= $latlong['lat'];
+      $entry->longitude 		= $latlong['lng'];
+    }
+
 		$ajaxAdd = e(Input::get('ajaxAdd'));
 
     if ($entry->isInvalid()) {
@@ -58,7 +70,7 @@ class EntriesController extends Controller
     if ($request->whitelabel_group->entries()->save($entry)) {
 			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
 			if( $ajaxAdd ) {
-			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
 			}
 
 		} else {
@@ -122,6 +134,16 @@ class EntriesController extends Controller
           $entry->description	= e(Input::get('description'));
           $entry->qty	= e(Input::get('qty'));
 
+          if (Input::get('location')) {
+            $entry->location = e(Input::get('location'));
+            $latlong = Helper::latlong(Input::get('location'));
+          }
+
+          if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+            $entry->latitude 		= $latlong['lat'];
+            $entry->longitude 		= $latlong['lng'];
+          }
+
           if (!$entry->save()) {
 						if($ajaxAdd) {
 							return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
@@ -145,7 +167,7 @@ class EntriesController extends Controller
 				if($ajaxAdd) {
 					return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
 				}
-				else {       
+				else {
         return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
       }
       }
@@ -163,7 +185,7 @@ class EntriesController extends Controller
         if($ajaxAdd) {
 					return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.delete_not_allowed')]);
 				}
-				else {   
+				else {
 					return redirect()->route('browse')->with('error',trans('general.entries.messages.delete_not_allowed'));
 				}
       } else {

@@ -50,6 +50,17 @@ class UserController extends Controller
         $user->display_name = e(Input::get('display_name'));
         $user->website = e(Input::get('website'));
         $user->bio = e(Input::get('bio'));
+        $user->location = e(Input::get('location'));
+
+        if (Input::get('location')) {
+          $latlong = Helper::latlong(Input::get('location'));
+        }
+
+        if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+					$user->latitude 		= $latlong['lat'];
+					$user->longitude 		= $latlong['lng'];
+				}
+
 
         if (!$user->save()) {
            return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
