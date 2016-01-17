@@ -22,15 +22,15 @@
                 <h1 class="size-16 uppercase">{{ trans('general.entries.create') }}</h1>
                 <p>{{ trans('general.entries.create_subheadline') }}</p>
                 <!-- entry form -->
-                
+
                 <form method="post" action="{{ route('entry.create.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">
                   {!! csrf_field() !!}
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
 
-  
+
                   <div class="clearfix"></div>
                   <fieldset class="nomargin">
-  
+
                     <div class="col-md-2 margin-bottom-10 {{ $errors->first('post_type', ' has-error') }}">
                         <select class="form-control" name="post_type" id="post_type">
                           <option value="want">I want</option>
@@ -46,16 +46,16 @@
                     <div class="col-md-3 margin-bottom-10">
                     	<button type="button" id="pref_button"  class="btn btn-info btn-md" style="float:right;"><i class="fa fa-cogs fa-lg" style="margin-right:10px;"></i><i class="fa fa-caret-down fa-lg"></i></button>
                       <button class="btn btn-success" id="quickAdd" name="quickAdd" value="quickAdd" style="margin-right:10px;float:right;"><i class="fa fa-sign-in fa-lg" style="margin-right:5px;"></i>Create</button>
-                      	
+
                     </div>
                     <!--
                     Added tiles ....
                     -->
-  
+
                     <div class="col-md-12 col-sm-12 col-xs-12" id="added_heading">
                       <h4 class="text-left">You Added</h4>
                     </div> <!-- col-md-12 -->
-          
+
                     <div class="col-md-12 col-sm-12 col-xs-12 tile_container" id="tile_1" style="display:none;">
                       <div class="row" style="margin-bottom:7px;">
                         <div class="tile_info col-md-11 col-sm-11 col-xs-11" >
@@ -72,35 +72,35 @@
                         </div> <!-- col-md-10 tile_info  -->
                         <div class="delete_error col-md-11 col-sm-11 col-xs-11" style="display:none"></div>
 
-            
+
                         <div class="col-md-1 col-sm-1 col-xs-1">
                         	<button type="button" class="more_button btn btn-info btn-md" style="float:right;">more</i> <i class="fa fa-caret-down fa-lg"></i></button>
                         </div> <!-- col-md-2 -->
-                          
+
                         <!--
                         More controls ....
                         -->
-  
+
                         <div class="more_controls col-md-12 col-sm-12 col-xs-12" style="display:none;margin-top:10px;">
                           <div class="image_upload">
                             <label for="fileupload_" class="sr-only">Upload image</label>
                             <input id="fileupload_" class="file_upload" type="file" onchange="handleFile(this.files, this.id)" accept="image/gif, image/jpeg, image/png"/></label>
-                          
+
                             <button type="button" id='button_' class="smooth_font pull-left image_button btn btn-info btn-md">image <i class="fa fa-upload fa-lg"></i></button>
                             <span class='too_large smooth_font' style="display:none;">File exceeds the 4MB maximum</span>
-              
+
                             <div class="percentage"></div>
                           </div> <!-- image_upload -->
-              
-                         
+
+
             							<button type="button" class="button_edit smooth_font btn btn-info btn-md"  style="float:right;margin-left:10px;font-size:13px;">edit <i class="fa fa-pencil fa-lg"></i></button>
-                          
+
                           <button type="button" class="button_delete smooth_font btn btn-warning btn-md"  style="float:right;margin-left:10px;background-color:rgba(255,0,0,0.6);font-size:13px;">delete <i class="fa fa-times fa-lg"></i></button>
-                          
+
                         </div> <!-- more_controls -->
                       </div> <!-- row  -->
                     </div> <!-- col-md-10 tile_container  -->
-                    
+
                   <!--  <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 pull-right">
                       <span class='pull-right' >
                       	<button type="button" id="pref_button" style="border:none; outline: 0;  -webkit-box-shadow: none; box-shadow: none;" >Preferences <i class="fa fa-caret-down"></i></button>
@@ -108,61 +108,57 @@
 
                     	</span>
                     </div> --><!-- col-md-10 -->
-            
+
                     <div id="prefs_panel" style="display:none;">
-                      <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12"><hr /></div>
-                      <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-                        <div class="form-group" style="margin-bottom: 5px;">
-                          <input id="selectall" name="all_exchange" type="checkbox" checked value="all"/>
-                          <label for="selectall">Exchange in all ways</label>
-            
-                          <fieldset>
-                            <legend style="border:none;" class="sr-only">Exchange by:</legend>
-                            {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
-            
-                            <div class="exchange_types">
-                             <div class="checkbox">
-                    @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-                    <label>
-                      {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
-                      {{ $exchange_types->name }}
-                    </label>
-                    @endforeach
-                    </div>
-                            </div> <!-- exchange_types  -->
-                          </fieldset>
-                        </div> <!-- form-group -->
-                      </div> <!-- col-md-10 -->
-            
-                      <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-                        <input id="location_checkbox" name="location" type="checkbox" checked value="no_location">
-                        <label for="location">No location</label>
-            
-                        <div class="input-group col-md-10">
-                          <div id="location_block" style="display:none;" class="col-md-12">
-                          
-                          </div> <!-- location_block -->
-                        </div> <!-- input-group  -->
-            
-                        <input id="private_checkbox" name="private" type="checkbox" value="1"/>
-                        <label for="private_checkbox">Keep this value private</label>
-                      </div> <!-- col-md-10  -->
-            
-                      <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12" id="select_hub" style="display:none;margin-top:20px;">
+
+                      <!-- Location -->
+                      <div class="col-md-12 form-group {{ $errors->first('location', 'has-error') }}">
+                        <label class="control-label" for="location">Location</label>
+                        <div class="input-group">
+                        <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}" placeholder="Address, City, Country">
+                        <div class="input-group-addon" id="basic-addon2"><i class="fa fa-location-arrow" id="geolocate"></i></div>
+                         {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
+                       </div>
+                      </div>
+
+                      <!-- checkboxes for exchange types -->
+                      <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
+                        <div class="checkbox">
+                        @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                        <div class="col-md-2 pull-left margin-bottom-10">
+                          <label class="checkbox col-md-3 pull-left margin-bottom-10">
+                            {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                            <i></i> {{ $exchange_types->name }}
+                          </label>
+                        </div>
+                        @endforeach
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="checkbox col-md-12 pull-left margin-bottom-10">
+                          <label class="checkbox pull-left margin-bottom-10" for="private_checkbox">
+                            {{ Form::checkbox('private', 1, 0, array('id'=>'private_checkbox')) }}
+                            <i></i> Keep this value private
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 col-sm-12 col-xs-12" id="select_hub" style="display:none;margin-top:20px;">
                         <div class="hubs row">
                           @if(isset($groups) && count($groups))
                           <fieldset>
                             <legend style="border:none;">Add to Hubs:</legend>
-                          
+
                           </fieldset>
                           @endif
                         </div> <!-- hubs & row -->
                       </div> <!-- col-md-10 -->
                     </div> <!-- prefs panel -->
-                  
-                        
-                    
-  
+
+
+
+
                   </fieldset>
                 </form>
               </div>
@@ -173,11 +169,11 @@
 				</div>
 			</section>
 			<!-- / -->
-      
+
       <!-- Modal -->
       <div id="myExamples" class="modal fade" role="dialog">
         <div class="modal-dialog">
-      
+
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -196,7 +192,7 @@
               <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
             </div>
           </div>
-      
+
         </div>
       </div>
 <script type="text/javascript">
@@ -226,7 +222,7 @@ $(function() {
 
 		$('#prefs_panel').toggle();
 	});
-	
+
 
 	$(document).on( "click", "#example_button", function( e ) {
 		e.preventDefault();
@@ -282,7 +278,7 @@ function getExchangeList() {
 		for(i=0; i< exchanges.length; i++){
 			if(exchanges[i] != "all") exchangeList = exchangeList + "&tile_exchange_type["+exchanges[i]+"]="+exchanges[i];
 		};
-		
+
 		// console.log("exchangeList: "+exchangeList);
 		return exchangeList;
 	}
@@ -388,7 +384,7 @@ function getExchangeList() {
 		}
 		return request;
 	}
-	
+
 	function updateTileIds(temp_tile_id, tile_id)
 	{
 		// console.log("updateTileIds temp_tile_id = "+temp_tile_id +", tile_id = " +tile_id);
@@ -416,7 +412,7 @@ function getExchangeList() {
 		else {
 			xhr.open("POST", "new", true);
 		}
-		
+
 		token ='_token='+$('input[name=_token]').val() +'&';
 
 		//// console.log('token = ' + $('input[name=_token]').val());
@@ -438,7 +434,7 @@ function getExchangeList() {
 				// console.log("success!!!!!  "+xhr.responseText) ;
 
 				replyData = JSON.parse(xhr.responseText);
-				
+
 
 				if(replyData.success)
 				{
@@ -524,8 +520,8 @@ function getExchangeList() {
 
 		// step 4b. Fire off the ajax call
 		xhr.send("_token="+$('input[name=_token]').val()+'&ajaxAdd=true');
-		setTimeout(function() {  xhr.abort()  },20000); //abort after 20 seconds 
-		
+		setTimeout(function() {  xhr.abort()  },20000); //abort after 20 seconds
+
 
 		function deleteChanged()
 		{
@@ -551,7 +547,7 @@ function getExchangeList() {
 						$('#tile_'+tile_id +' .delete_error').html('<p style="margin-top:5px">'+replyData.error+'</p>').show();
 					}
 				}
-			} 
+			}
 		}
 
 
@@ -582,7 +578,7 @@ function getExchangeList() {
 
 		var maxSize = document.getElementById('MAX_FILE_SIZE').value;
 		// console.log("handleFile: " +image.name+"tile id = "+ id+",  file size = "+image.size);
-		
+
 		if(image.size < maxSize) {
 			$("#tile_"+id +" .show_thumbnail").append(imageElem);
 			$("#tile_"+id +" .show_thumbnail img").attr('alt',"");
@@ -600,7 +596,7 @@ function getExchangeList() {
 function uploadFile(image, tile_id){
 	var xhr = new XMLHttpRequest();
 	var form_data = new FormData();
-	
+
 	// console.log("uploadFile: " +image.name+"  "+ tile_id+JSON.stringify(formData));
 
 	form_data.append('image', image);
