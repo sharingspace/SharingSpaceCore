@@ -21,6 +21,7 @@
 
 				<h2 class="size-16">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h2>
 				<p>{{ $entry->description }}</p>
+        <p>Location: {{ $entry->location }}</p>
         <p>QTY: {{ $entry->qty }}</p>
 
         @if (count($entry->exchangeTypes) > 0)
