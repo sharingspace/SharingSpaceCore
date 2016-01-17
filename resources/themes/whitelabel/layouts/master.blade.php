@@ -62,5 +62,6 @@
     </div>
     <!-- /wrapper -->
 
+@include('partials.geo-lookup')
 </body>
 </html>
