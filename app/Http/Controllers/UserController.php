@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Auth;
 use Input;
 use Redirect;
+use Helper;
 
 
 class UserController extends Controller
