@@ -32,7 +32,7 @@ class Entry extends Model
   use UploadableFileTrait;
 
   /*
-  *
+  * Model validation rules
   */
   protected $rules = [
       'title'            => 'required|string|min:2|max:255',
