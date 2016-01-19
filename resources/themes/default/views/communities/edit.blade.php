@@ -104,7 +104,7 @@
   									</div>
 
                     <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top: 30px;">
-                        <i class="fa fa-ticket"></i><span>Coupon</span>
+                        <i class="fa fa-ticket"></i> Coupon
                     </div>
 
                     <!-- Coupon -->
@@ -112,7 +112,7 @@
                        <label for="cvc">Coupon Code</label>
                         <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="coupon" />
                     </div>
-                    
+
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
                         <button type="submit" class="btn btn-primary" id="create_community">Create Community</button>
                     </div>
