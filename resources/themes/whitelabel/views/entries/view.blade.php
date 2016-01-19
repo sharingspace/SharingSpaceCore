@@ -19,7 +19,10 @@
 			<!-- LEFT TEXT -->
 			<div class="col-md-12">
 
-				<h2 class="size-16">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h2>
+				<h2 class="size-16">{{ strtoupper($entry->post_type) }}:
+          {{ $entry->title }}
+        </h2>
+
 				<p>{{ $entry->description }}</p>
         <p>Location: {{ $entry->location }}</p>
         <p>QTY: {{ $entry->qty }}</p>
@@ -29,6 +32,15 @@
             <li> {{ strtolower($entry->exchangeTypes[$i]->name) }}
           @endfor
         @endif
+
+        @if ($entry->media)
+          <p>{{ $entry->media()->count() }} images</p>
+          @foreach ($entry->media() as $image)
+            <li><img src="/assets/uploads/{{ $image }}">
+          @endforeach
+        @endif
+
+
 
 
 			</div>
