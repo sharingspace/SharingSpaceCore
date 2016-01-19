@@ -35,15 +35,15 @@
 
                   <!-- Display Name -->
                   <div class="col-md-12 form-group {{ $errors->first('display_name', 'has-error') }}">
-                     <label class="control-label" for="last_name">Display Name</label>
+                     <label class="control-label" for="display_name">Display Name</label>
                       <input type="text" placeholder="Awesome66" class="form-control" name="display_name" value="{{ Input::old('display_name', Auth::user()->display_name) }}">
                       {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
                   </div>
 
                   <!-- Email  -->
                   <div class="col-md-12 form-group {{ $errors->first('email', 'has-error') }}">
-                     <label class="control-label" for="last_name">Email</label>
-                      <input type="text" placeholder="you@example.com" class="form-control" name="email" autocomplete="off" value="{{ Input::old('email', Auth::user()->email) }}">
+                     <label class="control-label" for="email">Email</label>
+                      <input type="text" placeholder="you@example.com" class="form-control" name="email" autocomplete="off" value="{{ Input::old('email', Auth::user()->email) }}" readonly onfocus="this.removeAttribute('readonly');" style="background-color: white;">
                       {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                   </div>
 
