@@ -73,7 +73,7 @@
                             <label for="fileupload_" class="sr-only">Upload image</label>
                             <input id="fileupload_" class="file_upload" type="file" onchange="handleFile(this.files, this.id)" accept="image/gif, image/jpeg, image/png"/></label>
 
-                            <button type="button" id='button_' class="smooth_font pull-left image_button btn btn-info btn-md">image <i class="fa fa-upload fa-lg"></i></button>
+                            <button type="button" id='button_' class="smooth_font pull-left image_button btn btn-info btn-md">image <i class="fa fa-picture-o fa-lg"></i></button>
                             <span class='too_large smooth_font' style="display:none;">File exceeds the 4MB maximum</span>
 
                             <div class="percentage"></div>
@@ -152,9 +152,9 @@
                           </div>
 
                           <!-- File upload -->
-                          <div class="form-group {{ $errors->first('location', 'has-error') }}">
+                          <div class="form-group {{ $errors->first('file', 'has-error') }}">
                             <div class="fancy-file-upload fancy-file-info">
-                            	<i class="fa fa-upload"></i>
+                            	<i class="fa fa-picture-o"></i>
                             	<input type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);" />
                             	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
                             	<span class="button">Choose File</span>
@@ -519,7 +519,7 @@ function getExchangeList() {
 							$('#create_table').show();
 						}
 						$('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+
-						trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm"><i class="fa fa-upload fa-lg"></i></button></td><td style="display:none;" class="entry_'+replyData.tile_id+'"></td></tr>');
+						trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;" class="entry_'+replyData.tile_id+'"></td></tr>');
 
 					}
 				}
