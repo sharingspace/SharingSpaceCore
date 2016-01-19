@@ -88,31 +88,42 @@
 									  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="4242424242424242" />
 								    </div>
 
-                    <div class="form-group col-md-3 col-sm-2">
+                    <div class="form-group col-md-3 col-sm-12">
   										<label for="exp_month">Month *</label>
   										<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" data-stripe="exp-month" value="01" />
                     </div>
 
-                    <div class="form-group col-md-3 col-sm-3">
+                    <div class="form-group col-md-3 col-sm-12">
                         <label for="exp_year">Year *</label>
                         <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="{{ (date('Y') + 3) }}"  data-stripe="exp-year" value="2020" />
 								    </div>
 
-  									<div class="form-group col-md-3 col-sm-3">
+  									<div class="form-group col-md-3 col-sm-12">
   										<label for="cvc">CVC *</label>
   										<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" data-stripe="cvc" />
   									</div>
 
+                    <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top: 30px;">
+                        <i class="fa fa-ticket"></i><span>Coupon</span>
+                    </div>
+
+                    <!-- Coupon -->
+                    <div class="form-group col-md-12 col-sm-12" id="coupon_field" style="display:none;">
+                       <label for="cvc">Coupon Code</label>
+                        <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="coupon" />
+                    </div>
+                    
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
                         <button type="submit" class="btn btn-primary" id="create_community">Create Community</button>
                     </div>
-
                     <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
                         <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
                             Something went wrong :(
                         </div>
                     </div>
+
 								</div>
+
 						</div>
             </form>
 					</div>
@@ -129,6 +140,14 @@
       </script>
 
       <script>
+
+      $(function() {
+        $("#coupon_question").click(function () {
+            $("#coupon_field").animate({opacity: 'toggle'}, 'fast');
+        });
+      });
+
+
       $(function(){
 
         $('#payment-form').submit(function(event) {

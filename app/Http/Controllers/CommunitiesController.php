@@ -67,6 +67,10 @@ class CommunitiesController extends Controller
   public function postCreate(Request $request)
   {
 
+    // echo '<pre>';
+    // print_r($_POST);
+    // echo '</pre>';
+    // exit;
     $token = Input::get('stripeToken');
 
     // No stripe token - something went wrong :(
@@ -96,11 +100,20 @@ class CommunitiesController extends Controller
 
     if ($customer->stripe_id=='') {
       // Create the Stripe customer
+
+
+
       $customer->createStripeCustomer([
           'email' => $customer->email,
           'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e(Input::get('name')),
           'metadata' => $metadata,
       ]);
+
+      // set the given discount
+      if (Input::has('coupon')) {
+        $customer->applyStripeDiscount(e(Input::get('coupon')));
+      }
+
     }
 
     $data['name'] = $customer->getDisplayName();
