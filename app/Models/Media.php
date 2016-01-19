@@ -2,6 +2,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Watson\Validating\ValidatingTrait;
 
 
 class Media extends Model
@@ -13,6 +14,13 @@ class Media extends Model
   * @var string
   */
   protected $table = 'entries_media';
+
+  /*
+  * Model validation rules
+  */
+  protected $rules = [
+      'file'      => 'image',
+  ];
 
 
   public function entries() {
