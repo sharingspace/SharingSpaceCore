@@ -158,6 +158,12 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postDelete')
   );
 
+  Route::post('{entryID}/delete/ajax', array(
+    'middleware' => 'auth',
+    'as' => 'entry.delete.ajax.save',
+    'uses' => 'EntriesController@postAjaxDelete')
+  );
+
   Route::get('{entryID}/edit', array(
     'middleware' => 'auth',
     'as' => 'entry.edit.form',
@@ -176,7 +182,7 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postEdit')
   );
 
-  Route::post('{tileId}/upload', array(
+  Route::post('{entryID}/upload', array(
     'middleware' => 'auth',
     'uses' => 'EntriesController@ajaxUpload')
   );

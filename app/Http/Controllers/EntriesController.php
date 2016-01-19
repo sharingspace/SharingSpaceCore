@@ -94,31 +94,18 @@ class EntriesController extends Controller
       $entry->longitude 		= $latlong['lng'];
     }
 
-		$ajaxAdd = e(Input::get('ajaxAdd'));
-
     if ($entry->isInvalid()) {
-			if( $ajaxAdd ) {
-				return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
-			}
-			else {
        return redirect()->back()->withInput()->withErrors($community->getErrors());
-    }
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
 			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
-			if( $ajaxAdd ) {
-			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
-			}
 
-		} else {
-      if( $ajaxAdd ) {
-				return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
-			}
-			else {
+			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('entry_exchange_types')]);
+
+		}
       return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
-    }
-  }
+
   }
 
 	/*
@@ -148,7 +135,7 @@ class EntriesController extends Controller
 
 
   /*
-  Save the entry edits
+  Save the entry edits via Ajax
   */
   public function postAjaxEdit(Request $request, $entryID)
   {
@@ -187,10 +174,9 @@ class EntriesController extends Controller
         $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
         return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
 
-      } else {
-
-          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
       }
+
+      return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
 
   }
 
@@ -202,71 +188,72 @@ class EntriesController extends Controller
 	public function postEdit(Request $request, $entryID)
 	{
 
-		  if ($entry = \App\Entry::find($entryID)) {
+	  if ($entry = \App\Entry::find($entryID)) {
 
-        $user = Auth::user();
-				$ajaxAdd = e(Input::get('ajaxAdd'));
+      $user = Auth::user();
 
-      	if (!$entry->checkUserCanEditEntry($user)) {
-					if($ajaxAdd) {
-						return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
-					}
-					else {
-			    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
-					}
-      	} else {
+    	if (!$entry->checkUserCanEditEntry($user)) {
+		    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+    	} else {
 
-          $entry->title	= e(Input::get('title'));
-          $entry->post_type	= e(Input::get('post_type'));
-          $entry->description	= e(Input::get('description'));
-          $entry->qty	= e(Input::get('qty'));
+        $entry->title	= e(Input::get('title'));
+        $entry->post_type	= e(Input::get('post_type'));
+        $entry->description	= e(Input::get('description'));
+        $entry->qty	= e(Input::get('qty'));
 
-          if (Input::get('location')) {
-            $entry->location = e(Input::get('location'));
-            $latlong = Helper::latlong(Input::get('location'));
-          }
-
-          if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-            $entry->latitude 		= $latlong['lat'];
-            $entry->longitude 		= $latlong['lng'];
-          }
-
-          if (!$entry->save()) {
-
-						if($ajaxAdd) {
-							return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
-						}
-						else {
-             return Redirect::back()->withInput()->withErrors($entry->getErrors());
-            }
-
-
-          }
-
-          if (Input::hasFile('file')) {
-            $entry->uploadImage(Input::file('file'), 'entries');
-          }
-
-					if( $ajaxAdd ) {
-						return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
-					}
-					else {
-          $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
-
-  				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
-        }
+        if (Input::get('location')) {
+          $entry->location = e(Input::get('location'));
+          $latlong = Helper::latlong(Input::get('location'));
         }
 
-      } else {
-				if($ajaxAdd) {
-					return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
-				}
-				else {
-        return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+        if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+          $entry->latitude 		= $latlong['lat'];
+          $entry->longitude 		= $latlong['lng'];
+        }
+
+        if (!$entry->save()) {
+           return Redirect::back()->withInput()->withErrors($entry->getErrors());
+        }
+
+        if (Input::hasFile('file')) {
+          $entry->uploadImage(Input::file('file'), 'entries');
+        }
+        $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
+
+				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
       }
-      }
+
+    }
+    return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
 
   }
+
+
+  /*
+  Delete the entry via Ajax
+  */
+  public function postAjaxDelete($entryID)
+  {
+    if ($entry = \App\Entry::find($entryID)) {
+      $user = Auth::user();
+
+      if (!$entry->checkUserCanEditEntry($user)) {
+        return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.delete_not_allowed')]);
+      } else {
+
+        if ($entry->delete()) {
+          $entry->exchangeTypes()->detach();
+          return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
+        }
+
+        return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.delete_failed'));
+      }
+    }
+
+    return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+
+  }
+
 
 	/*
   Delete the entry
