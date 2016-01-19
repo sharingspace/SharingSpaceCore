@@ -23,7 +23,7 @@
                 <p>{{ trans('general.entries.create_subheadline') }}</p>
                 <!-- entry form -->
 
-                <form method="post" action="{{ route('entry.create.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">
+                <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">
                   {!! csrf_field() !!}
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
 

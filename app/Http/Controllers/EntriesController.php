@@ -36,6 +36,44 @@ class EntriesController extends Controller
     return view('entries.create');
   }
 
+
+  /*
+  * Save new entry via Ajax
+  */
+  public function postAjaxCreate(Request $request)
+  {
+    $entry = new \App\Entry();
+    $entry->title	= e(Input::get('title'));
+    $entry->post_type	= e(Input::get('post_type'));
+    $entry->created_by	= Auth::user()->id;
+
+    if (Input::get('location')) {
+      $entry->location = e(Input::get('location'));
+      $latlong = Helper::latlong(Input::get('location'));
+    }
+
+    if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+      $entry->latitude 		= $latlong['lat'];
+      $entry->longitude 	= $latlong['lng'];
+    }
+
+    if ($entry->isInvalid()) {
+			return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+		}
+
+
+    if ($request->whitelabel_group->entries()->save($entry)) {
+			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+
+		}
+
+    return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+
+  }
+
+
+
   /*
   * Save new entry
   */
@@ -109,6 +147,7 @@ class EntriesController extends Controller
   }
 
 
+
   /*
 	Save the entry edits
 	*/
@@ -145,6 +184,11 @@ class EntriesController extends Controller
           }
 
           if (!$entry->save()) {
+
+            if (Input::hasFile('file')) {
+    					$filename 				=  Help::uploadImage('image', 'profile', 250, 250);
+    				}
+
 						if($ajaxAdd) {
 							return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
 						}
