@@ -100,7 +100,7 @@
                     <!-- file upload -->
                     <div class="col-md-12 margin-bottom-10">
                       <div class="fancy-file-upload fancy-file-info">
-                      	<i class="fa fa-upload"></i>
+                      	<i class="fa fa-picture-o"></i>
                       	<input type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);" />
                       	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
                       	<span class="button">Choose File</span>
