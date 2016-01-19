@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-      "aws/aws-sdk-php-laravel": "*",
+      "aws/aws-sdk-php-laravel": "~3.0",
       "barryvdh/laravel-debugbar": "^2.0",
       "cartalyst/stripe-billing-laravel": "~3.0",
       "cviebrock/eloquent-sluggable": "^3.0",

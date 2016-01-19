@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe46b68b8923dfb2ebc7863c180fc4a7",
-    "content-hash": "bf7f0e2a7ccab82fe4025081d504683d",
+    "hash": "640d665208e5c7a262bf3c812f5ac704",
+    "content-hash": "871443dd19e656bb1a1fd7a280640605",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -88,16 +88,16 @@
         },
         {
             "name": "aws/aws-sdk-php-laravel",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php-laravel.git",
-                "reference": "47d805e4cd3f18cce1d89bd2b3c02929712b7b6e"
+                "reference": "3b946892d493b91b4920ec4facc4a0ad7195fb86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php-laravel/zipball/47d805e4cd3f18cce1d89bd2b3c02929712b7b6e",
-                "reference": "47d805e4cd3f18cce1d89bd2b3c02929712b7b6e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php-laravel/zipball/3b946892d493b91b4920ec4facc4a0ad7195fb86",
+                "reference": "3b946892d493b91b4920ec4facc4a0ad7195fb86",
                 "shasum": ""
             },
             "require": {
@@ -106,8 +106,11 @@
                 "php": ">=5.5.9"
             },
             "require-dev": {
-                "laravel/framework": "~5.1",
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "~4.0|~5.0"
+            },
+            "suggest": {
+                "laravel/framework": "To test the Laravel bindings",
+                "laravel/lumen-framework": "To test the Lumen bindings"
             },
             "type": "library",
             "autoload": {
@@ -137,7 +140,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-09-18 19:48:38"
+            "time": "2016-01-18 06:57:07"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1514,22 +1517,22 @@
         },
         {
             "name": "jenssegers/rollbar",
-            "version": "v1.4.5",
+            "version": "v1.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jenssegers/laravel-rollbar.git",
-                "reference": "20f6bbc550bb6e6fdad7d922a3082e7e247323ce"
+                "reference": "d277e533c2e7fb342bb0ecba14d71b8b2d454846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jenssegers/laravel-rollbar/zipball/20f6bbc550bb6e6fdad7d922a3082e7e247323ce",
-                "reference": "20f6bbc550bb6e6fdad7d922a3082e7e247323ce",
+                "url": "https://api.github.com/repos/jenssegers/laravel-rollbar/zipball/d277e533c2e7fb342bb0ecba14d71b8b2d454846",
+                "reference": "d277e533c2e7fb342bb0ecba14d71b8b2d454846",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "^4.0|^5.0",
                 "php": ">=5.4",
-                "rollbar/rollbar": "^0.11"
+                "rollbar/rollbar": "~0.15"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9",
@@ -1561,7 +1564,7 @@
                 "monitoring",
                 "rollbar"
             ],
-            "time": "2015-12-13 08:51:29"
+            "time": "2016-01-17 20:47:23"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -1805,16 +1808,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.2",
+            "version": "v5.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "5a8f1380a0d5ef21cdef37e775d86566307f8358"
+                "reference": "c88b2d59a56ed2290fc5082a1a6099e357c9fdbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/5a8f1380a0d5ef21cdef37e775d86566307f8358",
-                "reference": "5a8f1380a0d5ef21cdef37e775d86566307f8358",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/c88b2d59a56ed2290fc5082a1a6099e357c9fdbc",
+                "reference": "c88b2d59a56ed2290fc5082a1a6099e357c9fdbc",
                 "shasum": ""
             },
             "require": {
@@ -1855,7 +1858,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
-            "time": "2015-12-23 07:46:46"
+            "time": "2016-01-16 16:54:49"
         },
         {
             "name": "league/flysystem",
@@ -2703,16 +2706,16 @@
         },
         {
             "name": "rollbar/rollbar",
-            "version": "v0.11.2",
+            "version": "v0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "1d8c5dce4a3eb2ed3f6767ae651f267ad354b43d"
+                "reference": "f4ead5be5e52443f0c9e0272a0cd5813a5b3199a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/1d8c5dce4a3eb2ed3f6767ae651f267ad354b43d",
-                "reference": "1d8c5dce4a3eb2ed3f6767ae651f267ad354b43d",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/f4ead5be5e52443f0c9e0272a0cd5813a5b3199a",
+                "reference": "f4ead5be5e52443f0c9e0272a0cd5813a5b3199a",
                 "shasum": ""
             },
             "require": {
@@ -2748,7 +2751,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2015-05-27 21:44:30"
+            "time": "2015-07-29 00:03:24"
         },
         {
             "name": "swiftmailer/swiftmailer",
