@@ -146,6 +146,12 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postCreate')
   );
 
+  Route::post('new', array(
+    'middleware' => 'auth',
+    'as' => 'entry.create.ajax.save',
+    'uses' => 'EntriesController@postAjaxCreate')
+  );
+
   Route::post('{entryID}/delete', array(
     'middleware' => 'auth',
     'as' => 'entry.delete.save',
