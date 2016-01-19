@@ -147,6 +147,54 @@ class EntriesController extends Controller
   }
 
 
+  /*
+  Save the entry edits
+  */
+  public function postAjaxEdit(Request $request, $entryID)
+  {
+
+      if ($entry = \App\Entry::find($entryID)) {
+
+        $user = Auth::user();
+
+        if (!$entry->checkUserCanEditEntry($user)) {
+          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
+        }
+
+        $entry->title	= e(Input::get('title'));
+        $entry->post_type	= e(Input::get('post_type'));
+        $entry->description	= e(Input::get('description'));
+        $entry->qty	= e(Input::get('qty'));
+
+        if (Input::get('location')) {
+          $entry->location = e(Input::get('location'));
+          $latlong = Helper::latlong(Input::get('location'));
+        }
+
+        if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+          $entry->latitude 		  = $latlong['lat'];
+          $entry->longitude 		= $latlong['lng'];
+        }
+
+        if (!$entry->save()) {
+          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+        }
+
+        if (Input::hasFile('file')) {
+          $entry->uploadImage(Input::file('file'), 'entries');
+        }
+
+        $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
+        return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
+
+      } else {
+
+          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
+      }
+
+  }
+
+
 
   /*
 	Save the entry edits

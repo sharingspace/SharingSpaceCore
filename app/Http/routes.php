@@ -146,7 +146,7 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postCreate')
   );
 
-  Route::post('new', array(
+  Route::post('new/ajax', array(
     'middleware' => 'auth',
     'as' => 'entry.create.ajax.save',
     'uses' => 'EntriesController@postAjaxCreate')
@@ -162,6 +162,12 @@ Route::group(array('prefix' => 'entry'), function () {
     'middleware' => 'auth',
     'as' => 'entry.edit.form',
     'uses' => 'EntriesController@getEdit')
+  );
+
+  Route::post('{entryID}/edit/ajax', array(
+    'middleware' => 'auth',
+    'as' => 'entry.edit.ajax.save',
+    'uses' => 'EntriesController@postAjaxEdit')
   );
 
   Route::post('{entryID}/edit', array(
