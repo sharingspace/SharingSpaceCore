@@ -185,16 +185,18 @@ class EntriesController extends Controller
 
           if (!$entry->save()) {
 
-            if (Input::hasFile('file')) {
-    					$filename 				=  Help::uploadImage('image', 'profile', 250, 250);
-    				}
-
 						if($ajaxAdd) {
 							return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
 						}
 						else {
              return Redirect::back()->withInput()->withErrors($entry->getErrors());
+            }
+
+
           }
+
+          if (Input::hasFile('file')) {
+            $entry->uploadImage(Input::file('file'), 'entries');
           }
 
 					if( $ajaxAdd ) {

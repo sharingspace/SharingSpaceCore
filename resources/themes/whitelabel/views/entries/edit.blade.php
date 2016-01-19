@@ -101,7 +101,7 @@
                     <div class="col-md-12 margin-bottom-10">
                       <div class="fancy-file-upload fancy-file-info">
                       	<i class="fa fa-upload"></i>
-                      	<input type="file" class="form-control" name="contact[attachment]" onchange="jQuery(this).next('input').val(this.value);" />
+                      	<input type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);" />
                       	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
                       	<span class="button">Choose File</span>
                       </div>

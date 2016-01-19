@@ -12,7 +12,7 @@ class Media extends Model
   *
   * @var string
   */
-  protected $table = 'media';
+  protected $table = 'entries_media';
 
 
   public function entries() {

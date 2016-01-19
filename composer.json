@@ -42,7 +42,8 @@
             "database",
             "app/Models",
             "app/Http/Transformers",
-            "app/Helpers/Helper.php"
+            "app/Helpers/Helper.php",
+            "app/Traits"
         ],
         "psr-4": {
             "App\\": "app/"

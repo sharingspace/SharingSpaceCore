@@ -6,6 +6,7 @@ use Config;
 use App\User;
 use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
+use App\UploadableFileTrait;
 
 class Entry extends Model
 {
@@ -28,12 +29,33 @@ class Entry extends Model
 
 
   use ValidatingTrait;
+  use UploadableFileTrait;
 
-
+  /*
+  *
+  */
   protected $rules = [
       'title'            => 'required|string|min:2|max:255',
       'post_type'            => 'required',
   ];
+
+  /*
+  * Set traits for uploadable image
+  */
+
+  public $uploadableImgs = [
+      'entries' =>
+        [
+          'height' => '250',
+          'width' => '250',
+        ],
+  ];
+
+
+  // public $uploadableImgLocalPath = '/public/assets/uploads/entries/';
+  // public $uploadableImgCDNPath =  'assets/uploads/entries/';
+  // public $uploadableImgWidth = 250;
+  // public $uploadableImgHeight = 250;
 
   /**
    * The attributes that are mass assignable.
