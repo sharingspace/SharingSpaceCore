@@ -14,7 +14,7 @@
       <div class="row">
         <h1 class="size-16 uppercase margin-bottom-20">{{ trans('general.entries.create') }}</h1>
         <p class="margin-bottom-20">{{ trans('general.entries.create_subheadline') }}</p>
-        
+
         <!-- Added tiles .... -->
         <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
         <table class="table" id="create_table" >
@@ -41,7 +41,7 @@
 						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
 							<div class="row">
 
-               
+
                 <!-- entry form -->
 
                 <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">
@@ -51,7 +51,7 @@
  										<!--
                     Added tiles ....
                     -->
-                   
+
                     <div class="col-md-12 col-sm-12 col-xs-12 tile_container" id="tile_1" style="display:none;margin-bottom:15px;">
                       <div class="row" style="margin-bottom:7px;">
                       	<div class="tile_info col-md-5 col-sm-5 col-xs-5" >
@@ -80,7 +80,7 @@
                           </div> <!-- image_upload -->
 
 
-            							<!-- <button type="button" class="button_edit smooth_font btn btn-info btn-md"  style="float:right;margin-left:10px;font-size:13px;">edit <i class="fa fa-pencil fa-lg"></i></button> 
+            							<!-- <button type="button" class="button_edit smooth_font btn btn-info btn-md"  style="float:right;margin-left:10px;font-size:13px;">edit <i class="fa fa-pencil fa-lg"></i></button>
 
                           <button type="button" class="button_delete smooth_font btn btn-warning btn-md"  style="float:right;margin-left:10px;background-color:rgba(255,0,0,0.6);font-size:13px;">delete <i class="fa fa-times fa-lg"></i></button> -->
 
@@ -88,24 +88,34 @@
                       </div> <!-- row  -->
                     </div> <!-- col-md-10 tile_container  -->
                   	<div class="col-md-3 col-sm-3 col-xs-3" style="border-right:#CCC thin solid;">
-                    
+
                     	<div class="form-group" style="margin-bottom: 5px;">
-                      	<fieldset class='margin-bottom-10'>
-                        	<legend class='sr-only'>Excahange by:</legend>
+                      	<fieldset class="margin-bottom-10">
+
+                        	<legend class="sr-only">Exchange by:</legend>
+
                           {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
 													<div class="exchange_types">
-                          	@foreach (\App\ExchangeType::all() as $exchange_types)
-                            	<label class="checkbox" style="display:block;">
-                              {{ Form::checkbox('community_exchange_types['.$exchange_types->id.']', $exchange_types->id, false) }}
-                              <i></i> {{ $exchange_types->name }}
-                               </label>
-                            @endforeach
+
+
+                            <!-- checkboxes for exchange types -->
+                            <div class="col-md-12 margin-bottom-10">
+                              <div class="checkbox">
+                              @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                              <div class="col-md-12 pull-left margin-bottom-10">
+                                <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                                  {{ Form::checkbox('community_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                                  <i></i> {{ $exchange_types->name }}
+                                </label>
+                              </div>
+                              @endforeach
+                              </div>
                           </div> <!-- exchange_types -->
                          </fieldset>
                         </div> <!-- form-group -->
-                        
+
                       </div> <!-- col-md-3 -->
-                      
+
                       <div class="col-md-9 col-sm-9 col-xs-9">
 
                   		<fieldset class="nomargin">
@@ -122,12 +132,12 @@
                       		</label>
                     		</div>
                     		<div class="col-md-2 margin-bottom-10">
-                    		<button class="btn btn-success  pull-right" id="quickAdd" name="quickAdd" value="quickAdd"><i class="fa fa-sign-in fa-lg" style="margin-right:5px;"></i>Create</button>
-                      	
+                    		<button class="btn btn-success  pull-right" id="quickAdd" name="quickAdd" value="quickAdd">Create</button>
+
                     		</div>
                    		</fieldset>
-                   
-                   		<div class="col-md-10"> 
+
+                   		<div class="col-md-10">
                         <div id="prefs_panel" style="display:none;">
                           <!-- Location -->
                           <div class="form-group {{ $errors->first('location', 'has-error') }}">
@@ -140,7 +150,17 @@
                               {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
                            </div>
                           </div>
-  
+
+                          <!-- File upload -->
+                          <div class="form-group {{ $errors->first('location', 'has-error') }}">
+                            <div class="fancy-file-upload fancy-file-info">
+                            	<i class="fa fa-upload"></i>
+                            	<input type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);" />
+                            	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
+                            	<span class="button">Choose File</span>
+                            </div>
+                          </div>
+
                           <div class="col-md-12 col-sm-12 col-xs-12">
                             <label class="checkbox pull-left" for="visible_checkbox">
                               {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
@@ -149,19 +169,19 @@
                           </div>
                         </div> <!-- prefs panel -->
                        </div>
-                      
+
                       <div class="col-md-2">
                     		<button type="button" id="pref_button"  class="btn btn-info btn-md" style="float:right;"><i class="fa fa-caret-left fa-lg"></i> More</button>
                     	</div>
                     </div>
-                   
+
 
                   <!--  <div>
                   <input id="option" type="checkbox" name="field" value="option">
                   <label for="option"><span><span></span></span>Value</label>
                 </div> -->
 
-                  
+
                 </form>
               </div>
 						</div>
@@ -458,14 +478,14 @@ function getExchangeList() {
 				if(replyData.success)
 				{
 					//console.log("success!!!!! "+xhr.responseText + "  "+replyData.exchange_types);
-					
+
 					var exchanges='';
 					$.each(replyData.exchange_types, function(index, value) {
     				exchanges = exchanges + ', '+ exchangeTypeName[value] ;
 					});
-					exchanges = exchanges.replace(/(^\s*, )|(, \s*$)/g, ''); 
+					exchanges = exchanges.replace(/(^\s*, )|(, \s*$)/g, '');
 					//exchanges = " ("+exchanges+')';
-					 
+
 					if(edit)
 					{
 						//console.log("Edit response  "+replyData.success) ;
@@ -494,7 +514,7 @@ function getExchangeList() {
 						tile_info = "I "+replyData.post_type + " "+replyData.title;
 
 						//console.log("stateChanged, tile_info: "+tile_info);
-						
+
 						if( $('#create_table tr').length == 1) {
 							$('#create_table').show();
 						}
@@ -526,7 +546,7 @@ function getExchangeList() {
 			deleteChanged();
 		};
 
-		xhr.open("POST", tile_id+"/delete", true);
+		xhr.open("POST", tile_id+"/delete/ajax", true);
 		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
 		// step 4b. Fire off the ajax call
