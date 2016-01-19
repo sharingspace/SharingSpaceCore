@@ -36,7 +36,7 @@
 
           <p>{{ $entry->media->count() }} images</p>
           @foreach ($entry->media as $image)
-            <img src="/assets/uploads/{{ $image->filename }}" height="250" width="250" border="1">
+            <img src="/assets/uploads/{{ $entry->id }}/{{ $image->filename }}" height="250" width="250" border="1">
           @endforeach
 
 
