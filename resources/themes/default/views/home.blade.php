@@ -128,7 +128,8 @@
 						</div>
             
             <div class="col-sm-7">
-            	<iframe width="560" height="315" src="https://www.youtube.com/embed/wF0-BvRPMss" frameborder="0" allowfullscreen></iframe>
+            	<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/wF0-BvRPMss" frameborder="0" allowfullscreen></iframe> -->
+              <img src='assets/img/backgrounds/hp/regional_football.png') alt='regional mens football sharing hub' />
           	</div>
 					</div>
 				</div>

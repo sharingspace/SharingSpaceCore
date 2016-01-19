@@ -64,13 +64,14 @@ class EntriesController extends Controller
 			}
 			else {
        return redirect()->back()->withInput()->withErrors($community->getErrors());
-    }
+   	 }
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
 			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+			
 			if( $ajaxAdd ) {
-			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('entry_exchange_types')]);
 			}
 
 		} else {
@@ -150,17 +151,16 @@ class EntriesController extends Controller
 						}
 						else {
              return Redirect::back()->withInput()->withErrors($entry->getErrors());
+         	 }
           }
-          }
-
+					
+					$entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
 					if( $ajaxAdd ) {
 						return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
 					}
 					else {
-          $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
-
-  				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
-        }
+  					return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
+       	 }
         }
 
       } else {

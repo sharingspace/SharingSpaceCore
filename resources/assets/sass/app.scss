@@ -3563,7 +3563,7 @@ form {
     margin-bottom: 20px;
   }
   label {
-    font-weight: bold;
+    font-weight: 400;
   }
 }
 
@@ -7601,7 +7601,7 @@ $color-green: #9AE14F;
 			text-align: center;
 	}
 	
-	.tile_info {
+	.tile_info, .tile_exchanges {
 		font-size:16px;
 		background-color:#eee;
 		height:40px;
