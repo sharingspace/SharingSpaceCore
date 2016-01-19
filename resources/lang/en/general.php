@@ -94,6 +94,11 @@ return [
 
     ],
 
+    'uploads'  => [
+      'choose_file'  => 'Choose file',
+    ],
+
+
 
 
 ];
