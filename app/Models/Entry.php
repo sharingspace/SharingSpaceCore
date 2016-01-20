@@ -39,6 +39,7 @@ class Entry extends Model
   protected $rules = [
       'title'            => 'required|string|min:3|max:255',
       'post_type'        => 'required',
+      'qty'              => 'required|min:1',
   ];
 
   /*
