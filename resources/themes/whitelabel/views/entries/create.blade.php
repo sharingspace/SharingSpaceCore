@@ -366,6 +366,7 @@ $(function() {
     var message = '';
     for (var err in error) {
       message += '<li>' + error[err] + '</li>';
+      $('#' + err).parent().addClass('has-error');
     }
     $('#submission_error').html(message).show();
   }
@@ -387,12 +388,11 @@ $(function() {
 			2000);
       return;
 		}
-		if(!$('.exchange_types input:checked')) {
-			$("<p class='no_exchanges' style='font-weight:bold;font-size:18px;'>Please select at least one exchange type</p>").insertBefore('form');
-			setTimeout(function() {
-					$('p.no_exchanges').remove();
-				},
-			4000);
+
+    console.dir($('.exchange_types input:checked'));
+
+		if($('.exchange_types input:checked').length == 0) {
+      $('#submission_error').text('Please select at least one exchange type').show();
       return;
 		}
 		if(!title) // step 1. Anything to save?
