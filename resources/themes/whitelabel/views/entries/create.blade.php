@@ -29,6 +29,7 @@
           <thead>
               <tr>
                   <th>{{ trans('general.entries.post_type') }}</th>
+                  <th>{{ trans('general.entries.qty') }}</th>
                   <th>{{ trans('general.entries.title') }}</th>
                   <th>{{ trans('general.entries.exchange_types') }}</th>
                   <th>Action</th>
@@ -135,7 +136,7 @@
                     		</div>
                         <div class="col-md-2 margin-bottom-10">
                           <!-- stepper -->
-                          <input type="text" value="{{ Input::old('qty', 1) }}" min="1" max="1000" class="form-control stepper" name="qty">
+                          <input type="text" value="{{ Input::old('qty', 1) }}" min="1" max="1000" class="form-control stepper" id="qty" name="qty">
                         </div>
                     		<div class="col-md-6 margin-bottom-8 {{ $errors->first('title', ' has-error') }}">
                       		<!-- Name -->
@@ -430,7 +431,7 @@ $(function() {
 		// step 4. Create the ajax call
 		// saveEntry(entry_id, title, want_have, exchangeList, location, visible, edit);
     // console.warn("about to post...");
-    // console.warn("Serialized POst IS: "+$('#entry_form').serialize());
+    console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
       //console.warn("Yay we posted! Here's our reply: ");
       //console.dir(replyData);
@@ -482,7 +483,7 @@ $(function() {
         if( $('#create_table tr').length == 1) {
           $('#create_table').show();
         }
-        $('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+
+        $('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+replyData.qty+ '</td><td>'+
         trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td></tr>');
         console.warn("End of create 'else' branch and of the entire callback");
       }
