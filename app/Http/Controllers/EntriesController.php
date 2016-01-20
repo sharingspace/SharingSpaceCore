@@ -307,8 +307,7 @@ class EntriesController extends Controller
         }
 
       } else {
-        $upload_key = Input::get('upload_key');
-        $uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('file'), 'entries', $upload_key);
+        $uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('file'), 'entries', Input::get('upload_key'));
       }
 
       // The file was uploaded successfully
