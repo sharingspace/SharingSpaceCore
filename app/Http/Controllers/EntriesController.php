@@ -46,6 +46,8 @@ class EntriesController extends Controller
     $entry->title	= e(Input::get('title'));
     $entry->post_type	= e(Input::get('post_type'));
     $entry->created_by	= Auth::user()->id;
+    $entry->tags	= e(Input::get('tags'));
+    $entry->qty	= e(Input::get('qty'));
 
     if (Input::get('location')) {
       $entry->location = e(Input::get('location'));
@@ -88,6 +90,8 @@ class EntriesController extends Controller
     $entry->title	= e(Input::get('title'));
     $entry->post_type	= e(Input::get('post_type'));
     $entry->created_by	= Auth::user()->id;
+    $entry->tags	= e(Input::get('tags'));
+    $entry->qty	= e(Input::get('qty'));
 
     if (Input::get('location')) {
       $entry->location = e(Input::get('location'));
@@ -162,6 +166,7 @@ class EntriesController extends Controller
         $entry->post_type	= e(Input::get('post_type'));
         $entry->description	= e(Input::get('description'));
         $entry->qty	= e(Input::get('qty'));
+        $entry->tags	= e(Input::get('tags'));
 
         if (Input::get('location')) {
           $entry->location = e(Input::get('location'));
@@ -210,6 +215,7 @@ class EntriesController extends Controller
         $entry->post_type	= e(Input::get('post_type'));
         $entry->description	= e(Input::get('description'));
         $entry->qty	= e(Input::get('qty'));
+        $entry->tags	= e(Input::get('tags'));
 
         if (Input::get('location')) {
           $entry->location = e(Input::get('location'));
