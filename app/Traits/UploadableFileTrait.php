@@ -41,7 +41,7 @@ trait UploadableFileTrait {
     if ($file->move($path, $filename)) {
       $media = new Media();
       $media->entry_id = $id;
-      //$media->upload_key = $upload_key;
+      $media->upload_key = $upload_key;
       $media->filename =  $filename;
       $media->filetype = 'image';
       $media->caption = NULL;
