@@ -6,6 +6,7 @@ use Config;
 use App\User;
 use App\ExchangeType;
 use Watson\Validating\ValidatingTrait;
+use App\UploadableFileTrait;
 
 class Community extends Model
 {
@@ -26,12 +27,36 @@ class Community extends Model
   */
   protected $injectUniqueIdentifier = true;
   use ValidatingTrait;
+  use UploadableFileTrait;
 
   protected $rules = [
       'name'            => 'required|string|min:2|max:255',
       'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
       'group_type'      => 'required',
   ];
+
+  /*
+  * Set traits for uploadable image
+  */
+
+  public static $uploadableImgs = [
+      'community-covers' =>
+        [
+          'height' => '250',
+          'width' => '250',
+        ],
+      'community-logos' =>
+        [
+          'height' => '250',
+          'width' => '250',
+        ],
+      'community-avatar' =>
+        [
+          'height' => '250',
+          'width' => '250',
+        ],
+  ];
+
 
   /**
    * The attributes that are mass assignable.
