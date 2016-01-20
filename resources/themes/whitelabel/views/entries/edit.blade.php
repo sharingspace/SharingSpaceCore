@@ -89,7 +89,7 @@
                       @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                       <div class="col-md-2 pull-left margin-bottom-10">
                         <label class="checkbox col-md-3 pull-left margin-bottom-10">
-                          {{ Form::checkbox('entry_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                          {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
                           <i></i> {{ $exchange_types->name }}
                         </label>
                       </div>
