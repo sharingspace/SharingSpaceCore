@@ -10,13 +10,20 @@
 {{-- Page content --}}
 @section('content')
 
+<style>
+.checkbox {
+   padding-left: 0px;
+}
+</style>
+
     <section class="container">
       <div class="row">
-        <h1 class="size-16 uppercase margin-bottom-20">{{ trans('general.entries.create') }}</h1>
-        <p class="margin-bottom-20">{{ trans('general.entries.create_subheadline') }}</p>
+
 
         <!-- Added tiles .... -->
         <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+        <h1 class="size-16 uppercase margin-bottom-20">{{ trans('general.entries.create') }}</h1>
+
         <table class="table" id="create_table" >
           <caption>You Added</caption>
           <thead>
@@ -41,10 +48,11 @@
 						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
 							<div class="row">
 
+                <div class="alert alert-danger" style="display:none" id="submission_error"></div>
 
                 <!-- entry form -->
 
-                <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">
+                <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin" id='entry_form'>
                   {!! csrf_field() !!}
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
 
@@ -104,7 +112,7 @@
                               @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                               <div class="col-md-12 pull-left margin-bottom-10">
                                 <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                                  {{ Form::checkbox('community_exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                                  {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
                                   <i></i> {{ $exchange_types->name }}
                                 </label>
                               </div>
@@ -138,7 +146,23 @@
                    		</fieldset>
 
                    		<div class="col-md-10">
-                        <div id="prefs_panel" style="display:none;">
+                        <div id="prefs_panel">
+
+                          <div class="form-group {{ $errors->first('description', 'has-error') }}">
+                            <!-- Description -->
+                            <label class="input">
+                              <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="Detailed description..."></textarea>
+                            </label>
+                          </div>
+
+                          <!-- Tags -->
+                          <div class="form-group {{ $errors->first('tags', 'has-error') }}">
+                            <label class="input">
+                          		<input type="text" name="tags" id="tags" class="form-control" placeholder="Keywords, comma-separated">
+                        		</label>
+                          </div>
+
+
                           <!-- Location -->
                           <div class="form-group {{ $errors->first('location', 'has-error') }}">
                             <label class="control-label sr-only" for="location">Location</label>
@@ -170,9 +194,6 @@
                         </div> <!-- prefs panel -->
                        </div>
 
-                      <div class="col-md-2">
-                    		<button type="button" id="pref_button"  class="btn btn-info btn-md" style="float:right;"><i class="fa fa-caret-left fa-lg"></i> More</button>
-                    	</div>
                     </div>
 
 
@@ -224,11 +245,6 @@ $("#create_table").hide();
 
 $(function() {
 
-var exchangeTypeName=[];
-@foreach (\App\ExchangeType::all() as $exchange_types)
-	exchangeTypeName[{{ $exchange_types->id }}] = "{{ $exchange_types->name }}";
-@endforeach
-
 //console.log(exchangeTypeName);
 	$("#quickAdd").removeAttr('disabled');//enable add button	now page has loaded
 
@@ -271,50 +287,49 @@ var exchangeTypeName=[];
 
 	$(document).on( "click", ".button_edit", function( e ) {
 		e.preventDefault();
-		tile_info = $(this).closest('.tile_container').find('.tile_info').text();
-		tile_info = tile_info.substr(6);
+    return window.alert("This hasn't been built yet.");
+		entry_info = $(this).closest('.tile_container').find('.tile_info').text();
+    console.warn("Tile info is: "+entry_info);
+		entry_info = entry_info.substr(6);
 		//console.log("edit clicked"+tile_info);
 
 		var tile = $(this).closest('.tile_container').prop("id");
-		var tile_id = parseInt( tile.match(/\d+/g), 10 );
-		//console.log("edit clicked"+tile_id);
-		document.getElementById("title").value = tile_info;
+    var entry_id = $(this).data("entryid");
+		//console.log("edit clicked"+entry_id);
+		$("#title").val(tile_info);
 		$("#title").css('background-color','FFFFCC').animate({
             'background-color': 'white'
             //your input background color.
        			 }, 2000);
-		document.getElementById("title").focus();
-		$( "#title" ).addClass( "update_"+tile_id);
-
+		$("#title").focus();
+		$("#title" ).addClass( "update_"+entry_id);
 	});
 
 	$(document).on( "click", ".button_delete", function( e ) {
 		e.preventDefault();
 		//var tile = $(this).closest('.tile_container').prop("id");
-		var entry = $(this).closest('td').next().attr('class');
-		var entry_id = parseInt( entry.match(/\d+/g), 10 );
-		//console.log("delete clicked on entry: "+entry_id);
-		deleteTile(entry_id);
+		var entry_id = $(this).data("entryid");
+    var myrow = $(this).closest('tr');
+		console.log("delete clicked on entry: "+entry_id);
+    $.post(entry_id+"/delete/ajax",{_token: $('input[name=_token]').val()},function (replyData) {
+      //console.log("delete success :-)  "+replyData.entry_id);
+      if(replyData.success) {
+        //$('td.entry_'+replyData.entry_id).closest('tr').remove();
+        myrow.remove();
+
+        // count how many rows we have, if we only have the header row hide the table
+        //console.log($('#create_table tr').length);
+        if( $('#create_table tr').length == 1) {
+          $('#create_table').css('display','none');
+        }
+      } else {
+        // TODO: display some kind of error?
+      }
+    }).fail(function (jqxhr,errorStatus) {
+      window.alert("Server error status is: "+errorStatus);
+      $('#tile_'+entry_id +' .delete_error').html('<p style="margin-top:5px">'+replyData.error+'</p>').show();
+    });
 	});
-
-
-
-function getExchangeList() {
-		var exchanges = [];
-		var exchangeList = "";
-
-		$('.exchange_types input:checked').each(function() {
-		exchanges.push($(this).val());
-		});
-
-		for(i=0; i< exchanges.length; i++){
-			//if(exchanges[i] != "all") exchangeList = exchangeList + "&tile_exchange_type["+exchanges[i]+"]="+exchanges[i];
-			exchangeList = exchangeList + "&entry_exchange_types["+exchanges[i]+"]="+exchanges[i];
-		};
-
-		//console.log("exchangeList: "+exchanges.length +"  (number)  "+exchangeList);
-		return exchangeList;
-	}
 
 	function getHubList() {
 		var hubList = "";
@@ -328,7 +343,6 @@ function getExchangeList() {
 			hubList = hubList + "&groups["+hubs[i]+"]="+hubs[i];
 		};
 
-		//console.log("hubList: "+hubList);
 		return hubList;
 	}
 
@@ -336,19 +350,26 @@ function getExchangeList() {
 		// has title text changed?
 		$focusedTitle = $(':focus');
 		if( $focusedTitle ) {
-			//console.log("Current value "+ $focusedTitle.val()+", initial value "+$focusedTitle.data().initail);
-
 			return !($focusedTitle.val() == $focusedTitle.data().initail)
 		}
 		else return false;
 	}
 
 	function restorePlaceholder(ph_text) {
-		//return function() {
-			document.getElementById("title").value = "";
-			document.getElementById("title").placeholder = ph_text;
-		//};
+			$("#title").val(""); // = "";
+			$("#title").attr('placeholder',ph_text);
 	}
+
+
+  // Return smart server error messages
+  function parseAndDisplayError(error) {
+    var message = '';
+    for (var err in error) {
+      message += '<li>' + error[err] + '</li>';
+    }
+    $('#submission_error').html(message).show();
+  }
+
 
 	$(document).on( "click", "#quickAdd", function( e ) {
 		//console.log("add or return hit");
@@ -357,231 +378,129 @@ function getExchangeList() {
 		edit = false;
 
 		var title = $("#title").val();
-		if(title.length < 3)
+		if(title.length < 3 && false)
 		{
 			restorePlaceholder("Your want or have must be at least 3 characters long")
 			setTimeout(function() {
 					restorePlaceholder("Press enter to save");
 				},
 			2000);
+      return;
 		}
-		else if(!getExchangeList().length) {
+		if(!$('.exchange_types input:checked')) {
 			$("<p class='no_exchanges' style='font-weight:bold;font-size:18px;'>Please select at least one exchange type</p>").insertBefore('form');
 			setTimeout(function() {
 					$('p.no_exchanges').remove();
 				},
 			4000);
+      return;
 		}
-		else if(title) // step 1. Anything to save?
+		if(!title) // step 1. Anything to save?
 		{
-			//console.log("title of new tile = "+title);
+      //I suspect that this will never fire; if there was no title text-left
+      // then title.length < 3 anyways.
+      return;
+    }
+		//console.log("title of new tile = "+title);
 
-			// step 2. Get the id of the last div with id starting with tile_xx
-			// this is where we will store the results if this tile saves successfully
-			var lastTileDiv = $('div[id^="tile_"]:last');
-			//console.log("last = "+lastTileDiv.attr("id"));
-			var tile_id = parseInt( lastTileDiv.prop("id").match(/\d+/g), 10 );
-			//console.log("On success save tile at id = tile_"+tile_id);
+		// step 2. Get the id of the last div with id starting with tile_xx
+		// this is where we will store the results if this tile saves successfully
+		var lastEntryDiv = $('div[id^="tile_"]:last');
+		var entry_id = parseInt( lastEntryDiv.prop("id").match(/\d+/g), 10 );
 
 
-			tileClasses = $('#title').attr('class');
-			//console.log("work ?  "+tileClasses.match(/\d+/g));
-			position = tileClasses.indexOf("update_");
-			if(position>=0) {
-				tile_id = tileClasses.match(/\d+/g);
-				//console.log("update, edit = true "+tile_id+"  "+tileClasses);
-				edit = true;
-			}
-
-			// step 3. Gather everything else we need from the form, want/have, location, exchanges etc
-			var want_have = $( "#post_type" ).val();
-			var location = $('#location').val();
-			var exchangeList = getExchangeList();
-			//var hubList = getHubList() ;
-			if (document.getElementById('visible_checkbox').checked == true) var visible=0;
-			else var visible =1;
-			//console.log("Visible only to you checked:" + document.getElementById('visible_checkbox').checked);
-
-			// step 4. Create the ajax call
-			saveTile(tile_id, title, want_have, exchangeList, location, visible, edit);
+		tileClasses = $('#title').attr('class');
+		//console.log("work ?  "+tileClasses.match(/\d+/g));
+    var post_url="new/ajax";
+		position = tileClasses.indexOf("update_");
+		if(position>=0) {
+			entry_id = tileClasses.match(/\d+/g);
+			//console.log("update, edit = true "+entry_id+"  "+tileClasses);
+			edit = true;
+      post_url=entry_id+"/edit/ajax";
 		}
+
+		//var hubList = getHubList() ;
+		//console.log("Visible only to you checked:" + $('#visible_checkbox').checked);
+
+		// step 4. Create the ajax call
+		// saveEntry(entry_id, title, want_have, exchangeList, location, visible, edit);
+    // console.warn("about to post...");
+    // console.warn("Serialized POst IS: "+$('#entry_form').serialize());
+    $.post( post_url, $('#entry_form').serialize(),function (replyData) {
+      //console.warn("Yay we posted! Here's our reply: ");
+      //console.dir(replyData);
+      if(!replyData.success) {
+        parseAndDisplayError(replyData.error);
+        return;
+      }
+      //console.log("success!!!!! "+xhr.responseText + "  "+replyData.exchange_types);
+
+      if (replyData.exchange_types) {
+        var exchanges=replyData.exchange_types.join(", ");
+      }
+
+      //exchanges = exchanges.replace(/(^\s*, )|(, \s*$)/g, '');
+      //exchanges = " ("+exchanges+')';
+
+      if(edit)
+      {
+        //console.log("Edit response  "+replyData.success) ;
+        // step 4d. Find existing tile div and update contents
+        $("#title").removeClass( "update_"+entry_id);
+
+        tile_info = "I "+replyData.post_type + " "+replyData.title;
+        lastEntryDiv = $("#tile_"+entry_id);
+        $("#tile_"+entry_id +" .tile_info").html(trimString(tile_info,70));
+        $("#title").value = "Saved";
+        $("#title").css('color','green').css('font-weight','bold');
+        $("#title").animate({
+          color: 'white'
+          //your input background color.
+        }, 1000, 'linear', function(){
+          $(this).val('').css('color','#000').css('font-weight','normal');
+          //this is done so that when you start typing, you see the text again :P
+        });
+
+        $("#title").find('input:text').focus();
+      }
+      else
+      {
+        // console.warn("create 'else' branch entered");
+        //console.log("Create response  "+replyData.success) ;
+
+        tile_info = "I "+replyData.post_type + " "+replyData.title;
+
+        //console.log("stateChanged, tile_info: "+tile_info);
+
+        $('#submission_error').hide();
+
+        if( $('#create_table tr').length == 1) {
+          $('#create_table').show();
+        }
+        $('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+
+        trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td></tr>');
+        console.warn("End of create 'else' branch and of the entire callback");
+      }
+    }).fail(function (jqxhr,errorStatus) {
+      $('#submission_error').text(errorStatus).show();
+      console.warn("Boo, we failed at posting :(");
+      restorePlaceholder(errorStatus)
+      setTimeout(function() {
+          restorePlaceholder("Press enter to save");
+        },
+      4000);
+    });
 	});
 
-	function createRequest() {
-		try {
-			request = new XMLHttpRequest();
-		} catch (tryMS) {
-			try {
-				request = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (otherMS) {
-				try {
-					request = new ActiveXObject("Microsoft.XMLHTTP");
-				} catch (failed) {
-					request = null;
-				}
-			}
-		}
-		return request;
-	}
-
-	function updateTileIds(temp_tile_id, tile_id)
+	function updateTileIds(temp_entry_id, entry_id)
 	{
-		//console.log("updateTileIds temp_tile_id = "+temp_tile_id +", tile_id = " +tile_id);
-		document.getElementById("tile_"+temp_tile_id).id="tile_"+tile_id;
-		document.getElementById("fileupload_").id = "fileupload_"+tile_id;
+		//console.log("updateTileIds temp_entry_id = "+temp_entry_id +", entry_id = " +entry_id);
+		$("#tile_"+temp_entry_id).id="tile_"+entry_id;
+		$("#fileupload_").id = "fileupload_"+entry_id;
 
-		$("#tile_"+tile_id+" .title_text label").attr('for','title_'+tile_id);
+		$("#tile_"+entry_id+" .title_text label").attr('for','title_'+entry_id);
 	}
-
-
-	// step 4. Create the ajax call
-	function saveTile(tile_id, title, post_type, exchangeTypes, location, visible, edit){
-		var xhr = createRequest();
-
-		//console.log("saveTile: " +title+"  "+ post_type+"  "+exchangeTypes+"  "+location+", tile_id = "+tile_id + ", visible = "+visible + ", edit = "+edit);
-
-		// step 4a. Create the ajax callback
-		xhr.onreadystatechange = function () {
-			stateChanged();
-		};
-
-		if(edit) {
-			xhr.open("POST", tile_id+"/edit", true);
-		}
-		else {
-			xhr.open("POST", "new", true);
-		}
-
-		token ='_token='+$('input[name=_token]').val() +'&';
-
-		////console.log('token = ' + $('input[name=_token]').val());
-		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		var parameters =token+"ajaxAdd=true&title="+title+"&post_type="+ post_type+exchangeTypes+"&tiletype_id=1&location="+location+"&visible="+visible;
-		//console.log("parameters: "+parameters);
-
-		// step 4b. Fire off the ajax call
-		xhr.send(parameters);
-
-		function stateChanged()
-		{
-			var data;
-
-			// step 4c. Check status change for success
-
-			if (xhr.readyState==4 && xhr.status==200)
-			{
-				//console.log("success!!!!!  "+xhr.responseText) ;
-
-				replyData = JSON.parse(xhr.responseText);
-
-
-				if(replyData.success)
-				{
-					//console.log("success!!!!! "+xhr.responseText + "  "+replyData.exchange_types);
-
-					var exchanges='';
-					$.each(replyData.exchange_types, function(index, value) {
-    				exchanges = exchanges + ', '+ exchangeTypeName[value] ;
-					});
-					exchanges = exchanges.replace(/(^\s*, )|(, \s*$)/g, '');
-					//exchanges = " ("+exchanges+')';
-
-					if(edit)
-					{
-						//console.log("Edit response  "+replyData.success) ;
-						// step 4d. Find existing tile div and update contents
-						$("#title").removeClass( "update_"+tile_id);
-
-						tile_info = "I "+replyData.post_type + " "+replyData.title;
-						lastTileDiv = $("#tile_"+tile_id);
-						$("#tile_"+tile_id +" .tile_info").html(trimString(tile_info,70));
-						document.getElementById("title").value = "Saved";
-						$("#title").css('color','green').css('font-weight','bold');
-						$("#title").animate({
-            color: 'white'
-            //your input background color.
-       			 }, 1000, 'linear', function(){
-            $(this).val('').css('color','#000').css('font-weight','normal');
-            //this is done so that when you start typing, you see the text again :P
-       			 });
-
-						$("#title").find('input:text').focus();
-					}
-					else
-					{
-						//console.log("Create response  "+replyData.success) ;
-
-						tile_info = "I "+replyData.post_type + " "+replyData.title;
-
-						//console.log("stateChanged, tile_info: "+tile_info);
-
-						if( $('#create_table tr').length == 1) {
-							$('#create_table').show();
-						}
-						$('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+
-						trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;" class="entry_'+replyData.tile_id+'"></td></tr>');
-
-					}
-				}
-				else
-				{
-					restorePlaceholder(replyData.error)
-					setTimeout(function() {
-							restorePlaceholder("Press enter to save");
-						},
-					4000);
-				}
-			}
-		}
-	}
-
-	function deleteTile(tile_id)
-	{
-		var xhr = new XMLHttpRequest();
-
-		//console.log("deleteTile: tile_id = "+tile_id);
-
-		// step 4a. Create the ajax callback
-		xhr.onreadystatechange = function () {
-			deleteChanged();
-		};
-
-		xhr.open("POST", tile_id+"/delete/ajax", true);
-		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-
-		// step 4b. Fire off the ajax call
-		xhr.send("_token="+$('input[name=_token]').val()+'&ajaxAdd=true');
-		setTimeout(function() {  xhr.abort()  },20000); //abort after 20 seconds
-
-
-		function deleteChanged()
-		{
-			var data;
-			//console.log("statusText: "+xhr.statusText +"  "+xhr.responseText);
-			if (xhr.readyState==4 && xhr.status==200)
-			{
-					replyData = JSON.parse(xhr.responseText);
-
-					if(replyData.success) {
-						//console.log("delete success :-)  "+replyData.entry_id);
-
-
-						$('td.entry_'+replyData.entry_id).closest('tr').remove();
-
-						// count how many rows we have, if we only have the header row hide the table
-						//console.log($('#create_table tr').length);
-						if( $('#create_table tr').length == 1) {
-							$('#create_table').css('display','none');
-						}
-					}
-					else {
-						//console.log("delete failed :-(  "+replyData.entry_id + "   "+replyData.error);
-						$('#tile_'+tile_id +' .delete_error').html('<p style="margin-top:5px">'+replyData.error+'</p>').show();
-					}
-				}
-			}
-		}
-
 
 	$(document).on("click", '[id^=button_]', function () {
 		//console.log('Upload image click');
@@ -597,18 +516,18 @@ function getExchangeList() {
 
 });
 
-  function handleFile(files, tile_id){
+  function handleFile(files, entry_id){
 		var image=files[0];
 		var fileReader = new FileReader();
 		var imageElem = document.createElement("img");
-		var id_array  = tile_id.split('_');
-		//console.log("handleFile: tile_id = "+id_array[1]+", file = "+image.name);
+		var id_array  = entry_id.split('_');
+		//console.log("handleFile: entry_id = "+id_array[1]+", file = "+image.name);
 		id = id_array[1];
 
 		fileReader.onload=(function(img){return function(e){img.src = e.target.result;};})(imageElem);
 		fileReader.readAsDataURL(image);
 
-		var maxSize = document.getElementById('MAX_FILE_SIZE').value;
+		var maxSize = $('#MAX_FILE_SIZE').value;
 		//console.log("handleFile: " +image.name+"tile id = "+ id+",  file size = "+image.size);
 
 		if(image.size < maxSize) {
@@ -625,19 +544,19 @@ function getExchangeList() {
    }
 
 
-function uploadFile(image, tile_id){
+function uploadFile(image, entry_id){
 	var xhr = new XMLHttpRequest();
 	var form_data = new FormData();
 
 	form_data.append('_token', $('input[name=_token]').val());
 	form_data.append('image', image);
-	//form_data.append('tile_id', tile_id);
-	//console.log("uploadFile: " +image.name+"  "+ tile_id+JSON.stringify(form_data));
+	//form_data.append('entry_id', entry_id);
+	//console.log("uploadFile: " +image.name+"  "+ entry_id+JSON.stringify(form_data));
 
 	xhr.upload.onprogress = function(e) {
 		if (e.lengthComputable) {
 			var percentage =  parseInt((e.loaded / e.total) * 100);
-			$("#tile_"+tile_id+ " .percentage").html(percentage+"%");
+			$("#tile_"+entry_id+ " .percentage").html(percentage+"%");
 			//console.log("progress: "+percentage+"% complete");
 		}
 	};
@@ -659,12 +578,12 @@ function uploadFile(image, tile_id){
 			//console.log("uploadFile: success!!!!!!!!!!");
 			replyData = JSON.parse(xhr.responseText);
 			//console.log("onreadystatechange: image name = "+replyData.image);
-			$("#tile_"+tile_id+ " .percentage").fadeOut( 1200);//,"linear");
-			//$("#tile_"+tile_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');
+			$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
+			//$("#tile_"+entry_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');
 
 		}
 	};
-	xhr.open("POST", +tile_id+"/upload", true);
+	xhr.open("POST", +entry_id+"/upload", true);
 	xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
 	xhr.send(form_data);
 }

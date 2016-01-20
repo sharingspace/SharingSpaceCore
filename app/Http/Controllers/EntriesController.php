@@ -58,13 +58,18 @@ class EntriesController extends Controller
     }
 
     if ($entry->isInvalid()) {
-			return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+			return response()->json(['success'=>false, 'error'=>$entry->getErrors()]);
 		}
 
 
     if ($request->whitelabel_group->entries()->save($entry)) {
 			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
-			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type]);
+      $types=[]; //FIXME this is broken. Sorry. I don't know why it doesn't work.
+
+      foreach($entry->exchangeTypes as $et) {
+        array_push($types,$et->name);
+      }
+			return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type,'exchange_types' =>$types]);
 
 		}
 
@@ -95,13 +100,18 @@ class EntriesController extends Controller
     }
 
     if ($entry->isInvalid()) {
-       return redirect()->back()->withInput()->withErrors($community->getErrors());
+       return redirect()->back()->withInput()->withErrors($entry->getErrors());
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
+
+      if (Input::hasFile('file')) {
+        $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
+      }
+
 			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
 
-			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('entry_exchange_types')]);
+			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
 
 		}
       return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
@@ -168,10 +178,10 @@ class EntriesController extends Controller
         }
 
         if (Input::hasFile('file')) {
-          $entry->uploadImage(Input::file('file'), 'entries');
+          $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
         }
 
-        $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
+        $entry->exchangeTypes()->sync(Input::get('exchange_types'));
         return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
 
       }
@@ -216,9 +226,9 @@ class EntriesController extends Controller
         }
 
         if (Input::hasFile('file')) {
-          $entry->uploadImage(Input::file('file'), 'entries');
+          $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
         }
-        $entry->exchangeTypes()->sync(Input::get('entry_exchange_types'));
+        $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
 				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
       }
@@ -262,58 +272,54 @@ class EntriesController extends Controller
   {
     if ($entry = \App\Entry::find($entryID)) {
       $user = Auth::user();
+
       if (!$entry->checkUserCanEditEntry($user)) {
-        if($ajaxAdd) {
-					return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.delete_not_allowed')]);
-				}
-				else {
-					return redirect()->route('browse')->with('error',trans('general.entries.messages.delete_not_allowed'));
-				}
+				return redirect()->route('browse')->with('error',trans('general.entries.messages.delete_not_allowed'));
       } else {
         if ($entry->delete()) {
-					$ajaxAdd = e(Input::get('ajaxAdd'));
           $entry->exchangeTypes()->detach();
-					if($ajaxAdd) {
-						return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
-					}
-					else {
           return redirect()->route('browse')->with('success',trans('general.entries.messages.deleted'));
-					}
-        } else {
-          return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.delete_failed'));
         }
+        return redirect()->route('entry.view', $entry->id)->with('error',trans('general.entries.messages.delete_failed'));
       }
 
-    } else {
-      return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
     }
+    return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
+
   }
 
 
 	/*
   * Process an uploaded image
   */
-	public function ajaxUpload($entry_id = null) {
+	public function ajaxUpload($entryID = null) {
+
 		if (Input::hasFile('image')) {
 
-			if ($entry_id) {
-				$tile = $this->tile->withTrashed()->find($entry_id);
-				$filename =  $tile->uploadImage('image', 'profile', 250, 250);
-			} else {
-				$user = Sentry::getUser();
-				$upload_key = Input::get('upload_key');
-				$filename =  Tile::uploadTmpImage('image', 'profile', 250, 250, $upload_key);
-			}
+      if ($entryID) {
 
-			 if ($filename) {
-				return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
-			 } else {
-				return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
-			 }
+        $entry = \App\Entry::find($entryID);
 
-		} else {
-			return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
+        if (!$entry->checkUserCanEditEntry($user)) {
+          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.edit_not_allowed')]);
+        } else {
+          $uploaded = $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
+        }
+
+      } else {
+        $upload_key = Input::get('upload_key');
+        $uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('file'), 'entries', $upload_key);
+      }
+
+      // The file was uploaded successfully
+      if ($uploaded) {
+        return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
+      }
+
+      return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
 		}
+		return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
+
 	}
 
 
@@ -340,7 +346,6 @@ class EntriesController extends Controller
         $limit = 50;
     }
 
-    $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
     $allowed_columns =
       [
         'title',
@@ -350,6 +355,8 @@ class EntriesController extends Controller
       ];
 
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+    $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
+
     $count = $entries->count();
     $entries = $entries->orderBy($sort, $order);
     $entries = $entries->skip($offset)->take($limit)->get();
