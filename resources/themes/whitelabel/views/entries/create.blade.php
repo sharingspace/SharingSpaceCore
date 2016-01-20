@@ -33,7 +33,6 @@
                   <th>{{ trans('general.entries.title') }}</th>
                   <th>{{ trans('general.entries.exchange_types') }}</th>
                   <th>Action</th>
-                  <th style='display:none'>id</th>
               </tr>
           </thead>
         </table>
@@ -431,7 +430,7 @@ $(function() {
 		// step 4. Create the ajax call
 		// saveEntry(entry_id, title, want_have, exchangeList, location, visible, edit);
     // console.warn("about to post...");
-    console.warn("Serialized POst IS: "+$('#entry_form').serialize());
+    // console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
       //console.warn("Yay we posted! Here's our reply: ");
       //console.dir(replyData);
@@ -485,7 +484,7 @@ $(function() {
         }
         $('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+replyData.qty+ '</td><td>'+
         trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td></tr>');
-        console.warn("End of create 'else' branch and of the entire callback");
+        // console.warn("End of create 'else' branch and of the entire callback");
       }
     }).fail(function (jqxhr,errorStatus) {
       $('#submission_error').text(errorStatus).show();
