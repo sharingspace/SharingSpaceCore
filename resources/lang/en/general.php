@@ -32,6 +32,7 @@ return [
     'entries'  => [
           'post_type' => 'Type',
           'title' => 'Title',
+          'qty' => 'QTY',
           'author' => 'Author',
           'location' => 'Location',
           'created_at' => 'Created',
