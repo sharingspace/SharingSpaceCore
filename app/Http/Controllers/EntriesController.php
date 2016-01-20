@@ -65,13 +65,13 @@ class EntriesController extends Controller
 
 
     if ($request->whitelabel_group->entries()->save($entry)) {
-			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+			$entry->exchangeTypes()->sync(Input::get('exchange_types'));
       $types=[]; //FIXME this is broken. Sorry. I don't know why it doesn't work.
 
       foreach($entry->exchangeTypes as $et) {
         array_push($types,$et->name);
       }
-			return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type,'exchange_types' =>$types]);
+			return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
 
 		}
 
@@ -113,9 +113,9 @@ class EntriesController extends Controller
         $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
       }
 
-			$entry->exchangeTypes()->saveMany(\App\ExchangeType::all());
+      $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
-			  return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
+			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
 
 		}
       return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
@@ -187,7 +187,7 @@ class EntriesController extends Controller
         }
 
         $entry->exchangeTypes()->sync(Input::get('exchange_types'));
-        return response()->json(['success'=>true,'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type]);
+        return response()->json(['success'=>true,'entry_id'=>$entry->id,'qty'=>$entry->qty,'title'=>$entry->title,'post_type'=>$entry->post_type]);
 
       }
 
