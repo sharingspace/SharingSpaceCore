@@ -45,6 +45,7 @@ class EntriesController extends Controller
     $entry = new \App\Entry();
     $entry->title	= e(Input::get('title'));
     $entry->post_type	= e(Input::get('post_type'));
+		$entry->description	= e(Input::get('description'));
     $entry->created_by	= Auth::user()->id;
     $entry->tags	= e(Input::get('tags'));
     $entry->qty	= e(Input::get('qty'));
@@ -71,7 +72,7 @@ class EntriesController extends Controller
       foreach($entry->exchangeTypes as $et) {
         array_push($types,$et->name);
       }
-			return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
+			return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
 
 		}
 

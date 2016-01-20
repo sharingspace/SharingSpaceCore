@@ -10,12 +10,6 @@
 {{-- Page content --}}
 @section('content')
 
-<style>
-.checkbox {
-   padding-left: 0px;
-}
-</style>
-
     <section class="container">
       <div class="row">
 
@@ -72,28 +66,6 @@
                         <div class="col-md-2 col-sm-2 col-xs-2">
                         	<button type="button" class="more_button btn btn-info btn-md" style="float:right;">more</i> <i class="fa fa-caret-down fa-lg"></i></button>
                         </div> <!-- col-md-2 -->
-
-                        <!--
-                        More controls ....
-                        -->
-
-                        <div class="more_controls col-md-12 col-sm-12 col-xs-12" style="display:none;margin-top:10px;">
-                          <div class="image_upload">
-                            <label for="fileupload_" class="sr-only">Upload image</label>
-                            <input id="fileupload_" class="file_upload" type="file" onchange="handleFile(this.files, this.id)" accept="image/gif, image/jpeg, image/png"/></label>
-
-                            <button type="button" id='button_' class="smooth_font pull-left image_button btn btn-info btn-md">image <i class="fa fa-picture-o fa-lg"></i></button>
-                            <span class='too_large smooth_font' style="display:none;">File exceeds the 4MB maximum</span>
-
-                            <div class="percentage"></div>
-                          </div> <!-- image_upload -->
-
-
-            							<!-- <button type="button" class="button_edit smooth_font btn btn-info btn-md"  style="float:right;margin-left:10px;font-size:13px;">edit <i class="fa fa-pencil fa-lg"></i></button>
-
-                          <button type="button" class="button_delete smooth_font btn btn-warning btn-md"  style="float:right;margin-left:10px;background-color:rgba(255,0,0,0.6);font-size:13px;">delete <i class="fa fa-times fa-lg"></i></button> -->
-
-                        </div> <!-- more_controls -->
                       </div> <!-- row  -->
                     </div> <!-- col-md-10 tile_container  -->
                   	<div class="col-md-3 col-sm-3 col-xs-3" style="border-right:#CCC thin solid;">
@@ -108,7 +80,6 @@
 
 
                             <!-- checkboxes for exchange types -->
-                            <div class="col-md-12 margin-bottom-10">
                               <div class="checkbox">
                               @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                               <div class="col-md-12 pull-left margin-bottom-10">
@@ -122,7 +93,7 @@
                           </div> <!-- exchange_types -->
                          </fieldset>
                         </div> <!-- form-group -->
-
+                        
                       </div> <!-- col-md-3 -->
 
                       <div class="col-md-9 col-sm-9 col-xs-9">
@@ -198,15 +169,7 @@
                           </div>
                         </div> <!-- prefs panel -->
                        </div>
-
                     </div>
-
-
-                  <!--  <div>
-                  <input id="option" type="checkbox" name="field" value="option">
-                  <label for="option"><span><span></span></span>Value</label>
-                </div> -->
-
 
                 </form>
               </div>
@@ -218,31 +181,7 @@
 			</section>
 			<!-- / -->
 
-      <!-- Modal -->
-      <div id="myExamples" class="modal fade" role="dialog">
-        <div class="modal-dialog">
 
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Examples</h4>
-            </div>
-            <div class="modal-body">
-              <p>I want a new bicycle<br />
-              I have karate skills I can share<br />
-              I want carrot cake for my birthday<br />
-              I have the ability to speak French<br />
-              I want help cleaning my garage<br />
-              I have a pile of scrap wood</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
 <script type="text/javascript">
 
 $("#quickAdd").attr('disabled','disabled'); // disable add button until page has loaded
@@ -263,45 +202,21 @@ $(function() {
 		});
 
 
-	$(document).on( "click", "#pref_button", function( e ) {
-		e.preventDefault();
-		//console.log("preferences clicked");
-		$('#pref_button i').toggleClass('fa-caret-left fa-caret-right');
-		//$('#pref_button').find('i').toggleClass('fa-caret-up');
-
-
-		$('#prefs_panel').toggle();
-	});
-
-
-	$(document).on( "click", "#example_button", function( e ) {
-		e.preventDefault();
-		//console.log("example clicked");
-
-		$('#example_button').find('i').toggleClass('fa-caret-down fa-caret-up');
-		$('#example_panel').toggle();
-	});
-
-	$(document).on( "click", ".more_button", function( e ) {
-		e.preventDefault();
-		//console.log("more clicked");
-		$(this).find('i').toggleClass('fa-caret-down fa-caret-up');
-
-		$(this).closest('.tile_container').find('.more_controls').toggle();
-	});
-
 	$(document).on( "click", ".button_edit", function( e ) {
 		e.preventDefault();
-    return window.alert("This hasn't been built yet.");
-		entry_info = $(this).closest('.tile_container').find('.tile_info').text();
-    console.warn("Tile info is: "+entry_info);
-		entry_info = entry_info.substr(6);
-		//console.log("edit clicked"+tile_info);
+		
+		var entry_id = $(this).prop('data-entryid') ;
+		var title = $(this).closest('tr').children('td.td_title').html();
+		var post_type = $(this).closest('tr').children('td.td_post_type').html();
+		var qty = $(this).closest('tr').children('td.td_qty').html();
+		var desc = $(this).closest('tr').children('td.td_description').html();
+		//var title = $(this).closest('tr').('td.table_title').html();
+    console.warn("Title is: "+title +", post type is: "+post_type+", quantity is: "+qty);
 
-		var tile = $(this).closest('.tile_container').prop("id");
-    var entry_id = $(this).data("entryid");
 		//console.log("edit clicked"+entry_id);
-		$("#title").val(tile_info);
+		$("#title").val(title);
+		$('#qty').val(qty);
+		$('#description').val(desc);
 		$("#title").css('background-color','FFFFCC').animate({
             'background-color': 'white'
             //your input background color.
@@ -336,21 +251,6 @@ $(function() {
     });
 	});
 
-	function getHubList() {
-		var hubList = "";
-		var hubs = [];
-
-		$('.hubs input:checked').each(function() {
-			hubs.push($(this).val());
-		});
-
-		for(i=0; i< hubs.length; i++){
-			hubList = hubList + "&groups["+hubs[i]+"]="+hubs[i];
-		};
-
-		return hubList;
-	}
-
 	function updateExisting() {
 		// has title text changed?
 		$focusedTitle = $(':focus');
@@ -364,7 +264,6 @@ $(function() {
 			$("#title").val(""); // = "";
 			$("#title").attr('placeholder',ph_text);
 	}
-
 
   // Return smart server error messages
   function parseAndDisplayError(error) {
@@ -402,22 +301,12 @@ $(function() {
 		}
 		if(!title) // step 1. Anything to save?
 		{
-      //I suspect that this will never fire; if there was no title text-left
-      // then title.length < 3 anyways.
+      //I suspect that this will never fire; validation will catch this
       return;
     }
-		//console.log("title of new tile = "+title);
-
-		// step 2. Get the id of the last div with id starting with tile_xx
-		// this is where we will store the results if this tile saves successfully
-		var lastEntryDiv = $('div[id^="tile_"]:last');
-		var entry_id = parseInt( lastEntryDiv.prop("id").match(/\d+/g), 10 );
-
-
-		tileClasses = $('#title').attr('class');
-		//console.log("work ?  "+tileClasses.match(/\d+/g));
+	
     var post_url="new/ajax";
-		position = tileClasses.indexOf("update_");
+		position = -1;//tileClasses.indexOf("update_");
 		if(position>=0) {
 			entry_id = tileClasses.match(/\d+/g);
 			//console.log("update, edit = true "+entry_id+"  "+tileClasses);
@@ -425,11 +314,7 @@ $(function() {
       post_url=entry_id+"/edit/ajax";
 		}
 
-		//var hubList = getHubList() ;
-		//console.log("Visible only to you checked:" + $('#visible_checkbox').checked);
-
-		// step 4. Create the ajax call
-		// saveEntry(entry_id, title, want_have, exchangeList, location, visible, edit);
+		
     // console.warn("about to post...");
     console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
@@ -445,10 +330,22 @@ $(function() {
         var exchanges=replyData.exchange_types.join(", ");
       }
 
-      //exchanges = exchanges.replace(/(^\s*, )|(, \s*$)/g, '');
-      //exchanges = " ("+exchanges+')';
+      if(!edit)
+      {
+				$("#title").val('');
+				$('#description').val('');
+				$('#qty').val(1);
+        // console.warn("create 'save new entry' branch entered");
+        $('#submission_error').hide();
 
-      if(edit)
+        if( $('#create_table tr').length == 1) {
+          $('#create_table').show();
+        }
+        $('#create_table tr:last').after('<tr><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
+        trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
+        console.warn("End of create 'save' branch and of the entire callback");
+      }
+			else
       {
         //console.log("Edit response  "+replyData.success) ;
         // step 4d. Find existing tile div and update contents
@@ -468,25 +365,10 @@ $(function() {
         });
 
         $("#title").find('input:text').focus();
+				console.warn("End of create 'edit' branch and of the entire callback");
       }
-      else
-      {
-        // console.warn("create 'else' branch entered");
-        //console.log("Create response  "+replyData.success) ;
 
-        tile_info = "I "+replyData.post_type + " "+replyData.title;
-
-        //console.log("stateChanged, tile_info: "+tile_info);
-
-        $('#submission_error').hide();
-
-        if( $('#create_table tr').length == 1) {
-          $('#create_table').show();
-        }
-        $('#create_table tr:last').after('<tr><td>'+replyData.post_type.toUpperCase()+'</td><td>'+replyData.qty+ '</td><td>'+
-        trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td></tr>');
-        console.warn("End of create 'else' branch and of the entire callback");
-      }
+			
     }).fail(function (jqxhr,errorStatus) {
       $('#submission_error').text(errorStatus).show();
       console.warn("Boo, we failed at posting :(");
@@ -498,14 +380,6 @@ $(function() {
     });
 	});
 
-	function updateTileIds(temp_entry_id, entry_id)
-	{
-		//console.log("updateTileIds temp_entry_id = "+temp_entry_id +", entry_id = " +entry_id);
-		$("#tile_"+temp_entry_id).id="tile_"+entry_id;
-		$("#fileupload_").id = "fileupload_"+entry_id;
-
-		$("#tile_"+entry_id+" .title_text label").attr('for','title_'+entry_id);
-	}
 
 	$(document).on("click", '[id^=button_]', function () {
 		//console.log('Upload image click');
