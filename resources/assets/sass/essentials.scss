@@ -1554,8 +1554,13 @@ section.dark {
 hr {
   border: 0;
   height: 1px;
-	background: #333;
-  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#d6d6d6',GradientType=0 );
+  /* IE6-9 */
 }
 
 section.dark hr {
@@ -26038,8 +26043,8 @@ form.validate label.error {
   display: inline-block;
   margin: 0 15px 3px 0;
   padding-left: 27px;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 15px;
+  line-height: 27px;
   color: #404040;
   cursor: pointer;
 }
@@ -26058,21 +26063,15 @@ section.dark {
 .radio i, .checkbox i {
   position: absolute;
   top: 5px;
-  left: 0px;
+  left: 0;
   display: block;
-  width: 13px;
-  height: 13px;
+  width: 19px;
+  height: 19px;
   outline: none;
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.3);
-	border-radius:3px;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+32,d6d6d6+100 */
-	background: rgb(255,255,255); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 32%, rgba(214,214,214,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 32%,rgba(214,214,214,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  rgba(255,255,255,1) 32%,rgba(214,214,214,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d6d6d6',GradientType=0 ); /* IE6-9 */
+  background: rgba(255, 255, 255, 0.3);
 }
 
 section.dark {
@@ -26120,11 +26119,11 @@ section.dark {
 
 .checkbox input + i:after {
   content: '\f00c';
-  top: -1px;
-  left: -1px;
-  width: 14px;
-  height: 14px;
-  font: normal 10px/14px FontAwesome;
+  top: 0;
+  left: 0px;
+  width: 15px;
+  height: 15px;
+  font: normal 12px/16px FontAwesome;
   text-align: center;
 }
 
@@ -26214,7 +26213,6 @@ section.dark {
     }
   }
 }
-
 
 /* @toggle switch elements
 -------------------------------------------------- */
@@ -27309,7 +27307,7 @@ section.dark {
 }
 
 .checkbox + .checkbox, .radio + .radio {
-  //margin-top: 12px;
+  margin-top: 12px;
 }
 
 .sky-form {
