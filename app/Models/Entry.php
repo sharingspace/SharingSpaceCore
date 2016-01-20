@@ -7,6 +7,7 @@ use App\User;
 use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Entry extends Model
 {
@@ -30,20 +31,21 @@ class Entry extends Model
 
   use ValidatingTrait;
   use UploadableFileTrait;
+  use SoftDeletes;
 
   /*
   * Model validation rules
   */
   protected $rules = [
-      'title'            => 'required|string|min:2|max:255',
-      'post_type'            => 'required',
+      'title'            => 'required|string|min:3|max:255',
+      'post_type'        => 'required',
   ];
 
   /*
   * Set traits for uploadable image
   */
 
-  public $uploadableImgs = [
+  public static $uploadableImgs = [
       'entries' =>
         [
           'height' => '250',
@@ -52,10 +54,7 @@ class Entry extends Model
   ];
 
 
-  // public $uploadableImgLocalPath = '/public/assets/uploads/entries/';
-  // public $uploadableImgCDNPath =  'assets/uploads/entries/';
-  // public $uploadableImgWidth = 250;
-  // public $uploadableImgHeight = 250;
+  protected $dates = ['deleted_at'];
 
   /**
    * The attributes that are mass assignable.
