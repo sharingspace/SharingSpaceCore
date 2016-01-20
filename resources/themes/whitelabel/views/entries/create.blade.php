@@ -389,7 +389,7 @@ $(function() {
       return;
 		}
 
-    console.dir($('.exchange_types input:checked'));
+    // console.dir($('.exchange_types input:checked'));
 
 		if($('.exchange_types input:checked').length == 0) {
       $('#submission_error').text('Please select at least one exchange type').show();
