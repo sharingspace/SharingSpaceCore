@@ -39,6 +39,7 @@ $factory->defineAs(App\Entry::class, 'want-entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
       'post_type' => 'want',
+      'qty' => 1,
     ];
 });
 
@@ -46,6 +47,7 @@ $factory->defineAs(App\Entry::class, 'have-entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
       'post_type' => 'have',
+      'qty' => '1',
     ];
 });
 
