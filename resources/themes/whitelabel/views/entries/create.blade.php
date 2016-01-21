@@ -116,7 +116,7 @@
                       		</label>
                     		</div>
                     		<div class="col-md-2 margin-bottom-10">
-                    		<button class="btn btn-success  pull-right" id="quickAdd" name="quickAdd" value="quickAdd">Create</button>
+                    		<button class="btn btn-success  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
 
                     		</div>
                    		</fieldset>
@@ -184,13 +184,12 @@
 
 <script type="text/javascript">
 
-$("#quickAdd").attr('disabled','disabled'); // disable add button until page has loaded
+$("#ajaxAdd").attr('disabled','disabled'); // disable add button until page has loaded
 $("#create_table").hide();
 
 $(function() {
 
-//console.log(exchangeTypeName);
-	$("#quickAdd").removeAttr('disabled');//enable add button	now page has loaded
+	$("#ajaxAdd").removeAttr('disabled');//enable add button	now page has loaded
 
 		if ($('#visible_checkbox').is(":checked")) {
 			$('#select_hub').hide();
@@ -205,13 +204,13 @@ $(function() {
 	$(document).on( "click", ".button_edit", function( e ) {
 		e.preventDefault();
 
-		var entry_id = $(this).prop('data-entryid') ;
+		var entry_id = $(this).attr('data-entryid') ;
 		var title = $(this).closest('tr').children('td.td_title').html();
 		var post_type = $(this).closest('tr').children('td.td_post_type').html();
 		var qty = $(this).closest('tr').children('td.td_qty').html();
 		var desc = $(this).closest('tr').children('td.td_description').html();
 		//var title = $(this).closest('tr').('td.table_title').html();
-    console.warn("Title is: "+title +", post type is: "+post_type+", quantity is: "+qty);
+    //console.warn("Title is: "+title +", post type is: "+post_type+", quantity is: "+qty+", entry id is: "+$(this).prop('class')+entry_id);
 
 		//console.log("edit clicked"+entry_id);
 		$("#title").val(title);
@@ -223,6 +222,7 @@ $(function() {
        			 }, 2000);
 		$("#title").focus();
 		$("#title" ).addClass( "update_"+entry_id);
+		$("#ajaxAdd").html("Update");
 	});
 
 	$(document).on( "click", ".button_delete", function( e ) {
@@ -230,7 +230,7 @@ $(function() {
 		//var tile = $(this).closest('.tile_container').prop("id");
 		var entry_id = $(this).data("entryid");
     var myrow = $(this).closest('tr');
-		console.log("delete clicked on entry: "+entry_id);
+		//console.log("delete clicked on entry: "+entry_id);
     $.post(entry_id+"/delete/ajax",{_token: $('input[name=_token]').val()},function (replyData) {
       //console.log("delete success :-)  "+replyData.entry_id);
       if(replyData.success) {
@@ -276,11 +276,11 @@ $(function() {
   }
 
 
-	$(document).on( "click", "#quickAdd", function( e ) {
+	$(document).on( "click", "#ajaxAdd", function( e ) {
 		//console.log("add or return hit");
 
 		e.preventDefault();
-		edit = false;
+		var save = true;
 
 		var title = $("#title").val();
 		if(title.length < 3 && false)
@@ -293,7 +293,7 @@ $(function() {
       return;
 		}
 
-    // console.dir($('.exchange_types input:checked'));
+    // //console.dir($('.exchange_types input:checked'));
 
 		if($('.exchange_types input:checked').length == 0) {
       $('#submission_error').text('Please select at least one exchange type').show();
@@ -306,47 +306,52 @@ $(function() {
     }
 
     var post_url="new/ajax";
-		position = -1;//tileClasses.indexOf("update_");
+		var tileClasses = $('#title').prop('class');
+		position = tileClasses.indexOf("update_");
 		if(position>=0) {
 			entry_id = tileClasses.match(/\d+/g);
 			//console.log("update, edit = true "+entry_id+"  "+tileClasses);
-			edit = true;
+			save = false;
       post_url=entry_id+"/edit/ajax";
 		}
 
 
-    // console.warn("about to post...");
-    console.warn("Serialized POst IS: "+$('#entry_form').serialize());
+    // //console.warn("about to post...");
+    //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
-      //console.warn("Yay we posted! Here's our reply: ");
+      ////console.warn("Yay we posted! Here's our reply: ");
       //console.dir(replyData);
       if(!replyData.success) {
         parseAndDisplayError(replyData.error);
         return;
       }
-      //console.log("success!!!!! "+xhr.responseText + "  "+replyData.exchange_types);
 
       if (replyData.exchange_types) {
         var exchanges=replyData.exchange_types.join(", ");
       }
 
-      if(!edit)
+      if(replyData.save)
       {
 				$("#title").val('');
 				$('#description').val('');
 				$('#qty').val(1);
-        // console.warn("create 'save new entry' branch entered");
+        // //console.warn("create 'save new entry' branch entered");
         $('#submission_error').hide();
 
         if( $('#create_table tr').length == 1) {
           $('#create_table').show();
         }
-        $('#create_table tr:last').after('<tr><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
-        trimString(replyData.title, 60)+'</td><td>'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
-        console.warn("End of create 'save' branch and of the entire callback");
+				
+				// is this an edit or a save?
+				$('#create_table tr:last').after('<tr id="tr_'+replyData.entry_id+'"><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
+				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
+				
+        //console.warn("End of create 'save' branch and of the entire callback");
       }
 			else
       {
+				$("#ajaxAdd").html("Create");
+
         //console.log("Edit response  "+replyData.success) ;
         // step 4d. Find existing tile div and update contents
         $("#title").removeClass( "update_"+entry_id);
@@ -365,13 +370,20 @@ $(function() {
         });
 
         $("#title").find('input:text').focus();
-				console.warn("End of create 'edit' branch and of the entire callback");
+				
+					$('tr#tr_'+entry_id+' .td_post_type').html(replyData.post_type.toUpperCase());
+					$('tr#tr_'+entry_id+' .td_title').html(trimString(replyData.title, 60));
+					$('tr#tr_'+entry_id+' .td_qty').html(replyData.qty);
+					$('tr#tr_'+entry_id+' .td_exchanges').html(exchanges);
+					
+
+					//console.warn("End of create 'edit' branch and of the entire callback");
       }
 
 
     }).fail(function (jqxhr,errorStatus) {
       $('#submission_error').text(errorStatus).show();
-      console.warn("Boo, we failed at posting :(");
+      //console.warn("Boo, we failed at posting :(");
       restorePlaceholder(errorStatus)
       setTimeout(function() {
           restorePlaceholder("Press enter to save");

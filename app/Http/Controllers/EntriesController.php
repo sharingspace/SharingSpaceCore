@@ -72,7 +72,7 @@ class EntriesController extends Controller
       foreach($entry->exchangeTypes as $et) {
         array_push($types,$et->name);
       }
-			return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
+			return response()->json(['success'=>true, 'save'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
 
 		}
 
@@ -187,8 +187,16 @@ class EntriesController extends Controller
           $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
         }
 
-        $entry->exchangeTypes()->sync(Input::get('exchange_types'));
-        return response()->json(['success'=>true,'entry_id'=>$entry->id,'qty'=>$entry->qty,'title'=>$entry->title,'post_type'=>$entry->post_type]);
+      	$types=[]; //FIXME this is broken. Sorry. I don't know why it doesn't work.
+				if ($request->whitelabel_group->entries()->save($entry)) {
+					$entry->exchangeTypes()->sync(Input::get('exchange_types'));
+
+					foreach($entry->exchangeTypes as $et) {
+						array_push($types,$et->name);
+					}
+				}
+				
+        return response()->json(['success'=>true, 'save'=>false, 'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types]);
 
       }
 
