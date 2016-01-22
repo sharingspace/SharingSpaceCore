@@ -51,23 +51,7 @@
                   {!! csrf_field() !!}
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
 
- 										<!--
-                    Added tiles ....
-                    -->
 
-                    <div class="col-md-12 col-sm-12 col-xs-12 tile_container" id="tile_1" style="display:none;margin-bottom:15px;">
-                      <div class="row" style="margin-bottom:7px;">
-                      	<div class="tile_info col-md-5 col-sm-5 col-xs-5" >
-                        </div> <!-- col-md-7 tile_info  -->
-												<div class="tile_exchanges col-md-5 col-sm-5 col-xs-5" >
-                        </div> <!-- col-md-7 tile_exchanges  -->
-                        <div class="delete_error col-md-10 col-sm-10 col-xs-10" style="display:none"></div>
-
-                        <div class="col-md-2 col-sm-2 col-xs-2">
-                        	<button type="button" class="more_button btn btn-info btn-md" style="float:right;">more</i> <i class="fa fa-caret-down fa-lg"></i></button>
-                        </div> <!-- col-md-2 -->
-                      </div> <!-- row  -->
-                    </div> <!-- col-md-10 tile_container  -->
                   	<div class="col-md-3 col-sm-3 col-xs-3" style="border-right:#CCC thin solid;">
 
                     	<div class="form-group" style="margin-bottom: 5px;">
@@ -78,18 +62,23 @@
                           {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
 													<div class="exchange_types">
 
-
                             <!-- checkboxes for exchange types -->
                               <div class="checkbox">
                               @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                               <div class="col-md-12 pull-left margin-bottom-10">
                                 <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                                  {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                                {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id, ['class' => 'exchanges']) }}
                                   <i></i> {{ $exchange_types->name }}
                                 </label>
                               </div>
                               @endforeach
+                            <div class="col-md-12 pull-left margin-bottom-10">
+                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                                {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
+                                <i></i> all exchanges
+                              </label>
                               </div>
+                           </div>
                           </div> <!-- exchange_types -->
                          </fieldset>
                         </div> <!-- form-group -->
@@ -113,10 +102,14 @@
                       		<!-- Name -->
                       		<label class="input">
                         		<input type="text" name="title" id="title" class="form-control" placeholder="Description">
+                            <span class="fa fa-thumbs-down inputErr"></span>
+                            <span class="fa fa-thumbs-up noInputErr" style="display:none;"></span>
+
+
                       		</label>
                     		</div>
                     		<div class="col-md-2 margin-bottom-10">
-                    		<button class="btn btn-success  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
+                    		<button class="btn btn-success" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
 
                     		</div>
                    		</fieldset>
@@ -200,10 +193,21 @@ $(function() {
 			$('#select_hub').toggle();
 		});
 
+	$('#title').on('input', function() {
+		if($(this).val().length < 3) {
+			$(".noInputErr").hide();
+			$(".inputErr").show();
+		}
+		else {
+			$(".inputErr").hide();
+			$(".noInputErr").show();
+		}
+	});
 
 	$(document).on( "click", ".button_edit", function( e ) {
 		e.preventDefault();
-
+		$(".inputErr").hide();
+		$(".noInputErr").show();
 		var entry_id = $(this).attr('data-entryid') ;
 		var title = $(this).closest('tr').children('td.td_title').html();
 		var post_type = $(this).closest('tr').children('td.td_post_type').html();
@@ -251,6 +255,31 @@ $(function() {
     });
 	});
 
+
+	$(document).on( "click", "#select_all", 
+		function( e ) {
+			//e.preventDefault();
+			if(this.checked) {
+				$('.exchanges').each(function(e) {
+					this.checked = true;
+				});
+			}
+			else
+			{
+				$('.exchanges').each(function(e)
+				{
+					this.checked = false;
+				});
+			}
+		}
+	)
+	
+	$(document).on( "click", ".exchanges", 
+		function( e ) {
+			$('#select_all').prop('checked', false);
+		}
+	)
+	
 	function updateExisting() {
 		// has title text changed?
 		$focusedTitle = $(':focus');
@@ -293,7 +322,7 @@ $(function() {
       return;
 		}
 
-    // //console.dir($('.exchange_types input:checked'));
+    // console.dir($('.exchange_types input:checked'));
 
 		if($('.exchange_types input:checked').length == 0) {
       $('#submission_error').text('Please select at least one exchange type').show();
@@ -316,10 +345,10 @@ $(function() {
 		}
 
 
-    // //console.warn("about to post...");
+    //console.warn("about to post...");
     //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
-      ////console.warn("Yay we posted! Here's our reply: ");
+      //console.warn("Yay we posted! Here's our reply: ");
       //console.dir(replyData);
       if(!replyData.success) {
         parseAndDisplayError(replyData.error);
@@ -335,7 +364,7 @@ $(function() {
 				$("#title").val('');
 				$('#description').val('');
 				$('#qty').val(1);
-        // //console.warn("create 'save new entry' branch entered");
+        //console.warn("create 'save new entry' branch entered");
         $('#submission_error').hide();
 
         if( $('#create_table tr').length == 1) {
@@ -346,6 +375,8 @@ $(function() {
 				$('#create_table tr:last').after('<tr id="tr_'+replyData.entry_id+'"><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
 				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
 				
+				$(".inputErr").show();
+				$(".noInputErr").hide();
         //console.warn("End of create 'save' branch and of the entire callback");
       }
 			else
