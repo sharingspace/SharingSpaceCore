@@ -101,18 +101,11 @@ class CommunitiesController extends Controller
     if ($customer->stripe_id=='') {
       // Create the Stripe customer
 
-
-
       $customer->createStripeCustomer([
           'email' => $customer->email,
           'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e(Input::get('name')),
           'metadata' => $metadata,
       ]);
-
-      // set the given discount
-      if (Input::has('coupon')) {
-        $customer->applyStripeDiscount(e(Input::get('coupon')));
-      }
 
     }
 
@@ -122,11 +115,8 @@ class CommunitiesController extends Controller
     $data['subdomain'] = strtolower(Input::get('subdomain'));
     $data['type'] = e(Input::get('subscription_type'));
 
-    if ($customer->save()) {
-      Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
-      {
-        $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
-      });
+    if (!$customer->save()) {
+      return Redirect::back()->withInput()->with('error','Something went wrong.');
     }
 
     try {
@@ -141,6 +131,15 @@ class CommunitiesController extends Controller
       ->subscription()
       ->onPlan(e(Input::get('subscription_type')))
       ->create();
+
+      // set the given discount
+      if (Input::has('coupon')) {
+        try {
+          $customer->applyStripeDiscount(e(Input::get('coupon')));
+        } catch (\Exception $e) {
+          return Redirect::back()->withInput()->with('error','Something went wrong while trying to process your coupon request: '.$e->getMessage().'');
+        }
+      }
 
     } catch (\Exception $e) {
       return Redirect::back()->withInput()->with('error','Something went wrong creating your subscription: '.$e->getMessage().'');
@@ -160,6 +159,11 @@ class CommunitiesController extends Controller
 
     $community->members()->attach(Auth::user(), ['is_admin' => true]);
     $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+
+    Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
+    {
+      $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+    });
 
     return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success',trans('general.community.save_success'));
 
