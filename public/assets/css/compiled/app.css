@@ -901,7 +901,7 @@ section.dark.page-header ul.page-options a {
     background-color: #fff;
     position: absolute;
     box-shadow: 5px 5px rgba(91, 91, 91, 0.2);
-    width: 274px;
+    width: 574px;
     margin-top: 36px;
     z-index: 22; }
 
@@ -909,7 +909,7 @@ section.dark.page-header ul.page-options a {
   margin-top: 25px; }
 
 #header.header-sm li.search .search-box {
-  margin-top: 19px; }
+  margin-top: 0px; }
 
 #header.fixed li.search .search-box, #header.fixed.header-sm li.search .search-box {
   margin-top: 18px; }
@@ -5578,10 +5578,10 @@ section#about p {
 .social .form-control {
   padding-left: 35px; }
 
-/* 
------------------------------------------- 
+/*
+------------------------------------------
 Quick add
------------------------------------------- 
+------------------------------------------
 */
 /* these are bootstraps media breaks */
 #add_tile_wrapper .tile_container *[id^='nbutton_'], #add_tile_wrapper .tile_container *[class^='nbutton_'] {
@@ -6912,8 +6912,9 @@ section.dark .border-top-1, section.dark .border-top-2, section.dark .border-top
 hr {
   border: 0;
   height: 1px;
-  background: #333;
-  background-image: linear-gradient(to right, #ccc, #333, #ccc); }
+  background-image: linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#d6d6d6',GradientType=0 );
+  /* IE6-9 */ }
 
 section.dark hr {
   border: 0;
@@ -24499,8 +24500,8 @@ form.validate label.error {
   display: inline-block;
   margin: 0 15px 3px 0;
   padding-left: 27px;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 15px;
+  line-height: 27px;
   color: #404040;
   cursor: pointer; }
 
@@ -24514,24 +24515,15 @@ section.dark .radio, section.dark .checkbox {
 .radio i, .checkbox i {
   position: absolute;
   top: 5px;
-  left: 0px;
+  left: 0;
   display: block;
-  width: 13px;
-  height: 13px;
+  width: 19px;
+  height: 19px;
   outline: none;
-  border-width: 1px;
+  border-width: 2px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+32,d6d6d6+100 */
-  background: white;
-  /* Old browsers */
-  /* FF3.6-15 */
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, white 32%, #d6d6d6 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d6d6d6',GradientType=0 );
-  /* IE6-9 */ }
+  background: rgba(255, 255, 255, 0.3); }
 
 section.dark .radio i, section.dark .checkbox i {
   border-color: rgba(255, 255, 255, 0.3);
@@ -24568,11 +24560,11 @@ section.dark .radio i, section.dark .checkbox i {
 
 .checkbox input + i:after {
   content: '\f00c';
-  top: -1px;
-  left: -1px;
-  width: 14px;
-  height: 14px;
-  font: normal 10px/14px FontAwesome;
+  top: 0;
+  left: 0px;
+  width: 15px;
+  height: 15px;
+  font: normal 12px/16px FontAwesome;
   text-align: center; }
 
 .radio input:checked + i:after, .checkbox input:checked + i:after {
@@ -25457,6 +25449,9 @@ section.dark .slider-wrapper, section.dark .sliderv-wrapper {
     padding: 0;
     font-size: 14px;
     font-weight: 300; }
+
+.checkbox + .checkbox, .radio + .radio {
+  margin-top: 12px; }
 
 .sky-form.boxed {
   border: rgba(0, 0, 0, 0.1) solid; }

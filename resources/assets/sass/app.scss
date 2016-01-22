@@ -1161,7 +1161,7 @@ section {
       background-color: #fff;
       position: absolute;
       box-shadow: 5px 5px rgba(91, 91, 91, 0.2);
-      width: 274px;
+      width: 574px;
       margin-top: 36px;
       z-index: 22;
     }
@@ -1170,7 +1170,7 @@ section {
     margin-top: 25px;
   }
   &.header-sm li.search .search-box {
-    margin-top: 19px;
+    margin-top: 0px;
   }
   &.fixed {
     li.search .search-box, &.header-sm li.search .search-box {
@@ -5287,7 +5287,7 @@ section#slider {
 		margin-top: 15px;
 		margin-right: 5px;
 		font-weight:bold;
-		font-size:14px; 
+		font-size:14px;
 	}
   .btn-default {
     color: #fff;
@@ -7557,16 +7557,16 @@ section {
     padding: 10px 0;
 
 	}
-	
+
 	.form-control {
 		padding-left: 35px;
 	}
 }
 
-/* 
------------------------------------------- 
+/*
+------------------------------------------
 Quick add
------------------------------------------- 
+------------------------------------------
 */
 
 $screen-xs-max:479px;
@@ -7590,7 +7590,7 @@ $color-blue: #1BC3E1;
 $color-green: #9AE14F;
 
 #add_tile_wrapper {
-	.tile_container *[id^='nbutton_'], .tile_container *[class^='nbutton_'] {    
+	.tile_container *[id^='nbutton_'], .tile_container *[class^='nbutton_'] {
 			cursor: pointer;
 			display: block;
 			width: 40px;
@@ -7600,7 +7600,7 @@ $color-green: #9AE14F;
 			font-size: 14px;
 			text-align: center;
 	}
-	
+
 	.tile_info, .tile_exchanges {
 		font-size:16px;
 		background-color:#eee;
@@ -7612,7 +7612,7 @@ $color-green: #9AE14F;
 	.image_upload input[type='file'] {
 			opacity:0;
 	}
-	
+
 	h4 {
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -7620,7 +7620,7 @@ $color-green: #9AE14F;
 		line-height: 24px;
 		font-weight: 700;
 	}
-	
+
 	.border {
 		margin-top: 127px;
 		margin-bottom: 10px;
@@ -7628,14 +7628,14 @@ $color-green: #9AE14F;
 		border-top: 1px solid #bfbfbf;
 		border-bottom: 1px none #ccc;
 	}
-	
+
 	#added_heading {
 		color: #c7bfbf;
 		display:none;
 		margin-bottom:15px;
 	}
-	
-	
+
+
 	*[class^='show_thumbnail'] img {
 		height:40px;
 		width:40px;
@@ -7646,7 +7646,7 @@ $color-green: #9AE14F;
 		-moz-transition:  width 1000ms;
 		transition:  width 1000ms;
 	}
-		
+
 	.tile_container .percentage {
 		background-color:green;
 		color:white;
@@ -7656,7 +7656,7 @@ $color-green: #9AE14F;
 		font-size:14px;
 		text-align:center;
 	}
-	
+
 	.tile_container .too_large {
 		display:none;
 		background-color:orange;
@@ -7669,18 +7669,18 @@ $color-green: #9AE14F;
 		margin-left:10px;
 		line-height:19px;
 	}
-	
+
 	.error_message {
 			font-weight:bold;
 			text-align: center;
 	}
-	
+
 	.tile_container .fileUpload {
 		position: relative;
 		overflow: hidden;
 		margin: 10px;
 	}
-	
+
 	.tile_container .fileUpload input.upload {
 		position: absolute;
 		top: 0;
@@ -7692,12 +7692,12 @@ $color-green: #9AE14F;
 		opacity: 0;
 		filter: alpha(opacity=0);
 	}
-	
+
 	.upload_text {
 		margin-top: 11px;
 		font-size:12px;
 	}
-	
+
 	.value_text {
 		 color:black;
 		 font-style:italic;
@@ -7705,32 +7705,32 @@ $color-green: #9AE14F;
 		 margin-bottom:15px;
 		 text-align:center;
 	}
-	
+
 	h1 {
 		font-size:30px;
 		margin-bottom:20px;
 	}
-	
+
 	.less_text {
 		display:none;
 	}
-	
+
 	@media (min-width: $screen-md-min) {
 		.value_text {
 			 font-size:30px;
 			 margin-bottom:35px;
 		}
-		
+
 		h1 {
 			font-size:40px;
 			margin-bottom:30px;
 
 		}
 	}
-	
+
 	@media (min-width: $screen-lg-min) {
 	}
-	
+
 	.tile_container *[class^='bbutton_'] {
     cursor: pointer;
     display: block;
