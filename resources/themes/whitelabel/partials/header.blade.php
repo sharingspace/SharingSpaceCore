@@ -136,6 +136,26 @@
                       {!! (Route::is('community.edit.form') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
+                  <!-- SEARCH -->
+    							<li class="search">
+    								<a href="javascript:;">
+    									<i class="fa fa-search"></i>
+    								</a>
+    								<div class="search-box">
+    									<form action="#" method="get">
+    										<div class="input-group">
+    											<input type="text" name="src" placeholder="Search this Community" class="form-control" />
+    											<span class="input-group-btn">
+    												<button class="btn btn-primary" type="submit">Search</button>
+    											</span>
+    										</div>
+    									</form>
+    								</div>
+    							</li>
+    							<!-- /SEARCH -->
+
+
+
 								</ul>
 
 							</nav>
