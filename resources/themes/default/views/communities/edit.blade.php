@@ -141,6 +141,13 @@
 
       <script>
 
+      $(document).keydown(function() {
+        var subdomain= $('input[name="subdomain"]').val();
+        subdomain = subdomain.toLowerCase().replace(/ /g, '-');
+        $('input[name="subdomain"]').val(subdomain);
+      });
+
+
       $(function() {
         $("#coupon_question").click(function () {
             $("#coupon_field").animate({opacity: 'toggle'}, 'fast');
