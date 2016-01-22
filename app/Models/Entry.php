@@ -39,7 +39,7 @@ class Entry extends Model
   protected $rules = [
       'title'            => 'required|string|min:3|max:255',
       'post_type'        => 'required',
-      'qty'              => 'required|min:1',
+      'qty'              => 'required|numeric|min:1',
   ];
 
   /*
@@ -62,7 +62,7 @@ class Entry extends Model
    *
    * @var array
    */
-  protected $fillable = ['title','post_type'];
+  protected $fillable = ['title','post_type','qty'];
 
 
 
