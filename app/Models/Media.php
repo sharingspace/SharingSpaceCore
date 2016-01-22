@@ -28,6 +28,7 @@ class Media extends Model
   }
 
 
+// WE DO NOT USE THIS ANYMORE. USE UPLOADABLEFILETRAIT INSTEAD
   public function uploadImage($fieldname = 'image', $type = 'profile', $width = 250, $height = null) {
 
 		if (Input::hasFile($fieldname)) {
