@@ -5365,6 +5365,22 @@ section#slider {
  **************************************************************** **/
 /* do not move from here - we rewrite this below */
 
+.inputErr, .noInputErr {
+	float: right;
+	margin-right: 6px;
+	margin-top: -27px;
+	position: relative;
+	z-index: 2;
+}
+
+.inputErr {
+	color: red;
+}
+
+.noInputErr {
+	color: green;
+}
+
 .item-box-desc {
   h2, h3, h4, h5 {
     font-size: 18px;
