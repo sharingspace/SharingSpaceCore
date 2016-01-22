@@ -67,7 +67,7 @@ class EntriesController extends Controller
 
     if ($request->whitelabel_group->entries()->save($entry)) {
 			$entry->exchangeTypes()->sync(Input::get('exchange_types'));
-      $types=[]; //FIXME this is broken. Sorry. I don't know why it doesn't work.
+      $types=[]; 
 
       foreach($entry->exchangeTypes as $et) {
         array_push($types,$et->name);
@@ -195,7 +195,7 @@ class EntriesController extends Controller
 						array_push($types,$et->name);
 					}
 				}
-				
+
         return response()->json(['success'=>true, 'save'=>false, 'entry_id'=>$entry->id,'title'=>$entry->title,'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types]);
 
       }
