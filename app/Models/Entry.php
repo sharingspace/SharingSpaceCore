@@ -82,6 +82,16 @@ class Entry extends Model
   }
 
 
+  public static function saveImageToDB($id, $filename, $type, $upload_key = null) {
+    $media = new Media();
+    $media->entry_id = $id;
+    $media->upload_key = $upload_key;
+    $media->filename =  $filename;
+    $media->filetype = 'image';
+    $media->caption = NULL;
+    $media->created_at = date("Y-m-d H:i:s");
+    $media->save();
+  }
 
   /**
 	* Convert the tags string to an array so we can loop through it and link to other results

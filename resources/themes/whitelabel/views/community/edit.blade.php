@@ -146,15 +146,37 @@
                       {!! $errors->first('ga', '<span class="help-block">:message</span>') !!}
   									</div>
 
-                    <!-- File upload -->
+                    <!-- Cover upload -->
                     <div class="form-group {{ $errors->first('file', 'has-error') }}">
                       <div class="fancy-file-upload fancy-file-info">
                         <i class="fa fa-picture-o"></i>
-                        <input type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);" />
-                        <input type="text" class="form-control" placeholder="no file selected" readonly="" />
+                        <input type="file" class="form-control" name="cover_img" onchange="jQuery(this).next('input').val(this.value);" />
+                        <input type="text" class="form-control" placeholder="Cover image upload - no file selected" readonly="" />
                         <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                       </div>
                     </div>
+
+                    <!-- Avatar upload -->
+                    <div class="form-group {{ $errors->first('file', 'has-error') }}">
+                      <div class="fancy-file-upload fancy-file-info">
+                        <i class="fa fa-picture-o"></i>
+                        <input type="file" class="form-control" name="profile_img" onchange="jQuery(this).next('input').val(this.value);" />
+                        <input type="text" class="form-control" placeholder="Avatar upload - no file selected" readonly="" />
+                        <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                      </div>
+                    </div>
+
+                    <!-- Logo upload -->
+                    <div class="form-group {{ $errors->first('file', 'has-error') }}">
+                      <div class="fancy-file-upload fancy-file-info">
+                        <i class="fa fa-picture-o"></i>
+                        <input type="file" class="form-control" name="logo" onchange="jQuery(this).next('input').val(this.value);" />
+                        <input type="text" class="form-control" placeholder="Logo upload - no file selected" readonly="" />
+                        <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                      </div>
+                    </div>
+
+
 
                     </div>
 

@@ -39,14 +39,8 @@ trait UploadableFileTrait {
     $orig_filename = str_random(10).'-orig.'.$file->getClientOriginalExtension();
 
     if ($file->move($path, $filename)) {
-      $media = new Media();
-      $media->entry_id = $id;
-      $media->upload_key = $upload_key;
-      $media->filename =  $filename;
-      $media->filetype = 'image';
-      $media->caption = NULL;
-      $media->created_at = date("Y-m-d H:i:s");
-      $media->save();
+
+      self::saveImageToDB($id, $filename, $layoutType, $upload_key);
 
       if (!Media::is_animated_gif($img_path)) {
 

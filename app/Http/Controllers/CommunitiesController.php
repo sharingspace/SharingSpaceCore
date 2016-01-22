@@ -207,6 +207,19 @@ class CommunitiesController extends Controller
         $latlong = Helper::latlong(Input::get('location'));
       }
 
+      if (Input::hasFile('profile_img')) {
+        $community->uploadImage(Auth::user(),Input::file('profile_img'), 'community-profiles');
+      }
+
+      if (Input::hasFile('cover_img')) {
+        $community->uploadImage(Auth::user(),Input::file('cover_img'), 'community-covers');
+      }
+
+      if (Input::hasFile('logo')) {
+        $community->uploadImage(Auth::user(),Input::file('logo'), 'community-logos');
+      }
+
+
       if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
         $community->latitude 		= $latlong['lat'];
         $community->longitude 	= $latlong['lng'];
