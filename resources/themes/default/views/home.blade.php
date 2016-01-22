@@ -126,7 +126,7 @@
 							<hr />
 
 						</div>
-            
+
             <div class="col-sm-7">
             	<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/wF0-BvRPMss" frameborder="0" allowfullscreen></iframe> -->
               <img src='assets/img/backgrounds/hp/regional_football.png') alt='regional mens football sharing hub' />
@@ -134,9 +134,9 @@
 					</div>
 				</div>
 			</section>
-      
-       
-       
+
+
+
 			<!-- /ABOUT -->
       <!-- BUTTON CALLOUT -->
       <div class="callout callout-theme-color margin-bottom-10">
@@ -276,7 +276,12 @@
                       </span>
                     </span>
                     <!-- <img class="img-responsive" src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="600" height="399" alt=""> -->
-                    <img class="img-responsive" src="http://lorempixel.com/200/200/nature" width="200" height="200" alt="">
+                    @if ($community->getProfileImg()!='')
+                        <img class="img-responsive" src="{{ $community->getProfileImg() }}" width="600" height="399" alt="">
+                    @else
+                          <img class="img-responsive" src="http://lorempixel.com/{{ rand(100,200) }}/{{ rand(100,200) }}/nature" width="200" height="200" alt="">
+                    @endif
+
 
                   </figure>
                 </div>
@@ -292,18 +297,18 @@
 
           </div>
       </section>
-      
+
       <section id="pricing" class="dark">
         <div class="container">
 
           <header class="text-center margin-bottom-20">
             <h2>Pricing</h2>
           </header>
-          
+
           <div class="row">
            <div class="col-sm-8 col-sm-offset-2" >
             <div class="row dark">
-              
+
 							<table class="table">
                 <thead>
                 <tr>

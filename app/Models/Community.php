@@ -118,7 +118,7 @@ class Community extends Model
 		if ($this->logo) {
 			return Config::get('services.cdn.default').'/uploads/community-logos/'.$this->id.'/'.$this->logo;
 		} else {
-			return null;
+			return false;
 		}
 	}
 
@@ -129,10 +129,10 @@ class Community extends Model
   */
 	public function getProfileImg() {
 
-		if ($this->profile_img) {
-			return Config::get('app.cdn.default').'/uploads/community-profiles/'.$this->id.'/'.$this->profile_img;
+		if ($this->profile_img!='') {
+			return Config::get('services.cdn.default').'/uploads/community-profiles/'.$this->id.'/'.$this->profile_img;
 		} else {
-			return null;
+			return false;
 		}
 	}
 
