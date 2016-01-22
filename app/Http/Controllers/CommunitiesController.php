@@ -14,6 +14,7 @@ use App\ExchangeType;
 use Form;
 use Pagetheme;
 use Mail;
+use Helper;
 
 class CommunitiesController extends Controller
 {
@@ -194,12 +195,24 @@ class CommunitiesController extends Controller
       $community->name	= e(Input::get('name'));
       $community->subdomain	= e(Input::get('subdomain'));
       $community->group_type	= e(Input::get('group_type'));
+      $community->about	= e(Input::get('about'));
+      $community->welcome_text	= e(Input::get('welcome_text'));
+
+      if (Input::get('location')) {
+        $community->location = e(Input::get('location'));
+        $latlong = Helper::latlong(Input::get('location'));
+      }
+
+      if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+        $community->latitude 		= $latlong['lat'];
+        $community->longitude 	= $latlong['lng'];
+      }
 
       if (!$community->save()) {
          return Redirect::back()->withInput()->withErrors($community->getErrors());
       }
 
-      $community->exchangeTypes()->sync(Input::get('community_exchange_types'));
+      $community->exchangeTypes()->sync(Input::get('exchange_types'));
       return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
 
   }
