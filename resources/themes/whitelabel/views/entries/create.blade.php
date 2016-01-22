@@ -102,8 +102,8 @@
                       		<!-- Name -->
                       		<label class="input">
                         		<input type="text" name="title" id="title" class="form-control" placeholder="Description">
-                            <span class="fa fa-thumbs-down inputErr"></span>
-                            <span class="fa fa-thumbs-up noInputErr" style="display:none;"></span>
+                            <span class="fa fa-asterisk inputErr"></span>
+                            <span class="fa fa-asterisk noInputErr" style="display:none;"></span>
 
 
                       		</label>
