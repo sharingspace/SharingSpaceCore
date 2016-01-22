@@ -21,7 +21,19 @@ class EntryTest extends \Codeception\TestCase\Test
           'post_type' => $entry->post_type,
           'qty' => $entry->qty,
         ];
-        
+
+        Entry::create($values);
+        $this->tester->seeRecord('entries', $values);
+    }
+
+    public function testNewHaveEntry()
+    {
+        $entry = factory(App\Entry::class, 'have-entry')->make();
+        $values = [
+          'title' => $entry->title,
+          'post_type' => $entry->post_type,
+          'qty' => $entry->qty,
+        ];
 
         Entry::create($values);
         $this->tester->seeRecord('entries', $values);
