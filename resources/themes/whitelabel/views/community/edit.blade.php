@@ -95,9 +95,9 @@
                     </div>
 
                     <div class="form-group {{ $errors->first('welcome_text', 'has-error') }}">
-                      <!-- Description -->
+                      <!-- Welcome text -->
                       <label class="input">
-                        <textarea name="welcome_text" rows="4" class="form-control" data-maxlength="200" id="welcome_text" data-info="textarea-words-info" placeholder="Welcome text..."></textarea>
+                        <textarea name="welcome_text" rows="4" class="form-control" data-maxlength="200" id="welcome_text" data-info="textarea-words-info" placeholder="Welcome text...">{{ Input::old('slack_endpoint', $community->welcome_text) }}</textarea>
                       </label>
                     </div>
 
@@ -105,7 +105,7 @@
                     <div class="form-group {{ $errors->first('about', 'has-error') }}">
                       <!-- Description -->
                       <label class="input">
-                        <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="Detailed description..."></textarea>
+                        <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="Detailed description...">{{ Input::old('about', $community->about) }}</textarea>
                       </label>
                     </div>
 
@@ -113,13 +113,38 @@
                     <div class="form-group {{ $errors->first('location', 'has-error') }}">
                       <label class="control-label sr-only" for="location">Location</label>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}">
+                        <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', $community->location) }}}">
                         <div class="input-group-addon" id="basic-addon2">
                           <i class="fa fa-location-arrow" id="geolocate"></i>
                         </div>
                         {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
                      </div>
                     </div>
+
+                    <!-- Slack endpoint -->
+  									<div class="form-group{{ $errors->first('slack_endpoint', ' has-error') }}">
+  										<input type="text" name="slack_endpoint" class="form-control" placeholder="Slack endpoint" required="" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
+                      {!! $errors->first('slack_endpoint', '<span class="help-block">:message</span>') !!}
+  									</div>
+
+                    <!-- Slack botname -->
+  									<div class="form-group{{ $errors->first('slack_botname', ' has-error') }}">
+  										<input type="text" name="slack_botname" class="form-control" placeholder="Slack botname" required="" value="{{ Input::old('slack_botname', $community->slack_botname) }}">
+                      {!! $errors->first('slack_botname', '<span class="help-block">:message</span>') !!}
+  									</div>
+
+                    <!-- Slack channel -->
+  									<div class="form-group{{ $errors->first('slack_channel', ' has-error') }}">
+  										<input type="text" name="slack_channel" class="form-control" placeholder="Slack channel" required="" value="{{ Input::old('slack_channel', $community->slack_channel) }}">
+                      {!! $errors->first('slack_channel', '<span class="help-block">:message</span>') !!}
+  									</div>
+
+
+                    <!-- Google analytics ID -->
+  									<div class="form-group{{ $errors->first('ga', ' has-error') }}">
+  										<input type="text" name="ga" class="form-control" placeholder="Google Analytics ID" value="{{ Input::old('ga', $community->ga) }}">
+                      {!! $errors->first('ga', '<span class="help-block">:message</span>') !!}
+  									</div>
 
                     <!-- File upload -->
                     <div class="form-group {{ $errors->first('file', 'has-error') }}">

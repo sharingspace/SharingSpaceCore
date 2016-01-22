@@ -197,6 +197,10 @@ class CommunitiesController extends Controller
       $community->group_type	= e(Input::get('group_type'));
       $community->about	= e(Input::get('about'));
       $community->welcome_text	= e(Input::get('welcome_text'));
+      $community->slack_endpoint	= e(Input::get('slack_endpoint'));
+      $community->slack_botname	= e(Input::get('slack_botname'));
+      $community->slack_channel	= e(Input::get('slack_channel'));
+      $community->ga	= e(Input::get('ga'));
 
       if (Input::get('location')) {
         $community->location = e(Input::get('location'));
