@@ -131,7 +131,17 @@
 
 										</span>
 									</span>
-									<img class="img-responsive" src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="600" height="399" alt="">
+
+                  @if ($entry->media->count() > 0)
+
+                    @foreach ($entry->media as $media)
+                      <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="">
+                    @endforeach
+
+                  @else
+                    <img class="img-responsive" src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="600" height="399" alt="">
+                  @endif
+
 								</figure>
 							</div>
 
