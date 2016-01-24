@@ -24,33 +24,39 @@
 <section>
 	<div id="view" class="container margin-top-20">
 		<div class="row">
-    	<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-10" style="object-fit:contain;">
+    	<div class="col-md-4 col-sm-4 col-xs-3 margin-bottom-10" style="object-fit:contain;">
         @if($entry->media->count())
           <img src="/assets/uploads/entries/{{ $entry->id }}/{{ $entry->media[0]->filename }}">
         @endif
       </div> <!-- col-md-4 -->
 
-			<div class="col-md-8 col-sm-8 col-xs-12" style="object-fit:contain;">
+			<div class="col-md-8 col-sm-8 col-xs-9" style="object-fit:contain;">
       	<div class="row">
         	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
          		<h1 class="size-18 margin-bottom-0">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>
           </div>
           
-          @if($entry->qty)
-          	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-              <strong>Quantity:</strong> {{$entry->qty}} 
-						</div>              
+          @if($entry->author->getDisplayName())
+        		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
+        			<strong>By:</strong> {{$entry->author->getDisplayName()}}
+            </div>
           @endif
+          
+         
           @if (count($entry->exchangeTypes) > 0)
         		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
 							<?php  $exchanges = array(); ?>
               @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                 <?php array_push($exchanges, strtolower($entry->exchangeTypes[$i]->name)); ?>
               @endfor
-              <strong>Exchanges:</strong> {{implode(', ', $exchanges)}}
+              <strong>Exchange types:</strong> {{implode(', ', $exchanges)}}
             </div>
         	@endif
-          
+           @if($entry->qty)
+          	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
+              <strong>Quantity:</strong> {{$entry->qty}} 
+						</div>              
+          @endif
           @if($entry->location)
         		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
         			<strong>Location:</strong> {{ $entry->location }}
@@ -62,11 +68,7 @@
         			<strong>Description:</strong> {{ $entry->description }}
             </div>
           @endif
-           @if($entry->author->getDisplayName())
-        		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-        			<strong>Posted by:</strong> {{$entry->author->getDisplayName()}}
-            </div>
-          @endif
+           
           
       
       
@@ -102,7 +104,7 @@
 
 							@if (Auth::check())
 								@if (Auth::user()->user_id==$entry->user_id)
-									View Messages
+									View Offers
 								@else
 									Make Offer
 								@endif
@@ -128,7 +130,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-12 margin-top-6">
 
 									@if (Auth::check())
-										@if (Auth::user()->user_id == $entry->user_id)
+										@if (Auth::user()->user_id != $entry->user_id)
 											@if ((!$entry->expired) && ($entry->completed_at==''))
 												<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
 												<form action="/tiles/{{{ $entry->id }}}/view" method="post">
