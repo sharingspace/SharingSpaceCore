@@ -81,16 +81,16 @@
   
            @if ((Auth::user()->is_admin) || (($entry->deleted_at=='') && ($entry->checkUserCanEditEntry(Auth::user()))   ))
   
-            <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-default tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Edit from Tile View">
+            <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Edit from Tile View">
             <i class="fa fa-pencil"></i> Edit</a>
   
             @if ($entry->completed_at=='')
-              <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-default tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{{ strtoupper($entry->post_type) }}} as completed" data-mm-track-label="Mark as Completed from Tile View">
+              <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{{ strtoupper($entry->post_type) }}} as completed" data-mm-track-label="Mark as Completed from Tile View">
                     <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
             @endif
             
-              <a href="{{ route('entry.delete.save', $entry->id) }}" class="btn btn-xs btn-default tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete this {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Delete from Tile View">
-                  <i class="fa fa-times"></i> Delete</a>
+              <a href="{{ route('entry.delete.save', $entry->id) }}" class="btn btn-xs btn-warning tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete this {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Delete from Tile View">
+                  <i class="fa fa-trash"></i> Delete</a>
           @endif
         </div> <!-- listing-actions -->
         @endif <!-- endif user is admin or owner -->
