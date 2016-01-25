@@ -9,7 +9,7 @@
 <style>
 #view img {
 	width: 100%;
-	max-width: 100%;
+	max-width: 400px;
 	height: auto;
 	max-height: 100%;
 	display: block;
@@ -24,13 +24,15 @@
 <section>
 	<div id="view" class="container margin-top-20">
 		<div class="row">
-    	<div class="col-md-4 col-sm-4 col-xs-3 margin-bottom-10" style="object-fit:contain;">
+    	<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-10" style="object-fit:contain;">
         @if($entry->media->count())
           <img src="/assets/uploads/entries/{{ $entry->id }}/{{ $entry->media[0]->filename }}">
+        @else
+        	<img src="{{ Config::get('app.cdn.default') }}/assets/img/default/new-default-{{{ $entry->post_type }}}.jpg">
         @endif
       </div> <!-- col-md-4 -->
 
-			<div class="col-md-8 col-sm-8 col-xs-9" style="object-fit:contain;">
+			<div class="col-md-8 col-sm-8 col-xs-12" style="object-fit:contain;">
       	<div class="row">
         	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
          		<h1 class="size-18 margin-bottom-0">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>

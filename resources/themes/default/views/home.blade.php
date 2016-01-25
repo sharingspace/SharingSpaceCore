@@ -139,14 +139,18 @@
 
 			<!-- /ABOUT -->
       <!-- BUTTON CALLOUT -->
-      <div class="callout callout-theme-color margin-bottom-10">
+      <div class="callout callout-theme-color margin-bottom-10 text-center">
         <div class="row">
-          <div class="col-md-5 col-sm-12 col-md-offset-1"><!-- left text -->
-<h4>Make a Sharing Hub in 1 minute!<br /><span>or click here to browse live hubs</span></h4>
-          </div><!-- /left text -->
-          <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
-            <a href="#" class="btn btn-success btn-lg">30-day free trial</a>
-          </div><!-- /right btn -->
+         <div class="row text-center">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
+      <h4>Make a Sharing Hub in 1 minute! <br /><span>or click here to browse live hubs</span></h4>
+    </div><!-- /left text -->
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
+      <a href="#" class="btn btn-success btn-lg hidden-xs">30-day free trial</a>
+      <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">30-day free trial</a>
+
+    </div><!-- /right btn -->
+  </div>
         </div>
       </div>
       <!-- /BUTTON CALLOUT -->
@@ -161,44 +165,43 @@
 
   				<!-- FEATURED BOXES 3 -->
   				<div class="row">
-
-  					<div class="col-md-4 col-xs-6">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-random"></i>
   							<h3>Exchange Anything</h3>
   							<p class="font-lato size-20">Any kind of thing, skill, knowledge, opportunity and more can be included.</p>
   						</div>
   					</div>
-  					<div class="col-md-4 col-xs-6">
+           
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-users"></i>
   							<h3>Unlimited Size</h3>
   							<p class="font-lato size-20">Hubs can be from 1 - 100k members and from anyplace on the Earth.</p>
   						</div>
   					</div>
-  					<div class="col-md-4 col-xs-6">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-wrench"></i>
   							<h3>Custom Look & Feel</h3>
   							<p class="font-lato size-20">Choose different colors, layouts, and branded themes for your hub.</p>
   						</div>
   					</div>
-  					<div class="col-md-4 col-xs-6">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-university"></i>
   							<h3>Professional Options</h3>
   							<p class="font-lato size-20">Administrators can make money building access as well as other benefits!</p>
   						</div>
   					</div>
-
-  					<div class="col-md-4 col-xs-6">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-eye-slash"></i>
   							<h3>Full Privacy Control</h3>
   							<p class="font-lato size-20">Public, private, and secret hubs make it easy for you to control the amount of visibility.</p>
   						</div>
   					</div>
-  					<div class="col-md-4 col-xs-6">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-code"></i>
   							<h3>API + More</h3>
@@ -222,7 +225,7 @@
           <header class="text-center margin-bottom-20">
             <h2>We're a CO-OP!</h2>
           </header>
-          <p class="lead font-lato">AnyShare is the first Cooperative in the United States (and global community) to allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! After all, we ARE you. <a href="#">Read more</a>.</p>
+          <p class="lead font-lato">AnyShare is the first Cooperative in the United States (and global community) to allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! After all, we ARE you. <a href="#" style='color:white;'>Read more</a>.</p>
 			</div>
   		</section>
       <!-- COMMUNITIES -->
@@ -341,15 +344,13 @@
 <!-- BUTTON CALLOUT -->
 <div class="callout callout-theme-color margin-bottom-0">
 
-  <div class="row">
-
-    <div class="col-md-4 col-sm-12 col-md-offset-2"><!-- left text -->
-      <h4>Launch Your Sharing Hub in 1 minute! <br /><span>or click here to browse live hubs</span></h4>
+  <div class="row text-center">
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
+      <h4>Make a Sharing Hub in 1 minute! <br /><span>or click here to browse live hubs</span></h4>
     </div><!-- /left text -->
-    <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
       <a href="#" class="btn btn-success btn-lg">30-day free trial</a>
     </div><!-- /right btn -->
-
   </div>
 
 </div>
