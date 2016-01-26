@@ -408,6 +408,15 @@ class EntriesController extends Controller
     return $data;
 
   }
+	
+	/*
+  Complete the entry
+  */
+  public function completeEntry($entryID)
+  {
+    echo "completeEntry: stubbed";
+	}
+
 
 
 }

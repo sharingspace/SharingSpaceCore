@@ -197,6 +197,11 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@getEntry')
   );
 
+ Route::get('{entryID}/completed', array(
+    'middleware' => 'auth',
+    'as' => 'entry.completed',
+    'uses' => 'EntriesController@completeEntry')
+  );
 });
 
 
