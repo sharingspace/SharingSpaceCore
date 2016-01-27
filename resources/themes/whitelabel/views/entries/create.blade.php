@@ -50,7 +50,7 @@
                 <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin" id='entry_form'>
                   {!! csrf_field() !!}
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
-
+    							<input type="hidden" name="upload_key" value="{{ Session::get('upload_key') }}">
 
                   	<div class="col-md-3 col-sm-3 col-xs-3" style="border-right:#CCC thin solid;">
 
@@ -148,7 +148,7 @@
                           <div class="form-group {{ $errors->first('file', 'has-error') }}">
                             <div class="fancy-file-upload fancy-file-info">
                             	<i class="fa fa-picture-o"></i>
-                            	<input type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);" />
+                            	<input id="choose-file" type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
                             	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
                             	<span class="button">{{ trans('general.uploads.choose_file') }}</span>
                             </div>
@@ -216,7 +216,7 @@ $(function() {
 		//var title = $(this).closest('tr').('td.table_title').html();
     //console.warn("Title is: "+title +", post type is: "+post_type+", quantity is: "+qty+", entry id is: "+$(this).prop('class')+entry_id);
 
-		//console.log("edit clicked"+entry_id);
+		console.log("edit clicked"+entry_id);
 		$("#title").val(title);
 		$('#qty').val(qty);
 		$('#description').val(desc);
@@ -234,15 +234,15 @@ $(function() {
 		//var tile = $(this).closest('.tile_container').prop("id");
 		var entry_id = $(this).data("entryid");
     var myrow = $(this).closest('tr');
-		//console.log("delete clicked on entry: "+entry_id);
+		console.log("delete clicked on entry: "+entry_id);
     $.post(entry_id+"/delete/ajax",{_token: $('input[name=_token]').val()},function (replyData) {
-      //console.log("delete success :-)  "+replyData.entry_id);
+      console.log("delete success :-)  "+replyData.entry_id);
       if(replyData.success) {
         //$('td.entry_'+replyData.entry_id).closest('tr').remove();
         myrow.remove();
 
         // count how many rows we have, if we only have the header row hide the table
-        //console.log($('#create_table tr').length);
+        console.log($('#create_table tr').length);
         if( $('#create_table tr').length == 1) {
           $('#create_table').css('display','none');
         }
@@ -306,9 +306,16 @@ $(function() {
 
 
 	$(document).on( "click", "#ajaxAdd", function( e ) {
-		//console.log("add or return hit");
+		console.log("add or return hit");
 
 		e.preventDefault();
+		
+		// if we have an image, handle that separately
+		if($('#choose-file').val()) {
+			handleFile();
+		}
+		
+		//alert($('#choose-file').val());
 		var save = true;
 
 		var title = $("#title").val();
@@ -339,13 +346,14 @@ $(function() {
 		position = tileClasses.indexOf("update_");
 		if(position>=0) {
 			entry_id = tileClasses.match(/\d+/g);
-			//console.log("update, edit = true "+entry_id+"  "+tileClasses);
+			console.log("update, edit = true "+entry_id+"  "+tileClasses);
 			save = false;
       post_url=entry_id+"/edit/ajax";
 		}
 
 
     //console.warn("about to post...");
+		//alert($('#entry_form').serialize());
     //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
       //console.warn("Yay we posted! Here's our reply: ");
@@ -383,7 +391,7 @@ $(function() {
       {
 				$("#ajaxAdd").html("Create");
 
-        //console.log("Edit response  "+replyData.success) ;
+        console.log("Edit response  "+replyData.success) ;
         // step 4d. Find existing tile div and update contents
         $("#title").removeClass( "update_"+entry_id);
 
@@ -425,61 +433,57 @@ $(function() {
 
 
 	$(document).on("click", '[id^=button_]', function () {
-		//console.log('Upload image click');
+		console.log('Upload image click');
 		var parent_div = $(this).parents( '.tile_container').attr('id');
-		//console.log("Upload click: div: "+parent_div);
+		console.log("Upload click: div: "+parent_div);
 
 		if(parent_div) {
 			var buttonArray = parent_div.split('_');
-			//console.log("Upload click: tile id: #tile_"+buttonArray[1]);
+			console.log("Upload click: tile id: #tile_"+buttonArray[1]);
 			$('#tile_' + buttonArray[1]+' input[type=file]').trigger('click');
 		}
 	});
 
 });
 
-  function handleFile(files, entry_id){
-		var image=files[0];
+  function handleFile(){
+		
+		var image=$('input[type=file]')[0].files[0];
 		var fileReader = new FileReader();
-		var imageElem = document.createElement("img");
-		var id_array  = entry_id.split('_');
-		//console.log("handleFile: entry_id = "+id_array[1]+", file = "+image.name);
-		id = id_array[1];
+		var upload_key = "{{ Session::get('upload_key')}}"
+		console.log("handleFile: file = "+image.name+", upload_key = "+upload_key);
 
-		fileReader.onload=(function(img){return function(e){img.src = e.target.result;};})(imageElem);
+		fileReader.onload=function(e){ console.log("file read")}
 		fileReader.readAsDataURL(image);
 
-		var maxSize = $('#MAX_FILE_SIZE').value;
-		//console.log("handleFile: " +image.name+"tile id = "+ id+",  file size = "+image.size);
+		var maxSize = $('#MAX_FILE_SIZE').val();
+		console.log("handleFile: " +image.name+", maxSize = "+ maxSize+",  file size = "+image.size);
 
 		if(image.size < maxSize) {
-			$("#tile_"+id +" .show_thumbnail").append(imageElem);
-			$("#tile_"+id +" .show_thumbnail img").attr('alt',"");
-			$("#button_"+id).hide();
-			uploadFile(image, id);
+			uploadFile(image, upload_key);
 		}
 		else
 		{
-			$("#tile_"+id +" .too_large").show().addClass("error_message").fadeOut(9000, "linear");
-			//console.log("handleFile: file too big");
+			//$("#tile_"+id +" .too_large").show().addClass("error_message").fadeOut(9000, "linear");
+			console.log("handleFile: file too big");
 		}
    }
 
 
-function uploadFile(image, entry_id){
+function uploadFile(image, upload_key){
 	var xhr = new XMLHttpRequest();
 	var form_data = new FormData();
 
 	form_data.append('_token', $('input[name=_token]').val());
 	form_data.append('image', image);
-	//form_data.append('entry_id', entry_id);
-	//console.log("uploadFile: " +image.name+"  "+ entry_id+JSON.stringify(form_data));
+	form_data.append('upload_key', upload_key);
+	console.log("uploadFile: " +image.name+"  "+ JSON.stringify(form_data));
 
 	xhr.upload.onprogress = function(e) {
 		if (e.lengthComputable) {
 			var percentage =  parseInt((e.loaded / e.total) * 100);
-			$("#tile_"+entry_id+ " .percentage").html(percentage+"%");
-			//console.log("progress: "+percentage+"% complete");
+			//$("#tile_"+entry_id+ " .percentage").html(percentage+"%");
+			console.log("progress: "+percentage+"% complete");
 		}
 	};
 
@@ -492,20 +496,20 @@ function uploadFile(image, entry_id){
 	}, false);
 
 	xhr.onreadystatechange = function () {
-			//console.log("uploadFile: "+xhr.statusText);
+			console.log("uploadFile: "+xhr.statusText);
 
-		//console.log("uploadFile: status change");
+		console.log("uploadFile: status change");
 		if (xhr.readyState==4 && xhr.status==200)
 		{
-			//console.log("uploadFile: success!!!!!!!!!!");
+			console.log("uploadFile: success!!!!!!!!!!");
 			replyData = JSON.parse(xhr.responseText);
-			//console.log("onreadystatechange: image name = "+replyData.image);
-			$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
+			console.log("onreadystatechange: image name = "+replyData.image +"  "+replyData.upload_key +"  "+replyData.user_id);
+			//$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
 			//$("#tile_"+entry_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');
 
 		}
 	};
-	xhr.open("POST", +entry_id+"/upload", true);
+	xhr.open("POST", "/entry/upload", true);
 	xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
 	xhr.send(form_data);
 }
@@ -541,7 +545,7 @@ function trimString(yourString, maxLength) {
 
 function toggleBoxes(source) {
   checkboxes = document.querySelectorAll("input[name^='tile_exchange_type[']");
-	//console.log(checkboxes.length);
+	console.log(checkboxes.length);
   for (i=0; i < checkboxes.length; i++) {
 		checkboxes[i].checked = source.checked;
 	}

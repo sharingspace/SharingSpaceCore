@@ -31,8 +31,9 @@ class EntriesController extends Controller
   /*
   Get the create entry page
   */
-  public function getCreate()
+  public function getCreate(Request $request)
   {
+		$request->session()->put('upload_key', str_random(15));
     return view('entries.create');
   }
 
@@ -310,30 +311,29 @@ class EntriesController extends Controller
 	public function ajaxUpload($entryID = null) {
 
 		if (Input::hasFile('image')) {
-
+			$uploaded = false;
       if ($entryID) {
-
-        $entry = \App\Entry::find($entryID);
-
-        if (!$entry->checkUserCanEditEntry($user)) {
-          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.edit_not_allowed')]);
-        } else {
-          $uploaded = $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
-        }
-
+      	$uploaded = $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
       } else {
-        $uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('file'), 'entries', Input::get('upload_key'));
-      }
+				$uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'));
 
+      }      
+			$user = Auth::user();
+
+			return response()->json(['success'=>true, 'image'=>'linnard', 'upload_key'=>Input::get('upload_key'), 'user_id'=>$user->id]);
       // The file was uploaded successfully
       if ($uploaded) {
-        return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
+				return response()->json(['success'=>true, 'user_id'=>$user->id]);
       }
+			else {
+				return response()->json(['success'=>false]);
+			}
 
-      return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
+     // return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
 		}
-		return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
-
+			//return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
+			
+			return response()->json(['success'=>true, 'image'=>'linnard', 'upload_key'=>Input::get('upload_key'), 'user_id'=>$user->id]);
 	}
 
 

@@ -182,7 +182,7 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postEdit')
   );
 
-  Route::post('{entryID}/upload', array(
+  Route::post('upload/{entryID?}/', array(
     'middleware' => 'auth',
     'uses' => 'EntriesController@ajaxUpload')
   );
