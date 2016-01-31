@@ -25,8 +25,9 @@
 	<div id="view" class="container margin-top-20">
 		<div class="row">
     	<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-10" style="object-fit:contain;">
-        @if($entry->media->count())
-          <img src="/assets/uploads/entries/{{ $entry->id }}/{{ $entry->media[0]->filename }}">
+    	
+        @if($images && $images[0]->filename)
+          <img src="/assets/uploads/entries/{{ $entry->created_by }}/{{ $images[0]->filename }}">
         @else
         	<img src="{{ Config::get('app.cdn.default') }}/assets/img/default/new-default-{{{ $entry->post_type }}}.jpg">
         @endif
@@ -115,10 +116,8 @@
 							@endif
               </a></li>
 
-              @if (isset($entry->media))
-								@if (count($entry->media) > 1)
+              @if ($images && count($images) > 1)
 									<li><a href="#view_images_tab" role="tab" data-toggle="tab">More Images</a></li>
-								@endif
               @endif
 
 							<li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li>
@@ -213,12 +212,15 @@
 							</div> <!-- tab-pane -->
               
 							<div class="tab-pane" id="view_images_tab">
-                @foreach ($entry->media as $image)
-                	<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:20px;object-fit:contain;">
-            				<img src="/assets/uploads/entries/{{ $entry->id }}/{{ $image->filename }}" height="250" width="250" border="1">
-                  </div>
-          			@endforeach
+								@if($images)
+              	  @foreach ($images as $image)
+                		<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:20px;object-fit:contain;">
+            					<img src="/assets/uploads/entries/{{ $entry->created_by }}/{{ $image->filename }}" height="250" width="250" border="1">
+                  	</div>
+          				@endforeach
+          			@endif
 							</div>
+								
               
 							<div class="tab-pane" id="view_map">
 								<!--MAP-->

@@ -82,7 +82,7 @@ class Entry extends Model
   }
 
 
-  public static function saveImageToDB($id, $filename, $type, $upload_key = null) {
+  public static function saveImageToDB($id, $filename, $type, $user_id = null, $upload_key = null) {
     $media = new Media();
     $media->entry_id = $id;
     $media->upload_key = $upload_key;
@@ -90,6 +90,7 @@ class Entry extends Model
     $media->filetype = 'image';
     $media->caption = NULL;
     $media->created_at = date("Y-m-d H:i:s");
+		$media->user_id = $user_id;
     $media->save();
   }
 
