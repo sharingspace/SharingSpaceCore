@@ -25,9 +25,9 @@
 	<div id="view" class="container margin-top-20">
 		<div class="row">
     	<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-10" style="object-fit:contain;">
-    	
+
         @if($images && $images[0]->filename)
-          <img src="/assets/uploads/entries/{{ $entry->created_by }}/{{ $images[0]->filename }}">
+          <img src="/assets/uploads/entries/{{ $entry->id }}/{{ $images[0]->filename }}">
         @else
         	<img src="{{ Config::get('app.cdn.default') }}/assets/img/default/new-default-{{{ $entry->post_type }}}.jpg">
         @endif
@@ -38,14 +38,14 @@
         	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
          		<h1 class="size-18 margin-bottom-0">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>
           </div>
-          
+
           @if($entry->author->getDisplayName())
         		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
         			<strong>By:</strong> {{$entry->author->getDisplayName()}}
             </div>
           @endif
-          
-         
+
+
           @if (count($entry->exchangeTypes) > 0)
         		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
 							<?php  $exchanges = array(); ?>
@@ -57,39 +57,39 @@
         	@endif
            @if($entry->qty)
           	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-              <strong>Quantity:</strong> {{$entry->qty}} 
-						</div>              
+              <strong>Quantity:</strong> {{$entry->qty}}
+						</div>
           @endif
           @if($entry->location)
         		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
         			<strong>Location:</strong> {{ $entry->location }}
             </div>
           @endif
-          
+
            @if($entry->description)
         		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
         			<strong>Description:</strong> {{ $entry->description }}
             </div>
           @endif
-           
-          
-      
-      
+
+
+
+
       <!-- if user is admin or owner -->
       <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
         @if (Auth::check())
           <div class="listing-actions" style="padding-top: 10px;"> <!--  (Auth::user()->user_id == $entry->user_id)) $user) && -->
-  
+
            @if ((Auth::user()->is_admin) || (($entry->deleted_at=='') && ($entry->checkUserCanEditEntry(Auth::user()))   ))
-  
+
             <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Edit from Tile View">
             <i class="fa fa-pencil"></i> Edit</a>
-  
+
             @if ($entry->completed_at=='')
               <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{{ strtoupper($entry->post_type) }}} as completed" data-mm-track-label="Mark as Completed from Tile View">
                     <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
             @endif
-            
+
               <a href="{{ route('entry.delete.save', $entry->id) }}" class="btn btn-xs btn-warning tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete this {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Delete from Tile View">
                   <i class="fa fa-trash"></i> Delete</a>
           @endif
@@ -98,8 +98,8 @@
       </div>  <!-- col-md-12 -->
  		</div> <!-- col-sm-8 -->
 		</div>
- 
- 
+
+
 		<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
@@ -136,7 +136,7 @@
 												<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
 												<form action="/tiles/{{{ $entry->id }}}/view" method="post">
                           <!--MAKE AN OFFER-->
-      
+
                           <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
                             <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'>{{{ Input::old('message') }}}</textarea>
                           </div>  <!-- col-xs-12 -->
@@ -144,7 +144,7 @@
 
 													<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
                             <div class="form-group {{ $errors->first('message', 'has-error') }}">
-                            
+
                               <ul class="exchange_types">
                                  @if (count($entry->exchangeTypes) > 0)
                                    @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
@@ -197,7 +197,7 @@
   										<i class="fa fa-envelope"></i>
   										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#offer1">Lorem ipsum Dolor</button>
 										</div><!-- /notification item -->
-              
+
               			<div class="clearfix"><!-- notification item -->
   										<i class="fa fa-envelope"></i>
                       <button type="button" class="btn btn-link" data-toggle="modal" data-target="#offer1">Biggus Lorem ipsum Dolor</button>
@@ -210,7 +210,7 @@
 
 								</div> <!-- col-xs-12 -->
 							</div> <!-- tab-pane -->
-              
+
 							<div class="tab-pane" id="view_images_tab">
 								@if($images)
               	  @foreach ($images as $image)
@@ -220,8 +220,8 @@
           				@endforeach
           			@endif
 							</div>
-								
-              
+
+
 							<div class="tab-pane" id="view_map">
 								<!--MAP-->
 								@if (($entry->latitude!='') && ($entry->longitude!=''))
@@ -263,7 +263,7 @@
 
              </div> <!-- tab-pane -->
 
-							
+
 
 								<div class="tab-pane" id="comments">
 									<p class="help-block">Comments posted here are publicly viewable.</p>
@@ -272,10 +272,10 @@
              </div> <!-- tab-content -->
 					</div> <!-- col-xs-12 -->
 				</div> <!-- row -->
- 
- 
- 
-      
+
+
+
+
 
 				</div> <!-- row -->
 <!-- <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal2">Make Offer</button> -->
@@ -314,7 +314,7 @@ $(document).ready(function () {
             data: $('form.contact').serialize(),
             success: function(msg){
                 $("#thanks").html(msg) //hide button and show thank you
-                $("#form-content").modal('hide'); //hide popup  
+                $("#form-content").modal('hide'); //hide popup
             },
             error: function(){
                 alert("failure");

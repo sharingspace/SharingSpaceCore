@@ -77,14 +77,19 @@ trait UploadableFileTrait {
 		->where('user_id','=',  $user->id)
 		->get();
 
-		$aws_path = base_path().'/public/assets/uploads/entries/'.$user->id;
+		$aws_path = base_path().'/public/assets/uploads/entries/'.$entry_id;
 		$path = base_path().'/public/assets/uploads/entries/user-'.$user->id.'-tmp';
-    
+
 		foreach ($tmp_images as $tmp_image) {
 
 			$filename = $tmp_image->filename;
 			$src = $path.'/'.$filename;
       $dest = $aws_path.'/'.$filename;
+
+      // Make the directory if it doesn't exist
+      if (!file_exists($aws_path)) {
+        mkdir($aws_path, 0755, true);
+      }
 
       $error = rename($src, $dest);
 

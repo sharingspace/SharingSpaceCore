@@ -52,7 +52,7 @@
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
     							<input type="hidden" name="upload_key" id="upload_key" value="" />
 
-                  	<div class="col-md-3 col-sm-3 col-xs-3" style="border-right:#CCC thin solid;">
+                  	<div class="col-md-3 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
 
                     	<div class="form-group" style="margin-bottom: 5px;">
                       	<fieldset class="margin-bottom-10">
@@ -85,7 +85,7 @@
 
                       </div> <!-- col-md-3 -->
 
-                      <div class="col-md-9 col-sm-9 col-xs-9">
+                      <div class="col-md-9 col-sm-8 col-xs-12">
 
                   		<fieldset class="nomargin">
                     		<div class="col-md-2 margin-bottom-10 {{ $errors->first('post_type', ' has-error') }}">
@@ -104,16 +104,19 @@
                         		<input type="text" name="title" id="title" class="form-control" placeholder="Description">
                             <span class="fa fa-asterisk inputErr"></span>
                             <span class="fa fa-asterisk noInputErr" style="display:none;"></span>
-
-
                       		</label>
                     		</div>
-                    		<div class="col-md-2 margin-bottom-10">
-                    		<button class="btn btn-success" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
 
-                    		</div>
                    		</fieldset>
-
+                      <!-- File upload -->
+                      <div class="col-md-10 form-group {{ $errors->first('file', 'has-error') }}">
+                        <div class="fancy-file-upload fancy-file-info">
+                          <i class="fa fa-picture-o"></i>
+                          <input id="choose-file" type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
+                          <input type="text" class="form-control" placeholder="no file selected" readonly="" />
+                          <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                        </div>
+                      </div>
                    		<div class="col-md-10">
                         <div id="prefs_panel">
 
@@ -144,21 +147,17 @@
                            </div>
                           </div>
 
-                          <!-- File upload -->
-                          <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                            <div class="fancy-file-upload fancy-file-info">
-                            	<i class="fa fa-picture-o"></i>
-                            	<input id="choose-file" type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
-                            	<input type="text" class="form-control" placeholder="no file selected" readonly="" />
-                            	<span class="button">{{ trans('general.uploads.choose_file') }}</span>
-                            </div>
-                          </div>
 
-                          <div class="col-md-12 col-sm-12 col-xs-12">
+
+                          <div class="col-md-10 col-sm-10 col-xs-10">
                             <label class="checkbox pull-left" for="visible_checkbox">
                               {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
                               <i></i> Visible only to you
                             </label>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-2 ">
+                          <button class="btn btn-success" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
+
                           </div>
                         </div> <!-- prefs panel -->
                        </div>
