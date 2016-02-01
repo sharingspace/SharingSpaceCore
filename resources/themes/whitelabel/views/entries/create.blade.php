@@ -50,7 +50,7 @@
                 <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin" id='entry_form'>
                   {!! csrf_field() !!}
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
-    							<input type="hidden" name="upload_key" value="{{ Session::get('upload_key') }}">
+    							<input type="hidden" name="upload_key" id="upload_key" value="" />
 
                   	<div class="col-md-3 col-sm-3 col-xs-3" style="border-right:#CCC thin solid;">
 
@@ -180,18 +180,19 @@
 $("#ajaxAdd").attr('disabled','disabled'); // disable add button until page has loaded
 $("#create_table").hide();
 
-$(function() {
+$( document ).ready(function() {
 
 	$("#ajaxAdd").removeAttr('disabled');//enable add button	now page has loaded
 
-		if ($('#visible_checkbox').is(":checked")) {
-			$('#select_hub').hide();
-		} else {
-			$('#select_hub').show();
-		}
-		$(document).on( "click", "#visible_checkbox", function( e ) {
-			$('#select_hub').toggle();
-		});
+	if ($('#visible_checkbox').is(":checked")) {
+		$('#select_hub').hide();
+	}else {
+		$('#select_hub').show();
+	}
+
+	$(document).on( "click", "#visible_checkbox", function( e ) {
+		$('#select_hub').toggle();
+	});
 
 	$('#title').on('input', function() {
 		if($(this).val().length < 3) {
@@ -256,42 +257,38 @@ $(function() {
 	});
 
 
-	$(document).on( "click", "#select_all", 
-		function( e ) {
-			//e.preventDefault();
-			if(this.checked) {
-				$('.exchanges').each(function(e) {
-					this.checked = true;
-				});
-			}
-			else
-			{
-				$('.exchanges').each(function(e)
-				{
-					this.checked = false;
-				});
-			}
+	$(document).on( "click", "#select_all", function( e ) {
+		//e.preventDefault();
+		if(this.checked) {
+			$('.exchanges').each(function(e) {
+				this.checked = true;
+			});
 		}
-	)
-	
-	$(document).on( "click", ".exchanges", 
-		function( e ) {
-			$('#select_all').prop('checked', false);
+		else {
+			$('.exchanges').each(function(e) {
+				this.checked = false;
+			});
 		}
-	)
-	
+	});
+
+	$(document).on( "click", ".exchanges", function( e ) {
+		$('#select_all').prop('checked', false);
+	});
+
 	function updateExisting() {
 		// has title text changed?
 		$focusedTitle = $(':focus');
 		if( $focusedTitle ) {
 			return !($focusedTitle.val() == $focusedTitle.data().initail)
 		}
-		else return false;
+		else {
+			return false;
+		}
 	}
 
 	function restorePlaceholder(ph_text) {
-			$("#title").val(""); // = "";
-			$("#title").attr('placeholder',ph_text);
+		$("#title").val("");
+		$("#title").attr('placeholder',ph_text);
 	}
 
   // Return smart server error messages
@@ -309,34 +306,32 @@ $(function() {
 		//console.log("add or return hit");
 
 		e.preventDefault();
-		
+		var newUpload_key = Math.random().toString(36).substring(7);
+		$('#upload_key').val(newUpload_key);
+
+		// do what you like with the input
 		// if we have an image, handle that separately
 		if($('#choose-file').val()) {
-			handleFile();
+			handleFile(newUpload_key);
 		}
-		
-		//alert($('#choose-file').val());
+
 		var save = true;
 
 		var title = $("#title").val();
-		if(title.length < 3 && false)
-		{
+		if(title.length < 3 && false) {
 			restorePlaceholder("Your want or have must be at least 3 characters long")
 			setTimeout(function() {
 					restorePlaceholder("Press enter to save");
-				},
-			2000);
+				}, 2000);
       return;
 		}
-
-    // //console.dir($('.exchange_types input:checked'));
 
 		if($('.exchange_types input:checked').length == 0) {
       $('#submission_error').text('Please select at least one exchange type').show();
       return;
 		}
-		if(!title) // step 1. Anything to save?
-		{
+
+		if(!title) {
       //I suspect that this will never fire; validation will catch this
       return;
     }
@@ -356,7 +351,7 @@ $(function() {
 		//alert($('#entry_form').serialize());
     //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
     $.post( post_url, $('#entry_form').serialize(),function (replyData) {
-    //console.warn("Yay we posted! Here's our reply: ");
+    	//console.warn("Yay we posted! Here's our reply: ");
       //console.dir(replyData);
       if(!replyData.success) {
         //console.log("Create: failed ************************************"+replyData.error)
@@ -373,7 +368,6 @@ $(function() {
 				$("#title").val('');
 				$('#description').val('');
 				$('#qty').val(1);
-        //console.warn("create 'save new entry' branch entered");
         $('#submission_error').hide();
 
         if( $('#create_table tr').length == 1) {
@@ -386,14 +380,13 @@ $(function() {
 
 				$(".inputErr").show();
 				$(".noInputErr").hide();
-       //console.warn("End of create 'save' branch and of the entire callback");
+       	//console.warn("End of create 'save' branch and of the entire callback");
       }
 			else
       {
 				$("#ajaxAdd").html("Create");
 
         //console.log("Edit response  "+replyData.success) ;
-        // step 4d. Find existing tile div and update contents
         $("#title").removeClass( "update_"+entry_id);
 
         tile_info = "I "+replyData.post_type + " "+replyData.title;
@@ -410,16 +403,12 @@ $(function() {
         });
 
         $("#title").find('input:text').focus();
-				
-					$('tr#tr_'+entry_id+' .td_post_type').html(replyData.post_type.toUpperCase());
-					$('tr#tr_'+entry_id+' .td_title').html(trimString(replyData.title, 60));
-					$('tr#tr_'+entry_id+' .td_qty').html(replyData.qty);
-					$('tr#tr_'+entry_id+' .td_exchanges').html(exchanges);
-					
 
-					//console.warn("End of create 'edit' branch and of the entire callback");
+        $('tr#tr_'+entry_id+' .td_post_type').html(replyData.post_type.toUpperCase());
+        $('tr#tr_'+entry_id+' .td_title').html(trimString(replyData.title, 60));
+        $('tr#tr_'+entry_id+' .td_qty').html(replyData.qty);
+        $('tr#tr_'+entry_id+' .td_exchanges').html(exchanges);
       }
-
 
     }).fail(function (jqxhr,errorStatus) {
       $('#submission_error').text(errorStatus).show();
@@ -436,7 +425,6 @@ $(function() {
 	$(document).on("click", '[id^=button_]', function () {
 		//console.log('Upload image click');
 		var parent_div = $(this).parents( '.tile_container').attr('id');
-		//console.log("Upload click: div: "+parent_div);
 
 		if(parent_div) {
 			var buttonArray = parent_div.split('_');
@@ -445,16 +433,14 @@ $(function() {
 		}
 	});
 
-});
 
-  function handleFile(){
+  function handleFile(upload_key){
 
 		var image=$('input[type=file]')[0].files[0];
 		var fileReader = new FileReader();
-		var upload_key = "{{ Session::get('upload_key')}}"
 		//console.log("handleFile: file = "+image.name+", upload_key = "+upload_key);
 
-		fileReader.onload=function(e){ //console.log("file read")}
+		//fileReader.onload=function(e){ console.log("file read")}
 		fileReader.readAsDataURL(image);
 
 		var maxSize = $('#MAX_FILE_SIZE').val();
@@ -463,136 +449,72 @@ $(function() {
 		if(image.size < maxSize) {
 			uploadFile(image, upload_key);
 		}
-		else
-		{
+		else {
 			//$("#tile_"+id +" .too_large").show().addClass("error_message").fadeOut(9000, "linear");
 			//console.log("handleFile: file too big");
 		}
-   }
+  }
 
 
-function uploadFile(image, upload_key){
-	var xhr = new XMLHttpRequest();
-	var form_data = new FormData();
+	function uploadFile(image, upload_key){
 
-	form_data.append('_token', $('input[name=_token]').val());
-	form_data.append('image', image);
-	form_data.append('upload_key', upload_key);
-	//console.log("uploadFile: " +image.name+"  "+ JSON.stringify(form_data));
+		var xhr = new XMLHttpRequest();
+		var form_data = new FormData();
 
-	xhr.upload.onprogress = function(e) {
-		if (e.lengthComputable) {
-			var percentage =  parseInt((e.loaded / e.total) * 100);
-			//$("#tile_"+entry_id+ " .percentage").html(percentage+"%");
-			//console.log("progress: "+percentage+"% complete");
+		form_data.append('_token', $('input[name=_token]').val());
+		form_data.append('image', image);
+		form_data.append('upload_key', upload_key);
+		//console.log("uploadFile: " +image.name+"  "+ JSON.stringify(form_data));
+
+		xhr.upload.onprogress = function(e) {
+			if (e.lengthComputable) {
+				var percentage =  parseInt((e.loaded / e.total) * 100);
+				//$("#tile_"+entry_id+ " .percentage").html(percentage+"%");
+				//console.log("progress: "+percentage+"% complete");
+			}
+		};
+
+		xhr.upload.addEventListener("loadstart", function(e){
+    	$("#percentage").show();
+  	}, false);
+
+		xhr.upload.addEventListener("load", function(e){
+    	$("#percentage").html("100% Done");
+		}, false);
+
+		xhr.onreadystatechange = function () {
+			//console.log("uploadFile: status change");
+			if (xhr.readyState==4 && xhr.status==200) {
+				//console.log("uploadFile: success!!!!!!!!!!");
+				replyData = JSON.parse(xhr.responseText);
+				//console.log("onreadystatechange: image name = "+replyData.image +"  "+replyData.upload_key +"  "+replyData.user_id);
+				//$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
+				//$("#tile_"+entry_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');
+			}
+		};
+
+		xhr.open("POST", "/entry/upload", true);
+		xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
+		xhr.send(form_data);
+	}
+
+	function trimString(yourString, maxLength) {
+		//trim the string to the maximum length
+
+		if(yourString.length > maxLength)	{
+			var trimmedString = yourString.substr(0, maxLength);
+
+			//re-trim if we are in the middle of a word
+			trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+
+			trimmedString += " " +String.fromCharCode(8230);
+
+			return trimmedString;
 		}
-	};
 
-	xhr.upload.addEventListener("loadstart", function(e){
-    $("#percentage").show();
-  }, false);
-
-	xhr.upload.addEventListener("load", function(e){
-    $("#percentage").html("100% Done");
-	}, false);
-
-	xhr.onreadystatechange = function () {
-			//console.log("uploadFile: "+xhr.statusText);
-
-		//console.log("uploadFile: status change");
-		if (xhr.readyState==4 && xhr.status==200)
-		{
-			//console.log("uploadFile: success!!!!!!!!!!");
-			replyData = JSON.parse(xhr.responseText);
-			//console.log("onreadystatechange: image name = "+replyData.image +"  "+replyData.upload_key +"  "+replyData.user_id);
-			//$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
-			//$("#tile_"+entry_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');
-
-		}
-	};
-	xhr.open("POST", "/entry/upload", true);
-	xhr.overrideMimeType('text/plain; charset=x-user-defined-binary');
-	xhr.send(form_data);
-}
-
-$(document).ready(function() {
-	$('.exc_checkbox').prop('checked', true);
-
-		$('#location_checkbox').click(function(event)
-		{
-			$('#location_block').toggle();
-    });
-
-});
-
-
-function trimString(yourString, maxLength) {
-	//trim the string to the maximum length
-
-	if(yourString.length > maxLength)
-	{
-		var trimmedString = yourString.substr(0, maxLength);
-
-		//re-trim if we are in the middle of a word
-		trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-
-		trimmedString += " " +String.fromCharCode(8230);
-
-		return trimmedString;
+		return yourString;
 	}
 
-	return yourString;
-}
-
-function toggleBoxes(source) {
-  checkboxes = document.querySelectorAll("input[name^='tile_exchange_type[']");
-	//console.log(checkboxes.length);
-  for (i=0; i < checkboxes.length; i++) {
-		checkboxes[i].checked = source.checked;
-	}
-	$('.exchange_types').toggle();
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-$('#post_type').change(function(){
-	if ($(this).val() == "want") {
-		$('.wrapper').css("border",'8px solid #4d3a93');
-		$('.edit_listing li > a').css("background-color",'rgba(77,58,147,0.5)');
-		$('.edit_listing li.active > a').css("background-color",'#4d3a93');
-		$('button.submit_listing').css("background-color",'#4d3a93');
-		$('#buy').show();
-		$('#sell').hide();
-		$('button.submit_listing').html('Save Want');
-
-	} else if ($(this).val() == "have") {
-		$('.wrapper').css("border",'8px solid #24b5ec');
-		$('.edit_listing li > a').css("background-color",'rgba(36,181,236,0.5)');
-
-		$('.edit_listing li.active > a').css("background-color",'#24b5ec');
-		$('button.submit_listing').css("background-color",'#24b5ec');
-		$('#sell').show();
-		$('#buy').hide();
-		$('button.submit_listing').html('Save Have');
-	}
-});
-
-
-$('div.edit_listing ul.nav-tabs li a').click(function(){
-
-	if($('#post_type').val() == "want")
-	{
-		$('.edit_listing li > a').css("background-color",'rgba(77,58,147,0.5)');
-		$(this).css("background-color",'#4d3a93');
-
-	}
-	else
-	{
-		$('.edit_listing li > a').css("background-color",'rgba(36,181,236,0.5)');
-		$(this).css("background-color",'#24b5ec');
-	}
 });
 
 

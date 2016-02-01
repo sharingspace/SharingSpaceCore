@@ -33,11 +33,10 @@ trait UploadableFileTrait {
     if (!file_exists($path)) {
       mkdir($path, 0755, true);
     }
-    
-		$rand_filename = str_random(10)
+
+		$rand_filename = str_random(10);
     $filename = $rand_filename.'.'.$file->getClientOriginalExtension();
-    //$filename = $upload_key.'.'.$file->getClientOriginalExtension();
-    
+
     $img_path = $path.'/'.$filename;
 
     if ($file->move($path, $filename)) { // $destinationPath, $fileName
@@ -80,7 +79,7 @@ trait UploadableFileTrait {
 
 		$aws_path = base_path().'/public/assets/uploads/entries/'.$user->id;
 		$path = base_path().'/public/assets/uploads/entries/user-'.$user->id.'-tmp';
-		
+    
 		foreach ($tmp_images as $tmp_image) {
 
 			$filename = $tmp_image->filename;
@@ -89,7 +88,8 @@ trait UploadableFileTrait {
 
       $error = rename($src, $dest);
 
-      self::saveImageToDB($entry_id, $filename, 'image', $user->id, $upload_key) ;
+      // update the media entry
+      self::updateImageToDB($user->id, $upload_key, $entry_id);
 
       return $error; // note only processing one image here before returning
 		}

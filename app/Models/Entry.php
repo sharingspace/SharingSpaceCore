@@ -94,6 +94,16 @@ class Entry extends Model
     $media->save();
   }
 
+  public static function updateImageToDB($user_id, $upload_key, $entry_id) {
+
+    $media = \App\Media::where('upload_key','=', $upload_key)
+      ->where('user_id','=',  $user_id)
+      ->first();
+
+    $media->entry_id = $entry_id;
+    $media->save();
+  }
+
   /**
 	* Convert the tags string to an array so we can loop through it and link to other results
 	* on the tile display
