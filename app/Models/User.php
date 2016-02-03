@@ -85,7 +85,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*/
 	public function gravatar($size = null)
 	{
-		    return "//gravatar.com/avatar/".md5(strtolower(trim($this->email)))."";
+		if($this->gravatar) {
+			return "assets/uploads/users/".$this->id."/".$this->gravatar;
+		}
+		else {
+		  return "//gravatar.com/avatar/".md5(strtolower(trim($this->email)))."";
+		}
 	}
 
 
