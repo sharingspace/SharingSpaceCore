@@ -284,9 +284,16 @@ Route::get('privacy', function () {
 });
 
 Route::get('home', function () {
-    return redirect('/');
- });
+  return redirect('/');
+});
 
+Route::get('about', function () {
+  return view('about');
+}); 
+
+Route::get('coop', function () {
+  return view('coop');
+}); 
 
 Route::get('/', array(
   'as' => 'home',
