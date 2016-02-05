@@ -151,24 +151,24 @@ class CommunitiesController extends Controller
     $customer->card()->syncWithStripe();
 
 
-  if ($community->save()) {
+    if ($community->save()) {
 
-    // Save the community_id to the subscriptions table
-    $subscription = \App\CommunitySubscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
-    $subscription->community_id = $community->id;
-    $subscription->save();
+      // Save the community_id to the subscriptions table
+      $subscription = \App\CommunitySubscription::where('stripe_id','=',$stripe_subscription->stripe_id)->first();
+      $subscription->community_id = $community->id;
+      $subscription->save();
 
-    $community->members()->attach(Auth::user(), ['is_admin' => true]);
-    $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+      $community->members()->attach(Auth::user(), ['is_admin' => true]);
+      $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
 
-    Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
-    {
-      $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
-    });
+      Mail::send(['text' => 'emails.welcome'], $data, function($message) use ($data)
+      {
+        $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+      });
 
-    return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success',trans('general.community.save_success'));
+      return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/entry/new')->with('success',trans('general.community.save_success'));
 
-    }
+      }
 
   }
 
@@ -186,7 +186,7 @@ class CommunitiesController extends Controller
 
 
   /*
-  Get the create community page
+  Post the create community page
   */
   public function postEdit(Request $request)
   {
