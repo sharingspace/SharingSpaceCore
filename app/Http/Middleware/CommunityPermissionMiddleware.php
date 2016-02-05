@@ -22,7 +22,7 @@ class CommunityPermissionMiddleware
         if ($request->whitelabel_group) {
 
           // This group is restricted
-          if (($request->whitelabel_group->group_type=='O') || ($request->whitelabel_group->group_type=='S')) {
+          if (($request->whitelabel_group->group_type=='C') || ($request->whitelabel_group->group_type=='S')) {
 
 
             // If the user is logged in, check that they are a member
