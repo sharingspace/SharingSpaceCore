@@ -19,6 +19,10 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
         \App\Http\Middleware\SubdomainMiddleware::class,
+
+        // Anything that requires we have knowledge of the current community
+        // goes here, since we get that info above in SubdomainMiddleware
+        \App\Http\Middleware\CommunityPermissionMiddleware::class,
         \App\Http\Middleware\ThemeMiddleware::class,
     ];
 
