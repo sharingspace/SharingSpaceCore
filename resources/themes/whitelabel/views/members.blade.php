@@ -14,7 +14,7 @@
 
 .image {
     width: 100%;
-    height: 100%;    
+    height: 100%;
 }
 
 .member_image img {
@@ -47,20 +47,26 @@ table#members thead .sortable {
  			<table class="table table-condensed" id="members">
       	<thead>
           <tr>
-						<th data-sortable="false"><span class='sr-only'>Image</span></th>
-						<th data-sortable="true">Name</th>
-						<th data-sortable="true">Location</th>
-						<th data-sortable="false">Bio</th>
-						<th data-sortable="true">Since</th>
+            <th data-sortable="false"><span class='sr-only'>Image</span></th>
+            <th data-sortable="true">Name</th>
+            <th data-sortable="true">Location</th>
+            <th data-sortable="false">Bio</th>
+            <th data-sortable="true">Since</th>
           </tr>
         </thead>
 				<tbody>
 					@foreach ($members as $member)
-						<tr><td class="thumbnail" style="border:none;"><div class="member_image"><img src="{{ $member->gravatar() }}" class="thumbnail pull-left"></div></td>
-						<td>{{ $member->getDisplayName() }}</td>
-						<td>{{$member->location}}</td>
-						<td>{{ substr_replace($member->bio, '&hellip;', 60) }} <a href="{{ route('user.profile', [$member->id]) }}">more</a></td>
-						<td>{{date("m-Y", strtotime($member->created_at))}}
+						<tr>
+              <td class="thumbnail" style="border:none;"><div class="member_image"><img src="{{ $member->gravatar() }}" class="thumbnail pull-left"></div></td>
+              <td>{{ $member->getDisplayName() }}
+
+              @if ($member->pivot->is_admin==1)
+                <i class="fa fa-star text-warning"></i>
+              @endif
+              </td>
+              <td>{{$member->location}}</td>
+              <td>{{ substr_replace($member->bio, '&hellip;', 60) }} <a href="{{ route('user.profile', [$member->id]) }}">more</a></td>
+              <td>{{date("m-Y", strtotime($member->created_at))}}</td>
 						</tr>
 					@endforeach
     		</tbody>
@@ -97,7 +103,7 @@ $(document).ready(function() {
     });
 
 });
-  
+
 </script>
 
 @stop
