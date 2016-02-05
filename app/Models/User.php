@@ -146,7 +146,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
   public function communities()
   {
-      return $this->belongsToMany('Community', 'hubgroups_users','user_id','hubgroup_id');
+      return $this->belongsToMany('\App\Community', 'communities_users','user_id','community_id');
+  }
+
+
+  public function isMemberOfCommunity($community_id)
+  {
+    if ($this->whereHas('communities', function ($q) use ($community_id) {
+      $q->where('community_id', '=', $community_id);
+      }))
+    {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 
