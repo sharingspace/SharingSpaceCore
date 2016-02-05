@@ -181,6 +181,17 @@ class Community extends Model
     }
 
 
+    /**
+    * Only return publicly viewable communities
+    *
+    * @return collection
+    */
+  	public function scopeIsPublic()
+      {
+      	return $this->where( 'group_type', '!=', 'S');
+    }
+
+
   /**
    * scopeEntriesInCommunity
    * Get all entries that are in the current community

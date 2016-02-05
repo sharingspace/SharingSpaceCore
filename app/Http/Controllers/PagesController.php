@@ -17,7 +17,7 @@ class PagesController extends Controller
       $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->orderBy('created_at','desc')->get();
       return view('home')->with('entries',$entries);
     } else {
-      $communities = \App\Community::orderBy('created_at','DESC')->take(20)->get();
+      $communities = \App\Community::orderBy('created_at','DESC')->IsPublic()->take(20)->get();
       return view('home')->with('communities',$communities);
     }
 
