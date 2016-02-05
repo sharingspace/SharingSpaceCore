@@ -182,7 +182,12 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@postEdit')
   );
 
-  Route::post('{entryID}/upload', array(
+  Route::post('{entryID?}/upload', array(
+    'middleware' => 'auth',
+    'uses' => 'EntriesController@ajaxUpload')
+  );
+
+  Route::post('upload', array(
     'middleware' => 'auth',
     'uses' => 'EntriesController@ajaxUpload')
   );
@@ -279,9 +284,16 @@ Route::get('privacy', function () {
 });
 
 Route::get('home', function () {
-    return redirect('/');
- });
+  return redirect('/');
+});
 
+Route::get('about', function () {
+  return view('about');
+}); 
+
+Route::get('coop', function () {
+  return view('coop');
+}); 
 
 Route::get('/', array(
   'as' => 'home',
