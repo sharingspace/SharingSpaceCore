@@ -50,6 +50,7 @@ return [
 						'delete_not_allowed' => 'You are not allowed to delete this entry.',
             'save_new' => 'Your new entry has been created!',
             'save_failed' => 'Something went wrong. Your entry edits have not been saved',
+            'upload_failed' => 'Something went wrong. Your uploaded image has not been saved',
           ],
     ],
 

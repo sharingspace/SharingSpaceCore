@@ -20,7 +20,13 @@ class EntriesController extends Controller
   public function getEntry($entryID)
   {
     if ($entry = \App\Entry::find($entryID)) {
-      return view('entries.view')->with('entry',$entry);
+    
+    	$images = \DB::table('media')
+    	->where('entry_id','=', $entryID)
+			->get();
+		  
+		  return view('entries.view')->with('entry',$entry)->with('images', $images);
+
     } else {
       return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
     }
@@ -31,8 +37,9 @@ class EntriesController extends Controller
   /*
   Get the create entry page
   */
-  public function getCreate()
+  public function getCreate(Request $request)
   {
+		$request->session()->put('upload_key', str_random(15));
     return view('entries.create');
   }
 
@@ -49,6 +56,7 @@ class EntriesController extends Controller
     $entry->created_by	= Auth::user()->id;
     $entry->tags	= e(Input::get('tags'));
     $entry->qty	= e(Input::get('qty'));
+    $upload_key = e(Input::get('upload_key'));
 
     if (Input::get('location')) {
       $entry->location = e(Input::get('location'));
@@ -67,13 +75,25 @@ class EntriesController extends Controller
 
     if ($request->whitelabel_group->entries()->save($entry)) {
 			$entry->exchangeTypes()->sync(Input::get('exchange_types'));
-      $types=[]; 
+      $types=[];
 
       foreach($entry->exchangeTypes as $et) {
         array_push($types,$et->name);
       }
-			return response()->json(['success'=>true, 'save'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
+			$uploaded = true;
+      if (Input::hasFile('file')) {
+        $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
+      }
+      else {
+        $uploaded = \App\Entry::moveImagesForNewTile(	Auth::user(), $entry->id, $upload_key);
+      }
 
+      if($uploaded) {
+        return response()->json(['success'=>true, 'save'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
+      }
+      else {
+        return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.upload_failed')]);
+			}
 		}
 
     return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
@@ -112,6 +132,16 @@ class EntriesController extends Controller
 
       if (Input::hasFile('file')) {
         $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
+      }
+      else {
+         $moved = \App\Entry::moveImagesForNewTile(	Auth::user(), $request->session()->get('upload_key'));
+
+         if($moved) {
+           echo response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
+        }
+        else {
+          return response()->json(['success'=>false]);
+        }
       }
 
       $entry->exchangeTypes()->sync(Input::get('exchange_types'));
@@ -311,29 +341,24 @@ class EntriesController extends Controller
 
 		if (Input::hasFile('image')) {
 
+      $uploaded = false;
       if ($entryID) {
-
-        $entry = \App\Entry::find($entryID);
-
-        if (!$entry->checkUserCanEditEntry($user)) {
-          return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.edit_not_allowed')]);
-        } else {
-          $uploaded = $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
-        }
-
-      } else {
-        $uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('file'), 'entries', Input::get('upload_key'));
+      	$uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries');
       }
-
-      // The file was uploaded successfully
-      if ($uploaded) {
-        return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
+			else {
+				$uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'));
+			}
+			$user = Auth::user();
+			if($uploaded) {
+				return response()->json(['success'=>true, 'image'=>'bingo']);
       }
-
-      return response()->json(['success'=>false, 'entry_id'=>$entry->id]);
+			else {
+				return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
+			}
 		}
-		return response()->json(['success'=>false, 'entry_id'=>$entry->id, 'error'=>trans('general.entries.messages.invalid')]);
-
+		else {
+			return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
+		}
 	}
 
 
