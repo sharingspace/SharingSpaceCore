@@ -53,17 +53,20 @@ class SubdomainMiddleware
 
         $request->valid_whitelabel = true;
         $request->whitelabel_group = $group;
+        $request->corporate_default = false;
         view()->share('whitelabel_group',$request->whitelabel_group);
         view()->share('valid_whitelabel',$request->valid_whitelabel);
 
       } else {
         $request->valid_whitelabel = false;
+        $request->corporate_default = false;
         return redirect(Config::get('app.url'));
       }
 
     } else {
       $request->valid_whitelabel = false;
-    
+      $request->corporate_default = true;
+
     }
 
     return $next($request);
