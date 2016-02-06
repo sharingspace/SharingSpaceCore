@@ -7780,3 +7780,17 @@ $color-green: #9AE14F;
 		text-align: center;
 	}
 }
+
+.page_banner {
+  height:400px;
+  width:100%;
+  background-position: 50% 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  &.about_banner { 
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/nepal_tech.jpg');
+  }
+  &.coop_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/coop.jpg');
+  }
+}

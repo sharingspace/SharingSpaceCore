@@ -103,7 +103,7 @@ a.control_next {
 
 
 <section id='slider' style="width:100%;">					
-  <div style="background-color:rgba(0, 0, 0, 0.45);background-image: url('assets/img/backgrounds/nepal_tech.jpg'); height:400px;width:100%;background-position: 50% 0px;background-size: cover;background-repeat: no-repeat;">
+  <div class='page_banner about_banner'>
     <h1>Sharing Hubs</h1>
     <h2 style="text-align:center;">multi-person needs and resources</h2>
     <div style="text-align:center;"><a href="#" class="btn btn-danger">Try</a>

@@ -102,7 +102,7 @@ a.control_next {
 
 
 <section id='slider' style="width:100%;">					
-  <div style="background-color:rgba(0, 0, 0, 0.45);background-image: url('assets/img/backgrounds/coop.jpg'); height:400px;width:100%;background-position: 50% 0px;background-size: cover;background-repeat: no-repeat;">
+  <div class='page_banner coop_banner'>
     <h1>{{ trans('coop.coop_headline') }}</h1>
     <h2 style="text-align:center;">{{ trans('coop.mission_subheadline') }}</h2>
     <div style="text-align:center;"><a href="coop_faq" class="btn btn-danger">FAQ</a>

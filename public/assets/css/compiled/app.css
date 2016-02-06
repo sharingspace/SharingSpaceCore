@@ -8271,6 +8271,22 @@ Quick add
   font-size: 14px;
   text-align: center;
 }
+
+.page_banner {
+  height: 400px;
+  width: 100%;
+  background-position: 50% 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.page_banner.about_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/nepal_tech.jpg");
+}
+
+.page_banner.coop_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/coop.jpg");
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

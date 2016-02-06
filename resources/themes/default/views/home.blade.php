@@ -313,12 +313,12 @@
       <section id="pricing" class="callout-theme-color">
         <div class="container">
 
-          <header class="text-center margin-bottom-20">
+          <header class="text-center margin-bottom-10">
             <h2>Pricing</h2>
           </header>
 
           <div class="row">
-           <div class="col-sm-8 col-sm-offset-2" >
+           <div class="col-sm-10 col-sm-offset-1" >
             <div class="row dark">
 
 							<table class="table">
@@ -338,8 +338,8 @@
                     <p>Automatic Upgrades</p></td>
                 </tr>
                 <tr>
-                	<td><a href="#" class="btn btn-info btn-sm">Apply Now</a></td>
-                	<td><a href="#" class="btn btn-info btn-sm">Join Free for a Month</a></td>
+                	<td><a href="#" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Apply Now</a></td>
+                	<td><a href="#" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Join Free for a Month</a></td>
                 </tr>
               </tbody>
             </table>
@@ -349,22 +349,6 @@
       </div> <!-- container -->
   	</section>
 <!-- /COMMUNITIES  -->
-
-<!-- BUTTON CALLOUT -->
-<div class="callout callout-theme-color margin-bottom-0">
-
-  <div class="row text-center">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-      <h4>Make a Sharing Hub in 1 minute! <br /><span>or click here to browse live hubs</span></h4>
-    </div><!-- /left text -->
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
-      <a href="#" class="btn btn-success btn-lg">30-day free trial</a>
-    </div><!-- /right btn -->
-  </div>
-
-</div>
-<!-- /BUTTON CALLOUT -->
-
 
 
 @stop
