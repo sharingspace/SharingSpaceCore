@@ -222,14 +222,23 @@
       <section id="coop" class="callout-theme-color">
         <div class="container">
 
-          <header class="text-center margin-bottom-20">
+          
+          <div class="row">
+            <div class="col-md-9 col-sm-8 col-xs-7 margin-bottom-0">
+            <header class="text-center margin-bottom-20">
             <h2>We're a CO-OP!</h2>
           </header>
-          <p class="lead font-lato">AnyShare is the first Cooperative in the United States (and global community) to allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! After all, we ARE you. <a href="#" style='color:white;'>Read more</a>.</p>
+              <p class="lead font-lato">AnyShare is the first Fairshares Cooperative in the United States (and global community) to 
+              allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! 
+              After all, we ARE you. <a href="/coop" style='color:white;font-weight:bold;'>Read more</a>.</p>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-5 margin-bottom-0">
+              <img class="img-responsive"  style="float:right;margin-top:15px;" src="assets/img/logos/fairshares.png">
+            </div>
 			</div>
   		</section>
       <!-- COMMUNITIES -->
-      <section id="examples" class="dark">
+      <section id="examples">
         <div class="container">
 
           <header class="text-center margin-bottom-60">
@@ -301,7 +310,7 @@
           </div>
       </section>
 
-      <section id="pricing" class="dark">
+      <section id="pricing" class="callout-theme-color">
         <div class="container">
 
           <header class="text-center margin-bottom-20">
@@ -329,8 +338,8 @@
                     <p>Automatic Upgrades</p></td>
                 </tr>
                 <tr>
-                	<td><a href="#" class="btn btn-success btn-md">Apply Now</a></td>
-                	<td><a href="#" class="btn btn-success btn-md">Join Free for a Month</a></td>
+                	<td><a href="#" class="btn btn-info btn-sm">Apply Now</a></td>
+                	<td><a href="#" class="btn btn-info btn-sm">Join Free for a Month</a></td>
                 </tr>
               </tbody>
             </table>

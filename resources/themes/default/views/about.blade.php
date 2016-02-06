@@ -19,9 +19,8 @@
   background-color: transparent;
 }
 
-p {
+section p {
   font-family: Montserrat, sans-serif;
-  color: #636363;
   font-size: 15px;
 }
 

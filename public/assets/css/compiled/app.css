@@ -2170,6 +2170,10 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
   	width: 170px;
   	z-index: 2;
   } */
+
+  #slider h1 {
+    padding-top: 130px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -2251,6 +2255,10 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
 
   body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertical_btn {
     display: none;
+  }
+
+  #slider h1 {
+    padding-top: 50px;
   }
 }
 
@@ -5589,8 +5597,7 @@ div.ls-thumbnail-slide-container {
   font-weight: 400;
   text-align: center;
   text-shadow: 1px 1px 6px black;
-  line-height: 44px;
-  padding-top: 150px;
+  line-height: 70px !important;
   margin-bottom: 10px;
 }
 
@@ -8039,8 +8046,8 @@ li.notifications-popdown .notifications-popdown-box {
   text-align: center;
   width: 50%;
   border: none;
-  font-size: 18px;
-  color: #5cb85c;
+  font-size: 24px;
+  color: #fff;
 }
 
 #pricing table tr td {
@@ -8060,20 +8067,38 @@ section#about p {
 }
 
 .callout h4 {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .callout h4 span {
-  font-size: 20px;
-  display: inline-block;
-  text-align: center;
-  width: 370px;
+  font-size: 16px;
   color: white;
 }
 
+.callout .btn {
+  margin-top: 10px !important;
+}
+
+@media only screen and (min-width: 760px) {
+  .callout h4 {
+    font-size: 24px;
+  }
+
+  .callout h4 span {
+    font-size: 20px;
+  }
+}
+
 #coop h2,
-#coop p {
+#coop p,
+#pricing h2,
+#pricing p {
   color: #fff;
+}
+
+#coop h2,
+#pricing h2 {
+  font-size: 32px;
 }
 
 .social label.fa {
@@ -28486,12 +28511,12 @@ section.dark .callout-transparent p {
   .callout h4,
   .callout h5,
   .callout h6 {
-    margin-bottom: 30px !important;
+    margin-bottom: 10px !important;
   }
 
   .callout .btn {
     display: block;
-    margin-top: 30px !important;
+    margin-top: 10px !important;
   }
 }
 
@@ -29269,6 +29294,13 @@ i.ico-color {
   color: #fff;
   border: transparent;
   text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+}
+
+i.ico-color-grey {
+  color: #fff;
+  border: transparent;
+  text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+  background-color: #878787;
 }
 
 i.ico-hover:hover {

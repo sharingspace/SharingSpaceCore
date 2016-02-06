@@ -7524,8 +7524,8 @@ li.notifications-popdown .notifications-popdown-box {
 			text-align:center;
 			width:50%;
 			border:none;
-			font-size:18px;
-			color:#5cb85c;
+			font-size:24px;
+			color:#fff;
 		}
 		tr td {
 			text-align:center;
@@ -7572,9 +7572,12 @@ section {
 	}
 }
 
-#coop {
+#coop, #pricing {
 	h2, p {
 		color:#fff;
+	}
+	h2 {
+		font-size:32px;
 	}
 }
 

@@ -53,7 +53,7 @@
       @if (!Route::is('home'))
           <!-- Notifications -->
 
-            <div class="col-md-12 margin-top-10">
+            <div class="col-md-12 margin-top-0">
               @include('notifications')
             </div>
 

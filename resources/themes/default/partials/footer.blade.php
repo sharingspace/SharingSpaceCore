@@ -13,7 +13,8 @@
 								<!-- <img class="footer-logo footer-2" src="assets/img/logo-footer.png" alt="" /> -->
 
 								<!-- Small Description -->
-								<p>The AnyShare Society is a multi-stakeholder COOP and involved in spreading access, information, and opportunities that promote abundance for Earth. See our news [ link to news.anysha.re ]  here to learn more.</p>
+								<p>The AnyShare Society is a multi-stakeholder COOP and involved in spreading access, information, and opportunities 
+								that promote abundance for Earth. See our <a style="color:white;" href="http://blog.massmosaic.com">news</a> to learn more.</p>
 
 							</div>
 
@@ -108,8 +109,11 @@
 				<div class="copyright">
 					<div class="container">
 						<ul class="pull-right nomargin list-inline mobile-block">
-							<li><a href="/terms">Terms &amp; Conditions</a></li>
-							<li>&bull;</li>
+						  <li><a href="/about">About</a></li><li>&bull;</li>
+						  <li><a href="/coop">Coop</a></li><li>&bull;</li>
+						  <li><a href="/terms">Pricing</a></li><li>&bull;</li>
+						  <li><a href="http://blog.massmosaic.com">News</a></li><li>&bull;</li>
+						  <li><a href="/terms">Terms &amp; Conditions</a></li><li>&bull;</li>
 							<li><a href="/privacy">Privacy</a></li>
 						</ul>
 						&copy; All Rights Reserved, AnyShare Society.

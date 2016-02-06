@@ -20765,6 +20765,12 @@ i {
     border: transparent;
     text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
   }
+  &.ico-color-grey {
+    color: #fff;
+    border: transparent;
+    text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+    background-color: #878787;
+  }
   &.ico-hover:hover {
     color: #fff;
     background-color: #111;

@@ -80,7 +80,7 @@
 						</button>
 
 						<!-- Logo -->
-            <a class="logo pull-left navbar-brand scrollTo" href="/#top">
+            <a class="logo pull-left navbar-brand" href="/">
               <img src="/assets/img/anyshare-logo-squares.png">
             </a>
 
