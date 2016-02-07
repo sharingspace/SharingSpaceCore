@@ -1,7 +1,7 @@
 
 <!-- FOOTER -->
 			<footer id="footer">
-				<div class="container">
+				<div class="container padding-top-30">
 
 					<div class="row">
 
@@ -13,7 +13,7 @@
 								<!-- <img class="footer-logo footer-2" src="assets/img/logo-footer.png" alt="" /> -->
 
 								<!-- Small Description -->
-								<p>The AnyShare Society is a multi-stakeholder COOP and involved in spreading access, information, and opportunities 
+								<p class="margin-bottom-10">The AnyShare Society is a multi-stakeholder COOP and involved in spreading access, information, and opportunities 
 								that promote abundance for Earth. See our <a style="color:white;" href="http://blog.massmosaic.com">news</a> to learn more.</p>
 
 							</div>
@@ -21,7 +21,7 @@
 							<hr />
 
 							<div class="row">
-								<div class="col-md-6 col-sm-6">
+								<div class="col-md-6 col-sm-6 margin-bottom-20">
 
 									<!-- Newsletter Form -->
 									<p class="margin-bottom-10">Subscribe to Our <strong>Newsletter</strong></p>

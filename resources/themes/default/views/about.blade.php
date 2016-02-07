@@ -135,7 +135,7 @@ a.control_next {
 
       <div class="col-md-6">
         <h3 id="mission" class="about-subheading">The Solution</h3>
-        <p class="about-description">Scarcity must be met with multi-dimensional abundance... otherwise the solution is only surface. 
+        <p class="about-description">Scarcity must be met with multi-dimensional abundance otherwise the solution is only surface. 
         For example, it is impossible to solve an issue of a neighborhood not having healthy food by giving them vegetables. 
         We must also ask how the neighborhood has been viewed in the first place. Are it's assets identified and appreciated? 
         We must look at the entire picture to fix the entire picture.</p>

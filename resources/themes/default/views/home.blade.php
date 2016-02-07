@@ -127,9 +127,8 @@
 
 						</div>
 
-            <div class="col-sm-7">
-            	<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/wF0-BvRPMss" frameborder="0" allowfullscreen></iframe> -->
-              <img src='assets/img/backgrounds/hp/regional_football.png') alt='regional mens football sharing hub' />
+            <div class="col-sm-7 hidden-xs-down">
+              <img class="img-responsive" src='assets/img/backgrounds/hp/regional_football.png') alt='regional mens football sharing hub' />
           	</div>
 					</div>
 				</div>
@@ -224,7 +223,7 @@
 
           
           <div class="row">
-            <div class="col-md-9 col-sm-8 col-xs-7 margin-bottom-0">
+            <div class="col-md-9 col-sm-8 col-xs-12 margin-bottom-0">
             <header class="text-center margin-bottom-20">
             <h2>We're a CO-OP!</h2>
           </header>
@@ -232,7 +231,7 @@
               allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! 
               After all, we ARE you. <a href="/coop" style='color:white;font-weight:bold;'>Read more</a>.</p>
             </div>
-            <div class="col-md-3 col-sm-4 col-xs-5 margin-bottom-0">
+            <div class="col-md-3 col-sm-4 hidden-xs margin-bottom-0">
               <img class="img-responsive"  style="float:right;margin-top:15px;" src="assets/img/logos/fairshares.png">
             </div>
 			</div>
@@ -241,7 +240,7 @@
       <section id="examples">
         <div class="container">
 
-          <header class="text-center margin-bottom-60">
+          <header class="text-center margin-bottom-20">
             <h2>Want to See Examples?</h2>
             <p class="lead font-lato">Browse our favorite Sharing Hubs around the world! </p>
             <hr />
@@ -318,7 +317,7 @@
           </header>
 
           <div class="row">
-           <div class="col-sm-10 col-sm-offset-1" >
+           <div class="col-sm-10 col-sm-offset-1 margin-bottom-0" >
             <div class="row dark">
 
 							<table class="table">
