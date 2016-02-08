@@ -168,7 +168,7 @@ a.control_next {
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa  fa-unlock"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-comment"></i>
             <h3>Your Voice</h3>
             <p class="font-lato size-20">Members can appoint directors and can propose and vote on resolutions for the direction of AnyShare.</p>
           </div>
@@ -176,14 +176,14 @@ a.control_next {
        
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-users"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-credit-card"></i>
             <h3>Your Profit</h3>
             <p class="font-lato size-20">Customers, Employees, Investors and Founders all get to share in the monetary value created by AnyShare.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-balance-scale"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-lightbulb-o"></i>
             <h3>A Real Solution</h3>
             <p class="font-lato size-20">You are being part of the core solution to the wide spread inequality we see today.</p>
           </div>
@@ -212,7 +212,7 @@ a.control_next {
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-check"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-arrows "></i>
             <h3>Vote on company direction</h3>
             <p class="font-lato size-20">All stakeholders will be able to create and vote on resolutions 
             on the companies direction.</p>
@@ -221,7 +221,7 @@ a.control_next {
        
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-users"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-money"></i>
             <h3>Share in surplus profits</h3>
             <p class="font-lato size-20">When Directors decide that surplus profits will be returned to stakeholders, 
             they are returned to all stakeholders.</p>
@@ -229,7 +229,7 @@ a.control_next {
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-building"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-users"></i>
             <h3>Empower communities</h3>
             <p class="font-lato size-20">Giving a voice in the direction of the business, empowers communities to steer 
             the direction of the company in ways that best help them.</p>
@@ -238,7 +238,7 @@ a.control_next {
 
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-female"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-globe"></i>
             <h3>Appoint Directors</h3>
             <p class="font-lato size-20">Each stakeholder group can appoint Directors to oversee the operations of the business.</p>
           </div>
@@ -246,14 +246,14 @@ a.control_next {
        
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-balance-scale"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-bank"></i>
             <h3>Reduce inequality</h3>
             <p class="font-lato size-20">Sharing the value created with all stakeholders, reduces income and wealth inequality in our communities.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-heart"></i>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-heartbeat"></i>
             <h3>Make a difference</h3>
             <p class="font-lato size-20">By contributing to a company that is equitable at it's core, you are being part of the solution 
             to the wide spread inequality we see today.</p>
