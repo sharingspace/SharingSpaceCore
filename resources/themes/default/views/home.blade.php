@@ -7,8 +7,8 @@
 	<section id="slider">
 
 				<div class="dark-overlay owl-carousel buttons-autohide controlls-over nomargin" data-plugin-options='{"singleItem": true, "autoPlay": true, "navigation": false, "pagination": false, "transitionStyle":"fade", "slideSpeed":300, "paginationSpeed" : 100}'>
-					<div class="dark-overlay">
-						<div style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('assets/img/backgrounds/hp/band.jpg'); background-position:center top; height:400px;">
+					<div class="dark-overlayy">
+						<div class="page_banner band_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
               <a href="#" class="btn btn-danger">Try</a>
@@ -16,7 +16,7 @@
             </div>
 					</div>
 					<div>
-						<div style="background-image: url('assets/img/backgrounds/hp/big_clothing_swap.jpg'); height:400px;">
+						<div class="page_banner clothing_swap_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
               <a href="#" class="btn btn-danger">Try</a>
@@ -24,7 +24,7 @@
             </div>
 					</div>
           <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/bike_workshop.jpg'); height:400px;">
+						<div class="page_banner bike_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
               <a href="#" class="btn btn-danger">Try</a>
@@ -32,23 +32,7 @@
             </div>
 					</div>
           <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/clothing_swap.jpg'); height:400px;">
-              <h1>Sharing Hubs</h1>
-              <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
-            </div>
-					</div>
-          <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/communal_garden.jpg'); height:400px;">
-              <h1>Sharing Hubs</h1>
-              <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
-            </div>
-					</div>
-          <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/farmer.jpg'); height:400px;">
+						<div class="page_banner farmer_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
               <a href="#" class="btn btn-danger">Try</a>
@@ -64,7 +48,7 @@
             </div>
 					</div>
           <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/knowledge_share.jpg'); height:400px;">
+						<div class="page_banner mural_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
               <a href="#" class="btn btn-danger">Try</a>
@@ -72,15 +56,7 @@
             </div>
 					</div>
           <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/mural.jpg'); height:400px;">
-              <h1>Sharing Hubs</h1>
-              <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
-            </div>
-					</div>
-          <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/tech_design.jpg'); height:400px;">
+          	<div class="page_banner tech_design_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
               <a href="#" class="btn btn-danger">Try</a>
@@ -114,20 +90,19 @@
 
 					<header class="text-center margin-bottom-60">
 						<h2 style="font-size:48px;">{{ trans('home.learn_more_headline') }}</h2>
-						<p class="lead font-lato">{{ trans('home.learn_more_subheadline') }}</p>
 					</header>
 
 
 					<div class="row">
 
-						<div class="col-sm-5">
+						<div class="col-sm-6 col-xs-12">
 							<p>{{ trans('home.learn_more_p1')}}</p>
               <p>{{ trans('home.learn_more_p2')}}</p>
 							<hr />
 
 						</div>
 
-            <div class="col-sm-7 hidden-xs-down">
+            <div class="col-sm-6 hidden-xs-down">
               <img class="img-responsive" src='assets/img/backgrounds/hp/regional_football.png') alt='regional mens football sharing hub' />
           	</div>
 					</div>
@@ -142,7 +117,7 @@
         <div class="row">
          <div class="row text-center">
     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-      <h4>Make a Sharing Hub in 1 minute! <br /><span>or click here to browse live hubs</span></h4>
+      <h4>Make a Sharing Hub in 1 minute!</h4>
     </div><!-- /left text -->
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
       <a href="#" class="btn btn-success btn-lg hidden-xs">30-day free trial</a>
@@ -217,26 +192,34 @@
 
 
 
- 			<!-- co-op -->
-      <section id="coop" class="callout-theme-color">
-        <div class="container">
-
-          
-          <div class="row">
-            <div class="col-md-9 col-sm-8 col-xs-12 margin-bottom-0">
-            <header class="text-center margin-bottom-20">
-            <h2>We're a CO-OP!</h2>
-          </header>
-              <p class="lead font-lato">AnyShare is the first Fairshares Cooperative in the United States (and global community) to 
-              allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! 
-              After all, we ARE you. <a href="/coop" style='color:white;font-weight:bold;'>Read more</a>.</p>
+  		
+  		<!-- BUTTON CALLOUT -->
+      <div class="callout callout-theme-color margin-bottom-0 text-center">
+        <div class="row text-center">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8"><!-- left text -->
+                <h2>We're a CO-OP!</h2>
+                <p class="lead font-lato">AnyShare is the first Fairshares Cooperative in the United States (and global community) to 
+                allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! 
+                After all, we ARE you.</p>
+                <a href="#" class="btn btn-success btn-lg hidden-xs">Read more</a>
+              </div>
+              <div class="col-md-2 col-sm-2 hidden-xs margin-bottom-0">
+                <img class="img-responsive"  style="float:right;margin-top:15px;" src="assets/img/logos/fairshares.png">
+              </div> 
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
+                <h2>Pricing</h2>
+                <a href="pricing" class="btn btn-success btn-lg size-14">Pricing</a>
+              </div> <!-- col 6 -->
             </div>
-            <div class="col-md-3 col-sm-4 hidden-xs margin-bottom-0">
-              <img class="img-responsive"  style="float:right;margin-top:15px;" src="assets/img/logos/fairshares.png">
-            </div>
-			</div>
-  		</section>
+          </div>
+        </div> <!-- row -->
+      </div>
+      <!-- /BUTTON CALLOUT -->
+  		
       <!-- COMMUNITIES -->
+      @if(0)}}
       <section id="examples">
         <div class="container">
 
@@ -347,6 +330,7 @@
    			</div> <!-- row -->
       </div> <!-- container -->
   	</section>
+  	      @endif
 <!-- /COMMUNITIES  -->
 
 

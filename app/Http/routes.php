@@ -295,6 +295,10 @@ Route::get('coop', function () {
   return view('coop');
 }); 
 
+Route::get('pricing', function () {
+  return view('pricing');
+}); 
+
 Route::get('/', array(
   'as' => 'home',
   'uses' => 'PagesController@getHomepage'));

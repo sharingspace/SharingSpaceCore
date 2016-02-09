@@ -6,7 +6,7 @@
     <meta charset="UTF-8"/>
     <title>
       @section('title')
-        AnySha.re
+        {{ trans('general.seo_title')}}
       @show
     </title>
     <!-- Mobile Specific Metas-->
@@ -41,7 +41,7 @@
     @if( getenv('APP_DEBUG'))
 			<!-- <script src="assets/js/extensions/debug/bootstrap-debugger.js"></script> -->
     @endif
-
+  <link rel="shortcut icon" href="/assets/favicon.ico">
   </head>
 
 <body class="smoothscroll enable-animation">

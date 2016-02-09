@@ -8287,6 +8287,30 @@ Quick add
 .page_banner.coop_banner {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/coop.jpg");
 }
+
+.page_banner.band_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/band.jpg");
+}
+
+.page_banner.clothing_swap_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/big_clothing_swap.jpg");
+}
+
+.page_banner.bike_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/bike_workshop.jpg");
+}
+
+.page_banner.farmer_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/farmer.jpg");
+}
+
+.page_banner.mural_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/mural.jpg");
+}
+
+.page_banner.tech_design_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/tech_design.jpg");
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

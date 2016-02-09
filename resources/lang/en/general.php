@@ -11,7 +11,8 @@ return [
     'browse_button' => 'Browse Here',
     'copyright' => 'Copyright',
     'no_about_data'  => 'The owner of this group has not entered any information about it yet.',
-
+    'seo_title' => 'Create a sharing hub with AnyShare',
+    
     'nav'  => [
           'browse' => 'Browse',
           'add' => 'Add',
@@ -25,7 +26,7 @@ return [
           'members' => 'Members',
           'settings' => 'Settings',
           'profile' => 'Profile',
-          'create_sharing_hub' => 'Make&hellip;',
+          'create_sharing_hub' => 'Create&hellip;',
 					'order_history' => 'Order History',
     ],
 

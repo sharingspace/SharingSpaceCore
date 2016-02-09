@@ -7793,4 +7793,37 @@ $color-green: #9AE14F;
   &.coop_banner {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/coop.jpg');
   }
+  &.band_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/band.jpg');
+  }
+  &.clothing_swap_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/big_clothing_swap.jpg');
+  }
+  &.bike_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/bike_workshop.jpg');
+  }
+  &.farmer_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/farmer.jpg');
+  }
+  &.mural_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/mural.jpg');
+  }
+  &.tech_design_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
+  }
+}
+
+
+@font-face{ 
+	font-family: 'communityFont';
+	src: url('/assets/webfonts/communitymedium-webfont.eot');
+	src: url('/assets/webfonts/communitymedium-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('/assets/webfonts/communitymedium-webfont.woff') format('woff'),
+	     url('/assets/webfonts/communitymedium-webfont.ttf') format('truetype'),
+	     url('/assets/webfonts/communitymedium-webfont.svg#webfont') format('svg');
+}
+
+.iconFont { 
+  font-family: 'communityFont', Arial, sans-serif;
+  font-size:30px;
 }
