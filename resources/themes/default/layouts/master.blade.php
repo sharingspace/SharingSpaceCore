@@ -41,7 +41,7 @@
     @if( getenv('APP_DEBUG'))
 			<!-- <script src="assets/js/extensions/debug/bootstrap-debugger.js"></script> -->
     @endif
-  <link rel="shortcut icon" href="/assets/favicon.ico">
+  <link rel="shortcut icon" href="/favicon.ico">
   </head>
 
 <body class="smoothscroll enable-animation">

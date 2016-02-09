@@ -7762,7 +7762,6 @@ $color-green: #9AE14F;
 		h1 {
 			font-size:40px;
 			margin-bottom:30px;
-
 		}
 	}
 
@@ -7813,17 +7812,3 @@ $color-green: #9AE14F;
   }
 }
 
-
-@font-face{ 
-	font-family: 'communityFont';
-	src: url('/assets/webfonts/communitymedium-webfont.eot');
-	src: url('/assets/webfonts/communitymedium-webfont.eot?#iefix') format('embedded-opentype'),
-	     url('/assets/webfonts/communitymedium-webfont.woff') format('woff'),
-	     url('/assets/webfonts/communitymedium-webfont.ttf') format('truetype'),
-	     url('/assets/webfonts/communitymedium-webfont.svg#webfont') format('svg');
-}
-
-.iconFont { 
-  font-family: 'communityFont', Arial, sans-serif;
-  font-size:30px;
-}

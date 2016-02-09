@@ -206,7 +206,7 @@
                 <a href="#" class="btn btn-success btn-lg hidden-xs">Read more</a>
               </div>
               <div class="col-md-2 col-sm-2 hidden-xs margin-bottom-0">
-                <img class="img-responsive"  style="float:right;margin-top:15px;" src="assets/img/logos/fairshares.png">
+                <img class="img-responsive"  style="float:right;margin-top:15px;" src="/assets/img/logos/FairShares.png">
               </div> 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
                 <h2>Pricing</h2>
