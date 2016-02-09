@@ -80,8 +80,8 @@
 						</button>
 
 						<!-- Logo -->
-            <a class="logo pull-left navbar-brand scrollTo" href="/#top">
-              <img src="/assets/img/anyshare-logo-squares.png">
+            <a class="logo pull-left navbar-brand" href="/">
+            <img src="/assets/img/anyshare-logo-squares.svg" onerror="this.onerror=null; this.src='/assets/img/anyshare-logo-squares.png'">
             </a>
 
 

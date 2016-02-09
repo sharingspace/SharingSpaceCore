@@ -19,92 +19,23 @@
   background-color: transparent;
 }
 
-p {
+section p {
   font-family: Montserrat, sans-serif;
-  color: #636363;
   font-size: 15px;
 }
 
-#team_slider {
-  position: relative;
-  overflow: hidden;
-  margin: 20px 0 0 0;
-}
 
-#team_slider ul {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 
-#team_slider ul li {
-  position: relative;
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-  max-height: 366px;
-  max-width: 550px;
-  text-align: center;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
-  background-size:contain;
-}
 
-ul li span {
-    display:table-cell;
-    vertical-align: bottom;
-    height: 366px;
-    width: 550px;
-    color:white;
-    font-size: 24px;
-}
 
-a.control_prev, a.control_next {
-  position: absolute;
-  top: 40%;
-  z-index: 999;
-  display: block;
-  padding: 4% 3%;
-  width: auto;
-  height: auto;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
-  opacity: 0.8;
-  cursor: pointer;
-}
 
-a.control_prev:hover, a.control_next:hover {
-  opacity: 1;
-  -webkit-transition: all 0.2s ease;
-}
-
-a.control_prev {
-  border-radius: 0 2px 2px 0;
-}
-
-a.control_next {
-  right: 0;
-  border-radius: 2px 0 0 2px;
-}
-
-.slider_option {
-  position: relative;
-  margin: 10px auto;
-  width: 160px;
-  font-size: 18px;
-}
-
+ 
 </style>
 @section('content')
 
 
 <section id='slider' style="width:100%;">					
-  <div style="background-color:rgba(0, 0, 0, 0.45);background-image: url('assets/img/backgrounds/nepal_tech.jpg'); height:400px;width:100%;background-position: 50% 0px;background-size: cover;background-repeat: no-repeat;">
+  <div class='page_banner about_banner'>
     <h1>Sharing Hubs</h1>
     <h2 style="text-align:center;">multi-person needs and resources</h2>
     <div style="text-align:center;"><a href="#" class="btn btn-danger">Try</a>
@@ -130,17 +61,17 @@ a.control_next {
       
         <p>Despite our world beginning to connect, we have not comprehensively secured access to life-supporting resources 
         to all beings on Earth. Why?</p>
-        <p>"Scarcity" is multi-dimensional problem. It attacks our perception, identity, bank account, and more. 
+        <p class="margin-bottom-0">"Scarcity" is multi-dimensional problem. It attacks our perception, identity, bank account, and more. 
         It causes war, censorship, jealousy, and control.</p>
       </div> <!-- col-md-6 -->
 
       <div class="col-md-6">
         <h3 id="mission" class="about-subheading">The Solution</h3>
-        <p class="about-description">Scarcity must be met with multi-dimensional abundance... otherwise the solution is only surface. 
+        <p class="about-description">Scarcity must be met with multi-dimensional abundance otherwise the solution is only surface. 
         For example, it is impossible to solve an issue of a neighborhood not having healthy food by giving them vegetables. 
         We must also ask how the neighborhood has been viewed in the first place. Are it's assets identified and appreciated? 
         We must look at the entire picture to fix the entire picture.</p>
-        <p>AnySha.re is approaching scarcity as a multi-dimensional way. We are evolving the way communities identify 
+        <p class="margin-bottom-0">AnySha.re is approaching scarcity as a multi-dimensional way. We are evolving the way communities identify 
         abundance, the business structures that power us, and the relationships that hold us. 
         Read below to learn more!</p>
       </div> <!-- col-md-6 -->
@@ -149,8 +80,8 @@ a.control_next {
 </section>
 
 
-<div class="callout callout-theme-color" style="margin-bottom-0;background-image: url('assets/img/backgrounds/mm_on_tablet.jpg'); height:350px;background-position: 50% 0px;background-color: black;    background-size: contain;background-repeat: no-repeat;">
-
+<div class="callout callout-theme-color text-center hidden-xs" style="height:350px;background-color: black;">
+<img  class="img-responsive" src='assets/img/backgrounds/mm_on_tablet.jpg' alt='tablet displaying peoples wants and haves on anyshare'>
 </div>
     
 <!-- /COMMUNITIES  -->
@@ -215,16 +146,27 @@ a.control_next {
     
       <div class="col-md-6">
         <h3 class="about-subheading">The Team</h3>
-        <div id="team_slider">
-          <a href="" class="control_next"><i class="fa fa-2x fa-chevron-right"></i><span class="sr-only">next image</span></a>
-          <a href="" class="control_prev"><i class="fa fa-2x fa-chevron-left"></i><span class="sr-only">previous image</span></a>
-          <ul>
-            <li style="background-image:url('assets/img/backgrounds/rob.jpg');"><span>Rob</span></li>
-            <li style="background-image:url('assets/img/backgrounds/eric.jpg');"><span>Eric</span></li>
-            <li style="background-image:url('assets/img/backgrounds/alison.jpg');"><span>Alison</span></li>
-            <li style="background-image:url('assets/img/backgrounds/david.jpg');"><span>David</span></li>
-          </ul>  
-        </div> <!-- slider -->
+        <div style="position:relative;">
+            <ul id="rslides">
+              <li>
+                <img src="assets/img/backgrounds/rob.jpg" alt="">
+                <p class="caption">Rob</p>
+              </li>
+              <li>
+                <img src="assets/img/backgrounds/eric.jpg" alt="">
+                <p class="caption">Eric</p>
+              </li>
+              <li>
+                <img src="assets/img/backgrounds/alison.jpg" alt="">
+                <p class="caption">Alison</p>
+              </li>
+              <li>
+                <img src="assets/img/backgrounds/david.jpg" alt="">
+                <p class="caption">David</p>
+              </li>
+            </ul>
+          </div>
+          
           
         <p>Our COOP organization gives great opportunities and culture for the right people. 
         If you're interested, email us at info@anysha.re with information about yourself. We are a remote organization, 
@@ -236,63 +178,18 @@ a.control_next {
 
 <!-- /BUTTON CALLOUT -->
 
-<!-- <div id="slider">
-  <a href="" class="control_next"><i class="fa fa-2x fa-chevron-right"></i><span class="sr-only">next image</span></a>
-  <a href="" class="control_prev"><i class="fa fa-2x fa-chevron-left"></i><span class="sr-only">previous image</span></a>
-  <ul>
-    <li style="background-image:url('assets/img/backgrounds/rob.jpg');"><span>Rob</span></li>
-    <li style="background-image:url('assets/img/backgrounds/eric.jpg');"><span>Eric</span></li>
-    <li style="background-image:url('assets/img/backgrounds/alison.jpg');"><span>Alison</span></li>
-    <li style="background-image:url('assets/img/backgrounds/david.jpg');"><span>David</span></li>
-  </ul>  
-</div> -->
+<script src="/assets/js/extensions/responsiveslider/responsiveslides.min.js"></script>
 
 <script>
 
-jQuery(document).ready(function ($) {
-
-  setInterval(function () {
-      moveRight();
-  }, 3000);
-  
-	var slideCount = $('#team_slider ul li').length;
-	var slideWidth = $('#team_slider ul li').width();
-	var slideHeight = $('#team_slider ul li').height();
-	var sliderUlWidth = slideCount * slideWidth;
-	
-	$('#team_slider').css({ width: slideWidth, height: slideHeight });
-	
-	$('#team_slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-	
-    $('#team_slider ul li:last-child').prependTo('#team_slider ul');
-
-    function moveLeft() {
-        $('#team_slider ul').animate({
-            left: + slideWidth
-        }, 200, function () {
-            $('#team_slider ul li:last-child').prependTo('#team_slider ul');
-            $('#team_slider ul').css('left', '');
-        });
-    };
-
-    function moveRight() {
-        $('#team_slider ul').animate({
-            left: - slideWidth
-        }, 200, function () {
-            $('#team_slider ul li:first-child').appendTo('#team_slider ul');
-            $('#team_slider ul').css('left', '');
-        });
-    };
-
-    $('a.control_prev').click(function (e) {
-    e.preventDefault();
-        moveLeft();
-    });
-
-    $('a.control_next').click(function (e) {
-      e.preventDefault();
-      moveRight();
-    });
+jQuery(document).ready(function () {
+    $("#rslides").responsiveSlides({
+      auto: true,
+      pagination: true,
+      nav: true,
+      fade: 500,
+     // maxwidth: 500
+  });
 });
 
 </script>

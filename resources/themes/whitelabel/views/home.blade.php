@@ -104,12 +104,12 @@
             ">
             <!-- item -->
 
-							<div class="item-box">
+							<div class="item-box" style="border: solid 1px #ddd;box-shadow:1px 1px 3px 0 #f2f2f2 padding:5px;">
 								<figure>
 									<span class="item-hover">
 										<span class="overlay dark-5"></span>
 										<span class="inner">
-                      <h2 style="color: white;">{{ ucwords($entry->title) }}</h2>
+                      <h2 style="color: black;">boo{{ ucwords($entry->title) }}</h2>
                       <br><br>
 											<!-- lightbox -->
 											<!-- <a class="ico-rounded lightbox" href="/assets/img/demo/mockups/1200x800/3-min.jpg" data-plugin-options='{"type":"image"}'>
@@ -133,13 +133,39 @@
 									</span>
 
                   @if ($entry->media->count() > 0)
-
                     @foreach ($entry->media as $media)
-                      <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="">
+                     <div class="entry_browse">
+
+                      <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="" style="margin-bottom:14px;">
+                     
+                      <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                      <br>  
+                      @if (count($entry->exchangeTypes) > 0)
+                        @foreach ($entry->exchangeTypes as $entry_exchange_types)
+                          {{ Str::slug(strtolower($entry_exchange_types->name)).", "}}
+                        @endforeach
+                      @endif
+                      @if($entry->location)
+                        <br><span style="color:black;">{{"(".strtolower('Oakland, California').")"}}</span>
+                      @endif
+                      
+                    </div>
+                      
                     @endforeach
 
                   @else
-                    <img class="img-responsive" src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="600" height="399" alt="">
+
+                    <img class="img-responsive" src="http://lorempixel.com/{{ rand(100, 200) }}/{{ rand(100, 200) }}" width="600" height="399" alt="" style="margin-bottom:14px;">
+                     <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                    <br>  
+                      @if (count($entry->exchangeTypes) > 0)
+                        @foreach ($entry->exchangeTypes as $entry_exchange_types)
+                          {{ Str::slug(strtolower($entry_exchange_types->name)).", "}}
+                        @endforeach
+                      @endif
+                      @if($entry->location)
+                        <br><span style="color:black;">{{"(".strtolower('Oakland, California').")"}}</span>
+                      @endif
                   @endif
 
 								</figure>

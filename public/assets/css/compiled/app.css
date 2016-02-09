@@ -2170,6 +2170,10 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
   	width: 170px;
   	z-index: 2;
   } */
+
+  #slider h1 {
+    padding-top: 130px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -2251,6 +2255,10 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
 
   body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertical_btn {
     display: none;
+  }
+
+  #slider h1 {
+    padding-top: 50px;
   }
 }
 
@@ -5589,8 +5597,7 @@ div.ls-thumbnail-slide-container {
   font-weight: 400;
   text-align: center;
   text-shadow: 1px 1px 6px black;
-  line-height: 44px;
-  padding-top: 150px;
+  line-height: 70px !important;
   margin-bottom: 10px;
 }
 
@@ -8039,8 +8046,8 @@ li.notifications-popdown .notifications-popdown-box {
   text-align: center;
   width: 50%;
   border: none;
-  font-size: 18px;
-  color: #5cb85c;
+  font-size: 24px;
+  color: #fff;
 }
 
 #pricing table tr td {
@@ -8060,20 +8067,38 @@ section#about p {
 }
 
 .callout h4 {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .callout h4 span {
-  font-size: 20px;
-  display: inline-block;
-  text-align: center;
-  width: 370px;
+  font-size: 16px;
   color: white;
 }
 
+.callout .btn {
+  margin-top: 10px !important;
+}
+
+@media only screen and (min-width: 760px) {
+  .callout h4 {
+    font-size: 24px;
+  }
+
+  .callout h4 span {
+    font-size: 20px;
+  }
+}
+
 #coop h2,
-#coop p {
+#coop p,
+#pricing h2,
+#pricing p {
   color: #fff;
+}
+
+#coop h2,
+#pricing h2 {
+  font-size: 32px;
 }
 
 .social label.fa {
@@ -8245,6 +8270,46 @@ Quick add
   color: white;
   font-size: 14px;
   text-align: center;
+}
+
+.page_banner {
+  height: 400px;
+  width: 100%;
+  background-position: 50% 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.page_banner.about_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/nepal_tech.jpg");
+}
+
+.page_banner.coop_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/coop.jpg");
+}
+
+.page_banner.band_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/band.jpg");
+}
+
+.page_banner.clothing_swap_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/big_clothing_swap.jpg");
+}
+
+.page_banner.bike_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/bike_workshop.jpg");
+}
+
+.page_banner.farmer_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/farmer.jpg");
+}
+
+.page_banner.mural_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/mural.jpg");
+}
+
+.page_banner.tech_design_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/tech_design.jpg");
 }
 /** ************************************* **
 
@@ -28486,12 +28551,12 @@ section.dark .callout-transparent p {
   .callout h4,
   .callout h5,
   .callout h6 {
-    margin-bottom: 30px !important;
+    margin-bottom: 10px !important;
   }
 
   .callout .btn {
     display: block;
-    margin-top: 30px !important;
+    margin-top: 10px !important;
   }
 }
 
@@ -29269,6 +29334,13 @@ i.ico-color {
   color: #fff;
   border: transparent;
   text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+}
+
+i.ico-color-grey {
+  color: #fff;
+  border: transparent;
+  text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
+  background-color: #878787;
 }
 
 i.ico-hover:hover {
@@ -37704,4 +37776,170 @@ section.dark .md-editor.md-fullscreen-mode .md-preview {
 
 .has-error .ico-append {
   color: #a94442;
+}
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+}
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+}
+
+.rslides .caption {
+  background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+  bottom: 0;
+  color: #fff;
+  display: block;
+  left: 0;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+
+.rslides p {
+  margin-bottom: 0;
+}
+
+.rslides {
+  margin: 0 auto;
+}
+
+.rslides_container {
+  margin-bottom: 50px;
+  position: relative;
+  float: left;
+  width: 100%;
+}
+
+.rslides1_nav {
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  top: 50%;
+  left: 0;
+  z-index: 99;
+  opacity: 0.7;
+  text-indent: -9999px;
+  overflow: hidden;
+  text-decoration: none;
+  height: 61px;
+  width: 38px;
+  background: transparent url("/assets/img/buttons/slider-arrows.jpg") no-repeat left top;
+  margin-top: -45px;
+}
+
+.rslides1_nav:active {
+  opacity: 1.0;
+}
+
+.rslides1_nav.next {
+  left: auto;
+  background-position: right top;
+  right: 0;
+}
+
+.rslides2_nav {
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  top: 0;
+  left: 0;
+  display: block;
+  background: #fff;
+  /* Fix for IE6-9 */
+  opacity: 0;
+  filter: alpha(opacity=1);
+  width: 48%;
+  text-indent: -9999px;
+  overflow: hidden;
+  height: 91%;
+}
+
+.rslides2_nav.next {
+  left: auto;
+  right: 0;
+}
+
+.rslides3_nav {
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0.6;
+  text-indent: -9999px;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: #000 url("themes.gif") no-repeat left 50%;
+  width: 38px;
+}
+
+.rslides3_nav:active {
+  opacity: 1.0;
+}
+
+.rslides3_nav.next {
+  left: auto;
+  background-position: right 50%;
+  right: 0;
+}
+
+.rslides1_nav:focus,
+.rslides2_nav:focus,
+.rslides3_nav:focus {
+  outline: none;
+}
+
+.rslides_tabs {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.rslides_tabs li {
+  display: inline;
+  float: none;
+  _float: left;
+  *float: left;
+  margin-right: 5px;
+}
+
+.rslides_tabs a {
+  text-indent: -9999px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #ccc;
+  background: rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  _display: block;
+  *display: block;
+  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.3);
+  width: 9px;
+  height: 9px;
+}
+
+.rslides_tabs .rslides_here a {
+  background: #222;
+  background: rgba(0, 0, 0, 0.8);
 }
