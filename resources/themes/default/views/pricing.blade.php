@@ -142,6 +142,29 @@ a.control_next {
 
   <section id="features">
     <div class="container">
+      <div class="table-responsive">
+        <table class="table" style="color:#222;font-size:18px;font-weight:500;">
+          <thead>
+            <tr style="background-color:#ddd;"><th style="width:60%;">Feature</th>
+            <th>Regular</th>
+            <th>Members</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Your own subdomain</td><td>X</td><td>X</td></tr>
+            <tr><td>Unlimited members Hello this is an simple example of the usage of [tooltip title="Tooltip shortcode"] tooltip[/tooltip] shortcode</td><td>X</td><td>X</td></tr>
+            <tr><td>Unlimited listings</td><td>X</td><td>X</td></tr>
+            <tr><td>Email and social media sign up </td><td></td><td>X</td></tr>
+            <tr><td>Customizable design<td></td><td>X</td></tr><tr><td>Your choice of exchange types
+            <tr><td>Open or closed community<td></td><td>X</td></tr>
+            <tr><td>Multiple Views (List, Grid and Map)<td></td><td>X</td></tr>
+            <tr><td>Advanced Search<td></td><td>X</td></tr>
+            <tr><td>Multi language support JSON RESTful API Google Analytics<td></td><td>X</td></tr>
+            <tr><td>JSON RESTful API<td></td><td>X</td></tr>
+            <tr><td>Google Analytics<td></td><td>X</td></tr>
+            <tr><td><span class="sr-only">Price</span></td><td><a href="{{ route('community.create.form') }}" class="btn btn-primary" style="font-size:20px;">$10 / Month</a></td><td><a href="{{ route('community.create.form') }}" class="btn btn-primary" style="font-size:20px;">$6 / Month</a></td>           
+          </tbody>
+        </table>
+      </div> 
     </div>
   </section>
   <!-- / -->
