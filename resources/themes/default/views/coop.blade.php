@@ -158,10 +158,15 @@ a.control_next {
 </section>
 
 
+<div class="callout callout-theme-color" style="margin-bottom-0;background-image: url('assets/img/backgrounds/london.jpg'); height:350px;background-position: 50% 0px;background-color: black;    background-size: contain;background-repeat: no-repeat;">
+</div>
+
   <section id="features">
     <div class="container">
       <header class="text-center margin-bottom-40">
         <h2 style="font-size:46px;">Coop Features</h2>
+        <p>{{ trans('coop.all_inclusive_sub') }}</p>
+
       </header>
 
       <!-- FEATURED BOXES 3 -->
@@ -189,27 +194,6 @@ a.control_next {
           </div>
         </div>
 
-      </div>
-      <!-- /FEATURED BOXES 3 -->
-
-    </div>
-  </section>
-  <!-- / -->
-
-
-<div class="callout callout-theme-color" style="margin-bottom-0;background-image: url('assets/img/backgrounds/london.jpg'); height:350px;background-position: 50% 0px;background-color: black;    background-size: contain;background-repeat: no-repeat;">
-</div>
-
-  <section id="features">
-    <div class="container">
-      <header class="text-center margin-bottom-40">
-        <h3 style="font-size:46px;">{{ trans('coop.all_inclusive') }}</h2>
-        <p>{{ trans('coop.all_inclusive_sub') }}</p>
-
-      </header>
-
-      <!-- FEATURED BOXES 3 -->
-      <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
             <i class="ico-color-grey ico-lg ico-rounded fa fa-arrows "></i>

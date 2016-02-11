@@ -203,14 +203,15 @@
                 <p class="lead font-lato">AnyShare is the first Fairshares Cooperative in the United States (and global community) to 
                 allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! 
                 After all, we ARE you.</p>
-                <a href="#" class="btn btn-success btn-lg hidden-xs">Read more</a>
+                <a href="#" class="btn btn-success btn-lg">Read more</a>
               </div>
               <div class="col-md-2 col-sm-2 hidden-xs margin-bottom-0">
                 <img class="img-responsive"  style="float:right;margin-top:15px;" src="/assets/img/logos/FairShares.png">
               </div> 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
                 <h2>Pricing</h2>
-                <a href="pricing" class="btn btn-success btn-lg size-14">Pricing</a>
+                <p>Choose the plan that's right for you.</p>
+                <a href="pricing" class="btn btn-success btn-lg">Pricing</a>
               </div> <!-- col 6 -->
             </div>
           </div>

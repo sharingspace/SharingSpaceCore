@@ -86,7 +86,7 @@ section p {
     
 <!-- /COMMUNITIES  -->
 
-<section id="what_how" class="padding-xxs">
+<section id="who_when" class="padding-xxs">
   <div class="container">
 
     <header class="text-center margin-bottom-60">
@@ -96,7 +96,7 @@ section p {
 
     <div class="row">
       <div class="col-md-6">
-        <h3 class="about-subheading">About AnyShare</h3>
+       <h3 class="about-subheading">About AnyShare</h3>
         <p>Our official name is AnyShare Society and we've made the 
         <a href="https://anysha.re" target="_blank">AnySha.re website</a>. Here you can make a 
         "sharing hub," for helping people identify, collect, and exchange their value. </p>
@@ -115,18 +115,7 @@ section p {
         
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
-  </div> <!-- container -->
-</section>
-
-
-<section id="who_when" class="padding-xxs">
-  <div class="container">
-
-    <header class="text-center margin-bottom-60">
-      <h2 style="font-size:48px;">{{ trans('about.when_who') }}</h2>
-      <p class="lead font-lato">{{ trans('about.when_who_subheadline') }}</p>
-    </header>
-
+    
     <div class="row">
       <div class="col-md-6">
         <h3 class="about-subheading">The Backstory</h3>
@@ -147,26 +136,25 @@ section p {
       <div class="col-md-6">
         <h3 class="about-subheading">The Team</h3>
         <div style="position:relative;">
-            <ul id="rslides">
-              <li>
-                <img src="assets/img/backgrounds/rob.jpg" alt="">
-                <p class="caption">Rob</p>
-              </li>
-              <li>
-                <img src="assets/img/backgrounds/eric.jpg" alt="">
-                <p class="caption">Eric</p>
-              </li>
-              <li>
-                <img src="assets/img/backgrounds/alison.jpg" alt="">
-                <p class="caption">Alison</p>
-              </li>
-              <li>
-                <img src="assets/img/backgrounds/david.jpg" alt="">
-                <p class="caption">David</p>
-              </li>
-            </ul>
-          </div>
-          
+          <ul id="rslides">
+            <li>
+              <img src="assets/img/backgrounds/rob.jpg" alt="">
+              <p class="caption">Rob</p>
+            </li>
+            <li>
+              <img src="assets/img/backgrounds/eric.jpg" alt="">
+              <p class="caption">Eric</p>
+            </li>
+            <li>
+              <img src="assets/img/backgrounds/alison.jpg" alt="">
+              <p class="caption">Alison</p>
+            </li>
+            <li>
+              <img src="assets/img/backgrounds/david.jpg" alt="">
+              <p class="caption">David</p>
+            </li>
+          </ul>
+        </div>
           
         <p>Our COOP organization gives great opportunities and culture for the right people. 
         If you're interested, email us at info@anysha.re with information about yourself. We are a remote organization, 
