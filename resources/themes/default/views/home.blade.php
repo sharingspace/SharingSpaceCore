@@ -11,56 +11,42 @@
 						<div class="page_banner band_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
             </div>
 					</div>
 					<div>
 						<div class="page_banner clothing_swap_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
-            </div>
+             </div>
 					</div>
           <div>
 						<div class="page_banner bike_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
             </div>
 					</div>
           <div>
-						<div class="page_banner farmer_banner">
+						<div class="page_banner farmers_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
             </div>
 					</div>
           <div>
-						<div style="background-image: url('assets/img/backgrounds/hp/helping_hands.jpg'); height:400px;">
+						<div class="page_banner helping_hands_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
             </div>
 					</div>
           <div>
 						<div class="page_banner mural_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
             </div>
 					</div>
           <div>
           	<div class="page_banner tech_design_banner">
               <h1>Sharing Hubs</h1>
               <h2>multi-person needs and resources</h2>
-              <a href="#" class="btn btn-danger">Try</a>
-              <a href="#about" class="btn btn-warning">Learn</a>
             </div>
 					</div>
 
@@ -90,8 +76,8 @@
 
 					<header class="text-center margin-bottom-60">
 						<h2 style="font-size:48px;">{{ trans('home.learn_more_headline') }}</h2>
+						<h3>{{ trans('home.home_subheadline') }}</h3>
 					</header>
-
 
 					<div class="row">
 
@@ -115,16 +101,15 @@
       <!-- BUTTON CALLOUT -->
       <div class="callout callout-theme-color margin-bottom-10 text-center">
         <div class="row">
-         <div class="row text-center">
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-      <h4>Make a Sharing Hub in 1 minute!</h4>
-    </div><!-- /left text -->
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
-      <a href="#" class="btn btn-success btn-lg hidden-xs">30-day free trial</a>
-      <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">30-day free trial</a>
-
-    </div><!-- /right btn -->
-  </div>
+          <div class="row text-center">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
+              <h2 style="font-size:36px;">Make a Sharing Hub in 1 minute!</h2>
+            </div><!-- /left text -->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
+              <a href="#" class="btn btn-success btn-lg hidden-xs">30-day free trial</a>
+              <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">30-day free trial</a>
+            </div><!-- /right btn -->
+          </div>
         </div>
       </div>
       <!-- /BUTTON CALLOUT -->
@@ -157,7 +142,7 @@
   					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
   						<div class="text-center">
   							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-wrench"></i>
-  							<h3>Custom Look & Feel</h3>
+  							<h3>Custom Look &amp; Feel</h3>
   							<p class="font-lato size-20">Choose different colors, layouts, and branded themes for your hub.</p>
   						</div>
   					</div>
@@ -194,24 +179,17 @@
 
   		
   		<!-- BUTTON CALLOUT -->
-      <div class="callout callout-theme-color margin-bottom-0 text-center">
+      <div class="callout callout-dark margin-bottom-0 text-center">
         <div class="row text-center">
           <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+            <h2 style="font-size:46px;">Learn More</h2>
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8"><!-- left text -->
-                <h2>We're a CO-OP!</h2>
-                <p class="lead font-lato">AnyShare is the first Fairshares Cooperative in the United States (and global community) to 
-                allow all stakeholders to own, vote, and share revenue! We're thrilled, and so are our members! 
-                After all, we ARE you.</p>
-                <a href="#" class="btn btn-success btn-lg">Read more</a>
-              </div>
-              <div class="col-md-2 col-sm-2 hidden-xs margin-bottom-0">
-                <img class="img-responsive"  style="float:right;margin-top:15px;" src="/assets/img/logos/FairShares.png">
-              </div> 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
-                <h2>Pricing</h2>
-                <p>Choose the plan that's right for you.</p>
-                <a href="pricing" class="btn btn-success btn-lg">Pricing</a>
+                <a href="#" class="btn btn-success btn-lg">We're a CO-OP!</a>
+              </div>
+             
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
+                <a href="pricing" class="btn btn-success btn-lg">View Pricing</a>
               </div> <!-- col 6 -->
             </div>
           </div>
@@ -220,7 +198,7 @@
       <!-- /BUTTON CALLOUT -->
   		
       <!-- COMMUNITIES -->
-      @if(0)}}
+      @if(0)
       <section id="examples">
         <div class="container">
 
@@ -293,45 +271,7 @@
           </div>
       </section>
 
-      <section id="pricing" class="callout-theme-color">
-        <div class="container">
-
-          <header class="text-center margin-bottom-10">
-            <h2>Pricing</h2>
-          </header>
-
-          <div class="row">
-           <div class="col-sm-10 col-sm-offset-1 margin-bottom-0" >
-            <div class="row dark">
-
-							<table class="table">
-                <thead>
-                <tr>
-                	<th>Gift</th>
-                	<th>$10 a month</th>
-                </tr>
-                </thead>
-              	<tbody>
-                <tr>
-                	<td><p>For groups that don't have the budget to pay for a subscription.</p>
-                  <p>We ask you to apply for the gift, by stating your intention with AnyShare and why you don't have the budget to pay.</p></td>
-                	<td style="text-align: center;border:none;"><p style="margin-left:15px;">Hosted Solution</p>
-                  	<p>Email Support</p>
-                    <p>Automatic Backups</p>
-                    <p>Automatic Upgrades</p></td>
-                </tr>
-                <tr>
-                	<td><a href="#" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Apply Now</a></td>
-                	<td><a href="#" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Join Free for a Month</a></td>
-                </tr>
-              </tbody>
-            </table>
-   					</div> <!-- dark row row -->
-          </div> <!-- col 8 -->
-   			</div> <!-- row -->
-      </div> <!-- container -->
-  	</section>
-  	      @endif
+  	 @endif
 <!-- /COMMUNITIES  -->
 
 
