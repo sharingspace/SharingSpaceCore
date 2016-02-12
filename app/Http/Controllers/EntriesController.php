@@ -10,6 +10,7 @@ use Validator;
 use Input;
 use Redirect;
 use Helper;
+use Log;
 
 class EntriesController extends Controller
 {
@@ -20,11 +21,11 @@ class EntriesController extends Controller
   public function getEntry($entryID)
   {
     if ($entry = \App\Entry::find($entryID)) {
-    
+
     	$images = \DB::table('media')
     	->where('entry_id','=', $entryID)
 			->get();
-		  
+
 		  return view('entries.view')->with('entry',$entry)->with('images', $images);
 
     } else {
@@ -74,6 +75,7 @@ class EntriesController extends Controller
 
 
     if ($request->whitelabel_group->entries()->save($entry)) {
+      Log::debug("Saving whitelabel group, id: ".$entry->id." upload_key: ".$upload_key);
 			$entry->exchangeTypes()->sync(Input::get('exchange_types'));
       $types=[];
 
@@ -81,10 +83,13 @@ class EntriesController extends Controller
         array_push($types,$et->name);
       }
 			$uploaded = true;
+
       if (Input::hasFile('file')) {
+        Log::debug("We have a file - and, weirdly, kinda shouldn't?");
         $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
       }
       else {
+        Log::debug("no file was detected, we should just be moving files from temp-to-perm");
         $uploaded = \App\Entry::moveImagesForNewTile(	Auth::user(), $entry->id, $upload_key);
       }
 
@@ -125,23 +130,24 @@ class EntriesController extends Controller
     }
 
     if ($entry->isInvalid()) {
-       return redirect()->back()->withInput()->withErrors($entry->getErrors());
+      return redirect()->back()->withInput()->withErrors($entry->getErrors());
     }
 
     if ($request->whitelabel_group->entries()->save($entry)) {
 
+      // Check if there is a file being uploaded
       if (Input::hasFile('file')) {
-        $entry->uploadImage(Auth::user(),Input::file('file'), 'entries');
-      }
-      else {
-         $moved = \App\Entry::moveImagesForNewTile(	Auth::user(), $request->session()->get('upload_key'));
+        if the file was uploaded correctly
+        if ($entry->uploadImage(Auth::user(),Input::file('file'), 'entries')) {
 
-         if($moved) {
-           echo response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
-        }
-        else {
+          if (\App\Entry::moveImagesForNewTile(	Auth::user(), $request->session()->get('upload_key'))) {
+            echo response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
+          } else {
+            return response()->json(['success'=>false]);
+          }
           return response()->json(['success'=>false]);
         }
+
       }
 
       $entry->exchangeTypes()->sync(Input::get('exchange_types'));
@@ -149,7 +155,7 @@ class EntriesController extends Controller
 			return response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
 
 		}
-      return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
+    return redirect()->back()->with('error',trans('general.entries.messages.save_failed'));
 
   }
 
@@ -340,23 +346,28 @@ class EntriesController extends Controller
 	public function ajaxUpload($entryID = null) {
 
 		if (Input::hasFile('image')) {
+      Log::debug("A file was detected amongst thine inputz!");
 
       $uploaded = false;
       if ($entryID) {
       	$uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries');
       }
 			else {
+        Log::debug("Thee upload key is: ".Input::get('upload_key'));
 				$uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'));
+        Log::debug("the uploaded result is: ".$uploaded);
 			}
-			$user = Auth::user();
+			// $user = Auth::user();
 			if($uploaded) {
 				return response()->json(['success'=>true, 'image'=>'bingo']);
       }
 			else {
+        Log::debug("were not able to upload the file, sorry :(");
 				return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
 			}
 		}
 		else {
+      Log::debug("No actual file was given, so this whole thing is shot");
 			return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
 		}
 	}
@@ -433,7 +444,7 @@ class EntriesController extends Controller
     return $data;
 
   }
-	
+
 	/*
   Complete the entry
   */

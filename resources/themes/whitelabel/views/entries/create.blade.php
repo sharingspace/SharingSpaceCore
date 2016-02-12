@@ -6,7 +6,6 @@
 @parent
 @stop
 
-
 {{-- Page content --}}
 @section('content')
 
@@ -302,6 +301,119 @@ $( document ).ready(function() {
 
 
 	$(document).on( "click", "#ajaxAdd", function( e ) {
+    // finish_submit will get invoked later, after
+    // we handle the file upload. But we have to define
+    // it before we call it.
+    var finish_submit = function (img_upload_results) {
+      if(img_upload_results && !img_upload_results.success) {
+        alert("Error uploading image file!");
+        return false;
+      }
+  		var save = true;
+
+  		var title = $("#title").val();
+  		if(title.length < 3 && false) {
+  			restorePlaceholder("Your want or have must be at least 3 characters long")
+  			setTimeout(function() {
+  					restorePlaceholder("Press enter to save");
+  				}, 2000);
+        return;
+  		}
+
+  		if($('.exchange_types input:checked').length == 0) {
+        $('#submission_error').text('Please select at least one exchange type').show();
+        return;
+  		}
+
+  		if(!title) {
+        //I suspect that this will never fire; validation will catch this
+        return;
+      }
+
+      var post_url="new/ajax";
+  		var tileClasses = $('#title').prop('class');
+  		position = tileClasses.indexOf("update_");
+  		if(position>=0) {
+  			entry_id = tileClasses.match(/\d+/g);
+  			//console.log("update, edit = true "+entry_id+"  "+tileClasses);
+  			save = false;
+        post_url=entry_id+"/edit/ajax";
+  		}
+
+
+      //console.warn("about to post...");
+  		//alert($('#entry_form').serialize());
+      //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
+      $.post( post_url, $('#entry_form').serialize(),function (replyData) {
+      	//console.warn("Yay we posted! Here's our reply: ");
+        //console.dir(replyData);
+        if(!replyData.success) {
+          //console.log("Create: failed ************************************"+replyData.error)
+          parseAndDisplayError(replyData.error);
+          return;
+        }
+
+        if (replyData.exchange_types) {
+          var exchanges=replyData.exchange_types.join(", ");
+        }
+
+        if(replyData.save)
+        {
+  				$("#title").val('');
+  				$('#description').val('');
+  				$('#qty').val(1);
+          $('#submission_error').hide();
+
+          if( $('#create_table tr').length == 1) {
+            $('#create_table').show();
+          }
+
+  				// is this an edit or a save?
+  				$('#create_table tr:last').after('<tr id="tr_'+replyData.entry_id+'"><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
+  				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
+
+  				$(".inputErr").show();
+  				$(".noInputErr").hide();
+         	//console.warn("End of create 'save' branch and of the entire callback");
+        }
+  			else
+        {
+  				$("#ajaxAdd").html("Create");
+
+          //console.log("Edit response  "+replyData.success) ;
+          $("#title").removeClass( "update_"+entry_id);
+
+          tile_info = "I "+replyData.post_type + " "+replyData.title;
+          lastEntryDiv = $("#tile_"+entry_id);
+          $("#tile_"+entry_id +" .tile_info").html(trimString(tile_info,70));
+          $("#title").value = "Saved";
+          $("#title").css('color','green').css('font-weight','bold');
+          $("#title").animate({
+            color: 'white'
+            //your input background color.
+          }, 1000, 'linear', function(){
+            $(this).val('').css('color','#000').css('font-weight','normal');
+            //this is done so that when you start typing, you see the text again :P
+          });
+
+          $("#title").find('input:text').focus();
+
+          $('tr#tr_'+entry_id+' .td_post_type').html(replyData.post_type.toUpperCase());
+          $('tr#tr_'+entry_id+' .td_title').html(trimString(replyData.title, 60));
+          $('tr#tr_'+entry_id+' .td_qty').html(replyData.qty);
+          $('tr#tr_'+entry_id+' .td_exchanges').html(exchanges);
+        }
+
+      }).fail(function (jqxhr,errorStatus) {
+        $('#submission_error').text(errorStatus).show();
+        //console.warn("Boo, we failed at posting :(");
+        restorePlaceholder(errorStatus)
+        setTimeout(function() {
+            restorePlaceholder("Press enter to save");
+          },
+        4000);
+      });
+    };
 		//console.log("add or return hit");
 
 		e.preventDefault();
@@ -311,113 +423,12 @@ $( document ).ready(function() {
 		// do what you like with the input
 		// if we have an image, handle that separately
 		if($('#choose-file').val()) {
-			handleFile(newUpload_key);
-		}
-
-		var save = true;
-
-		var title = $("#title").val();
-		if(title.length < 3 && false) {
-			restorePlaceholder("Your want or have must be at least 3 characters long")
-			setTimeout(function() {
-					restorePlaceholder("Press enter to save");
-				}, 2000);
-      return;
-		}
-
-		if($('.exchange_types input:checked').length == 0) {
-      $('#submission_error').text('Please select at least one exchange type').show();
-      return;
-		}
-
-		if(!title) {
-      //I suspect that this will never fire; validation will catch this
-      return;
+			handleFile(newUpload_key, finish_submit);
+		} else {
+      finish_submit();
     }
-
-    var post_url="new/ajax";
-		var tileClasses = $('#title').prop('class');
-		position = tileClasses.indexOf("update_");
-		if(position>=0) {
-			entry_id = tileClasses.match(/\d+/g);
-			//console.log("update, edit = true "+entry_id+"  "+tileClasses);
-			save = false;
-      post_url=entry_id+"/edit/ajax";
-		}
-
-
-    //console.warn("about to post...");
-		//alert($('#entry_form').serialize());
-    //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
-    $.post( post_url, $('#entry_form').serialize(),function (replyData) {
-    	//console.warn("Yay we posted! Here's our reply: ");
-      //console.dir(replyData);
-      if(!replyData.success) {
-        //console.log("Create: failed ************************************"+replyData.error)
-        parseAndDisplayError(replyData.error);
-        return;
-      }
-
-      if (replyData.exchange_types) {
-        var exchanges=replyData.exchange_types.join(", ");
-      }
-
-      if(replyData.save)
-      {
-				$("#title").val('');
-				$('#description').val('');
-				$('#qty').val(1);
-        $('#submission_error').hide();
-
-        if( $('#create_table tr').length == 1) {
-          $('#create_table').show();
-        }
-
-				// is this an edit or a save?
-				$('#create_table tr:last').after('<tr id="tr_'+replyData.entry_id+'"><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
-				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
-
-				$(".inputErr").show();
-				$(".noInputErr").hide();
-       	//console.warn("End of create 'save' branch and of the entire callback");
-      }
-			else
-      {
-				$("#ajaxAdd").html("Create");
-
-        //console.log("Edit response  "+replyData.success) ;
-        $("#title").removeClass( "update_"+entry_id);
-
-        tile_info = "I "+replyData.post_type + " "+replyData.title;
-        lastEntryDiv = $("#tile_"+entry_id);
-        $("#tile_"+entry_id +" .tile_info").html(trimString(tile_info,70));
-        $("#title").value = "Saved";
-        $("#title").css('color','green').css('font-weight','bold');
-        $("#title").animate({
-          color: 'white'
-          //your input background color.
-        }, 1000, 'linear', function(){
-          $(this).val('').css('color','#000').css('font-weight','normal');
-          //this is done so that when you start typing, you see the text again :P
-        });
-
-        $("#title").find('input:text').focus();
-
-        $('tr#tr_'+entry_id+' .td_post_type').html(replyData.post_type.toUpperCase());
-        $('tr#tr_'+entry_id+' .td_title').html(trimString(replyData.title, 60));
-        $('tr#tr_'+entry_id+' .td_qty').html(replyData.qty);
-        $('tr#tr_'+entry_id+' .td_exchanges').html(exchanges);
-      }
-
-    }).fail(function (jqxhr,errorStatus) {
-      $('#submission_error').text(errorStatus).show();
-      //console.warn("Boo, we failed at posting :(");
-      restorePlaceholder(errorStatus)
-      setTimeout(function() {
-          restorePlaceholder("Press enter to save");
-        },
-      4000);
-    });
+    // console.warn("Aborting ajax add to debug file upload part - REMOVE ME!");
+    // return false;
 	});
 
 
@@ -433,7 +444,7 @@ $( document ).ready(function() {
 	});
 
 
-  function handleFile(upload_key){
+  function handleFile(upload_key,callback){
 
 		var image=$('input[type=file]')[0].files[0];
 		var fileReader = new FileReader();
@@ -446,7 +457,7 @@ $( document ).ready(function() {
 		//console.log("handleFile: " +image.name+", maxSize = "+ maxSize+",  file size = "+image.size);
 
 		if(image.size < maxSize) {
-			uploadFile(image, upload_key);
+			uploadFile(image, upload_key,callback);
 		}
 		else {
 			//$("#tile_"+id +" .too_large").show().addClass("error_message").fadeOut(9000, "linear");
@@ -455,7 +466,7 @@ $( document ).ready(function() {
   }
 
 
-	function uploadFile(image, upload_key){
+	function uploadFile(image, upload_key,callback){
 
 		var xhr = new XMLHttpRequest();
 		var form_data = new FormData();
@@ -486,6 +497,9 @@ $( document ).ready(function() {
 			if (xhr.readyState==4 && xhr.status==200) {
 				//console.log("uploadFile: success!!!!!!!!!!");
 				replyData = JSON.parse(xhr.responseText);
+        console.warn("Results: "+xhr.responseText);
+        console.dir(replyData);
+        callback(replyData);
 				//console.log("onreadystatechange: image name = "+replyData.image +"  "+replyData.upload_key +"  "+replyData.user_id);
 				//$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
 				//$("#tile_"+entry_id+ " .show_thumbnail img").delay(3500).css('width','23px').css('height','23px');

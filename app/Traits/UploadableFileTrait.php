@@ -1,6 +1,7 @@
 <?php
 namespace App;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Log;
 
 
 trait UploadableFileTrait {
@@ -24,7 +25,7 @@ trait UploadableFileTrait {
 
   public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key) {
     $path = base_path().'/public/assets/uploads/'.$layoutType.'/user-'.$user->id.'-tmp';
-    self::moveAndStoreImage($user, $file, $path, null, $layoutType, null, $upload_key);
+    return self::moveAndStoreImage($user, $file, $path, null, $layoutType, null, $upload_key);
   }
 
   public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $id = null, $upload_key = null) {
@@ -40,10 +41,12 @@ trait UploadableFileTrait {
     $img_path = $path.'/'.$filename;
 
     if ($file->move($path, $filename)) { // $destinationPath, $fileName
-
-      self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+      Log::debug("We were able to move file from $path to $filename!");
+      $res=self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+      Log::debug("The results of saving to the DB, though, are: $res");
 
       if (!Media::is_animated_gif($img_path)) {
+        Log::info("This is *NOT* an animated GIF, so try this...");
 
         try {
 
@@ -51,14 +54,16 @@ trait UploadableFileTrait {
             $img->fit(self::$uploadableImgs[$layoutType]['width'],self::$uploadableImgs[$layoutType]['height']);
             $img->save($img_path,70);
           }
-          return false;
+          //return true;
 
         } catch (Exception $e) {
+          Log::error("Exception caught in moveAndStore Trait, in resize section: ".$e->getMessage());
           echo 'Caught exception: ',  $e->getMessage(), "\n";
+          return false;
         }
       }
 
-      return true;
+      return $filename;
 
     }
     return false;
@@ -77,26 +82,33 @@ trait UploadableFileTrait {
 		->where('user_id','=',  $user->id)
 		->get();
 
-		$aws_path = base_path().'/public/assets/uploads/entries/'.$entry_id;
-		$path = base_path().'/public/assets/uploads/entries/user-'.$user->id.'-tmp';
+		$dest_path = base_path().'/public/assets/uploads/entries/'.$entry_id;
+		$src_path = base_path().'/public/assets/uploads/entries/user-'.$user->id.'-tmp';
 
 		foreach ($tmp_images as $tmp_image) {
+      Log::debug("okay, looking at one tmp image to migrate...".$tmp_image->filename);
 
 			$filename = $tmp_image->filename;
-			$src = $path.'/'.$filename;
-      $dest = $aws_path.'/'.$filename;
+			$src = $src_path.'/'.$filename;
+      $dest = $dest_path.'/'.$filename;
 
       // Make the directory if it doesn't exist
-      if (!file_exists($aws_path)) {
-        mkdir($aws_path, 0755, true);
+      if (!file_exists($dest_path)) {
+        mkdir($dest_path, 0755, true);
       }
 
-      $error = rename($src, $dest);
+      $success = rename($src, $dest);
+      if (!$success) {
+        Log::error("Error renaming file from $src to $dest: ".$error);
+        return false; // note only processing one image here before returning
+      }
 
       // update the media entry
       self::updateImageToDB($user->id, $upload_key, $entry_id);
 
-      return $error; // note only processing one image here before returning
+
 		}
+    return true;
 	}
+
 }
