@@ -137,7 +137,7 @@ class EntriesController extends Controller
 
       // Check if there is a file being uploaded
       if (Input::hasFile('file')) {
-        if the file was uploaded correctly
+        // if the file was uploaded correctly
         if ($entry->uploadImage(Auth::user(),Input::file('file'), 'entries')) {
 
           if (\App\Entry::moveImagesForNewTile(	Auth::user(), $request->session()->get('upload_key'))) {
