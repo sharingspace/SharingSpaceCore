@@ -370,7 +370,7 @@ $( document ).ready(function() {
 
   				// is this an edit or a save?
   				$('#create_table tr:last').after('<tr id="tr_'+replyData.entry_id+'"><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
-  				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button> <button class="smooth_font image_button btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-picture-o fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
+  				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
 
   				$(".inputErr").show();
   				$(".noInputErr").hide();
