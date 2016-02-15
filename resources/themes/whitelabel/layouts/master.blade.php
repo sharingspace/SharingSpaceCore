@@ -36,7 +36,7 @@
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <!-- Bootstrap 3 Javascript is pulled in through the scripts.js file - no need to include it here -->
-
+    <link rel="shortcut icon" href="/favicon.ico">
   </head>
 
 <body class="smoothscroll enable-animation">

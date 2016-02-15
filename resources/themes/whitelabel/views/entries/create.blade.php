@@ -112,7 +112,7 @@
                         <div class="fancy-file-upload fancy-file-info">
                           <i class="fa fa-picture-o"></i>
                           <input id="choose-file" type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
-                          <input type="text" class="form-control" placeholder="no file selected" readonly="" />
+                          <input id="shadow_input" type="text" class="form-control" placeholder="no file selected" readonly="" />
                           <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                         </div>
                       </div>
@@ -212,10 +212,8 @@ $( document ).ready(function() {
 		var post_type = $(this).closest('tr').children('td.td_post_type').html();
 		var qty = $(this).closest('tr').children('td.td_qty').html();
 		var desc = $(this).closest('tr').children('td.td_description').html();
-		//var title = $(this).closest('tr').('td.table_title').html();
     //console.warn("Title is: "+title +", post type is: "+post_type+", quantity is: "+qty+", entry id is: "+$(this).prop('class')+entry_id);
 
-		//console.log("edit clicked"+entry_id);
 		$("#title").val(title);
 		$('#qty').val(qty);
 		$('#description').val(desc);
@@ -241,7 +239,6 @@ $( document ).ready(function() {
         myrow.remove();
 
         // count how many rows we have, if we only have the header row hide the table
-        //console.log($('#create_table tr').length);
         if( $('#create_table tr').length == 1) {
           $('#create_table').css('display','none');
         }
@@ -284,9 +281,9 @@ $( document ).ready(function() {
 		}
 	}
 
-	function restorePlaceholder(ph_text) {
-		$("#title").val("");
-		$("#title").attr('placeholder',ph_text);
+	function restorePlaceholder(element, ph_text) {
+    $(element).val("");
+		$(element).attr('placeholder',ph_text);
 	}
 
   // Return smart server error messages
@@ -299,6 +296,9 @@ $( document ).ready(function() {
     $('#submission_error').html(message).show();
   }
 
+  $("#choose-file").change(function() {
+    $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+  });
 
 	$(document).on( "click", "#ajaxAdd", function( e ) {
     // finish_submit will get invoked later, after
@@ -313,9 +313,9 @@ $( document ).ready(function() {
 
   		var title = $("#title").val();
   		if(title.length < 3 && false) {
-  			restorePlaceholder("Your want or have must be at least 3 characters long")
+  			restorePlaceholder("#title", "Your want or have must be at least 3 characters long")
   			setTimeout(function() {
-  					restorePlaceholder("Press enter to save");
+  					restorePlaceholder("#title", "Press enter to save");
   				}, 2000);
         return;
   		}
@@ -340,10 +340,7 @@ $( document ).ready(function() {
         post_url=entry_id+"/edit/ajax";
   		}
 
-
-      //console.warn("about to post...");
-  		//alert($('#entry_form').serialize());
-      //console.warn("Serialized POst IS: "+$('#entry_form').serialize());
+      //console.warn("Serialized Post is: "+$('#entry_form').serialize());
       $.post( post_url, $('#entry_form').serialize(),function (replyData) {
       	//console.warn("Yay we posted! Here's our reply: ");
         //console.dir(replyData);
@@ -357,11 +354,11 @@ $( document ).ready(function() {
           var exchanges=replyData.exchange_types.join(", ");
         }
 
+        // reset the form
+        $('#entry_form')[0].reset();
+
         if(replyData.save)
         {
-  				$("#title").val('');
-  				$('#description').val('');
-  				$('#qty').val(1);
           $('#submission_error').hide();
 
           if( $('#create_table tr').length == 1) {
@@ -406,10 +403,9 @@ $( document ).ready(function() {
 
       }).fail(function (jqxhr,errorStatus) {
         $('#submission_error').text(errorStatus).show();
-        //console.warn("Boo, we failed at posting :(");
-        restorePlaceholder(errorStatus)
+        restorePlaceholder("#title", errorStatus)
         setTimeout(function() {
-            restorePlaceholder("Press enter to save");
+            restorePlaceholder("#title", "Press enter to save");
           },
         4000);
       });
@@ -497,8 +493,8 @@ $( document ).ready(function() {
 			if (xhr.readyState==4 && xhr.status==200) {
 				//console.log("uploadFile: success!!!!!!!!!!");
 				replyData = JSON.parse(xhr.responseText);
-        console.warn("Results: "+xhr.responseText);
-        console.dir(replyData);
+        //console.warn("Results: "+xhr.responseText);
+        //console.dir(replyData);
         callback(replyData);
 				//console.log("onreadystatechange: image name = "+replyData.image +"  "+replyData.upload_key +"  "+replyData.user_id);
 				//$("#tile_"+entry_id+ " .percentage").fadeOut( 1200);//,"linear");
