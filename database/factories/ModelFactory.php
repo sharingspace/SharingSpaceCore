@@ -47,7 +47,7 @@ $factory->defineAs(App\Entry::class, 'have-entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
       'post_type' => 'have',
-      'qty' => '1',
+      'qty' => 1,
     ];
 });
 
