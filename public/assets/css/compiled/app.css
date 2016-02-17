@@ -5628,6 +5628,10 @@ div.ls-thumbnail-slide-container {
   border-width: 2px;
 }
 
+#banner_header h2 {
+  color: white;
+}
+
 @media only screen and (max-width: 768px) {
   #slider div.slider-featured-text {
     text-align: center !important;
@@ -8289,27 +8293,31 @@ Quick add
 }
 
 .page_banner.band_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/band.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url("/assets/img/backgrounds/hp/band.jpg");
 }
 
 .page_banner.clothing_swap_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/big_clothing_swap.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url("/assets/img/backgrounds/hp/big_clothing_swap.jpg");
 }
 
 .page_banner.bike_banner {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/bike_workshop.jpg");
 }
 
-.page_banner.farmer_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/farmer.jpg");
+.page_banner.farmers_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/farmers.jpg");
 }
 
 .page_banner.mural_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/mural.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url("/assets/img/backgrounds/hp/mural.jpg");
 }
 
 .page_banner.tech_design_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/tech_design.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url("/assets/img/backgrounds/hp/tech_design.jpg");
+}
+
+.page_banner.helping_hands_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/helping_hands.jpg");
 }
 /** ************************************* **
 
