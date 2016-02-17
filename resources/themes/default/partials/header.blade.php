@@ -80,10 +80,7 @@
 						</button>
 
 						<!-- Logo -->
-            <a class="logo pull-left navbar-brand" href="/">
-            <img src="/assets/img/anyshare-logo-squares.svg" onerror="this.onerror=null; this.src='/assets/img/anyshare-logo-squares.png'">
-            </a>
-
+            <a class="logo pull-left navbar-brand" href="/"><img src="/assets/img/anyshare-logo-squares.png"></a>
 
 						<!--
 							Top Nav
@@ -96,7 +93,7 @@
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
                   <li><a href="/#about">{{ trans('general.nav.basics') }} <span class="sr-only">(current)</span></a></li>
                   <li><a href="/#features">{{ trans('general.nav.features') }}</a></li>
-                  <li><a href="/#examples">{{ trans('general.nav.examples') }}  </a></li>
+                  <!-- <li><a href="/#examples">{{ trans('general.nav.examples') }}  </a></li>-->
                   <li><a href="{{ route('community.create.form') }}">{{ trans('general.nav.create_sharing_hub') }} </a></li>
 								</ul>
 

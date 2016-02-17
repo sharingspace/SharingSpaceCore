@@ -5305,6 +5305,11 @@ section#slider {
   }
 }
 
+#banner_header {
+  h2 {
+    color:white;
+  }
+}
 @media only screen and (max-width: 768px) {
   #slider div.slider-featured-text {
     text-align: center !important;
@@ -7793,22 +7798,25 @@ $color-green: #9AE14F;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/coop.jpg');
   }
   &.band_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/band.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) ), url('/assets/img/backgrounds/hp/band.jpg');
   }
   &.clothing_swap_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/big_clothing_swap.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('/assets/img/backgrounds/hp/big_clothing_swap.jpg');
   }
   &.bike_banner {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/bike_workshop.jpg');
   }
-  &.farmer_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/farmer.jpg');
+  &.farmers_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/farmers.jpg');
   }
   &.mural_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/mural.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) ), url('/assets/img/backgrounds/hp/mural.jpg');
   }
   &.tech_design_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
+  }
+  &.helping_hands_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/helping_hands.jpg');
   }
 }
 
