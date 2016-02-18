@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Entry extends Model
 {
 
+  use ValidatingTrait;
+  use UploadableFileTrait;
+  use SoftDeletes;
+
   /**
    * The database table used by the model.
    *
@@ -29,9 +33,7 @@ class Entry extends Model
   protected $injectUniqueIdentifier = true;
 
 
-  use ValidatingTrait;
-  use UploadableFileTrait;
-  use SoftDeletes;
+
 
   /*
   * Model validation rules
