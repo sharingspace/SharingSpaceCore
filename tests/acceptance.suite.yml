@@ -13,17 +13,7 @@ modules:
   enabled: [\Helper\Acceptance, PhpBrowser]
   config:
     PhpBrowser:
-      url: https://massmosaic5.dev
+      url: https://anyshare.dev:8890
     Laravel4:
       environment: testing
       filters: true
-
-env:
-  circle-ci:
-    modules:
-      config:
-        PhpBrowser:
-          url: http://massmosaic.dev
-        Laravel4:
-          environment: circle-ci
-          filters: true
