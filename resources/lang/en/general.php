@@ -12,7 +12,7 @@ return [
     'copyright' => 'Copyright',
     'no_about_data'  => 'The owner of this group has not entered any information about it yet.',
     'seo_title' => 'Create a sharing hub with AnyShare',
-    
+
     'nav'  => [
           'browse' => 'Browse',
           'add' => 'Add',
@@ -46,6 +46,7 @@ return [
 
           'messages' => [
             'invalid' => 'That entry is not valid.',
+            'completed' => 'Completed! ',
             'save_edits' => 'Your entry has been updated!',
             'not_allowed' => 'You are not allowed to edit this entry.',
 						'delete_not_allowed' => 'You are not allowed to delete this entry.',

@@ -11,6 +11,7 @@ use Input;
 use Redirect;
 use Helper;
 use Log;
+use App\Entry;
 
 class EntriesController extends Controller
 {
@@ -450,7 +451,14 @@ class EntriesController extends Controller
   */
   public function completeEntry($entryID)
   {
-    echo "completeEntry: stubbed";
+    // Needs auth stuff here
+    $entry = Entry::find($entryID);
+    if ($entry) {
+      $entry->completed_at = date("Y-m-d H:i:s");
+      $entry->save();
+      return redirect()->route('browse')->with('success',trans('general.entries.messages.completed'));
+    }
+
 	}
 
 
