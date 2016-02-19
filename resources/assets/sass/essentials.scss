@@ -14238,6 +14238,13 @@ a.social-icon {
 
 /* small */
 
+.social-grayscale {
+  &:hover {
+    background-color: #686868 !important;
+  }
+  background-color: #686868;
+}
+
 .social-facebook {
   &:hover {
     background-color: #3B5998 !important;

@@ -22345,6 +22345,14 @@ a.social-icon.social-icon-sm > i[class^=icon-] {
 
 /* small */
 
+.social-grayscale {
+  background-color: #686868;
+}
+
+.social-grayscale:hover {
+  background-color: #686868 !important;
+}
+
 .social-facebook {
   background-color: #3B5998;
 }

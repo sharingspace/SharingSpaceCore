@@ -35,8 +35,6 @@
     <!-- jQuery 2.1.4-->
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    <!-- Bootstrap 3 and Bootstrap Table Javascript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Bootstrap debug, very handy when working on a responsive layouts -->
     @if( getenv('APP_DEBUG'))
 			<!-- <script src="assets/js/extensions/debug/bootstrap-debugger.js"></script> -->
@@ -51,11 +49,11 @@
       <div>@include('partials.header')</div>
 
       @if (!Route::is('home'))
-          <!-- Notifications -->
+        <!-- Notifications -->
 
-            <div class="col-md-12 margin-top-0">
-              @include('notifications')
-            </div>
+          <div class="col-md-12 margin-top-0">
+            @include('notifications')
+          </div>
 
       @endif
 
