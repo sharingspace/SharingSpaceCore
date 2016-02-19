@@ -13,5 +13,5 @@ require('laravel-elixir-codeception');
 
 elixir(function(mix) {
     mix.sass(['app.scss', 'essentials.scss'],'public/assets/css/compiled');
-      mix.codeception();
+    mix.codeception();
 });
