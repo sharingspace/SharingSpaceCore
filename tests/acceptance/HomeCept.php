@@ -6,6 +6,4 @@ $I->wantTo('ensure that frontpage loads without errors');
 $I->amGoingTo('go to the homepage');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/');
-$I->see('AnySha.re');
-
-$I->seeLink('Sign-Up');
+$I->see('AnyShare Society');
