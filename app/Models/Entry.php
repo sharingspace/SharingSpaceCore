@@ -134,6 +134,21 @@ class Entry extends Model
 
   }
 
+  /**
+  * Query builder scope to only return uncompleted 
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  text                              $search      Search term
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
+  public function scopeNotCompleted($query)
+  {
+    return $query->whereNull('completed_at');
+  }
+
+
+
 
   /**
   * Query builder scope to search on text

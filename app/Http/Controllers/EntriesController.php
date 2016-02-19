@@ -379,7 +379,7 @@ class EntriesController extends Controller
   */
   public function getEntriesDataView(Request $request)
   {
-    $entries = $request->whitelabel_group->entries()->with('author');
+    $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
 
     if (Input::has('search')) {
         $entries->TextSearch(e(Input::get('search')));
