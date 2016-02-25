@@ -296,6 +296,7 @@ class EntriesController extends Controller
   */
   public function postAjaxDelete($entryID)
   {
+    echo "boo";exit;
     if ($entry = \App\Entry::find($entryID)) {
       $user = Auth::user();
 
@@ -375,11 +376,16 @@ class EntriesController extends Controller
 
 
   /*
-  Get the JSON list of entries in the current community
+  Get the JSON list of entries in the current community or for a specific user
   */
-  public function getEntriesDataView(Request $request)
+  public function getEntriesDataView(Request $request, $user_id=null)
   {
-    $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
+    //if ($user_id) {
+    //  $entries = $request->whitelabel_group->entries()->where('created_by', $user_id)->with('author')->NotCompleted();
+    //}
+    //else {
+      $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
+   // }
 
     if (Input::has('search')) {
         $entries->TextSearch(e(Input::get('search')));
@@ -423,9 +429,10 @@ class EntriesController extends Controller
     foreach ($entries as $entry) {
 
       $actions = '';
+   //        $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a><a href="'.route('entry.delete.ajax.save', $entry->id).'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
 
         if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
-            $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a><a href="'.route('entry.delete.save', $entry->id).'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
+            $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
         } else {
             $actions = '';
         }

@@ -57,8 +57,8 @@
               <h2 style="font-size:36px;">Create a sharing hub for exchanging anything!</h2>
             </div><!-- /left text -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
-              <a href="#" class="btn btn-success btn-lg hidden-xs">30-day free trial</a>
-              <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">30-day free trial</a>
+              <a href="#" class="btn btn-success btn-lg hidden-xs">Free trial</a>
+              <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">Free trial</a>
             </div><!-- /right btn -->
           </div>
         </div>
@@ -136,10 +136,10 @@
             <div class="row">
             <h2>What next?</h2>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
-                <a href="coop" class="btn btn-success btn-lg">We're a COOP</a>
+                <a href="coop" class="btn btn-success btn-lg">We're a Cooperative</a>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
-                <a href="pricing" class="btn btn-success btn-lg">View Pricing</a>
+                <a href="pricing" class="btn btn-success btn-lg">See Pricing</a>
               </div> <!-- col 6 -->
             </div>
           </div>

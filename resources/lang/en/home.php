@@ -9,7 +9,8 @@ return [
     */
 
     'home_headline' => 'We\'ve fixed the problem with sharing',
-    'subhome_headline' => 'You choose who you want to deal with!',
+    'subhome_headline2' => 'You choose who you want to deal with!',
+    'subhome_headline' => 'Make a cooperative network with the people you choose',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'our_communities'  => 'Our Communities',

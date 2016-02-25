@@ -192,7 +192,7 @@ Route::group(array('prefix' => 'entry'), function () {
     'uses' => 'EntriesController@ajaxUpload')
   );
 
-  Route::get('json.browse', array(
+  Route::get('json.browse/{userId?}', array(
     'as' => 'json.browse',
     'uses' => 'EntriesController@getEntriesDataView')
   );
