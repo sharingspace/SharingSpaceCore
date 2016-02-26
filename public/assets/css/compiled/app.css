@@ -8311,6 +8311,19 @@ Quick add
 .page_banner.tech_design_banner {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/tech_design.jpg");
 }
+
+.page_banner.sharing_fixed_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("/assets/img/backgrounds/hp/sharing_fixed_banner3.png");
+}
+
+.user_profile .thumbnail {
+  padding: 0;
+}
+
+.user_profile .my_exchanges {
+  font-size: larger;
+  font-weight: bold;
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!
@@ -22344,6 +22357,14 @@ a.social-icon.social-icon-sm > i[class^=icon-] {
 }
 
 /* small */
+
+.social-grayscale {
+  background-color: #686868;
+}
+
+.social-grayscale:hover {
+  background-color: #686868 !important;
+}
 
 .social-facebook {
   background-color: #3B5998;
@@ -37776,170 +37797,4 @@ section.dark .md-editor.md-fullscreen-mode .md-preview {
 
 .has-error .ico-append {
   color: #a94442;
-}
-.rslides {
-  position: relative;
-  list-style: none;
-  overflow: hidden;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.rslides li {
-  -webkit-backface-visibility: hidden;
-  position: absolute;
-  display: none;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
-
-.rslides li:first-child {
-  position: relative;
-  display: block;
-  float: left;
-}
-
-.rslides img {
-  display: block;
-  height: auto;
-  float: left;
-  width: 100%;
-  border: 0;
-}
-
-.rslides .caption {
-  background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
-  bottom: 0;
-  color: #fff;
-  display: block;
-  left: 0;
-  padding: 10px;
-  position: absolute;
-  right: 0;
-  text-align: center;
-}
-
-.rslides p {
-  margin-bottom: 0;
-}
-
-.rslides {
-  margin: 0 auto;
-}
-
-.rslides_container {
-  margin-bottom: 50px;
-  position: relative;
-  float: left;
-  width: 100%;
-}
-
-.rslides1_nav {
-  position: absolute;
-  -webkit-tap-highlight-color: transparent;
-  top: 50%;
-  left: 0;
-  z-index: 99;
-  opacity: 0.7;
-  text-indent: -9999px;
-  overflow: hidden;
-  text-decoration: none;
-  height: 61px;
-  width: 38px;
-  background: transparent url("/assets/img/buttons/slider-arrows.jpg") no-repeat left top;
-  margin-top: -45px;
-}
-
-.rslides1_nav:active {
-  opacity: 1.0;
-}
-
-.rslides1_nav.next {
-  left: auto;
-  background-position: right top;
-  right: 0;
-}
-
-.rslides2_nav {
-  position: absolute;
-  -webkit-tap-highlight-color: transparent;
-  top: 0;
-  left: 0;
-  display: block;
-  background: #fff;
-  /* Fix for IE6-9 */
-  opacity: 0;
-  filter: alpha(opacity=1);
-  width: 48%;
-  text-indent: -9999px;
-  overflow: hidden;
-  height: 91%;
-}
-
-.rslides2_nav.next {
-  left: auto;
-  right: 0;
-}
-
-.rslides3_nav {
-  position: absolute;
-  -webkit-tap-highlight-color: transparent;
-  opacity: 0.6;
-  text-indent: -9999px;
-  overflow: hidden;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: #000 url("themes.gif") no-repeat left 50%;
-  width: 38px;
-}
-
-.rslides3_nav:active {
-  opacity: 1.0;
-}
-
-.rslides3_nav.next {
-  left: auto;
-  background-position: right 50%;
-  right: 0;
-}
-
-.rslides1_nav:focus,
-.rslides2_nav:focus,
-.rslides3_nav:focus {
-  outline: none;
-}
-
-.rslides_tabs {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.rslides_tabs li {
-  display: inline;
-  float: none;
-  _float: left;
-  *float: left;
-  margin-right: 5px;
-}
-
-.rslides_tabs a {
-  text-indent: -9999px;
-  overflow: hidden;
-  border-radius: 15px;
-  background: #ccc;
-  background: rgba(0, 0, 0, 0.2);
-  display: inline-block;
-  _display: block;
-  *display: block;
-  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.3);
-  width: 9px;
-  height: 9px;
-}
-
-.rslides_tabs .rslides_here a {
-  background: #222;
-  background: rgba(0, 0, 0, 0.8);
 }

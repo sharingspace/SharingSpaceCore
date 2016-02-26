@@ -204,7 +204,7 @@
 													<label for="file" class="input input-file">
 														<div class="button">
 															<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
-														</div><input type="text" readonly>
+														</div><input id="shadow_input" type="text" placeholder="no file selected" readonly>
 													</label>
 												</div>
 
@@ -358,4 +358,14 @@
 			</section>
 			<!-- / -->
 
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+  $("#file").change(function() {
+    $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+  });
+});
+
+</script>
 @stop

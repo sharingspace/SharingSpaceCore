@@ -7810,5 +7810,17 @@ $color-green: #9AE14F;
   &.tech_design_banner {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
   }
+  &.sharing_fixed_banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3) ), url('/assets/img/backgrounds/hp/sharing_fixed_banner3.png');
+  }
 }
 
+.user_profile {
+  .thumbnail {
+    padding:0;
+  }
+  .my_exchanges {
+    font-size:larger;
+    font-weight:bold;
+  }
+}
