@@ -1,6 +1,6 @@
 
 <!-- FOOTER -->
-			<footer id="footer">
+			<footer id="footer" class="callout-dark" style="background: linear-gradient(to bottom, #000 0%, #000 100%)">
        @if(0)
 				<div class="container padding-top-30 margin-bottom-10">
 					<div class="row">
