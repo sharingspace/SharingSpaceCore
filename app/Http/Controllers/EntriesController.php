@@ -286,17 +286,17 @@ class EntriesController extends Controller
       }
 
     }
-    return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
 
+    return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
   }
 
 
   /*
   Delete the entry via Ajax
   */
+
   public function postAjaxDelete($entryID)
   {
-    echo "boo";exit;
     if ($entry = \App\Entry::find($entryID)) {
       $user = Auth::user();
 
@@ -314,7 +314,6 @@ class EntriesController extends Controller
     }
 
     return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
-
   }
 
 

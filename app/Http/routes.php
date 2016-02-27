@@ -126,7 +126,14 @@ Route::get('users/{userID}', array(
   'uses' => 'UserController@getProfile')
 );
 
-
+Route::group(array('prefix' => 'users'), function () {
+  Route::post('{entryId}/ajaxdelete', array(
+      'middleware' => 'auth',
+      'uses' => 'EntriesController@postAjaxDelete')
+  );
+});
+ 
+ 
 /*
 |--------------------------------------------------------------------------
 | Entry routes

@@ -145,24 +145,25 @@
    });
   
 $( document ).ready(function() {
-
   // we off screen the table headers as they are obvious. 
   $('table th').addClass('sr-only');
   $('table').on( "click", '[id^=delete_entry_]', function() {
-    var id = $(this).attr('id').split('_')[2];
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-  
-    $.ajax({
-      url: 'entry.delete.ajax.save',
-      type: 'POST',
-      data: {_token:CSRF_TOKEN, entryID:'813'},
-      dataType: 'JSON',
-      contentType:"application/json",
-      headers: {'X-CSRF-TOKEN': CSRF_TOKEN},
-      success: function (data) {
-          alert("delete complete :-) ");
+    var entryID = $(this).attr('id').split('_')[2];
+    
+    // add a clas to the row so we can remove it on success
+    $(this).closest('tr').addClass("remove_"+entryID);
+
+    var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
+
+    $.post(entryID+"/ajaxdelete",{_token: CSRF_TOKEN},function (replyData) {
+      //console.log("delete success :-)  "+replyData.entry_id);
+      if(replyData.success) {
+        // remove row from table
+        $('.remove_'+entryID).remove();
+      } else {
+       console.error('delete failed');
       }
-    });  
+    });
   });
 })
 
