@@ -20778,6 +20778,18 @@ i {
     text-shadow: rgba(0, 0, 0, 0.3) 1px 1px 1px;
     background-color: #878787;
   }
+  &.ico-color-lightblue {
+    color: #AFDBDB;
+    border: transparent;
+    background-color: #fff;
+    border: 2px solid #bbb;
+  }
+  &.ico-color-lightblue:hover {
+    color: #fff;
+    border: transparent;
+    background-color: #AFDBDB!important;
+    border: 2px solid #AFDBDB!important;
+  }
   &.ico-hover:hover {
     color: #fff;
     background-color: #111;

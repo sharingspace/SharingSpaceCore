@@ -8,9 +8,9 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'home_headline' => 'We\'ve fixed the problem with sharing',
+    'home_headline' => 'We\'ve Fixed the Problem with Sharing',
     'subhome_headline2' => 'You choose who you want to deal with!',
-    'subhome_headline' => 'Make a cooperative network with the people you choose',
+    'subhome_headline' => 'a cooperative network for the people you choose',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'our_communities'  => 'Our Communities',
