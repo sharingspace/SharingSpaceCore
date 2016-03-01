@@ -379,12 +379,12 @@ class EntriesController extends Controller
   */
   public function getEntriesDataView(Request $request, $user_id=null)
   {
-    //if ($user_id) {
-    //  $entries = $request->whitelabel_group->entries()->where('created_by', $user_id)->with('author')->NotCompleted();
-    //}
-    //else {
+    if ($user_id) {
+      $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id)->NotCompleted();
+    }
+    else {
       $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
-   // }
+    }
 
     if (Input::has('search')) {
         $entries->TextSearch(e(Input::get('search')));
@@ -442,7 +442,7 @@ class EntriesController extends Controller
         'post_type' => strtoupper($entry->post_type),
         'author' => '<a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
         'location' => $entry->location,
-        'created_at' => $entry->created_at->format('M d Y g:iA'),
+        'created_at' => $entry->created_at->format('M d, Y'), // removed hour and minutes to see how it looks, may re-add it after feedback (g:iA'),
         'actions' => $actions,
       );
     }
