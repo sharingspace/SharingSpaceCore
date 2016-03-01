@@ -43,6 +43,7 @@
 		Responsive
 		HomePage
 		Quick add
+    Members
 *************************************************** **/
 
 /** Globals
@@ -8323,6 +8324,28 @@ Quick add
 .user_profile .my_exchanges {
   font-size: larger;
   font-weight: bold;
+}
+
+/**
+  * Members page
+  **/
+
+#members .member_thumb img {
+  border: none;
+  height: 60px;
+  max-width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#members .bio {
+  width: 50%;
+}
+
+#members td {
+  border-left: none;
+  border-right: none;
 }
 /** ************************************* **
 
