@@ -17,6 +17,9 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
+    <!-- token used in ajax calls where no form is present on the page -->
+    <meta name="ajax-csrf-token" content="{{ csrf_token() }}" />
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/compiled/bootstrap-social.css') }}">

@@ -6,9 +6,9 @@
 <!-- OWL SLIDER -->
 	<section>
 
-		<div class="page_banner"  style="background-color:#AFDBDB;height:300px;">
-       <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:50px;margin-bottom:20px; ">{{ trans('home.home_headline') }}</h1>
-       <h2 style="font-size:45px!important;;color:white;text-align:center;">{{ trans('home.subhome_headline') }}</h2>
+		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
+       <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px; ">{{ trans('home.home_headline') }}</h1>
+       <h2 style="font-size:40px!important;font-weight:400;color:white;text-align:center;">{{ trans('home.subhome_headline') }}</h2>
     </div>
 
 	</section>
@@ -50,15 +50,17 @@
 
 			<!-- /ABOUT -->
       <!-- BUTTON CALLOUT -->
-      <div class="callout callout-theme-color margin-bottom-10 text-center">
+      <div class="callout callout-dark margin-bottom-10">
+              <div class="container">
+
         <div class="row">
-          <div class="row text-center">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-              <h2 style="font-size:36px;">Create a sharing hub for exchanging anything!</h2>
+              <h2 style="font-size:36px;" class="pull-right">Try a sharing hub free for 30 days!</h2>
+
             </div><!-- /left text -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><!-- right btn -->
-              <a href="#" class="btn btn-success btn-lg hidden-xs">Free trial</a>
-              <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">Free trial</a>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->
+              <a href="#" class="btn btn-warning btn-lg hidden-xs pull-left" style="background-color:#EC971F">Create</a>
+              <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">Create</a>
             </div><!-- /right btn -->
           </div>
         </div>
@@ -69,53 +71,49 @@
       <!-- -->
   		<section id="features">
   			<div class="container">
-  				<header class="text-center margin-bottom-40">
-						<h2 style="font-size:46px;">Features</h2>
-					</header>
-
   				<!-- FEATURED BOXES 3 -->
   				<div class="row">
-  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10 margin-top-20">
   						<div class="text-center">
-  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-random"></i>
-  							<h3>Exchange Anything</h3>
+  							<i class="ico-color-lightblue  ico-lg ico-rounded ico-hover fa fa-random"></i>
+  							<h3 class="margin-bottom-0">Exchange Anything</h3>
   							<p class="font-lato size-20">Any kind of thing, skill, knowledge, opportunity and more can be included.</p>
   						</div>
   					</div>
            
-  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10 margin-top-20">
   						<div class="text-center">
-  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-users"></i>
-  							<h3>Unlimited Size</h3>
+  							<i class="ico-color-lightblue ico-lg ico-rounded ico-hover fa fa-users"></i>
+  							<h3 class="margin-bottom-0">Unlimited Size</h3>
   							<p class="font-lato size-20">Hubs can be from 1 - 100k members and from anyplace on the Earth.</p>
   						</div>
   					</div>
-  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10 margin-top-20">
   						<div class="text-center">
-  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-wrench"></i>
-  							<h3>Custom Look &amp; Feel</h3>
+  							<i class="ico-color-lightblue ico-lg ico-rounded ico-hover fa fa-wrench"></i>
+  							<h3 class="margin-bottom-0">Custom Look &amp; Feel</h3>
   							<p class="font-lato size-20">Choose different colors, layouts, and branded themes for your hub.</p>
   						</div>
   					</div>
-  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-20">
   						<div class="text-center">
-  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-university"></i>
-  							<h3>Professional Options</h3>
-  							<p class="font-lato size-20">Administrators can make money building access as well as other benefits!</p>
+  							<i class="ico-color-lightblue ico-lg ico-rounded ico-hover fa fa-university"></i>
+  							<h3 class="margin-bottom-0">Professional Options</h3>
+  							<p class="font-lato size-20">Administrators can make money building access!</p>
   						</div>
   					</div>
-  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-20">
   						<div class="text-center">
-  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-eye-slash"></i>
-  							<h3>Full Privacy Control</h3>
-  							<p class="font-lato size-20">Public, private, and secret hubs make it easy for you to control the amount of visibility.</p>
+  							<i class="ico-color-lightblue ico-lg ico-rounded ico-hover fa fa-eye-slash"></i>
+  							<h3 class="margin-bottom-0">Full Privacy Control</h3>
+  							<p class="font-lato size-20">Public, private, and secret hubs make it easy for you to control visibility.</p>
   						</div>
   					</div>
-  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+  					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-20">
   						<div class="text-center">
-  							<i class="ico-color ico-lg ico-rounded ico-hover fa fa-code"></i>
-  							<h3>API + More</h3>
-  							<p class="font-lato size-20">Display your entries and data on the websites you choose! Extend the hub for your needs.</p>
+  							<i class="ico-color-lightblue ico-lg ico-rounded ico-hover fa fa-code"></i>
+  							<h3 class="margin-bottom-0">API + More</h3>
+  							<p class="font-lato size-20">Display your entries and data on the websites you choose!</p>
   						</div>
   					</div>
 
@@ -124,27 +122,26 @@
 
   			</div>
   		</section>
-      <!-- / -->
-
 
 
   		
   		<!-- BUTTON CALLOUT -->
-      <div class="callout callout-theme-color margin-bottom-0 text-center">
-        <div class="row text-center">
-          <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-            <div class="row">
-            <h2>What next?</h2>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
-                <a href="coop" class="btn btn-success btn-lg">We're a Cooperative</a>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><!-- left text -->
-                <a href="pricing" class="btn btn-success btn-lg">See Pricing</a>
-              </div> <!-- col 6 -->
-            </div>
-          </div>
-        </div> <!-- row -->
-      </div>
+      <div class="callout callout-dark margin-bottom-0 text-center" style="background-color:#AFDBDB;">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-md-offset-2">
+              <div class="row">
+                <h2 style="font-weight:800;">Explore more</h2>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><!-- left text -->
+                  <a href="coop" class="btn btn-success btn-lg margin-right-20">The Cooperative</a> <a href="pricing" class="btn btn-success btn-lg">See Pricing</a>
+                </div> <!-- col 12 -->
+                
+              </div> <!-- row -->
+            </div> <!-- col 8 -->
+          </div> <!-- row -->
+        </div> <!-- container -->
+      </div> <!-- callout -->
       <!-- /BUTTON CALLOUT -->
   		
       <!-- COMMUNITIES -->
@@ -259,7 +256,7 @@
    			</div> <!-- row -->
       </div> <!-- container -->
   	</section>
-  	      @endif
+  	@endif
 <!-- /COMMUNITIES  -->
 
 

@@ -139,19 +139,19 @@ section p {
           <ul id="rslides">
             <li>
               <img src="assets/img/backgrounds/rob.jpg" alt="">
-              <p class="caption">Rob</p>
+              <span class="caption">Rob</span>
             </li>
             <li>
               <img src="assets/img/backgrounds/eric.jpg" alt="">
-              <p class="caption">Eric</p>
+              <span class="caption">Eric</span>
             </li>
             <li>
               <img src="assets/img/backgrounds/alison.jpg" alt="">
-              <p class="caption">Alison</p>
+              <span class="caption">Alison</span>
             </li>
             <li>
               <img src="assets/img/backgrounds/david.jpg" alt="">
-              <p class="caption">David</p>
+              <span class="caption">David</span>
             </li>
           </ul>
         </div>
@@ -176,8 +176,11 @@ jQuery(document).ready(function () {
       pagination: true,
       nav: true,
       fade: 500,
-     // maxwidth: 500
-  });
+      //maxwidth: 500,
+      prevText: "Previous",   // String: Text for the "previous" button
+      nextText: "Next",       // String: Text for the "next" buttons
+      pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+    });
 });
 
 </script>

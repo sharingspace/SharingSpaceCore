@@ -8,5 +8,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'headline' => 'Pricing'
+    'headline' => 'Pricing',
+    'startTrial' => 'Start your free trial'
 ];
