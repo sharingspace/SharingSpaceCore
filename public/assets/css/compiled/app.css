@@ -43,7 +43,9 @@
 		Responsive
 		HomePage
 		Quick add
-*************************************************** **/
+    Members
+    Pricing
+*****************************************************/
 
 /** Globals
  ******************************************************************/
@@ -8035,30 +8037,6 @@ li.notifications-popdown .notifications-popdown-box {
 
 /********************** Home page ***********************/
 
-#pricing table {
-  color: #cecece;
-  font-family: Montserrat,sans-serif;
-  font-size: 14px;
-  border-radius: 10px;
-}
-
-#pricing table tr th {
-  text-align: center;
-  width: 50%;
-  border: none;
-  font-size: 24px;
-  color: #fff;
-}
-
-#pricing table tr td {
-  text-align: center;
-  border: none;
-}
-
-#pricing table p {
-  margin-bottom: 10px;
-}
-
 section#about p {
   font-family: Ubuntu,Helvetica,sans-serif;
   color: #5A5A5A;
@@ -8390,6 +8368,50 @@ Quick add
   background: #000;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
+}
+
+/**
+  * Members page
+  **/
+
+#members .member_thumb img {
+  border: none;
+  height: 60px;
+  max-width: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#members .bio {
+  width: 50%;
+}
+
+#members td {
+  border-left: none;
+  border-right: none;
+}
+
+/**
+  * Pricing page
+  **/
+
+#pricing table {
+  background_color: red !important;
+}
+
+#pricing table th {
+  text-align: left;
+}
+
+#pricing table th:nth-child(2),
+#pricing table td:nth-child(2) {
+  text-align: center;
+}
+
+#pricing table caption {
+  text-align: center;
+  margin-bottom: 15px;
 }
 /** ************************************* **
 

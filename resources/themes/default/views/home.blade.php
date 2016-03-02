@@ -2,15 +2,11 @@
 
 @section('content')
 
-
-<!-- OWL SLIDER -->
-	<section>
-
+	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
        <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px; ">{{ trans('home.home_headline') }}</h1>
        <h2 style="font-size:40px!important;font-weight:400;color:white;text-align:center;">{{ trans('home.subhome_headline') }}</h2>
     </div>
-
 	</section>
 
 

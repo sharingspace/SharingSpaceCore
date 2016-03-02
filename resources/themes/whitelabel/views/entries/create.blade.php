@@ -15,7 +15,7 @@
 
         <!-- Added tiles .... -->
         <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-        <h1 class="size-16 uppercase margin-bottom-20">{{ trans('general.entries.create') }}</h1>
+        <h1 class="size-16 uppercase margin-bottom-20 sr-only">{{ trans('general.entries.create') }}</h1>
 
         <table class="table" id="create_table" >
           <caption>You Added</caption>
@@ -41,8 +41,8 @@
 						<!-- Entry -->
 						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
 							<div class="row">
-
-                <div class="alert alert-danger" style="display:none" id="submission_error"></div>
+                <div class="alert alert-danger" style="display:none" id="submission_error">
+                </div>
 
                 <!-- entry form -->
 
@@ -51,124 +51,117 @@
                   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000" />
     							<input type="hidden" name="upload_key" id="upload_key" value="" />
 
-                  	<div class="col-md-3 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
+                	<div class="col-md-3 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
+                  	<div class="form-group" style="margin-bottom: 5px;">
+                    	<fieldset class="margin-bottom-10">
 
-                    	<div class="form-group" style="margin-bottom: 5px;">
-                      	<fieldset class="margin-bottom-10">
+                      	<legend class="sr-only">Exchange by:</legend>
 
-                        	<legend class="sr-only">Exchange by:</legend>
+                        {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
+												<div class="exchange_types">
 
-                          {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
-													<div class="exchange_types">
-
-                            <!-- checkboxes for exchange types -->
-                              <div class="checkbox">
-                              @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                          <!-- checkboxes for exchange types -->
+                          <div class="checkbox">
+                            @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                               <div class="col-md-12 pull-left margin-bottom-10">
                                 <label class="checkbox col-md-12 pull-left margin-bottom-10">
                                 {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id, ['class' => 'exchanges']) }}
                                   <i></i> {{ $exchange_types->name }}
                                 </label>
                               </div>
-                              @endforeach
+                            @endforeach
                             <div class="col-md-12 pull-left margin-bottom-10">
                               <label class="checkbox col-md-12 pull-left margin-bottom-10">
                                 {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
                                 <i></i> all exchanges
                               </label>
-                              </div>
-                           </div>
-                          </div> <!-- exchange_types -->
-                         </fieldset>
-                        </div> <!-- form-group -->
+                            </div>
+                          </div>
+                        </div> <!-- exchange_types -->
+                      </fieldset>
+                    </div> <!-- form-group -->
+                  </div> <!-- col-md-3 -->
 
-                      </div> <!-- col-md-3 -->
+                  <div class="col-md-9 col-sm-8 col-xs-12">
+                		<div class="row">
+                  		<div class="col-md-3 margin-bottom-10 {{ $errors->first('post_type', ' has-error') }}">
+                      	<select class="form-control" name="post_type" id="post_type">
+                        	<option value="want">I want</option>
+                        	<option value="have">I have</option>
+                      	</select>
+                  		</div> <!-- col 3 -->
+                      <div class="col-md-3 margin-bottom-10">
+                        <!-- stepper -->
+                        <input type="text" value="{{ Input::old('qty', 1) }}" min="1" max="1000" class="form-control stepper" id="qty" name="qty">
+                      </div> <!-- col 3 -->
+                  		<div class="col-md-6 margin-bottom-8 {{ $errors->first('title', ' has-error') }}">
+                    		<!-- Name -->
+                    		<label class="input">
+                      		<input type="text" name="title" id="title" class="form-control" placeholder="Description">
+                          <span class="fa fa-asterisk inputErr"></span>
+                          <span class="fa fa-asterisk noInputErr" style="display:none;"></span>
+                    		</label>
+                  		</div> <!-- col 6 -->
 
-                      <div class="col-md-9 col-sm-8 col-xs-12">
-
-                  		<fieldset class="nomargin">
-                    		<div class="col-md-2 margin-bottom-10 {{ $errors->first('post_type', ' has-error') }}">
-                        	<select class="form-control" name="post_type" id="post_type">
-                          	<option value="want">I want</option>
-                          	<option value="have">I have</option>
-                        	</select>
-                    		</div>
-                        <div class="col-md-2 margin-bottom-10">
-                          <!-- stepper -->
-                          <input type="text" value="{{ Input::old('qty', 1) }}" min="1" max="1000" class="form-control stepper" id="qty" name="qty">
-                        </div>
-                    		<div class="col-md-6 margin-bottom-8 {{ $errors->first('title', ' has-error') }}">
-                      		<!-- Name -->
-                      		<label class="input">
-                        		<input type="text" name="title" id="title" class="form-control" placeholder="Description">
-                            <span class="fa fa-asterisk inputErr"></span>
-                            <span class="fa fa-asterisk noInputErr" style="display:none;"></span>
-                      		</label>
-                    		</div>
-
-                   		</fieldset>
                       <!-- File upload -->
-                      <div class="col-md-10 form-group {{ $errors->first('file', 'has-error') }}">
+                      <div class="col-md-12 form-group {{ $errors->first('file', 'has-error') }}">
                         <div class="fancy-file-upload fancy-file-info">
                           <i class="fa fa-picture-o"></i>
                           <input id="choose-file" type="file" class="form-control" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
                           <input id="shadow_input" type="text" class="form-control" placeholder="no file selected" readonly="" />
                           <span class="button">{{ trans('general.uploads.choose_file') }}</span>
-                        </div>
+                        </div> <!-- fancy -->
+                      </div> <!-- col 12 -->
+
+                   		<div class="col-md-12">
+                        <div class="form-group {{ $errors->first('description', 'has-error') }}">
+                          <!-- Description -->
+                          <label class="input">
+                            <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="Detailed description..."></textarea>
+                          </label>
+                        </div> <!-- form group -->
+                      </div> <!-- col 12 -->
+
+                      <div class="col-md-12">
+                        <!-- Tags -->
+                        <div class="form-group {{ $errors->first('tags', 'has-error') }}">
+                          <label class="input">
+                        		<input type="text" name="tags" id="tags" class="form-control" placeholder="Keywords, comma-separated">
+                      		</label>
+                        </div> <!-- tags -->
+                      </div> <!-- col 12 -->
+                      
+                      <div class="col-md-12">
+                        <!-- Location -->
+                        <div class="form-group {{ $errors->first('location', 'has-error') }}">
+                          <label class="control-label sr-only" for="location">Location</label>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}">
+                            <div class="input-group-addon" id="basic-addon2">
+                              <i class="fa fa-location-arrow" id="geolocate"></i>
+                            </div>
+                            {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
+                          </div> <!-- input-group -->
+                        </div> <!-- form-group -->
                       </div>
-                   		<div class="col-md-10">
-                        <div id="prefs_panel">
 
-                          <div class="form-group {{ $errors->first('description', 'has-error') }}">
-                            <!-- Description -->
-                            <label class="input">
-                              <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="Detailed description..."></textarea>
-                            </label>
-                          </div>
+                      <div class="col-md-10 col-sm-10 col-xs-10">
+                        <label class="checkbox pull-left" for="visible_checkbox">
+                          {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
+                          <i></i> Visible only to you
+                        </label>
+                      </div> <!-- col 10 -->
 
-                          <!-- Tags -->
-                          <div class="form-group {{ $errors->first('tags', 'has-error') }}">
-                            <label class="input">
-                          		<input type="text" name="tags" id="tags" class="form-control" placeholder="Keywords, comma-separated">
-                        		</label>
-                          </div>
-
-
-                          <!-- Location -->
-                          <div class="form-group {{ $errors->first('location', 'has-error') }}">
-                            <label class="control-label sr-only" for="location">Location</label>
-                            <div class="input-group">
-                              <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}">
-                              <div class="input-group-addon" id="basic-addon2">
-                                <i class="fa fa-location-arrow" id="geolocate"></i>
-                              </div>
-                              {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
-                           </div>
-                          </div>
-
-
-
-                          <div class="col-md-10 col-sm-10 col-xs-10">
-                            <label class="checkbox pull-left" for="visible_checkbox">
-                              {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
-                              <i></i> Visible only to you
-                            </label>
-                          </div>
-                          <div class="col-md-2 col-sm-2 col-xs-2 ">
-                          <button class="btn btn-success" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
-
-                          </div>
-                        </div> <!-- prefs panel -->
-                       </div>
-                    </div>
-
+                      <div class="col-md-2 col-sm-2 col-xs-2 ">
+                        <button class="btn btn-warning  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
+                      </div> <!-- col 2 -->
+                    </div> <!-- row -->
+                  </div> <!-- col 9 -->
                 </form>
-              </div>
-						</div>
-					</div>
-
-
-				</div>
+              </div> <!-- row -->
+						</div> <!-- col-10 -->
+					</div> <!-- row -->
+				</div> <!-- add_tile_wrapper -->
 			</section>
 			<!-- / -->
 

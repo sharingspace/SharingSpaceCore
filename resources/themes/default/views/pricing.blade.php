@@ -1,23 +1,15 @@
 @extends('layouts.master')
-<style>
-table th:nth-child(2), td:nth-child(2) {
-  text-align:center;
-}
-table caption {
-  text-align:center;
-  margin-bottom: 15px;
-}
-</style>
+
 @section('content')
 
 
-<section id='slider' style="width:100%;">					
+<section class="padding-top-0">
   <div class='page_banner sharing_fixed_banner'>
-    <h1>{{trans('pricing.headline') }}</h1>
+    <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px;">{{trans('pricing.headline') }}</h1>
   </div>
 </section>
 
-  <section id="features">
+  <section id="pricing">
     <div class="container">
       <div class="table-responsive">
         <table class="table margin-top-30 margin-bottom-0" style="color:#222;font-size:16px;font-weight:500;">
