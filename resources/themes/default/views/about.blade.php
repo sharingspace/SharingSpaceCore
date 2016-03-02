@@ -1,48 +1,12 @@
 @extends('layouts.master')
-<style>
 
-.about-section-2 {
-  height: 350px;
-  margin-bottom: 0px;
-  background-color: #000;
-  background-image: url("http://uploads.webflow.com/564b3e094801fab237b6b158/564d780e5e1ff0f11ea54aba_sitting.jpg");
-  background-position: 50% 0px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.about-section-3 {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 43px;
-  padding-bottom: 50px;
-  background-color: transparent;
-}
-
-section p {
-  font-family: Montserrat, sans-serif;
-  font-size: 15px;
-}
-
-
-
-
-
-
- 
-</style>
 @section('content')
 
-
-<section id='slider' style="width:100%;">					
+<section class="padding-top-0">
   <div class='page_banner about_banner'>
-    <h1>Sharing Hubs</h1>
-    <h2 style="text-align:center;">multi-person needs and resources</h2>
-    <div style="text-align:center;"><a href="#" class="btn btn-danger">Try</a>
-    <a href="#about" class="btn btn-warning w-button slider-buttons button-variation">Learn</a></div>
+    <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px;">About</h1>
   </div>
 </section>
-
 
 <section id="why" class="padding-xxs">
   <div class="container">
@@ -176,7 +140,6 @@ jQuery(document).ready(function () {
       pagination: true,
       nav: true,
       fade: 500,
-      //maxwidth: 500,
       prevText: "Previous",   // String: Text for the "previous" button
       nextText: "Next",       // String: Text for the "next" buttons
       pauseControls: true,    // Boolean: Pause when hovering controls, true or false

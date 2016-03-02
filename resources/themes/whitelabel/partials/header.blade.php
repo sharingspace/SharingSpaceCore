@@ -118,16 +118,17 @@
                       {!! (Route::is('browse') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
-                  <li>
-                    <a href="{{ route('entry.create.form')}}">
-                      {{ trans('general.nav.add') }}
-                      {!! (Route::is('entries.create.new') ? '<span class="sr-only">(current)</span>' : '') !!}
-                    </a>
-                  </li>
                   <li{!! (Route::is('members') ? ' class="active"' : '') !!}>
                     <a href="{{ route('members') }}">
                       {{ trans('general.nav.members') }}
                       {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('entry.create.form') }}">
+                      <button type="button" class="btn btn-sm btn-warning">
+                        {{ trans('general.nav.create') }}
+                      </button>
                     </a>
                   </li>
                   <li>
