@@ -10,7 +10,7 @@
 @section('content')
 
 <!-- Profile -->
-			<section>
+			<section class="padding-top-0">
 				<div class="container user_profile">
 					<!-- LEFT -->
 					<div class="col-lg-6 col-md-6 col-sm-5">
@@ -157,11 +157,12 @@ $( document ).ready(function() {
 
     $.post(entryID+"/ajaxdelete",{_token: CSRF_TOKEN},function (replyData) {
       //console.log("delete success :-)  "+replyData.entry_id);
-      if(replyData.success) {
+      if (replyData.success) {
         // remove row from table
         $('.remove_'+entryID).remove();
-      } else {
-       console.error('delete failed');
+      }
+      else {
+        //console.error('delete failed');
       }
     });
   });

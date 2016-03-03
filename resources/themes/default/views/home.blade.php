@@ -31,7 +31,7 @@
 					<div class="row">
 
 						<div class="col-sm-6 col-xs-12">
-							<p>{{ trans('home.learn_more_p1')}}</p>
+							<p>A <span class="weight-700 font-style-italic">{{ trans('home.learn_more_p1a')}}</span> {{ trans('home.learn_more_p1b')}}</p>
               <p>{{ trans('home.learn_more_p2')}}</p>
 						</div>
 
@@ -51,12 +51,12 @@
 
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-              <h2 style="font-size:36px;" class="pull-right">Try a sharing hub free for 30 days!</h2>
+              <h2 style="font-size:36px;" class="pull-right">Try a sharing hub free for 30 days</h2>
 
             </div><!-- /left text -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->
-              <a href="#" class="btn btn-warning btn-lg hidden-xs pull-left" style="background-color:#EC971F">Create</a>
-              <a href="#" class="btn btn-success btn-sm size-14 hidden-sm hidden-md hidden-lg">Create</a>
+              <a href="#" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
+              <a href="#" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
             </div><!-- /right btn -->
           </div>
         </div>

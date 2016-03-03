@@ -8294,6 +8294,10 @@ Quick add
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/sets.png");
 }
 
+/**
+  * User profile page
+  */
+
 .user_profile .thumbnail {
   padding: 0;
 }
@@ -8302,6 +8306,22 @@ Quick add
   font-size: larger;
   font-weight: bold;
 }
+
+.user_profile .fixed-table-container table {
+  width: 99%;
+}
+
+/**
+  * Sharing hub browse page
+  */
+
+.browse_table .fixed-table-container table {
+  width: 99%;
+}
+
+/**
+  * About page
+  */
 
 .rslides {
   position: relative;
@@ -8371,8 +8391,8 @@ Quick add
 }
 
 /**
-  * Members page
-  **/
+ * Members page
+ **/
 
 #members .member_thumb img {
   border: none;

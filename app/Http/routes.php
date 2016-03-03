@@ -230,6 +230,11 @@ Route::get('browse', array(
   'uses' => 'CommunitiesController@getEntriesView')
 );
 
+Route::post('{entryId}/ajaxdelete', array(
+  'middleware' => 'auth',
+  'uses' => 'EntriesController@postAjaxDelete')
+);
+
 Route::get('members', array(
   'as' => 'members',
   'uses' => 'CommunitiesController@getMembers')
