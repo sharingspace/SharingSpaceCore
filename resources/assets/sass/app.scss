@@ -7795,6 +7795,10 @@ $color-green: #9AE14F;
   }
 }
 
+/**
+  * User profile page
+  */
+
 .user_profile {
   .thumbnail {
     padding:0;
@@ -7803,7 +7807,24 @@ $color-green: #9AE14F;
     font-size:larger;
     font-weight:bold;
   }
+
+  .fixed-table-container table {
+    width:99%; // seems to fix the annoying horizontal scroll bar on bootstrap datatables
+  }
 }
+
+/**
+  * Sharing hub browse page
+  */
+.browse_table {
+  .fixed-table-container table {
+    width:99%; // seems to fix the annoying horizontal scroll bar bootstrap datatables
+  }
+}
+
+/**
+  * About page
+  */
 
  .rslides {
     position: relative;
@@ -7872,9 +7893,9 @@ $color-green: #9AE14F;
       color: #fff;
   }
 
-  /**
-  * Members page
-  **/
+/**
+ * Members page
+ **/
 
 #members {
   .member_thumb {
