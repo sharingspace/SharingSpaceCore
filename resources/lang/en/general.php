@@ -16,6 +16,7 @@ return [
     'nav'  => [
           'browse' => 'Browse',
           'create' => 'Create',
+          'try_it' => 'Try it',
           'login' => 'Sign-In',
           'logout' => 'Logout',
           'register' => 'Sign-Up',
