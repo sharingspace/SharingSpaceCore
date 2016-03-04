@@ -12,7 +12,7 @@
 <!-- Profile -->
   <section class="padding-top-0">
   	<div class="container user_profile">
-     <h1 class="margin-bottom-0 size-24 text-center">About {{ $user->getDisplayName() }}</h1>
+     <h1 class="margin-bottom-0 size-24 text-center">{{ $user->getDisplayName() }}</h1>
   		<!-- LEFT -->
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-5">
