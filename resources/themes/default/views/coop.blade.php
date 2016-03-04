@@ -58,7 +58,7 @@
 <div class="callout callout-theme-color" style="margin-bottom-0;background-image: url('assets/img/backgrounds/london.jpg'); height:350px;background-position: 50% 0px;background-color: black;    background-size: contain;background-repeat: no-repeat;">
 </div>
 
-  <section id="features">
+  <section id="coop_features">
     <div class="container">
       <header class="text-center margin-bottom-40">
         <h2 style="font-size:46px;">Coop Features</h2>
@@ -72,7 +72,7 @@
           <div class="text-center">
             <i class="ico-color-grey ico-lg ico-rounded fa fa-comment"></i>
             <h3>Your Voice</h3>
-            <p class="font-lato size-20">Members can appoint directors and can propose and vote on resolutions for the direction of AnyShare.</p>
+            <p class="font-lato size-20">Members can appoint directors and can propose resolutions for the direction of AnyShare.</p>
           </div>
         </div>
        
@@ -80,7 +80,7 @@
           <div class="text-center">
             <i class="ico-color-grey ico-lg ico-rounded fa fa-credit-card"></i>
             <h3>Your Profit</h3>
-            <p class="font-lato size-20">Customers, Employees, Investors and Founders all get to share in the monetary value created by AnyShare.</p>
+            <p class="font-lato size-20">Customers, Employees, Investors and Founders all get to share in the profit. </p>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
@@ -93,8 +93,8 @@
 
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
           <div class="text-center">
-            <i class="ico-color-grey ico-lg ico-rounded fa fa-arrows "></i>
-            <h3>Vote on company direction</h3>
+            <i class="ico-color-grey ico-lg ico-rounded fa fa-check"></i>
+            <h3>Voting for all</h3>
             <p class="font-lato size-20">All stakeholders will be able to create and vote on resolutions 
             on the companies direction.</p>
           </div>
@@ -112,7 +112,7 @@
           <div class="text-center">
             <i class="ico-color-grey ico-lg ico-rounded fa fa-users"></i>
             <h3>Empower communities</h3>
-            <p class="font-lato size-20">Giving a voice in the direction of the business, empowers communities to steer 
+            <p class="font-lato size-20">Empowering communities to steer 
             the direction of the company in ways that best help them.</p>
           </div>
         </div>
@@ -136,8 +136,7 @@
           <div class="text-center">
             <i class="ico-color-grey ico-lg ico-rounded fa fa-heartbeat"></i>
             <h3>Make a difference</h3>
-            <p class="font-lato size-20">By contributing to a company that is equitable at it's core, you are being part of the solution 
-            to the wide spread inequality we see today.</p>
+            <p class="font-lato size-20">By contributing to a company that is equitable at it's core, you are part of the solution to wide spread inequality.</p>
           </div>
         </div>
 
@@ -149,53 +148,4 @@
   <!-- / -->
 
 
-<script>
-
-jQuery(document).ready(function ($) {
-
-  setInterval(function () {
-      moveRight();
-  }, 3000);
-  
-	var slideCount = $('#team_slider ul li').length;
-	var slideWidth = $('#team_slider ul li').width();
-	var slideHeight = $('#team_slider ul li').height();
-	var sliderUlWidth = slideCount * slideWidth;
-	
-	$('#team_slider').css({ width: slideWidth, height: slideHeight });
-	
-	$('#team_slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-	
-    $('#team_slider ul li:last-child').prependTo('#team_slider ul');
-
-    function moveLeft() {
-        $('#team_slider ul').animate({
-            left: + slideWidth
-        }, 200, function () {
-            $('#team_slider ul li:last-child').prependTo('#team_slider ul');
-            $('#team_slider ul').css('left', '');
-        });
-    };
-
-    function moveRight() {
-        $('#team_slider ul').animate({
-            left: - slideWidth
-        }, 200, function () {
-            $('#team_slider ul li:first-child').appendTo('#team_slider ul');
-            $('#team_slider ul').css('left', '');
-        });
-    };
-
-    $('a.control_prev').click(function (e) {
-    e.preventDefault();
-        moveLeft();
-    });
-
-    $('a.control_next').click(function (e) {
-      e.preventDefault();
-      moveRight();
-    });
-});
-
-</script>
 @stop
