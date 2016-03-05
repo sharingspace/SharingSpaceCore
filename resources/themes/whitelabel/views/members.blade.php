@@ -12,16 +12,16 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-10 col-md-12 col-lg-offset-1  col-sm-10 col-sm-offset-1 col-xs-12 margin-top-20">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
    			<table class="table table-condensed" id="members">
         	<thead>
             <tr>
               <th data-sortable="false"><span class='sr-only'>Image</span></th>
-              <th data-sortable="true">Name</th>
-              <th data-sortable="true">Location</th>
+              <th data-sortable="true" class="name">Name</th>
+              <th data-sortable="true" class="location">Location</th>
               <th data-sortable="false" class="bio">Bio</th>
-              <th data-sortable="true">Since</th>
+              <th data-sortable="true">Member since</th>
             </tr>
           </thead>
   				<tbody>
@@ -35,8 +35,8 @@
                 @endif
                 </td>
                 <td>{{$member->location}}</td>
-                <td>{{ substr_replace($member->bio, '&hellip;', 200) }}</td>
-                <td>{{date("m-Y", strtotime($member->created_at))}}</td>
+                <td>{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</td>
+                <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>
   					@endforeach
       		</tbody>
@@ -65,6 +65,9 @@ $(document).ready(function() {
       pagination: true,
       sortable: true,
       mobileResponsive: true,
+      formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' members';
+      },
        icons: {
           paginationSwitchDown: 'fa-caret-square-o-down',
           paginationSwitchUp: 'fa-caret-square-o-up',

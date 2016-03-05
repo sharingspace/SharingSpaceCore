@@ -7913,8 +7913,16 @@ $color-green: #9AE14F;
   }
 
   .bio {
-    width:50%;
-  }     
+    width:40%; 
+  }
+
+  .name {
+    width:15%;
+  }
+
+  .location {
+    width:20%;
+  }
 
   td {
     border-left:none;
