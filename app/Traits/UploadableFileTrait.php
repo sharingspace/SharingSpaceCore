@@ -51,11 +51,12 @@ trait UploadableFileTrait {
         try {
 
           if ($img = \Image::make($img_path)) {
-            $img->fit(self::$uploadableImgs[$layoutType]['width'],self::$uploadableImgs[$layoutType]['height']);
+            $img->resize(self::$uploadableImgs[$layoutType]['width'],self::$uploadableImgs[$layoutType]['height'],function ($constraint) {
+              $constraint->aspectRatio();
+            });
+
             $img->save($img_path,70);
           }
-          //return true;
-
         } catch (Exception $e) {
           Log::error("Exception caught in moveAndStore Trait, in resize section: ".$e->getMessage());
           echo 'Caught exception: ',  $e->getMessage(), "\n";
