@@ -8501,6 +8501,15 @@ Quick add
     clear: left;
   }
 }
+
+/**
+ * Settings page
+ * 
+ **/
+
+#privacy .checkbox label {
+  padding-left: 27px;
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

@@ -37,6 +37,7 @@ return [
           'qty' => 'QTY',
           'author' => 'Author',
           'posted_by' => 'Posted by',
+          'tags' => 'Keywords',
           'location' => 'Location',
           'created_at' => 'Created on',
 					'exchange_types' => 'Exchange Types',
