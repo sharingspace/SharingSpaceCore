@@ -19,6 +19,7 @@
             <th data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
             <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+            <th data-sortable="false" data-field="tags">{{ trans('general.entries.tags') }}</th>
             <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
           </tr>
       </thead>
@@ -34,6 +35,7 @@
 <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+
 <script type="text/javascript">
   $('#table').bootstrapTable({
     classes: 'table table-responsive table-no-bordered',
