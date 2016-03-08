@@ -230,8 +230,8 @@ class CommunitiesController extends Controller
       }
 
       $community->exchangeTypes()->sync(Input::get('exchange_types'));
-      return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success',trans('general.community.messages.save_edits'));
 
+      return redirect()->route('community.edit.form')->with('success',trans('general.community.messages.save_edits'));
   }
 
 
