@@ -6,23 +6,12 @@
 @parent
 @stop
 
-<style>
-#view img {
-	width: 100%;
-	max-width: 400px;
-	height: auto;
-	max-height: 100%;
-	display: block;
-	text-align: center;
-}
-</style>
-
 {{-- Page content --}}
 @section('content')
 
 <!-- -->
 <section>
-	<div id="view" class="container margin-top-20">
+	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
     	<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-10" style="object-fit:contain;">
 
@@ -78,21 +67,23 @@
       <!-- if user is admin or owner -->
       <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
         @if (Auth::check())
-          <div class="listing-actions" style="padding-top: 10px;"> <!--  (Auth::user()->user_id == $entry->user_id)) $user) && -->
+          <div class="listing-actions" style="padding-top: 10px;">
 
-           @if ((Auth::user()->is_admin) || (($entry->deleted_at=='') && ($entry->checkUserCanEditEntry(Auth::user()))   ))
+          {{ Form::open(array('route'=>array('entry.delete.save',$entry->id))) }}
+            {{ Form::token()}}
+            @if ((Auth::user()->is_admin) || (($entry->deleted_at=='') && ($entry->checkUserCanEditEntry(Auth::user()))   ))
 
-            <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Edit from Tile View">
-            <i class="fa fa-pencil"></i> Edit</a>
+              <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Edit from Tile View">
+              <i class="fa fa-pencil"></i> Edit</a>
 
-            @if ($entry->completed_at=='')
-              <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{{ strtoupper($entry->post_type) }}} as completed" data-mm-track-label="Mark as Completed from Tile View">
-                    <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
+              @if ($entry->completed_at=='')
+                <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{{ strtoupper($entry->post_type) }}} as completed" data-mm-track-label="Mark as Completed from Tile View">
+                <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
+              @endif
             @endif
+            {{ Form::button('<i class="fa fa-trash"></i> Delete', array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
+          {{ Form::close() }}
 
-              <a href="{{ route('entry.delete.save', $entry->id) }}" class="btn btn-xs btn-warning tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Delete this {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Delete from Tile View">
-                  <i class="fa fa-trash"></i> Delete</a>
-          @endif
         </div> <!-- listing-actions -->
         @endif <!-- endif user is admin or owner -->
       </div>  <!-- col-md-12 -->
