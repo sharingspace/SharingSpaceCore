@@ -45,6 +45,7 @@
 		Quick add
     Members
     Pricing
+    Entry View
 *****************************************************/
 
 /** Globals
@@ -8509,6 +8510,20 @@ Quick add
 
 #privacy .checkbox label {
   padding-left: 27px;
+}
+
+/**
+ * Entry view page
+ * 
+ **/
+
+#entry_view img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  text-align: center;
 }
 /** ************************************* **
 

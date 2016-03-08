@@ -53,6 +53,8 @@ return [
             'completed' => 'Completed! ',
             'save_edits' => 'Your entry has been updated!',
             'not_allowed' => 'You are not allowed to edit this entry.',
+            'deleted' => 'Your entry as been deleted',
+            'deleted_failed' => 'Something went wrong. Your entry could not be deleted',
 						'delete_not_allowed' => 'You are not allowed to delete this entry.',
             'save_new' => 'Your new entry has been created!',
             'save_failed' => 'Something went wrong. Your entry edits have not been saved',
