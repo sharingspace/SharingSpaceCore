@@ -153,8 +153,27 @@ class UserController extends Controller
       return redirect()->route('user.settings.view')->withInput()->with('error','Invalid user');
 
     }
+  
+  /*
+    * Save the user's updated privacy settings
+    *
+    */
+    public function postUpdatePrivacy()
+    {
+      return "postUpdatePrivacy() needs to be implemented and needs db updates";
+      if ($user = \App\User::find(Auth::user()->id)) {
 
+        if (!$user->save()) {
+           return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
+        }
 
+        return redirect()->route('user.settings.view')->with('success','Saved!');
+
+      }
+
+      // That user wasn't valid
+      return redirect()->route('user.settings.view')->withInput()->with('error','Invalid user');
+    }
 
 
     public function getProfile($id)

@@ -109,6 +109,12 @@ Route::post('account/password', array(
   'uses' => 'UserController@postUpdatePassword')
 );
 
+Route::post('account/privacy', array(
+  'middleware' => 'auth',
+  'as' => 'user.privacy.save',
+  'uses' => 'UserController@postUpdatePrivacy')
+);
+
 Route::post('account/social', array(
   'middleware' => 'auth',
   'as' => 'user.social.save',
