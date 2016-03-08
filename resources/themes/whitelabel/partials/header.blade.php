@@ -12,6 +12,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{{ route('user.profile', Auth::user()->id) }}"><i class="fa fa-user"></i> {{ trans('general.nav.profile') }}</a></li>
+                {{-- @if($members->is_admin) --}}
+                  <li>
+                    <a href="{{ route('community.edit.form')}}"><i class="fa fa-cogs"></i> This Hub</a>
+                  </li>
+                {{-- @endif // is admin --}}
                 <li><a href="{{ route('user.settings.view') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
                 <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
               </ul>
@@ -131,12 +136,7 @@
                       </button>
                     </a>
                   </li>
-                  <li>
-                    <a href="{{ route('community.edit.form')}}">
-                      <i class="fa fa-cogs"></i>
-                      {!! (Route::is('community.edit.form') ? '<span class="sr-only">(current)</span>' : '') !!}
-                    </a>
-                  </li>
+                  
                   <!-- SEARCH -->
     							<li class="search">
     								<a href="javascript:;">
