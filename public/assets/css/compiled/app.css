@@ -8433,6 +8433,63 @@ Quick add
   text-align: center;
   margin-bottom: 15px;
 }
+
+/**
+  * Coop page
+  **/
+
+#coop_features {
+  /*  This stop sthe features on the coop page from getting catch on
+      eachother if one happens to be very long */
+  /*  Tablet  */
+  /*  Medium Desktop  */
+  /*  Large Desktop  */
+}
+
+@media (min-width: 767px) {
+  #coop_features {
+    /* Column clear fix */
+  }
+
+  #coop_features .col-lg-4:nth-child(3n+1),
+  #coop_features .col-md-4:nth-child(3n+1) {
+    clear: none;
+  }
+
+  #coop_features .col-sm-6:nth-child(2n+1) {
+    clear: left;
+  }
+}
+
+@media (min-width: 992px) {
+  #coop_features {
+    /* Column clear fix */
+  }
+
+  #coop_features .col-lg-4:nth-child(3n+1),
+  #coop_features .col-sm-6:nth-child(2n+1) {
+    clear: none;
+  }
+
+  #coop_features .col-md-4:nth-child(3n+1) {
+    clear: left;
+  }
+}
+
+@media (min-width: 1200px) {
+  #coop_features {
+    /* Column clear fix */
+  }
+
+  #coop_features .col-md-4:nth-child(3n+1),
+  #coop_features .col-sm-6:nth-child(2n+1) {
+    clear: none;
+  }
+
+  #coop_features .col-lg-4:nth-child(3n+1) {
+    clear: left;
+  }
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

@@ -7919,7 +7919,7 @@ $color-green: #9AE14F;
   }
 }
 
-  /**
+/**
   * Pricing page
   **/
 
@@ -7939,4 +7939,55 @@ $color-green: #9AE14F;
   }
 }
 
+/**
+  * Coop page
+  **/
+//<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10 pull-left">
 
+#coop_features {
+
+  /*  This stop sthe features on the coop page from getting catch on
+      eachother if one happens to be very long */
+
+  /*  Tablet  */
+  @media (min-width:767px) {
+
+    /* Column clear fix */
+    .col-lg-4:nth-child(3n+1),
+    .col-md-4:nth-child(3n+1) {
+      clear: none;
+    }
+    
+    .col-sm-6:nth-child(2n+1) {
+      clear: left;
+    }
+  }
+
+  /*  Medium Desktop  */
+  @media (min-width:992px) {
+
+    /* Column clear fix */
+    .col-lg-4:nth-child(3n+1),
+    .col-sm-6:nth-child(2n+1) {
+      clear: none;
+    }
+
+    .col-md-4:nth-child(3n+1) {
+      clear: left;
+    }
+  }
+
+  /*  Large Desktop  */
+  @media (min-width:1200px) {
+
+    /* Column clear fix */
+    .col-md-4:nth-child(3n+1),
+    .col-sm-6:nth-child(2n+1) {
+      clear: none;
+    }
+
+    .col-lg-4:nth-child(3n+1) {
+      clear: left;
+    }
+  }
+}
