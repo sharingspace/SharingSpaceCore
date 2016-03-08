@@ -7802,6 +7802,9 @@ $color-green: #9AE14F;
 .user_profile {
   .thumbnail {
     padding:0;
+    width:200px;
+    max-height:300px;
+    border:none;
   }
   .my_exchanges {
     font-size:larger;
@@ -7942,7 +7945,6 @@ $color-green: #9AE14F;
 /**
   * Coop page
   **/
-//<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10 pull-left">
 
 #coop_features {
 
