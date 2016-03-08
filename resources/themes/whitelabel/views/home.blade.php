@@ -58,12 +58,10 @@
 </section>
 <!-- /INFO BAR -->
 
-
-  <div class="col-md-12 margin-top-20">
-    <!-- Notifications -->
-    @include('notifications')
-  </div>
-
+<div class="col-md-12 margin-top-20">
+  <!-- Notifications -->
+  @include('notifications')
+</div>
 
 @if ($whitelabel_group->about!='')
 <section class="container padding-none">
@@ -76,101 +74,97 @@
 @endif
 
 <!-- -->
-			<section>
-				<div class="container">
+<section>
+	<div class="container">
 
-					<ul id="portfolio_filter" class="nav nav-pills margin-bottom-60">
+		<ul id="portfolio_filter" class="nav nav-pills margin-bottom-60">
 
-            <li class="filter active">
-              <a data-filter="*" href="#">All</a>
-            </li>
-            @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-              <li class="filter">
-                <a data-filter=".{{ Str::slug(strtolower($exchange_types->name)) }}" href="#">{{ $exchange_types->name }}</a>
-              </li>
-            @endforeach
+      <li class="filter active">
+        <a data-filter="*" href="#">All</a>
+      </li>
+      @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+        <li class="filter">
+          <a data-filter=".{{ Str::slug(strtolower($exchange_types->name)) }}" href="#">{{ $exchange_types->name }}</a>
+        </li>
+      @endforeach
 
-					</ul>
+		</ul>
 
-					<div id="portfolio" class="clearfix portfolio-isotope portfolio-isotope-5">
+		<div id="portfolio" class="clearfix portfolio-isotope portfolio-isotope-5">
 
-            @foreach ($entries as $entry)
-            <div class="portfolio-item
-            @if (count($entry->exchangeTypes) > 0)
-              @foreach ($entry->exchangeTypes as $entry_exchange_types)
-                {{ Str::slug(strtolower($entry_exchange_types->name)) }}
-              @endforeach
-            @endif
-            ">
-            <!-- item -->
+      @foreach ($entries as $entry)
+        <div class="portfolio-item
+        @if (count($entry->exchangeTypes) > 0)
+          @foreach ($entry->exchangeTypes as $entry_exchange_types)
+            {{ Str::slug(strtolower($entry_exchange_types->name)) }}
+          @endforeach
+        @endif
+        ">
+      <!-- item -->
 
-							<div class="item-box" style="border: solid 1px #ccc;box-shadow:1px 1px 3px 0 #f2f2f2 padding:5px;">
-                @if ($entry->media->count() > 0)
-  								<figure style="min-height:100px;">
-  									<span class="item-hover">
-  										<span class="overlay dark-5"></span>
-  										<span class="inner">
-                        <h2 style="color: white;">{{ ucwords($entry->title) }}</h2>
-                        <br><br>
-  											<a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
-  												<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-  											</a>
-  										</span>
-  									</span>
-                 
-                    @foreach ($entry->media as $media)
-                     <div class="entry_browse">
+				<div class="item-box" style="border: solid 1px #ccc;box-shadow:1px 1px 3px 0 #f2f2f2 padding:5px;">
+          @if ($entry->media->count() > 0)
+						<figure style="min-height:100px;">
+							<span class="item-hover">
+								<span class="overlay dark-5"></span>
+								<span class="inner">
+                  <h2 style="color: white;">{{ ucwords($entry->title) }}</h2>
+                  <br><br>
+									<a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
+										<span class="glyphicon glyphicon-option-horizontal size-20"></span>
+									</a>
+								</span>
+							</span>
+           
+              @foreach ($entry->media as $media)
+               <div class="entry_browse">
 
-                      <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="" style="margin-bottom:14px;">
-                     
-                      <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
-                      <br>  
-                      @if ( 0 && count($entry->exchangeTypes) > 0)
-                        @foreach ($entry->exchangeTypes as $entry_exchange_types)
-                          {{ Str::slug(strtolower($entry_exchange_types->name)).", "}}
-                        @endforeach
-                      @endif
-                      @if(0 && $entry->location)
-                        <br><span style="color:black;">{{"(".strtolower('Oakland, California').")"}}</span>
-                      @endif
-                    </div>
-                      
-                    @endforeach
+                <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="" style="margin-bottom:14px;">
+               
+                <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                <br>  
+                @if ( count($entry->exchangeTypes) > 0)
+                  {{--*/ $exchanges = ''; /*--}}
+                  @foreach ($entry->exchangeTypes as $entry_exchange_types)
+                    {{--*/ $exchanges .= strtolower($entry_exchange_types->name) .", "; /*--}}
+                  @endforeach
+                  {{ rtrim($exchanges, ', ')}}
+                @endif
+              </div>
+              @endforeach {{-- media --}} 
+            </figure>
+          @else
+            <figure style="min-height:100px;display:table;">
+              <span style="display:table-cell;vertical-align:middle;">
+                <span class="item-hover ">
+                  <span class="inner" style="top:0;display:table-cell;
+   vertical-align:middle;">
+                    <h2 style="color: white;margin-top:20px;">{{ ucwords($entry->title) }}</h2>
+                    <br>
+                    <a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
+                      <span class="glyphicon glyphicon-option-horizontal size-20"></span>
+                    </a>
+                  </span>
+                </span>
 
-                  @else
-                    <figure style="min-height:100px;background-color:#F1F1F1;">
-                      <span class="item-hover">
-                        <span class="overlay dark-5"></span>
-                        <span class="inner" style="top:0;">
-                          <h2 style="color: white;margin-top:20px;">{{ ucwords($entry->title) }}</h2>
-                          <br>
-                          <a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
-                            <span class="glyphicon glyphicon-option-horizontal size-20"></span>
-                          </a>
-                        </span>
-                      </span>
+                <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                <br>  
+                @if ( count($entry->exchangeTypes) > 0)
+                  {{--*/ $exchanges = ''; /*--}}
+                  @foreach ($entry->exchangeTypes as $entry_exchange_types)
+                    {{--*/ $exchanges .= strtolower($entry_exchange_types->name) .", "; /*--}}
+                  @endforeach
+                  {{ rtrim($exchanges, ', ')}}
+                @endif {{-- exchange types --}}
+                </span>
+              </figure>
+            @endif {{-- media ? --}} 
+ 				</div> <!-- item -->
+			 </div> <!-- portfolio-item -->
+      @endforeach {{-- entry loop --}}
 
-                     <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;position:absolutte;top:40%;left:0;right:0;vertical-align:middle; ">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
-                    <br>  
-                      @if ( 0 &&count($entry->exchangeTypes) > 0)
-                        @foreach ($entry->exchangeTypes as $entry_exchange_types)
-                          {{ Str::slug(strtolower($entry_exchange_types->name)).", "}}
-                        @endforeach
-                      @endif
-                      @if(0 &&$entry->location)
-                        <br><span style="color:black;">{{"(".strtolower('Oakland, California').")"}}</span>
-                      @endif
-                  @endif
-
-								</figure>
-							</div>
-
-						</div><!-- /item -->
-            @endforeach
-
-					</div>
-
-				</div>
-			</section>
-			<!-- / -->
+		</div>
+	</div>
+</section>
+<!-- / -->
 @stop

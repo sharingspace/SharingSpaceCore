@@ -14,12 +14,12 @@
     data-cookie-id-table="communityListingv1">
       <thead>
           <tr>
-              <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
-              <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
-              <th data-sortable="true" data-field="author">{{ trans('general.entries.author') }}</th>
-              <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
-              <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-              <th data-sortable="false" data-field="actions"></th>
+            <th data-sortable="true" data-field="post_type"><span class="sr-onlyy">{{ trans('general.entries.post_type') }}</span></th>
+            <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+            <th data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
+            <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
+            <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+            <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
           </tr>
       </thead>
     </table>
@@ -57,18 +57,19 @@
     paginationPreText: "@lang('pagination.previous')",
     paginationNextText: "@lang('pagination.next')",
     pageList: ['10','25','50','100','150','200'],
+    formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
+      },
     icons: {
         paginationSwitchDown: 'fa-caret-square-o-down',
         paginationSwitchUp: 'fa-caret-square-o-up',
         columns: 'fa-columns',
         refresh: 'fa-refresh'
     },
-
   });
 
 $( document ).ready(function() {
   // we off screen the table headers as they are obvious. 
-  $('table th').addClass('sr-only');
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];
     

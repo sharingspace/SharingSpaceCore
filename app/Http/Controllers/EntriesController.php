@@ -380,7 +380,7 @@ class EntriesController extends Controller
   public function getEntriesDataView(Request $request, $user_id=null)
   {
     if ($user_id) {
-      $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id)->NotCompleted();
+      $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id)->get();
     }
     else {
       $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
