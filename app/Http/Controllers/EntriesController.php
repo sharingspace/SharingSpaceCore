@@ -426,24 +426,20 @@ class EntriesController extends Controller
     }
 
     foreach ($entries as $entry) {
-
-      $actions = '';
-   //        $actions = '<a href="'.route('entry.edit.form', $entry->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a><a href="'.route('entry.delete.ajax.save', $entry->id).'" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>';
-
-        if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
-            $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
-        } else {
-            $actions = '';
-        }
-
+      if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
+          $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
+      } else {
+          $actions = '';
+      }
 
       $rows[] = array(
         'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
         'post_type' => strtoupper($entry->post_type),
         'author' => '<a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
         'location' => $entry->location,
-        'created_at' => $entry->created_at->format('M d, Y'), // removed hour and minutes to see how it looks, may re-add it after feedback (g:iA'),
+        'created_at' => $entry->created_at->format('M jS, Y'),
         'actions' => $actions,
+        'tags' => $entry->tags
       );
     }
 
