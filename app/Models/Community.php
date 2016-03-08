@@ -48,8 +48,8 @@ class Community extends Model
         ],
       'community-logos' =>
         [
-          'height' => '100',
-          'width' => '100',
+          'height' => '40',
+          'width' => '250',
         ],
       'community-profiles' =>
         [
