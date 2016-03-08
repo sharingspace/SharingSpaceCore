@@ -8407,7 +8407,15 @@ Quick add
 }
 
 #members .bio {
-  width: 50%;
+  width: 40%;
+}
+
+#members .name {
+  width: 15%;
+}
+
+#members .location {
+  width: 20%;
 }
 
 #members td {
