@@ -153,7 +153,7 @@
                       </div> <!-- col 10 -->
 
                       <div class="col-md-2 col-sm-2 col-xs-2 ">
-                        <button class="btn btn-warning  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">Create</button>
+                        <button class="btn btn-warning  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd"><i class="fa fa-plus"></i></button>
                       </div> <!-- col 2 -->
                     </div> <!-- row -->
                   </div> <!-- col 9 -->

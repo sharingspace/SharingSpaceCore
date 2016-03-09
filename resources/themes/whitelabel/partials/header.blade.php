@@ -133,7 +133,7 @@
                   <li>
                     <a href="{{ route('entry.create.form') }}">
                       <button type="button" class="btn btn-sm btn-warning">
-                        {{ trans('general.nav.create') }}
+                        <i class="fa fa-plus"></i>
                       </button>
                     </a>
                   </li>
