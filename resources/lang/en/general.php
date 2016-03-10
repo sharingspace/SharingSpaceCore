@@ -72,11 +72,11 @@ return [
     ],
 
     'community'  => [
-      'community'  => 'Community',
-      'settings'  => 'Community Settings',
+      'community'  => 'Sharing Hub',
+      'settings'  => 'Sharing Hub Settings',
       'members'  => 'Member|Members',
-      'save' => 'Save Community',
-      'save_success' => 'Welcome to your new Community! Get started adding entries now.',
+      'save' => 'Save',
+      'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
 
         'exchange_types' => [
           'title' => 'Exchange Type|Exchange Types',
@@ -84,22 +84,22 @@ return [
         ],
 
         'open'  => [
-          'title'  => 'Open Community',
+          'title'  => 'Open Sharing Hub',
           'text'  => 'Anyone can join',
         ],
         'closed'  => [
-          'title'  => 'Closed Community',
+          'title'  => 'Closed Sharing Hub',
           'text'  => 'Invite-only to post',
         ],
         'secret'  => [
-          'title'  => 'Secret Community',
+          'title'  => 'Secret Sharing Hub',
           'text'  => 'Only members can view',
         ],
 
         'messages' => [
-          'save_edits' => 'Your community settings have been saved!',
-          'save_new' => 'Your new community has been created!',
-          'save_failed' => 'Something went wrong. Your community settings have not been saved',
+          'save_edits' => 'Your sharing hub settings have been saved!',
+          'save_new' => 'Your new sharing hub has been created!',
+          'save_failed' => 'Something went wrong. Your sharing hub settings have not been saved',
         ],
 
     ],
