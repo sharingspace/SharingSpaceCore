@@ -8,7 +8,6 @@
     <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px;">{{trans('pricing.headline') }}</h1>
   </div>
 </section>
-
   <section id="pricing">
     <div class="container">
       <div class="table-responsive">
@@ -36,6 +35,12 @@
         </table>
         <p class="small"><i class="fa fa-asterisk"></i> All fees in US dollars</p>
       </div> 
+
+      <dl>
+        <dt>Q. I can’t afford AnyShare right now. Can I still use it?</dt>
+        <dd>A. We don’t want to stop groups that don’t have the budget to pay, from using AnyShare.<br>If this applies to you, you can apply to receive AnyShare for free. <strong>Apply Now</strong></dd>
+      </dl>
+
     </div>
   </section>
   <!-- / -->

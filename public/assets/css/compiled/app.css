@@ -46,6 +46,7 @@
     Members
     Pricing
     Entry View
+    Footer
 *****************************************************/
 
 /** Globals
@@ -8069,13 +8070,6 @@ section#about p {
 }
 
 #coop h2,
-#coop p,
-#pricing h2,
-#pricing p {
-  color: #fff;
-}
-
-#coop h2,
 #pricing h2 {
   font-size: 32px;
 }
@@ -8524,6 +8518,21 @@ Quick add
   max-height: 100%;
   display: block;
   text-align: center;
+}
+
+/**
+ * Footer region
+ * 
+ **/
+
+#footer {
+  background-color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#footer .socials {
+  margin-top: -7px;
 }
 /** ************************************* **
 
@@ -29569,7 +29578,7 @@ i.ico-color-lightblue {
   color: #AFDBDB;
   border: transparent;
   background-color: #fff;
-  border: 2px solid #bbb;
+  border: 2px solid #eee;
 }
 
 i.ico-color-lightblue:hover {

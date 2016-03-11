@@ -47,6 +47,7 @@
     Members
     Pricing
     Entry View
+    Footer
 *****************************************************/
 
 /** Globals
@@ -7554,9 +7555,6 @@ section {
 }
 
 #coop, #pricing {
-	h2, p {
-		color:#fff;
-	}
 	h2 {
 		font-size:32px;
 	}
@@ -8028,3 +8026,17 @@ $color-green: #9AE14F;
   display: block;
   text-align: center;
 }
+
+/**
+ * Footer region
+ * 
+ **/
+
+ #footer {
+  background-color:black;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  .socials {
+    margin-top:-7px;
+  }
+ }
