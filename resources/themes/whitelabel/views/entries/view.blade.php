@@ -61,7 +61,11 @@
             </div>
           @endif
 
-
+          @if($entry->tags)
+            <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
+              <strong>Keywords:</strong> {{ $entry->tags }}
+            </div>
+          @endif
 
 
       <!-- if user is admin or owner -->
