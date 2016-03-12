@@ -9,8 +9,7 @@
 
 {{-- Page content --}}
 @section('content')
-
-
+<h1 class="sr-only">{{ trans('general.community.settings') }} :: {{ $whitelabel_group->name }}</h1>
 
 <section class="container">
 

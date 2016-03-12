@@ -8019,13 +8019,29 @@ $color-green: #9AE14F;
  * 
  **/
 
- #entry_view img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  max-height: 100%;
-  display: block;
-  text-align: center;
+ #entry_view {
+   img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    max-height: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+
+#edit_entry {  
+  .fancy-form-select:before {
+    right: 17px;
+  }
+
+  .fancy-form > .fancy-arrow {
+    left: 115px;
+  }
+
+  .checkbox {
+    display: block;
+  }
 }
 
 /**

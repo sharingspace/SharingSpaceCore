@@ -9,33 +9,16 @@
 
 {{-- Page content --}}
 @section('content')
+<h1 class="sr-only">{{ trans('general.entries.edit') }}</h1>
 
-<style>
-.fancy-form-select:before {
-  right: 17px;
-}
-
-.fancy-form > .fancy-arrow {
-  left: 115px;
-}
-
-.checkbox {
-  display: block;
-}
-
-
-</style>
 <!-- -->
 			<section>
 
-				<div id="add_tile_wrapper" class="container margin-top-20">
+				<div id="edit_entry" class="container margin-top-20">
 					<div class="row">
 						<!-- Entry -->
-						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 margin-top-20">
 							<div class="row">
-
-                <h1 class="size-16 uppercase">{{ trans('general.entries.edit') }}</h1>
-
                 <!-- entry form -->
 
                 <form method="post" action="{{ route('entry.edit.save', $entry->id) }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">

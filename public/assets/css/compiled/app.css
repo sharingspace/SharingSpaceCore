@@ -8521,6 +8521,18 @@ Quick add
   text-align: center;
 }
 
+#edit_entry .fancy-form-select:before {
+  right: 17px;
+}
+
+#edit_entry .fancy-form > .fancy-arrow {
+  left: 115px;
+}
+
+#edit_entry .checkbox {
+  display: block;
+}
+
 /**
  * Footer region
  * 
