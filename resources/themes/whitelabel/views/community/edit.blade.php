@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.community.settings') }} ::
+  {{ trans('general.community.settings') }} ::
 @parent
 @stop
 
@@ -36,7 +36,6 @@
 
               <!-- community form -->
               <div class="row">
-
                 <div class="col-md-8 col-sm-8 col-xs-8">
                   <fieldset class="nomargin">
                     <div class="form-group{{ $errors->first('name', ' has-error') }}">
@@ -63,7 +62,7 @@
                   <!-- Welcome text -->
                   <div class="form-group {{ $errors->first('welcome_text', 'has-error') }}">
                     <label class="input">Welcome appears on your home page
-                      <textarea name="welcome_text" rows="4" class="form-control" data-maxlength="200" id="welcome_text" data-info="textarea-words-info" placeholder="Welcome text...">{{ Input::old('slack_endpoint', $community->welcome_text) }}</textarea>
+                      <textarea name="welcome_text" rows="4" class="form-control" data-maxlength="200" id="welcome_text" data-info="textarea-words-info" placeholder="Welcome text...">{{ Input::old('welcome_text', $community->welcome_text) }}</textarea>
                     </label>
                   </div> <!-- Welcome text -->
 
@@ -123,40 +122,58 @@
 
             <!-- IMAGES TAB -->
             <div class="tab-pane fade" id="hub_images">
-              <!-- Cover upload -->
-              <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                <label for="cover_img">Cover image</label>
-                <div class="fancy-file-upload fancy-file-info">
-                  <i class="fa fa-picture-o"></i>
-                  <input type="file" class="form-control" name="cover_img" onchange="jQuery(this).next('input').val(this.value);" />
-                  <input type="text" class="form-control" placeholder="Cover image upload - no file selected" readonly="" />
-                  <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+             <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- Cover upload -->
+                <div class="form-group {{ $errors->first('file', 'has-error') }}">
+                  <label for="cover_img">Cover image</label>
+                  <div class="fancy-file-upload fancy-file-info">
+                    <i class="fa fa-picture-o"></i>
+                    <input type="file" class="form-control" name="cover_img" onchange="jQuery(this).next('input').val(this.value);" />
+                    <input type="text" class="form-control" placeholder="Cover image upload - no file selected" readonly="" />
+                    <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                  </div>
+                  <p>Tip: best image size is 1300 x 300px (short &amp; wide image)</p>
                 </div>
-                <p>Tip: Short, wide images look better here</p>
+              </div>
+              <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-30" >
+                <img src="{{ $whitelabel_group->getCover() }}" style=" width: 100%;height: 100%;object-fit:cover;overflow: hidden;">
               </div>
 
-              <!-- Avatar upload -->
-              <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                <label for="cover_img">Profile image (not sure where this is used?</label>
-                <div class="fancy-file-upload fancy-file-info">
-                  <i class="fa fa-picture-o"></i>
-                  <input type="file" class="form-control" name="profile_img" onchange="jQuery(this).next('input').val(this.value);" />
-                  <input type="text" class="form-control" placeholder="Avatar upload - no file selected" readonly="" />
-                  <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- Avatar upload -->
+                <div class="form-group {{ $errors->first('file', 'has-error') }}">
+                  <label for="cover_img">Profile image (not sure where this is used?)</label>
+                  <div class="fancy-file-upload fancy-file-info">
+                    <i class="fa fa-picture-o"></i>
+                    <input type="file" class="form-control" name="profile_img" onchange="jQuery(this).next('input').val(this.value);" />
+                    <input type="text" class="form-control" placeholder="Avatar upload - no file selected" readonly="" />
+                    <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                  </div>
                 </div>
               </div>
 
               <!-- Logo upload -->
-              <div class="form-group {{ $errors->first('file', 'has-error') }}">
-              <label for="cover_img">Logo image</label>
-                <div class="fancy-file-upload fancy-file-info">
-                  <i class="fa fa-picture-o"></i>
-                  <input type="file" class="form-control" name="logo" onchange="jQuery(this).next('input').val(this.value);" />
-                  <input type="text" class="form-control" placeholder="Logo upload - no file selected" readonly="" />
-                  <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group {{ $errors->first('file', 'has-error') }}">
+                <label for="cover_img">Logo image</label>
+                  <div class="fancy-file-upload fancy-file-info">
+                    <i class="fa fa-picture-o"></i>
+                    <input type="file" class="form-control" name="logo" onchange="jQuery(this).next('input').val(this.value);" />
+                    <input type="text" class="form-control" placeholder="Logo upload - no file selected" readonly="" />
+                    <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                  </div>
+                  <p>Tip: best image size is 250 x 40px (short &amp; wide image)</p>
                 </div>
-                <p>Tip: Square images look best here</p>
               </div>
+              <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10" style="background-color:#fff;height:60px">
+                <div class="col-md-4 col-md-offset-4" style="position:absolute;top:35%;">
+                  <img src="{{ $whitelabel_group->getLogo() }}" style=" width: 100%;height: 100%;object-fit:cover;overflow: hidden;background-color:white">
+                </div>
+              </div>
+              </div> <!-- row -->
             </div> <!-- IMAGES TAB -->
 
 
@@ -175,21 +192,21 @@
                 <!-- Slack endpoint -->
                 <div class="form-group{{ $errors->first('slack_endpoint', ' has-error') }}">
                   <label for="slack_endpoint">Slack endpoint</label>
-                  <input type="text" name="slack_endpoint" class="form-control" placeholder="Slack endpoint" required="" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
+                  <input type="text" name="slack_endpoint" class="form-control" placeholder="Slack endpoint" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
                   {!! $errors->first('slack_endpoint', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack endpoint -->
 
                 <!-- Slack botname -->
                 <div class="form-group{{ $errors->first('slack_botname', ' has-error') }}">
                   <label for="slack_botname">Slack bot name</label>
-                  <input type="text" name="slack_botname" class="form-control" placeholder="Slack botname" required="" value="{{ Input::old('slack_botname', $community->slack_botname) }}">
+                  <input type="text" name="slack_botname" class="form-control" placeholder="Slack botname" value="{{ Input::old('slack_botname', $community->slack_botname) }}">
                   {!! $errors->first('slack_botname', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack botname -->
 
                 <!-- Slack channel -->
                 <div class="form-group{{ $errors->first('slack_channel', ' has-error') }}">
                   <label for="slack_channel">Slack channel name</label>
-                  <input type="text" name="slack_channel" class="form-control" placeholder="Slack channel" required="" value="{{ Input::old('slack_channel', $community->slack_channel) }}">
+                  <input type="text" name="slack_channel" class="form-control" placeholder="Slack channel" value="{{ Input::old('slack_channel', $community->slack_channel) }}">
                   {!! $errors->first('slack_channel', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack channel -->
               </fieldset>
