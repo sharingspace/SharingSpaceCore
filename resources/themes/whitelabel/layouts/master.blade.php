@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/compiled/bootstrap-social.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/compiled/app.css?v='.date('U') ) }}">
     <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-tagsinput.css')}}">
 
     <!-- PAGE LEVEL SCRIPTS -->
 		<link href="{{ asset('assets/css/header-1.css') }}" rel="stylesheet" type="text/css" />
@@ -37,6 +38,8 @@
 
     <!-- jQuery 2.1.3-->
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="{{ asset('assets/js/extensions/tagsinput/bootstrap-tagsinput.js')}}"></script>
+
 
     <!-- Bootstrap 3 Javascript is pulled in through the scripts.js file - no need to include it here -->
     <link rel="shortcut icon" href="/favicon.ico">

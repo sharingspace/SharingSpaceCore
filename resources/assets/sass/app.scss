@@ -48,6 +48,7 @@
     Pricing
     Entry View
     Footer
+    Tagsinput
 *****************************************************/
 
 /** Globals
@@ -8040,3 +8041,12 @@ $color-green: #9AE14F;
     margin-top:-7px;
   }
  }
+
+/**
+ * Bootstraps tags input
+ *
+ **/
+
+.bootstrap-tagsinput, .bootstrap-tagsinput input {
+  width: 100% !important;
+}

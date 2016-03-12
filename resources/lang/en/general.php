@@ -41,11 +41,12 @@ return [
           'location' => 'Location',
           'created_at' => 'Created on',
 					'exchange_types' => 'Exchange Types',
+          'keywords' => 'Keywords',
           'actions' => 'Actions',
           'view' => 'View Entry',
           'create' => 'Create',
 					'create_subheadline' => 'What do you want or have? Press "Enter" to make an new entry',
-
+          'save' => 'Save',
           'edit' => 'Edit Entry',
 
           'messages' => [
