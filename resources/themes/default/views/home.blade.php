@@ -122,7 +122,7 @@
 
   		
   		<!-- BUTTON CALLOUT -->
-      <div class="callout callout-dark margin-bottom-0 text-center" style="background-color:#AFDBDB;">
+      <div class="callout margin-bottom-0 text-center" style="background-color:#AFDBDB;">
         <div class="container">
           <div class="row text-center">
             <div class="col-lg-8 col-md-8 col-sm-8 col-md-offset-2">
@@ -130,7 +130,7 @@
                 <h2 style="font-weight:800;">Explore more</h2>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><!-- left text -->
-                  <a href="coop" class="btn btn-success btn-lg margin-right-20">The Cooperative</a> <a href="pricing" class="btn btn-success btn-lg">See Pricing</a>
+                  <a href="coop" class="btn btn-default btn-lg margin-right-20">The Cooperative</a> <a href="pricing" class="btn btn-default btn-lg">See Pricing</a>
                 </div> <!-- col 12 -->
                 
               </div> <!-- row -->
