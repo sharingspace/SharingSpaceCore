@@ -81,7 +81,7 @@
         <p>{{trans('privacy.changes.p1') }}</p>
 
         <h3>{{trans('privacy.contact.title') }}</h3>
-        <p>{{trans('privacy.contact.p1') }} <a href="mailto:info@massmosaic.com">info@anysha.re</a></p>
+        <p>{{trans('privacy.contact.p1') }} <a href="mailto:info@anysha.re">info@anysha.re</a></p>
       </div>
     </div>
   </div>
