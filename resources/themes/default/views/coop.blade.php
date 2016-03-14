@@ -2,8 +2,8 @@
 @section('content')
 
 <section class="padding-top-0">
-  <div class='page_banner coop_banner'>
-    <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px;">{{ trans('coop.coop_headline') }}</h1>
+  <div class="page_banner sharing_fixed_banner">
+    <h1 class="sr-only">{{ trans('coop.coop_headline') }}</h1>
   </div>
 </section>
 
