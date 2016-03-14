@@ -79,8 +79,26 @@ return [
       'settings'  => 'Sharing Hub Settings',
       'members'  => 'Member|Members',
       'save' => 'Save',
+      'create' => 'CREATE A SHARING HUB ON ANYSHA.RE',
+      'name_placeholder' => 'My Awesome Sharing Hub',
+      'name' => 'Sharing Hub Name',
+      'subdomain' => 'Subdomain',
+      'subdomain_placeholder' => 'awesome.anysha.re',
+      'p1' => 'You will not be charged until your free trial ends on',
+      'p2' => 'No commitments, cancel online at any time',
       'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
-
+      'type' => 'Select Sharing Hub Type',
+      'payment_info' => 'Payment Information',
+      'monthly' => 'Monthly',
+      'month' => 'Month',
+      'year' => 'Year',
+      'annual' => 'Annual',
+      'card_num' => 'Card Number',
+      'cvc' => 'CVC',
+      'coupon' => 'Coupon',
+      'coupon_code' => 'Coupon Code',
+      'wrong' => 'Something went wrong :(',
+      'sub_type' => 'Subscription Type',
         'exchange_types' => [
           'title' => 'Exchange Type|Exchange Types',
           'all_allowed' => 'All exchange types welcome',
@@ -89,14 +107,17 @@ return [
         'open'  => [
           'title'  => 'Open Sharing Hub',
           'text'  => 'Anyone can join',
+          'type' => 'Open'
         ],
         'closed'  => [
           'title'  => 'Closed Sharing Hub',
           'text'  => 'Invite-only to post',
+          'type' => 'Closed'
         ],
         'secret'  => [
           'title'  => 'Secret Sharing Hub',
           'text'  => 'Only members can view',
+          'type' => 'Secret'
         ],
 
         'messages' => [

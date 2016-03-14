@@ -23,10 +23,12 @@
               {!! csrf_field() !!}
 
             <div class="col-md-12">
-              <h2 class="size-16">CREATE A COMMUNITY ON ANYSHA.RE</h2>
-              <p class="text-muted">Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+              <h1 class="size-16">{{trans('general.community.create')}}</h1>
+              <ul class="text-muted">
+                <li>{{trans('general.community.p1')}} {{date('jS F, Y', strtotime("+30 days"))}}</li>
+                <li>{{trans('general.community.p2')}}</li>
+              </ul>
             </div>
-
 
 						<!-- LEFT TEXT -->
 						<div class="col-md-6">
@@ -35,23 +37,22 @@
 
 							<!-- Name -->
 							<div class="form-group{{ $errors->first('name', ' has-error') }}">
-								<label for="name"> Community Name *</label>
-                  <input type="text" name="name" class="form-control" placeholder="My Awesome Community" required="" value="{{ old('name') }}">
+								<label for="name">{{trans('general.community.name')}} *</label>
+                  <input type="text" name="name" class="form-control" placeholder="{{trans('general.community.name_placeholder')}}" required="" value="{{ old('name') }}">
 
                 {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
 							</div>
 
               <!-- Slug -->
 							<div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
-                <label for="subdomain">Subdomain *</label>
-								  <input type="text" name="subdomain" class="form-control" placeholder="awesome.anysha.re" required="" value="{{ old('subdomain') }}">
+                <label for="subdomain">{{trans('general.community.subdomain')}} *</label>
+								  <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain_placeholder')}}" required="" value="{{ old('subdomain') }}">
                 {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
 							</div>
 
               <!-- Type -->
               <div class="form-group{{ $errors->first('group_type', ' has-error') }}">
-                <label for="group_type">
-                  Community Type *</label>
+                <label for="group_type">{{trans('general.community.type')}} *</label>
                   {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
                   {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
               </div>
@@ -60,14 +61,14 @@
 
 						<!-- PAYMENT -->
 						<div class="col-md-5">
-              <h2 class="size-16 uppercase">Payment Information</h2>
+              <h2 class="size-16 uppercase">{{trans('general.community.payment_info')}}</h2>
 
                 <!-- Subscription -->
                 <div class="form-group col-md-12 col-sm-12">
-                   <label for="cvc">Subscription Type *</label>
+                   <label for="cvc">{{trans('general.community.sub_type')}} *</label>
                     <select class="form-control" name="subscription_type">
-                        <option value="MONTHLY-HUB-SUBSCRIPTION">Monthly ($1/month)</option>
-                        <option value="ANNUAL-HUB-SUBSCRIPTION">Annual ($12/year)</option>
+                        <option value="MONTHLY-HUB-SUBSCRIPTION">{{trans('general.community.monthly')}} ($1/{{trans('general.community.month')}})</option>
+                        <option value="ANNUAL-HUB-SUBSCRIPTION">{{trans('general.community.annual')}} ($12/{{trans('general.community.year')}})</option>
                     </select>
                 </div>
 
@@ -77,7 +78,7 @@
                 </div>
 
               		<div class="form-group col-md-12 col-sm-12" id="form-card-number">
-              			<label for="card-number">Card Number *
+              			<label for="card-number">{{trans('general.community.card_num')}} *
                       <i class="fa fa-cc-visa help-text"></i>
                       <i class="fa fa-cc-amex"></i>
                       <i class="fa fa-cc-mastercard"></i>
@@ -89,36 +90,36 @@
 								    </div>
 
                     <div class="form-group col-md-3 col-sm-12">
-  										<label for="exp_month">Month *</label>
+  										<label for="exp_month">{{trans('general.community.month')}} *</label>
   										<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" data-stripe="exp-month" value="01" />
                     </div>
 
                     <div class="form-group col-md-3 col-sm-12">
-                        <label for="exp_year">Year *</label>
+                        <label for="exp_year">{{trans('general.community.year')}} *</label>
                         <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="{{ (date('Y') + 3) }}"  data-stripe="exp-year" value="2020" />
 								    </div>
 
   									<div class="form-group col-md-3 col-sm-12">
-  										<label for="cvc">CVC *</label>
+  										<label for="cvc">{{trans('general.community.cvc')}} *</label>
   										<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" data-stripe="cvc" />
   									</div>
 
                     <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top: 30px;">
-                        <i class="fa fa-ticket"></i> Coupon
+                        <i class="fa fa-ticket"></i> {{trans('general.community.coupon')}}
                     </div>
 
                     <!-- Coupon -->
                     <div class="form-group col-md-12 col-sm-12" id="coupon_field" style="display:none;">
-                       <label for="cvc">Coupon Code</label>
-                        <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="coupon" />
+                       <label for="coupon">{{trans('general.community.coupon_code')}}</label>
+                        <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="{{trans('general.community.coupon_code')}}" />
                     </div>
 
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
-                        <button type="submit" class="btn btn-primary" id="create_community">Create Community</button>
+                        <button type="submit" class="btn btn-primary" id="create_community">{{trans('general.nav.create')}}</button>
                     </div>
                     <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
                         <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
-                            Something went wrong :(
+                            {{trans('general.community.wrong')}}
                         </div>
                     </div>
 
