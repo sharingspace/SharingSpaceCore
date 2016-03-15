@@ -8,13 +8,14 @@
 
 
 @section('content')
+<h1 class="sr-only">{{trans('general.user.change_settings')}}</h1>
 
 <!-- -->
 <section>
 	<div class="container margin-top-20">
 
 		<!-- RIGHT -->
-		<div class="col-lg-9 col-md-9 col-sm-8 col-lg-push-3 col-md-push-3 col-sm-push-4 margin-bottom-80">
+		<div class="col-lg-9 col-md-9 col-sm-8 col-lg-push-3 col-md-push-3 col-sm-push-4 margin-bottom-80 margin-top-20">
 
 			<ul class="nav nav-tabs nav-top-border">
 				<li class="active"><a href="#info" data-toggle="tab">Personal Info</a></li>
@@ -274,7 +275,7 @@
 
 
 		<!-- LEFT -->
-		<div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8">
+		<div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8 margin-top-20">
 			<div class="thumbnail text-center">
 				<img src="{{ Auth::user()->gravatar() }}?s=400" alt="" />
 				<h2 class="size-18 margin-top-10 margin-bottom-0">{{ Auth::user()->getDisplayName() }}</h2>

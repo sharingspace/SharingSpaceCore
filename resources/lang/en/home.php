@@ -7,7 +7,7 @@ return [
     | General Site Language Lines
     |--------------------------------------------------------------------------
     */
-
+    'homepage' => 'home page',
     'home_headline' => 'We\'ve Fixed the Problem with Sharing',
     'subhome_headline2' => 'You choose who you want to deal with!',
     'subhome_headline' => 'a cooperative network for the people you choose',

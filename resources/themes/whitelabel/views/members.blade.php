@@ -8,6 +8,7 @@
 
 
 @section('content')
+<h1 class="sr-only">{{trans('general.members.members_of')}} {{ $whitelabel_group->name }}</h1>
 
 
 <div class="container">

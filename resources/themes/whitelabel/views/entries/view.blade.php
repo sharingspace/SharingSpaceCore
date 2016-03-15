@@ -13,7 +13,7 @@
 <section>
 	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
-    	<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-10" style="object-fit:contain;">
+    	<div class="col-md-4 col-sm-4 col-xs-12 margin-top-20" style="object-fit:contain;">
 
         @if($images && $images[0]->filename)
           <img src="/assets/uploads/entries/{{ $entry->id }}/{{ $images[0]->filename }}">
@@ -22,10 +22,10 @@
         @endif
       </div> <!-- col-md-4 -->
 
-			<div class="col-md-8 col-sm-8 col-xs-12" style="object-fit:contain;">
+			<div class="col-md-8 col-sm-8 col-xs-12 margin-top-20" style="object-fit:contain;">
       	<div class="row">
         	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
-         		<h1 class="size-18 margin-bottom-0">{{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>
+         		<h1 class="size-18 margin-bottom-0"><span class="sr-only">{{ trans('general.entries.view') }},</span> {{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>
           </div>
 
           @if($entry->author->getDisplayName())

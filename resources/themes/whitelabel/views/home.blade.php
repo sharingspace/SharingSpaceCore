@@ -1,5 +1,4 @@
 @extends('layouts/master')
-
 {{-- Page title --}}
 @section('title')
      {{ trans('general.nav.browse') }} ::
@@ -9,12 +8,12 @@
 
 {{-- Page content --}}
 @section('content')
+<h1 class="sr-only"> {{ $whitelabel_group->name }} {{ trans('home.homepage')}}</h1>
 
 <section class="info-bar">
 	<div class="container">
 
 		<div class="row">
-
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-globe"></i>
           @if ($whitelabel_group->group_type == 'O')

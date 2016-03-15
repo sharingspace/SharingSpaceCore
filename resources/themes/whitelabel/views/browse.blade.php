@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<h1 class="sr-only">{{trans('general.entries.browse_entries')}} {{ $whitelabel_group->name }}</h1>
 
 <section class="container padding-top-0 browse_table">
 <div class="row">

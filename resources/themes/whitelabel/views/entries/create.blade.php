@@ -8,14 +8,13 @@
 
 {{-- Page content --}}
 @section('content')
+<h1 class="sr-only">{{ trans('general.entries.create') }}</h1>
 
     <section class="container">
       <div class="row">
 
-
         <!-- Added tiles .... -->
         <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-        <h1 class="size-16 uppercase margin-bottom-20 sr-only">{{ trans('general.entries.create') }}</h1>
 
         <table class="table" id="create_table" >
           <caption>You Added</caption>

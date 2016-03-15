@@ -44,10 +44,11 @@ return [
           'keywords' => 'Keywords',
           'actions' => 'Actions',
           'view' => 'View Entry',
-          'create' => 'Create',
+          'create' => 'Create entry',
 					'create_subheadline' => 'What do you want or have? Press "Enter" to make an new entry',
           'save' => 'Save',
           'edit' => 'Edit Entry',
+          'browse_entries' => 'Browse entries within',
 
           'messages' => [
             'invalid' => 'That entry is not valid.',
@@ -70,6 +71,7 @@ return [
       'email'  => 'Email',
       'password'  => 'Password',
       'confirm_password'  => 'Confirm Password',
+      'change_settings' => 'Change your settings',
     ],
 
     'community'  => [
@@ -104,6 +106,9 @@ return [
         ],
 
     ],
+    'members' => [
+      'members_of' => 'Members of',
+    ],
 
     'uploads'  => [
       'choose_file'  => 'Choose file',
@@ -113,7 +118,9 @@ return [
       'title'  => 'Privacy',
     ],
 
-
+    'profile'  => [
+      'profile'  => 'Profile for ',
+    ],
 
 
 ];
