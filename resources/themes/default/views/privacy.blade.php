@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.privacy.title') }} ::
+  {{ trans('general.privacy.title') }} ::
 @parent
 @stop
 
@@ -11,71 +11,80 @@
 @section('content')
 <section class="padding-top-0">
   <div class='page_banner sharing_fixed_banner'>
-    <h1 style="font-size:56px!important;color:white;text-align:center;padding-top:125px;margin-bottom:-5px;">{{trans('general.privacy.title') }}</h1>
+    <h1 class="sr-only">{{trans('privacy.title') }}</h1>
   </div>
 </section>
 
 <!-- -->
 <section>
-     <div class="container margin-top-20">
+  <div class="container margin-top-20">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <p>{{trans('privacy.intro') }}</p>
 
-     <h1 class="size-30">Terms &amp; Conditions</h1>
+        <h2>{{ trans('privacy.what_info.title') }}</h2>
+        <h3>{{ trans('privacy.what_info.user_provided.title') }}</h3>
+        <p>{{ trans('privacy.what_info.user_provided.p1') }}</p>
+        <p>{{ trans('privacy.what_info.user_provided.p2') }}</p>
+        <p>{{ trans('privacy.what_info.user_provided.p3') }}</p>
+        <p>{{ trans('privacy.what_info.user_provided.p4') }}</p>
 
-     <p>The following information outlines our shared agreements when using AnySha.re.</p>
+        <h3>{{ trans('privacy.what_info.automatically.title') }}</h3>
+        <p>{{ trans('privacy.what_info.automatically.p1') }}</p>
+        <p><strong>{{ trans('privacy.what_info.automatically.q1') }}</strong></p>
+        <p>{{ trans('privacy.what_info.automatically.a1') }}</p>
+        <p><strong>{{ trans('privacy.what_info.automatically.q2') }}</strong></p>
+        <p>{{ trans('privacy.what_info.automatically.a2') }}</p>
+        <ul>
+          <li class="margin-bottom-10">{{ trans('privacy.what_info.automatically.li1') }}</li>
+          <li class="margin-bottom-10">{{ trans('privacy.what_info.automatically.li2') }}</li>
+          <li class="margin-bottom-10">{{ trans('privacy.what_info.automatically.li3') }}</li>
+          <li class="margin-bottom-10">{{ trans('privacy.what_info.automatically.li4') }}</li>
+        </ul>
 
-     <p>Welcome to AnySha.re, created by Crticial Mass Mosaic! (a.k.a. &quot;we&quot; or &quot;us&quot; or the &quot;Company&quot;). We are excited to have you as a user. The following terms and conditions (together with any documents referred to in them) (collectively, these &quot;Terms of Service&quot;) apply to your use of anysha.re, including any content, functionality offered on or through massmosaic.com (the &quot;Website&quot;). We want to keep our relationship with you as lean and informal as possible, but please read the Terms of Service carefully before you start to use the site. By using the Website you accept and agree to be bound and abide by these Terms of Service. Should you disagree with some of the provisions herein, you can either leave the website, or contact us at info@massmosaic.com. Mass Mosaic is all about collaborating for improving legal policies, and we’ll be happy to hear your comments and suggestions and work out a better version of this agreement.
+        <h3>{{ trans('privacy.opt_out_rights.title') }}</h3>
+        <p>{{ trans('privacy.opt_out_rights.p1') }}</p>
 
-     <h3>Changes to the Terms of Service</h3>
-     <p>
-     AnySha.re is a work in progress, and we will update these Terms of Service from time to time in our sole discretion. Since this document is public on Mass Mosaic, you will be able to track all changes between versions. Your continued use of the Website following the publishing of revised Terms of Use means that you accept and agree to the changes.
-     </p>
+        <h3>{{ trans('privacy.data_retension.title') }}</h3>
+        <p>{{ trans('privacy.data_retension.p1') }}</p>
 
-     <h3>Accessing the Website and Account Security</h3>
-     <p>Critical Mass Mosaic is a new company, and a lot will change in the near future. We reserve the right to withdraw or amend, even dramatically, this Website, and any service or material we provide on the Website, in our sole discretion without notice. Also, we will not be liable if for any reason all or any part of the Website is unavailable at any time or for any period. As said, this is a new website and rolling new features might impact the reliability of the Website. From time to time, we may restrict access to some parts of the Website, or the entire Website, to users, including registered users. To access the Website you are provided with a secure user ID and password. You must treat such information as confidential, and you must not disclose it to any third party. You agree to immediately notify Company of any unauthorized use of your user ID or password or any other breach of security. You also agree to ensure that you exit from your account at the end of each session. You should use particular caution when accessing your account from a public or shared computer so that others are not able to view or record your password or other personal information. In the future, you may be asked to provide certain registration details or other information. It is a condition of your use of the Website that all the information you provide on the Website is correct, current and complete. We have the right to disable any user identification code or password, whether chosen by you or provided by us, at any time in our sole discretion for any or no reason, including, if in our opinion, you have failed to comply with any provision of these Terms of Service.</p>
+        <h3>{{ trans('privacy.third_parties.title') }}</h3>
+        <p>{{ trans('privacy.third_parties.p1') }}</p>
+        <p>{{ trans('privacy.third_parties.p2') }}</p>
+        <p>{{ trans('privacy.third_parties.p3') }}</p>
 
-     <h3>&quot;This is not an NDA&quot; clause</h3>
-     <p>You are allowed to publicly talk and write about Mass Mosaic and the Website, albeit acknowledging that the service and the Website are in beta and everything is subject to change. For this reason, we kindly ask you to restrain of publishing full reviews, public tests, screenshots or anything else that might unfaithfully represent Mass Mosaic. We trust your judgment and discretion in helping us develop and spread Mass Mosaic to the world!</p>
+        <h4>{{ trans('privacy.third_parties.tools.ga.title') }}</h4>
+        <p>{{ trans('privacy.third_parties.tools.ga.p1') }}</p>
+        <h4>{{ trans('privacy.third_parties.tools.crazy_egg.title') }}</h4>
+        <p>{{ trans('privacy.third_parties.tools.crazy_egg.p1') }}</p>
+        <h4>{{ trans('privacy.third_parties.tools.zendesk.title') }}</h4>
+        <p>{{ trans('privacy.third_parties.tools.zendesk.p1') }}</p>
 
-     <h3>Intellectual Property Rights</h3>
-     <p>The Website and its entire contents, features and functionality (including but not limited to all information, text, displays, images, video and audio, and the design, selection and arrangement thereof), are owned by the Company, its licensors or other providers of such material and are protected by United States and international copyright, trademark, patent, trade secret and other intellectual property or proprietary rights laws. You are permitted to use the Website for purpose not inconsistent with applicable law or these Terms of Use. The Company grants you a license to use any content, in whole or in part, available through this Website. You may contact, exchange, collaborate, publicly display, publicly perform, republish, any of the material on our site, except that you may not do any of the foregoing with any computer programs, source code, or object code of the Website itself. However, you must not delete or alter any copyright, trademark or other proprietary rights notices of materials from this site. If you wish to make any use of material on the Website other than that set out in this section, please address your request to: info@massmosaic.com If you use any part of the Website in breach of the Terms of Service, your right to use the Website will cease immediately and you must destroy any copies of the materials you have made that utilize our or our users’. No right, title or interest in or to the Website or any content on the site is transferred to you, and all rights not expressly granted are reserved by the Company. Any use of the Website not expressly permitted by these Terms of Service is a breach of these Terms of Service and may violate copyright, trademark and other laws.</p>
+        <h3>{{ trans('privacy.social_logins.title') }}</h3>
+        <p>{{ trans('privacy.social_logins.p1') }}</p>
+        <h4>{{ trans('privacy.social_logins.facebook.title') }}</h4>
+        <p>{{ trans('privacy.social_logins.facebook.p1') }}</p>
+        <h4>{{ trans('privacy.social_logins.twitter.title') }}</h4>
+        <p>{{ trans('privacy.social_logins.twitter.p1') }}</p>
+        <h4>{{ trans('privacy.social_logins.google.title') }}</h4>
+        <p>{{ trans('privacy.social_logins.google.p1') }}</p>
+        <h4>{{ trans('privacy.social_logins.github.title') }}</h4>
+        <p>{{ trans('privacy.social_logins.github.p1') }}</p>
 
-     <h3>Prohibited Uses</h3>
-     <p>You may use the Website only for lawful purposes and in accordance with these Terms of Service. You agree not to use the Website: In any way that violates any applicable federal, state, local and international law or regulation (including, without limitation, any laws regarding the export of data or software to and from the US or other countries). To send, upload, download, use or re-use any material which does not comply with the Content Standards set below. To transmit, or procure the sending of, any mass advertising or direct solicitation material. To impersonate or attempt to impersonate the Company or a Company employee, another user, or another person or entity (including, without limitation, the use of e-mail addresses or screen names associated with or confusingly similar to any of the foregoing). To engage in any other conduct that restricts or inhibits anyone’s use or enjoyment of the Website, or which, as determined by us, may harm the Company or users of the Website or expose them to liability. Additionally, you agree not to: Use the Website in any manner that could disable, overburden, damage, or impair the site or interfere with any other party’s use of the Website, including their ability to engage in real time activities through the Website. Use any robot, spider or other automatic device, process or means to access the Website for any purpose, including to monitor or copy any of the material on the Website. Use any manual process to monitor or copy any of the material on the Website or for any other unauthorized purpose without our prior written consent. Use any device, software or routine that interferes with the proper working of the Website. Introduce any viruses, trojan horses, worms, logic bombs or other material which is malicious or technologically harmful. Attempt to gain unauthorized access to, interfere with, damage or disrupt any parts of the Website, the server on which the Website is stored, or any server, computer or database connected to the Website. Attack the Website via a denial-of-service attack or a distributed denial-of-service attack or otherwise attempt to interfere with the proper working of the Website.</p>
+        <h3>{{trans('privacy.children.title') }}</h3>
+        <p>{{trans('privacy.children.p1') }}</p>
 
-     <h3>User Contributions and Legal Disclaimer</h3>
-     <p>The Website contains user generated content, message boards,personal web profiles, forums and other interactive features (collectively, &quot;Interactive Services&quot;) that allow you to post, submit, publish, display or transmit to other users (hereinafter, &quot;post&quot;) content or materials (collectively, &quot;User Content&quot;) on or through the Website.</p>
+        <h3>{{trans('privacy.security.title') }}</h3>
+        <p>{{trans('privacy.security.p1') }}</p></p>
 
-     <h3>All User Content must comply with the Content Standards set out below.</h3>
-     <p>We claim no intellectual property rights over the User Content. Your profile and materials uploaded remain yours. However, by setting your pages to be viewed publicly, you agree to allow others to view, comment, share, and contact you using your preferred communication channels. We give you the freedom to edit your Content at any time you want, and you grant us the right to use, copy, and distribute it to the world for any purpose. You represent and warrant that you own or control all rights in and to the User Content and have the right to grant the Company and its affiliates the license granted above.You represent and warrant that all of your User Content does and will comply with these Terms of Service, and you agree to hold harmless the Company and its affiliates and licensors for any breach of that representation and warranty. Any feedback, comments, or suggestions you may provide regarding Mass Mosaic is entirely voluntary and we will be free to use such feedback, comments or suggestions as we see fit and without any obligation to you. You understand and acknowledge that you are responsible for any User Content you submit or contribute, and you, not the Company, have full responsibility for such content, including its legality, reliability, accuracy and appropriateness. Any content and/or opinions uploaded, expressed or submitted to the Website, and all articles and responses to questions and other content, other than the content provided by the Company, are solely the opinions and the responsibility of the person or entity submitting them and do not necessarily reflect the opinion of the Company. We are not responsible, or liable to any third party, for the content or accuracy of any materials posted by you or any other user of the Website.</p>
+        <h3>{{trans('privacy.changes.title') }}</h3>
+        <p>{{trans('privacy.changes.p1') }}</p>
 
-     <h3>Monitoring and Enforcement of User Content; Termination</h3>
-     <p>We have the right to: Remove or refuse to post any User Content for any or no reason in our sole discretion. Take any action with respect to any User Content that we deem necessary or appropriate in our sole discretion if we believe that such User Content violates the Terms of Service, including the Content Standards, infringes any intellectual property right or other right, threatens the personal safety of users of the Website and the public or could create liability for the Company. Disclose user identities when required to do so by applicable law, including in response to a law enforcement request supported by a valid court order. Terminate your access to all or part of the Website for any or no reason, including without limitation, any violation of these Terms of Service. You waive and hold harmless the Company from any claims resulting from any action taken by the Company during or as a result of its investigations and from any actions taken as a consequence of investigations by either the Company or law enforcement authorities. We do not undertake to review all material before it is posted on the Website, and cannot ensure prompt removal of objectionable material after it has been posted. Accordingly, we assume no liability for any action or inaction regarding transmissions, communications or content provided by any user or third party. We have no liability or responsibility to anyone for performance or nonperformance of the activities described in this paragraph.</p>
-
-     <h3>Content Standards</h3>
-     <p>These content standards apply to any and all User Content and Interactive Services. User Content must comply with all applicable federal, state, local and international laws and regulations. Without limiting the foregoing, User Content must not: Contain any material which is defamatory, obscene, indecent, abusive, offensive, harassing, violent, hateful, inflammatory or otherwise objectionable. Promote sexually explicit or pornographic material, violence, or discrimination based on race, sex, religion, nationality, disability, sexual orientation or age. Infringe any patent, trademark, trade secret, copyright or other intellectual property rights of any other person. Violate the legal rights (including the rights of publicity and privacy) of others or contain any material that could give rise to any civil or criminal liability under applicable laws or regulations or that otherwise may be in conflict with these Terms of Service. Be likely to deceive any person. Promote any illegal activity, or advocate, promote or assist any unlawful act. Cause annoyance, inconvenience or needless anxiety or be likely to upset, embarrass, alarm or annoy any other person. Be used to impersonate any person, or to misrepresent your identity or affiliation with any person or organization. Involve commercial activities or sales , such as contests, sweepstakes and other sales promotions, barter or advertising. Give the impression that they emanate from us or any other person or entity, if this is not the case.</p>
-
-     <h3>Copyright Infringement</h3>
-     <p>If you believe that any User Content violate your copyright, please email us at info@massmosaic.com for instructions on sending us a notice of copyright infringement. It is the policy of the Company to terminate the user accounts of repeat infringers, and we are in the process of setting up a DMCA compliant process for managing cases of infringement.</p>
-
-     <h3>Reliance on Information Posted</h3>
-     <p>The information presented on or through the Website is made by our users. We do not warrant the accuracy, completeness or usefulness of this information. Any reliance you place on such information is strictly at your own risk. We disclaim all liability and responsibility arising from any reliance placed on such materials by you or any other visitor to the Website, or by anyone who may be informed of any of its contents.</p>
-
-     <h3>Disclaimer of Warranties, Limitations of Liability and Indemnification.</h3>
-     <p>You acknowledge that you have only a limited, non-exclusive, nontransferable license to use the Website. Because the Website is in beta version only and is not error or bug free, you agree that you will use it carefully and avoid using it ways which might result in any loss of your or any third party’s property or information. Your use of Mass Mosaic is at your sole risk. The service is provided on an &quot;as is&quot; and &quot;as available&quot; basis. In particular, you acknowledge that technical support is only provided in only available via email, in English; that we use third party vendors and hosting partners to provide the necessary hardware, software, networking, storage, and related technology required to run the Website; that the technical processing and transmission of the service, including User Content, may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. We do not warrant that (i) the service will meet your specific requirements, (ii) the service will be uninterrupted, timely, secure, or error-free, (iii) the results that may be obtained from the use of the service will be accurate or reliable, (iv) the quality of any products, services, information, or other material purchased or obtained by you through the service will meet your expectations, and (v) any errors in the service will be corrected. You expressly understand and agree that Mass Mosaic shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses (even if Mass Mosaic has been advised of the possibility of such damages), resulting from: (i) the use or the inability to use the service; (ii) the cost of procurement of substitute goods and services resulting from any goods, data, information or services purchased or obtained or messages received or transactions entered into through or from the service; (iii) unauthorized access to or alteration of your transmissions or data; (iv) statements or conduct of any third party on the service; (v) or any other matter relating to the service. You agree to defend, indemnify and hold harmless the Company, its affiliates and licensors and their respective officers, directors, employees, contractors, agents, licensors and suppliers from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses or fees (including reasonable attorneys’ fees) resulting from your violation of these Terms of Use or your use of the Website, including, without limitation, any use of the Website’s content, services and products other than as expressly authorized in these Terms of Use or your use of any information obtained from the Website.</p>
-
-     <h3>Geographic Restrictions</h3>
-     <p>Mass Mosaic is based in the state of New York in the United States. We make no claims that the Website or any of its content is accessible or appropriate outside of the United States. Access to the Website may not be legal by certain persons or in certain countries. If you access the Website from outside the United States, you do so on your own initiative and are responsible for compliance with local laws.</p>
-
-     <h3>Governing Law and Jurisdiction</h3>
-     <p>These Terms of Service and any dispute or claim arising out of, or related to, them, their subject matter or their formation (in each case, including non-contractual disputes or claims) shall be governed by and construed in accordance with the internal laws of the State of New York without giving effect to any choice or conflict of law provision or rule. Any legal suit, action or proceeding arising out of, or related to, these Terms of Service or the Website shall be instituted exclusively in the federal courts of the United States or the courts of the State of New York. You waive any and all objections to the exercise of jurisdiction over you other courts and to venue in such courts.</p>
-
-     <h3>Waiver and Severability</h3>
-     <p>Our failure to exercise or enforce any right or provision of the Terms of Service shall not constitute a waiver of such right or provision. The Terms of Service constitutes the entire agreement between you and Mass Mosaic and govern your use of the service, superseding any prior agreements (including, but not limited to, any prior versions of the Terms of Service). If any provision of these Terms of Service is held by a court of competent jurisdiction to be invalid, illegal or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of the Terms of Service will continue in full force and effect.</p>
-
-     <h3>Feedback</h3>
-     <p>We welcome any comment, question and communication at <a href="mailto:info@massmosaic.com">info@massmosaic.com</a>.</p>
-
-   </div>
+        <h3>{{trans('privacy.contact.title') }}</h3>
+        <p>{{trans('privacy.contact.p1') }} <a href="mailto:info@anysha.re">info@anysha.re</a></p>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- / -->
 

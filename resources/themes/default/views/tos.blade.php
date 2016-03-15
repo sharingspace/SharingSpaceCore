@@ -68,7 +68,7 @@
           <p>Our failure to exercise or enforce any right or provision of the Terms of Service shall not constitute a waiver of such right or provision. The Terms of Service constitutes the entire agreement between you and Mass Mosaic and govern your use of the service, superseding any prior agreements (including, but not limited to, any prior versions of the Terms of Service). If any provision of these Terms of Service is held by a court of competent jurisdiction to be invalid, illegal or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of the Terms of Service will continue in full force and effect.</p>
 
           <h3>Feedback</h3>
-          <p>We welcome any comment, question and communication at <a href="mailto:info@massmosaic.com">info@massmosaic.com</a>.</p>
+          <p>We welcome any comment, question and communication at <a href="mailto:info@anysha.re">info@anysha.re</a>.</p>
 
 				</div>
 			</section>

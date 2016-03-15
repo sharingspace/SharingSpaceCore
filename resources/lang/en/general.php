@@ -135,10 +135,7 @@ return [
       'choose_file'  => 'Choose file',
     ],
 
-    'privacy'  => [
-      'title'  => 'Privacy',
-    ],
-
+   
     'profile'  => [
       'profile'  => 'Profile for ',
     ],
