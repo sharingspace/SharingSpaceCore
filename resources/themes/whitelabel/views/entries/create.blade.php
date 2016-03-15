@@ -25,6 +25,7 @@
                   <th>{{ trans('general.entries.qty') }}</th>
                   <th>{{ trans('general.entries.title') }}</th>
                   <th>{{ trans('general.entries.exchange_types') }}</th>
+                  <th>{{ trans('general.entries.keywords') }}</th>
                   <th>Action</th>
                   <th style='display:none'></th>
               </tr>
@@ -126,7 +127,7 @@
                         <!-- Tags -->
                         <div class="form-group {{ $errors->first('tags', 'has-error') }}">
                           <label class="input">
-                        		<input type="text" name="tags" id="tags" class="form-control" placeholder="Keywords, comma-separated">
+                        		<input data-role="tagsinput" type="text" name="tags" id="tags"  class="col-md-12 form-control"  placeholder="Keywords, comma-separated" placeholder="Separate each tag with a comma">
                       		</label>
                         </div> <!-- tags -->
                       </div> <!-- col 12 -->
@@ -153,7 +154,7 @@
                       </div> <!-- col 10 -->
 
                       <div class="col-md-2 col-sm-2 col-xs-2 ">
-                        <button class="btn btn-warning  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-warning  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">{{ trans('general.entries.save') }}</button>
                       </div> <!-- col 2 -->
                     </div> <!-- row -->
                   </div> <!-- col 9 -->
@@ -172,7 +173,6 @@ $("#ajaxAdd").attr('disabled','disabled'); // disable add button until page has 
 $("#create_table").hide();
 
 $( document ).ready(function() {
-
 	$("#ajaxAdd").removeAttr('disabled');//enable add button	now page has loaded
 
 	if ($('#visible_checkbox').is(":checked")) {
@@ -205,6 +205,7 @@ $( document ).ready(function() {
 		var post_type = $(this).closest('tr').children('td.td_post_type').html();
 		var qty = $(this).closest('tr').children('td.td_qty').html();
 		var desc = $(this).closest('tr').children('td.td_description').html();
+    var tags = $(this).closest('tr').children('td.td_tags').html();
     //console.warn("Title is: "+title +", post type is: "+post_type+", quantity is: "+qty+", entry id is: "+$(this).prop('class')+entry_id);
 
 		$("#title").val(title);
@@ -216,6 +217,7 @@ $( document ).ready(function() {
        			 }, 2000);
 		$("#title").focus();
 		$("#title" ).addClass( "update_"+entry_id);
+    $(".bootstrap-tagsinput input").val(tags);
 		$("#ajaxAdd").html("Update");
 	});
 
@@ -347,8 +349,9 @@ $( document ).ready(function() {
           var exchanges=replyData.exchange_types.join(", ");
         }
 
-        // reset the form
+        // reset the form and tagsinput
         $('#entry_form')[0].reset();
+        $('#tags').tagsinput('removeAll');
 
         if(replyData.save)
         {
@@ -360,7 +363,7 @@ $( document ).ready(function() {
 
   				// is this an edit or a save?
   				$('#create_table tr:last').after('<tr id="tr_'+replyData.entry_id+'"><td class="td_post_type">'+replyData.post_type.toUpperCase()+'</td><td class="td_qty">'+replyData.qty+ '</td><td class="td_title">'+
-  				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
+  				trimString(replyData.title, 60)+'</td><td class="td_exchanges">'+exchanges+ '</td><td class="td_tags">'+replyData.tags+ '</td><td><button class="button_delete smooth_font btn btn-warning btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-trash-o fa-lg"></i></button> <button class="button_edit smooth_font btn btn-info btn-sm" data-entryid="'+replyData.entry_id+'"><i class="fa fa-pencil fa-lg"></i></button></td><td style="display:none;"  class="td_description">'+replyData.description+'</td></tr>');
 
   				$(".inputErr").show();
   				$(".noInputErr").hide();

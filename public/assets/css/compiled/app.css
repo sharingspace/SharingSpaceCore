@@ -47,6 +47,7 @@
     Pricing
     Entry View
     Footer
+    Tagsinput
 *****************************************************/
 
 /** Globals
@@ -8533,6 +8534,16 @@ Quick add
 
 #footer .socials {
   margin-top: -7px;
+}
+
+/**
+ * Bootstraps tags input
+ *
+ **/
+
+.bootstrap-tagsinput,
+.bootstrap-tagsinput input {
+  width: 100% !important;
 }
 /** ************************************* **
 

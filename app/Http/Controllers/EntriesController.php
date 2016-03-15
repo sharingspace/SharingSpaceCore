@@ -95,7 +95,7 @@ class EntriesController extends Controller
       }
 
       if($uploaded) {
-        return response()->json(['success'=>true, 'save'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types]);
+        return response()->json(['success'=>true, 'save'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types, 'tags' => $entry->tags]);
       }
       else {
         return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.upload_failed')]);

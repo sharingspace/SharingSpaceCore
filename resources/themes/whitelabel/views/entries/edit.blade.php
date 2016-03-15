@@ -73,6 +73,14 @@
                       </label>
                     </div>
 
+                    <div class="col-md-12">
+                        <!-- Tags -->
+                        <div class="form-group {{ $errors->first('tags', 'has-error') }}">
+                          <label class="input">
+                            <input type="text" name="tags" id="tags" class="form-control" placeholder="Keywords, comma-separated" value="{{ Input::old('tags', $entry->tags) }}" data-role="tagsinput">
+                          </label>
+                        </div> <!-- tags -->
+                      </div> <!-- col 12 -->
                     <!-- Location -->
                     <div class="col-md-12 form-group {{ $errors->first('location', 'has-error') }}">
                       <label class="control-label" for="location">Location</label>
