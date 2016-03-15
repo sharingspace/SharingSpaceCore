@@ -9,13 +9,14 @@
 
 {{-- Page content --}}
 @section('content')
-<h1 class="sr-only">{{ trans('general.entries.edit') }}</h1>
 
 <!-- -->
 			<section>
 
 				<div id="edit_entry" class="container margin-top-20">
 					<div class="row">
+          <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.entries.edit') }}</h1>
+
 						<!-- Entry -->
 						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 margin-top-20">
 							<div class="row">

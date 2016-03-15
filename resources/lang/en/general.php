@@ -48,7 +48,7 @@ return [
 					'create_subheadline' => 'What do you want or have? Press "Enter" to make an new entry',
           'save' => 'Save',
           'edit' => 'Edit Entry',
-          'browse_entries' => 'Browse entries within',
+          'browse_entries' => 'Browse entries',
 
           'messages' => [
             'invalid' => 'That entry is not valid.',
@@ -128,7 +128,7 @@ return [
 
     ],
     'members' => [
-      'members_of' => 'Members of',
+      'members' => 'Members',
     ],
 
     'uploads'  => [

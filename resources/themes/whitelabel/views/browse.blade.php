@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-<h1 class="sr-only">{{trans('general.entries.browse_entries')}} {{ $whitelabel_group->name }}</h1>
+
 
 <section class="container padding-top-0 browse_table">
 <div class="row">
-
+  <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.entries.browse_entries')}}</h1>
     <!-- Begin entries table -->
     <table class="table table-condensed"
     name="communityListings"

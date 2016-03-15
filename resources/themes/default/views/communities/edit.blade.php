@@ -11,7 +11,11 @@
 @section('content')
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
+<section class="padding-top-0">
+  <div class='page_banner sharing_fixed_banner'>
+    <h1>{{trans('general.community.create')}}</h1>
+  </div>
+</section>
 
 <!-- -->
 			<section>
@@ -23,7 +27,6 @@
               {!! csrf_field() !!}
 
             <div class="col-md-12">
-              <h1 class="size-16">{{trans('general.community.create')}}</h1>
               <ul class="text-muted">
                 <li>{{trans('general.community.p1')}} {{date('jS F, Y', strtotime("+30 days"))}}</li>
                 <li>{{trans('general.community.p2')}}</li>

@@ -8,11 +8,11 @@
 
 
 @section('content')
-<h1 class="sr-only">{{trans('general.user.change_settings')}}</h1>
 
 <!-- -->
 <section>
 	<div class="container margin-top-20">
+    <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.user.change_settings')}}</h1>
 
 		<!-- RIGHT -->
 		<div class="col-lg-9 col-md-9 col-sm-8 col-lg-push-3 col-md-push-3 col-sm-push-4 margin-bottom-80 margin-top-20">

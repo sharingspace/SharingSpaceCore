@@ -317,7 +317,20 @@ Route::get('pricing', function () {
   return view('pricing');
 }); 
 
+Route::get('financial_assist', function () {
+  return view('assistance');
+}); 
+
+Route::post('financial_assist', array(
+  'as' => 'home',
+  'uses' => 'CommunitiesController@financialAssist'
+));
+
+
 Route::get('/', array(
   'as' => 'home',
   'uses' => 'PagesController@getHomepage'));
 });
+
+
+

@@ -234,6 +234,11 @@ class CommunitiesController extends Controller
       return redirect()->route('community.edit.form')->with('success',trans('general.community.messages.save_edits'));
   }
 
-
+/*
+  Process the finacial assistance form
+  */
+  public function financialAssist(Request $request) {
+    return Redirect::back()->with('success',trans('pricing.financial_assist.success'));  
+  }
 
 }

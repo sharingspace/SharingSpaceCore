@@ -11,7 +11,7 @@
 @section('content')
 <section class="padding-top-0">
   <div class='page_banner sharing_fixed_banner'>
-    <h1 class="sr-only">{{trans('privacy.title') }}</h1>
+    <h1>{{trans('privacy.title') }}</h1>
   </div>
 </section>
 
