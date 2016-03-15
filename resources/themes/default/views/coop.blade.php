@@ -3,7 +3,7 @@
 
 <section class="padding-top-0">
   <div class="page_banner sharing_fixed_banner">
-    <h1 class="sr-only">{{ trans('coop.coop_headline') }}</h1>
+    <h1>{{ trans('coop.coop_headline') }}</h1>
   </div>
 </section>
 

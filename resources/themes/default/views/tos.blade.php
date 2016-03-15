@@ -9,12 +9,15 @@
 
 {{-- Page content --}}
 @section('content')
-
+<section class="padding-top-0">
+  <div class='page_banner sharing_fixed_banner'>
+    <h1>Terms &amp; Conditions</h1>
+  </div>
+</section>
 <!-- -->
 			<section>
 				<div class="container margin-top-20">
 
-          <h1 class="size-30">Terms &amp; Conditions</h1>
 
           <p>The following information outlines our shared agreements when using AnySha.re.</p>
 

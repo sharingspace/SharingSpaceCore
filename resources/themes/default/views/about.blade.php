@@ -4,7 +4,7 @@
 
 <section class="padding-top-0">
   <div class='page_banner sharing_fixed_banner'>
-    <h1 class="sr-only">About</h1>
+    <h1>About</h1>
   </div>
 </section>
 

@@ -8,10 +8,9 @@
 
 {{-- Page content --}}
 @section('content')
-<h1 class="sr-only">{{ trans('general.entries.create') }}</h1>
-
     <section class="container">
       <div class="row">
+       <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.entries.create') }}</h1>
 
         <!-- Added tiles .... -->
         <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">

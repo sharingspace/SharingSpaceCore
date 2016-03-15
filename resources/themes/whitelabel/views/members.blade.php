@@ -8,11 +8,11 @@
 
 
 @section('content')
-<h1 class="sr-only">{{trans('general.members.members_of')}} {{ $whitelabel_group->name }}</h1>
-
 
 <div class="container">
 	<div class="row">
+  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members.members')}}</h1>
+
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
    			<table class="table table-condensed" id="members">
