@@ -29,6 +29,7 @@ return [
           'profile' => 'Profile',
           'create_sharing_hub' => 'Create',
 					'order_history' => 'Order History',
+          'tos' => 'Terms and Conditions',
     ],
 
     'entries'  => [
