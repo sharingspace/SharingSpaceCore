@@ -238,6 +238,19 @@ class CommunitiesController extends Controller
   Process the finacial assistance form
   */
   public function financialAssist(Request $request) {
+    $input = Input::get();
+    $firstName = Input::get('firstName');
+    $lastName = Input::get('lastName');
+    $email = Input::get('email');
+
+    // Send the application
+    Mail::send(['text' => 'email.freeAnyshareText'], ['data'=>$input], 
+      function ($m) use ($email, $firstName, $lastName) {
+      $m->to('info@AnySha.re', 'AnyShare');
+      $m->from($email, $firstName.' '.$lastName);
+      $m->subject("Application for free anyshare hub");
+    });
+    
     return Redirect::back()->with('success',trans('pricing.financial_assist.success'));  
   }
 
