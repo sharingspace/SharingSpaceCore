@@ -7587,10 +7587,10 @@ Quick add
 ------------------------------------------
 */
 
-$screen-xs-max:479px;
-$screen-sm-min:480px;
-$screen-sm-max:767px;
-$screen-md-min:768px;
+$screen-xs-max:767px;
+$screen-sm-min:768px;
+$screen-sm-max:991px;
+$screen-md-min:992px;
 $screen-md-max:1199px;
 $screen-lg-min:1200px;
 
@@ -7795,14 +7795,32 @@ $color-green: #9AE14F;
   }
 
   h1 {
-    font-size:56px!important;
+    font-size:32px!important;
     color:white;
     text-align:center;
-    padding-top:125px;
+    padding-top:100px;
     margin-bottom:-5px; 
+  }
+
+  h2 {
+    font-size:24px!important;
+    font-weight:400;
+    color:white;
+    text-align:center;
   }
 }
 
+@media (min-width: $screen-md-min) {
+  .page_banner {
+    h1 {
+      font-size:20px!important;
+      padding-top:125px;
+    }
+    h2 {
+      font-size:40px!important;
+    }
+  }
+}
 /**
   * User profile page
   */
@@ -7964,7 +7982,7 @@ $color-green: #9AE14F;
 
 #coop_features {
 
-  /*  This stop sthe features on the coop page from getting catch on
+  /*  This stops the features on the coop page from getting caught on
       eachother if one happens to be very long */
 
   /*  Tablet  */
@@ -8073,4 +8091,68 @@ $color-green: #9AE14F;
 
 .bootstrap-tagsinput, .bootstrap-tagsinput input {
   width: 100% !important;
+}
+
+
+/**
+ * Media pull
+ *
+ **/
+@media (max-width: $screen-xs-max) {
+  .pull-xs-left {
+      float: left;
+  }
+  .pull-xs-right {
+      float: right;
+  }
+  .text-center-xs
+  {
+    text-align: center;
+  }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .pull-sm-left {
+      float: left;
+      text-align:left;
+  }
+  .pull-sm-right {
+      float: right;
+      text-align:left;
+  }
+  .text-center-sm
+  {
+    text-align: center;
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .pull-md-left {
+      float: left;
+      text-align:right;
+  }
+  .pull-md-right {
+      float: right;
+      text-align:right;
+  }
+  .text-center-md
+  {
+    text-align: center;
+  }
+
+}
+
+@media (min-width: $screen-lg-min) {
+  .pull-lg-left {
+      float: left;
+      text-align:right;
+  }
+  .pull-lg-right {
+      float: right;
+      text-align:right;
+  }
+  .text-center-lg
+  {
+    text-align: center;
+  }
 }

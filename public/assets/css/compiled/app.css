@@ -8223,7 +8223,7 @@ Quick add
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   #add_tile_wrapper .value_text {
     font-size: 30px;
     margin-bottom: 35px;
@@ -8291,11 +8291,29 @@ Quick add
 }
 
 .page_banner h1 {
-  font-size: 56px !important;
+  font-size: 32px !important;
   color: white;
   text-align: center;
-  padding-top: 125px;
+  padding-top: 100px;
   margin-bottom: -5px;
+}
+
+.page_banner h2 {
+  font-size: 24px !important;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .page_banner h1 {
+    font-size: 20px !important;
+    padding-top: 125px;
+  }
+
+  .page_banner h2 {
+    font-size: 40px !important;
+  }
 }
 
 /**
@@ -8454,7 +8472,7 @@ Quick add
   **/
 
 #coop_features {
-  /*  This stop sthe features on the coop page from getting catch on
+  /*  This stops the features on the coop page from getting caught on
       eachother if one happens to be very long */
   /*  Tablet  */
   /*  Medium Desktop  */
@@ -8564,6 +8582,73 @@ Quick add
 .bootstrap-tagsinput,
 .bootstrap-tagsinput input {
   width: 100% !important;
+}
+
+/**
+ * Media pull
+ *
+ **/
+
+@media (max-width: 767px) {
+  .pull-xs-left {
+    float: left;
+  }
+
+  .pull-xs-right {
+    float: right;
+  }
+
+  .text-center-xs {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .pull-sm-left {
+    float: left;
+    text-align: left;
+  }
+
+  .pull-sm-right {
+    float: right;
+    text-align: left;
+  }
+
+  .text-center-sm {
+    text-align: center;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .pull-md-left {
+    float: left;
+    text-align: right;
+  }
+
+  .pull-md-right {
+    float: right;
+    text-align: right;
+  }
+
+  .text-center-md {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pull-lg-left {
+    float: left;
+    text-align: right;
+  }
+
+  .pull-lg-right {
+    float: right;
+    text-align: right;
+  }
+
+  .text-center-lg {
+    text-align: center;
+  }
 }
 /** ************************************* **
 
