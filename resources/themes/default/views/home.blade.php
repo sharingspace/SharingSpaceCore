@@ -125,12 +125,12 @@
       <div class="callout margin-bottom-0 text-center" style="background-color:#AFDBDB;">
         <div class="container">
           <div class="row text-center">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-md-offset-2">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-1">
               <div class="row">
                 <h2 style="font-weight:800;">Explore more</h2>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><!-- left text -->
-                  <a href="coop" class="btn btn-default btn-lg margin-right-20">The Cooperative</a> <a href="pricing" class="btn btn-default btn-lg">See Pricing</a>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center-sm text-center-xs"><!-- left text -->
+                  <a href="coop" class="btn btn-default btn-lg margin-left-10 margin-right-10 text-center-sm text-center-xs">The Cooperative</a> <a href="pricing" class="btn btn-default btn-lg margin-left-10 margin-right-10 text-center-sm text-center-xs">See Pricing</a>
                 </div> <!-- col 12 -->
                 
               </div> <!-- row -->
