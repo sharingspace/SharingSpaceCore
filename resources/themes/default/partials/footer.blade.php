@@ -3,11 +3,11 @@
 <footer id="footer">
 	<div class="copyright">
     <div class="container">
-      <div class="col-md-4 col-sm-12 pull-md-left">
+      <div class="col-md-4 col-sm-12 pull-md-left text-center-sm  text-center-xs margin-top-10">
         &copy; {{ date("Y") }} All Rights Reserved, AnyShare Society. 
       </div> <!-- col 3 -->
 
-      <div class="col-md-6 col-sm-12 hidden-xs pull-md-left">
+      <div class="col-md-6 col-sm-12 pull-md-left text-center-sm text-center-xs margin-top-10">
         <ul class="text-center nomargin list-inline mobile-block">
           <li><a href="http://blog.massmosaic.com">News</a></li>
           <li><a href="/about">About</a></li>
@@ -19,7 +19,7 @@
         </ul>
       </div>
 
-      <div class="col-md-2 col-sm-12 hidden-xs socials">
+      <div class="col-md-2 col-sm-12 socials text-center-sm text-center-xs margin-top-10">
         <a href="#" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
           <i class="fa fa-facebook"></i>
           <i class="fa fa-facebook"></i>
