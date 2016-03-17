@@ -35,14 +35,21 @@ class CommunityPermissionMiddleware
                     return $next($request);
 
                   } else {
-                    echo 'Must be a member';
-                    exit;
+
+                      if ($request->whitelabel_group->group_type=='S') {
+                        return redirect(route('login'))->withError('You must be a member of this group to view this page.');
+                      }
+
                   }
 
             // User is not logged in
             } else {
-              echo 'Must be logged in';
-              exit;
+                if ($request->whitelabel_group->group_type=='S') {
+
+                } elseif ($request->whitelabel_group->group_type=='C') {
+                     return redirect(route('login'))->withError('You must be logged in to see this.');
+                }
+
             }
 
           }
