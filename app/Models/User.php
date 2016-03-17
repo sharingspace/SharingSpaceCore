@@ -77,6 +77,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Social', 'user_id');
     }
 
+    public function isSuperAdmin() {
+        if ($this->superadmin=='1') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
 	* Returns the user Gravatar image url.
