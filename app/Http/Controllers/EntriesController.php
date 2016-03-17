@@ -11,6 +11,7 @@ use Input;
 use Redirect;
 use Helper;
 use Log;
+use Gate;
 use App\Entry;
 
 class EntriesController extends Controller
@@ -19,7 +20,7 @@ class EntriesController extends Controller
   /*
   Get the create entry page
   */
-  public function getEntry($entryID)
+  public function getEntry(Request $request, $entryID)
   {
     if ($entry = \App\Entry::find($entryID)) {
 
@@ -163,7 +164,7 @@ class EntriesController extends Controller
 	/*
 	Edit the entry
 	*/
-	public function getEdit($entryID)
+	public function getEdit(Request $request, $entryID)
 	{
       // This should be pulled into a helper or macro
       $post_types = array('want'=>'I want', 'have'=>'I have');
@@ -172,12 +173,12 @@ class EntriesController extends Controller
 
         $user = Auth::user();
 
-        if (!$entry->checkUserCanEditEntry($user)) {
-          return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
-
-        } else {
-          return view('entries.edit')->with('entry',$entry)->with('post_types',$post_types);
+        if (Gate::denies('update-entry', $entry)) {
+            abort(403,'not allowed');
         }
+
+          return view('entries.edit')->with('entry',$entry)->with('post_types',$post_types);
+
 
       } else {
         return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
@@ -253,9 +254,9 @@ class EntriesController extends Controller
 
       $user = Auth::user();
 
-    	if (!$entry->checkUserCanEditEntry($user)) {
-		    return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
-    	} else {
+        if ($request->user()->cannot('update-post', $entry)) {
+            abort(403);
+        }
 
         $entry->title	= e(Input::get('title'));
         $entry->post_type	= e(Input::get('post_type'));
@@ -284,8 +285,6 @@ class EntriesController extends Controller
 
 				return redirect()->route('entry.view', $entry->id)->with('success',trans('general.entries.messages.save_edits'));
       }
-
-    }
 
     return redirect()->route('browse')->with('error',trans('general.entries.messages.invalid'));
   }
