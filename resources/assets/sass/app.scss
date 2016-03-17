@@ -7810,10 +7810,21 @@ $color-green: #9AE14F;
   }
 }
 
+@media (min-width: $screen-sm-min) {
+  .page_banner {
+    h1 {
+      font-size:40px!important;
+      padding-top:125px;
+    }
+    h2 {
+      font-size:30px!important;
+    }
+  }
+}
 @media (min-width: $screen-md-min) {
   .page_banner {
     h1 {
-      font-size:20px!important;
+      font-size:56px!important;
       padding-top:125px;
     }
     h2 {
@@ -7821,6 +7832,8 @@ $color-green: #9AE14F;
     }
   }
 }
+
+
 /**
   * User profile page
   */
