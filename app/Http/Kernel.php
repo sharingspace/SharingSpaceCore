@@ -22,7 +22,6 @@ class Kernel extends HttpKernel
 
         // Anything that requires we have knowledge of the current community
         // goes here, since we get that info above in SubdomainMiddleware
-        \App\Http\Middleware\CommunityPermissionMiddleware::class,
         \App\Http\Middleware\ThemeMiddleware::class,
     ];
 
@@ -36,5 +35,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'subdomain' => \App\Http\Middleware\SubdomainMiddleware::class,
+        'community-auth'=>\App\Http\Middleware\CommunityPermissionMiddleware::class,
     ];
 }
