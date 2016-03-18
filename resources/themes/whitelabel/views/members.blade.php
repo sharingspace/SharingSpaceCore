@@ -31,7 +31,7 @@
                 <td class="member_thumb"><img src="{{ $member->gravatar() }}"></div></td>
                 <td><a href="{{ route('user.profile', [$member->id]) }}">{{ $member->getDisplayName() }}</a>
 
-                @if ($member->pivot->is_admin==1)
+                @if ($member->canAdmin($whitelabel_group))
                   <i class="fa fa-star text-warning"></i>
                 @endif
                 </td>
