@@ -174,7 +174,7 @@ class EntriesController extends Controller
         $user = Auth::user();
 
         if (Gate::denies('update-entry', $entry)) {
-            abort(403,'not allowed');
+            abort(403);
         }
 
           return view('entries.edit')->with('entry',$entry)->with('post_types',$post_types);
