@@ -132,7 +132,7 @@
                       </button>
                     </a>
                   </li>
-                  @if (Auth::user()->canAdmin($whitelabel_group))
+                  @if (Auth::check() && (Auth::user()->canAdmin($whitelabel_group)))
                   <li>
                     <a href="{{ route('community.edit.form')}}"><i class="fa fa-cogs"></i></a>
                   </li>
