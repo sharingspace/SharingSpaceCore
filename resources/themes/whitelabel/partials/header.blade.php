@@ -107,7 +107,7 @@
                 @endif
               @endif
             </a>
-           
+
 
 						<div class="navbar-collapse pull-right nav-main-collapse collapse">
 							<nav class="nav-main">
@@ -132,11 +132,11 @@
                       </button>
                     </a>
                   </li>
-                  {{-- @if($members->is_admin) --}}
+                  @if (Auth::user()->canAdmin($whitelabel_group))
                   <li>
                     <a href="{{ route('community.edit.form')}}"><i class="fa fa-cogs"></i></a>
                   </li>
-                {{-- @endif // is admin --}}
+                  @endif
                   <!-- SEARCH -->
     							<li class="search">
     								<a href="javascript:;">

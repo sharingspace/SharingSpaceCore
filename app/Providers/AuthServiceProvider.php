@@ -26,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        // If the user is a super admin, let them through no matter what
         $gate->before(function ($user, $ability) {
             if ($user->isSuperAdmin()) {
                 return true;

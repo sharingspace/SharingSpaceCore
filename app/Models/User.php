@@ -85,6 +85,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
     }
 
+    public function isAdminOfCommunity($community)
+    {
+      return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community->id)->where('is_admin','=','1')->count() > 0;
+    }
+
+
+    public function canAdmin($community)
+    {
+      if (($this->isAdminOfCommunity($community)) ||  ($this->isSuperAdmin())) {
+          return true;
+      } else {
+          return false;
+      }
+    }
+
+
 
     /**
 	* Returns the user Gravatar image url.
@@ -165,14 +181,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
   public function isMemberOfCommunity($community_id)
   {
-    if ($this->whereHas('communities', function ($q) use ($community_id) {
-      $q->where('community_id', '=', $community_id);
-      }))
-    {
-      return true;
-    } else {
-      return false;
-    }
+    return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community_id)->count() > 0;
   }
 
 
