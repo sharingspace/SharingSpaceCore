@@ -8,7 +8,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
- 
     'title'  => 'Privacy',
 
     'intro' => 'This is version 1.0 of the AnyShare privacy policy and was published on the 1st of February 2016. This privacy policy governs your use of the website AnyShare (“Website”) for desktop and mobile devices that was created by AnyShare Society.  The Website is for exchanging wants and haves in a variety of ways including gift, trade, sale, and collaboration.',
@@ -19,7 +18,7 @@ return [
         'p1' => 'The Website obtains the information you provide when you register your account, fill in your profile, and use its features to exchange and create together. Registration with us is optional if you want to browse parts of the website. However, please keep in mind that registration with us is mandatory in order to be able to use the many features of the Website. ',
         'p2' => 'When you become a member of the Website, you  may provide (a) your name, email address, user ID, password and other registration information; (b) transaction-related information, such as when you make purchases, respond to any offers, or download or use applications from us; (c) information you provide us when you contact us for help; (d) credit card information for purchase and use of the paid features, and; (e) information you enter into our system when using the Website, such as contact information and project information.',
         'p3' => 'We may use the information you provided us to contact your from time to time to provide you with important information, required notices and marketing promotions.',
-        'p4' => 'Customers of AnyShare can operate their own sharing hubs using the AnyShare service. When a user becomes a member of a sharing hub, they are providing their name and email to the owner of the sharing hub as well.'
+        'p4' => 'Hub owners of AnyShare can operate their own sharing hubs using the AnyShare service. When a user becomes a member of a sharing hub, they are providing their name and email to the owner of the sharing hub as well.',
       ],
 
       'automatically' => [
@@ -43,13 +42,13 @@ return [
     
     'data_retension' => [
       'title' => 'Data Retention Policy, Managing Your Information',
-      'p1' => 'We will retain User Provided data for as long as you use the Website. We will retain and use the data as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. If you’d like us to delete User Provided Data that you have provided via the Website, please contact us at info@anysha.re and we will respond in a reasonable time.',
+      'p1' => 'We will retain User Provided data from when you use the Website. We will retain and use the data as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. If you\’d like us to delete User Provided Data that you have provided via the Website, please contact us at info@anysha.re and we will respond in a reasonable time.',
     ],
 
     'third_parties' => [
       'title' => 'Third Parties',
       'p1' => 'We will never sell any personal data for advertising or other purposes.', 
-      'p2' => 'Customers of AnyShare can operate their own sharing hubs using the AnyShare service. When a user becomes a member of a sharing hub, they are providing their name and email to the owner of the sharing hub as well.',
+      'p2' => 'Hub owners of AnyShare can operate their own sharing hubs using the AnyShare service. When a user becomes a member of a sharing hub, they are providing their name and email to the owner of the sharing hub as well.',
       'p3' => 'We believe in being transparent with the third party tools we use and why we do so. We use the following third party tools:', 
       'tools' => [
         'ga' => [
