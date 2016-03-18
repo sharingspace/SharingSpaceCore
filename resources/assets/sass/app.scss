@@ -7975,7 +7975,9 @@ $color-green: #9AE14F;
 
 #pricing { 
   table  {
-  background_color:red!important;
+    color:#222;
+    font-size:12px;
+    font-weight:500;
     th {
       text-align:left;
     }
@@ -7986,6 +7988,15 @@ $color-green: #9AE14F;
   table caption {
     text-align:center;
     margin-bottom: 15px;
+  }
+
+}
+
+@media (min-width: $screen-sm-min) {
+  #pricing { 
+    table  {
+      font-size:16px;
+    }
   }
 }
 

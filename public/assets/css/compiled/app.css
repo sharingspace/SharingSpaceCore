@@ -8461,7 +8461,9 @@ Quick add
   **/
 
 #pricing table {
-  background_color: red !important;
+  color: #222;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 #pricing table th {
@@ -8476,6 +8478,12 @@ Quick add
 #pricing table caption {
   text-align: center;
   margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+  #pricing table {
+    font-size: 16px;
+  }
 }
 
 /**
