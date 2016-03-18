@@ -5,7 +5,6 @@
 @parent
 @stop
 
-
 {{-- Page content --}}
 @section('content')
 
@@ -47,11 +46,8 @@
               <li>{{ $exchange_type->name }}</li>
             @endforeach
           @endif
-
-
         </ul>
 			</div>
-
 		</div>
 
 	</div>
@@ -121,7 +117,7 @@
 
                 <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="" style="margin-bottom:14px;">
                
-                <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                <a href="#" class="entry_img_view">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
                 <br>  
                 @if ( count($entry->exchangeTypes) > 0)
                   {{--*/ $exchanges = ''; /*--}}
@@ -147,7 +143,7 @@
                   </span>
                 </span>
 
-                <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                <a href="#" class="entry_img_view">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
                 <br>  
                 @if ( count($entry->exchangeTypes) > 0)
                   {{--*/ $exchanges = ''; /*--}}

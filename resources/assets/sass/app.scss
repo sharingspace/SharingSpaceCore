@@ -8058,7 +8058,7 @@ $color-green: #9AE14F;
  * 
  **/
 
- #entry_view {
+#entry_view {
    img {
     width: 100%;
     max-width: 400px;
@@ -8081,6 +8081,14 @@ $color-green: #9AE14F;
   .checkbox {
     display: block;
   }
+}
+
+.entry_img_view {
+  color: blue;
+  font-family:Arial,san-serif;
+  font-size:15px;
+  font-weight:400;
+  color:#0066c0;
 }
 
 /**
