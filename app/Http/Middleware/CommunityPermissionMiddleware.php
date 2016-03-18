@@ -31,7 +31,7 @@ class CommunityPermissionMiddleware
 
                   $logged_in_user = Auth::user();
 
-                  if ($logged_in_user->isMemberOfCommunity($request->whitelabel_group->id)) {
+                  if ($logged_in_user->isMemberOfCommunity($request->whitelabel_group)) {
                     return $next($request);
 
                   } else {
