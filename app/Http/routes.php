@@ -329,10 +329,9 @@ Route::get('financial_assist', function () {
 });
 
 Route::post('financial_assist', array(
-  'as' => 'home',
+  'as' => 'assistance',
   'uses' => 'CommunitiesController@financialAssist'
 ));
-
 
 Route::get('/', array(
   'as' => 'home',
