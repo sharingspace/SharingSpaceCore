@@ -13,7 +13,7 @@
 	<div class="container">
 
 		<div class="row">
-      <h1 class="margin-bottom-10 size-24 text-center">{{ $whitelabel_group->name }} {{ trans('home.homepage')}}</h1>
+      <h1 class="sr-only">{{ $whitelabel_group->name }} {{ trans('home.homepage')}}</h1>
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-globe"></i>
