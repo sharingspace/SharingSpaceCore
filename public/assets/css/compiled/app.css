@@ -8570,6 +8570,14 @@ Quick add
   display: block;
 }
 
+.entry_img_view {
+  color: blue;
+  font-family: Arial,san-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #0066c0;
+}
+
 /**
  * Footer region
  * 

@@ -5,7 +5,6 @@
 @parent
 @stop
 
-
 {{-- Page content --}}
 @section('content')
 
@@ -13,7 +12,7 @@
 	<div class="container">
 
 		<div class="row">
-      <h1 class="margin-bottom-10 size-24 text-center">{{ $whitelabel_group->name }} {{ trans('home.homepage')}}</h1>
+      <h1 class="sr-only">{{ $whitelabel_group->name }} {{ trans('home.homepage')}}</h1>
 
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-globe"></i>
@@ -47,11 +46,8 @@
               <li>{{ $exchange_type->name }}</li>
             @endforeach
           @endif
-
-
         </ul>
 			</div>
-
 		</div>
 
 	</div>
@@ -121,7 +117,7 @@
 
                 <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="" style="margin-bottom:14px;">
                
-                <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                <a href="#" class="entry_img_view">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
                 <br>  
                 @if ( count($entry->exchangeTypes) > 0)
                   {{--*/ $exchanges = ''; /*--}}
@@ -147,7 +143,7 @@
                   </span>
                 </span>
 
-                <a href="#" style="color: blue;font-family:Arial,san-serif;font-size:15px;font-weight:400; color:#0066c0;">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
+                <a href="#" class="entry_img_view">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
                 <br>  
                 @if ( count($entry->exchangeTypes) > 0)
                   {{--*/ $exchanges = ''; /*--}}
