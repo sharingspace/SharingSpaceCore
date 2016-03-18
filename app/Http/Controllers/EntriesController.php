@@ -60,7 +60,7 @@ class EntriesController extends Controller
     $entry = new \App\Entry();
     $entry->title	= e(Input::get('title'));
     $entry->post_type	= e(Input::get('post_type'));
-		$entry->description	= e(Input::get('description'));
+	$entry->description	= e(Input::get('description'));
     $entry->created_by	= Auth::user()->id;
     $entry->tags	= e(Input::get('tags'));
     $entry->qty	= e(Input::get('qty'));

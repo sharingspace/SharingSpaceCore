@@ -19,7 +19,7 @@ class PagesController extends Controller
                 $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->orderBy('created_at','desc')->get();
                 return view('home')->with('entries',$entries);
             } else {
-                return view('request-access';
+                return view('request-access');
             }
 
         }
