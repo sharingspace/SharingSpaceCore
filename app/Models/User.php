@@ -100,6 +100,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       }
     }
 
+    public function canSeeCommunity($community)
+    {
+      if ((($this->isMemberOfCommunity($community)) || ($this->isSuperAdmin())) ||   ($community->group_type!='S')) {
+          return true;
+      } else {
+          return false;
+      }
+    }
+
 
 
     /**

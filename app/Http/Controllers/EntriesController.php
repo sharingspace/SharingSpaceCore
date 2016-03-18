@@ -24,6 +24,11 @@ class EntriesController extends Controller
   {
     if ($entry = \App\Entry::find($entryID)) {
 
+        if (Gate::denies('view-entry', $entry)) {
+            return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
+        }
+
+
     	$images = \DB::table('media')
     	->where('entry_id','=', $entryID)
 			->get();
@@ -169,15 +174,15 @@ class EntriesController extends Controller
       // This should be pulled into a helper or macro
       $post_types = array('want'=>'I want', 'have'=>'I have');
 
-		  if ($entry = \App\Entry::find($entryID)) {
+	  if ($entry = \App\Entry::find($entryID)) {
 
         $user = Auth::user();
 
         if (Gate::denies('update-entry', $entry)) {
-            abort(403);
+            return redirect()->route('browse')->with('error',trans('general.entries.messages.not_allowed'));
         }
 
-          return view('entries.edit')->with('entry',$entry)->with('post_types',$post_types);
+        return view('entries.edit')->with('entry',$entry)->with('post_types',$post_types);
 
 
       } else {

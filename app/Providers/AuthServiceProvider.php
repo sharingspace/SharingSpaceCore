@@ -34,6 +34,20 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        $gate->define('view-entry', function ($user, $community) {
+          if (($community->group_type=='O') || ($user->isMemberOfCommunity($community))) {
+              return true;
+          }
+        });
+
+        $gate->define('view-browse', function ($user, $community) {
+          if ($user->canSeeCommunity($community)) {
+              return true;
+          }
+        });
+
+
+
         $gate->define('update-entry', function ($user, $entry) {
             return $user->id === $entry->created_by;
         });

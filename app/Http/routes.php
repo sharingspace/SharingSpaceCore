@@ -281,7 +281,10 @@ Route::group(array('prefix' => 'community'), function () {
 });
 
 
-
+// Request access to a community
+Route::get('request-access', function () {
+  return view('request-access');
+});
 
 
 

@@ -14,8 +14,17 @@ class PagesController extends Controller
   {
 
     if ($request->whitelabel_group) {
-      $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->orderBy('created_at','desc')->get();
-      return view('home')->with('entries',$entries);
+        if (Auth::check()) {
+            if (Auth::user()->canSeeCommunity($request->whitelabel_group)) {
+                $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->orderBy('created_at','desc')->get();
+                return view('home')->with('entries',$entries);
+            } else {
+                return view('request-access';
+            }
+
+        }
+
+
     } else {
       $communities = \App\Community::orderBy('created_at','DESC')->IsPublic()->take(20)->get();
       return view('home')->with('communities',$communities);
