@@ -86,7 +86,7 @@
                 <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
               @endif
                 {{ Form::button('<i class="fa fa-trash"></i> Delete', array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
-            @endif
+            @endcan
 
           {{ Form::close() }}
 
