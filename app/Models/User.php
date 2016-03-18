@@ -179,9 +179,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   }
 
 
-  public function isMemberOfCommunity($community_id)
+  public function isMemberOfCommunity($community)
   {
-    return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community_id)->count() > 0;
+    return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community->id)->count() > 0;
   }
 
 
