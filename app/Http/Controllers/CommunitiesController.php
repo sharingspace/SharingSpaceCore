@@ -244,7 +244,7 @@ class CommunitiesController extends Controller
     $email = Input::get('email');
 
     // Send the application
-    Mail::send(['text' => 'email.freeAnyshareText'], ['data'=>$input], 
+    Mail::send(['text' => 'email.assistance.freeAnyshareText'], ['data'=>$input], 
       function ($m) use ($email, $firstName, $lastName) {
       $m->to('info@AnySha.re', 'AnyShare');
       $m->from($email, $firstName.' '.$lastName);
