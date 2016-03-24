@@ -281,12 +281,14 @@ Route::group(array('prefix' => 'community'), function () {
 });
 
 
+
 // Request access to a community
-Route::get('request-access', function () {
-  return view('request-access');
-});
-
-
+Route::get('request-access',
+  [
+    'as' => 'community.request-access.form',
+    'uses' => 'CommunitiesController@getRequestAccess'
+  ]
+);
 
 // Stripe Webhook...
 Route::post('webhook/stripe', [
