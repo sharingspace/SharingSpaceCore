@@ -4,6 +4,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application  Mode
+    |--------------------------------------------------------------------------
+    |
+    | Default to production, but let environmental variables override.
+    |
+    */
+    'env' => env('APP_ENV', 'production'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |
@@ -36,7 +46,7 @@ return [
     | This is the domain name, without protocol or port numbers.
     |
     */
-    'domain' => env('APP_DOMAIN', 'massmosaic5.dev'),
+    'domain' => env('APP_DOMAIN', 'anyshare.dev'),
 
 
 
