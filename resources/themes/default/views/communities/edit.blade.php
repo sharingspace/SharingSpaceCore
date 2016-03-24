@@ -18,9 +18,9 @@
 </section>
 
 <!-- -->
-			<section>
-				<div class="container margin-top-20">
-					<div class="row">
+<section>
+	<div class="container margin-top-20">
+		<div class="row">
 
             <!-- payment form -->
             <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
@@ -31,33 +31,34 @@
               <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+30 days"))}}. {{trans('general.community.p3')}}</p>
             </div>
 
-			<!-- LEFT TEXT -->
-			<div class="col-md-6">
-				<!-- Name -->
-				<div class="form-group{{ $errors->first('name', ' has-error') }}">
-					<label for="name">{{trans('general.community.name')}} *</label>
+            <!-- LEFT TEXT -->
+            <div class="col-md-6">
+
+            	<!-- Name -->
+            	<div class="form-group{{ $errors->first('name', ' has-error') }}">
+            		<label for="name">{{trans('general.community.name')}} *</label>
                     <input type="text" name="name" class="form-control" placeholder="{{trans('general.community.name_placeholder')}}" required="" value="{{ old('name') }}">
                     {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
-			</div>
+                </div>
 
-              <!-- Slug -->
-			<div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
-                <label for="subdomain">{{trans('general.community.subdomain')}} *</label>
-				  <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain_placeholder')}}" required="" value="{{ old('subdomain') }}">
-                {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
-			</div>
+                <!-- Slug -->
+                <div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
+                    <label for="subdomain">{{trans('general.community.subdomain')}} *</label>
+                	  <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain_placeholder')}}" required="" value="{{ old('subdomain') }}">
+                    {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
+                </div>
 
-              <!-- Type -->
-              <div class="form-group{{ $errors->first('group_type', ' has-error') }}">
-                <label for="group_type">{{trans('general.community.type')}} *</label>
-                  {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
-                  {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
-              </div>
-			</div>
-			<!-- /LEFT TEXT -->
+                <!-- Type -->
+                <div class="form-group{{ $errors->first('group_type', ' has-error') }}">
+                    <label for="group_type">{{trans('general.community.type')}} *</label>
+                    {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
+                    {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
+                </div>
+            </div>
+            <!-- /LEFT TEXT -->
 
-			<!-- PAYMENT -->
-			<div class="col-md-5">
+            <!-- PAYMENT -->
+            <div class="col-md-5">
               {{-- <h2 class="size-16 text-muted">{{ trans('general.community.payment_info') }}</h2> --}}
 
                 <!-- Subscription -->
@@ -74,32 +75,32 @@
                 <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
                 </div>
 
-          		<div class="form-group col-md-12 col-sm-12" id="form-card-number">
-          		<label for="card-number">{{trans('general.community.card_num')}} *
-                  <i class="fa fa-cc-visa help-text"></i>
-                  <i class="fa fa-cc-amex"></i>
-                  <i class="fa fa-cc-mastercard"></i>
-                  <i class="fa fa-cc-diners-club"></i>
-                  <i class="fa fa-cc-jcb"></i>
-                  <i class="fa fa-cc-discover"></i>
-                </label>
-				  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value="4242424242424242"' : '') !!} />
-			    </div>
+                <div class="form-group col-md-12 col-sm-12" id="form-card-number">
+                    <label for="card-number">{{trans('general.community.card_num')}} *
+                        <i class="fa fa-cc-visa help-text"></i>
+                        <i class="fa fa-cc-amex"></i>
+                        <i class="fa fa-cc-mastercard"></i>
+                        <i class="fa fa-cc-diners-club"></i>
+                        <i class="fa fa-cc-jcb"></i>
+                        <i class="fa fa-cc-discover"></i>
+                    </label>
+            	  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value="4242424242424242"' : '') !!} />
+                </div>
 
                 <div class="form-group col-md-3 col-sm-12">
-					<label for="exp_month">{{trans('general.community.month')}} *</label>
-					<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
+            		<label for="exp_month">{{trans('general.community.month')}} *</label>
+            		<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
                 </div>
 
                 <div class="form-group col-md-3 col-sm-12">
                     <label for="exp_year">{{ trans('general.community.year') }} *</label>
                     <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder=" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
-				</div>
+            	</div>
 
-				<div class="form-group col-md-3 col-sm-12">
-					<label for="cvc">{{ trans('general.community.cvc') }} *</label>
-					<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
-				</div>
+            	<div class="form-group col-md-3 col-sm-12">
+            		<label for="cvc">{{ trans('general.community.cvc') }} *</label>
+            		<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
+            	</div>
 
                 <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top:30px;cursor: pointer; ">
                   <span style="display:block;">{{trans('general.community.coupon')}} <i class="fa fa-ticket"></i></span>
@@ -120,14 +121,14 @@
                     </div>
                 </div>
 
-								</div>
+			</div>
 
-						</div>
+			</div>
             </form>
-					</div>
-				</div>
-			</section>
-			<!-- / -->
+		</div>
+	</div>
+</section>
+<!-- / -->
 
   @section('moar_scripts')
 
