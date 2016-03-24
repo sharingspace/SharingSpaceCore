@@ -38,7 +38,7 @@ class CommunityPermissionMiddleware
                     return $next($request);
                 } else {
                     LOG::debug('Whitelabel routing: User is not allowed to view this group.');
-                    return redirect(route('community.request-access.form'))->withError('You must be a member of this group to view this page.');
+                    return view('request-access')->withError('You must be a member of this group to view this page.');
                 }
 
             // User is not logged in
@@ -46,7 +46,7 @@ class CommunityPermissionMiddleware
                 LOG::debug('Whitelabel routing: User is not logged in.');
                 if ($request->whitelabel_group->group_type=='S') {
                     LOG::debug('Whitelabel routing: User is not logged in and this community requires authorization.');
-                    return redirect(route('login'))->withError('You must be logged in and a member to see this.');
+                    return view('auth/login-unbranded')->withError('You must be logged in and a member to see this.');
                 }
                 LOG::debug('Whitelabel routing: User is not logged in, but the community does not require authorization.');
                 return $next($request);
