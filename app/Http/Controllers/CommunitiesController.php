@@ -15,6 +15,7 @@ use Form;
 use Pagetheme;
 use Mail;
 use Helper;
+use Carbon;
 
 class CommunitiesController extends Controller
 {
@@ -131,6 +132,7 @@ class CommunitiesController extends Controller
       $stripe_subscription = $customer
       ->subscription()
       ->onPlan(e(Input::get('subscription_type')))
+      ->trialFor(Carbon::now()->addDays(30))
       ->create();
 
       // set the given discount
@@ -244,14 +246,14 @@ class CommunitiesController extends Controller
     $email = Input::get('email');
 
     // Send the application
-    Mail::send(['text' => 'email.freeAnyshareText'], ['data'=>$input], 
+    Mail::send(['text' => 'email.freeAnyshareText'], ['data'=>$input],
       function ($m) use ($email, $firstName, $lastName) {
       $m->to('info@AnySha.re', 'AnyShare');
       $m->from($email, $firstName.' '.$lastName);
       $m->subject("Application for free anyshare hub");
     });
-    
-    return Redirect::back()->with('success',trans('pricing.financial_assist.success'));  
+
+    return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
   }
 
 }
