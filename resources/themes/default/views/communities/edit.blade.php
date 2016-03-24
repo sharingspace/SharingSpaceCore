@@ -26,18 +26,13 @@
             <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
               {!! csrf_field() !!}
 
-            <div class="col-md-12">
-              <ul class="text-muted">
-                <li>{{trans('general.community.p1')}} {{date('jS F, Y', strtotime("+30 days"))}}</li>
-                <li>{{trans('general.community.p2')}}</li>
-              </ul>
+            <div class="col-md-12 text-muted">
+              <p class="margin-bottom-10">{{trans('general.community.p1')}}</p>
+              <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+30 days"))}}. {{trans('general.community.p3')}}</p>
             </div>
 
 						<!-- LEFT TEXT -->
 						<div class="col-md-6">
-
-              <h2 class="size-16 uppercase">{{ trans('general.nav.create_sharing_hub') }}</h2>
-
 							<!-- Name -->
 							<div class="form-group{{ $errors->first('name', ' has-error') }}">
 								<label for="name">{{trans('general.community.name')}} *</label>
@@ -64,14 +59,14 @@
 
 						<!-- PAYMENT -->
 						<div class="col-md-5">
-              <h2 class="size-16 uppercase">{{trans('general.community.payment_info')}}</h2>
+              <h2 class="size-16 text-muted">{{trans('general.community.payment_info')}}</h2>
 
                 <!-- Subscription -->
                 <div class="form-group col-md-12 col-sm-12">
                    <label for="cvc">{{trans('general.community.sub_type')}} *</label>
                     <select class="form-control" name="subscription_type">
-                        <option value="MONTHLY-HUB-SUBSCRIPTION">{{trans('general.community.monthly')}} ($1/{{trans('general.community.month')}})</option>
-                        <option value="ANNUAL-HUB-SUBSCRIPTION">{{trans('general.community.annual')}} ($12/{{trans('general.community.year')}})</option>
+                        <option value="MONTHLY-HUB-SUBSCRIPTION">{{trans('general.community.monthly')}} ($5/{{trans('general.community.month')}}) {{trans('general.community.after_trail')}}</option>
+                        <option value="ANNUAL-HUB-SUBSCRIPTION">{{trans('general.community.annual')}} ($100/{{trans('general.community.year')}})</option>
                     </select>
                 </div>
 
@@ -89,7 +84,7 @@
                       <i class="fa fa-cc-jcb"></i>
                       <i class="fa fa-cc-discover"></i>
                     </label>
-									  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="4242424242424242" />
+									  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="" />
 								    </div>
 
                     <div class="form-group col-md-3 col-sm-12">
@@ -107,8 +102,8 @@
   										<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" data-stripe="cvc" />
   									</div>
 
-                    <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top: 30px;">
-                        <i class="fa fa-ticket"></i> {{trans('general.community.coupon')}}
+                    <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top:30px;cursor: pointer; ">
+                      <span style="display:block;">{{trans('general.community.coupon')}} <i class="fa fa-ticket"></i></span>
                     </div>
 
                     <!-- Coupon -->
@@ -118,7 +113,7 @@
                     </div>
 
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
-                        <button type="submit" class="btn btn-primary" id="create_community">{{trans('general.nav.create')}}</button>
+                        <button type="submit" class="btn btn-primary" id="create_community">{{trans('general.community.start_trial')}}</button>
                     </div>
                     <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
                         <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
