@@ -42,6 +42,10 @@ class CommunitiesController extends Controller
     return view('browse');
   }
 
+  public function getRequestAccess() {
+      return view('request-access');
+  }
+
 
 
   /*
