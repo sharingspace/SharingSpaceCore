@@ -45,7 +45,7 @@ Route::group(array('prefix' => 'api/v1'), function () {
   */
   Route::group(array('prefix' => 'slack'), function () {
     Route::post('members', '\App\Http\Controllers\Api\SlackController@slackShowMembers');
-    Route::post('need', '\App\Http\Controllers\Api\EntriesController@postSlackEntry');
+    Route::post('need', '\App\Http\Controllers\Api\SlackController@slackAddNeedEntry');
   });
 
 });

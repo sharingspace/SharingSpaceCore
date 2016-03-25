@@ -193,6 +193,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community->id)->count() > 0;
   }
 
+  public function getSlackUsername($community) {
+      return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
+  }
 
   /**
   * Returns the user full name, it simply concatenates
