@@ -20,10 +20,12 @@ class SlackController extends Controller
 
         if (Input::get('token')!=config('services.slack.members')) {
             $message['text'] = 'That token is incorrect.';
+            return response()->json($message);
         }
 
         if (!$community = Community::where('subdomain','=',e(Input::get('text')))->first()) {
             $message['text'] = 'Invalid community.';
+            return response()->json($message);
         }
 
         $all_members = $community->members()->get();
