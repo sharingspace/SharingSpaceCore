@@ -73,7 +73,8 @@ class SlackController extends Controller
         $entry->post_type = 'want';
 
 
-        $message['response_type'] = 'ephemeral';
+        //$message['response_type'] = 'ephemeral';
+        $message['response_type'] = 'in_channel';
 
         if (Input::get('token')!=config('services.slack.need')) {
             $message['text'] = 'That token is incorrect.';
