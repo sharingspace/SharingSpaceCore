@@ -326,7 +326,7 @@ class CommunitiesController extends Controller
             $members .= $member->getDisplayName().', ';
         }
 
-        $message['response_type'] = 'in_channel',
+        $message['response_type'] = 'in_channel';
         $message['text'] = $members;
 
         //print_r($members);
