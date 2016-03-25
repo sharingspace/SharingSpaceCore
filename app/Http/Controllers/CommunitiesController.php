@@ -313,7 +313,7 @@ class CommunitiesController extends Controller
 
 
         //print_r($members);
-        return \Response::json($members);
+        return $members;
 
 
     }
