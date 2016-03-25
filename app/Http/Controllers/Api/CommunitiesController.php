@@ -21,6 +21,9 @@ class CommunitiesController extends ApiGuardController
       'memberlist' => [
           'keyAuthentication' => false
       ],
+      'slackShowMembers' => [
+          'keyAuthentication' => false
+      ],
   ];
 
 
@@ -55,5 +58,7 @@ class CommunitiesController extends ApiGuardController
 
         }
     }
+
+
 
 }

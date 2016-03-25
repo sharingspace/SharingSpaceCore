@@ -282,57 +282,6 @@ class CommunitiesController extends Controller
     return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
     }
 
-    public function postShowMembers(Request $request) {
-
-        // Slack will send:
-        // token=XXXXX
-        // team_id=XXX
-        // team_domain=example
-        // channel_id=XXXXX
-        // channel_name=test
-        // user_id=XXXXXX
-        // user_name=Steve
-        // command=/members
-        // text=94070
-        // response_url=https://hooks.slack.com/commands/XXX/XXX
-
-
-        // {
-        //     "response_type": "ephemeral",
-        //     "text": "Here are the currently open tickets:",
-        //     "attachments": [
-        //         {
-        //             "text": "#123456 http://domain.com/ticket/123456 \n
-        //             #123457 http://domain.com/ticket/123457 \n
-        //             #123458 http://domain.com/ticket/123458 \n
-        //             #123459 http://domain.com/ticket/123459 \n
-        //             #123460 http://domain.com/ticket/123460"
-        //         }
-        //     ]
-        // }
-
-
-        Log::info($request->input());
-
-        if (Input::get('token')!=config('services.slack.members')) {
-            return response()->json(['success'=>false, 'error'=>'Invalid token']);
-        }
-
-        $community = Community::where('subdomain','=',e(Input::get('text')))->first();
-        $all_members = $community->members()->get();
-        $members = $all_members->count().' members in the '.$community->name.' hub: ';
-
-        foreach ($all_members as $member) {
-            $members .= $member->getDisplayName().', ';
-        }
-
-        $message['response_type'] = 'in_channel';
-        $message['text'] = $members;
-
-        //print_r($members);
-        return $message;
-
-
-    }
+    
 
 }
