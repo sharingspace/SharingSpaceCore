@@ -311,9 +311,10 @@ class CommunitiesController extends Controller
             $members .= $member->getDisplayName().',';
         }
 
+        $message['text'] = $members;
 
         //print_r($members);
-        return $members;
+        return $message;
 
 
     }
