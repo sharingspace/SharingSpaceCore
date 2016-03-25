@@ -113,13 +113,10 @@ class SlackController extends Controller
         if ($community->entries()->save($entry)) {
             $entry->exchangeTypes()->sync(\App\ExchangeType::all());
             //$community->exchangeTypes()->saveMany(\App\ExchangeType::all());
-            $message['text'] = $entry->title.' added to '.$community_slug.'!';
+            $message['text'] = '<https://'.$community->subdomain.'.'.config('app.domain').'/entry/'.$entry->id.'|'.$entry->title.'> added to '.$community_slug.'!';
         } else {
             $message['text'] = 'Error ';
         }
-
-
-
 
 
         return response()->json($message);
