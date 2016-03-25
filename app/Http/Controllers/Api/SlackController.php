@@ -15,26 +15,33 @@ class SlackController extends Controller
 
     public function slackShowMembers(Request $request) {
 
+        $message['response_type'] = 'in_channel';
+        $count = 0;
 
         if (Input::get('token')!=config('services.slack.members')) {
-            return response()->json(['success'=>false, 'error'=>'Invalid token']);
+            $message['text'] = 'That token is incorrect.';
         }
 
         if (!$community = Community::where('subdomain','=',e(Input::get('text')))->first()) {
-            return response()->json(['success'=>false, 'error'=>'Invalid subdomain']);
+            $message['text'] = 'Invalid community.';
         }
 
         $all_members = $community->members()->get();
-        $members = $all_members->count().' members in the <https://'.$community->subdomain.''.config('app.domain').'|'.$community->name.'> hub:'."\n";
+        $members = $all_members->count().' members in the <https://'.$community->subdomain.'.'.config('app.domain').'|'.$community->name.'> hub:'."\n";
 
         foreach ($all_members as $member) {
-            $members .= $member->getDisplayName().', ';
+
+            $members .= $member->getDisplayName();
+            if (count($all_members) > $count) {
+                echo ', ';
+            }
+            $count++;
         }
 
-        $message['response_type'] = 'in_channel';
+
         $message['text'] = $members;
 
-        return $message;
+        return response()->json($message);
 
     }
 
