@@ -55,10 +55,6 @@ class SlackController extends Controller
         $text = explode(' ',$text_pre[0]);
         $community_slug = trim($text_pre[1]);
 
-        // print_r($text);
-        //
-        // print_r($text_pre);
-        //exit;
 
         $entry = new Entry;
 
@@ -68,8 +64,8 @@ class SlackController extends Controller
             $entry->qty = $text[0];
         }
 
-        if (array_key_exists('1',$text)) {
-            $entry->title = $text[1];
+        if (array_key_exists('0',$text_pre)) {
+            $entry->title = $text_pre[0];
         } else {
             $entry->title = $text[0];
         }
@@ -116,7 +112,7 @@ class SlackController extends Controller
         if ($community->entries()->save($entry)) {
             $entry->exchangeTypes()->sync(\App\ExchangeType::all());
             //$community->exchangeTypes()->saveMany(\App\ExchangeType::all());
-            $message['text'] = 'Entry added!';
+            $message['text'] = $entry->title.' added to '.$community_slug.'!';
         } else {
             $message['text'] = 'Error ';
         }
