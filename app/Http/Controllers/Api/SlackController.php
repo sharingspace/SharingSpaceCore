@@ -72,8 +72,10 @@ class SlackController extends Controller
 
         if ($postType=='want') {
             $entry->post_type = 'want';
+            $use_token = config('services.slack.want');
         } else {
             $entry->post_type = 'have';
+            $use_token = config('services.slack.have');
         }
 
 
@@ -81,7 +83,7 @@ class SlackController extends Controller
         //$message['response_type'] = 'ephemeral';
         $message['response_type'] = 'in_channel';
 
-        if (Input::get('token')!=config('services.slack.need')) {
+        if (Input::get('token')!=$use_token) {
             $message['text'] = 'That token is incorrect.';
             return response()->json($message);
         }

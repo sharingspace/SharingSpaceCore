@@ -72,7 +72,8 @@ return [
 
     'slack' => array(
         'members' => env('SLACK_MEMBERS_TOKEN'),
-        'need' => env('SLACK_NEED_TOKEN'),
+        'have' => env('SLACK_HAVE_TOKEN'),
+        'want' => env('SLACK_WANT_TOKEN'),
     ),
 
 ];
