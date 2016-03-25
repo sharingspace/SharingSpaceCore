@@ -305,10 +305,10 @@ class CommunitiesController extends Controller
 
         $community = Community::where('subdomain','=',e(Input::get('text')))->first();
         $all_members = $community->members()->get();
-        $members[] = $all_members->count().' members: ';
+        $members = $all_members->count().' members: <br>';
 
         foreach ($all_members as $member) {
-            $members[] = $member->getDisplayName();
+            $members .= $member->getDisplayName().',';
         }
 
 
