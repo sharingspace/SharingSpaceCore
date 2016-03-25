@@ -305,7 +305,7 @@ class CommunitiesController extends Controller
 
         $community = Community::where('subdomain','=',e(Input::get('text')))->first();
         $all_members = $community->members()->get();
-        $members = $all_members->count().' members in the '.$community->name.' hub: <br>';
+        $members = $all_members->count().' members in the '.$community->name.' hub: ';
 
         foreach ($all_members as $member) {
             $members .= $member->getDisplayName().',';
