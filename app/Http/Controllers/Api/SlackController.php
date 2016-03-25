@@ -49,7 +49,7 @@ class SlackController extends Controller
 
     }
 
-    public function slackAddNeedEntry(Request $request) {
+    public function slackAddWantEntry(Request $request) {
 
         $text_pre = explode(' in:',Input::get('text'));
         $text = explode(' ',$text_pre[0]);
@@ -70,7 +70,7 @@ class SlackController extends Controller
             $entry->title = $text[0];
         }
 
-        $entry->post_type = 'need';
+        $entry->post_type = 'want';
 
 
         $message['response_type'] = 'ephemeral';

@@ -14,6 +14,6 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
       'webhook/stripe',
       'api/v1/slack/members',
-      'api/v1/slack/need'
+      'api/v1/slack/want'
     ];
 }
