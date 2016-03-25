@@ -30,12 +30,12 @@ class SlackController extends Controller
         $members = $all_members->count().' members in the <https://'.$community->subdomain.'.'.config('app.domain').'|'.$community->name.'> hub:'."\n";
 
         foreach ($all_members as $member) {
-
-            $members .= $member->getDisplayName();
+            $count++;
+            $members .= '<https://'.$community->subdomain.'.'.config('app.domain').'/users/'.$member->id.'|'.$member->getDisplayName().'>';
             if (count($all_members) > $count) {
                 $members .= ', ';
             }
-            $count++;
+
         }
 
 
