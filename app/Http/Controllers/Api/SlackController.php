@@ -33,7 +33,7 @@ class SlackController extends Controller
 
             $members .= $member->getDisplayName();
             if (count($all_members) > $count) {
-                echo ', ';
+                $members .= ', ';
             }
             $count++;
         }
