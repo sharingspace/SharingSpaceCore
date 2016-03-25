@@ -49,7 +49,7 @@ class SlackController extends Controller
 
     }
 
-    public function slackAddWantEntry(Request $request) {
+    public function slackAddEntry(Request $request, $postType = 'want') {
 
         $text_pre = explode(' in:',Input::get('text'));
         $text = explode(' ',$text_pre[0]);
@@ -70,7 +70,12 @@ class SlackController extends Controller
             $entry->title = $text[0];
         }
 
-        $entry->post_type = 'want';
+        if ($postType=='want') {
+            $entry->post_type = 'want';
+        } else {
+            $entry->post_type = 'have';
+        }
+
 
 
         //$message['response_type'] = 'ephemeral';
@@ -113,7 +118,7 @@ class SlackController extends Controller
         if ($community->entries()->save($entry)) {
             $entry->exchangeTypes()->sync(\App\ExchangeType::all());
             //$community->exchangeTypes()->saveMany(\App\ExchangeType::all());
-            $message['text'] = '<https://'.$community->subdomain.'.'.config('app.domain').'/entry/'.$entry->id.'|'.$entry->title.'> added to '.$community_slug.'!';
+            $message['text'] = 'a new '.strtoupper($entry->post_type).' for  <https://'.$community->subdomain.'.'.config('app.domain').'/entry/'.$entry->id.'|'.$entry->title.'> added to '.$community_slug.'!';
         } else {
             $message['text'] = 'Error ';
         }
