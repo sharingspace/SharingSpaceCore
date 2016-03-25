@@ -14,7 +14,7 @@ class AddAdminFieldToUsers extends Migration
     {
         Schema::table('users', function(Blueprint $table)
         {
-          $table->string('superadmin')->default(0);
+          $table->boolean('superadmin')->default(0);
         });
     }
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJoinRequestsTable extends Migration
+class CreateInviteRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateJoinRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('community_join_requests', function (Blueprint $table) {
+        Schema::create('community_user_invites', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable()->default(NULL);
+            $table->string('name');
+            $table->string('email');
+            $table->integer('admin_id');
             $table->integer('community_id');
             $table->text('message')->nullable()->default(NULL);
-            $table->date('approved_at')->nullable()->default(NULL);
-            $table->integer('approved_by')->nullable()->default(NULL);
-            $table->date('rejected_at')->nullable()->default(NULL);
-            $table->integer('rejected_by')->nullable()->default(NULL);
+            $table->date('accepted_at')->nullable()->default(NULL);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateJoinRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('community_join_requests');
+        Schema::dropIfExists('community_user_invites');
     }
 }
