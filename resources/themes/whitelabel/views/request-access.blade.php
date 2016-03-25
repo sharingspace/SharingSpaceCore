@@ -19,6 +19,14 @@
 
         <div class="col-md-6 col-md-offset-3">
 
+            @if ($requests > 0)
+                <!-- ALERT -->
+               <div class="alert alert-mini alert-success margin-bottom-30">
+                   <strong>Awesome!</strong> You have asked to become a member of this community.  You will be notified by email when an admin approves your membership.
+               </div><!-- /ALERT -->
+            @else
+
+
 			<!-- ALERT -->
 			<div class="alert alert-mini alert-danger margin-bottom-30">
 				<strong>Oops!</strong> You must be a member of this community to view it.
@@ -30,6 +38,7 @@
 				</div>
 
 				<form class="nomargin" method="post" autocomplete="off" action="{{ route('community.request-access.save') }}">
+                    {!! csrf_field() !!}
 					<div class="clearfix">
 
                         <!-- Message -->
@@ -37,7 +46,7 @@
                             <label>Message to Hub Admin:</label>
                             <!-- textarea -->
 
-							<textarea rows="3" class="form-control" data-maxlength="140" data-info="textarea-words-info" placeholder="Fancy Textarea..."></textarea>
+							<textarea rows="3" class="form-control" data-maxlength="140" data-info="textarea-words-info" name="message" placeholder="Message to the admin... "></textarea>
 							<span class="fancy-hint size-11 text-muted">
 								<strong>Hint:</strong> Max 140 characters
 								<span class="pull-right">
@@ -62,8 +71,10 @@
 					</div>
 
 				</form>
+                @endif
 
 			</div>
+
   		</div>
 
   </div>

@@ -15,6 +15,7 @@ use Pagetheme;
 use Mail;
 use Helper;
 use Carbon;
+use DB;
 
     class CommunitiesController extends Controller
     {
@@ -45,7 +46,12 @@ use Carbon;
     Show the request access form
     */
     public function getRequestAccess(Request $request) {
-      return view('request-access');
+        $user = Auth::user();
+        $requests = DB::table('community_join_requests')
+        ->where('user_id','=',$user->id)
+        ->where('community_id','=',$request->whitelabel_group->id)
+        ->count();
+        return view('request-access')->with('requests',$requests);
     }
 
     /*
@@ -61,7 +67,7 @@ use Carbon;
         ]
 
         );
-    return view('request-access');
+        return redirect()->route('community.request-access.form');
     }
 
 
@@ -91,10 +97,6 @@ use Carbon;
     public function postCreate(Request $request)
     {
 
-    // echo '<pre>';
-    // print_r($_POST);
-    // echo '</pre>';
-    // exit;
     $token = Input::get('stripeToken');
 
     // No stripe token - something went wrong :(
