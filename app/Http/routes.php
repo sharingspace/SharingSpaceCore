@@ -285,6 +285,7 @@ Route::group(array('prefix' => 'community'), function () {
 // Request access to a community
 Route::get('request-access',
   [
+    'middleware' => ['auth'],
     'as' => 'community.request-access.form',
     'uses' => 'CommunitiesController@getRequestAccess'
   ]
