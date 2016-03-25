@@ -38,6 +38,16 @@ Route::group(array('prefix' => 'api/v1'), function () {
     Route::get('/', '\App\Http\Controllers\Api\EntriesController@all');
   });
 
+  /*
+  |--------------------------------------------------------------------------
+  | API Slack Slash Routes
+  |--------------------------------------------------------------------------
+  */
+  Route::group(array('prefix' => 'slack'), function () {
+    Route::post('members', '\App\Http\Controllers\CommunitiesController@postShowMembers');
+    Route::post('need', '\App\Http\Controllers\Api\EntriesController@postSlackEntry');
+  });
+
 });
 
 

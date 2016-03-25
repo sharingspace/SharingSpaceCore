@@ -70,4 +70,8 @@ return [
         'level' => 'debug',
     ),
 
+    'slack' => array(
+        'members' => env('SLACK_MEMBERS_TOKEN'),
+    ),
+
 ];

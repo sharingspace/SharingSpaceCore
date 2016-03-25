@@ -16,8 +16,10 @@ use Mail;
 use Helper;
 use Carbon;
 use DB;
+use Log;
+use App\Community;
 
-    class CommunitiesController extends Controller
+class CommunitiesController extends Controller
     {
 
     protected $community;
@@ -280,4 +282,40 @@ use DB;
     return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
     }
 
+    public function postShowMembers(Request $request) {
+
+        // Slack will send:
+        // token=XXXXX
+        // team_id=XXX
+        // team_domain=example
+        // channel_id=XXXXX
+        // channel_name=test
+        // user_id=XXXXXX
+        // user_name=Steve
+        // command=/members
+        // text=94070
+        // response_url=https://hooks.slack.com/commands/XXX/XXX
+
+
+        Log::info($request->input());
+
+        if (Input::get('token')!=config('services.slack.members')) {
+            return response()->json(['success'=>false, 'error'=>'Invalid token']);
+        }
+
+        $community = Community::where('subdomain','=',e(Input::get('text')))->first();
+        $all_members = $community->members()->get();
+        $members[] = $all_members->count().' members: ';
+
+        foreach ($all_members as $member) {
+            $members[] = $member->getDisplayName();
+        }
+
+
+        //print_r($members);
+        return \Response::json($members);
+
+
     }
+
+}
