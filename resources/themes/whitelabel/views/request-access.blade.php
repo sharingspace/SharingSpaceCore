@@ -29,7 +29,7 @@
 					<h2 class="size-20">Request Access</h2>
 				</div>
 
-				<form class="nomargin" method="post" autocomplete="off">
+				<form class="nomargin" method="post" autocomplete="off" action="{{ route('community.request-access.save') }}">
 					<div class="clearfix">
 
                         <!-- Message -->

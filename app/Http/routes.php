@@ -291,6 +291,15 @@ Route::get('request-access',
   ]
 );
 
+// Request access to a community
+Route::post('request-access',
+  [
+    'middleware' => ['auth'],
+    'as' => 'community.request-access.save',
+    'uses' => 'CommunitiesController@postRequestAccess'
+  ]
+);
+
 // Stripe Webhook...
 Route::post('webhook/stripe', [
   'as' => 'stripe.webhook',

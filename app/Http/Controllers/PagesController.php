@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -23,7 +22,7 @@ class PagesController extends Controller
                 return view('home')->with('entries',$entries);
             } else {
                 LOG::debug('Whitelabel routing: User is logged in but cannot see this homepage');
-                return view('request-access')->withError('You must be a member of this group to view this page.');
+                return redirect()->route('community.request-access.form')->withError('You must be a member of this group to view this page.');
             }
 
 

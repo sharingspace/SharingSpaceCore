@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -17,61 +16,80 @@ use Mail;
 use Helper;
 use Carbon;
 
-class CommunitiesController extends Controller
-{
+    class CommunitiesController extends Controller
+    {
 
-  protected $community;
+    protected $community;
 
-  public function __construct(\App\Community $community)
-  {
+    public function __construct(\App\Community $community)
+    {
       $this->community = $community;
-  }
+    }
 
 
-  public function getHomepage()
-  {
+    public function getHomepage()
+    {
     return view('home');
-  }
+    }
 
 
-  /*
-  Get the entries view in current community
-  */
-  public function getEntriesView()
-  {
+    /*
+    Get the entries view in current community
+    */
+    public function getEntriesView()
+    {
     return view('browse');
-  }
+    }
 
-  public function getRequestAccess() {
+    /*
+    Show the request access form
+    */
+    public function getRequestAccess(Request $request) {
       return view('request-access');
-  }
+    }
+
+    /*
+    Save request
+    */
+    public function postRequestAccess(Request $request) {
+      $user = Auth::user();
+      DB::table('community_join_requests')->insert(
+        [
+        'user_id' => $user->id,
+        'community_id' => $request->whitelabel_group->id,
+        'message' => e(Input::get('message')),
+        ]
+
+        );
+    return view('request-access');
+    }
 
 
 
-  /*
-  Get the members in current community
-  */
-  public function getMembers(Request $request)
-  {
+    /*
+    Get the members in current community
+    */
+    public function getMembers(Request $request)
+    {
     $members = $request->whitelabel_group->members()->get();
     return view('members')->with('members',$members);
-  }
+    }
 
-  /*
-  Get the create community page
-  */
-  public function getCreate()
-  {
+    /*
+    Get the create community page
+    */
+    public function getCreate()
+    {
     $themes = \App\Pagetheme::select('name')->where('public','=',1)->get()->lists('name');
     return view('communities.edit')->with('themes',$themes);
-  }
+    }
 
 
-  /*
-  * Save new community
-  */
-  public function postCreate(Request $request)
-  {
+    /*
+    * Save new community
+    */
+    public function postCreate(Request $request)
+    {
 
     // echo '<pre>';
     // print_r($_POST);
@@ -176,26 +194,26 @@ class CommunitiesController extends Controller
 
       }
 
-  }
+    }
 
 
-  /*
-  Get the create community page
-  */
-  public function getEdit(Request $request)
-  {
+    /*
+    Get the create community page
+    */
+    public function getEdit(Request $request)
+    {
     $themes = \App\Pagetheme::select('name')->where('public','=',1)->get()->lists('name');
 
     $community = \App\Community::find($request->whitelabel_group->id);
     return view('community.edit')->with('community',$community)->with('themes',$themes);
-  }
+    }
 
 
-  /*
-  Post the create community page
-  */
-  public function postEdit(Request $request)
-  {
+    /*
+    Post the create community page
+    */
+    public function postEdit(Request $request)
+    {
     $community = \App\Community::find($request->whitelabel_group->id);
 
       $community->name	= e(Input::get('name'));
@@ -238,12 +256,12 @@ class CommunitiesController extends Controller
       $community->exchangeTypes()->sync(Input::get('exchange_types'));
 
       return redirect()->route('community.edit.form')->with('success',trans('general.community.messages.save_edits'));
-  }
+    }
 
-/*
-  Process the finacial assistance form
-  */
-  public function financialAssist(Request $request) {
+    /*
+    Process the finacial assistance form
+    */
+    public function financialAssist(Request $request) {
     $input = Input::get();
     $firstName = Input::get('firstName');
     $lastName = Input::get('lastName');
@@ -258,6 +276,6 @@ class CommunitiesController extends Controller
     });
 
     return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
-  }
+    }
 
-}
+    }
