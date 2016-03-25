@@ -49,7 +49,7 @@ class SlackController extends Controller
 
     }
 
-    public function slackAddEntry(Request $request) {
+    public function slackAddNeedEntry(Request $request) {
 
         $text_pre = explode(' in:',Input::get('text'));
         $text = explode(' ',$text_pre[0]);
