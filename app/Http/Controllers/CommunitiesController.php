@@ -286,18 +286,19 @@ class CommunitiesController extends Controller
     Process activate account
     */
     public function activateAccount(Request $request) {
-      $firstName = $input['firstName'] = "David";
-      $lastName = $input['lastName'] = "Linnard";
-      $email = $input['email'] = "dslinnard@yahoo.com";
+      $firstName = "David";
+      $lastName = "Linnard";
+      $to = 'dslinnard@gmail.com';
+      $from = "info@anysha.re";
       $input['activateAccountUrl'] = '#';
 
       // Send the application
       // $m->to('info@AnySha.re', 'AnyShare');
 
       Mail::send(['emails.activate_account', 'emails.activate_account_text'], ['data'=>$input],
-        function ($m) use ($email, $firstName, $lastName) {
-          $m->to('dslinnard@yahoo.com', 'AnyShare');
-          $m->from($email, $firstName.' '.$lastName);
+        function ($m) use ($to, $from, $firstName, $lastName) {
+          $m->to($to, $firstName.' '. $lastName);
+          $m->from($from, 'AnyShare');
           $m->subject("Activate your Anyshare account");
       });
 

@@ -402,7 +402,7 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                               <table width="100%" align="left" class="column" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;">
                                 <tbody>
                                   <tr>
-                                    <td class="column_cell logo_cell font_default" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;vertical-align: top;text-align: left;"><a href="#" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #f14145;"><img src="images/anyshare_email_logo.png" width="240" height="49" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;"></a></td>
+                                    <td class="column_cell logo_cell font_default" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;vertical-align: top;text-align: left;"><a href="https://anysha.re" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #f14145;"><img src="https://anysha.re/assets/img/logos/anyshare-logo@2x.png" width="300" alt="anyshare" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;"></a></td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -431,9 +431,7 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                       </tbody>
                     </table><!-- end .header -->
                    
-                    <table class="jumbotron" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                      <tbody>
-                        <tr>
+                    
                           <!----------------------------- This is where it all happens ---------------------->
 
 
@@ -441,9 +439,7 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
 
 
                           <!----------------------------- This is where it all happens ---------------------->
-                        </tr>
-                      </tbody>
-                    </table><!-- end .jumbotron -->
+                      
                                                                          
                     <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                       <tbody>
