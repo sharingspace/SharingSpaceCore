@@ -133,7 +133,7 @@
                     <input type="text" class="form-control" placeholder="Cover image upload - no file selected" readonly="" />
                     <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                   </div>
-                  <p>Tip: best image size is 1300 x 300px (short &amp; wide image)</p>
+                  <p>Tip: best image size is short &amp; wide, we recommended 300 x 2000px</p>
                 </div>
               </div>
               <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-30" >
