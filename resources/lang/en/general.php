@@ -50,9 +50,11 @@ return [
           'save' => 'Save',
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
-
+          'max_file_size' => 'File exceeds the 4MB maximum',
+          
           'messages' => [
             'invalid' => 'That entry is not valid.',
+            'no_file' => 'No actual file was given',
             'completed' => 'Completed! ',
             'save_edits' => 'Your entry has been updated!',
             'not_allowed' => 'You are not allowed to edit this entry.',
