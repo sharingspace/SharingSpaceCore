@@ -22,110 +22,105 @@
 	<div class="container margin-top-20">
 		<div class="row">
 
-            <!-- payment form -->
-            <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
-              {!! csrf_field() !!}
+      <!-- payment form -->
+      <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
+        {!! csrf_field() !!}
 
-            <div class="col-md-12 text-muted">
-              <p class="margin-bottom-10">{{trans('general.community.p1')}}</p>
-              <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+30 days"))}}. {{trans('general.community.p3')}}</p>
+        <div class="col-md-12 text-muted">
+          <p class="margin-bottom-10">{{trans('general.community.p1')}}</p>
+          <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+30 days"))}}. {{trans('general.community.p3')}}</p>
+        </div>
+
+        <!-- LEFT TEXT -->
+        <div class="col-md-6">
+          <!-- Name -->
+          <div class="form-group{{ $errors->first('name', ' has-error') }}">
+            <label for="name">{{trans('general.community.name')}} *</label>
+            <input type="text" name="name" class="form-control" placeholder="{{trans('general.community.name_placeholder')}}" required="" value="{{ old('name') }}">
+            {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
+          </div>
+
+          <!-- Slug -->
+          <div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
+            <label for="subdomain">{{trans('general.community.subdomain.label')}} * <button type="button" data-toggle="modal" data-target="#subdomain_info"><i class="fa  fa-info-circle"></i></button></label>
+            <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain.placeholder')}}" required="" value="{{ old('subdomain') }}">
+            {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
+          </div>
+
+          <!-- Type -->
+          <div class="form-group{{ $errors->first('group_type', ' has-error') }}">
+            <label for="group_type">{{trans('general.community.privacy_type')}} *</label>
+            {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
+            {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
+          </div>
+        </div> <!-- col 6 -->
+        <!-- /LEFT TEXT -->
+
+        <!-- PAYMENT -->
+        <div class="col-md-6">
+          {{-- <h2 class="size-16 text-muted">{{ trans('general.community.payment_info') }}</h2> --}}
+
+          <!-- Subscription -->
+          <div class="form-group col-md-12 col-sm-12">
+            <label for="cvc">{{ trans('general.community.sub_type') }} *</label>
+            <select class="form-control" name="subscription_type">
+              <option value="MONTHLY-HUB-SUBSCRIPTION">{{ trans('general.community.monthly') }} ($5/{{ trans('general.community.month') }}) {{ trans('general.community.after_trail') }}</option>
+              <option value="ANNUAL-HUB-SUBSCRIPTION">{{ trans('general.community.annual') }} ($50/{{ trans('general.community.year') }})</option>
+            </select>
+          </div>
+
+          <!-- Error box for payment errors -->
+          <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
+          </div>
+
+          <div class="form-group col-md-12 col-sm-12" id="form-card-number">
+            <label for="card-number">{{trans('general.community.card_num')}} *
+            <i class="fa fa-cc-visa help-text"></i>
+            <i class="fa fa-cc-amex"></i>
+            <i class="fa fa-cc-mastercard"></i>
+            <i class="fa fa-cc-diners-club"></i>
+            <i class="fa fa-cc-jcb"></i>
+            <i class="fa fa-cc-discover"></i>
+            </label>
+            <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value=""' : '') !!} />
+          </div>
+
+          <div class="form-group col-md-3 col-sm-12">
+            <label for="exp_month">{{trans('general.community.month')}} *</label>
+            <input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="" value='' data-stripe="exp-month">
+          </div>
+
+          <div class="form-group col-md-3 col-sm-12">
+            <label for="exp_year">{{ trans('general.community.year') }} *</label>
+            <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="" value='' data-stripe="exp-year">
+          </div>
+
+          <div class="form-group col-md-3 col-sm-12">
+            <label for="cvc">{{ trans('general.community.cvc') }} *</label>
+            <input id="cvc" type="text" class="card-cvc form-control" placeholder="" value="" data-stripe="cvc" />
+          </div>
+
+          <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top:30px;cursor: pointer; ">
+            <span style="display:block;">{{trans('general.community.coupon')}} <i class="fa fa-ticket"></i></span>
+          </div>
+
+          <!-- Coupon -->
+          <div class="form-group col-md-12 col-sm-12" id="coupon_field" style="display:none;">
+            <label for="coupon">{{trans('general.community.coupon_code')}}</label>
+            <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="{{trans('general.community.coupon_code')}}" />
+          </div>
+
+          <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
+            <button type="submit" class="btn btn-primary" id="create_community">{{trans('general.community.start_trial')}}</button>
+          </div>
+          <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
+              {{trans('general.community.wrong')}}
             </div>
-
-            <!-- LEFT TEXT -->
-            <div class="col-md-6">
-
-            	<!-- Name -->
-            	<div class="form-group{{ $errors->first('name', ' has-error') }}">
-            		<label for="name">{{trans('general.community.name')}} *</label>
-                    <input type="text" name="name" class="form-control" placeholder="{{trans('general.community.name_placeholder')}}" required="" value="{{ old('name') }}">
-                    {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
-                </div>
-
-                <!-- Slug -->
-                <div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
-                    <label for="subdomain">{{trans('general.community.subdomain')}} *</label>
-                	  <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain_placeholder')}}" required="" value="{{ old('subdomain') }}">
-                    {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
-                </div>
-
-                <!-- Type -->
-                <div class="form-group{{ $errors->first('group_type', ' has-error') }}">
-                    <label for="group_type">{{trans('general.community.type')}} *</label>
-                    {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
-                    {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
-                </div>
-            </div>
-            <!-- /LEFT TEXT -->
-
-            <!-- PAYMENT -->
-            <div class="col-md-5">
-              {{-- <h2 class="size-16 text-muted">{{ trans('general.community.payment_info') }}</h2> --}}
-
-                <!-- Subscription -->
-                <div class="form-group col-md-12 col-sm-12">
-                   <label for="cvc">{{ trans('general.community.sub_type') }} *</label>
-                    <select class="form-control" name="subscription_type">
-                        <option value="MONTHLY-HUB-SUBSCRIPTION">{{ trans('general.community.monthly') }} ($5/{{ trans('general.community.month') }}) {{ trans('general.community.after_trail') }}</option>
-                        <option value="ANNUAL-HUB-SUBSCRIPTION">{{ trans('general.community.annual') }} ($100/{{ trans('general.community.year') }})</option>
-                    </select>
-                </div>
-
-
-                <!-- Error box for payment errors -->
-                <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
-                </div>
-
-                <div class="form-group col-md-12 col-sm-12" id="form-card-number">
-                    <label for="card-number">{{trans('general.community.card_num')}} *
-                        <i class="fa fa-cc-visa help-text"></i>
-                        <i class="fa fa-cc-amex"></i>
-                        <i class="fa fa-cc-mastercard"></i>
-                        <i class="fa fa-cc-diners-club"></i>
-                        <i class="fa fa-cc-jcb"></i>
-                        <i class="fa fa-cc-discover"></i>
-                    </label>
-            	  <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value="4242424242424242"' : '') !!} />
-                </div>
-
-                <div class="form-group col-md-3 col-sm-12">
-            		<label for="exp_month">{{trans('general.community.month')}} *</label>
-            		<input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
-                </div>
-
-                <div class="form-group col-md-3 col-sm-12">
-                    <label for="exp_year">{{ trans('general.community.year') }} *</label>
-                    <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder=" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
-            	</div>
-
-            	<div class="form-group col-md-3 col-sm-12">
-            		<label for="cvc">{{ trans('general.community.cvc') }} *</label>
-            		<input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
-            	</div>
-
-                <div class="form-group col-md-3 col-sm-12" id="coupon_question" style="margin-top:30px;cursor: pointer; ">
-                  <span style="display:block;">{{trans('general.community.coupon')}} <i class="fa fa-ticket"></i></span>
-                </div>
-
-                <!-- Coupon -->
-                <div class="form-group col-md-12 col-sm-12" id="coupon_field" style="display:none;">
-                   <label for="coupon">{{trans('general.community.coupon_code')}}</label>
-                    <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="{{trans('general.community.coupon_code')}}" />
-                </div>
-
-                <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
-                    <button type="submit" class="btn btn-primary" id="create_community">{{trans('general.community.start_trial')}}</button>
-                </div>
-                <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
-                        {{trans('general.community.wrong')}}
-                    </div>
-                </div>
-
-			</div>
-
-			</div>
-            </form>
-		</div>
+          </div>
+        </div> <!-- col  -->
+      </form>
+    </div> <!-- row -->
 	</div>
 </section>
 <!-- / -->
@@ -202,4 +197,33 @@
 
   @stop
 
+      <div class="modal fade" id="subdomain_info" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+              </button>
+              <h4 class="modal-title" id="myModal">{{trans('general.community.subdomain.title')}}</h4>
+            </div>
+
+            <div class="modal-body modal-short">
+            <p>{{trans('general.community.subdomain.p1a')}}  
+            <em>Anysha.re</em> {{trans('general.community.subdomain.p1b')}} <em>{{trans('general.community.subdomain.p1c')}}</em></p>
+
+            <p>{{trans('general.community.subdomain.p2')}}</p>
+
+            <ul>
+              <li>{{trans('general.community.subdomain.li1')}}</li>
+              <li>{{trans('general.community.subdomain.li2')}}</li>
+              <li>{{trans('general.community.subdomain.li3')}}</li>
+              <li>{{trans('general.community.subdomain.li4')}}</li>
+              <li>{{trans('general.community.subdomain.li5')}}</li>
+            </ul>
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+      <!-- /MODAL -->
 @stop
