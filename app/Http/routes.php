@@ -350,7 +350,12 @@ Route::get('financial_assist', function () {
   return view('assistance');
 });
 
-Route::post('financial_assist', array(
+Route::get('activate_account', array(
+  'as' => 'activate_account',
+  'uses' => 'CommunitiesController@activateAccount'
+));
+
+Route::get('financial_assist', array(
   'as' => 'assistance',
   'uses' => 'CommunitiesController@financialAssist'
 ));

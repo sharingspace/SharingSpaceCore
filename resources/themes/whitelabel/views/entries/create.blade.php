@@ -299,7 +299,7 @@ $( document ).ready(function() {
     // it before we call it.
     var finish_submit = function (img_upload_results) {
       if(img_upload_results && !img_upload_results.success) {
-        alert("Error uploading image file!");
+        console.error("Error uploading image file!"+img_upload_results.success);
         return false;
       }
   		var save = true;
