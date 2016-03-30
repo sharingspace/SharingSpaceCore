@@ -158,7 +158,7 @@ class CommunitiesController extends Controller
       $stripe_subscription = $customer
       ->subscription()
       ->onPlan(e(Input::get('subscription_type')))
-      ->trialFor(Carbon::now()->addDays(30))
+      ->trialFor(\Carbon::now()->addDays(30))
       ->create();
 
       // set the given discount
@@ -282,6 +282,6 @@ class CommunitiesController extends Controller
     return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
     }
 
-    
+
 
 }
