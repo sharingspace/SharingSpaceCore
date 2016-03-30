@@ -110,6 +110,7 @@
                           <input id="shadow_input" type="text" class="form-control" placeholder="no file selected" readonly="" />
                           <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                         </div> <!-- fancy -->
+                        <p class='too_large smooth_font' style="display:none;color:red;font-size:20px">{{ trans('general.entries.max_file_size')}}</p>
                       </div> <!-- col 12 -->
 
                    		<div class="col-md-12">
@@ -224,11 +225,8 @@ $( document ).ready(function() {
 		//var tile = $(this).closest('.tile_container').prop("id");
 		var entry_id = $(this).data("entryid");
     var myrow = $(this).closest('tr');
-		//console.log("delete clicked on entry: "+entry_id);
     $.post(entry_id+"/delete/ajax",{_token: $('input[name=_token]').val()},function (replyData) {
-      //console.log("delete success :-)  "+replyData.entry_id);
       if(replyData.success) {
-        //$('td.entry_'+replyData.entry_id).closest('tr').remove();
         myrow.remove();
 
         // count how many rows we have, if we only have the header row hide the table
@@ -299,7 +297,7 @@ $( document ).ready(function() {
     // it before we call it.
     var finish_submit = function (img_upload_results) {
       if(img_upload_results && !img_upload_results.success) {
-        alert("Error uploading image file!");
+        console.error("Error uploading image file!"+img_upload_results.success);
         return false;
       }
   		var save = true;
@@ -433,26 +431,21 @@ $( document ).ready(function() {
 		}
 	});
 
-
+  var maxSize = $('#MAX_FILE_SIZE').val();
+  $('#choose-file').change( function() {
+    if($("#choose-file")[0].files[0].size > maxSize) {
+      $("#shadow_input").val("");
+      $('p.too_large').show().addClass("error_message").fadeOut(4000, "swing");
+    }
+  });
+  
   function handleFile(upload_key,callback){
 
 		var image=$('input[type=file]')[0].files[0];
 		var fileReader = new FileReader();
-		//console.log("handleFile: file = "+image.name+", upload_key = "+upload_key);
 
-		//fileReader.onload=function(e){ console.log("file read")}
 		fileReader.readAsDataURL(image);
-
-		var maxSize = $('#MAX_FILE_SIZE').val();
-		//console.log("handleFile: " +image.name+", maxSize = "+ maxSize+",  file size = "+image.size);
-
-		if(image.size < maxSize) {
-			uploadFile(image, upload_key,callback);
-		}
-		else {
-			//$("#tile_"+id +" .too_large").show().addClass("error_message").fadeOut(9000, "linear");
-			//console.log("handleFile: file too big");
-		}
+		uploadFile(image, upload_key,callback);
   }
 
 
