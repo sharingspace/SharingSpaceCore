@@ -17,12 +17,14 @@ class CommunitySubscription extends Model
 
     protected $errors;
 
-    public function user(){
-        return $this->belongsTo( '\App\Models\User','billable_id', 'id');
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User', 'billable_id', 'id');
     }
 
-    public function community(){
-        return $this->hasOne( '\App\Community','id', 'community_id');
+    public function community()
+    {
+        return $this->hasOne('\App\Community', 'id', 'community_id');
     }
 
 }
