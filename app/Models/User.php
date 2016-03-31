@@ -3,22 +3,23 @@
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use DB;
-use App\Social;
 use App\CommunitySubscription;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cartalyst\Stripe\Billing\Laravel\Billable;
 use Cartalyst\Stripe\Billing\Laravel\BillableContract;
 use Watson\Validating\ValidatingTrait;
+use App\Social;
+use DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
-    use Authenticatable, CanResetPassword, Billable;
+    use Authenticatable, CanResetPassword, Billable, Authorizable;
     use SluggableTrait;
     use ValidatingTrait;
 

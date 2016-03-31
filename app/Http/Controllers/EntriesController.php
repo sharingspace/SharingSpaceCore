@@ -32,7 +32,6 @@ class EntriesController extends Controller
     	$images = \DB::table('media')
     	->where('entry_id','=', $entryID)
 			->get();
-
 		  return view('entries.view')->with('entry',$entry)->with('images', $images);
 
     } else {
@@ -48,7 +47,7 @@ class EntriesController extends Controller
   public function getCreate(Request $request)
   {
 		$request->session()->put('upload_key', str_random(15));
-    return view('entries.create');
+        return view('entries.create');
   }
 
 
@@ -259,7 +258,7 @@ class EntriesController extends Controller
 
       $user = Auth::user();
 
-        if ($request->user()->cannot('update-post', $entry)) {
+        if ($request->user()->cannot('update-entry', $entry)) {
             abort(403);
         }
 

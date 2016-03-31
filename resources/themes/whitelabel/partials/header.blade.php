@@ -132,11 +132,11 @@
                       </button>
                     </a>
                   </li>
-                  @if (Auth::check() && (Auth::user()->canAdmin($whitelabel_group)))
+                  @can ('update-community')
                   <li>
                     <a href="{{ route('community.edit.form')}}"><i class="fa fa-cogs"></i></a>
                   </li>
-                  @endif
+                  @endcan
                   <!-- SEARCH -->
     							<li class="search">
     								<a href="javascript:;">
