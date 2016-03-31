@@ -10,7 +10,7 @@ use Log;
 class PagesController extends Controller
 {
 
-  public function getHomepage(Request $request)
+  public function getHomepage(Request $request, $hp=null)
   {
 
     if ($request->whitelabel_group) {
@@ -39,7 +39,7 @@ class PagesController extends Controller
 
     } else {
       $communities = \App\Community::orderBy('created_at','DESC')->IsPublic()->take(20)->get();
-      return view('home')->with('communities',$communities);
+      return view('home'.$hp)->with('communities',$communities);
     }
 
   }

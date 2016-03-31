@@ -355,7 +355,7 @@ Route::post('financial_assist', array(
   'uses' => 'CommunitiesController@financialAssist'
 ));
 
-Route::get('/', array(
+Route::get('/{hp?}', array(
   'as' => 'home',
   'uses' => 'PagesController@getHomepage'));
 });

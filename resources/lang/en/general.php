@@ -50,7 +50,8 @@ return [
           'save' => 'Save',
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
-
+          'file_placeholder' => 'no file selected (maxiumum size is 4MB)',
+          
           'messages' => [
             'invalid' => 'That entry is not valid.',
             'completed' => 'Completed! ',
