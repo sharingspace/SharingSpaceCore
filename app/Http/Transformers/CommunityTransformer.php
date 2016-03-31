@@ -3,9 +3,11 @@ namespace App\Http\Transformers;
 use App\Community;
 use App\User;
 
-class CommunityTransformer {
+class CommunityTransformer
+{
 
-    public function transform(Community $community) {
+    public function transform(Community $community) 
+    {
         return [
             'id' => $community->hubgroup_id,
             'name' => $community->name,
@@ -25,14 +27,16 @@ class CommunityTransformer {
 
 }
 
-class MemberlistTransformer {
+class MemberlistTransformer
+{
 
-  public function transform(User $members) {
-      return [
+    public function transform(User $members) 
+    {
+        return [
           'id' => $members->id,
           'name' => $members->fullName(),
           'admin' => $members->is_admin,
 
-      ];
-  }
+        ];
+    }
 }

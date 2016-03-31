@@ -45,7 +45,7 @@ class AuthController extends Controller
     public function redirectToProvider(Request $request, $provider)
     {
         if ($request->whitelabel_group) {
-          $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
+            $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
         }
         return Socialite::driver($provider)->redirect();
     }
@@ -58,28 +58,28 @@ class AuthController extends Controller
     public function handleProviderCallback(Request $request, $provider)
     {
 
-      if ($request->session()->has('auth_subdomain')) {
-        $subdomain = $request->session()->get('auth_subdomain');
-        $request->session()->forget('auth_subdomain');
-        $redirect = 'http://'.$subdomain.'.'.Config::get('app.domain');
-      } else {
-        $redirect = Config::get('app.url');
-      }
+        if ($request->session()->has('auth_subdomain')) {
+            $subdomain = $request->session()->get('auth_subdomain');
+            $request->session()->forget('auth_subdomain');
+            $redirect = 'http://'.$subdomain.'.'.Config::get('app.domain');
+        } else {
+            $redirect = Config::get('app.url');
+        }
         try {
 
             $user = Socialite::driver($provider)->user();
 
             if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
                 Auth::login($getUser);
-                return redirect($redirect)->with('success','You have been logged in!');
+                return redirect($redirect)->with('success', 'You have been logged in!');
             } else {
                 $newUser = User::saveSocialAccount($user, $provider);
                 Auth::login($newUser);
-                return redirect($redirect)->with('success','Welcome aboard!');
+                return redirect($redirect)->with('success', 'Welcome aboard!');
             }
 
         } catch  (Exception $e) {
-            return redirect($redirect)->with('error','We couldn\'t log you in :(');
+            return redirect($redirect)->with('error', 'We couldn\'t log you in :(');
         }
 
 
@@ -89,32 +89,36 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make(
+            $data, [
             'display_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
             'terms_and_conditions' => 'accepted',
-        ]);
+            ]
+        );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        return User::create(
+            [
             'display_name' => $data['display_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+            ]
+        );
     }
 }

@@ -10,33 +10,33 @@ use App\Http\Transformers\UserTransformer;
 class UsersController extends ApiGuardController
 {
 
-  protected $apiMethods = [
+    protected $apiMethods = [
       'all' => [
           'keyAuthentication' => false
       ],
       'show' => [
           'keyAuthentication' => false
       ],
-  ];
+    ];
 
-  public function all()
-  {
-      $users = User::paginate(20);
-      return $this->response->withCollection($users, new \App\Http\Transformers\UserTransformer);
-  }
+    public function all()
+    {
+        $users = User::paginate(20);
+        return $this->response->withCollection($users, new \App\Http\Transformers\UserTransformer);
+    }
 
 
-  public function show()
-  {
-      $user = User::findOrFail($id);
-      return $this->response->withCollection($user, new \App\Http\Transformers\UserTransformer);
-  }
+    public function show()
+    {
+        $user = User::findOrFail($id);
+        return $this->response->withCollection($user, new \App\Http\Transformers\UserTransformer);
+    }
 
-  public function entries()
-  {
-      $user = User::findOrFail($id)->with('entries');
-      return $this->response->withCollection($user, new \App\Http\Transformers\EntriesTransformer);
-  }
+    public function entries()
+    {
+        $user = User::findOrFail($id)->with('entries');
+        return $this->response->withCollection($user, new \App\Http\Transformers\EntriesTransformer);
+    }
 
 
 }

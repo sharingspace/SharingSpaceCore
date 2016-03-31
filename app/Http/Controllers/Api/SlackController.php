@@ -16,7 +16,8 @@ class SlackController extends Controller
 {
 
 
-    public function slackShowMembers(Request $request) {
+    public function slackShowMembers(Request $request) 
+    {
 
         $message['response_type'] = 'in_channel';
         $count = 0;
@@ -26,7 +27,7 @@ class SlackController extends Controller
             return response()->json($message);
         }
 
-        if (!$community = Community::where('subdomain','=',e(Input::get('text')))->first()) {
+        if (!$community = Community::where('subdomain', '=', e(Input::get('text')))->first()) {
             $message['text'] = 'Invalid community.';
             return response()->json($message);
         }
@@ -49,10 +50,11 @@ class SlackController extends Controller
 
     }
 
-    public function slackAddEntry(Request $request, $postType = 'want') {
+    public function slackAddEntry(Request $request, $postType = 'want') 
+    {
 
-        $text_pre = explode(' in:',Input::get('text'));
-        $text = explode(' ',$text_pre[0]);
+        $text_pre = explode(' in:', Input::get('text'));
+        $text = explode(' ', $text_pre[0]);
         $community_slug = trim($text_pre[1]);
 
 
@@ -64,7 +66,7 @@ class SlackController extends Controller
             $entry->qty = $text[0];
         }
 
-        if (array_key_exists('0',$text_pre)) {
+        if (array_key_exists('0', $text_pre)) {
             $entry->title = $text_pre[0];
         } else {
             $entry->title = $text[0];
@@ -89,7 +91,7 @@ class SlackController extends Controller
         }
 
         if ($community_slug) {
-            if (!$community = Community::where('subdomain','=',e($community_slug))->first()) {
+            if (!$community = Community::where('subdomain', '=', e($community_slug))->first()) {
                 $message['text'] = 'The '.e($text[2]).' community is invalid.';
                 return response()->json($message);
             }
@@ -101,8 +103,8 @@ class SlackController extends Controller
         // TODO: This is messy and should be refactored
         $slack_users = DB::table('communities_users')
         ->select('*')
-        ->where('slack_name','=',e(Input::get('user_name')))
-        ->where('community_id','=',$community->id)
+        ->where('slack_name', '=', e(Input::get('user_name')))
+        ->where('community_id', '=', $community->id)
         ->first();
 
         if (!$slack_users) {

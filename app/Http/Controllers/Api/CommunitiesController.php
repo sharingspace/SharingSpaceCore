@@ -11,7 +11,7 @@ use App\Http\Transformers\MemberlistTransformer;
 class CommunitiesController extends ApiGuardController
 {
 
-  protected $apiMethods = [
+    protected $apiMethods = [
       'all' => [
           'keyAuthentication' => false
       ],
@@ -24,7 +24,7 @@ class CommunitiesController extends ApiGuardController
       'slackShowMembers' => [
           'keyAuthentication' => false
       ],
-  ];
+    ];
 
 
     public function all()

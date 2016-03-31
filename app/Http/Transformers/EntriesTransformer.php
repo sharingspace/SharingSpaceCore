@@ -3,9 +3,11 @@ namespace App\Http\Transformers;
 use \App\Entry;
 
 
-class EntriesTransformer {
+class EntriesTransformer
+{
 
-    public function transform(Entry $entry) {
+    public function transform(Entry $entry) 
+    {
         return [
             'id' => $entry->tile_id,
             'title' => $entry->title,

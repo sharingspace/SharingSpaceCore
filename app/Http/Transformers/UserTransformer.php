@@ -3,9 +3,11 @@ namespace App\Http\Transformers;
 use \App\User;
 
 
-class UserTransformer {
+class UserTransformer
+{
 
-    public function transform(User $user) {
+    public function transform(User $user) 
+    {
         return [
             'id' => $user->id,
             'profile_images' =>

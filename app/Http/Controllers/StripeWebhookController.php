@@ -9,7 +9,7 @@ class StripeWebhookController extends BaseWebhookController
     /**
      * Handles a successful payment.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleChargeSucceeded(array $payload)
@@ -24,7 +24,7 @@ class StripeWebhookController extends BaseWebhookController
     /**
      * Handles a failed payment.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleChargeFailed(array $payload)
@@ -39,7 +39,7 @@ class StripeWebhookController extends BaseWebhookController
     /**
      * Handles a payment refund.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleChargeRefunded(array $payload)
@@ -54,7 +54,7 @@ class StripeWebhookController extends BaseWebhookController
     /**
      * Handles the payment event.
      *
-     * @param  array  $charge
+     * @param  array $charge
      * @return \Cartalyst\Stripe\Billing\Models\IlluminateCharge
      */
     protected function handlePayment(array $charge)

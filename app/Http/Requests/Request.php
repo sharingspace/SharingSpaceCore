@@ -8,13 +8,16 @@ use \Illuminate\Http\Request as Base;
  *
  * @author Justin van Schaick <me@domain.nl>
  */
-class Request extends Base {
+class Request extends Base
+{
 
     /**
      * Explained on http://stackoverflow.com/questions/1175096/how-to-find-out-if-youre-using-https-without-serverhttps
+     *
      * @return boolean
      */
-    public function isSecure() {
+    public function isSecure() 
+    {
         $isSecure = parent::isSecure();
 
         if($isSecure) {

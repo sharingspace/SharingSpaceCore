@@ -10,7 +10,7 @@ use App\Entry;
 class EntriesController extends ApiGuardController
 {
 
-  protected $apiMethods = [
+    protected $apiMethods = [
       'all' => [
           'keyAuthentication' => false
       ],
@@ -20,7 +20,7 @@ class EntriesController extends ApiGuardController
       'entrylist' => [
           'keyAuthentication' => false
       ],
-  ];
+    ];
 
 
     public function all()
