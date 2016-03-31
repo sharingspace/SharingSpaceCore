@@ -1,4 +1,12 @@
 <?php
+/**
+ * This controller handles all subscription billing actions for
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ * @package    AnyShare
+ * @version    v1.0
+ */
 
 namespace App\Http\Controllers;
 

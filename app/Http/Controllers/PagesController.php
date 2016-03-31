@@ -1,4 +1,13 @@
 <?php
+/**
+ * This controller handles all actions related to generic pages for
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ * @package    AnyShare
+ * @version    v1.0
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,6 +19,16 @@ use Log;
 class PagesController extends Controller
 {
 
+    /**
+    * Returns a view to display the homepage. This is tricky because the
+    * homepage view will be different based on whether the viewer is looking
+    * at the homepage of the corporate site or of a community.
+    *
+    * @todo Find a more elegant way to handle the two different views.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getHomepage(Request $request, $hp=null)
     {
 

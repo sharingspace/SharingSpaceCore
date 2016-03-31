@@ -1,4 +1,12 @@
 <?php
+/**
+ * This controller handles all actions related to Entries for
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ * @package    AnyShare
+ * @version    v1.0
+ */
 
 namespace App\Http\Controllers;
 
@@ -17,8 +25,12 @@ use App\Entry;
 class EntriesController extends Controller
 {
 
-    /*
-    Get the create entry page
+    /**
+    * Returns a view that displays entry information
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
     */
     public function getEntry(Request $request, $entryID)
     {
@@ -41,8 +53,13 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    Get the create entry page
+    /**
+    * Returns a view that makes a form to create a new entry
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see EntriesControllers::postCreate()
+    * @since [v1.0]
+    * @return View
     */
     public function getCreate(Request $request)
     {
@@ -51,8 +68,12 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    * Save new entry via Ajax
+    /**
+    * Validates and stores the new entry data via AJAX request.
+    *
+    * @author [David Linnard] [<dslinnard@gmail.com>]
+    * @since [v1.0]
+    * @return String JSON
     */
     public function postAjaxCreate(Request $request)
     {
@@ -113,8 +134,13 @@ class EntriesController extends Controller
 
 
 
-    /*
-    * Save new entry
+    /**
+    * Validates and stores the new entry.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see EntriesController::getCreate()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postCreate(Request $request)
     {
@@ -165,8 +191,13 @@ class EntriesController extends Controller
 
     }
 
-    /*
-    Edit the entry
+    /**
+    * Returns a form view to edit an entry
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see EntriesController::postEdit()
+    * @since [v1.0]
+    * @return View
     */
     public function getEdit(Request $request, $entryID)
     {
@@ -191,8 +222,12 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    Save the entry edits via Ajax
+    /**
+    * Validates and stores the entry edits submitted via AJAX.
+    *
+    * @author [David Linnard] [<dslinnard@gmail.com>]
+    * @since [v1.0]
+    * @return String JSON
     */
     public function postAjaxEdit(Request $request, $entryID)
     {
@@ -248,8 +283,13 @@ class EntriesController extends Controller
 
 
 
-    /*
-    Save the entry edits
+    /**
+    * Validates and stores the entry edits.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see EntriesController::getEdit()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postEdit(Request $request, $entryID)
     {
@@ -294,10 +334,14 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    Delete the entry via Ajax
+    /**
+    * Deletes an entry via AJAX request
+    *
+    * @todo Consolidate this and the non-ajax delete.
+    * @author [David Linnard] [<dslinnard@gmail.com>]
+    * @since [v1.0]
+    * @return String JSON
     */
-
     public function postAjaxDelete($entryID)
     {
         if ($entry = \App\Entry::find($entryID)) {
@@ -320,8 +364,13 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    Delete the entry
+    /**
+    * Delete the entry
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see EntriesController::getCreate()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postDelete($entryID)
     {
@@ -344,10 +393,14 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    * Process an uploaded image
+    /**
+    * Validates and stores an image uploaded via AJAX
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return String JSON
     */
-    public function ajaxUpload($entryID = null) 
+    public function ajaxUpload($entryID = null)
     {
 
         if (Input::hasFile('image')) {
@@ -362,7 +415,6 @@ class EntriesController extends Controller
                 $uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'));
                  Log::debug("the uploaded result is: ".$uploaded);
             }
-            // $user = Auth::user();
             if($uploaded) {
                 return response()->json(['success'=>true, 'image'=>'bingo']);
             }
@@ -378,8 +430,13 @@ class EntriesController extends Controller
     }
 
 
-    /*
-    Get the JSON list of entries in the current community or for a specific user
+    /**
+    * Returns the JSON response to populate the datatable for browsing
+    * entries in a community.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return String JSON
     */
     public function getEntriesDataView(Request $request, $user_id=null)
     {
@@ -452,8 +509,12 @@ class EntriesController extends Controller
 
     }
 
-    /*
-    Complete the entry
+    /**
+    * Mark an entry as completed
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return Redirect
     */
     public function completeEntry($entryID)
     {

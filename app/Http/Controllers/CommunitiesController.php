@@ -1,4 +1,13 @@
 <?php
+/**
+ * This controller handles all actions related to Communities (Hubs) for
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ * @package    AnyShare
+ * @version    v1.0
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -30,24 +39,43 @@ class CommunitiesController extends Controller
     }
 
 
+    /**
+    * Returns the homepage view
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getHomepage()
     {
         return view('home');
     }
 
 
-    /*
-    Get the entries view in current community
+    /**
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content to display the entries within a community, which
+    * is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
     */
     public function getEntriesView()
     {
         return view('browse');
     }
 
-    /*
-    Show the request access form
+    /**
+    * Returns a view that allows a user to request access to a community that is
+    * non-public.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
     */
-    public function getRequestAccess(Request $request) 
+    public function getRequestAccess(Request $request)
     {
         $user = Auth::user();
         $requests = DB::table('community_join_requests')
@@ -57,10 +85,16 @@ class CommunitiesController extends Controller
         return view('request-access')->with('requests', $requests);
     }
 
-    /*
-    Save request
+    /**
+    * Stores the access request
+    *
+    * @todo Send an email to the community owner
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::getRequestAccess()
+    * @since [v1.0]
+    * @return Redirect
     */
-    public function postRequestAccess(Request $request) 
+    public function postRequestAccess(Request $request)
     {
         $user = Auth::user();
         DB::table('community_join_requests')->insert(
@@ -75,8 +109,14 @@ class CommunitiesController extends Controller
 
 
 
-    /*
-    Get the members in current community
+    /**
+    * Returns a view lists the members of a community.
+    *
+    * @todo Integrate server-side datatables
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
     */
     public function getMembers(Request $request)
     {
@@ -84,8 +124,13 @@ class CommunitiesController extends Controller
         return view('members')->with('members', $members);
     }
 
-    /*
-    Get the create community page
+    /**
+    * Returns a view that displays the form to create a community.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::postCreate()
+    * @since [v1.0]
+    * @return View
     */
     public function getCreate()
     {
@@ -94,8 +139,15 @@ class CommunitiesController extends Controller
     }
 
 
-    /*
-    * Save new community
+    /**
+    * Validates and stores the data for a new community. This method also handles
+    * creating a subscription in Stripe for the user.
+    *
+    * @todo Rip out Cartalyst's commercial stripe billing package and use Stripe native
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::getCreate()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postCreate(Request $request)
     {
@@ -194,7 +246,7 @@ class CommunitiesController extends Controller
 
             Mail::send(
                 ['text' => 'emails.welcome'], $data, function ($message) use ($data) {
-          
+
                     $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
                 }
             );
@@ -206,8 +258,13 @@ class CommunitiesController extends Controller
     }
 
 
-    /*
-    Get the create community page
+    /**
+    * Returns a view that makes a form to edit community details.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::postEdit()
+    * @since [v1.0]
+    * @return View
     */
     public function getEdit(Request $request)
     {
@@ -218,8 +275,13 @@ class CommunitiesController extends Controller
     }
 
 
-    /*
-    Post the create community page
+    /**
+    * Validates and stores the edited community data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CommunitiesController::getEdit()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postEdit(Request $request)
     {
@@ -267,10 +329,16 @@ class CommunitiesController extends Controller
         return redirect()->route('community.edit.form')->with('success', trans('general.community.messages.save_edits'));
     }
 
-    /*
-    Process the finacial assistance form
+    /**
+    * Sends an email to request financial assistance.
+    *
+    * @todo Move this to the pages controller. It has no community-specific functionality.
+    * @todo Use the form action type in the method name for clarity (postFinancialAssistance())
+    * @author [David Linnard] [<dslinnard@gmail.com>]
+    * @since [v1.0]
+    * @return Redirect
     */
-    public function financialAssist(Request $request) 
+    public function financialAssist(Request $request)
     {
         $input = Input::get();
         $firstName = Input::get('firstName');

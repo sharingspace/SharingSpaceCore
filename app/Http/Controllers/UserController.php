@@ -1,4 +1,12 @@
 <?php
+/**
+ * This controller handles all actions related to Users for
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ * @package    AnyShare
+ * @version    v1.0
+ */
 
 namespace App\Http\Controllers;
 
@@ -12,16 +20,29 @@ use Helper;
 
 class UserController extends Controller
 {
+    /**
+    * Returns a vew that shows the user their account dashboard
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getDashboard()
     {
         if (Auth::check()) {
-            // The user is logged in...
             $user = Auth::user();
             return view('home')->with('user', $user);
         }
 
     }
 
+    /**
+    * Returns a view tha displays subscription charge history
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getHistory()
     {
         $user = Auth::user();
@@ -30,15 +51,27 @@ class UserController extends Controller
     }
 
 
+    /**
+    * Returns a form that allows the user to update their settings.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see UsersController::postSettings()
+    * @since [v1.0]
+    * @return View
+    */
     public function getSettings()
     {
         return view('account.settings');
     }
 
 
-    /*
-    * Save the user's updated settings
+    /**
+    * Validates and stores the users updated general settings.
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see UsersController::getSettings()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postSettings()
     {
@@ -76,15 +109,16 @@ class UserController extends Controller
 
     }
 
-    /*
-    * Save the user's updated settings
+    /**
+    * Validates and stores the users social settings.
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see UsersController::getSettings()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postUpdateSocial()
     {
-
-        // print_r($_POST);
-        // exit;
 
         if ($user = \App\User::find(Auth::user()->id)) {
 
@@ -107,9 +141,13 @@ class UserController extends Controller
 
     }
 
-    /*
-    * Save the user's updated password
+    /**
+    * Validates and stores the users updated password.
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see UsersController::getSettings()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postUpdatePassword()
     {
@@ -132,9 +170,13 @@ class UserController extends Controller
     }
 
 
-    /*
-    * Save the user's updated settings
+    /**
+    * Validates and stores the users updated notification settings.
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see UsersController::getSettings()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postUpdateNotifications()
     {
@@ -153,10 +195,14 @@ class UserController extends Controller
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
 
     }
-  
-    /*
-    * Save the user's updated privacy settings
+
+    /**
+    * Validates and stores the users updated privacy settings.
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see UsersController::getSettings()
+    * @since [v1.0]
+    * @return Redirect
     */
     public function postUpdatePrivacy()
     {
@@ -176,6 +222,13 @@ class UserController extends Controller
     }
 
 
+    /**
+    * Returns a view that displays the user's public profile.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function getProfile($id)
     {
         if ($user = \App\User::findOrFail($id)) {
