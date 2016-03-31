@@ -360,7 +360,7 @@ Route::get('financial_assist', array(
   'uses' => 'CommunitiesController@financialAssist'
 ));
 
-Route::get('/{hp?}', array(
+Route::get('/', array(
   'as' => 'home',
   'uses' => 'PagesController@getHomepage'));
 });
