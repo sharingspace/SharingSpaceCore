@@ -5,7 +5,7 @@
 	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
        <h1>{{ trans('home_rob.home_headline') }}</h1>
-       <h2>{{ trans('home_rob.subhome_headline') }}<br>{{ trans('home_rob.subhome_headline2') }}</h2>
+       <h2>{{ trans('home_rob.subhome_headline') }}<br>{{ trans('home_rob.subhome_headline_b') }}</h2>
 
     </div>
 	</section>
@@ -33,6 +33,8 @@
 
 						<div class="col-sm-6 col-xs-12">
 							<p>{{ trans('home_rob.learn_more_p1')}}</p>
+              <p>{{ trans('home_rob.learn_more_p2')}} <strong>{{ trans('home_rob.learn_more_p2b')}}</strong> 
+              {{ trans('home_rob.learn_more_p2c')}}</p>
 
 
 						</div>

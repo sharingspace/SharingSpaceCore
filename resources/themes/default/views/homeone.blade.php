@@ -32,10 +32,9 @@
 					<div class="row">
 
 						<div class="col-sm-6 col-xs-12">
-							<p class="sr-only">A <span class="weight-700 font-style-italic">{{ trans('home_eric.learn_more_p1a')}}</span> {{ trans('home_eric.learn_more_p1b')}}</p>
-              <p>{{ trans('home_eric.learn_more_p1a')}}</p>
-              <p>{{ trans('home_eric.learn_more_p2a')}} <strong>{{ trans('home_eric.learn_more_p3b')}}</strong>{{ trans('home.learn_more_p2b')}} </p>
-              <p>{{ trans('home_eric.learn_more_p3a')}} <strong>{{ trans('home_eric.learn_more_p3b')}}</strong> {{ trans('home.learn_more_p3c')}}</p>
+							<p>{{ trans('home_eric.learn_more_p1')}}</p>
+              <p>{{ trans('home_eric.learn_more_p2')}} <strong>{{ trans('home_eric.learn_more_p2b')}}</strong>. {{ trans('home_eric.learn_more_p2c')}} </p>
+              <p>{{ trans('home_eric.learn_more_p3')}} <strong>{{ trans('home_eric.learn_more_p3b')}}</strong> {{ trans('home_eric.learn_more_p3c')}}</p>
 
 
 						</div>
