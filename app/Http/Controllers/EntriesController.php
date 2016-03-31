@@ -373,7 +373,7 @@ class EntriesController extends Controller
 		}
 		else {
       Log::debug("No actual file was given, so this whole thing is shot");
-			return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.no_file')]);
+			return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
 		}
 	}
 

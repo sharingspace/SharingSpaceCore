@@ -266,44 +266,22 @@ class CommunitiesController extends Controller
     Process the finacial assistance form
     */
     public function financialAssist(Request $request) {
-      $input = Input::get();
-      $firstName = Input::get('firstName');
-      $lastName = Input::get('lastName');
-      $email = Input::get('email');
+    $input = Input::get();
+    $firstName = Input::get('firstName');
+    $lastName = Input::get('lastName');
+    $email = Input::get('email');
 
-      // Send the application
-      Mail::send(['text' => 'email.freeAnyshareText'], ['data'=>$input],
-        function ($m) use ($email, $firstName, $lastName) {
-        $m->to('info@AnySha.re', 'AnyShare');
-        $m->from($email, $firstName.' '.$lastName);
-        $m->subject("Application for free anyshare hub");
-      });
+    // Send the application
+    Mail::send(['text' => 'email.freeAnyshareText'], ['data'=>$input],
+      function ($m) use ($email, $firstName, $lastName) {
+      $m->to('info@AnySha.re', 'AnyShare');
+      $m->from($email, $firstName.' '.$lastName);
+      $m->subject("Application for free anyshare hub");
+    });
 
-      return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
+    return Redirect::back()->with('success',trans('pricing.financial_assist.success'));
     }
 
-   /*
-    Process activate account
-    */
-    public function activateAccount(Request $request) {
-      $firstName = "David";
-      $lastName = "Linnard";
-      $to = 'dslinnard@gmail.com';
-      $from = "info@anysha.re";
-      $input['activateAccountUrl'] = '#';
 
-      // Send the application
-      // $m->to('info@AnySha.re', 'AnyShare');
-
-      Mail::send(['emails.activate_account', 'emails.activate_account_text'], ['data'=>$input],
-        function ($m) use ($to, $from, $firstName, $lastName) {
-          $m->to($to, $firstName.' '. $lastName);
-          $m->from($from, 'AnyShare');
-          $m->subject("Activate your Anyshare account");
-      });
-
-      return redirect()->route('home')->with('success',trans('pricing.financial_assist.success'));
-    }
-    
 
 }
