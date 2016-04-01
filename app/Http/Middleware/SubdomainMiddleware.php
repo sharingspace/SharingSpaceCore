@@ -1,5 +1,19 @@
 <?php
-
+/**
+ * This Middleware checks to see if the url is currently a sub-domain,
+ * and then gets the whitelabel community information if it's a
+ * valid subdomain.
+ *
+ * If the subdomain is valid, we add that community info to an object
+ * called $request->valid_whitelabel, which is available in the blades and
+ * and available to any controller method as long as the Request $request
+ * is passed as a controller method parameter.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App\Http\Middleware;
 
 use Closure;

@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * This Middleware does a high-level check to see whether
+ * or not the community is visible. More finely-tuned permissions
+ * are handled via the gates defined in AuthServiceProvider.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App\Http\Middleware;
 
 use Closure;

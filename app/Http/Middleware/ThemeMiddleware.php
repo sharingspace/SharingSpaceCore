@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * This Middleware checks for a theme preference based on the
+ * $request->valid_whitelabel object we set in the
+ * SubdomainMiddleware. 
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App\Http\Middleware;
 
 use Closure;
