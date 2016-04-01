@@ -4,10 +4,10 @@
  * the AnyShare application.
  *
  * PHP version 5.5.9
- * @package    AnyShare
- * @version    v1.0
+ *
+ * @package AnyShare
+ * @version v1.0
  */
-
 namespace App\Http\Controllers;
 
 use Cartalyst\Stripe\Billing\Laravel\Controllers\WebhookController as BaseWebhookController;

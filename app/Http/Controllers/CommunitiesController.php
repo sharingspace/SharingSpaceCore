@@ -4,10 +4,10 @@
  * the AnyShare application.
  *
  * PHP version 5.5.9
- * @package    AnyShare
- * @version    v1.0
+ *
+ * @package AnyShare
+ * @version v1.0
  */
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -43,7 +43,7 @@ class CommunitiesController extends Controller
     * Returns the homepage view
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return View
     */
     public function getHomepage()
@@ -58,8 +58,8 @@ class CommunitiesController extends Controller
     * is generated in getDatatable.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
+    * @see    CommunitiesController::getDatatable() method that generates the JSON response
+    * @since  [v1.0]
     * @return View
     */
     public function getEntriesView()
@@ -72,7 +72,7 @@ class CommunitiesController extends Controller
     * non-public.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return View
     */
     public function getRequestAccess(Request $request)
@@ -88,10 +88,10 @@ class CommunitiesController extends Controller
     /**
     * Stores the access request
     *
-    * @todo Send an email to the community owner
+    * @todo   Send an email to the community owner
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::getRequestAccess()
-    * @since [v1.0]
+    * @see    CommunitiesController::getRequestAccess()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postRequestAccess(Request $request)
@@ -112,10 +112,10 @@ class CommunitiesController extends Controller
     /**
     * Returns a view lists the members of a community.
     *
-    * @todo Integrate server-side datatables
+    * @todo   Integrate server-side datatables
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
+    * @see    CommunitiesController::getDatatable() method that generates the JSON response
+    * @since  [v1.0]
     * @return View
     */
     public function getMembers(Request $request)
@@ -128,8 +128,8 @@ class CommunitiesController extends Controller
     * Returns a view that displays the form to create a community.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::postCreate()
-    * @since [v1.0]
+    * @see    CommunitiesController::postCreate()
+    * @since  [v1.0]
     * @return View
     */
     public function getCreate()
@@ -143,10 +143,10 @@ class CommunitiesController extends Controller
     * Validates and stores the data for a new community. This method also handles
     * creating a subscription in Stripe for the user.
     *
-    * @todo Rip out Cartalyst's commercial stripe billing package and use Stripe native
+    * @todo   Rip out Cartalyst's commercial stripe billing package and use Stripe native
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::getCreate()
-    * @since [v1.0]
+    * @see    CommunitiesController::getCreate()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postCreate(Request $request)
@@ -262,8 +262,8 @@ class CommunitiesController extends Controller
     * Returns a view that makes a form to edit community details.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::postEdit()
-    * @since [v1.0]
+    * @see    CommunitiesController::postEdit()
+    * @since  [v1.0]
     * @return View
     */
     public function getEdit(Request $request)
@@ -279,8 +279,8 @@ class CommunitiesController extends Controller
     * Validates and stores the edited community data.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CommunitiesController::getEdit()
-    * @since [v1.0]
+    * @see    CommunitiesController::getEdit()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postEdit(Request $request)
@@ -332,10 +332,10 @@ class CommunitiesController extends Controller
     /**
     * Sends an email to request financial assistance.
     *
-    * @todo Move this to the pages controller. It has no community-specific functionality.
-    * @todo Use the form action type in the method name for clarity (postFinancialAssistance())
+    * @todo   Move this to the pages controller. It has no community-specific functionality.
+    * @todo   Use the form action type in the method name for clarity (postFinancialAssistance())
     * @author [David Linnard] [<dslinnard@gmail.com>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return Redirect
     */
     public function financialAssist(Request $request)

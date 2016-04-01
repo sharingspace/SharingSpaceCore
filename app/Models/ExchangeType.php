@@ -1,4 +1,13 @@
 <?php
+/**
+ * This model handles relationships for Echange Types for
+ * Entries and Communities in the AnyShare application.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 

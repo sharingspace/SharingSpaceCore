@@ -4,10 +4,10 @@
  * the AnyShare application.
  *
  * PHP version 5.5.9
- * @package    AnyShare
- * @version    v1.0
+ *
+ * @package AnyShare
+ * @version v1.0
  */
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class UserController extends Controller
     * Returns a vew that shows the user their account dashboard
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return View
     */
     public function getDashboard()
@@ -40,7 +40,7 @@ class UserController extends Controller
     * Returns a view tha displays subscription charge history
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return View
     */
     public function getHistory()
@@ -55,8 +55,8 @@ class UserController extends Controller
     * Returns a form that allows the user to update their settings.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see UsersController::postSettings()
-    * @since [v1.0]
+    * @see    UsersController::postSettings()
+    * @since  [v1.0]
     * @return View
     */
     public function getSettings()
@@ -69,8 +69,8 @@ class UserController extends Controller
     * Validates and stores the users updated general settings.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see UsersController::getSettings()
-    * @since [v1.0]
+    * @see    UsersController::getSettings()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postSettings()
@@ -113,8 +113,8 @@ class UserController extends Controller
     * Validates and stores the users social settings.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see UsersController::getSettings()
-    * @since [v1.0]
+    * @see    UsersController::getSettings()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postUpdateSocial()
@@ -145,8 +145,8 @@ class UserController extends Controller
     * Validates and stores the users updated password.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see UsersController::getSettings()
-    * @since [v1.0]
+    * @see    UsersController::getSettings()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postUpdatePassword()
@@ -174,8 +174,8 @@ class UserController extends Controller
     * Validates and stores the users updated notification settings.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see UsersController::getSettings()
-    * @since [v1.0]
+    * @see    UsersController::getSettings()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postUpdateNotifications()
@@ -200,8 +200,8 @@ class UserController extends Controller
     * Validates and stores the users updated privacy settings.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see UsersController::getSettings()
-    * @since [v1.0]
+    * @see    UsersController::getSettings()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postUpdatePrivacy()
@@ -226,7 +226,7 @@ class UserController extends Controller
     * Returns a view that displays the user's public profile.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return Redirect
     */
     public function getProfile($id)

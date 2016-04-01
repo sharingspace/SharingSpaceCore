@@ -4,10 +4,10 @@
  * the AnyShare application.
  *
  * PHP version 5.5.9
- * @package    AnyShare
- * @version    v1.0
+ *
+ * @package AnyShare
+ * @version v1.0
  */
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -24,9 +24,9 @@ class PagesController extends Controller
     * homepage view will be different based on whether the viewer is looking
     * at the homepage of the corporate site or of a community.
     *
-    * @todo Find a more elegant way to handle the two different views.
+    * @todo   Find a more elegant way to handle the two different views.
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return View
     */
     public function getHomepage(Request $request, $hp=null)

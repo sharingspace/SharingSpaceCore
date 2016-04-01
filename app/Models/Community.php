@@ -1,4 +1,13 @@
 <?php
+/**
+ * This model handles relationships related to Communities for
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -13,19 +22,19 @@ class Community extends Model
 {
 
     /**
-  * The database table used by the model.
-  *
-  * @var string
-  */
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'communities';
 
     /**
-  * Whether the model should inject it's identifier to the unique
-  * validation rules before attempting validation. If this property
-  * is not set in the model it will default to true.
-  *
-  * @var boolean
-  */
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
+    * @var boolean
+    */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UploadableFileTrait;
@@ -60,46 +69,59 @@ class Community extends Model
 
 
     /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = ['name','subdomain','group_type','cover_img','profile_img','logo'];
 
-
-    public function owner() 
+    /**
+    * Relationship to get community owner
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function owner()
     {
         return $this->belongsTo('App\User', 'created_by');
     }
 
     /**
-   * Relationship for entries and communities
-   *
-   * @return collection
-   */
-    public function entries() 
+    * Relationship for entries and communities
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function entries()
     {
         return $this->belongsToMany('App\Entry', 'entries_community_join', 'community_id', 'entry_id');
     }
 
 
     /**
-  * Get the members of a group.
-  * Groups belong to many users by way of the communities_users table.
-  *
-  * @return collection
-  */
+    * Get the members of a group.
+    * Groups belong to many users by way of the communities_users table.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function members()
     {
         return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin');
     }
 
+
     /**
-  * Get the cover image url based on app environment
-  *
-  * @return string
-  */
-    public function getCover() 
+    * Get the cover image url based on app environment
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return string
+    */
+    public function getCover()
     {
 
         if ($this->cover_img!='') {
@@ -112,11 +134,13 @@ class Community extends Model
 
 
     /**
-  * Get the logo image url based on app environment
-  *
-  * @return string
-  */
-    public function getLogo() 
+    * Get the logo image url based on app environment
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return string
+    */
+    public function getLogo()
     {
 
         if ($this->logo) {
@@ -127,11 +151,13 @@ class Community extends Model
     }
 
     /**
-  * Get the profile image url based on app environment
-  *
-  * @return string
-  */
-    public function getProfileImg() 
+    * Get the profile image url based on app environment
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return string
+    */
+    public function getProfileImg()
     {
 
         if ($this->profile_img!='') {
@@ -142,14 +168,28 @@ class Community extends Model
     }
 
 
-
+    /**
+    * Relationship for community subscription
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function subscription()
     {
         return $this->hasOne('\App\Subscription', 'id', 'community_id');
     }
 
 
-    public static function saveImageToDB($id, $filename, $type, $upload_key = null) 
+    /**
+    * Save the image to the DB. This method handles cover images, logos and profile images.
+    *
+    * @todo   Remove upload key, since it's not used here.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return boolean
+    */
+    public static function saveImageToDB($id, $filename, $type, $upload_key = null)
     {
 
         if ($community = Community::find($id)) {
@@ -175,11 +215,13 @@ class Community extends Model
     }
 
     /**
-  * Get the exchnage types allowed in this community.
-  * ExchangeType Types belong to many communities by way of the group_allowed_types table.
-  *
-  * @return collection
-  */
+    * Get the exchange types allowed in this community.
+    * ExchangeType Types belong to many communities by way of the group_allowed_types table.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function exchangeTypes()
     {
         $exchanges = $this->belongsToMany('App\ExchangeType', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
@@ -189,9 +231,11 @@ class Community extends Model
 
 
     /**
-    * Only return publicly viewable communities
+    * Query scope to only return publicly viewable communities.
     *
-    * @return collection
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return mixed
     */
     public function scopeIsPublic()
     {
@@ -200,15 +244,15 @@ class Community extends Model
 
 
     /**
-   * scopeEntriesInCommunity
-   * Get all entries that are in the current community
-   *
-   * @param $query
-   * @param array $categoryIdListing
-   *
-   * @return  mixed
-   * @version v1.0
-   */
+    * scopeEntriesInCommunity
+    * Get all entries that are in the current community
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @param  $query
+    * @param  array $categoryIdListing
+    * @return mixed
+    */
     public function scopeEntriesInCommunity($query)
     {
         return $query->whereIn('category_id', $categoryIdListing);

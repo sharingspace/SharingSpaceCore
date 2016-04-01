@@ -1,4 +1,13 @@
 <?php
+/**
+ * This model handles relationships for Entries in
+ * the AnyShare application.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -13,19 +22,19 @@ class Entry extends Model
 {
 
     /**
-   * The database table used by the model.
-   *
-   * @var string
-   */
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'entries';
 
     /**
-  * Whether the model should inject it's identifier to the unique
-  * validation rules before attempting validation. If this property
-  * is not set in the model it will default to true.
-  *
-  * @var boolean
-  */
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
+    * @var boolean
+    */
     protected $injectUniqueIdentifier = true;
 
 
@@ -58,15 +67,15 @@ class Entry extends Model
     protected $dates = ['deleted_at'];
 
     /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = ['title','post_type','qty'];
 
 
 
-    public function author() 
+    public function author()
     {
         return $this->belongsTo('App\User', 'created_by');
     }
@@ -83,7 +92,7 @@ class Entry extends Model
     }
 
 
-    public static function saveImageToDB($id, $filename, $type, $user_id = null, $upload_key = null) 
+    public static function saveImageToDB($id, $filename, $type, $user_id = null, $upload_key = null)
     {
         $media = new Media();
         $media->entry_id = $id;
@@ -96,7 +105,7 @@ class Entry extends Model
         $media->save();
     }
 
-    public static function updateImageToDB($user_id, $upload_key, $entry_id) 
+    public static function updateImageToDB($user_id, $upload_key, $entry_id)
     {
 
         $media = \App\Media::where('upload_key', '=', $upload_key)
@@ -120,7 +129,7 @@ class Entry extends Model
     }
 
 
-    public function media() 
+    public function media()
     {
         return $this->hasMany('App\Media', 'entry_id');
     }
@@ -129,7 +138,7 @@ class Entry extends Model
     * Check whether this user can edit the entry
     * Admin checks can go here later as well
     */
-    public  function checkUserCanEditEntry($user) 
+    public  function checkUserCanEditEntry($user)
     {
         if ($user->id == $this->created_by) {
             return true;
@@ -140,13 +149,13 @@ class Entry extends Model
     }
 
     /**
-  * Query builder scope to only return uncompleted 
-  *
-  * @param Illuminate\Database\Query\Builder $query  Query builder instance
-  * @param text                              $search Search term
-  *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
-  */
+    * Query builder scope to only return uncompleted
+    *
+    * @param Illuminate\Database\Query\Builder $query  Query builder instance
+    * @param text                              $search Search term
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeNotCompleted($query)
     {
         return $query->whereNull('completed_at');
@@ -156,13 +165,13 @@ class Entry extends Model
 
 
     /**
-  * Query builder scope to search on text
-  *
-  * @param Illuminate\Database\Query\Builder $query  Query builder instance
-  * @param text                              $search Search term
-  *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
-  */
+    * Query builder scope to search on text
+    *
+    * @param Illuminate\Database\Query\Builder $query  Query builder instance
+    * @param text                              $search Search term
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeTextSearch($query, $search)
     {
 

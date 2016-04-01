@@ -4,10 +4,10 @@
  * the AnyShare application.
  *
  * PHP version 5.5.9
- * @package    AnyShare
- * @version    v1.0
+ *
+ * @package AnyShare
+ * @version v1.0
  */
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class EntriesController extends Controller
     * Returns a view that displays entry information
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return View
     */
     public function getEntry(Request $request, $entryID)
@@ -57,8 +57,8 @@ class EntriesController extends Controller
     * Returns a view that makes a form to create a new entry
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see EntriesControllers::postCreate()
-    * @since [v1.0]
+    * @see    EntriesControllers::postCreate()
+    * @since  [v1.0]
     * @return View
     */
     public function getCreate(Request $request)
@@ -72,7 +72,7 @@ class EntriesController extends Controller
     * Validates and stores the new entry data via AJAX request.
     *
     * @author [David Linnard] [<dslinnard@gmail.com>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return String JSON
     */
     public function postAjaxCreate(Request $request)
@@ -138,8 +138,8 @@ class EntriesController extends Controller
     * Validates and stores the new entry.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see EntriesController::getCreate()
-    * @since [v1.0]
+    * @see    EntriesController::getCreate()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postCreate(Request $request)
@@ -195,8 +195,8 @@ class EntriesController extends Controller
     * Returns a form view to edit an entry
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see EntriesController::postEdit()
-    * @since [v1.0]
+    * @see    EntriesController::postEdit()
+    * @since  [v1.0]
     * @return View
     */
     public function getEdit(Request $request, $entryID)
@@ -226,7 +226,7 @@ class EntriesController extends Controller
     * Validates and stores the entry edits submitted via AJAX.
     *
     * @author [David Linnard] [<dslinnard@gmail.com>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return String JSON
     */
     public function postAjaxEdit(Request $request, $entryID)
@@ -287,8 +287,8 @@ class EntriesController extends Controller
     * Validates and stores the entry edits.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see EntriesController::getEdit()
-    * @since [v1.0]
+    * @see    EntriesController::getEdit()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postEdit(Request $request, $entryID)
@@ -337,9 +337,9 @@ class EntriesController extends Controller
     /**
     * Deletes an entry via AJAX request
     *
-    * @todo Consolidate this and the non-ajax delete.
+    * @todo   Consolidate this and the non-ajax delete.
     * @author [David Linnard] [<dslinnard@gmail.com>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return String JSON
     */
     public function postAjaxDelete($entryID)
@@ -368,8 +368,8 @@ class EntriesController extends Controller
     * Delete the entry
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see EntriesController::getCreate()
-    * @since [v1.0]
+    * @see    EntriesController::getCreate()
+    * @since  [v1.0]
     * @return Redirect
     */
     public function postDelete($entryID)
@@ -397,7 +397,7 @@ class EntriesController extends Controller
     * Validates and stores an image uploaded via AJAX
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return String JSON
     */
     public function ajaxUpload($entryID = null)
@@ -435,7 +435,7 @@ class EntriesController extends Controller
     * entries in a community.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return String JSON
     */
     public function getEntriesDataView(Request $request, $user_id=null)
@@ -513,7 +513,7 @@ class EntriesController extends Controller
     * Mark an entry as completed
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
+    * @since  [v1.0]
     * @return Redirect
     */
     public function completeEntry($entryID)
