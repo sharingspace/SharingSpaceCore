@@ -25,11 +25,25 @@ class CommunitySubscription extends Model
 
     protected $errors;
 
+    /**
+    * Returns the subscription information for a user.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function user()
     {
         return $this->belongsTo('\App\Models\User', 'billable_id', 'id');
     }
 
+    /**
+    * Returns the subscription information for a community.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function community()
     {
         return $this->hasOne('\App\Community', 'id', 'community_id');

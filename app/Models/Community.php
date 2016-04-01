@@ -235,7 +235,7 @@ class Community extends Model
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since  [v1.0]
-    * @return mixed
+    * @return Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeIsPublic()
     {
@@ -251,7 +251,7 @@ class Community extends Model
     * @since  [v1.0]
     * @param  $query
     * @param  array $categoryIdListing
-    * @return mixed
+    * @return Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeEntriesInCommunity($query)
     {

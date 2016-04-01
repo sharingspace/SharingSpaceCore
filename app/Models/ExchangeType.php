@@ -1,6 +1,6 @@
 <?php
 /**
- * This model handles relationships for Echange Types for
+ * This model handles relationships for Exchange Types for
  * Entries and Communities in the AnyShare application.
  *
  * PHP version 5.5.9

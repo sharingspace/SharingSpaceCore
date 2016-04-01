@@ -75,23 +75,51 @@ class Entry extends Model
 
 
 
+    /**
+    * Return the author of an entry
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function author()
     {
         return $this->belongsTo('App\User', 'created_by');
     }
 
-
+    /**
+    * Returns the communities the entry belongs to.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function communities()
     {
         return $this->belongsToMany('App\Community', 'entries_hubgroup_join', 'entry_id', 'hubgroup_id');
     }
 
+    /**
+    * Returns the entry's exchange types.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function exchangeTypes()
     {
         return $this->belongsToMany('App\ExchangeType', 'entries_exchange_types', 'entry_id', 'type_id');
     }
 
 
+    /**
+    * Static method to save an entry image to the database.
+    *
+    * @todo Add AWS integration
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return mixed
+    */
     public static function saveImageToDB($id, $filename, $type, $user_id = null, $upload_key = null)
     {
         $media = new Media();
@@ -105,6 +133,15 @@ class Entry extends Model
         $media->save();
     }
 
+    /**
+    * Updates the image entry in the database to reflect the new entry ID.
+    * This is necessary because the quick add AJAX form allows you to upload images
+    * to a new entry before the entry actually exists and has an ID number.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return mixed
+    */
     public static function updateImageToDB($user_id, $upload_key, $entry_id)
     {
 
@@ -117,8 +154,11 @@ class Entry extends Model
     }
 
     /**
-    * Convert the tags string to an array so we can loop through it and link to other results
-    * on the tile display
+    * Converts a string of tags into an array
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return array
     */
     public function tagsToArray()
     {
@@ -129,14 +169,26 @@ class Entry extends Model
     }
 
 
+    /**
+    * Returns the media associated with an entry.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function media()
     {
         return $this->hasMany('App\Media', 'entry_id');
     }
 
-    /*
+    /**
     * Check whether this user can edit the entry
     * Admin checks can go here later as well
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @param object $user
+    * @return boolean
     */
     public  function checkUserCanEditEntry($user)
     {
@@ -151,9 +203,10 @@ class Entry extends Model
     /**
     * Query builder scope to only return uncompleted
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
     * @param Illuminate\Database\Query\Builder $query  Query builder instance
     * @param text                              $search Search term
-    *
     * @return Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeNotCompleted($query)
@@ -167,9 +220,10 @@ class Entry extends Model
     /**
     * Query builder scope to search on text
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
     * @param Illuminate\Database\Query\Builder $query  Query builder instance
     * @param text                              $search Search term
-    *
     * @return Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeTextSearch($query, $search)
