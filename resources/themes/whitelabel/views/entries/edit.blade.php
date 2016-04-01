@@ -74,14 +74,19 @@
                        {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
                      </div>
                     </div>
-
                     <!-- checkboxes for exchange types -->
                     <div class="col-md-12 margin-bottom-10">
                       <div class="checkbox">
                       @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                       <div class="col-md-2 pull-left margin-bottom-10">
                         <label class="checkbox col-md-3 pull-left margin-bottom-10">
-                          {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+
+                            @if (array_key_exists($exchange_types->id, $selected_exchanges))
+                                {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id) }}
+                            @else
+                                {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id) }}
+                            @endif
+
                           <i></i> {{ $exchange_types->name }}
                         </label>
                       </div>

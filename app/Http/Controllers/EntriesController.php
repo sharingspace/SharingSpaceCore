@@ -206,13 +206,18 @@ class EntriesController extends Controller
 
         if ($entry = \App\Entry::find($entryID)) {
 
-             $user = Auth::user();
+            $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
                 return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
-             return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types);
+            $selected_exchange_types = $entry->exchangeTypes;
+
+            foreach ($selected_exchange_types as $selected_exchange_type) {
+                $selected_exchanges[$selected_exchange_type->id] = $selected_exchange_type->id;
+            }
+            return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types)->with('selected_exchanges', $selected_exchanges);
 
 
         } else {
