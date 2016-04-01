@@ -117,6 +117,11 @@ class Entry extends Model
     *
     * @todo Add AWS integration
     * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param int $id
+    * @param string $filename
+    * @param string $type
+    * @param int $user_id
+    * @param string $upload_key
     * @since  [v1.0]
     * @return mixed
     */
@@ -140,6 +145,9 @@ class Entry extends Model
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since  [v1.0]
+    * @param int $user_id
+    * @param string $upload_key
+    * @param int $entry_id
     * @return mixed
     */
     public static function updateImageToDB($user_id, $upload_key, $entry_id)
