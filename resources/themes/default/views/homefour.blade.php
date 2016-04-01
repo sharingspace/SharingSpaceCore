@@ -4,8 +4,8 @@
 
 	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
-       <h1>{{ trans('home_eric.home_headline') }}</h1>
-       <h2>{{ trans('home_eric.subhome_headline') }}<br>
+       <h1>{{ trans('home_four.home_headline') }}</h1>
+       <h2>{{ trans('home_four.subhome_headline') }}<br>
 
     </div>
 	</section>
@@ -32,9 +32,9 @@
 					<div class="row">
 
 						<div class="col-sm-6 col-xs-12">
-							<p>{{ trans('home_eric.learn_more_p1')}}</p>
-              <p>{{ trans('home_eric.learn_more_p2')}} <strong>{{ trans('home_eric.learn_more_p2b')}}</strong>. {{ trans('home_eric.learn_more_p2c')}} </p>
-              <p>{{ trans('home_eric.learn_more_p3')}} <strong>{{ trans('home_eric.learn_more_p3b')}}</strong> {{ trans('home_eric.learn_more_p3c')}}</p>
+							<p>{{ trans('home_four.learn_more_p1')}}</p>
+              <p>{{ trans('home_four.learn_more_p2')}} <strong>{{ trans('home_four.learn_more_p2b')}}</strong>. {{ trans('home_four.learn_more_p2c')}} </p>
+              <p>{{ trans('home_four.learn_more_p3')}} <strong>{{ trans('home_four.learn_more_p3b')}}</strong> {{ trans('home_four.learn_more_p3c')}}</p>
 
 
 						</div>

@@ -4,8 +4,8 @@
 
 	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
-       <h1>{{ trans('home_david.home_headline') }}</h1>
-       <h2 style="font-size:52px!important;">{{ trans('home_david.subhome_headline') }}<br>
+       <h1>{{ trans('home_three.home_headline') }}</h1>
+       <h2 style="font-size:52px!important;">{{ trans('home_three.subhome_headline') }}<br>
 
     </div>
 	</section>
@@ -33,10 +33,10 @@
 
 						<div class="col-sm-6 col-xs-12">
 
-              <p>{{ trans('home_david.learn_more_p1')}}</p>
-              <p>{{ trans('home_david.learn_more_p2')}} <strong>{{ trans('home_david.learn_more_p2b')}}</strong> {{ trans('home_david.learn_more_p2c')}} </p>
+              <p style="font-size:24px!important;">{{ trans('home_three.learn_more_p1')}}</p>
+              <p style="font-size:24px!important;">{{ trans('home_three.learn_more_p2')}} <strong>{{ trans('home_three.learn_more_p2b')}}</strong> {{ trans('home_three.learn_more_p2c')}} </p>
 
-              <p>{{ trans('home_david.learn_more_p3')}} <strong>{{ trans('home_david.learn_more_p3b')}}</strong> {{ trans('home_david.learn_more_p3c')}}</p>
+              <p style="font-size:24px!important;">{{ trans('home_three.learn_more_p3')}} <strong>{{ trans('home_three.learn_more_p3b')}}</strong> {{ trans('home_three.learn_more_p3c')}}</p>
 
 
 						</div>

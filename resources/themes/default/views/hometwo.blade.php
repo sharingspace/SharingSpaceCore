@@ -4,8 +4,8 @@
 
 	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
-       <h1>{{ trans('home_rob.home_headline') }}</h1>
-       <h2>{{ trans('home_rob.subhome_headline') }}<br>{{ trans('home_rob.subhome_headline_b') }}</h2>
+       <h1>{{ trans('home_two.home_headline') }}</h1>
+       <h2>{{ trans('home_two.subhome_headline') }}<br>
 
     </div>
 	</section>
@@ -32,9 +32,9 @@
 					<div class="row">
 
 						<div class="col-sm-6 col-xs-12">
-							<p>{{ trans('home_rob.learn_more_p1')}}</p>
-              <p>{{ trans('home_rob.learn_more_p2')}} <strong>{{ trans('home_rob.learn_more_p2b')}}</strong> 
-              {{ trans('home_rob.learn_more_p2c')}}</p>
+							<p>{{ trans('home_two.learn_more_p1')}}</p>
+              <p>{{ trans('home_two.learn_more_p2')}} <strong>{{ trans('home_two.learn_more_p2b')}}</strong>. {{ trans('home_two.learn_more_p2c')}} </p>
+              <p>{{ trans('home_two.learn_more_p3')}} <strong>{{ trans('home_two.learn_more_p3b')}}</strong> {{ trans('home_two.learn_more_p3c')}}</p>
 
 
 						</div>
