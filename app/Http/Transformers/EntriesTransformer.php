@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Transformers;
-use \App\Entry;
 
+use \App\Entry;
 
 class EntriesTransformer
 {
 
-    public function transform(Entry $entry) 
+    public function transform(Entry $entry)
     {
         return [
             'id' => $entry->tile_id,
@@ -29,6 +29,4 @@ class EntriesTransformer
 
         ];
     }
-
-
 }

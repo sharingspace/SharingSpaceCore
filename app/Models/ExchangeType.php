@@ -9,8 +9,8 @@
  * @version v1.0
  */
 namespace App;
-use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Model;
 
 class ExchangeType extends Model
 {
@@ -46,5 +46,4 @@ class ExchangeType extends Model
     {
         return $this->belongsToMany('App\Community', 'community_allowed_types', 'community_id', 'type_id');
     }
-
 }

@@ -48,5 +48,4 @@ class CommunitySubscription extends Model
     {
         return $this->hasOne('\App\Community', 'id', 'community_id');
     }
-
 }

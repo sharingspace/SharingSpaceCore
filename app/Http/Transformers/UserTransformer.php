@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Transformers;
-use \App\User;
 
+use \App\User;
 
 class UserTransformer
 {
 
-    public function transform(User $user) 
+    public function transform(User $user)
     {
         return [
             'id' => $user->id,
@@ -29,6 +29,4 @@ class UserTransformer
             'updated_at' => $user->updated_at,
         ];
     }
-
-
 }

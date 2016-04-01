@@ -195,15 +195,15 @@ class Community extends Model
         if ($community = Community::find($id)) {
 
             switch ($type) {
-            case 'community-covers':
-                $community->cover_img = $filename;
-                break;
-            case 'community-profiles':
-                $community->profile_img = $filename;
-                break;
-            case 'community-logos':
-                $community->logo = $filename;
-                break;
+                case 'community-covers':
+                    $community->cover_img = $filename;
+                    break;
+                case 'community-profiles':
+                    $community->profile_img = $filename;
+                    break;
+                case 'community-logos':
+                    $community->logo = $filename;
+                    break;
             }
 
             if (!$community->save()) {
@@ -257,6 +257,4 @@ class Community extends Model
     {
         return $query->whereIn('category_id', $categoryIdListing);
     }
-
-
 }

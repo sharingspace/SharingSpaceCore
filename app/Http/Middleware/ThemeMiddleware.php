@@ -2,7 +2,7 @@
 /**
  * This Middleware checks for a theme preference based on the
  * $request->valid_whitelabel object we set in the
- * SubdomainMiddleware. 
+ * SubdomainMiddleware.
  *
  * PHP version 5.5.9
  *

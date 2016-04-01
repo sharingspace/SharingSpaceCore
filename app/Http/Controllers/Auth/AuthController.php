@@ -78,7 +78,7 @@ class AuthController extends Controller
                 return redirect($redirect)->with('success', 'Welcome aboard!');
             }
 
-        } catch  (Exception $e) {
+        } catch (Exception $e) {
             return redirect($redirect)->with('error', 'We couldn\'t log you in :(');
         }
 
@@ -95,7 +95,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make(
-            $data, [
+            $data,
+            [
             'display_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',

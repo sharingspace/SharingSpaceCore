@@ -17,7 +17,6 @@ use Input;
 use Redirect;
 use Helper;
 
-
 class UserController extends Controller
 {
     /**
@@ -238,5 +237,4 @@ class UserController extends Controller
         }
 
     }
-
 }

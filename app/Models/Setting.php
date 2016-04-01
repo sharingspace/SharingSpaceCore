@@ -37,7 +37,4 @@ class Setting extends Model
     protected $rules = [
 
     ];
-
-
-
 }

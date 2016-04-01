@@ -11,7 +11,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Pagetheme extends Model
 {
 
@@ -21,7 +20,4 @@ class Pagetheme extends Model
   * @var string
   */
     protected $table = 'themes';
-
-
-
 }

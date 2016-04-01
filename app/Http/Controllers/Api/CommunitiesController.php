@@ -58,7 +58,4 @@ class CommunitiesController extends ApiGuardController
 
         }
     }
-
-
-
 }

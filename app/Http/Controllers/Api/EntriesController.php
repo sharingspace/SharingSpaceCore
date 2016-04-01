@@ -6,7 +6,6 @@ use Illuminate\Routing\Controller;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use App\Entry;
 
-
 class EntriesController extends ApiGuardController
 {
 
@@ -56,5 +55,4 @@ class EntriesController extends ApiGuardController
 
         }
     }
-
 }

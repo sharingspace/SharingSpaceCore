@@ -154,7 +154,7 @@ class Entry extends Model
     {
 
         $media = \App\Media::where('upload_key', '=', $upload_key)
-        ->where('user_id', '=',  $user_id)
+        ->where('user_id', '=', $user_id)
         ->first();
 
         $media->entry_id = $entry_id;
@@ -198,7 +198,7 @@ class Entry extends Model
     * @param object $user
     * @return boolean
     */
-    public  function checkUserCanEditEntry($user)
+    public function checkUserCanEditEntry($user)
     {
         if ($user->id == $this->created_by) {
             return true;
@@ -242,14 +242,12 @@ class Entry extends Model
             ->orWhere(
                 function ($query) use ($search) {
                     $query->whereHas(
-                        'author', function ($query) use ($search) {
+                        'author',
+                        function ($query) use ($search) {
                             $query->where('display_name', 'LIKE', '%'.$search.'%');
                         }
                     );
                 }
             );
     }
-
-
-
 }

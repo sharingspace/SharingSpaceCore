@@ -167,5 +167,4 @@ class SlackController extends Controller
         return response()->json($message);
 
     }
-
 }

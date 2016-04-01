@@ -1,12 +1,13 @@
 <?php
 namespace App\Http\Transformers;
+
 use App\Community;
 use App\User;
 
 class CommunityTransformer
 {
 
-    public function transform(Community $community) 
+    public function transform(Community $community)
     {
         return [
             'id' => $community->hubgroup_id,
@@ -23,14 +24,12 @@ class CommunityTransformer
             'members' => $community->members->count(),
         ];
     }
-
-
 }
 
 class MemberlistTransformer
 {
 
-    public function transform(User $members) 
+    public function transform(User $members)
     {
         return [
           'id' => $members->id,

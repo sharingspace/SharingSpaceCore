@@ -29,7 +29,7 @@ class PagesController extends Controller
     * @since  [v1.0]
     * @return View
     */
-    public function getHomepage(Request $request, $hp=null)
+    public function getHomepage(Request $request, $hp = null)
     {
 
         if ($request->whitelabel_group) {
@@ -62,5 +62,4 @@ class PagesController extends Controller
         }
 
     }
-
 }

@@ -245,7 +245,9 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
 
             Mail::send(
-                ['text' => 'emails.welcome'], $data, function ($message) use ($data) {
+                ['text' => 'emails.welcome'],
+                $data,
+                function ($message) use ($data) {
 
                     $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
                 }
@@ -347,7 +349,8 @@ class CommunitiesController extends Controller
 
         // Send the application
         Mail::send(
-            ['text' => 'email.freeAnyshareText'], ['data'=>$input],
+            ['text' => 'email.freeAnyshareText'],
+            ['data'=>$input],
             function ($m) use ($email, $firstName, $lastName) {
                 $m->to('info@AnySha.re', 'AnyShare');
                 $m->from($email, $firstName.' '.$lastName);
@@ -357,7 +360,4 @@ class CommunitiesController extends Controller
 
         return Redirect::back()->with('success', trans('pricing.financial_assist.success'));
     }
-
-
-
 }

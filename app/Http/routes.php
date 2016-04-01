@@ -5,7 +5,8 @@
 |--------------------------------------------------------------------------
 */
 Route::group(
-    array('prefix' => 'api/v1'), function () {
+    array('prefix' => 'api/v1'),
+    function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -13,7 +14,8 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::group(
-            array('prefix' => 'groups'), function () {
+            array('prefix' => 'groups'),
+            function () {
                 Route::get('{id}/members', '\App\Http\Controllers\Api\CommunitiesController@memberlist');
                 Route::get('{id}/entries', '\App\Http\Controllers\Api\CommunitiesController@entrylist');
                 Route::get('{id}', '\App\Http\Controllers\Api\CommunitiesController@show');
@@ -27,7 +29,8 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::group(
-            array('prefix' => 'members'), function () {
+            array('prefix' => 'members'),
+            function () {
                 Route::get('{id}', '\App\Http\Controllers\Api\UsersController@show');
                 Route::get('/', '\App\Http\Controllers\Api\UsersController@all');
             }
@@ -39,7 +42,8 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::group(
-            array('prefix' => 'entries'), function () {
+            array('prefix' => 'entries'),
+            function () {
                 Route::get('{id}', '\App\Http\Controllers\Api\EntriesController@show');
                 Route::get('/', '\App\Http\Controllers\Api\EntriesController@all');
             }
@@ -51,7 +55,8 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::group(
-            array('prefix' => 'slack'), function () {
+            array('prefix' => 'slack'),
+            function () {
                 Route::post('members', '\App\Http\Controllers\Api\SlackController@slackShowMembers');
                 Route::post('entry/{postType}', '\App\Http\Controllers\Api\SlackController@slackAddEntry');
             }
@@ -62,7 +67,8 @@ Route::group(
 
 
 Route::group(
-    ['prefix' => LaravelLocalization::setLocale()], function () {
+    ['prefix' => LaravelLocalization::setLocale()],
+    function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -71,18 +77,21 @@ Route::group(
         */
 
         Route::group(
-            array('prefix' => 'auth'), function () {
+            array('prefix' => 'auth'),
+            function () {
 
                 // Logout
                 Route::get(
-                    'logout', array(
+                    'logout',
+                    array(
                     'as' => 'logout',
                     'uses' => 'Auth\AuthController@getLogout')
                 );
 
                 // Login
                 Route::get(
-                    'login', array(
+                    'login',
+                    array(
                     'as' => 'login',
                     'uses' => 'Auth\AuthController@getLogin')
                 );
@@ -91,7 +100,8 @@ Route::group(
 
                 // Register
                 Route::get(
-                    'register', array(
+                    'register',
+                    array(
                     'as' => 'register',
                     'uses' => 'Auth\AuthController@getRegister')
                 );
@@ -113,64 +123,74 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::get(
-            'account/history', array(
+            'account/history',
+            array(
             'middleware' => 'auth',
             'as' => 'user.history',
             'uses' => 'UserController@getHistory')
         );
 
         Route::get(
-            'account/settings', array(
+            'account/settings',
+            array(
             'middleware' => 'auth',
             'as' => 'user.settings.view',
             'uses' => 'UserController@getSettings')
         );
 
         Route::post(
-            'account/settings', array(
+            'account/settings',
+            array(
             'middleware' => 'auth',
             'as' => 'user.settings.save',
             'uses' => 'UserController@postSettings')
         );
 
         Route::post(
-            'account/password', array(
+            'account/password',
+            array(
             'middleware' => 'auth',
             'as' => 'user.password.save',
             'uses' => 'UserController@postUpdatePassword')
         );
 
         Route::post(
-            'account/privacy', array(
+            'account/privacy',
+            array(
             'middleware' => 'auth',
             'as' => 'user.privacy.save',
             'uses' => 'UserController@postUpdatePrivacy')
         );
 
         Route::post(
-            'account/social', array(
+            'account/social',
+            array(
             'middleware' => 'auth',
             'as' => 'user.social.save',
             'uses' => 'UserController@postUpdateSocial')
         );
 
         Route::post(
-            'account/notification', array(
+            'account/notification',
+            array(
             'middleware' => 'auth',
             'as' => 'user.notifications.save',
             'uses' => 'UserController@postUpdateNotifications')
         );
 
         Route::get(
-            'users/{userID}', array(
+            'users/{userID}',
+            array(
             'as' => 'user.profile',
             'uses' => 'UserController@getProfile')
         );
 
         Route::group(
-            array('prefix' => 'users'), function () {
+            array('prefix' => 'users'),
+            function () {
                 Route::post(
-                    '{entryId}/ajaxdelete', array(
+                    '{entryId}/ajaxdelete',
+                    array(
                     'middleware' => 'auth',
                     'uses' => 'EntriesController@postAjaxDelete')
                 );
@@ -184,92 +204,106 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::group(
-            array('prefix' => 'entry'), function () {
+            array('prefix' => 'entry'),
+            function () {
 
                 Route::get(
-                    'new', array(
+                    'new',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.create.form',
                     'uses' => 'EntriesController@getCreate')
                 );
 
                 Route::post(
-                    'new', array(
+                    'new',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.create.save',
                     'uses' => 'EntriesController@postCreate')
                 );
 
                 Route::post(
-                    'new/ajax', array(
+                    'new/ajax',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.create.ajax.save',
                     'uses' => 'EntriesController@postAjaxCreate')
                 );
 
                 Route::post(
-                    '{entryID}/delete', array(
+                    '{entryID}/delete',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.delete.save',
                     'uses' => 'EntriesController@postDelete')
                 );
 
                 Route::post(
-                    '{entryID}/delete/ajax', array(
+                    '{entryID}/delete/ajax',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.delete.ajax.save',
                     'uses' => 'EntriesController@postAjaxDelete')
                 );
 
                 Route::get(
-                    '{entryID}/edit', array(
+                    '{entryID}/edit',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.edit.form',
                     'uses' => 'EntriesController@getEdit')
                 );
 
                 Route::post(
-                    '{entryID}/edit/ajax', array(
+                    '{entryID}/edit/ajax',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.edit.ajax.save',
                     'uses' => 'EntriesController@postAjaxEdit')
                 );
 
                 Route::post(
-                    '{entryID}/edit', array(
+                    '{entryID}/edit',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.edit.save',
                     'uses' => 'EntriesController@postEdit')
                 );
 
                 Route::post(
-                    '{entryID?}/upload', array(
+                    '{entryID?}/upload',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'uses' => 'EntriesController@ajaxUpload')
                 );
 
                 Route::post(
-                    'upload', array(
+                    'upload',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'uses' => 'EntriesController@ajaxUpload')
                 );
 
                 Route::get(
-                    'json.browse/{userId?}', array(
+                    'json.browse/{userId?}',
+                    array(
                     'middleware' => ['community-auth'],
                     'as' => 'json.browse',
                     'uses' => 'EntriesController@getEntriesDataView')
                 );
 
                 Route::get(
-                    '{entryID}', array(
+                    '{entryID}',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.view',
                     'uses' => 'EntriesController@getEntry')
                 );
 
                 Route::get(
-                    '{entryID}/completed', array(
+                    '{entryID}/completed',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.completed',
                     'uses' => 'EntriesController@completeEntry')
@@ -287,44 +321,51 @@ Route::group(
         */
 
         Route::get(
-            'browse', array(
+            'browse',
+            array(
             'as' => 'browse',
             'middleware' => 'community-auth',
             'uses' => 'CommunitiesController@getEntriesView')
         );
 
         Route::post(
-            '{entryId}/ajaxdelete', array(
+            '{entryId}/ajaxdelete',
+            array(
             'middleware' => ['auth','community-auth'],
             'uses' => 'EntriesController@postAjaxDelete')
         );
 
         Route::get(
-            'members', array(
+            'members',
+            array(
             'middleware' => 'community-auth',
             'as' => 'members',
             'uses' => 'CommunitiesController@getMembers')
         );
 
         Route::group(
-            array('prefix' => 'community'), function () {
+            array('prefix' => 'community'),
+            function () {
 
                 Route::get(
-                    'new', array(
+                    'new',
+                    array(
                     'middleware' => 'auth',
                     'as' => 'community.create.form',
                     'uses' => 'CommunitiesController@getCreate')
                 );
 
                 Route::post(
-                    'new', array(
+                    'new',
+                    array(
                     'middleware' => 'auth',
                     'as' => 'community.create.save',
                     'uses' => 'CommunitiesController@postCreate')
                 );
 
                 Route::get(
-                    'edit', array(
+                    'edit',
+                    array(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'community.edit.form',
                     'uses' => 'CommunitiesController@getEdit')
@@ -366,7 +407,8 @@ Route::group(
 
         // Stripe Webhook...
         Route::post(
-            'webhook/stripe', [
+            'webhook/stripe',
+            [
             'as' => 'stripe.webhook',
             'uses' => 'StripeWebhookController@handleWebhook' ]
         );
@@ -378,56 +420,65 @@ Route::group(
         */
 
         Route::get(
-            'terms', function () {
+            'terms',
+            function () {
                 return view('tos');
             }
         );
 
         Route::get(
-            'privacy', function () {
+            'privacy',
+            function () {
                 return view('privacy');
             }
         );
 
         Route::get(
-            'home', function () {
+            'home',
+            function () {
                 return redirect('/');
             }
         );
 
         Route::get(
-            'about', function () {
+            'about',
+            function () {
                 return view('about');
             }
         );
 
         Route::get(
-            'coop', function () {
+            'coop',
+            function () {
                 return view('coop');
             }
         );
 
         Route::get(
-            'pricing', function () {
+            'pricing',
+            function () {
                 return view('pricing');
             }
         );
 
         Route::get(
-            'financial_assist', function () {
+            'financial_assist',
+            function () {
                 return view('assistance');
             }
         );
 
         Route::post(
-            'financial_assist', array(
+            'financial_assist',
+            array(
             'as' => 'assistance',
             'uses' => 'CommunitiesController@financialAssist'
             )
         );
 
         Route::get(
-            '/{hp?}', array(
+            '/{hp?}',
+            array(
             'as' => 'home',
             'uses' => 'PagesController@getHomepage')
         );

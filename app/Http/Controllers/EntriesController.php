@@ -106,7 +106,7 @@ class EntriesController extends Controller
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
             $types=[];
 
-            foreach($entry->exchangeTypes as $et) {
+            foreach ($entry->exchangeTypes as $et) {
                 array_push($types, $et->name);
             }
             $uploaded = true;
@@ -114,16 +114,14 @@ class EntriesController extends Controller
             if (Input::hasFile('file')) {
                 Log::debug("We have a file - and, weirdly, kinda shouldn't?");
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
-            }
-            else {
+            } else {
                 Log::debug("no file was detected, we should just be moving files from temp-to-perm");
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
-            if($uploaded) {
+            if ($uploaded) {
                 return response()->json(['success'=>true, 'save'=>true, 'entry_id'=>$entry->id, 'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type,'qty'=>$entry->qty,'exchange_types' =>$types, 'tags' => $entry->tags]);
-            }
-            else {
+            } else {
                 return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.upload_failed')]);
             }
         }
@@ -273,7 +271,7 @@ class EntriesController extends Controller
             if ($request->whitelabel_group->entries()->save($entry)) {
                 $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
-                foreach($entry->exchangeTypes as $et) {
+                foreach ($entry->exchangeTypes as $et) {
                     array_push($types, $et->name);
                 }
             }
@@ -414,21 +412,18 @@ class EntriesController extends Controller
             $uploaded = false;
             if ($entryID) {
                 $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries');
-            }
-            else {
+            } else {
                  Log::debug("Thee upload key is: ".Input::get('upload_key'));
                 $uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'));
                  Log::debug("the uploaded result is: ".$uploaded);
             }
-            if($uploaded) {
+            if ($uploaded) {
                 return response()->json(['success'=>true, 'image'=>'bingo']);
-            }
-            else {
+            } else {
                  Log::debug("were not able to upload the file, sorry :(");
                 return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
             }
-        }
-        else {
+        } else {
             Log::debug("No actual file was given, so this whole thing is shot");
             return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
         }
@@ -443,12 +438,11 @@ class EntriesController extends Controller
     * @since  [v1.0]
     * @return String JSON
     */
-    public function getEntriesDataView(Request $request, $user_id=null)
+    public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
             $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id);
-        }
-        else {
+        } else {
             $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
         }
 
@@ -532,7 +526,4 @@ class EntriesController extends Controller
         }
 
     }
-
-
-
 }

@@ -15,7 +15,6 @@ use Closure;
 use Auth;
 use Log;
 
-
 class CommunityPermissionMiddleware
 {
     /**

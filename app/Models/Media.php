@@ -13,7 +13,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
-
 class Media extends Model
 {
 
@@ -61,8 +60,7 @@ class Media extends Model
         if (Input::hasFile($fieldname)) {
             $allFiles = Input::file();
 
-            foreach($allFiles as $file)
-            {
+            foreach ($allFiles as $file) {
                 $path = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads/entries/'.$this->tile_id;
                 $aws_path = 'assets/uploads/entries/'.$this->tile_id;
 
@@ -171,28 +169,23 @@ class Media extends Model
     * @return boolean
     */
 
-    public static function is_animated_gif( $filename )
+    public static function is_animated_gif($filename)
     {
         $raw = file_get_contents($filename);
 
         $offset = 0;
         $frames = 0;
-        while ($frames < 2)
-        {
+        while ($frames < 2) {
             $where1 = strpos($raw, "\x00\x21\xF9\x04", $offset);
-            if ($where1 === false ) {
+            if ($where1 === false) {
                 break;
-            }
-            else
-            {
+            } else {
                 $offset = $where1 + 1;
                 $where2 = strpos($raw, "\x00\x2C", $offset);
-                if ($where2 === false ) {
+                if ($where2 === false) {
                     break;
-                }
-                else
-                {
-                    if ($where1 + 8 == $where2 ) {
+                } else {
+                    if ($where1 + 8 == $where2) {
                         $frames ++;
                     }
                     $offset = $where2 + 1;
@@ -202,6 +195,4 @@ class Media extends Model
 
         return $frames > 1;
     }
-
-
 }
