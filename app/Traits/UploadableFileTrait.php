@@ -35,18 +35,18 @@ trait UploadableFileTrait {
       mkdir($path, 0755, true);
     }
 
-		$rand_filename = str_random(10);
+	$rand_filename = str_random(10);
     $filename = $rand_filename.'.'.$file->getClientOriginalExtension();
 
     $img_path = $path.'/'.$filename;
 
     if ($file->move($path, $filename)) { // $destinationPath, $fileName
-      Log::debug("We were able to move file from $path to $filename!");
-      $res=self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
-      Log::debug("The results of saving to the DB, though, are: $res");
+      //Log::debug("We were able to move file from $path to $filename!");
+      $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+      //Log::debug("The results of saving to the DB, though, are: $res");
 
       if (!Media::is_animated_gif($img_path)) {
-        Log::info("This is *NOT* an animated GIF, so try this...");
+        //Log::info("This is *NOT* an animated GIF, so try this...");
 
         try {
 
@@ -55,7 +55,7 @@ trait UploadableFileTrait {
               $constraint->aspectRatio();
             });
 
-            $img->save($img_path,70);
+            $img->save($img_path,100);
           }
         } catch (Exception $e) {
           Log::error("Exception caught in moveAndStore Trait, in resize section: ".$e->getMessage());
