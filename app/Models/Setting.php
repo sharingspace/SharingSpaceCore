@@ -1,4 +1,12 @@
 <?php
+/**
+ * This model is just used to establish the table name.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +38,6 @@ class Setting extends Model
 
     ];
 
-  
+
 
 }

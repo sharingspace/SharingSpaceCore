@@ -1,4 +1,13 @@
 <?php
+/**
+ * This model handles relationships for Media files
+ * in the AnyShare application.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -23,14 +32,30 @@ class Media extends Model
     ];
 
 
-    public function entries() 
+    /**
+    * Returns a collection of entries by media type
+    *
+    * @todo Is this actually used? Confirm and delete if not.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function entries()
     {
         return $this->belongsTo('App\Entry', 'entry_id');
     }
 
 
-    // WE DO NOT USE THIS ANYMORE. USE UPLOADABLEFILETRAIT INSTEAD
-    public function uploadImage_old($fieldname = 'image', $type = 'profile', $width = 250, $height = null) 
+    /**
+    * Return the author of an entry
+    *
+    * @todo Remove this method.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return boolean
+    * @deprecated We do not use this anymore. Use UploadableFileTrait instead.
+    */
+    public function uploadImage_old($fieldname = 'image', $type = 'profile', $width = 250, $height = null)
     {
 
         if (Input::hasFile($fieldname)) {
@@ -136,9 +161,16 @@ class Media extends Model
 
 
     /**
-  * Thanks to ZeBadger for original example, and Davide Gualano for pointing me to it
-  * Original at http://it.php.net/manual/en/function.imagecreatefromgif.php#59787
-  **/
+    * Determines if the image is an animated gif or not.
+    * We can't resize animated gifs, so this lets us know if we can
+    * safely resize the image.
+    *
+    * @link http://it.php.net/manual/en/function.imagecreatefromgif.php#59787
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return boolean
+    */
+
     public static function is_animated_gif( $filename )
     {
         $raw = file_get_contents($filename);

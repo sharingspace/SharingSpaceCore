@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * This model handles relationships and model methods for Users.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
@@ -69,18 +76,39 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
 
-    public function subscriptions() 
+    /**
+    * Return a user's subscriptions.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function subscriptions()
     {
         return $this->hasMany('App\CommunitySubscription', 'billable_id');
     }
 
 
-    public function social() 
+    /**
+    * Return a user's social accounts.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function social()
     {
         return $this->hasMany('App\Social', 'user_id');
     }
 
-    public function isSuperAdmin() 
+    /**
+    * Returns whether a user is a superadmin.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return boolean
+    */
+    public function isSuperAdmin()
     {
         if ($this->superadmin=='1') {
             return true;
@@ -89,12 +117,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
     }
 
+    /**
+    * Returns whether or not the user is an admin of a community
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param object $community
+    * @since  [v1.0]
+    * @return boolean
+    */
     public function isAdminOfCommunity($community)
     {
         return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community->id)->where('is_admin', '=', '1')->count() > 0;
     }
 
 
+    /**
+    * Returns whether or not the user can administer a community.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param object $community
+    * @since  [v1.0]
+    * @return boolean
+    */
     public function canAdmin($community)
     {
         if (($this->isAdminOfCommunity($community)) ||  ($this->isSuperAdmin())) {
@@ -104,6 +148,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
     }
 
+    /**
+    * Return whether or not the user can view the community.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param object $community
+    * @since  [v1.0]
+    * @return boolean
+    */
     public function canSeeCommunity($community)
     {
         if ((($this->isMemberOfCommunity($community)) || ($this->isSuperAdmin())) ||   ($community->group_type!='S')) {
@@ -116,8 +168,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Returns the user Gravatar image url.
+    * Return the URL of the user's avatar (or gravatar)
     *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param object $community
+    * @since  [v1.0]
     * @return string
     */
     public function gravatar($size = null)
@@ -131,10 +186,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    /*
-    * Get social accounts associated with this user
+    /**
+    * Stores the social accounts associated with a user.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param object $socialUser
+    * @param string $provider
+    * @since  [v1.0]
+    * @return mixed
     */
-    public static function saveSocialAccount($socialUser, $provider) 
+    public static function saveSocialAccount($socialUser, $provider)
     {
 
         // Check to see if a user exists in the users table first
@@ -166,10 +227,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
-    /*
-    * Check whether they have social logins stored
+    /**
+    * Checks to see if a user's social info has already been saved
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param object $community
+    * @since  [v1.0]
+    * @return User
     */
-    public static function checkForSocialLoginDBRecord($user, $provider) 
+    public static function checkForSocialLoginDBRecord($user, $provider)
     {
         return DB::table('social')
          ->where('access_token', '=', $user->token)
@@ -178,28 +244,55 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+
     /**
-   * @param array $data
-   * @return User
-   */
+    * Registers a new user
+    *
+    * @todo More documentation on how this works.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param array $data
+    * @since  [v1.0]
+    * @return User
+    */
     public static function register($data = [])
     {
         return static::create($data);
     }
 
 
+    /**
+    * Returns communities by user
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
     public function communities()
     {
         return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id');
     }
 
-
+    /**
+    * Checks if a user is a member of a community
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param Community $community
+    * @since  [v1.0]
+    * @return collection
+    */
     public function isMemberOfCommunity($community)
     {
         return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community->id)->count() > 0;
     }
 
-    public function getSlackUsername($community) 
+    /**
+    * Returns communities by user
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function getSlackUsername($community)
     {
         return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
     }

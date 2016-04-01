@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * This model handles the relationships between users and their
+ * social accounts.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App;
 
 
@@ -17,7 +25,7 @@ class Social extends Model
 
     protected $fillable = ['access_token','uid','service'];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo('User', 'user_id');
     }
