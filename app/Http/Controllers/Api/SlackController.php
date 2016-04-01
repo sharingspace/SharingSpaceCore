@@ -1,4 +1,12 @@
 <?php
+/**
+ * This controller handles all slack webhook actions.
+ *
+ * PHP version 5.5.9
+ *
+ * @package AnyShare
+ * @version v1.0
+ */
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -16,7 +24,20 @@ class SlackController extends Controller
 {
 
 
-    public function slackShowMembers(Request $request) 
+    /**
+    * Returns a JSON response for Slack that lists the members of a community.
+    *
+    * Usage:
+    * /members <community-subdomain>
+    *
+    * Example:
+    * /members nycpets
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return String JSON
+    */
+    public function slackShowMembers()
     {
 
         $message['response_type'] = 'in_channel';
@@ -50,7 +71,22 @@ class SlackController extends Controller
 
     }
 
-    public function slackAddEntry(Request $request, $postType = 'want') 
+    /**
+    * Returns a JSON response for Slack that adds a want or a have.
+    *
+    * Usage:
+    * /want <qty> <title> in:<community-subdomain>
+    * /have <qty> <title> in:<community-subdomain>
+    *
+    * Examples:
+    * /want a puppy crate in:nycpets
+    * /have 7 puppy crates in:nycpets
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return String JSON
+    */
+    public function slackAddEntry($postType = 'want')
     {
 
         $text_pre = explode(' in:', Input::get('text'));
