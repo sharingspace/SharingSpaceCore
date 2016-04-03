@@ -132,7 +132,7 @@
                       </button>
                     </a>
                   </li>
-                  @can ('update-community')
+                  @can('update-community', $whitelabel_group)
                   <li>
                     <a href="{{ route('community.edit.form')}}"><i class="fa fa-cogs"></i></a>
                   </li>
