@@ -36,7 +36,7 @@ class EntriesController extends Controller
     {
         if ($entry = \App\Entry::find($entryID)) {
 
-            if ($request->user()->cannot('view-entry', $entry)) {
+            if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
                 return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
