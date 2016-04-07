@@ -50,7 +50,9 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         $gate->define('update-community', function ($user, $community) {
-            return $user->id === $entry->created_by;
+            if( $user->isAdminOfCommunity($community) ) {
+                return true;
+            }
         });
 
     }
