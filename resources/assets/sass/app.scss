@@ -7793,7 +7793,12 @@ $color-green: #9AE14F;
   &.sharing_fixed_banner { 
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/home_bg.jpg');
   }
-  
+  &.sharing_fixed_banner_3 { 
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/hp_v3.jpg');
+  }
+  &.sharing_fixed_banner_2 { 
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/sets.png');
+  }
 
   h1 {
     font-size:32px!important;
