@@ -8290,6 +8290,14 @@ Quick add
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/home_bg.jpg");
 }
 
+.page_banner.sharing_fixed_banner_3 {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/hp_v3.jpg");
+}
+
+.page_banner.sharing_fixed_banner_2 {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/sets.png");
+}
+
 .page_banner h1 {
   font-size: 32px !important;
   color: white;

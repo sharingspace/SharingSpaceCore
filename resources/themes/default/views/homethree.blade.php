@@ -3,7 +3,7 @@
 @section('content')
 
 	<section class="padding-top-0">
-		<div class="page_banner sharing_fixed_banner"  style="height:400px;">
+		<div class="page_banner sharing_fixed_banner_3"  style="height:400px;">
        <h1>{{ trans('home_three.home_headline') }}</h1>
        <h2 style="font-size:52px!important;">{{ trans('home_three.subhome_headline') }}<br>
 

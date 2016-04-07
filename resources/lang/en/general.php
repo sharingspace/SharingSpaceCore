@@ -51,6 +51,8 @@ return [
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
           'file_placeholder' => 'no file selected (maxiumum size is 4MB)',
+          'max_file_size' => 'The maximum file size is 4MB',
+          'max_size' => '4096000',
           
           'messages' => [
             'invalid' => 'That entry is not valid.',
@@ -61,7 +63,7 @@ return [
             'deleted_failed' => 'Something went wrong. Your entry could not be deleted',
 						'delete_not_allowed' => 'You are not allowed to delete this entry.',
             'save_new' => 'Your new entry has been created!',
-            'save_failed' => 'Something went wrong. Your entry edits have not been saved',
+            'save_failed' => 'Something went wrong. Your entry edit has not been saved',
             'upload_failed' => 'Something went wrong. Your uploaded image has not been saved',
           ],
     ],
