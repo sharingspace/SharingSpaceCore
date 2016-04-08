@@ -5,11 +5,11 @@
 	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner_5"  style="height:400px;">
       <h1>{{ trans('home_five.home_headline') }}</h1>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to share my garden produce</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to share and borrow tools</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to share my books and games</h2>
+      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i have garden produce to share</h2>
+      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to trade tools</h2>
+      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i have a book to give</h2>
       <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want affordable healthy food</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to share baby toys</h2>
+      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want affordable healthy food</h2>
     </div>
 	</section>
 
@@ -153,15 +153,14 @@ $( document ).ready(function() {
     var subIndex = -1;
     
     function showNextSubheader() {
-        ++subIndex;
-        subhead.eq(subIndex % subhead.length)
-            .fadeIn(2000)
-            .delay(2000)
-            .fadeOut(2000, showNextSubheader);
+      ++subIndex;
+      subhead.eq(subIndex % subhead.length)
+        .fadeIn(2000)
+        .delay(2000)
+        .fadeOut(2000, showNextSubheader);
     }
     
     showNextSubheader();
-    
 });
 </script>
 @stop
