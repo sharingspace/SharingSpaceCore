@@ -39,37 +39,30 @@
                 <div class="col-md-8 col-sm-8 col-xs-8">
                   <fieldset class="nomargin">
                     <div class="form-group{{ $errors->first('name', ' has-error') }}">
-                      <label class="control-label" for="name">Sharing Hub Name *</label>
-                      <input type="text" name="name" class="form-control" placeholder="Give your sharing hub a name" required="" value="{{ Input::old('name', $community->name) }}">
+                      <label class="control-label" for="name">{{trans('general.community.name')}} *</label>
+                      <input type="text" name="name" class="form-control" placeholder="{{trans('general.community.name_placeholder')}}" required="" value="{{ Input::old('name', $community->name) }}">
                       {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                     </div> <!-- form-group -->
                   </fieldset>
 
                   <!-- Slug -->
                   <div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
-                    <label for="subdomain">Subdomain *</label>
-                    <input type="text" name="subdomain" class="form-control" placeholder="awesome.anysha.re" required="" value="{{ Input::old('subdomain', $community->subdomain) }}">
+                    <label for="subdomain">{{trans('general.community.subdomain')}} *</label>
+                    <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain_placeholder')}}" required="" value="{{ Input::old('subdomain', $community->subdomain) }}">
                     {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
                   </div>
 
                   <!-- Type -->
                   <div class="form-group">
-                    <label for="group_type">Type of sharing hub</label>
+                    <label for="group_type">{{trans('general.community.type')}} *</label>
                     {!! Form::community_types('group_type', Input::old('group_type', $community->group_type)) !!}
                     {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
                   </div> <!-- Type -->
 
-                  <!-- Welcome text -->
-                  <div class="form-group {{ $errors->first('welcome_text', 'has-error') }}">
-                    <label class="input">Welcome appears on your home page
-                      <textarea name="welcome_text" rows="4" class="form-control" data-maxlength="200" id="welcome_text" data-info="textarea-words-info" placeholder="Welcome text...">{{ Input::old('welcome_text', $community->welcome_text) }}</textarea>
-                    </label>
-                  </div> <!-- Welcome text -->
-
                   <!-- Description -->
                   <div class="form-group {{ $errors->first('about', 'has-error') }}">
-                    <label class="input">
-                      <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="Detailed description">{{ Input::old('about', $community->about) }}</textarea>
+                    <label class="input">{{trans('general.community.description')}}
+                      <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="{{trans('general.community.detailed_description')}}">{{ Input::old('about', $community->about) }}</textarea>
                     </label>
                   </div> <!-- Description -->
 
@@ -90,12 +83,18 @@
                   <div class="form-group" style="margin-bottom: 5px;">
                     <fieldset class="margin-bottom-10">
 
-                      <legend class="size-14"><p>Select which exchange types you wish to use for this sharing hub</p></legend>
+                      <legend class="size-14"><p>{{trans('general.community.exchange_options')}}</p></legend>
                       {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
                       <div class="exchange_types">
                         <!-- checkboxes for exchange types -->
                         <div class="checkbox">
                           <div class="row">
+                           <div class="col-md-12 pull-left margin-bottom-10">
+                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                                {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
+                                <i></i> {{trans('general.community.all_exchanges')}}
+                              </label>
+                            </div> <!-- col-md-12 -->
                             @foreach (\App\ExchangeType::all() as $exchange_types)
                             <div class="col-md-12 pull-left margin-bottom-10">
                               <label class="checkbox col-md-12 pull-left margin-bottom-10">
@@ -104,12 +103,7 @@
                               </label>
                             </div> <!-- col-md-12 -->
                             @endforeach
-                            <div class="col-md-12 pull-left margin-bottom-10">
-                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                                {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
-                                <i></i> all exchanges
-                              </label>
-                            </div> <!-- col-md-12 -->
+                           
                           </div> <!-- row -->
                         </div> <!-- checkbox -->
                       </div> <!-- exchange_types -->
@@ -133,29 +127,15 @@
                     <input type="text" class="form-control" placeholder="Cover image upload - no file selected" readonly="" />
                     <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                   </div>
-                  <p>Tip: best image size is 1300 x 300px (short &amp; wide image)</p>
+                  <p>{{ trans('general.uploads.banner_tip')}}</p>
                 </div>
               </div>
               <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-30" >
                 <img src="{{ $whitelabel_group->getCover() }}" style=" width: 100%;height: 100%;object-fit:cover;overflow: hidden;">
               </div>
 
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <!-- Avatar upload -->
-                <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                  <label for="cover_img">Profile image (not sure where this is used?)</label>
-                  <div class="fancy-file-upload fancy-file-info">
-                    <i class="fa fa-picture-o"></i>
-                    <input type="file" class="form-control" name="profile_img" onchange="jQuery(this).next('input').val(this.value);" />
-                    <input type="text" class="form-control" placeholder="Avatar upload - no file selected" readonly="" />
-                    <span class="button">{{ trans('general.uploads.choose_file') }}</span>
-                  </div>
-                </div>
-              </div>
-
+            
               <!-- Logo upload -->
-
-
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group {{ $errors->first('file', 'has-error') }}">
                 <label for="cover_img">Logo image</label>
@@ -165,7 +145,7 @@
                     <input type="text" class="form-control" placeholder="Logo upload - no file selected" readonly="" />
                     <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                   </div>
-                  <p>Tip: best image size is 250 x 40px (short &amp; wide image)</p>
+                  <p>{{ trans('general.uploads.logo_tip')}}</p>
                 </div>
               </div>
               <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10" style="background-color:#fff;height:60px">
@@ -182,42 +162,47 @@
 
               <!-- Theme -->
               <div class="form-group">
-                <label for="theme">Available themes</label>
+                <label for="theme">
+                  {{ trans('general.community.choose_theme')}}
+                </label>
                 {{ Form::select('theme', $themes, $community->theme, array('class'=>'select2', 'style'=>'width:100%')) }}
                 {!! $errors->first('theme', '<span class="help-block">:message</span>') !!}
               </div> <!-- Theme -->
 
               <fieldset class="nomargin">
-                <legend>Slack integration</legend>
+                <legend>
+                  {{ trans('general.community.slack_integration')}}
+                  <button type="button" class="" data-toggle="modal" data-target="#myModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
+                </legend>
                 <!-- Slack endpoint -->
                 <div class="form-group{{ $errors->first('slack_endpoint', ' has-error') }}">
-                  <label for="slack_endpoint">Slack endpoint</label>
-                  <input type="text" name="slack_endpoint" class="form-control" placeholder="Slack endpoint" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
+                  <label for="slack_endpoint">{{ trans('general.community.slack_endpoint')}}</label>
+                  <input type="text" name="slack_endpoint" class="form-control" placeholder="" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
                   {!! $errors->first('slack_endpoint', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack endpoint -->
 
                 <!-- Slack botname -->
                 <div class="form-group{{ $errors->first('slack_botname', ' has-error') }}">
-                  <label for="slack_botname">Slack bot name</label>
-                  <input type="text" name="slack_botname" class="form-control" placeholder="Slack botname" value="{{ Input::old('slack_botname', $community->slack_botname) }}">
+                  <label for="slack_botname">{{ trans('general.community.slack_bot_name')}}</label>
+                  <input type="text" name="slack_botname" class="form-control" placeholder="" value="{{ Input::old('slack_botname', $community->slack_botname) }}">
                   {!! $errors->first('slack_botname', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack botname -->
 
                 <!-- Slack channel -->
                 <div class="form-group{{ $errors->first('slack_channel', ' has-error') }}">
-                  <label for="slack_channel">Slack channel name</label>
-                  <input type="text" name="slack_channel" class="form-control" placeholder="Slack channel" value="{{ Input::old('slack_channel', $community->slack_channel) }}">
+                  <label for="slack_channel">{{ trans('general.community.slack_channel')}}</label>
+                  <input type="text" name="slack_channel" class="form-control" placeholder="" value="{{ Input::old('slack_channel', $community->slack_channel) }}">
                   {!! $errors->first('slack_channel', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack channel -->
               </fieldset>
 
               <fieldset class="nomargin">
-                <legend>Analytics</legend>
+                <legend>{{ trans('general.community.analytics')}}</legend>
                 <!-- Google analytics ID -->
                 <div class="form-group{{ $errors->first('ga', ' has-error') }}">
-                  <label for="slack_channel">Google analytics tracking id</label>
+                  <label for="slack_channel" class="sr-only">Google analytics tracking id</label>
 
-                  <input type="text" name="ga" class="form-control" placeholder="Google Analytics ID" value="{{ Input::old('ga', $community->ga) }}">
+                  <input type="text" name="ga" class="form-control" placeholder="{{ trans('general.community.for_example')}}" value="{{ Input::old('ga', $community->ga) }}">
                   {!! $errors->first('ga', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Google analytics ID -->
               </fieldset>        
@@ -235,12 +220,45 @@
 </section> <!-- container -->
 <!-- / -->
 
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{ trans('general.community.slack_integration')}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{ trans('general.community.slack_info.p1')}}</p>
+        <p>{{ trans('general.community.slack_info.p2')}}</p>
+        <p>{{ trans('general.community.slack_info.p3')}}</p>
+        <p>{{ trans('general.community.slack_info.p4')}}</p>
+        <p>{{ trans('general.community.slack_info.p5')}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <script type="text/javascript">
 
 $( document ).ready(function() {
 
   $("#file").change(function() {
     $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+  });
+
+  $(document).on( "click", "#select_all", function( e ) {
+    $('.exchanges').prop('checked', $(this).prop("checked"));
+  });
+
+  $(document).on( "click", ".exchanges", function( e ) {
+    $('#select_all').prop('checked', false);
   });
 });
 
