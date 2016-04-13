@@ -168,7 +168,7 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
                       </div> <!-- col 10 -->
 
                       <div class="col-md-2 col-sm-2 col-xs-2 ">
-                        <button class="btn btn-warning  pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">{{ trans('general.entries.save') }}</button>
+                        <button class="btn btn-info pull-right" id="ajaxAdd" name="ajaxAdd" value="ajaxAdd">{{ trans('general.entries.save') }}</button>
                       </div> <!-- col 2 -->
                     </div> <!-- row -->
                   </div> <!-- col 9 -->
@@ -288,6 +288,11 @@ $( document ).ready(function() {
           }
 
           resetForm();
+          // clear allc heckboxes and then select the ones we want
+          $('input:checkbox[class=exchanges]').prop('checked',false);
+          jQuery.each(data.typeIds, function(index, item) {
+            $('input:checkbox[class=exchanges][value='+item+']').prop('checked',true);
+          });
           var exchanges = null;
           if (data.exchange_types) {
             exchanges=data.exchange_types.join(", ");
