@@ -113,10 +113,10 @@
 							<nav class="nav-main">
 
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li{!! (Route::is('browse') ? ' class="active"' : '') !!}>
-                    <a href="{{ route('browse') }}">
+                  <li{!! (Route::is('home') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('home') }}/#table">
                       {{ trans('general.nav.browse') }}
-                      {!! (Route::is('browse') ? '<span class="sr-only">(current)</span>' : '') !!}
+                      {!! (Route::is('home') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
                   <li{!! (Route::is('members') ? ' class="active"' : '') !!}>

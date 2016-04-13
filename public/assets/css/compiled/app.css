@@ -7978,7 +7978,8 @@ footer.sticky {
   max-height: 300px;
   margin-top: -26px;
   margin-bottom: 10px;
-  background-position: 50% 0;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 
 ul.exchange_types {
