@@ -96,7 +96,7 @@ class Entry extends Model
     */
     public function communities()
     {
-        return $this->belongsToMany('App\Community', 'entries_hubgroup_join', 'entry_id', 'hubgroup_id');
+        return $this->belongsToMany('App\Community', 'entries_community_join', 'entry_id', 'community_id');
     }
 
     /**
@@ -171,7 +171,7 @@ class Entry extends Model
     * @param int $entry_id
     * @param string $filename
     * @return no return
-    */    
+    */
     public static function replaceImageInDB($user_id, $entry_id, $filename)
     {
         $media = \App\Media::where('user_id', '=', $user_id)
@@ -190,7 +190,7 @@ class Entry extends Model
     * @param int $user_id
     * @param int $entry_id
     * @return no return
-    */    
+    */
     public static function deleteImageFromDB($entry_id, $user_id)
     {
         $media = \App\Media::where('entry_id', '=', $entry_id)
