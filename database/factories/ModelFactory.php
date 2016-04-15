@@ -37,7 +37,6 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
 
 $factory->defineAs(App\Entry::class, 'entry', function ($faker) {
     return [
-      'created_by' => $faker->catchPhrase,
       'title' => $faker->catchPhrase,
       'post_type' => $faker->randomElement(['want','have']),
       'qty' => 1,
@@ -69,10 +68,8 @@ $factory->defineAs(App\Community::class, 'community', function ($faker) {
     ];
 });
 
-$factory->defineAs(App\Community::class, 'community-user', function ($faker) {
+$factory->defineAs(App\Entry::class, 'exchange-types', function ($faker) {
     return [
-      'user_id' => $faker->catchPhrase,
-      'subdomain' => $faker->domainWord,
-      'group_type' => $faker->randomElement(['O','have']),
+      'type_id' => $faker->numberBetween(1, 6),
     ];
 });
