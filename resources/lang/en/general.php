@@ -107,7 +107,7 @@ return [
       introductory cost is available for a limited time only. Email us at information 
       info@anysha.re with questions about current features.',
       'p2' => 'You will not be charged until your free trial ends on',
-      'p3' => 'No commitments, cancel online at any time.',
+      'p3' => 'No commitments, cancel at any time.',
       'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
       'type' => 'Choose a privacy level',
       'payment_info' => 'credit card information',
