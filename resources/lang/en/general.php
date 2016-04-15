@@ -56,8 +56,10 @@ return [
           
           'messages' => [
             'invalid' => 'That entry is not valid.',
+            'no_image' => 'No image was supplied',
             'completed' => 'Completed! ',
             'save_edits' => 'Your entry has been updated!',
+            'upload_fail' => "Your image failed to upload",
             'not_allowed' => 'You are not allowed to edit this entry.',
             'deleted' => 'Your entry as been deleted',
             'deleted_failed' => 'Something went wrong. Your entry could not be deleted',

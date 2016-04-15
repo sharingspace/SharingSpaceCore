@@ -39,7 +39,8 @@ trait UploadableFileTrait
     {
         $path = public_path().'/assets/uploads/'.$layoutType.'/'.$this->id.'/';
         $aws_path = 'assets/uploads/'.$layoutType.'/'.$this->id;
-        self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $this->id, null);
+        return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $this->id, null);
+
     }
 
     public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key)
@@ -50,8 +51,7 @@ trait UploadableFileTrait
 
     public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $id = null, $upload_key = null)
     {
-
-      // Make the directory if it doesn't exist
+        // Make the directory if it doesn't exist
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
         }
@@ -62,9 +62,26 @@ trait UploadableFileTrait
         $img_path = $path.'/'.$filename;
 
         if ($file->move($path, $filename)) { // $destinationPath, $fileName
-          //Log::debug("We were able to move file from $path to $filename!");
-            $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
-          //Log::debug("The results of saving to the DB, though, are: $res");
+            if($id ) {
+                //Log::debug("moveAndStoreImage: We already have an entry )"+$id+"), does it already have media?");
+
+                $entry = \App\Entry::find($id);
+                if ($entry->media()->count())
+                {
+                    //Log::debug("moveAndStoreImage: We already have an image associated with an entry");
+                    // We already have an image associated with an entry, so delete the existing image first
+                    self::deleteImage($id, $user->id);
+                    self::replaceImageInDB($user->id, $id, $filename);
+                }
+                else {
+                    //Log::debug("moveAndStoreImage: We were able to move file from $path to $filename!");
+                    $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+                }
+            }
+            else {
+                //Log::debug("moveAndStoreImage: We were able to move file from $path to $filename!");
+                $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+            }
 
             if (!Media::is_animated_gif($img_path)) {
               //Log::info("This is *NOT* an animated GIF, so try this...");
@@ -91,6 +108,25 @@ trait UploadableFileTrait
         return false;
     }
 
+   /**
+    * Deletes an image
+    *
+    * @author [D. Linnard] [<david@linnard.com>]
+    * @since  [v1.0]
+    */
+
+    public static function deleteImage($entry_id, $user_id)
+    {
+        $image = \DB::table('media')
+            ->where('user_id', '=', $user_id)
+            ->where('entry_id', '=', $entry_id)
+            ->first();
+        
+        //Log::debug("deleteImage: ".$image->filename);
+
+        $file = public_path().'/assets/uploads/entries/'.$entry_id.'/'.$image->filename;
+        unlink($file);
+      }
 
 
     /**
@@ -130,8 +166,6 @@ trait UploadableFileTrait
 
             // update the media entry
             self::updateImageToDB($user->id, $upload_key, $entry_id);
-
-
         }
         return true;
     }
