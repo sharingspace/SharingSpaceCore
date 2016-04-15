@@ -75,7 +75,7 @@
                             <div class="col-md-12 pull-left margin-bottom-10">
                               <label class="checkbox col-md-12 pull-left margin-bottom-10">
                                 {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
-                                <i></i> all exchanges
+                                <i></i> {{trans('general.community.all_exchanges')}}
                               </label>
                             </div>
                           </div>
