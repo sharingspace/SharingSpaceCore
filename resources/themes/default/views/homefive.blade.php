@@ -6,12 +6,12 @@
 		<div class="page_banner sharing_fixed_banner_5"  style="height:400px;">
         <h1></h1>
 
-    <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">{{ trans('home_five.home_headline') }}</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i have garden produce to share</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to trade tools</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i have a book to give</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want affordable healthy food</h2>
-      <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want affordable healthy food</h2>
+    <h2 class="subheadline" style="font-size:64px!important;font-style:italic; ">{{ trans('home_five.home_headline') }}</h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/vegetables.png"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/tools.png"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/book.png"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/food.png"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/house.png"></h2>
     </div>
 	</section>
 
