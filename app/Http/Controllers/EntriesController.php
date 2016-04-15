@@ -242,12 +242,24 @@ class EntriesController extends Controller
                 return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
+            $image = \DB::table('media')
+            ->where('entry_id', '=', $entryID)
+            ->first();
+
+            if ($image) {
+                $imageName = $image->filename;
+            }
+            else {
+                $imageName = null;
+            }
+
             $selected_exchange_types = $entry->exchangeTypes;
 
             foreach ($selected_exchange_types as $selected_exchange_type) {
                 $selected_exchanges[$selected_exchange_type->id] = $selected_exchange_type->id;
             }
-            return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types)->with('selected_exchanges', $selected_exchanges);
+
+            return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types)->with('selected_exchanges', $selected_exchanges)->with('image',$imageName);
 
 
         } else {
@@ -362,7 +374,12 @@ class EntriesController extends Controller
             if (Input::hasFile('file')) {
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
             }
-             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
+            else if(Input::get('delete_img')) {
+                \App\Entry::deleteImage($entry->id, $user->id);
+                \App\Entry::deleteImageFromDB($entry->id, $user->id);
+            }
+            
+            $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             return redirect()->route('entry.view', $entry->id)->with('success', trans('general.entries.messages.save_edits'));
         }
