@@ -49,7 +49,6 @@
         </ul>
 			</div>
 		</div>
-
 	</div>
 </section>
 <!-- /INFO BAR -->
@@ -69,98 +68,77 @@
 </section>
 @endif
 
-<!-- -->
-<section>
-	<div class="container">
-
-		<ul id="portfolio_filter" class="nav nav-pills margin-bottom-60">
-
-      <li class="filter active">
-        <a data-filter="*" href="#">All</a>
-      </li>
-      @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-        <li class="filter">
-          <a data-filter=".{{ Str::slug(strtolower($exchange_types->name)) }}" href="#">{{ $exchange_types->name }}</a>
-        </li>
-      @endforeach
-
-		</ul>
-
-		<div id="portfolio" class="clearfix portfolio-isotope portfolio-isotope-5">
-
-      @foreach ($entries as $entry)
-        <div class="portfolio-item
-        @if (count($entry->exchangeTypes) > 0)
-          @foreach ($entry->exchangeTypes as $entry_exchange_types)
-            {{ Str::slug(strtolower($entry_exchange_types->name)) }}
-          @endforeach
-        @endif
-        ">
-      <!-- item -->
-
-				<div class="item-box" style="border: solid 1px #ccc;box-shadow:1px 1px 3px 0 #f2f2f2 padding:5px;">
-          @if ($entry->media->count() > 0)
-						<figure style="min-height:100px;">
-							<span class="item-hover">
-								<span class="overlay dark-5"></span>
-								<span class="inner">
-                  <h2 style="color: white;">{{ ucwords($entry->title) }}</h2>
-                  <br><br>
-									<a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
-										<span class="glyphicon glyphicon-option-horizontal size-20"></span>
-									</a>
-								</span>
-							</span>
-           
-              @foreach ($entry->media as $media)
-               <div class="entry_browse">
-
-                <img class="img-responsive" src="/assets/uploads/entries/{{ $entry->id}}/{{ $media->filename }}" width="600" height="399" alt="" style="margin-bottom:14px;">
-               
-                <a href="#" class="entry_img_view">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
-                <br>  
-                @if ( count($entry->exchangeTypes) > 0)
-                  {{--*/ $exchanges = ''; /*--}}
-                  @foreach ($entry->exchangeTypes as $entry_exchange_types)
-                    {{--*/ $exchanges .= strtolower($entry_exchange_types->name) .", "; /*--}}
-                  @endforeach
-                  {{ rtrim($exchanges, ', ')}}
-                @endif
-              </div>
-              @endforeach {{-- media --}} 
-            </figure>
-          @else
-            <figure style="min-height:100px;display:table;">
-              <span style="display:table-cell;vertical-align:middle;">
-                <span class="item-hover ">
-                  <span class="inner" style="top:0;display:table-cell;
-   vertical-align:middle;">
-                    <h2 style="color: white;margin-top:20px;">{{ ucwords($entry->title) }}</h2>
-                    <br>
-                    <a class="ico-rounded" href="{{ route('entry.view', $entry->id) }}">
-                      <span class="glyphicon glyphicon-option-horizontal size-20"></span>
-                    </a>
-                  </span>
-                </span>
-
-                <a href="#" class="entry_img_view">{{ucwords($entry->post_type)}}: {{ ucwords($entry->title) }}</a>
-                <br>  
-                @if ( count($entry->exchangeTypes) > 0)
-                  {{--*/ $exchanges = ''; /*--}}
-                  @foreach ($entry->exchangeTypes as $entry_exchange_types)
-                    {{--*/ $exchanges .= strtolower($entry_exchange_types->name) .", "; /*--}}
-                  @endforeach
-                  {{ rtrim($exchanges, ', ')}}
-                @endif {{-- exchange types --}}
-                </span>
-              </figure>
-            @endif {{-- media ? --}} 
- 				</div> <!-- item -->
-			 </div> <!-- portfolio-item -->
-      @endforeach {{-- entry loop --}}
-
-		</div>
-	</div>
+<section class="container padding-top-0 browse_table">
+<div class="row">
+  <h2 class="margin-bottom-0 size-20 text-center">{{trans('general.entries.browse_entries')}}</h1>
+    <!-- Begin entries table -->
+    <table class="table table-condensed"
+    name="communityListings"
+    id="table"
+    data-url="{{ route('json.browse') }}"
+    data-cookie="true"
+    data-cookie-id-table="communityListingv1">
+      <thead>
+          <tr>
+            <th data-sortable="true" data-field="post_type"><span class="sr-onlyy">{{ trans('general.entries.post_type') }}</span></th>
+            <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+            <th data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
+            <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
+            <th data-sortable="true" data-field="created_at" data-visible="false">{{ trans('general.entries.created_at') }}</th>
+            <th data-sortable="false" data-field="tags">{{ trans('general.entries.tags') }}</th>
+            <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
+          </tr>
+      </thead>
+    </table>
+    <!-- End entries table -->
+  </div>
 </section>
-<!-- / -->
+
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+
+<script type="text/javascript">
+  $('#table').bootstrapTable({
+    classes: 'table table-responsive table-no-bordered',
+    undefinedText: '',
+    iconsPrefix: 'fa',
+    showRefresh: true,
+    search: true,
+    pageSize: 20,
+    pagination: true,
+    sidePagination: 'server',
+    sortable: true,
+    cookie: true,
+    mobileResponsive: true,
+    showExport: true,
+    showColumns: true,
+    exportDataType: 'all',
+    exportTypes: ['csv', 'txt','json', 'xml'],
+    maintainSelected: true,
+    paginationFirstText: "@lang('pagination.first')",
+    paginationLastText: "@lang('pagination.last')",
+    paginationPreText: "@lang('pagination.previous')",
+    paginationNextText: "@lang('pagination.next')",
+    pageList: ['10','25','50','100','150','200'],
+    formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
+      },
+    icons: {
+        paginationSwitchDown: 'fa-caret-square-o-down',
+        paginationSwitchUp: 'fa-caret-square-o-up',
+        columns: 'fa-columns',
+        refresh: 'fa-refresh'
+    },
+  });
+
+$( document ).ready(function() {
+  $('#table').on('load-success.bs.table', function () {
+    $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
+  });
+});
+</script>
 @stop
