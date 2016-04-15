@@ -35,6 +35,15 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
     ];
 });
 
+$factory->defineAs(App\Entry::class, 'entry', function ($faker) {
+    return [
+      'created_by' => $faker->catchPhrase,
+      'title' => $faker->catchPhrase,
+      'post_type' => $faker->randomElement(['want','have']),
+      'qty' => 1,
+    ];
+});
+
 $factory->defineAs(App\Entry::class, 'want-entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
@@ -56,6 +65,14 @@ $factory->defineAs(App\Community::class, 'community', function ($faker) {
     return [
       'name' => $faker->catchPhrase,
       'subdomain' => $faker->domainWord,
-      'group_type' => 'O',
+      'group_type' => $faker->randomElement(['O','S','C']),
+    ];
+});
+
+$factory->defineAs(App\Community::class, 'community-user', function ($faker) {
+    return [
+      'user_id' => $faker->catchPhrase,
+      'subdomain' => $faker->domainWord,
+      'group_type' => $faker->randomElement(['O','have']),
     ];
 });
