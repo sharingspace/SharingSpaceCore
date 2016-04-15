@@ -8249,53 +8249,6 @@ Quick add
 .page_banner {
   height: 400px;
   width: 100%;
-  background-position: 50% 0px;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.page_banner.about_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/nepal_tech.jpg");
-}
-
-.page_banner.coop_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/coop.jpg");
-}
-
-.page_banner.band_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/band.jpg");
-}
-
-.page_banner.clothing_swap_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/big_clothing_swap.jpg");
-}
-
-.page_banner.bike_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/bike_workshop.jpg");
-}
-
-.page_banner.farmer_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/farmer.jpg");
-}
-
-.page_banner.mural_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/mural.jpg");
-}
-
-.page_banner.tech_design_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/tech_design.jpg");
-}
-
-.page_banner.sharing_fixed_banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/home_bg.jpg");
-}
-
-.page_banner.sharing_fixed_banner_3 {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/hp_v3.jpg");
-}
-
-.page_banner.sharing_fixed_banner_2 {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/sets.png");
 }
 
 .page_banner h1 {
@@ -8311,6 +8264,70 @@ Quick add
   font-weight: 400;
   color: white;
   text-align: center;
+}
+
+.page_banner.about_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/nepal_tech.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.coop_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/coop.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.band_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/band.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.clothing_swap_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/big_clothing_swap.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.bike_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/bike_workshop.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.farmer_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/farmer.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.mural_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/mural.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.tech_design_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/tech_design.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.sharing_fixed_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/home_bg.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.sharing_fixed_banner_3 {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/hp_v3.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.sharing_fixed_banner_2 {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/sets.png");
+  background-position: 50% 0;
+}
+
+.page_banner.sharing_fixed_banner_5 {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("/assets/img/backgrounds/hp/hp_5.jpg");
+  background-position: 50% 0;
+}
+
+.page_banner.sharing_fixed_banner_5 .subheadline {
+  display: none;
 }
 
 @media (min-width: 768px) {
