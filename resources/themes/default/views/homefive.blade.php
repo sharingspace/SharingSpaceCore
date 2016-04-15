@@ -4,7 +4,9 @@
 
 	<section class="padding-top-0">
 		<div class="page_banner sharing_fixed_banner_5"  style="height:400px;">
-      <h1>{{ trans('home_five.home_headline') }}</h1>
+        <h1></h1>
+
+    <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">{{ trans('home_five.home_headline') }}</h2>
       <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i have garden produce to share</h2>
       <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i want to trade tools</h2>
       <h2 class="subheadline" style="font-size:40px!important;font-style:italic; ">i have a book to give</h2>
@@ -45,28 +47,6 @@
 					</div>
 				</div>
 			</section>
-
-
-
-			<!-- /ABOUT -->
-      <!-- BUTTON CALLOUT -->
-      <div class="callout callout-dark margin-bottom-10">
-              <div class="container">
-
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-              <h2 style="font-size:36px;" class="pull-right">Try a sharing hub free for 30 days</h2>
-
-            </div><!-- /left text -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->
-              <a href="#" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
-              <a href="#" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
-            </div><!-- /right btn -->
-          </div>
-        </div>
-      </div>
-      <!-- /BUTTON CALLOUT -->
-
 
       <!-- -->
   		<section id="features">
@@ -125,21 +105,17 @@
   		</section>
 
       <!-- BUTTON CALLOUT -->
-      <div class="callout callout-dark margin-bottom-10">
-              <div class="container">
-
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-              <h2 style="font-size:36px;" class="pull-right">Try a sharing hub for free</h2>
-
-            </div><!-- /left text -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->
-              <a href="#" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
-              <a href="#" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
-            </div><!-- /right btn -->
-          </div>
-        </div>
-      </div>
+      <div class="callout margin-bottom-0 text-center" style="background-color:#AFDBDB;">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
+              <h2 style="font-size:36px;" class="pull-left">Try a sharing hub free for 30 days</h2>
+              <a href="{{ route('community.create.form') }}" class="btn btn-default size-20 pull-right">{{ trans('general.nav.try_it') }}</a>
+ 
+            </div> <!-- col 8 -->
+          </div> <!-- row -->
+        </div> <!-- container -->
+      </div> <!-- callout -->
       <!-- /BUTTON CALLOUT -->
   		
  
