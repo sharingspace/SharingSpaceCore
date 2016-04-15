@@ -7980,6 +7980,7 @@ footer.sticky {
   margin-bottom: 10px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 ul.exchange_types {
