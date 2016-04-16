@@ -125,7 +125,9 @@
                       {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
+                  @if (strlen($whitelabel_group->about))
                   {!! (Route::is('home') ? '<li><a href="" id="display_about">About</a></li>' : '') !!}
+                  @endif
                   <li>
                     <a href="{{ route('entry.create.form') }}">
                       <button type="button" class="btn btn-sm btn-warning">
@@ -168,10 +170,14 @@
 				<!-- /Top Nav -->
 
 			</div>
+
 <div class="row">
   <div class="col-md-12 wl_usercover" style="background-image: url({{ $whitelabel_group->getCover() }});">
+@if( strlen($whitelabel_group->about))
     <div id="about_panel">
       <p style="vertical-align:middle">{{ $whitelabel_group->about }}</p>
-    </div>     
+    </div>
+@endif   
   </div>
 </div>
+
