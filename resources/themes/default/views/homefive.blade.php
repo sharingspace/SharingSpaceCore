@@ -7,11 +7,11 @@
         <h1></h1>
 
     <h2 class="subheadline" style="font-size:64px!important;font-style:italic; ">{{ trans('home_five.home_headline') }}</h2>
-      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/vegetables.png"></h2>
-      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/tools.png"></h2>
-      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/book.png"></h2>
-      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/food.png"></h2>
-      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/house.png"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/vegetables.png" style="width:50%;"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/tools.png" style="width:50%;"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/book.png" style="width:50%;"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/food.png" style="width:50%;"></h2>
+      <h2 class="subheadline"><img src="/assets/img/backgrounds/hp/house.png" style="width:50%;"></h2>
     </div>
 	</section>
 
