@@ -15,6 +15,8 @@ use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
 use Log;
+use Input;
+use Mail;
 
 class PagesController extends Controller
 {
@@ -59,6 +61,40 @@ class PagesController extends Controller
         } else {
             $communities = \App\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
             return view('home'.$hp)->with('communities', $communities);
+        }
+
+    }
+
+    /**
+    * Sends an email to request financial assistance.
+    *
+    * @author [David Linnard] [<dslinnard@gmail.com>]
+    * @since  [v1.0]
+    * @return Redirect
+    */
+    public function postFinancialAssist(Request $request)
+    {
+        $data['firstName'] = Input::get('firstName');
+        $data['lastName'] = Input::get('lastName');
+        $data['email'] = Input::get('email');
+        $data['toEmail'] = 'info@anysha.re';
+        $data['subject'] = 'Application for free Anyshare hub';;
+        $data['howUse'] = Input::get('howUse');
+        $data['budget'] = Input::get('budget');
+        $data['timePeriod'] = Input::get('timePeriod');
+        $data['market'] = Input::get('market');
+
+        $sent = Mail::send(
+            array('emails.freeAnyshare', 'emails.freeAnyshareText'), ['data'=>$data],
+            function ($m) use ($data) {
+                $m->from($data['email'], 'dave')->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
+            }
+        ); 
+        if( $sent) {
+            return Redirect::back()->with('success', trans('pricing.financial_assist.success'));
+        }
+        else {
+            return Redirect::back()->with('error', trans('pricing.financial_assist.error'));
         }
 
     }
