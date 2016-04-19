@@ -309,11 +309,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-  * Returns the user full name, it simply concatenates
-  * the user first and last name.
-  *
-  * @return string
-  */
+    * Returns the user full name, it simply concatenates
+    * the user first and last name.
+    *
+    * @return string
+    */
     public function getDisplayName()
     {
 
@@ -327,5 +327,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return "Anonymous";
         }
 
+    }
+
+    /**
+    * Gets messages sent to user
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function messagesTo()
+    {
+		return $this->hasMany('Messages','sent_to');
     }
 }

@@ -146,6 +146,32 @@ Route::group(
             'uses' => 'UserController@postSettings')
         );
 
+        Route::get(
+            'account/messages',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.view',
+            'uses' => 'MessagesController@getIndex')
+        );
+
+        Route::get(
+            'account/messages',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.create.form',
+            'uses' => 'MessagesController@getCreate')
+        );
+
+        Route::post(
+            'account/messages',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.create.save',
+            'uses' => 'MessagesController@postCreate')
+        );
+
+
+
         Route::post(
             'account/password',
             array(
@@ -270,7 +296,7 @@ Route::group(
                     'as' => 'entry.edit.save',
                     'uses' => 'EntriesController@postEdit')
                 );
-                
+
                 Route::get(
                     '{entryID}/ajaxgetentry',
                     array(

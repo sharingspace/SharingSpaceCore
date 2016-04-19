@@ -91,5 +91,17 @@ class Message extends Model
         return $this->belongsTo('App\Entry')->withTrashed();
     }
 
+    public static function getSentToUser($user_id)
+    {
+        $messages = Message::join('entries', 'entry.id', '=', 'messages.entry_id')
+        ->join('users', 'users.id', '=', 'messages.sent_by')
+        ->where('sent_to', '=', $user_id)
+        ->whereNull('users.deleted_at')
+        ->orderBy('messages.sent_on', 'desc')
+        ->get();
+        $messages->load('sender','recipient','tile');
+        return $messages;
+    }
+
 
 }
