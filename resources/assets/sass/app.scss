@@ -7469,10 +7469,30 @@ footer.sticky {
   min-height: 300px;
   max-height: 300px;
   margin-top: -26px;
-  margin-bottom: 10px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size:cover;
+
+  #about_panel, #display_about {
+    text-align: center;
+    background-color: rgba(176,220,220,0.7);
+  }
+
+  #about_panel {
+    display: none;
+    border: solid 1px #c3c3c3;
+    height:300px;
+
+    p {
+      position: relative;
+      top: 50%; 
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      font-size:larger;
+      margin-left:10%;
+      margin-right:10%;
+    }
+  }
 }
 
 ul.exchange_types { font-size: 12px; list-style: none; margin: 0; padding: 0; }

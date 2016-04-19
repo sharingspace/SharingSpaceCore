@@ -499,7 +499,7 @@ Route::group(
             'financial_assist',
             array(
             'as' => 'assistance',
-            'uses' => 'CommunitiesController@financialAssist'
+            'uses' => 'PagesController@postFinancialAssist'
             )
         );
 

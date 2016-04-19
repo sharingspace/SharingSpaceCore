@@ -59,8 +59,8 @@
 
             </div><!-- /left text -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->
-              <a href="#" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
-              <a href="#" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
+              <a href="{{ route('community.create.form') }}" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
+              <a href="{{ route('community.create.form') }}" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
             </div><!-- /right btn -->
           </div>
         </div>
