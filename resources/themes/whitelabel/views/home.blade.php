@@ -139,6 +139,13 @@ $( document ).ready(function() {
   $('#table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
   });
+
+  $("#display_about").click(function(e){
+    $("#about_panel").slideToggle("slow");
+    return false;
+  });
 });
+
 </script>
+
 @stop
