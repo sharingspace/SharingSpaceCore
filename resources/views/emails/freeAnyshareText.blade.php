@@ -1,4 +1,4 @@
-@extends('emails/layouts/html')
+@extends('emails/layouts/text')
 
 @section('content')
 Application for free Anyshare 
