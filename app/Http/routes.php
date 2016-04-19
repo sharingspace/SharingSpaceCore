@@ -270,12 +270,13 @@ Route::group(
                     'as' => 'entry.edit.save',
                     'uses' => 'EntriesController@postEdit')
                 );
-
-                Route::post(
-                    '{entryID?}/upload',
+                
+                Route::get(
+                    '{entryID}/ajaxgetentry',
                     array(
                     'middleware' => ['auth','community-auth'],
-                    'uses' => 'EntriesController@ajaxUpload')
+                    'as' => 'entry.ajax.get',
+                    'uses' => 'EntriesController@ajaxGetEntry')
                 );
 
                 Route::post(

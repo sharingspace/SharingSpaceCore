@@ -272,6 +272,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+    * Returns entries by user
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function entries()
+    {
+		return $this->hasMany('\App\Entry','created_by');
+    }
+
+    /**
     * Checks if a user is a member of a community
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]

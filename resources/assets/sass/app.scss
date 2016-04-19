@@ -7470,7 +7470,9 @@ footer.sticky {
   max-height: 300px;
   margin-top: -26px;
   margin-bottom: 10px;
-  background-position: 50% 0;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size:cover;
 }
 
 ul.exchange_types { font-size: 12px; list-style: none; margin: 0; padding: 0; }
@@ -7763,42 +7765,6 @@ $color-green: #9AE14F;
 .page_banner {
   height:400px;
   width:100%;
-  background-position: 50% 0px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  &.about_banner { 
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/nepal_tech.jpg');
-  }
-  &.coop_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/coop.jpg');
-  }
-  &.band_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/band.jpg');
-  }
-  &.clothing_swap_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/big_clothing_swap.jpg');
-  }
-  &.bike_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/bike_workshop.jpg');
-  }
-  &.farmer_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/farmer.jpg');
-  }
-  &.mural_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/mural.jpg');
-  }
-  &.tech_design_banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
-  }
-  &.sharing_fixed_banner { 
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/home_bg.jpg');
-  }
-  &.sharing_fixed_banner_3 { 
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/hp_v3.jpg');
-  }
-  &.sharing_fixed_banner_2 { 
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/sets.png');
-  }
 
   h1 {
     font-size:32px!important;
@@ -7813,6 +7779,59 @@ $color-green: #9AE14F;
     font-weight:400;
     color:white;
     text-align:center;
+  }
+}
+
+.page_banner.about_banner { 
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/nepal_tech.jpg');
+  background-position: 50% 0;
+}
+.page_banner.coop_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/coop.jpg');
+  background-position: 50% 0;
+}
+.page_banner.band_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/band.jpg');
+  background-position: 50% 0;
+}
+.page_banner.clothing_swap_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/big_clothing_swap.jpg');
+  background-position: 50% 0;
+}
+.page_banner.bike_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/bike_workshop.jpg');
+  background-position: 50% 0;
+}
+.page_banner.farmer_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/farmer.jpg');
+  background-position: 50% 0;
+}
+.page_banner.mural_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/mural.jpg');
+  background-position: 50% 0;
+}
+.page_banner.tech_design_banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
+  background-position: 50% 0;
+}
+.page_banner.sharing_fixed_banner { 
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/home_bg.jpg');
+  background-position: 50% 0;
+}
+.page_banner.sharing_fixed_banner_3 { 
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/hp_v3.jpg');
+  background-position: 50% 0;
+}
+.page_banner.sharing_fixed_banner_2 { 
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/sets.png');
+  background-position: 50% 0;
+}
+
+.page_banner.sharing_fixed_banner_5 { 
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/hp_5.jpg');
+  background-position: 50% 0;
+  .subheadline {
+    display:none;
   }
 }
 

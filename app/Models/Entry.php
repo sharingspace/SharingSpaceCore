@@ -96,7 +96,7 @@ class Entry extends Model
     */
     public function communities()
     {
-        return $this->belongsToMany('App\Community', 'entries_hubgroup_join', 'entry_id', 'hubgroup_id');
+        return $this->belongsToMany('App\Community', 'entries_community_join', 'entry_id', 'community_id');
     }
 
     /**
@@ -135,7 +135,7 @@ class Entry extends Model
         $media->caption = null;
         $media->created_at = date("Y-m-d H:i:s");
         $media->user_id = $user_id;
-        $media->save();
+        return $media->save();
     }
 
     /**
@@ -159,6 +159,47 @@ class Entry extends Model
 
         $media->entry_id = $entry_id;
         $media->save();
+    }
+
+    /**
+    * Replaces the image entry in the database to reflect the new entry ID.
+    * This function is used to impose a limit of one image per entry.
+    *
+    * @author [D. Linnard] [<david@linnard.com>]
+    * @since  [v1.0]
+    * @param int $user_id
+    * @param int $entry_id
+    * @param string $filename
+    * @return no return
+    */
+    public static function replaceImageInDB($user_id, $entry_id, $filename)
+    {
+        $media = \App\Media::where('user_id', '=', $user_id)
+        ->where('entry_id', '=', $entry_id)
+        ->first();
+
+        $media->filename = $filename;
+        $media->save();
+    }
+
+    /**
+    * Deletes entry image.
+    *
+    * @author [D. Linnard] [<david@linnard.com>]
+    * @since  [v1.0]
+    * @param int $user_id
+    * @param int $entry_id
+    * @return no return
+    */
+    public static function deleteImageFromDB($entry_id, $user_id)
+    {
+        $media = \App\Media::where('entry_id', '=', $entry_id)
+            ->where('user_id', '=', $user_id)
+            ->first();
+
+        if ($media) {
+            $media->delete();
+        }
     }
 
     /**

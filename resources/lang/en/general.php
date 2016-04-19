@@ -56,8 +56,10 @@ return [
           
           'messages' => [
             'invalid' => 'That entry is not valid.',
+            'no_image' => 'No image was supplied',
             'completed' => 'Completed! ',
             'save_edits' => 'Your entry has been updated!',
+            'upload_fail' => "Your image failed to upload",
             'not_allowed' => 'You are not allowed to edit this entry.',
             'deleted' => 'Your entry as been deleted',
             'deleted_failed' => 'Something went wrong. Your entry could not be deleted',
@@ -82,20 +84,32 @@ return [
       'community'  => 'Sharing Hub',
       'settings'  => 'Sharing Hub Settings',
       'members'  => 'Member|Members',
-      'save' => 'Save',
+      'save' => 'Update',
       'create' => 'Start your own Sharing Hub for Free!',
       'name_placeholder' => 'My awesome sharing hub',
-      'name' => 'Sharing hub name',
-      'subdomain' => 'Subdomain',
+      'name' => 'Name for your Sharing Hub',
+      'subdomain' => 'Web address for your Sharing Hub',
       'subdomain_placeholder' => 'your hubname.anysha.re',
+      'description' => 'Describe your sharing hub',
+      'detailed_description' => 'Detailed description',
+      'exchange_options' => 'Choose the allowed exchange options',
+      'all_exchanges' => 'All exchanges',
+      'choose_theme' => 'Choose a theme',
+      'slack_integration' => 'Slack integration',
+      'slack_endpoint' => 'Slack endpoint',
+      'slack_bot_name' => 'Slack bot name',
+      'slack_channel' => 'Slack channel name',
+      'analytics' => 'Google analytics integration', 
+      'ga_tracking_id' => 'Google analytics tracking id',
+      'for_example' => 'For example: UA-000000-01',
       'p1' => 'You can start a sharing hub in under 1 minute and enjoy it free for 30 days. 
       We are currently in beta, so keep in mind features are still being added. This 
       introductory cost is available for a limited time only. Email us at information 
       info@anysha.re with questions about current features.',
       'p2' => 'You will not be charged until your free trial ends on',
-      'p3' => 'No commitments, cancel online at any time.',
+      'p3' => 'No commitments, cancel at any time.',
       'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
-      'type' => 'Select hub type',
+      'type' => 'Choose a privacy level',
       'payment_info' => 'credit card information',
       'after_trail' => 'after 30 day free trail',
       'start_trial' => '30 day Free Trial',
@@ -132,10 +146,18 @@ return [
         ],
 
         'messages' => [
-          'save_edits' => 'Your sharing hub settings have been saved!',
+          'save_edits' => 'Your sharing hub settings have been saved',
           'save_new' => 'Your new sharing hub has been created!',
           'save_failed' => 'Something went wrong. Your sharing hub settings have not been saved',
         ],
+
+        'slack_info' => [
+          'p1' => 'Slack is a messaging app for teams (https://slack.com/). AnyShare integrates with slack to allow you to add entries and show members from within the app.',
+          'p2' => 'To list members, type: /members <hub subdomain>',
+          'p3' => 'To add an entry, type: /want <qty> <example text> in:<hub subdomain> and /have <qty> <example text> in:<hub subdomain>',
+          'p4' => 'The <qty> is optional, and if it\'s missing, it will default to one. For example, /have <example text> in:<hub subdomain> is the same as /have 1 <example text> in:<hub subdomain>.',
+          'p5' => 'New entries added through the slash command will have all of the exchange types available for that hub selected.',
+         ]
 
     ],
     'members' => [
@@ -144,6 +166,8 @@ return [
 
     'uploads'  => [
       'choose_file'  => 'Choose file',
+      'banner_tip' => 'Tip. For best results, use an image that is 2000px x 300px',
+      'logo_tip' => 'Tip. For best results, use an image that is 250px x 40px.',
     ],
 
    

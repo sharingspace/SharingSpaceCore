@@ -20,7 +20,8 @@
       "yaap/theme": "2.*",
       "chrisbjr/api-guard": "^2.3",
       "mcamara/laravel-localization": "1.0.*",
-      "watson/validating": "^2.0"
+      "watson/validating": "^2.0",
+        "doctrine/dbal": "^2.5"
     },
     "repositories": [
 		{
