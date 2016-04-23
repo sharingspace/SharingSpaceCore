@@ -246,16 +246,46 @@ class UserController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param $request
     * @since  [v1.0]
-    * @return View
+    * @return Redirect
     */
     public function postJoinCommunity(Request $request)
     {
-        $user = Auth::user();
-        if ($user->communities()->sync([$request->whitelabel_group->id])) {
+        if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
             return redirect()->route('browse')->withInput()->with('success', 'You have joined this community!');
         } else {
             return redirect()->route('browse')->withInput()->with('error', 'Unable to join community');
         }
 
     }
+
+
+    /**
+    * Gets a list of join requests for the community admin
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param $request
+    * @since  [v1.0]
+    * @return View
+    */
+    public function getJoinRequests(Request $request)
+    {
+
+
+    }
+
+    /**
+    * Gets the list of communities a user is a member of
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param $request
+    * @since  [v1.0]
+    * @return View
+    */
+    public function getCommunityMemberships(Request $request)
+    {
+        $communities = Auth::user()->communities()->get();
+        return view('account.community_memberships')->with('communities',$communities);
+
+    }
+
 }
