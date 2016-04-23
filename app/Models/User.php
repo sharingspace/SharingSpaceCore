@@ -271,6 +271,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id');
     }
 
+
     /**
     * Returns entries by user
     *
