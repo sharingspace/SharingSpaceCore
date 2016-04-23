@@ -109,10 +109,17 @@
             </a>
 
 
-						<div class="navbar-collapse pull-right nav-main-collapse collapse">
-							<nav class="nav-main">
+		<div class="navbar-collapse pull-right nav-main-collapse collapse">
+			<nav class="nav-main">
 
-								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+				<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+
+                @can('join-community', $whitelabel_group)
+                    <li>
+                        <a href="{{ route('join-community') }}">Join Hub</a>
+                    </li>
+                @endif
+
                   <li{!! (Route::is('home') ? ' class="active"' : '') !!}>
                     <a href="{{ route('home') }}/#table">
                       {{ trans('general.nav.browse') }}
@@ -177,7 +184,6 @@
     <div id="about_panel">
       <p style="vertical-align:middle">{{ $whitelabel_group->about }}</p>
     </div>
-@endif   
+@endif
   </div>
 </div>
-
