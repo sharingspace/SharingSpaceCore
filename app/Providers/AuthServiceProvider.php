@@ -26,12 +26,46 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+
         // If the user is a super admin, let them through no matter what
         $gate->before(function ($user, $ability) {
             if ($user->isSuperAdmin()) {
                 return true;
             }
         });
+
+        // --------------------------------
+        // COMMUNTIY GATES
+        // --------------------------------
+
+        // Check if the user can see the community entries
+        $gate->define('view-browse', function ($user, $community) {
+          if ($user->canSeeCommunity($community)) {
+              return true;
+          }
+        });
+
+        // Check if the user can join a community
+        // (they are not already a member)
+        $gate->define('join-community', function ($user, $community) {
+            if (!$user->isMemberOfCommunity($community)) {
+                return true;
+            }
+        });
+
+        // Check if the user can update the community settings
+        // (they are an admin)
+        $gate->define('update-community', function ($user, $community) {
+            if ($user->isAdminOfCommunity($community) ) {
+                return true;
+            }
+        });
+
+
+
+        // --------------------------------
+        // ENTRY GATES
+        // --------------------------------
 
         // Check the user is a member of the community and cam therefore post
         // an entry
@@ -48,32 +82,13 @@ class AuthServiceProvider extends ServiceProvider
           }
         });
 
-        // Check if the user can see the community entries
-        $gate->define('view-browse', function ($user, $community) {
-          if ($user->canSeeCommunity($community)) {
-              return true;
-          }
-        });
 
         // Check if the user can update an entry
         $gate->define('update-entry', function ($user, $entry) {
             return $user->id === $entry->created_by;
         });
 
-        // Check if the user can join a community (they are not currently
-        // already a member)
-        $gate->define('join-community', function ($user, $community) {
-            if (!$user->isMemberOfCommunity($community)) {
-                return true;
-            }
-        });
 
-        // Check if the user can update the community settings (they are an admin)
-        $gate->define('update-community', function ($user, $community) {
-            if( $user->isAdminOfCommunity($community) ) {
-                return true;
-            }
-        });
 
     }
 }
