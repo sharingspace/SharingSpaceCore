@@ -149,7 +149,7 @@
                   </li>
                   @endcan
                   <!-- SEARCH -->
-    							<li class="search">
+    							<!-- <li class="search">
     								<a href="javascript:;">
     									<i class="fa fa-search"></i>
     								</a>
@@ -164,6 +164,7 @@
     									</form>
     								</div>
     							</li>
+                            -->
     							<!-- /SEARCH -->
 
 
