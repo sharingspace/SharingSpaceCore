@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Theme;
 use Log;
@@ -74,6 +75,12 @@ class PagesController extends Controller
     */
     public function postFinancialAssist(Request $request)
     {
+         /* Mail::raw("Testing", function ($message) {
+            $message->from('dslinnard@gmail.com', 'David');
+            $message->to('dslinnard@yahoo.com', 'David')
+              ->subject('LaravelGMail App!');
+        });*/
+       
         $data['firstName'] = Input::get('firstName');
         $data['lastName'] = Input::get('lastName');
         $data['email'] = Input::get('email');
@@ -90,6 +97,7 @@ class PagesController extends Controller
                 $m->from($data['email'], 'dave')->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
             }
         ); 
+
         if( $sent) {
             return Redirect::back()->with('success', trans('pricing.financial_assist.success'));
         }
