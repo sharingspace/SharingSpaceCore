@@ -131,6 +131,15 @@ Route::group(
         );
 
         Route::get(
+            'account/memberships',
+            array(
+            'middleware' => 'auth',
+            'as' => 'account.memberships.view',
+            'uses' => 'UserController@getCommunityMemberships')
+        );
+
+
+        Route::get(
             'account/settings',
             array(
             'middleware' => 'auth',
