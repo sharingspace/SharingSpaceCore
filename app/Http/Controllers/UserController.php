@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\User;
 use Auth;
 use Input;
 use Redirect;
@@ -75,7 +76,7 @@ class UserController extends Controller
     public function postSettings()
     {
 
-        if ($user = \App\User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {
 
             $user->first_name = e(Input::get('first_name'));
             $user->last_name = e(Input::get('last_name'));
@@ -119,7 +120,7 @@ class UserController extends Controller
     public function postUpdateSocial()
     {
 
-        if ($user = \App\User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {
 
             $user->fb_url = e(Input::get('fb_url'));
             $user->twitter = e(Input::get('twitter'));
@@ -151,7 +152,7 @@ class UserController extends Controller
     public function postUpdatePassword()
     {
 
-        if ($user = \App\User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {
 
             $user->password = e(Input::get('password'));
 
@@ -180,7 +181,7 @@ class UserController extends Controller
     public function postUpdateNotifications()
     {
 
-        if ($user = \App\User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {
 
             if (!$user->save()) {
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
@@ -206,7 +207,7 @@ class UserController extends Controller
     public function postUpdatePrivacy()
     {
         return "postUpdatePrivacy() needs to be implemented and needs db updates";
-        if ($user = \App\User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {
 
             if (!$user->save()) {
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
@@ -230,10 +231,31 @@ class UserController extends Controller
     */
     public function getProfile($id)
     {
-        if ($user = \App\User::findOrFail($id)) {
+        if ($user = User::findOrFail($id)) {
             return view('users.view')->with('user', $user);
         } else {
             echo 'Invalid user';
+        }
+
+    }
+
+
+    /**
+    * Joins a user to a community
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param $request
+    * @since  [v1.0]
+    * @return View
+    */
+    public function postJoinCommunity(Request $request)
+    {
+        $user = Auth::user();
+        //$user->communities()->attach($request->whitelabel_group->id);
+        if ($user->communities()->sync([$request->whitelabel_group->id])) {
+            return redirect()->route('browse')->withInput()->with('success', 'You have joined this community!');
+        } else {
+            return redirect()->route('browse')->withInput()->with('error', 'Unable to join community');
         }
 
     }
