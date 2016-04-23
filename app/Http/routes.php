@@ -370,6 +370,14 @@ Route::group(
             'uses' => 'CommunitiesController@getMembers')
         );
 
+        Route::get(
+            'join',
+            array(
+            'middleware' => 'community-auth',
+            'as' => 'join-community',
+            'uses' => 'UserController@postJoinCommunity')
+        );
+
         Route::group(
             array('prefix' => 'community'),
             function () {
