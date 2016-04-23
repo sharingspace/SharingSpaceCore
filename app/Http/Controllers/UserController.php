@@ -251,7 +251,6 @@ class UserController extends Controller
     public function postJoinCommunity(Request $request)
     {
         $user = Auth::user();
-        //$user->communities()->attach($request->whitelabel_group->id);
         if ($user->communities()->sync([$request->whitelabel_group->id])) {
             return redirect()->route('browse')->withInput()->with('success', 'You have joined this community!');
         } else {
