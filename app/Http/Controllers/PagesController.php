@@ -75,17 +75,11 @@ class PagesController extends Controller
     */
     public function postFinancialAssist(Request $request)
     {
-         /* Mail::raw("Testing", function ($message) {
-            $message->from('dslinnard@gmail.com', 'David');
-            $message->to('dslinnard@yahoo.com', 'David')
-              ->subject('LaravelGMail App!');
-        });*/
-       
         $data['firstName'] = Input::get('firstName');
         $data['lastName'] = Input::get('lastName');
         $data['email'] = Input::get('email');
         $data['toEmail'] = 'info@anysha.re';
-        $data['subject'] = 'Application for free Anyshare hub';;
+        $data['subject'] = 'Application for free Anyshare hub';
         $data['howUse'] = Input::get('howUse');
         $data['budget'] = Input::get('budget');
         $data['timePeriod'] = Input::get('timePeriod');
@@ -94,7 +88,7 @@ class PagesController extends Controller
         $sent = Mail::send(
             array('emails.freeAnyshare', 'emails.freeAnyshareText'), ['data'=>$data],
             function ($m) use ($data) {
-                $m->from($data['email'], 'dave')->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
+                $m->from($data['email'], $data['firstName'].' '.$data['lastName'])->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
             }
         ); 
 
