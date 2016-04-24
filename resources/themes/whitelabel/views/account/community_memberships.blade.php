@@ -10,28 +10,27 @@
 @section('content')
 
 <div class="container">
-	<div class="row">
-  <h1 class="margin-bottom-0  size-24 text-center">Communities</h1>
+    <div class="row">
+        
+        <h1 class="margin-bottom-0  size-24 text-center">Communities</h1>
 
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
-      <div class="table-responsive">
-   			<table class="table table-condensed" id="members">
-        	<thead>
-            <tr>
-              <th data-sortable="false">Name</th>
+    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
+            <div class="table-responsive">
+       			<table class="table table-condensed" id="members">
+          			<tbody>
+        			@foreach ($communities as $community)
+        				<tr>
+                        <td class="col-md-3"> {{ $community->name }}</td>
+                        <td class="col-md-2"> {{ $community->location }}</td>
+                        <td class="col-md-6"> {{ $community->about }}</td>
+                        <td class="col-md-1"> <a href="leave/{{ $community->id }}" class="btn btn-sm btn-warning">Leave</a></td>
+                        </tr>
+          			@endforeach
+              		</tbody>
+          	    </table>
+            </div> <!-- table responsive -->
+        </div> <!-- col-lg-12 -->
 
-            </tr>
-          </thead>
-  				<tbody>
-			@foreach ($communities as $community)
-				<tr>
-                <td> {{ $community->name }}</td>
-                </tr>
-  			@endforeach
-      		</tbody>
-      	</table>
-      </div>
- 	 </div> <!-- col-lg-10 -->
 	</div> <!-- row -->
 </div> <!-- #container -->
 
