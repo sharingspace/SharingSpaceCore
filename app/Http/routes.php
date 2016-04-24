@@ -138,6 +138,14 @@ Route::group(
             'uses' => 'UserController@getCommunityMemberships')
         );
 
+        Route::get(
+            'account/leave/{communityId?}',
+            array(
+            'middleware' => 'community-auth',
+            'as' => 'leave-community',
+            'uses' => 'UserController@getLeaveCommunity')
+        );
+
 
         Route::get(
             'account/settings',
@@ -384,7 +392,7 @@ Route::group(
             array(
             'middleware' => 'community-auth',
             'as' => 'join-community',
-            'uses' => 'UserController@postJoinCommunity')
+            'uses' => 'UserController@getJoinCommunity')
         );
 
         Route::group(
