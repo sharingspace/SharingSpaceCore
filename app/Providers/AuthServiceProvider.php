@@ -27,6 +27,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies($gate);
 
 
+        // --------------------------------
+        // BEFORE ANYTHING ELSE
+        // --------------------------------
+        // If this condition is true, ANYTHING else below will be asssumed
+        // to be true. This can cause weird blade behavior, so if something
+        // happens where you don't understand why something is returning true
+        // that shouldn't be true, check that the user in question
+        // isn't a superadmin
+        // --------------------------------
         // If the user is a super admin, let them through no matter what
         $gate->before(function ($user, $ability) {
             if ($user->isSuperAdmin()) {
