@@ -115,7 +115,7 @@
 
 				<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
 
-                @can('join-community', $whitelabel_group)
+                @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
                     <li>
                         <a href="{{ route('join-community') }}">Join Hub</a>
                     </li>
