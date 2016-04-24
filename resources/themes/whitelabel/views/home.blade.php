@@ -108,7 +108,7 @@
     iconsPrefix: 'fa',
     showRefresh: true,
     search: true,
-    pageSize: 20,
+    pageSize: 100,
     pagination: true,
     sidePagination: 'server',
     sortable: true,
@@ -119,10 +119,10 @@
     exportDataType: 'all',
     exportTypes: ['csv', 'txt','json', 'xml'],
     maintainSelected: true,
-    paginationFirstText: "@lang('pagination.first')",
-    paginationLastText: "@lang('pagination.last')",
-    paginationPreText: "@lang('pagination.previous')",
-    paginationNextText: "@lang('pagination.next')",
+    paginationFirstText: "{{ trans('pagination.first') }}",
+    paginationLastText: "{{ trans('pagination.last') }}",
+    paginationPreText: "{{ trans('pagination.previous') }}",
+    paginationNextText: "{{ trans('pagination.next') }}",
     pageList: ['10','25','50','100','150','200'],
     formatShowingRows: function (pageFrom, pageTo, totalRows) {
         return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
@@ -139,6 +139,13 @@ $( document ).ready(function() {
   $('#table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
   });
+
+  $("#display_about").click(function(e){
+    $("#about_panel").slideToggle("slow");
+    return false;
+  });
 });
+
 </script>
+
 @stop

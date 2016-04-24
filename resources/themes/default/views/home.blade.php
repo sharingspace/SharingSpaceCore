@@ -55,8 +55,8 @@
 
             </div><!-- /left text -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->
-              <a href="#" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
-              <a href="#" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
+              <a href="{{ route('community.create.form') }}" class="btn btn-warning size-20 hidden-xs pull-left" style="background-color:#EC971F">{{ trans('general.nav.try_it') }}</a>
+              <a href="{{ route('community.create.form') }}" class="btn btn-success btn-sm size-12 hidden-sm hidden-md hidden-lg">{{ trans('general.nav.try_it') }}</a>
             </div><!-- /right btn -->
           </div>
         </div>
@@ -243,7 +243,7 @@
                 </tr>
                 <tr>
                 	<td><a href="#" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Apply Now</a></td>
-                	<td><a href="#" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Join Free for a Month</a></td>
+                	<td><a href="{{ route('entry.create.form') }}" class="btn btn-info btn-sm" style="border-color:#ccc;background-color:white;color:#F07057;">Join Free for a Month</a></td>
                 </tr>
               </tbody>
             </table>
@@ -254,6 +254,5 @@
   	</section>
   	@endif
 <!-- /COMMUNITIES  -->
-
 
 @stop

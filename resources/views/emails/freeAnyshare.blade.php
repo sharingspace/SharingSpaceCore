@@ -1,4 +1,4 @@
-@extends('emails/layouts/default')
+@extends('emails/layouts/html')
 
 @section('content')
 <h1>Application for free Anyshare</h1>

@@ -44,7 +44,7 @@
     iconsPrefix: 'fa',
     showRefresh: true,
     search: true,
-    pageSize: 20,
+    pageSize: 100,
     pagination: true,
     sidePagination: 'server',
     sortable: true,
@@ -55,10 +55,10 @@
     exportDataType: 'all',
     exportTypes: ['csv', 'txt','json', 'xml'],
     maintainSelected: true,
-    paginationFirstText: "@lang('pagination.first')",
-    paginationLastText: "@lang('pagination.last')",
-    paginationPreText: "@lang('pagination.previous')",
-    paginationNextText: "@lang('pagination.next')",
+    paginationFirstText: "{{ trans('pagination.first') }}",
+    paginationLastText: "{{ trans('pagination.last') }}",
+    paginationPreText: "{{ trans('pagination.previous') }}",
+    paginationNextText: "{{ trans('pagination.next') }}",
     pageList: ['10','25','50','100','150','200'],
     formatShowingRows: function (pageFrom, pageTo, totalRows) {
         return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
@@ -72,10 +72,10 @@
   });
 
 $( document ).ready(function() {
-  // we off screen the table headers as they are obvious. 
+  // we off screen the table headers as they are obvious.
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];
-    
+
     // add a clas to the row so we can remove it on success
     $(this).closest('tr').addClass("remove_"+entryID);
 
@@ -86,7 +86,7 @@ $( document ).ready(function() {
       if (replyData.success) {
         // remove row from table
         $('.remove_'+entryID).remove();
-      } 
+      }
       else {
         //console.error('delete failed');
       }

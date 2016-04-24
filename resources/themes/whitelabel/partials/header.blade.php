@@ -11,6 +11,7 @@
         <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> Memberships</a></li>
                 <li><a href="{{ route('user.profile', Auth::user()->id) }}"><i class="fa fa-user"></i> {{ trans('general.nav.profile') }}</a></li>
                 <li><a href="{{ route('user.settings.view') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
                 <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
@@ -109,10 +110,17 @@
             </a>
 
 
-						<div class="navbar-collapse pull-right nav-main-collapse collapse">
-							<nav class="nav-main">
+		<div class="navbar-collapse pull-right nav-main-collapse collapse">
+			<nav class="nav-main">
 
-								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+				<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+
+                @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
+                    <li>
+                        <a href="{{ route('join-community') }}">Join Hub</a>
+                    </li>
+                @endif
+
                   <li{!! (Route::is('home') ? ' class="active"' : '') !!}>
                     <a href="{{ route('home') }}/#table">
                       {{ trans('general.nav.browse') }}
@@ -125,6 +133,9 @@
                       {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
                   </li>
+                  @if (strlen($whitelabel_group->about))
+                  {!! (Route::is('home') ? '<li><a href="" id="display_about">About</a></li>' : '') !!}
+                  @endif
                   <li>
                     <a href="{{ route('entry.create.form') }}">
                       <button type="button" class="btn btn-sm btn-warning">
@@ -134,11 +145,11 @@
                   </li>
                   @can('update-community', $whitelabel_group)
                   <li>
-                    <a href="{{ route('community.edit.form')}}"><i class="fa fa-cogs"></i></a>
+                    <a href="{{ route('community.edit.form')}}"><i class="fa fa-lg fa-cog"></i></a>
                   </li>
                   @endcan
                   <!-- SEARCH -->
-    							<li class="search">
+    							<!-- <li class="search">
     								<a href="javascript:;">
     									<i class="fa fa-search"></i>
     								</a>
@@ -153,6 +164,7 @@
     									</form>
     								</div>
     							</li>
+                            -->
     							<!-- /SEARCH -->
 
 
@@ -168,6 +180,12 @@
 
 			</div>
 
+<div class="row">
   <div class="col-md-12 wl_usercover" style="background-image: url({{ $whitelabel_group->getCover() }});">
-
+@if( strlen($whitelabel_group->about))
+    <div id="about_panel">
+      <p style="vertical-align:middle">{{ $whitelabel_group->about }}</p>
+    </div>
+@endif
   </div>
+</div>

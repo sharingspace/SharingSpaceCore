@@ -271,6 +271,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id');
     }
 
+
     /**
     * Returns entries by user
     *
@@ -293,7 +294,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function isMemberOfCommunity($community)
     {
-        return $this->communities('\App\Models\Community', 'communities_users', 'community_id', 'user_id')->where('community_id', '=', $community->id)->count() > 0;
+        return $this->communities()->where('community_id', '=', $community->id)->count() > 0;
     }
 
     /**
@@ -309,11 +310,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-  * Returns the user full name, it simply concatenates
-  * the user first and last name.
-  *
-  * @return string
-  */
+    * Returns the user full name, it simply concatenates
+    * the user first and last name.
+    *
+    * @return string
+    */
     public function getDisplayName()
     {
 
@@ -327,5 +328,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return "Anonymous";
         }
 
+    }
+
+    /**
+    * Gets messages sent to user
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function messagesTo()
+    {
+		return $this->hasMany('Messages','sent_to');
     }
 }

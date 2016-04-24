@@ -131,6 +131,15 @@ Route::group(
         );
 
         Route::get(
+            'account/memberships',
+            array(
+            'middleware' => 'auth',
+            'as' => 'account.memberships.view',
+            'uses' => 'UserController@getCommunityMemberships')
+        );
+
+
+        Route::get(
             'account/settings',
             array(
             'middleware' => 'auth',
@@ -145,6 +154,32 @@ Route::group(
             'as' => 'user.settings.save',
             'uses' => 'UserController@postSettings')
         );
+
+        Route::get(
+            'account/messages',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.view',
+            'uses' => 'MessagesController@getIndex')
+        );
+
+        Route::get(
+            'account/messages',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.create.form',
+            'uses' => 'MessagesController@getCreate')
+        );
+
+        Route::post(
+            'account/messages',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.create.save',
+            'uses' => 'MessagesController@postCreate')
+        );
+
+
 
         Route::post(
             'account/password',
@@ -270,7 +305,7 @@ Route::group(
                     'as' => 'entry.edit.save',
                     'uses' => 'EntriesController@postEdit')
                 );
-                
+
                 Route::get(
                     '{entryID}/ajaxgetentry',
                     array(
@@ -342,6 +377,14 @@ Route::group(
             'middleware' => 'community-auth',
             'as' => 'members',
             'uses' => 'CommunitiesController@getMembers')
+        );
+
+        Route::get(
+            'join',
+            array(
+            'middleware' => 'community-auth',
+            'as' => 'join-community',
+            'uses' => 'UserController@postJoinCommunity')
         );
 
         Route::group(
