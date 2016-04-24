@@ -59,16 +59,6 @@
   @include('notifications')
 </div>
 
-@if ($whitelabel_group->about!='')
-<section class="container padding-none">
-  <div class="row">
-      <div class="col-md-12 col-sm-12">
-          <p>{{ $whitelabel_group->about }}</p>
-      </div>
-  </div><!--end row-->
-</section>
-@endif
-
 <!-- -->
 <section>
 	<div class="container">
