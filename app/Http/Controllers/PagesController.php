@@ -17,10 +17,10 @@ use Theme;
 use Log;
 use Input;
 use Mail;
+use Redirect;
 
 class PagesController extends Controller
 {
-
     /**
     * Returns a view to display the homepage. This is tricky because the
     * homepage view will be different based on whether the viewer is looking
@@ -33,7 +33,6 @@ class PagesController extends Controller
     */
     public function getHomepage(Request $request, $hp = null)
     {
-
         if ($request->whitelabel_group) {
             LOG::debug('Whitelabel routing: Passed middleware, start getHomepage');
             if (Auth::check()) {
@@ -46,18 +45,13 @@ class PagesController extends Controller
                     return redirect()->route('community.request-access.form')->withError('You must be a member of this group to view this page.');
                 }
 
-
             } else {
                 if ($request->whitelabel_group->group_type == 'S') {
                     return view('auth/login-unbranded')->withError('You must be logged in and a member to see this.');
                 } else {
                     return view('auth/login')->withError('You must be logged in and a member to see this.');
                 }
-
             }
-
-
-
         } else {
             $communities = \App\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
             return view('home'.$hp)->with('communities', $communities);
@@ -78,7 +72,7 @@ class PagesController extends Controller
         $data['lastName'] = Input::get('lastName');
         $data['email'] = Input::get('email');
         $data['toEmail'] = 'info@anysha.re';
-        $data['subject'] = 'Application for free Anyshare hub';;
+        $data['subject'] = 'Application for free Anyshare hub';
         $data['howUse'] = Input::get('howUse');
         $data['budget'] = Input::get('budget');
         $data['timePeriod'] = Input::get('timePeriod');
@@ -87,9 +81,10 @@ class PagesController extends Controller
         $sent = Mail::send(
             array('emails.freeAnyshare', 'emails.freeAnyshareText'), ['data'=>$data],
             function ($m) use ($data) {
-                $m->from($data['email'], 'dave')->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
+                $m->from($data['email'], $data['firstName'].' '.$data['lastName'])->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
             }
         ); 
+
         if( $sent) {
             return Redirect::back()->with('success', trans('pricing.financial_assist.success'));
         }
