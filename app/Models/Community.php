@@ -115,6 +115,19 @@ class Community extends Model
 
 
     /**
+    * Get the admins of a community.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function admins()
+    {
+        return $this->members()->where('is_admin','=',1);
+    }
+
+
+    /**
     * Get the cover image url based on app environment
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
