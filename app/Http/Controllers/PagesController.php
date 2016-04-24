@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Theme;
 use Log;
@@ -78,7 +79,7 @@ class PagesController extends Controller
         $data['lastName'] = Input::get('lastName');
         $data['email'] = Input::get('email');
         $data['toEmail'] = 'info@anysha.re';
-        $data['subject'] = 'Application for free Anyshare hub';;
+        $data['subject'] = 'Application for free Anyshare hub';
         $data['howUse'] = Input::get('howUse');
         $data['budget'] = Input::get('budget');
         $data['timePeriod'] = Input::get('timePeriod');
@@ -87,9 +88,10 @@ class PagesController extends Controller
         $sent = Mail::send(
             array('emails.freeAnyshare', 'emails.freeAnyshareText'), ['data'=>$data],
             function ($m) use ($data) {
-                $m->from($data['email'], 'dave')->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
+                $m->from($data['email'], $data['firstName'].' '.$data['lastName'])->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
             }
         ); 
+
         if( $sent) {
             return Redirect::back()->with('success', trans('pricing.financial_assist.success'));
         }

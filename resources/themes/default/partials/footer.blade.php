@@ -20,17 +20,17 @@
       </div>
 
       <div class="col-md-2 col-sm-12 socials text-center-sm text-center-xs margin-top-10">
-        <a href="#" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
+        <a href="https://www.facebook.com/mass.mosaic/" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
           <i class="fa fa-facebook"></i>
           <i class="fa fa-facebook"></i>
         </a>
 
-        <a href="#" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
+        <a href="https://twitter.com/massmosaic" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
           <i class="fa fa-twitter"></i>
           <i class="fa fa-twitter"></i>
         </a>
 
-        <a href="#" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Google plus">
+        <a href="https://plus.google.com/+Massmosaic/videos" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Google plus">
           <i class="fa fa-google"></i>
           <i class="fa fa-google"></i>
         </a>
