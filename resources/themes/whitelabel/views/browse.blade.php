@@ -44,7 +44,7 @@
     iconsPrefix: 'fa',
     showRefresh: true,
     search: true,
-    pageSize: 20,
+    pageSize: 100,
     pagination: true,
     sidePagination: 'server',
     sortable: true,
@@ -72,10 +72,10 @@
   });
 
 $( document ).ready(function() {
-  // we off screen the table headers as they are obvious. 
+  // we off screen the table headers as they are obvious.
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];
-    
+
     // add a clas to the row so we can remove it on success
     $(this).closest('tr').addClass("remove_"+entryID);
 
@@ -86,7 +86,7 @@ $( document ).ready(function() {
       if (replyData.success) {
         // remove row from table
         $('.remove_'+entryID).remove();
-      } 
+      }
       else {
         //console.error('delete failed');
       }
