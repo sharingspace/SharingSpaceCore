@@ -58,16 +58,6 @@
   @include('notifications')
 </div>
 
-@if ($whitelabel_group->about!='')
-<section class="container padding-none">
-  <div class="row">
-      <div class="col-md-12 col-sm-12">
-          <p>{{ $whitelabel_group->about }}</p>
-      </div>
-  </div><!--end row-->
-</section>
-@endif
-
 <section class="container padding-top-0 browse_table">
 <div class="row">
   <h2 class="margin-bottom-0 size-20 text-center">{{trans('general.entries.browse_entries')}}</h1>

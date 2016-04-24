@@ -1,11 +1,12 @@
 @extends('emails/layouts/text')
 
 @section('content')
-Application for free Anyshare 
+{{{ $data['subject'] }}}
+
 Name: {{{ $data['firstName'] }}} {{{ $data['lastName'] }}} 
 Email: {{{ $data['email'] }}}
 
-How I will use Anysha.re: {{{ $data['howUse'] }}}
+How will you use Anysha.re: {{{ $data['howUse'] }}}
 
 Explain why you don’t have the budget to pay? {{{$data['budget']}}}
 

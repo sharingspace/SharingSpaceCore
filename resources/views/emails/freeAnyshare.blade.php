@@ -1,16 +1,20 @@
 @extends('emails/layouts/html')
 
 @section('content')
-<h1>Application for free Anyshare</h1>
+<h1>{{{ $data['subject'] }}}</h1>
 <p>Name: {{{ $data['firstName'] }}} {{{ $data['lastName'] }}} </p>
 <p>Email: {{{ $data['email'] }}}</p>
 
-<p>How I will use Anysha.re: {{{ $data['howUse'] }}}</p>
+<h2>How will you use Anysha.re?</h2>
+<p>{{{ $data['howUse'] }}}</p>
 
-<p>Explain why you don’t have the budget to pay? {{{$data['budget']}}}</p>
+<h2>Explain why you don’t have the budget to pay?</h2>
+<p>{{{$data['budget']}}}</p>
 
-<p>Is this budget limitation temporary or will it continue indefinitely? {{{$data['timePeriod']}}}</p>
+<h2>Is this budget limitation temporary or will it continue indefinitely?</h2>
+<p>{{{$data['timePeriod']}}}</p>
 
-<p>How will you market your Sharing Hub? {{{$data['market']}}}</p>
+<h2>How will you market your Sharing Hub?</h2>
+<p>{{{$data['market']}}}</p>
 
 @stop
