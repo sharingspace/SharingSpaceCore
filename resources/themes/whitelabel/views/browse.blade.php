@@ -55,10 +55,10 @@
     exportDataType: 'all',
     exportTypes: ['csv', 'txt','json', 'xml'],
     maintainSelected: true,
-    paginationFirstText: "@lang('pagination.first')",
-    paginationLastText: "@lang('pagination.last')",
-    paginationPreText: "@lang('pagination.previous')",
-    paginationNextText: "@lang('pagination.next')",
+    paginationFirstText: "{{ trans('pagination.first') }}",
+    paginationLastText: "{{ trans('pagination.last') }}",
+    paginationPreText: "{{ trans('pagination.previous') }}",
+    paginationNextText: "{{ trans('pagination.next') }}",
     pageList: ['10','25','50','100','150','200'],
     formatShowingRows: function (pageFrom, pageTo, totalRows) {
         return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
