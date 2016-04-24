@@ -243,17 +243,37 @@ class UserController extends Controller
     /**
     * Joins a user to a community
     *
+    * @todo Change this to a post request
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param $request
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postJoinCommunity(Request $request)
+    public function getJoinCommunity(Request $request)
     {
         if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
             return redirect()->route('browse')->withInput()->with('success', 'You have joined this community!');
         } else {
             return redirect()->route('browse')->withInput()->with('error', 'Unable to join community');
+        }
+
+    }
+
+    /**
+    * Leaves a community
+    *
+    * @todo Change this to a post request
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param $request
+    * @since  [v1.0]
+    * @return Redirect
+    */
+    public function getLeaveCommunity(Request $request)
+    {
+        if (Auth::user()->communities()->detach([$request->whitelabel_group->id])) {
+            return redirect()->route('browse')->withInput()->with('success', 'You have left this community!');
+        } else {
+            return redirect()->route('browse')->withInput()->with('error', 'Unable to leave community');
         }
 
     }
