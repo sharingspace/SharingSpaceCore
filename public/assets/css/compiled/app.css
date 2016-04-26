@@ -7974,8 +7974,7 @@ footer.sticky {
 }
 
 .wl_usercover {
-  min-height: 300px;
-  max-height: 300px;
+  max-height: 450px;
   margin-top: -26px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -7985,7 +7984,7 @@ footer.sticky {
 .wl_usercover #about_panel,
 .wl_usercover #display_about {
   text-align: center;
-  background-color: rgba(176, 220, 220, 0.7);
+  background-color: rgba(176, 220, 220, 0.8);
 }
 
 .wl_usercover #about_panel {
@@ -11750,18 +11749,15 @@ blockquote cite:after {
 }
 
 .mfp-zoom-out-cur {
-  cursor: -webkit-zoom-out;
   cursor: zoom-out;
 }
 
 .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
-  cursor: -webkit-zoom-out;
   cursor: zoom-out;
 }
 
 .mfp-zoom {
   cursor: pointer;
-  cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
 
@@ -12908,6 +12904,14 @@ section.dark .owl-carousel.featured .owl-next:hover {
 
 section.dark h2.owl-featured {
   border-bottom-color: #666;
+}
+
+@media only screen and (max-width: 768px) {
+  /*
+  	.owl-carousel.featured .owl-controls {
+  		display:none !important
+  	}
+  */
 }
 
 /* buttons bottom */
@@ -36156,7 +36160,6 @@ section.dark .sliderv-wrapper {
 }
 
 .ui-slider .ui-state-active {
-  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 
