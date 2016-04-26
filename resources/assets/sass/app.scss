@@ -7466,8 +7466,7 @@ footer.sticky {
 }
 
 .wl_usercover {
-  min-height: 300px;
-  max-height: 300px;
+  max-height: 450px;
   margin-top: -26px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -7475,7 +7474,7 @@ footer.sticky {
 
   #about_panel, #display_about {
     text-align: center;
-    background-color: rgba(176,220,220,0.7);
+    background-color: rgba(176,220,220,0.8);
   }
 
   #about_panel {
