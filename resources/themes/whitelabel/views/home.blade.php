@@ -77,6 +77,8 @@
             <th data-sortable="true" data-field="created_at" data-visible="false">{{ trans('general.entries.created_at') }}</th>
             <th data-sortable="false" data-field="tags">{{ trans('general.entries.tags') }}</th>
             <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
+                        <!--           <th data-sortable="false" data-field="image" >Image</th> -->
+
           </tr>
       </thead>
     </table>
@@ -92,6 +94,32 @@
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 
 <script type="text/javascript">
+$( document ).ready(function() {
+  // we off screen the table headers as they are obvious.
+  $('table').on( "click", '[id^=delete_entry_]', function() {
+    var entryID = $(this).attr('id').split('_')[2];
+    // add a clas to the row so we can remove it on success
+    $(this).closest('tr').addClass("remove_"+entryID);
+
+    var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
+
+    $.post(entryID+"/ajaxdelete",{_token: CSRF_TOKEN},function (replyData) {
+      //console.log("delete success :-)  "+replyData.entry_id);
+      if (replyData.success) {
+        // remove row from table
+        $('.remove_'+entryID).remove();
+        // display error message
+        $('div.ajax_success .fa-check').after('&nbsp;<strong>Success: </strong>'+replyData.message);
+        $('div.ajax_success').removeClass('hidden');//.delay(5000).fadeOut();
+      }
+      else {
+        // display error message
+        $('div.ajax_error').removeClass('hidden');
+        $('div.ajax_error .fa-exclamation-circle').after('&nbsp;<strong>Error: </strong>'+replyData.message);
+      }
+    });
+  });
+
   $('#table').bootstrapTable({
     classes: 'table table-responsive table-no-bordered',
     undefinedText: '',
@@ -122,10 +150,9 @@
         paginationSwitchUp: 'fa-caret-square-o-up',
         columns: 'fa-columns',
         refresh: 'fa-refresh'
-    },
+    }
   });
 
-$( document ).ready(function() {
   $('#table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
   });
@@ -133,6 +160,26 @@ $( document ).ready(function() {
   $("#display_about").click(function(e){
     $("#about_panel").slideToggle("slow");
     return false;
+  });
+
+  // we off screen the table headers as they are obvious.
+  $('table').on( "click", '[id^=delete_entry_]', function() {
+    var entryID = $(this).attr('id').split('_')[2];
+    // add a clas to the row so we can remove it on success
+    $(this).closest('tr').addClass("remove_"+entryID);
+
+    var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
+
+    $.post(entryID+"/ajaxdelete",{_token: CSRF_TOKEN},function (replyData) {
+      //console.log("delete success :-)  "+replyData.entry_id);
+      if (replyData.success) {
+        // remove row from table
+        $('.remove_'+entryID).remove();
+      }
+      else {
+        //console.error('delete failed');
+      }
+    });
   });
 });
 
