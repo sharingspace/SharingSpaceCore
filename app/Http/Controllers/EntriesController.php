@@ -402,19 +402,17 @@ class EntriesController extends Controller
             $user = Auth::user();
 
             if (!$entry->checkUserCanEditEntry($user)) {
-                return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.delete_not_allowed')]);
+                return response()->json(['success'=>false, 'message'=>trans('general.entries.messages.delete_not_allowed')]);
             } else {
 
                 if ($entry->delete()) {
                     $entry->exchangeTypes()->detach();
-                    return response()->json(['success'=>true, 'entry_id'=>$entry->id]);
+                    return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'message'=>trans('general.entries.messages.delete_success')]);
                 }
-
-                return redirect()->route('entry.view', $entry->id)->with('error', trans('general.entries.messages.delete_failed'));
+                return response()->json(['success'=>false, 'message'=>trans('general.entries.messages.delete_failed')]);
             }
         }
-
-        return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+        return response()->json(['success'=>false, 'message'=>trans('general.entries.messages.invalid')]);
     }
 
 
@@ -551,6 +549,7 @@ class EntriesController extends Controller
             'created_at' => $entry->created_at->format('M jS, Y'),
             'actions' => $actions,
             'tags' => $entry->tags
+            //'image' => '<img src="/assets/uploads/entries/',$entry->id.'/'.$images[0]->filename.'">'
             );
         }
 
