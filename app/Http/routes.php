@@ -172,7 +172,16 @@ Route::group(
         );
 
         Route::get(
-            'account/messages',
+            'account/messages/ajax',
+            array(
+            'middleware' => 'auth',
+            'as' => 'messages.view.ajax',
+            'uses' => 'MessagesController@getMessagesDataView')
+        );
+
+
+        Route::get(
+            'account/messages/new',
             array(
             'middleware' => 'auth',
             'as' => 'messages.create.form',
