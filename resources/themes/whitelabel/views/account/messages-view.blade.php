@@ -17,7 +17,7 @@
           <tr>
             <th data-sortable="true" data-field="post_type"><span class="sr-only">{{ trans('general.entries.post_type') }}</span></th>
             <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
-            <th data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
+            <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
             <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
           </tr>
