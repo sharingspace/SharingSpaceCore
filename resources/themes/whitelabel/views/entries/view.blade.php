@@ -98,61 +98,62 @@
 
 
 		<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-						 <li class="active"><a href="#make_offer" role="tab" data-toggle="tab">
 
-							@if (Auth::check())
-								@if (Auth::user()->id == $entry->created_by)
-									View Offers
-								@else
-									Make Offer
-								@endif
-							@else
-								Make Offer
-							@endif
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+			 <li class="active"><a href="#make_offer" role="tab" data-toggle="tab">
+
+				@if (Auth::check())
+					@if (Auth::user()->id == $entry->created_by)
+						View Offers
+					@else
+						Make Offer
+					@endif
+				@else
+					Make Offer
+				@endif
               </a></li>
 
               @if ($images && count($images) > 1)
 				<li><a href="#view_images_tab" role="tab" data-toggle="tab">More Images</a></li>
               @endif
 
-    				<li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li>
-    				<li><a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">Comments</a></li>
-    			</ul> <!-- nav-tabs -->
+				<li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li>
+				<li><a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">Comments</a></li>
+    		</ul> <!-- nav-tabs -->
 
-						<!-- Tab panes -->
-						<div class="tab-content">
+			<!-- Tab panes -->
+			<div class="tab-content">
 
-							<div class="tab-pane active" id="make_offer">
-								<div class="col-xs-12 col-sm-12 col-md-12 margin-top-6">
+				<div class="tab-pane active" id="make_offer">
+					<div class="col-xs-12 col-sm-12 col-md-12 margin-top-6">
 
-									@if (Auth::check())
-										@if (Auth::user()->id != $entry->created_by)
-											@if ((!$entry->expired) && ($entry->completed_at==''))
-												<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
-						<form action="{{ route('messages.create.save') }}" method="post">
-                            {!! csrf_field() !!}
-                          <!--MAKE AN OFFER-->
+						@if (Auth::check())
+							@if (Auth::user()->id != $entry->created_by)
+								@if ((!$entry->expired) && ($entry->completed_at==''))
+									<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
+						            <form action="{{ route('messages.create.save') }}" method="post">
+                                    {!! csrf_field() !!}
+                                    <!--MAKE AN OFFER-->
 
-                          <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
-                            <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'>{{{ Input::old('message') }}}</textarea>
-                          </div>  <!-- col-xs-12 -->
-                          <p class='margin-bottom-6 pull-left'>I would like to:</p>
+                                      <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
+                                        <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'>{{{ Input::old('message') }}}</textarea>
+                                      </div>  <!-- col-xs-12 -->
+                                      <p class='margin-bottom-6 pull-left'>I would like to:</p>
 
-							<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
-                            <div class="form-group {{ $errors->first('message', 'has-error') }}">
+            							<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
+                                        <div class="form-group {{ $errors->first('message', 'has-error') }}">
 
-                              <ul class="exchange_types">
-                                 @if (count($entry->exchangeTypes) > 0)
-                                   @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
-                                   <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-                                      <input type="checkbox" name="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}" value="1" id="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}"> {{{ $entry->exchangeTypes[$i]->name }}}
-                                  </div> <!-- col-sm-3 -->
-                                @endfor
-                              @endif
-								</ul> <!-- exchange_types -->
-							</div> <!-- form-group -->
+                                          <ul class="exchange_types">
+                                             @if (count($entry->exchangeTypes) > 0)
+                                               @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
+                                               <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                                                  <input type="checkbox" name="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}" value="1" id="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}"> {{{ $entry->exchangeTypes[$i]->name }}}
+                                              </div> <!-- col-sm-3 -->
+                                            @endfor
+                                          @endif
+								        </ul> <!-- exchange_types -->
+							        </div> <!-- form-group -->
 
 							{{ $errors->first('message', '<div class="alert-no-fade alert-danger col-sm-12"> :message</div>') }}
 						</div> <!-- col-xs-12 -->
@@ -180,7 +181,7 @@
 											@if ($entry->expired)
 												<p>Sorry, this tile has expired!</p>
 											@elseif ($entry->completed_at!='')
-												<p>This entry has been completed and is no longer available for offers. Still interested? <a href="{{ route('create/tile') }}">List it as a want or a have</a>!</p>
+												<p>This entry has been completed and is no longer available for offers. Still interested? <a href="{{ route('entry.create.form') }}">List it as a want or a have</a>!</p>
 											@endif
 										@endif <!-- expired -->
 									@else
