@@ -12,9 +12,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Auth;
+use Theme;
+use Validator;
+use Input;
+use Redirect;
+use Helper;
+use Log;
+use Gate;
 use App\Message;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Entry;
 
 class MessagesController extends Controller
 {
@@ -29,7 +37,8 @@ class MessagesController extends Controller
     public function getIndex(Request $request)
     {
         $messages = Auth::user()->messagesTo();
-        return view('messages.view')->with('messages', $messages);
+        return view('account/messages-view')->with('messages', $messages);
     }
+
 
 }
