@@ -47,7 +47,7 @@
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
-							<a href="/user/messages" class="btn btn-primary btn-xs pull-right">VIEW MESSAGES</a>
+							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">VIEW MESSAGES</a>
 							<!-- <span class="pull-left"><strong>TOTAL:</strong> $54.39</span> -->
 						</div>
 						<!-- /quick cart footer -->
