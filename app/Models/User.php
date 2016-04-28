@@ -22,6 +22,7 @@ use Cartalyst\Stripe\Billing\Laravel\Billable;
 use Cartalyst\Stripe\Billing\Laravel\BillableContract;
 use Watson\Validating\ValidatingTrait;
 use App\Social;
+use App\Message;
 use DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
@@ -339,6 +340,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function messagesTo()
     {
-		return $this->hasMany('Messages','sent_to');
+		return $this->hasMany('\App\Message','sent_to');
     }
 }
