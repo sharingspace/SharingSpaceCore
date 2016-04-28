@@ -142,6 +142,27 @@ class UserController extends Controller
     }
 
     /**
+    * Validates and stores the users avatar.
+    *
+    * @author [D. Linanrd] [<david@linnard.com>]
+    * @see    UsersController::getSettings()
+    * @since  [v1.0]
+    * @return Redirect
+    */
+    public function postUpdateAvatar()
+    {
+        return "postUpdateAvatar() needs to be implemented";
+
+        if ($user = User::find(Auth::user()->id)) {
+            //return redirect()->route('user.settings.view')->with('success', 'Saved!');
+        }
+
+        // That user wasn't valid
+        return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
+
+    }   
+
+    /**
     * Validates and stores the users updated password.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]

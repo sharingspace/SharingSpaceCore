@@ -214,6 +214,14 @@ Route::group(
         );
 
         Route::post(
+            'account/avatar',
+            array(
+            'middleware' => 'auth',
+            'as' => 'user.avatar.save',
+            'uses' => 'UserController@postUpdateAvatar')
+        );
+
+        Route::post(
             'account/notification',
             array(
             'middleware' => 'auth',

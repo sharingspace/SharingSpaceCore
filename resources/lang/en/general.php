@@ -53,6 +53,7 @@ return [
           'file_placeholder' => 'no file selected (maxiumum size is 4MB)',
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
+          'remove' => 'Remove',
           
           'messages' => [
             'invalid' => 'That entry is not valid.',
@@ -78,6 +79,11 @@ return [
       'password'  => 'Password',
       'confirm_password'  => 'Confirm Password',
       'change_settings' => 'Change your settings',
+      'save_password' => 'Save Password Changes',
+      'save_personal_info' => 'Save Personal Info Changes',
+      'save_privacy' => 'Save Privacy Changes',
+      'save_socials' => 'Save Social Link Changes',
+      'save_avatar' => 'Save Avatar Changes',
     ],
 
     'community'  => [
