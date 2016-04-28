@@ -54,7 +54,7 @@ return [
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',
-          
+
           'messages' => [
             'invalid' => 'That entry is not valid.',
             'no_image' => 'No image was supplied',
@@ -105,12 +105,12 @@ return [
       'slack_endpoint' => 'Slack endpoint',
       'slack_bot_name' => 'Slack bot name',
       'slack_channel' => 'Slack channel name',
-      'analytics' => 'Google analytics integration', 
+      'analytics' => 'Google analytics integration',
       'ga_tracking_id' => 'Google analytics tracking id',
       'for_example' => 'For example: UA-000000-01',
-      'p1' => 'You can start a sharing hub in under 1 minute and enjoy it free for 30 days. 
-      We are currently in beta, so keep in mind features are still being added. This 
-      introductory cost is available for a limited time only. Email us at information 
+      'p1' => 'You can start a sharing hub in under 1 minute and enjoy it free for 30 days.
+      We are currently in beta, so keep in mind features are still being added. This
+      introductory cost is available for a limited time only. Email us at information
       info@anysha.re with questions about current features.',
       'p2' => 'You will not be charged until your free trial ends on',
       'p3' => 'No commitments, cancel at any time.',
@@ -176,10 +176,17 @@ return [
       'logo_tip' => 'Tip. For best results, use an image that is 250px x 40px.',
     ],
 
-   
+
     'profile'  => [
       'profile'  => 'Profile for ',
     ],
+
+    'messages'      => [
+      'inbox'       => 'Messages Inbox',
+      'from'        => 'From',
+      'created_at'  => 'Sent On',
+    ],
+
 
 
 ];
