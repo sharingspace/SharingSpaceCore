@@ -103,7 +103,7 @@
 						 <li class="active"><a href="#make_offer" role="tab" data-toggle="tab">
 
 							@if (Auth::check())
-								@if (Auth::user()->id == $entry->user_id)
+								@if (Auth::user()->id == $entry->created_by)
 									View Offers
 								@else
 									Make Offer
@@ -128,7 +128,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-12 margin-top-6">
 
 									@if (Auth::check())
-										@if (Auth::user()->id != $entry->user_id)
+										@if (Auth::user()->id != $entry->created_by)
 											@if ((!$entry->expired) && ($entry->completed_at==''))
 												<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
 						<form action="{{ route('messages.create.save') }}" method="post">
@@ -138,7 +138,7 @@
                           <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
                             <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'>{{{ Input::old('message') }}}</textarea>
                           </div>  <!-- col-xs-12 -->
-                          <p class='margin-bottom-6 pull-left'>Please select your exchanges:</p>
+                          <p class='margin-bottom-6 pull-left'>I would like to:</p>
 
 							<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
                             <div class="form-group {{ $errors->first('message', 'has-error') }}">
@@ -147,21 +147,15 @@
                                  @if (count($entry->exchangeTypes) > 0)
                                    @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-                                    @if ($entry->exchangeTypes[$i]->name =="Buy")
-                                      <input type="checkbox" name="sell" value="1" id="buy"> Sell
-                                    @elseif ($entry->exchangeTypes[$i]->name=="Sell")
-                                      <input type="checkbox" name="buy" value="1" id="sell"> Buy
-                                    @else
                                       <input type="checkbox" name="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}" value="1" id="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}"> {{{ $entry->exchangeTypes[$i]->name }}}
-                                    @endif
                                   </div> <!-- col-sm-3 -->
                                 @endfor
                               @endif
-														</ul> <!-- exchange_types -->
-													</div> <!-- form-group -->
+								</ul> <!-- exchange_types -->
+							</div> <!-- form-group -->
 
-													{{ $errors->first('message', '<div class="alert-no-fade alert-danger col-sm-12"> :message</div>') }}
-												</div> <!-- col-xs-12 -->
+							{{ $errors->first('message', '<div class="alert-no-fade alert-danger col-sm-12"> :message</div>') }}
+						</div> <!-- col-xs-12 -->
                         <div class="col-md-9 col-sm-12 col-xs-12 form-group" id="amountbox" style="display:none;">
                           <div class="col-md-3">
                             <p class="help-block">Offer an amount</p>
