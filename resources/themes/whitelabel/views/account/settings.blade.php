@@ -87,7 +87,7 @@
             </div>
 
 						<div class="col-md-12 form-group">
-							<button class="btn btn-primary">Save Personal Info Changes</button>
+							<button class="btn btn-primary pull-right">{{trans('general.user.save_personal_info')}}</button>
 						</div>
 
           </form>
@@ -112,7 +112,6 @@
                       {!! $errors->first('fb_url', '<span class="help-block">:message</span>') !!}
                 </div>
               </div>  <!-- col-md-7 -->
-
 
               <div class="col-md-7">
                 <div class="form-group {{ $errors->first('twitter', 'has-error') }}">
@@ -168,7 +167,7 @@
             </div> <!-- col-md-12 -->
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-primary">Save Social Link Changes</button>
+							<button class="btn btn-primary pull-right">{{trans('general.user.save_socials')}}</button>
 						</div>
         </form>
 
@@ -176,37 +175,43 @@
 
 				<!-- AVATAR TAB -->
 				<div class="tab-pane fade" id="avatar">
-					<div class="form-group">
-
+          <form role="form" method="post" action="{{ route('user.avatar.save') }}">
+            {{ csrf_field() }}
 						<div class="row">
-							<div class="col-md-3 col-sm-4">
-								<div class="thumbnail">
-									<img class="img-responsive" src="{{ Auth::user()->gravatar() }}?s=300" alt="" />
-								</div>
-							</div>
+              <!-- file upload -->
+              <div class="col-md-8 margin-bottom-10">
+                <div class="fancy-file-upload fancy-file-info">
+                  <i class="fa fa-picture-o"></i>
+                  <input  id="choose-file" type="file" class="form-control"  accept="image/jpg,image/png,image/jpeg,image/gif"  name="file" onchange="jQuery(this).next('input').val(this.value);" />
+                  <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
+                  <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                </div>  <!-- fancy -->
+                <p class='too_large smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
+              </div> <!-- col 8 -->
 
-							<div class="col-md-9 col-sm-8">
-								<div class="sky-form nomargin">
-									<label class="label">Select File</label>
-									<label for="file" class="input input-file">
-										<div class="button">
-											<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">Browse
-										</div><input id="shadow_input" type="text" placeholder="no file selected" readonly>
-									</label>
-								</div>
+              <div class="col-md-1" style="position:relative;height:50px;">
+                <div id="image_box" class="pull-left" style="background-size: contain;
+    position: absolute;background-position: center;background-repeat: no-repeat;height: 100%;width: 100%;background-image:url('{{ Auth::user()->gravatar() }}')">
+                </div>
+              </div>
 
-								<a href="#" class="btn btn-danger btn-xs noradius"><i class="fa fa-times"></i> Remove Avatar</a>
+              <div class="col-md-3">
+                <button id="remove_img_button" class="pull-right smooth_font btn btn-warning btn-sm margin-left-10 margin-top-6">{{trans('general.entries.remove')}}</button>
+                <label id="delete_img_checkbox_label" class="pull-right margin-top-6" for="delete_img">
+                  {{ Form::checkbox('delete_img', 1, 0, ['id'=>'delete_img'])}}
+                  <i></i> Delete image
+                </label>
+              </div>
 
-								<div class="clearfix margin-top-20">
-									<p>We recommend using an image that is a 250 pixels by 250 pixels.</p>
-								</div>
-							</div>
-						</div>
-					</div>
+  						<div class="col-md-12 col-sm-12 margin-top-20">
+  							<p>We recommend using an image that is a 250 pixels by 250 pixels.</p>
+  						</div>
+  					</div> <!-- row -->
 
-          <div class="col-md-12 form-group">
-						<button class="btn btn-primary">Save Avatar Changes</button>
-					</div>
+            <div class="col-md-12 form-group">
+  						<button class="btn btn-primary pull-right">{{trans('general.user.save_avatar')}}</button>
+  					</div>
+          </form>
 				</div> <!-- /AVATAR TAB -->
 
 				<!-- PASSWORD TAB -->
@@ -228,7 +233,7 @@
 						</div>
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-primary">Save Password Changes</button>
+							<button class="btn btn-primary pull-right">{{trans('general.user.save_password')}}</button>
 						</div>
           </form>
 
@@ -265,7 +270,7 @@
             </div>
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-primary">Save Privacy Changes</button>
+  						<button class="btn btn-primary pull-right">{{trans('general.user.save_privacy')}}</button>
   					</div>
           </form>
 
