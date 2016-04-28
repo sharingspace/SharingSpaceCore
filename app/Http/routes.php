@@ -122,132 +122,119 @@ Route::group(
         | User/Account routes
         |--------------------------------------------------------------------------
         */
-        Route::get(
-            'account/history',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.history',
-            'uses' => 'UserController@getHistory')
-        );
+        Route::group(
+            array('prefix' => 'account', 'middleware' => 'auth'),
+            function () {
 
-        Route::get(
-            'account/memberships',
-            array(
-            'middleware' => 'auth',
-            'as' => 'account.memberships.view',
-            'uses' => 'UserController@getCommunityMemberships')
-        );
+                Route::get(
+                    'history',
+                    array(
+                    'as' => 'user.history',
+                    'uses' => 'UserController@getHistory')
+                );
 
-        Route::get(
-            'account/leave/{communityId?}',
-            array(
-            'middleware' => 'community-auth',
-            'as' => 'leave-community',
-            'uses' => 'UserController@getLeaveCommunity')
-        );
+                Route::get(
+                    'memberships',
+                    array(
+                    'as' => 'account.memberships.view',
+                    'uses' => 'UserController@getCommunityMemberships')
+                );
 
+                Route::get(
+                    'leave/{communityId?}',
+                    array(
+                    'middleware' => 'community-auth',
+                    'as' => 'leave-community',
+                    'uses' => 'UserController@getLeaveCommunity')
+                );
 
-        Route::get(
-            'account/settings',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.settings.view',
-            'uses' => 'UserController@getSettings')
-        );
+                Route::get(
+                    'settings',
+                    array(
+                    'as' => 'user.settings.view',
+                    'uses' => 'UserController@getSettings')
+                );
 
-        Route::post(
-            'account/settings',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.settings.save',
-            'uses' => 'UserController@postSettings')
-        );
+                Route::post(
+                    'settings',
+                    array(
+                    'as' => 'user.settings.save',
+                    'uses' => 'UserController@postSettings')
+                );
 
-        Route::get(
-            'account/messages',
-            array(
-            'middleware' => 'auth',
-            'as' => 'messages.view',
-            'uses' => 'MessagesController@getIndex')
-        );
+                Route::get(
+                    'messages',
+                    array(
+                    'as' => 'messages.view',
+                    'uses' => 'MessagesController@getIndex')
+                );
 
-        Route::get(
-            'account/messages/ajax',
-            array(
-            'middleware' => 'auth',
-            'as' => 'messages.view.ajax',
-            'uses' => 'MessagesController@getMessagesDataView')
-        );
+                Route::get(
+                    'messages/ajax',
+                    array(
+                    'as' => 'messages.view.ajax',
+                    'uses' => 'MessagesController@getMessagesDataView')
+                );
 
-
-        Route::get(
-            'account/messages/new',
-            array(
-            'middleware' => 'auth',
-            'as' => 'messages.create.form',
-            'uses' => 'MessagesController@getCreate')
-        );
-
-        Route::post(
-            'account/messages',
-            array(
-            'middleware' => 'auth',
-            'as' => 'messages.create.save',
-            'uses' => 'MessagesController@postCreate')
-        );
+                Route::post(
+                    'messages/new/{entryId?}',
+                    array(
+                    'as' => 'messages.create.save',
+                    'uses' => 'MessagesController@getCreate')
+                );
 
 
+                Route::post(
+                    'password',
+                    array(
+                    'as' => 'user.password.save',
+                    'uses' => 'UserController@postUpdatePassword')
+                );
 
-        Route::post(
-            'account/password',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.password.save',
-            'uses' => 'UserController@postUpdatePassword')
-        );
+                Route::post(
+                    'privacy',
+                    array(
+                    'as' => 'user.privacy.save',
+                    'uses' => 'UserController@postUpdatePrivacy')
+                );
 
-        Route::post(
-            'account/privacy',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.privacy.save',
-            'uses' => 'UserController@postUpdatePrivacy')
-        );
+                Route::post(
+                    'social',
+                    array(
+                    'as' => 'user.social.save',
+                    'uses' => 'UserController@postUpdateSocial')
+                );
 
-        Route::post(
-            'account/social',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.social.save',
-            'uses' => 'UserController@postUpdateSocial')
-        );
+                Route::post(
+                    'avatar',
+                    array(
+                    'as' => 'user.avatar.save',
+                    'uses' => 'UserController@postUpdateAvatar')
+                );
 
-        Route::post(
-            'account/avatar',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.avatar.save',
-            'uses' => 'UserController@postUpdateAvatar')
-        );
+                Route::post(
+                    'notification',
+                    array(
+                    'as' => 'user.notifications.save',
+                    'uses' => 'UserController@postUpdateNotifications')
+                );
 
-        Route::post(
-            'account/notification',
-            array(
-            'middleware' => 'auth',
-            'as' => 'user.notifications.save',
-            'uses' => 'UserController@postUpdateNotifications')
-        );
 
-        Route::get(
-            'users/{userID}',
-            array(
-            'as' => 'user.profile',
-            'uses' => 'UserController@getProfile')
-        );
+
+        });
+
 
         Route::group(
             array('prefix' => 'users'),
             function () {
+
+                Route::get(
+                    '{userID}',
+                    array(
+                    'as' => 'user.profile',
+                    'uses' => 'UserController@getProfile')
+                );
+
                 Route::post(
                     '{entryId}/ajaxdelete',
                     array(
