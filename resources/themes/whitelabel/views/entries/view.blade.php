@@ -103,7 +103,7 @@
 						 <li class="active"><a href="#make_offer" role="tab" data-toggle="tab">
 
 							@if (Auth::check())
-								@if (Auth::user()->user_id==$entry->user_id)
+								@if (Auth::user()->id == $entry->user_id)
 									View Offers
 								@else
 									Make Offer
@@ -114,12 +114,12 @@
               </a></li>
 
               @if ($images && count($images) > 1)
-									<li><a href="#view_images_tab" role="tab" data-toggle="tab">More Images</a></li>
+				<li><a href="#view_images_tab" role="tab" data-toggle="tab">More Images</a></li>
               @endif
 
-							<li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li>
-							<li><a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">Comments</a></li>
-						</ul> <!-- nav-tabs -->
+    				<li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li>
+    				<li><a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">Comments</a></li>
+    			</ul> <!-- nav-tabs -->
 
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -128,10 +128,11 @@
 								<div class="col-xs-12 col-sm-12 col-md-12 margin-top-6">
 
 									@if (Auth::check())
-										@if (Auth::user()->user_id != $entry->user_id)
+										@if (Auth::user()->id != $entry->user_id)
 											@if ((!$entry->expired) && ($entry->completed_at==''))
 												<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
-												<form action="/tiles/{{{ $entry->id }}}/view" method="post">
+						<form action="{{ route('messages.create.save') }}" method="post">
+                            {!! csrf_field() !!}
                           <!--MAKE AN OFFER-->
 
                           <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
@@ -139,7 +140,7 @@
                           </div>  <!-- col-xs-12 -->
                           <p class='margin-bottom-6 pull-left'>Please select your exchanges:</p>
 
-													<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
+							<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
                             <div class="form-group {{ $errors->first('message', 'has-error') }}">
 
                               <ul class="exchange_types">
