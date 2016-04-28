@@ -10,7 +10,6 @@
     <table class="table table-condensed"
     name="messages"
     id="table"
-    data-url="{{ route('json.browse') }}"
     data-cookie="true"
     data-cookie-id-table="messages">
       <thead>
