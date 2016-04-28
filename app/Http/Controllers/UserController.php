@@ -17,6 +17,7 @@ use Auth;
 use Input;
 use Redirect;
 use Helper;
+use App\Message;
 
 class UserController extends Controller
 {
@@ -160,7 +161,7 @@ class UserController extends Controller
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
 
-    }   
+    }
 
     /**
     * Validates and stores the users updated password.
