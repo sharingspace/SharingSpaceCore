@@ -36,8 +36,35 @@ class MessagesController extends Controller
     */
     public function getIndex(Request $request)
     {
-        $messages = Auth::user()->messagesTo();
-        return view('account/messages-view')->with('messages', $messages);
+        $messages = Auth::user()->messagesTo()->with('entry','sender')->get();
+        return view('account/inbox')->with('messages', $messages);
+    }
+
+
+
+
+    public function postCreate(Request $request, $entryId = null) {
+
+
+        //return response()->json(['success'=>true, 'message'=>'poopyface']);
+        $message = new Message;
+        if ($entryId) {
+            $entry = Entry::find($entryId)->first();
+        }
+
+        $message->message = e(Input::get('message'));
+        $message->sent_by = Auth::user()->id;
+        $message->sent_to = $entry->created_by;
+        if ($entry) {
+            $message->entry_id = $entry->id;
+        }
+
+
+        if ($message->save()) {
+            return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
+        } else {
+            return response()->json(['success'=>false, 'error'=>$message->getErrors()]);
+        }
     }
 
 
