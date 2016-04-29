@@ -176,13 +176,6 @@ Route::group(
                     'uses' => 'MessagesController@getMessagesDataView')
                 );
 
-                Route::post(
-                    'messages/new/{entryId?}',
-                    array(
-                    'as' => 'messages.create.save',
-                    'uses' => 'MessagesController@getCreate')
-                );
-
 
                 Route::post(
                     'password',
@@ -292,6 +285,13 @@ Route::group(
                     'middleware' => ['auth','community-auth'],
                     'as' => 'entry.delete.ajax.save',
                     'uses' => 'EntriesController@postAjaxDelete')
+                );
+
+                Route::post(
+                    'messages/new/{entryId?}',
+                    array(
+                    'as' => 'messages.create.save',
+                    'uses' => 'MessagesController@postCreate')
                 );
 
                 Route::get(
