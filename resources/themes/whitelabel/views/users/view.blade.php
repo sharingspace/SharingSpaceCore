@@ -28,7 +28,7 @@
             <div class="col-lg-7 col-md-7">
               <div class="text-muted">
                 <ul class="list-unstyled nomargin">
-                  @if($user->location)                  
+                  @if($user->location)
                     <li class="margin-bottom-6"><i class="fa fa-location-arrow width-20"></i> {{ $user->location }}</li>
                   @endif
                   @if ($user->website)
@@ -58,7 +58,8 @@
             </div> <!-- col 12 -->
             <div class="col-md-12"
               @if (1 || Auth::user() && (Auth::user()->id != $user->id))
-                <form method="post" action="#" class="box-lightt margin-top-20"><!-- .box-light OR .box-dark -->
+                <form id="offerForm" class="box-lightt margin-top-20"><!-- .box-light OR .box-dark -->
+                    {!! csrf_field() !!}
                   <div>
                     <h4 class="uppercase">LEAVE A MESSAGE FOR <strong>{{ strtoupper($user->getDisplayName()) }} </strong></h4>
 
@@ -67,11 +68,11 @@
                       <span>0/100</span> Words
                     </div>
 
-                    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>I'm intersted</button>
+                    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>I'm interested</button>
                   </div>
                 </form>
               @endif
-            </div> <!-- col 12 -->        
+            </div> <!-- col 12 -->
           </div> <!-- row -->
         </div> <!-- col 6 -->
         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -138,13 +139,13 @@
         refresh: 'fa-refresh'
     },
    });
-  
+
 $( document ).ready(function() {
-  // we off screen the table headers as they are obvious. 
+  // we off screen the table headers as they are obvious.
   $('table th').addClass('sr-only');
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];
-    
+
     // add a clas to the row so we can remove it on success
     $(this).closest('tr').addClass("remove_"+entryID);
 
@@ -163,4 +164,33 @@ $( document ).ready(function() {
 })
 
 </script>
+
+<script>
+$(document).ready(function () {
+
+
+    $("#offerForm").submit(function(){
+
+        $.ajax({
+            type: "POST",
+            url: "{{ route('messages.create.save') }}",
+            data: $('#offerForm').serialize(),
+            success: function(data){
+                if (data.success) {
+                    alert("success");
+                } else {
+                    alert("something went wrong");
+                }
+
+            },
+            error: function(data){
+                alert("failure");
+            }
+        });
+        return false;
+    });
+});
+</script>
+
+
 @stop
