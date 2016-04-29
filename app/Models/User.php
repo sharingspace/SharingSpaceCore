@@ -351,19 +351,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * @since  [v1.0]
     * @return collection
     */
-    public function getUnreadMessageCount() {
+    public function getUnreadMessages() {
     	static $cache;
 
     	if ($cache) {
     		return $cache;
     	} else {
-			$count = Message::join('users', 'users.id', '=', 'messages.sent_by')
+			$unread_messages = Message::join('users', 'users.id', '=', 'messages.sent_by')
 			->where('sent_to', '=', $this->id)
 			->whereNull('users.deleted_at')
-			->whereNull('read_on')
-			->count();
-			$cache = $count;
-			return $count;
+			->whereNull('read_on')->get();
+			$cache = $unread_messages;
+			return $unread_messages;
     	}
 
     }

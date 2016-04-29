@@ -21,29 +21,25 @@
         <!-- NOTIFICATION BOX -->
 				<li class="notifications-popdown">
 					<a href="#">
-						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessageCount() }}</span>
+						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessages()->count() }}</span>
 						<i class="fa fa-envelope-o"></i>
 					</a>
 					<div class="notifications-popdown-box" style="display: none;">
 						<div class="notifications-popdown-wrapper">
 
-              <div class="clearfix margin-bottom-20"><!-- notification item -->
-  							<span class="label label-success label-square pull-left">
-  								<i class="fa fa-comment"></i>
-  							</span>
-  							<span class="size-14 text-muted">
-                  <b>New Comment</b>: Lorem ipsum Dolor
-                </span>
-              </div><!-- /notification item -->
 
-              <div class="clearfix margin-bottom-20"><!-- notification item -->
-								<span class="label label-danger label-square pull-left">
-									<i class="fa fa-heart-o"></i>
-								</span>
-								<span class="size-14 text-muted"><b>Fav'd</b>: Lorem ipsum Dolor</span>
-							</div><!-- /notification item -->
 
-						</div>
+                    @foreach (Auth::user()->getUnreadMessages() as $unread_messages)
+                         <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                 <span class="label label-success label-square pull-left">
+       								<i class="fa fa-comment"></i>
+       							</span>
+       							<span class="size-14 text-muted">
+                                   <b>New Comment</b>: {{ $unread_messages->message }}
+                                 </span>
+                           </div><!-- /notification item -->
+
+                    @endforeach
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
