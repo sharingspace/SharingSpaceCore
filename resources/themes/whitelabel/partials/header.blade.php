@@ -29,17 +29,18 @@
 
 					<div class="notifications-popdown-box" style="display: none;">
 						<div class="notifications-popdown-wrapper">
-
+                            <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
+                                {{ Auth::user()->getUnreadMessages()->count() }} new messages
+                            </div>
                             @foreach (Auth::user()->getUnreadMessages() as $unread_messages)
                                  <div class="clearfix margin-bottom-20"><!-- notification item -->
-                                         <span class="label label-success label-square pull-left">
-               								<i class="fa fa-comment"></i>
-               							</span>
-               							<span class="size-14 text-muted">
-                                           <b>New Message</b>: {{ $unread_messages->message }}
-                                         </span>
+                                    <span class="label label-success label-square pull-left">
+                                    	<i class="fa fa-comment"></i>
+                                    </span>
+                                    <span class="size-14 text-muted">
+                                        <b>New Message</b>: {{ $unread_messages->message }}
+                                    </span>
                                    </div><!-- /notification item -->
-
                             @endforeach
 
 						<!-- quick cart footer -->
