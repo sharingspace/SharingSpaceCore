@@ -118,7 +118,7 @@
 				<li><a href="#view_images_tab" role="tab" data-toggle="tab">More Images</a></li>
               @endif
 
-				<li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li>
+				<!-- <li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li> -->
 				<li><a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">Comments</a></li>
     		</ul> <!-- nav-tabs -->
 
@@ -131,13 +131,14 @@
 						@if (Auth::check())
 							@if (Auth::user()->id != $entry->created_by)
 								@if ((!$entry->expired) && ($entry->completed_at==''))
+                                    <form id="offerForm">
 									<p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
-						            <form action="{{ route('messages.create.save') }}" method="post">
-                                    {!! csrf_field() !!}
+
                                     <!--MAKE AN OFFER-->
 
+                                    {!! csrf_field() !!}
                                       <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
-                                        <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'>{{{ Input::old('message') }}}</textarea>
+                                        <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'></textarea>
                                       </div>  <!-- col-xs-12 -->
                                       <p class='margin-bottom-6 pull-left'>I would like to:</p>
 
@@ -148,34 +149,31 @@
                                              @if (count($entry->exchangeTypes) > 0)
                                                @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                                                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-                                                  <input type="checkbox" name="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}" value="1" id="{{{ strtolower($entry->exchangeTypes[$i]->name) }}}"> {{{ $entry->exchangeTypes[$i]->name }}}
+                                                  <input type="checkbox" name="{{ strtolower($entry->exchangeTypes[$i]->name) }}" value="1" id="{{ strtolower($entry->exchangeTypes[$i]->name) }}"> {{{ $entry->exchangeTypes[$i]->name }}}
                                               </div> <!-- col-sm-3 -->
                                             @endfor
                                           @endif
 								        </ul> <!-- exchange_types -->
 							        </div> <!-- form-group -->
 
-							{{ $errors->first('message', '<div class="alert-no-fade alert-danger col-sm-12"> :message</div>') }}
-						</div> <!-- col-xs-12 -->
-                        <div class="col-md-9 col-sm-12 col-xs-12 form-group" id="amountbox" style="display:none;">
-                          <div class="col-md-3">
-                            <p class="help-block">Offer an amount</p>
-                          </div>
-                          <div class="input-group col-md-3">
-                            <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-usd"></span>
-                            </span>
-                            <input type="text" id="amount" name="amount" class="form-control" value="{{{ Input::old('amount') }}}">
-                          </div>
-                          <div class="col-md-12 form-group">
-                            {{ $errors->first('post_type', '<div class="alert-no-fade alert-danger col-sm-12"> :message</div>') }}
-                          </div>
-                        </div>  <!-- col-md-9 -->
+            						</div> <!-- col-xs-12 -->
+                                    <div class="col-md-9 col-sm-12 col-xs-12 form-group" id="amountbox" style="display:none;">
+                                      <div class="col-md-3">
+                                        <p class="help-block">Offer an amount</p>
+                                      </div>
+                                      <div class="input-group col-md-3">
+                                        <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-usd"></span>
+                                        </span>
+                                        <input type="text" id="amount" name="amount" class="form-control" value="{{{ Input::old('amount') }}}">
+                                      </div>
+                                    </div>  <!-- col-md-9 -->
 
-                        <div class="col-xs-12 col-sm-12  col-md-3  form-group pull-right">
-                          <button type="submit" class="btn btn-warning pull-right">Make Offer</button>
-                        </div>  <!-- col-md-3 -->
-                      </form>
+                                    <div class="col-xs-12 col-sm-12  col-md-3  form-group pull-right">
+                                      <button type="submit" class="btn btn-warning pull-right" id="messageSubmit">Make Offer</button>
+                            </div>  <!-- col-md-3 -->
+                        </form>
+
 
 										@else  <!-- expired -->
 											@if ($entry->expired)
@@ -185,16 +183,8 @@
 											@endif
 										@endif <!-- expired -->
 									@else
-										<p style="font-size: x-small;margin-bottom:10px;">It would be nice to see a list such as the faked up list below</p>
-                    <div class="clearfix"><!-- notification item -->
-  										<i class="fa fa-envelope"></i>
-  										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#offer1">Lorem ipsum Dolor</button>
-										</div><!-- /notification item -->
+										<p>Offers on this entry go here.</p>
 
-              			<div class="clearfix"><!-- notification item -->
-  										<i class="fa fa-envelope"></i>
-                      <button type="button" class="btn btn-link" data-toggle="modal" data-target="#offer1">Biggus Lorem ipsum Dolor</button>
-                    </div><!-- /notification item -->
 									@endif <!-- user -->
 
 								@else
@@ -206,11 +196,11 @@
 
 							<div class="tab-pane" id="view_images_tab">
 								@if($images)
-              	  @foreach ($images as $image)
-                		<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:20px;object-fit:contain;">
-            					<img src="/assets/uploads/entries/{{ $entry->created_by }}/{{ $image->filename }}" height="250" width="250" border="1">
-                  	</div>
-          				@endforeach
+                          	  @foreach ($images as $image)
+                            		<div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:20px;object-fit:contain;">
+                        					<img src="/assets/uploads/entries/{{ $entry->created_by }}/{{ $image->filename }}" height="250" width="250" border="1">
+                              	</div>
+                      			@endforeach
           			@endif
 							</div>
 
@@ -221,40 +211,13 @@
 
 								<div id="map" style="height: 250px;"></div>
 
-									<script>
-									$( document ).ready(function() {
-										map = new L.Map('map');
-
-										// create the tile layer with correct attribution
-										var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-										var osmAttrib='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-										var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 14, attribution: osmAttrib});
-
-										// start the map in South-East England
-										map.setView(new L.LatLng({{{ $entry->latitude }}}, {{{ $entry->longitude }}}),12);
-										map.addLayer(osm);
-										var marker = L.marker([{{{ $entry->latitude }}}, {{{ $entry->longitude }}}]).addTo(map);
-									});
-									</script>
-
-									<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
-									<script src="{{ Config::get('app.cdn.default') }}/js/leaflet.markercluster-src.js"></script>
-
-
-									<script>
-									$(window).click(function(){
-									  map.invalidateSize();
-									});
-									</script>
-
-
 								@else
 									<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px;">
 										<p>The owner of this tile has not posted any location information yet.</p>
 									</div>
 								@endif <!-- latitude, longitude -->
 
-             </div> <!-- tab-pane -->
+                            </div> <!-- tab-pane -->
 
 
 
@@ -300,19 +263,28 @@
 
 <script>
 $(document).ready(function () {
-    $("input#submit").click(function(){
-     /*   $.ajax({
+
+    //$("#messageSubmit").attr('disabled','disabled'); // disable button until message has been types
+
+    $("#offerForm").submit(function(){
+
+        $.ajax({
             type: "POST",
-            url: "process.php", //process to mail
-            data: $('form.contact').serialize(),
-            success: function(msg){
-                $("#thanks").html(msg) //hide button and show thank you
-                $("#form-content").modal('hide'); //hide popup
+            url: "{{ route('messages.create.save', $entry->id) }}",
+            data: $('#offerForm').serialize(),
+            success: function(data){
+                if (data.success) {
+                    alert("success");
+                } else {
+                    alert("something went wrong");
+                }
+
             },
-            error: function(){
+            error: function(data){
                 alert("failure");
             }
-        }); */
+        });
+        return false;
     });
 });
 </script>
