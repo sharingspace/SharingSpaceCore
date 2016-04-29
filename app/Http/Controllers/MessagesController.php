@@ -54,9 +54,12 @@ class MessagesController extends Controller
 
         $message->message = e(Input::get('message'));
         $message->sent_by = Auth::user()->id;
-        $message->sent_to = $entry->created_by;
+
         if ($entry) {
+            $message->sent_to = $entry->created_by;
             $message->entry_id = $entry->id;
+        } else {
+            $message->sent_to = $user->id;
         }
 
 

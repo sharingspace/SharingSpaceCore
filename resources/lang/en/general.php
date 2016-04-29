@@ -187,6 +187,7 @@ return [
       'inbox'       => 'Messages Inbox',
       'from'        => 'From',
       'created_at'  => 'Sent On',
+      'message'       => 'Message',
     ],
 
 

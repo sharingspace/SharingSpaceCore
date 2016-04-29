@@ -17,6 +17,7 @@
             <th data-sortable="true" data-field="post_type"><span class="sr-only">{{ trans('general.entries.post_type') }}</span></th>
             <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
+            <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
             <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
           </tr>
@@ -30,8 +31,8 @@
                     <a href="{{ route('entry.view', $message->entry->id) }}">{{ $message->entry->title }}</a>
                 @endif
             </td>
-
             <td>{{ $message->sender->getDisplayName() }}</td>
+            <td>{{ $message->message }}</td>
             <td>{{ $message->created_at->format('M j, Y') }}</td>
           </tr>
           @endforeach

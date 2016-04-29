@@ -56,14 +56,14 @@
             <div class="col-md-12"
               <p>{{ $user->bio }}</p>
             </div> <!-- col 12 -->
-            <div class="col-md-12"
-              @if (1 || Auth::user() && (Auth::user()->id != $user->id))
-                <form id="offerForm" class="box-lightt margin-top-20"><!-- .box-light OR .box-dark -->
+            <div class="col-md-12">
+              @if (Auth::check())
+                <form id="offerForm" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
                     {!! csrf_field() !!}
                   <div>
                     <h4 class="uppercase">LEAVE A MESSAGE FOR <strong>{{ strtoupper($user->getDisplayName()) }} </strong></h4>
 
-                    <textarea required class="form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
+                    <textarea name="message" required class="form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
                     <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
                       <span>0/100</span> Words
                     </div>
@@ -170,7 +170,7 @@ $(document).ready(function () {
 
 
     $("#offerForm").submit(function(){
-
+        //console.warn('fired');
         $.ajax({
             type: "POST",
             url: "{{ route('messages.create.save') }}",
