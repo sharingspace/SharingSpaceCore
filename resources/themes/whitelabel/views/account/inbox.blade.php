@@ -21,6 +21,21 @@
             <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
           </tr>
       </thead>
+      <tbody>
+          @foreach ($messages as $message)
+          <tr>
+            <td>{{ strtoupper($message->entry->post_type) }}</td>
+            <td>
+                @if ($message->entry)
+                    <a href="{{ route('entry.view', $message->entry->id) }}">{{ $message->entry->title }}</a>
+                @endif
+            </td>
+
+            <td>{{ $message->sender->getDisplayName() }}</td>
+            <td>{{ $message->created_at->format('M j, Y') }}</td>
+          </tr>
+          @endforeach
+      </tbody>
     </table>
     <!-- End entries table -->
   </div>
