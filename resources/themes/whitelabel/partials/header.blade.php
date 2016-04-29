@@ -21,7 +21,7 @@
         <!-- NOTIFICATION BOX -->
 				<li class="notifications-popdown">
 					<a href="#">
-						<span class="badge badge-red btn-xs badge-corner-sm">2</span>
+						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessageCount() }}</span>
 						<i class="fa fa-envelope-o"></i>
 					</a>
 					<div class="notifications-popdown-box" style="display: none;">

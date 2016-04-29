@@ -342,4 +342,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
 		return $this->hasMany('\App\Message','sent_to');
     }
+
+
+    /**
+    * Get the count of unread messages
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function getUnreadMessageCount() {
+    	static $cache;
+
+    	if ($cache) {
+    		return $cache;
+    	} else {
+			$count = Message::join('users', 'users.id', '=', 'messages.sent_by')
+			->where('sent_to', '=', $this->id)
+			->whereNull('users.deleted_at')
+			->whereNull('read_on')
+			->count();
+			$cache = $count;
+			return $count;
+    	}
+
+    }
 }
