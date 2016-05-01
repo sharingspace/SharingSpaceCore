@@ -160,7 +160,22 @@ $( document ).ready(function() {
   });
 
   $("#display_about").click(function(e){
-    $("#about_panel").slideToggle("slow");
+    var height;
+
+    if (!$('#about_panel').is(':visible')) {
+      $("#about_panel").slideToggle('fast');
+      height = $("#about_panel p").height()+30+'px';
+    }
+    else {
+      $("#about_panel").slideToggle('fast');
+      height = '0px';
+    }
+
+    $("#about_panel").parent().css('height', height);
+    if ($('.wl_usercover').length) {
+      $(".wl_usercover").slideToggle();
+    }
+
     return false;
   });
 

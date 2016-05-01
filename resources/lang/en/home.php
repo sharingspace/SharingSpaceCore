@@ -13,6 +13,7 @@ return [
     'subhome_headline' => 'a cooperative network for the people you choose',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
+    'free_trial' => 'Try a sharing hub free for 15 days',
     'our_communities'  => 'Our Communities',
 		'learn_more_headline' => 'Learn about "Sharing Hubs"',
 		'learn_more_subheadline'=> 'Learn about "Sharing Hubs"',
