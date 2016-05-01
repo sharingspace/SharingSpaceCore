@@ -21,6 +21,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cartalyst\Stripe\Billing\Laravel\Billable;
 use Cartalyst\Stripe\Billing\Laravel\BillableContract;
 use Watson\Validating\ValidatingTrait;
+use App\UploadableFileTrait;
 use App\Social;
 use App\Message;
 use DB;
@@ -30,7 +31,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword, Billable, Authorizable;
     use SluggableTrait;
     use ValidatingTrait;
+    use UploadableFileTrait;
 
+    /*
+    * Set traits for uploadable image
+    */
+
+    public static $uploadableImgs = [
+      'avatar' =>
+        [
+          'height' => '250',
+          'width' => '250'
+        ]
+    ];
 
     /**
      * The database table used by the model.

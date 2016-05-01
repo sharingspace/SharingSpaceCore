@@ -18,6 +18,7 @@ use Input;
 use Redirect;
 use Helper;
 use App\Message;
+use Log;
 
 class UserController extends Controller
 {
@@ -152,15 +153,32 @@ class UserController extends Controller
     */
     public function postUpdateAvatar()
     {
-        return "postUpdateAvatar() needs to be implemented";
+        Log::debug('postUpdateAvatar');
 
         if ($user = User::find(Auth::user()->id)) {
-            //return redirect()->route('user.settings.view')->with('success', 'Saved!');
+            Log::debug('postUpdateAvatar user fine');
+
+            if (Input::hasFile('file')) {
+                Log::debug('postUpdateAvatar has file');
+                $user->uploadImage($user, Input::file('file'), 'avatar');
+                                Log::debug('postUpdateAvatar uploadImage');
+
+            }
+            else if(Input::get('delete_img')) {
+                            Log::debug('postUpdateAvatar delete');
+
+                //\App\Entry::deleteImage($entry->id, $user->id);
+                //\App\Entry::deleteImageFromDB($entry->id, $user->id);
+            }
+
+            if ($user = User::find(Auth::user()->id)) {
+                return redirect()->route('user.settings.view')->with('success', 'Saved!');
+            }
         }
-
-        // That user wasn't valid
-        return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
-
+        else {
+            // That user wasn't valid
+            return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
+        }
     }
 
     /**

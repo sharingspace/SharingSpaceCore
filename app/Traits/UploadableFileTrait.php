@@ -37,6 +37,8 @@ trait UploadableFileTrait
 
     public function uploadImage(\App\User $user, UploadedFile $file, $layoutType)
     {
+        Log::debug("uploadImage ".$layoutType);
+
         $path = public_path().'/assets/uploads/'.$layoutType.'/'.$this->id.'/';
         $aws_path = 'assets/uploads/'.$layoutType.'/'.$this->id;
         return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $this->id, null);
@@ -51,6 +53,7 @@ trait UploadableFileTrait
 
     public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $id = null, $upload_key = null)
     {
+        Log::debug("moveAndStoreImage ".$path);
         // Make the directory if it doesn't exist
         if (!file_exists($path)) {
             mkdir($path, 0755, true);

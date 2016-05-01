@@ -296,11 +296,73 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
+  $("#remove_img_button").hide();
+  $("#delete_img_checkbox_label").hide();
+
+  var image = "{{ Auth::user()->gravatar() }}";
+  if (image) {
+    $('#image_box').css("background-image", "url("+image+")");
+    $("#delete_img_checkbox_label").show();
+  }
+  else {
+    $('#image_box').css("background-image","none");
+  }
 
   $("#file").change(function() {
     $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
   });
-});
 
+  $('#choose-file').change( function() {
+    var maxSize = $('#MAX_FILE_SIZE').val();
+    $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+
+    if ($("#choose-file")[0].files[0].size > maxSize) {
+      $("#shadow_input").val("");
+      $('p.too_large').show().addClass("error_message").fadeOut(5000, "swing");
+    }
+    else if (!$('#delete_img').prop('checked')) {
+      var files = !!this.files ? this.files : [];
+      if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+      if (/^image/.test( files[0].type)) { // only image file
+        var reader = new FileReader(); // instance of the FileReader
+        reader.readAsDataURL(files[0]); // read the local file
+
+        reader.onloadend = function(){ // set insert image before button
+          $('#image_box').css("background-image", "url("+this.result+")");
+        }
+      }
+      $("#delete_img_checkbox_label").hide();
+
+      $('#remove_img_button').show();
+    }
+    else {
+      $('#delete_img').prop('checked') = true;
+    }
+    
+    $('#remove_img_button').addClass('notUploaded');
+  });
+
+
+  $('#remove_img_button').click(function(e)
+  {
+    e.preventDefault(); // cancel default behavior
+
+    if ($(this).hasClass('notUploaded')) {
+      $(this).removeClass('notUploaded').hide();
+      $('#image_box').css("background-image","none");
+      $('#choose-file').val('');
+      $('#shadow_input').val('');
+      if (typeof image != 'undefined') {
+        $('#image_box').css("background-image", "url('"+image+"')");
+        $("#delete_img_checkbox_label").show();
+      }
+    }
+
+    return false;
+  });
+
+});
 </script>
+
 @stop
