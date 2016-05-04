@@ -175,14 +175,14 @@
 
 				<!-- AVATAR TAB -->
 				<div class="tab-pane fade" id="avatar">
-          <form role="form" method="post" action="{{ route('user.avatar.save') }}">
+          <form role="form" method="post" action="{{ route('user.avatar.save') }}" enctype='multipart/form-data'>
             {{ csrf_field() }}
 						<div class="row">
               <!-- file upload -->
               <div class="col-md-8 margin-bottom-10">
                 <div class="fancy-file-upload fancy-file-info">
                   <i class="fa fa-picture-o"></i>
-                  <input  id="choose-file" type="file" class="form-control"  accept="image/jpg,image/png,image/jpeg,image/gif"  name="file" onchange="jQuery(this).next('input').val(this.value);" />
+                  <input id="choose-file" type="file" class="form-control"  accept="image/jpg,image/png,image/jpeg,image/gif"  name="avatar_img" onchange="jQuery(this).next('input').val(this.value);" />
                   <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
                   <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                 </div>  <!-- fancy -->

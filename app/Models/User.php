@@ -38,7 +38,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     public static $uploadableImgs = [
-      'avatar' =>
+      'users' =>
         [
           'height' => '250',
           'width' => '250'
@@ -379,4 +379,52 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     	}
 
     }
+
+    /**
+    * Save the image to the DB. This method handles cover images, logos and profile images.
+    *
+    * @todo   Remove upload key, since it's not used here.
+    * @author [D. Linnard] [<dslinnard@gmail.com>]
+    * @since  [v1.0]
+    * @return boolean
+    */
+    public static function saveImageToDB($id, $filename, $type, $upload_key = null)
+    {
+        if ($user = User::find($id)) {
+            $user->gravatar = $filename;
+
+            if (!$user->save()) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+    * Deletes a users avatar
+    *
+    * @author [D. Linnard] [<david@linnard.com>]
+    * @since  [v1.0]
+    * @param int $user_id
+    * @param int $entry_id
+    * @return no return
+    */
+    public static function deleteAvatar($user_id)
+    {
+        if ($user = User::find($user_id)) {
+            if ($user->gravatar) {
+                $filename = public_path().'/assets/uploads/users'.$user_id.'/'.$user->gravatar;
+                \File::Delete($filename);
+                if (!\File::exists($filename))
+                {
+                    $user->gravatar = null;
+                    if ($user->save()) {
+                        return true;
+                    }
+                }
+            }
+        }  
+    }
+    return false;
 }
