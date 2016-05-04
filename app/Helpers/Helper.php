@@ -40,6 +40,21 @@ class Helper
     }
 
 
+    /**
+     * Returns Markdown-formatted text
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @param text $str
+     * @return String
+     */
+    public static function parseText($str)
+    {
+        $Parsedown = new Parsedown();
+        return $Parsedown->text(e($str));
+    }
+
+
 
     /**
     * Returns the latitude and longitude of an address
