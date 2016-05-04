@@ -1,6 +1,6 @@
 <?php
 /**
- * This contains seom static helpers for
+ * This contains some static helpers for
  * the AnyShare application.
  *
  * PHP version 5.5.9
