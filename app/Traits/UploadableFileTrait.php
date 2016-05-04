@@ -37,10 +37,11 @@ trait UploadableFileTrait
 
     public function uploadImage(\App\User $user, UploadedFile $file, $layoutType)
     {
+        Log::debug("uploadImage ".$layoutType);
+
         $path = public_path().'/assets/uploads/'.$layoutType.'/'.$this->id.'/';
         $aws_path = 'assets/uploads/'.$layoutType.'/'.$this->id;
         return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $this->id, null);
-
     }
 
     public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key)
@@ -62,7 +63,7 @@ trait UploadableFileTrait
         $img_path = $path.'/'.$filename;
 
         if ($file->move($path, $filename)) { // $destinationPath, $fileName
-            if($id ) {
+            if ($id && $layoutType !='users') {
                 //Log::debug("moveAndStoreImage: We already have an entry )"+$id+"), does it already have media?");
 
                 $entry = \App\Entry::find($id);

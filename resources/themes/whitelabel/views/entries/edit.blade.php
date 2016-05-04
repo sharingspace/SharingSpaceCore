@@ -105,7 +105,7 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
             </div>
 
             <div class="col-md-3">
-              <button id="remove_img_button" class="pull-right smooth_font btn btn-warning btn-sm margin-left-10 margin-top-6">Remove</button>
+              <button type="button" id="remove_img_button" class="pull-right smooth_font btn btn-warning btn-sm margin-left-10 margin-top-6">{{ trans('general.entries.remove')}}</button>
               <label id="delete_img_checkbox_label" class="pull-right margin-top-6" for="delete_img">
                 {{ Form::checkbox('delete_img', 1, 0, ['id'=>'delete_img'])}}
                 <i></i> Delete image
@@ -155,25 +155,31 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
     </div>
   </div>
 </section>
-image = {{$image}}
+
+
 <script type="text/javascript">
 $("#remove_img_button").hide();
 $("#delete_img_checkbox_label").hide();
 
 $( document ).ready(function() {
-  var image = '{{$image}}';
-  var entry_id = '{{$entry->id}}';
-
+  var image = "/assets/uploads/entries/"+'{{$entry->id}}'+"/"+'{{$image}}';
   if (image) {
-    $('#image_box').css("background-image", "url('/assets/uploads/entries/"+entry_id+"/"+image+"')");
+    $('#image_box').css("background-image", "url('"+image+"')");
     $("#delete_img_checkbox_label").show();
   }
   else {
     $('#image_box').css("background-image","none");
   }
 
+  $(document).on( "click", "#select_all", function( e ) {
+    $('.exchanges').prop('checked', $(this).prop("checked"));
+  });
 
- $('#choose-file').change( function() {
+  $(document).on( "click", ".exchanges", function( e ) {
+    $('#select_all').prop('checked', false);
+  });
+
+  $('#choose-file').change( function() {
     var maxSize = $('#MAX_FILE_SIZE').val();
     $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
 
@@ -206,13 +212,15 @@ $( document ).ready(function() {
 
   $('#remove_img_button').click(function(e)
   {
+    e.preventDefault(); // cancel default behavior
+
     if ($(this).hasClass('notUploaded')) {
       $(this).removeClass('notUploaded').hide();
       $('#image_box').css("background-image","none");
       $('#choose-file').val('');
       $('#shadow_input').val('');
-      if (image) {
-        $('#image_box').css("background-image", "url('/assets/uploads/entries/"+entry_id+"/"+image+"')");
+      if (typeof image != 'undefined') {
+        $('#image_box').css("background-image", "url('"+image+"')");
         $("#delete_img_checkbox_label").show();
       }
     }
@@ -220,13 +228,8 @@ $( document ).ready(function() {
     return false;
   });
 
-  $(document).on( "click", "#select_all", function( e ) {
-    $('.exchanges').prop('checked', $(this).prop("checked"));
-  });
-
-  $(document).on( "click", ".exchanges", function( e ) {
-    $('#select_all').prop('checked', false);
-  });
 });
 </script>
+
+
 @stop

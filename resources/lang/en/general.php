@@ -85,7 +85,11 @@ return [
       'save_personal_info' => 'Save Personal Info Changes',
       'save_privacy' => 'Save Privacy Changes',
       'save_socials' => 'Save Social Link Changes',
+      'social_success' => 'Your social settings have been updated',
+      'social_failure' => 'Something went wrong. Your social settings have not been saved',
       'save_avatar' => 'Save Avatar Changes',
+      'avatar_success' => 'Your avatar has been updated',
+      'avatar_failure' => 'Something went wrong. Your uploaded image has not been saved',
     ],
 
     'community'  => [
