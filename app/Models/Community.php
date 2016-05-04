@@ -136,12 +136,12 @@ class Community extends Model
     */
     public function getCover()
     {
+        $cover_img = null;
 
         if ($this->cover_img!='') {
             $cover_img = Config::get('services.cdn.default').'/uploads/community-covers/'.$this->id.'/'.$this->cover_img;
-        } else {
-            $cover_img = Config::get('services.cdn.default').'/img/covers/default-heart-cover.jpg';
         }
+
         return $cover_img;
     }
 

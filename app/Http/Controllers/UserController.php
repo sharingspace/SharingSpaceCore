@@ -18,6 +18,7 @@ use Input;
 use Redirect;
 use Helper;
 use App\Message;
+use Log;
 
 class UserController extends Controller
 {
@@ -133,17 +134,15 @@ class UserController extends Controller
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
 
-            return redirect()->route('user.settings.view')->with('success', 'Saved!');
-
+            return redirect()->route('user.settings.view')->with('success', trans('general.user.social_success'));
         }
 
-        // That user wasn't valid
-        return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
-
+        // Damn that user was an imposter!
+        return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.social_failure'));
     }
 
     /**
-    * Validates and stores the users avatar.
+    * Stores the users avatar.
     *
     * @author [D. Linanrd] [<david@linnard.com>]
     * @see    UsersController::getSettings()
@@ -152,15 +151,24 @@ class UserController extends Controller
     */
     public function postUpdateAvatar()
     {
-        return "postUpdateAvatar() needs to be implemented";
-
         if ($user = User::find(Auth::user()->id)) {
-            //return redirect()->route('user.settings.view')->with('success', 'Saved!');
+            if (Input::hasFile('avatar_img')) {
+                $user->uploadImage($user, Input::file('avatar_img'), 'users');
+                return redirect()->route('user.settings.view')->with('success', trans('general.user.avatar_success'));
+            }
+            else if(Input::get('delete_img')) {
+                if (User::deleteAvatar($user->id)) {
+                    return redirect()->route('user.settings.view')->with('success', 'delete okay');
+                }
+                else {
+                    return redirect()->route('user.settings.view')->with('success', 'delete fail');
+                }
+            }
         }
-
-        // That user wasn't valid
-        return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
-
+        else {
+            // That user wasn't valid
+            return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.avatar_failure'));
+        }
     }
 
     /**

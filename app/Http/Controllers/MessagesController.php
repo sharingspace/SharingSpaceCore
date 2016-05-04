@@ -23,6 +23,7 @@ use Log;
 use Gate;
 use App\Message;
 use App\Entry;
+use App\User;
 
 class MessagesController extends Controller
 {
@@ -45,11 +46,32 @@ class MessagesController extends Controller
 
     public function postCreate(Request $request, $entryId = null) {
 
-
-        //return response()->json(['success'=>true, 'message'=>'poopyface']);
         $message = new Message;
         if ($entryId) {
             $entry = Entry::find($entryId)->first();
+        }
+
+        $message->message = e(Input::get('message'));
+        $message->sent_by = Auth::user()->id;
+
+        if ($entry) {
+            $message->entry_id = $entry->id;
+            $message->sent_to = $entry->created_by;
+        }
+
+
+        if ($message->save()) {
+            return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
+        } else {
+            return response()->json(['success'=>false, 'error'=>$message->getErrors()]);
+        }
+    }
+
+    public function postCreateDirect(Request $request, $userId = null) {
+
+        $message = new Message;
+        if ($userId) {
+            $user = User::find($userId)->first();
         }
 
         $message->message = e(Input::get('message'));
