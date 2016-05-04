@@ -93,6 +93,11 @@ class MessagesController extends Controller
     public function postCreateDirect(Request $request, $userId = null) {
 
         $message = new Message;
+
+        if ($entryId) {
+            $entry = Entry::find($entryId)->first();
+        }
+
         if ($userId) {
             $user = User::find($userId)->first();
         }
