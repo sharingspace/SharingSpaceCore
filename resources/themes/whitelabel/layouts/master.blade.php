@@ -39,7 +39,26 @@
     <!-- jQuery 2.1.3-->
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="{{ asset('assets/js/extensions/tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script type="text/javascript">
+    $( document ).ready(function() {
+        if ($('.wl_usercover').length) {
+          setBannerHeight();
+        
+          $(window).resize(function() {
+              setBannerHeight();
+          });
 
+          $('.wl_usercover').show();
+        }
+
+        function setBannerHeight()
+        {
+            var height = $( window ).width()/4;
+            // adaptive height is 25% of width
+            $('.wl_usercover').css('height',height);
+        }
+    });
+    </script>
 
     <!-- Bootstrap 3 Javascript is pulled in through the scripts.js file - no need to include it here -->
     <link rel="shortcut icon" href="/favicon.ico">

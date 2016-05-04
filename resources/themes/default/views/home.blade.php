@@ -51,7 +51,7 @@
 
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"><!-- left text -->
-              <h2 style="font-size:36px;" class="pull-right">Try a sharing hub free for 30 days</h2>
+              <h2 style="font-size:36px;" class="pull-right">{{ trans('home.free_trial') }}</h2>
 
             </div><!-- /left text -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><!-- right btn -->

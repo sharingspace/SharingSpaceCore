@@ -7974,33 +7974,28 @@ footer.sticky {
 }
 
 .wl_usercover {
-  max-height: 450px;
-  margin-top: -26px;
+  height: 300px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+  display: none;
 }
 
-.wl_usercover #about_panel,
-.wl_usercover #display_about {
+#about_panel,
+#display_about {
   text-align: center;
-  background-color: rgba(176, 220, 220, 0.8);
 }
 
-.wl_usercover #about_panel {
+#about_panel {
   display: none;
   border: solid 1px #c3c3c3;
-  height: 300px;
+  position: relative;
+  background-color: rgba(176, 220, 220, 0.4);
 }
 
-.wl_usercover #about_panel p {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
+#about_panel p {
   font-size: larger;
-  margin-left: 10%;
-  margin-right: 10%;
+  padding: 20px;
 }
 
 ul.exchange_types {

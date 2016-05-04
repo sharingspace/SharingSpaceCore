@@ -177,15 +177,15 @@
 				<!-- /Top Nav -->
 
 			</div>
+@if ($whitelabel_group->getCover())
+  <div class="row wl_usercover" style="position:relative; background-image: url({{ $whitelabel_group->getCover() }});"></div>
+@endif
 
-<div class="row">
-  <div class="col-md-12 wl_usercover">
+<div class="row" style="position:relative;">
   @if( strlen($whitelabel_group->about))
     <div id="about_panel" style="top:0;right: 0;bottom: 0;left: 0;position: absolute;">
       <p style="vertical-align:middle">{{ $whitelabel_group->about }}</p>
     </div>
   @endif
-  <img style="width:100%;min-heigh:200px;" src="{{ $whitelabel_group->getCover() }}">
-
-  </div>
 </div>
+

@@ -18,7 +18,7 @@ return [
     'nav'  => [
           'browse' => 'Browse',
           'create' => 'Create',
-          'try_it' => 'Try it',
+          'try_it' => 'Free Trial',
           'login' => 'Sign-In',
           'logout' => 'Logout',
           'register' => 'Sign-Up',
@@ -110,7 +110,7 @@ return [
       'analytics' => 'Google analytics integration',
       'ga_tracking_id' => 'Google analytics tracking id',
       'for_example' => 'For example: UA-000000-01',
-      'p1' => 'You can start a sharing hub in under 1 minute and enjoy it free for 30 days.
+      'p1' => 'You can start a sharing hub in under 1 minute and enjoy it free for 15 days.
       We are currently in beta, so keep in mind features are still being added. This
       introductory cost is available for a limited time only. Email us at information
       info@anysha.re with questions about current features.',
@@ -119,8 +119,8 @@ return [
       'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
       'type' => 'Choose a privacy level',
       'payment_info' => 'credit card information',
-      'after_trail' => 'after 30 day free trail',
-      'start_trial' => '30 day Free Trial',
+      'after_trail' => 'after 15 day free trail',
+      'start_trial' => '15 day Free Trial',
       'monthly' => 'Monthly',
       'month' => 'Month',
       'year' => 'Year',
@@ -174,7 +174,7 @@ return [
 
     'uploads'  => [
       'choose_file'  => 'Choose file',
-      'banner_tip' => 'Tip. For best results, use an image that is 2000px x 300px',
+      'banner_tip' => 'Tip. Images with an aspect ratio of 4:1 will fit exactly.',
       'logo_tip' => 'Tip. For best results, use an image that is 250px x 40px.',
     ],
 
