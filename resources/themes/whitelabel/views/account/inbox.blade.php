@@ -7,26 +7,26 @@
   <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.messages.inbox')}}</h1>
     <!-- Begin messages table -->
     <table
-    class="table table-condensed"
     name="messages"
     id="table"
     data-cookie="true"
-    data-cookie-id-table="inbox-messages">
+    data-cookie-id-table="inbox-messagesdsf">
       <thead>
           <tr>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
-            <th data-sortable="true" data-field="title">{{ trans('general.entries.entry') }}</th>
-            <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
+            <th data-sortable="true" data-field="entry">{{ trans('general.entries.entry') }}</th>
+            <th data-sortable="true" data-field="message">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
-              <th data-sortable="true" data-field="title">{{ trans('general.community.community') }}</th>
+              <th data-sortable="true" data-field="community">{{ trans('general.community.community') }}</th>
           </tr>
       </thead>
       <tbody>
           @foreach ($messages as $message)
           <tr>
               <td>
-                  <a href="{{ route('user.profile', $message->sender->id) }}"><img src="{{ $message->sender->gravatar() }}" class="avatar-sm">
-                      {{ $message->sender->getDisplayName() }}
+                  <a href="{{ route('user.profile', $message->sender->id) }}">
+                      <img src="{{ $message->sender->gravatar() }}" class="avatar-sm">
+                      {{ $message->sender->getDisplayName() }} poop
                   </a>
               </td>
             <td>
@@ -96,7 +96,6 @@
         refresh: 'fa-refresh'
     },
   });
-
 
 
 </script>
