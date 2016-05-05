@@ -192,6 +192,8 @@ return [
       'from'        => 'From',
       'created_at'  => 'Sent On',
       'message'       => 'Message',
+        'message_from'       => 'Message From :name',
+
     ],
 
 
