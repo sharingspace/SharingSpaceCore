@@ -14,9 +14,8 @@
     data-cookie-id-table="messages">
       <thead>
           <tr>
-            <th data-sortable="true" data-field="post_type"><span class="sr-only">{{ trans('general.entries.post_type') }}</span></th>
-            <th data-sortable="true" data-field="title">{{ trans('general.entries.entry') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
+            <th data-sortable="true" data-field="title">{{ trans('general.entries.entry') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
           </tr>
@@ -24,17 +23,16 @@
       <tbody>
           @foreach ($messages as $message)
           <tr>
+              <td><a href="{{ route('user.profile', $message->sender->id) }}"><img src="{{ $message->sender->gravatar() }}" class="avatar-sm">{{ $message->sender->getDisplayName() }}</a></td>
             <td>
                 @if ($message->conversation->entry)
-                {{ strtoupper($message->conversation->entry->post_type) }}
+                    <a href="{{ route('entry.view', $message->conversation->entry->id) }}">
+                        @if ($message->conversation->entry)
+                            {{ strtoupper($message->conversation->entry->post_type) }}: 
+                        @endif
+                        {{ $message->conversation->entry->title }}</a>
                 @endif
             </td>
-            <td>
-                @if ($message->conversation->entry)
-                    <a href="{{ route('entry.view', $message->conversation->entry->id) }}">{{ $message->conversation->entry->title }}</a>
-                @endif
-            </td>
-            <td><a href="{{ route('user.profile', $message->sender->id) }}"><img src="{{ $message->sender->gravatar() }}" class="avatar-sm">{{ $message->sender->getDisplayName() }}</a></td>
             <td><a href="{{ route('message.view', $message->conversation->id) }}">
                     {{ ($message->conversation->subject!='' ? $message->conversation->subject: '(No subject)') }}</a></td>
             <td>{{ $message->created_at->format('M j, Y') }}</td>
