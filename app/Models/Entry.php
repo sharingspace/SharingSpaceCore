@@ -280,6 +280,8 @@ class Entry extends Model
 
         return $query->where('title', 'LIKE', "%$search%")
             ->orWhere('location', 'LIKE', "%$search%")
+            ->orWhere('description', 'LIKE', "%$search%")
+            ->orWhere('tags', 'LIKE', "%$search%")
             ->orWhere(
                 function ($query) use ($search) {
                     $query->whereHas(

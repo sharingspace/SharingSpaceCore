@@ -515,6 +515,7 @@ class EntriesController extends Controller
         [
         'title',
         'location',
+        'tags',
         'post_type',
         'created_at'
         ];
