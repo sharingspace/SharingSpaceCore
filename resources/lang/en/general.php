@@ -123,7 +123,7 @@ return [
       'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
       'type' => 'Choose a privacy level',
       'payment_info' => 'credit card information',
-      'after_trail' => 'after 15 day free trail',
+      'after_trail' => 'after 15 day free trial',
       'start_trial' => '15 day Free Trial',
       'monthly' => 'Monthly',
       'month' => 'Month',
