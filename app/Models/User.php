@@ -345,6 +345,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Gets conversations the user is involved in
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
+    public function conversations()
+    {
+        return $this->hasMany('\App\Conversation','started_by');
+    }
+
+    /**
     * Gets messages sent to user
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
