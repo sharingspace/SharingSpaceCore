@@ -64,7 +64,7 @@ class MessagesController extends Controller
 
     public function postCreate(Request $request, $entryId = null) {
 
-//        if ($request->user()->cannot('view-message', $entryId)) {
+//        if ($request->user()->cannot('send-message', $entryId)) {
 //            return redirect()->route('browse')->with('error', trans('general.messages.messages.not_allowed'));
 //        }
 
