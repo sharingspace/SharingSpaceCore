@@ -10,7 +10,7 @@
     name="messages"
     id="table"
     data-cookie="true"
-    data-cookie-id-table="inbox-messagesdsf">
+    data-cookie-id-table="inbox-messages">
       <thead>
           <tr>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
