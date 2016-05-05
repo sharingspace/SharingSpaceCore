@@ -21,7 +21,7 @@
         <!-- NOTIFICATION BOX -->
 				<li class="notifications-popdown">
 					<a href="#">
-                        @if (Auth::user()->getLimitedUnreadMessages())
+                        @if (Auth::user()->getUnreadMessagesCount() > 0)
 						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessagesCount() }}</span>
                         @endif
 						<i class="fa fa-envelope-o"></i>
