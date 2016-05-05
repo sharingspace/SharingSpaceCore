@@ -23,7 +23,7 @@ use Form;
 use Pagetheme;
 use Mail;
 use Helper;
-use Carbon;
+use Carbon\Carbon;
 use DB;
 use Log;
 use App\Community;
@@ -213,7 +213,7 @@ class CommunitiesController extends Controller
             $stripe_subscription = $customer
                 ->subscription()
                 ->onPlan(e(Input::get('subscription_type')))
-                ->trialFor(\Carbon::now()->addDays(15))
+                //->trialFor(Carbon::now()->addDays(15))
                 ->create();
 
             // set the given discount
