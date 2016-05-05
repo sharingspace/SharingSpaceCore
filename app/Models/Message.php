@@ -78,6 +78,19 @@ class Message extends Model
         return $this->belongsTo('App\User', 'sent_to');
     }
 
+    /**
+     * Shows what community the message was sent from
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
+    public function community()
+    {
+        // return $this->hasManyThrough('App\Community','App\Conversation','community_id','id');
+        // return $this->belongsTo('App\Community', 'conversations', 'thread_id', 'community_id');
+    }
+
 
     /**
     * Marks the message as read
@@ -92,18 +105,7 @@ class Message extends Model
             ->where('id', $this->id)
             ->update(array('read_on' => $dt->format('Y-m-d H:i:s')));
 	}
-
-    /**
-    * Returns the entry the message is about
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
-    public function entry()
-    {
-        return $this->belongsTo('App\Entry')->withTrashed();
-    }
+    
 
     public static function getSentToUser($user_id)
     {

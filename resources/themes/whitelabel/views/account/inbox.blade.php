@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <section class="container padding-top-0 browse_table">
 <div class="row">
   <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.messages.inbox')}}</h1>
@@ -18,12 +17,17 @@
             <th data-sortable="true" data-field="title">{{ trans('general.entries.entry') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
+              <th data-sortable="true" data-field="title">Community</th>
           </tr>
       </thead>
       <tbody>
           @foreach ($messages as $message)
           <tr>
-              <td><a href="{{ route('user.profile', $message->sender->id) }}"><img src="{{ $message->sender->gravatar() }}" class="avatar-sm">{{ $message->sender->getDisplayName() }}</a></td>
+              <td>
+                  <a href="{{ route('user.profile', $message->sender->id) }}"><img src="{{ $message->sender->gravatar() }}" class="avatar-sm">
+                      {{ $message->sender->getDisplayName() }}
+                  </a>
+              </td>
             <td>
                 @if ($message->conversation->entry)
                     <a href="{{ route('entry.view', $message->conversation->entry->id) }}">
@@ -36,6 +40,11 @@
             <td><a href="{{ route('message.view', $message->conversation->id) }}">
                     {{ ($message->conversation->subject!='' ? $message->conversation->subject: '(No subject)') }}</a></td>
             <td>{{ $message->created_at->format('M j, Y') }}</td>
+              <td>
+                  @if ($message->conversation->community)
+                      {{ $message->conversation->community->name }}
+                  @endif
+              </td>
           </tr>
           @endforeach
       </tbody>
