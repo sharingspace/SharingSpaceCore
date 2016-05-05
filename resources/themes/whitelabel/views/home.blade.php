@@ -33,7 +33,7 @@
 
 				<h3 class="uppercase">{{ $whitelabel_group->members->count() }} {{ trans_choice('general.community.members', $whitelabel_group->members->count()) }}</h3>
                 @if ($whitelabel_group->created_at)
-				<p>Since {{ $whitelabel_group->created_at->format('M i, Y') }}</p>
+				<p>Since {{ $whitelabel_group->created_at->format('M j, Y') }}</p>
                 @endif
 			</div>
 
