@@ -48,6 +48,12 @@
       {!! csrf_field() !!}
 
       <div class="clearfix margin-top-30 margin-bottom-20">
+        <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <i class="fa fa-exclamation-circle"></i>
+          <strong id="offerStatusText"></strong><span id="offerStatus"></span>
+        </div> <!-- alert -->
+        
         <textarea class="summernote form-control" data-height="200" data-lang="en-US" name="message"></textarea>
       </div>
 
@@ -69,19 +75,30 @@
 <script>
   $(document).ready(function () {
 
-    //$("#messageSubmit").attr('disabled','disabled'); // disable button until message has been types
-
     $("#offerForm").submit(function(){
+      $('#offerStatusbox').hide();
+      $('#offerStatusText').html('');
+      $('#offerStatus').html('');
+      $('#offerStatusbox').removeClass('alert alert-success alert-danger');
 
       $.ajax({
         type: "POST",
         url: "{{ route('messages.create.save', $message->entry->id) }}",
         data: $('#offerForm').serialize(),
+
         success: function(data){
+
+          $('#offerStatusbox').show();
+
           if (data.success) {
-            alert("success");
+            $('#offerStatusbox').addClass('alert alert-success');
+            $('#offerStatusText').html('Success!');
+            $('#offerStatus').html(data.success.message);
+
           } else {
-            alert("ERROR: " + data.error.message[0]);
+            $('#offerStatusbox').addClass('alert alert-danger');
+            $('#offerStatusText').html('Error: ');
+            $('#offerStatus').html(data.error.message[0]);
           }
 
         },
