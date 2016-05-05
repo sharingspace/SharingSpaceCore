@@ -12,4 +12,12 @@
 
     <p>{{ $offer }}</p>
 
+    <p style="text-align: center">
+        <strong>
+            <a href="{{ $community_url }}/account/message/{{ $thread_id }}"  style="color: white;">
+                Click here to view this message online
+            </a>
+        </strong>
+    </p>
+
 @stop
