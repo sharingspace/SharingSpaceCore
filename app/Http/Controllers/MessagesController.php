@@ -41,7 +41,10 @@ class MessagesController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $messages = Auth::user()->messagesTo()->with('entry','sender','conversation')->groupBy('thread_id')->orderBy('created_at', 'DESC')->get();
+        $messages = Auth::user()->messagesTo()
+            ->with('conversation.entry','sender','conversation','conversation.community')
+            ->groupBy('thread_id')
+            ->orderBy('created_at', 'DESC')->get();
         return view('account/inbox')->with('messages', $messages);
     }
 
