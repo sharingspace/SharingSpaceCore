@@ -5,112 +5,93 @@
 
 <section class="container padding-top-0 browse_table">
 <div class="row">
-  <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.messages.inbox')}}</h1>
-    <!-- Begin entries table -->
-    <table class="table table-condensed"
-    name="messages"
-    id="table"
-    data-cookie="true"
-    data-cookie-id-table="messages">
-      <thead>
-          <tr>
-            <th data-sortable="true" data-field="post_type"><span class="sr-only">{{ trans('general.entries.post_type') }}</span></th>
-            <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
-            <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
-            <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
-            <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
-            <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
-          </tr>
-      </thead>
-      <tbody>
-          @foreach ($messages as $message)
-          <tr>
-            <td>{{ strtoupper($message->entry->post_type) }}</td>
-            <td>
-                @if ($message->entry)
-                    <a href="{{ route('entry.view', $message->entry->id) }}">{{ $message->entry->title }}</a>
-                @endif
-            </td>
-            <td>{{ $message->sender->getDisplayName() }}</td>
-            <td>{{ $message->message }}</td>
-            <td>{{ $message->created_at->format('M j, Y') }}</td>
-          </tr>
-          @endforeach
-      </tbody>
-    </table>
-    <!-- End entries table -->
+  <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.messages.message_from', ['name' => $message->sender->getDisplayName() ]) }}</h1>
+
+  <!-- post -->
+  <div class="clearfix margin-bottom-60">
+
+    <div class="border-bottom-1 border-top-1 padding-10">
+      <span class="pull-right size-11 margin-top-3 text-muted">{{ $message->created_at->format('M i, Y h:iA') }}</span>
+      <strong>{{ $message->sender->getDisplayName()  }}</strong></a>
+    </div>
+
+    <div class="block-review-content">
+
+      <div class="block-review-body">
+
+        <div class="block-review-avatar text-center">
+          <div class="push-bit">
+            <a href="{{ route('user.profile', $message->sender->id) }}">
+              <img src="{{ $message->sender->gravatar() }}" width="100" alt="avatar">
+            </a>
+          </div>
+
+        </div>
+        {!!  Helper::parseText($message->message) !!}
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /post -->
+
+
+  <!-- reply -->
+  <div class="clearfix margin-bottom-60">
+
+    <div class="border-bottom-1 border-top-1 padding-10">
+      <span class="pull-right size-11 margin-top-3 text-muted">today</span>
+      <strong>LEAVE A REPLY</strong></a>
+    </div>
+
+    <form id="offerForm" class="block-review-content">
+      {!! csrf_field() !!}
+
+      <div class="clearfix margin-top-30 margin-bottom-20">
+        <textarea class="summernote form-control" data-height="200" data-lang="en-US" name="message"></textarea>
+      </div>
+
+      <button class="btn btn-3d btn-sm btn-reveal btn-teal">
+        <i class="fa fa-check"></i>
+        <span>SUBMIT POST</span>
+      </button>
+
+
+    </form>
+
+  </div>
+  <!-- /reply -->
+
   </div>
 </section>
 
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 
-<script type="text/javascript">
-$( document ).ready(function() {
-  // we off screen the table headers as they are obvious.
-  $('table').on( "click", '[id^=delete_entry_]', function() {
-    var entryID = $(this).attr('id').split('_')[2];
-    // add a clas to the row so we can remove it on success
-    $(this).closest('tr').addClass("remove_"+entryID);
+<script>
+  $(document).ready(function () {
 
-    var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
+    //$("#messageSubmit").attr('disabled','disabled'); // disable button until message has been types
 
-    $.post(entryID+"/ajaxdelete",{_token: CSRF_TOKEN},function (replyData) {
-      //console.log("delete success :-)  "+replyData.entry_id);
-      if (replyData.success) {
-        // remove row from table
-        $('.remove_'+entryID).remove();
-        // display error message
-        $('div.ajax_success .fa-check').after('&nbsp;<strong>Success: </strong>'+replyData.message);
-        $('div.ajax_success').removeClass('hidden').delay(5000).fadeOut();
-      }
-      else {
-        // display error message
-        $('div.ajax_error').removeClass('hidden');
-        $('div.ajax_error .fa-exclamation-circle').after('&nbsp;<strong>Error: </strong>'+replyData.message);
-      }
+    $("#offerForm").submit(function(){
+
+      $.ajax({
+        type: "POST",
+        url: "{{ route('messages.create.save', $message->entry->id) }}",
+        data: $('#offerForm').serialize(),
+        success: function(data){
+          if (data.success) {
+            alert("success");
+          } else {
+            alert("ERROR: " + data.error.message[0]);
+          }
+
+        },
+        error: function(data){
+          alert("failure");
+        }
+      });
+      return false;
     });
   });
-
-  $('#table').bootstrapTable({
-    classes: 'table table-responsive table-no-bordered',
-    undefinedText: '',
-    iconsPrefix: 'fa',
-    showRefresh: true,
-    search: true,
-    pageSize: 100,
-    pagination: true,
-    sidePagination: 'client',
-    sortable: true,
-    cookie: true,
-    mobileResponsive: true,
-    showExport: true,
-    showColumns: true,
-    exportDataType: 'all',
-    exportTypes: ['csv', 'txt','json', 'xml'],
-    maintainSelected: true,
-    paginationFirstText: "{{ trans('pagination.first') }}",
-    paginationLastText: "{{ trans('pagination.last') }}",
-    paginationPreText: "{{ trans('pagination.previous') }}",
-    paginationNextText: "{{ trans('pagination.next') }}",
-    pageList: ['10','25','50','100','150','200'],
-    formatShowingRows: function (pageFrom, pageTo, totalRows) {
-        return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
-      },
-    icons: {
-        paginationSwitchDown: 'fa-caret-square-o-down',
-        paginationSwitchUp: 'fa-caret-square-o-up',
-        columns: 'fa-columns',
-        refresh: 'fa-refresh'
-    },
-  });
-})
-
-
 </script>
 
 @stop
