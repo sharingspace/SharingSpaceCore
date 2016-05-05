@@ -100,7 +100,7 @@ return [
       'create' => 'Start your own Sharing Hub for Free!',
       'name_placeholder' => 'My awesome sharing hub',
       'name' => 'Name for your Sharing Hub',
-      'subdomain' => 'Web address for your Sharing Hub',
+      'subdomain' => ' Subdomain (xxx.anysha.re) for your Sharing Hub',
       'subdomain_placeholder' => 'your hubname.anysha.re',
       'description' => 'Describe your sharing hub',
       'detailed_description' => 'Detailed description',
