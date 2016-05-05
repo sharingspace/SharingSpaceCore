@@ -56,7 +56,12 @@ class MessagesController extends Controller
      */
     public function getMessage(Request $request, $conversationId)
     {
+
         $conversation = Conversation::with('entry','sender','messages')->find($conversationId);
+
+        if ($request->user()->cannot('view-conversation', $conversation)) {
+            return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
+        }
         return view('account/message')->with('conversation', $conversation);
     }
 
@@ -124,44 +129,6 @@ class MessagesController extends Controller
             return response()->json(['success'=>false, 'error'=>$offer->getErrors()]);
         }
     }
-
-
-
-
-    public function postCreateDirect(Request $request, $userId = null) {
-
-        $message = new Message;
-
-        if ($entryId) {
-            $entry = Entry::find($entryId)->first();
-        }
-
-        if ($userId) {
-            $user = User::find($userId)->first();
-        }
-
-        $message->message = e(Input::get('message'));
-        $message->sent_by = Auth::user()->id;
-
-        if ($entry) {
-            $message->sent_to = $entry->created_by;
-            $message->entry_id = $entry->id;
-        } else {
-            $message->sent_to = $user->id;
-        }
-
-
-        if ($message->save()) {
-            Mail::send(array('emails.new-msg'), $data, function($message) use ($sendto_email, $sendto_fullname, $msg_subject)
-            {
-                $message->to($sendto_email, $sendto_fullname)->subject($msg_subject);
-            });
-
-            return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
-        } else {
-            return response()->json(['success'=>false, 'error'=>$message->getErrors()]);
-        }
-    }
-
+    
 
 }

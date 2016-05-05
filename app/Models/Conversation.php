@@ -73,8 +73,17 @@ class Conversation extends Model
                return $message->sent_by;
            }
         }
-
-
     }
+
+    public function checkUserInConvo(User $user)
+    {
+        foreach ($this->messages as $message) {
+            if (($message->sent_to ==  $user->id) || ($message->sent_by == $user->id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

@@ -97,6 +97,17 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id === $entry->created_by;
         });
 
+        // --------------------------------
+        // MESSAGE GATES
+        // --------------------------------
+
+        // Check the user is part of the conversation and can therefore view it
+        $gate->define('view-conversation', function ($user, $conversation) {
+            if ($conversation->checkUserInConvo($user)) {
+                return true;
+            }
+        });
+
 
 
     }
