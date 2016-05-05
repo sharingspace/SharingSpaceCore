@@ -78,11 +78,11 @@
 
             @can('update-entry', $entry)
 
-              <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{{ strtoupper($entry->post_type) }}}" data-mm-track-label="Edit from Tile View">
+              <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
               <i class="fa fa-pencil"></i> Edit</a>
 
               @if ($entry->completed_at=='')
-                <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{{ strtoupper($entry->post_type) }}} as completed" data-mm-track-label="Mark as Completed from Tile View">
+                <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
                 <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
               @endif
                 {{ Form::button('<i class="fa fa-trash"></i> Delete', array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
@@ -149,7 +149,7 @@
                                              @if (count($entry->exchangeTypes) > 0)
                                                @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                                                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-                                                  <input type="checkbox" name="{{ strtolower($entry->exchangeTypes[$i]->name) }}" value="1" id="{{ strtolower($entry->exchangeTypes[$i]->name) }}"> {{{ $entry->exchangeTypes[$i]->name }}}
+                                                  <input type="checkbox" name="{{ strtolower($entry->exchangeTypes[$i]->name) }}" value="1" id="{{ strtolower($entry->exchangeTypes[$i]->name) }}"> {{ $entry->exchangeTypes[$i]->name }}
                                               </div> <!-- col-sm-3 -->
                                             @endfor
                                           @endif
@@ -223,7 +223,7 @@
 
 								<div class="tab-pane" id="comments">
 									<p class="help-block">Comments posted here are publicly viewable.</p>
-									<div class="fb-comments" data-href="{{{ URL::to('entry/'.$entry->id.'/view/') }}}" data-numposts="5" data-colorscheme="light" data-width="800" style="width: 100%"></div>
+									<div class="fb-comments" data-href="{{ URL::to('entry/'.$entry->id.'/view/') }}" data-numposts="5" data-colorscheme="light" data-width="800" style="width: 100%"></div>
 							</div>  <!-- tab-pane -->
              </div> <!-- tab-content -->
 					</div> <!-- col-xs-12 -->
