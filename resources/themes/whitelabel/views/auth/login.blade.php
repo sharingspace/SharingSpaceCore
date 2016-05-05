@@ -21,7 +21,7 @@
       <div class="col-md-6 col-sm-6">
 
         <!-- register form -->
-        <form class="nomargin sky-form boxed" method="post">
+        <form class="nomargin sky-form boxed" method="post" action="{{ route('login') }}">
           {!! csrf_field() !!}
           <header>
             <i class="fa fa-sign-in"></i>  {{ trans('general.nav.login') }}
