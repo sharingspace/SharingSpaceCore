@@ -276,7 +276,7 @@ $(document).ready(function () {
                 if (data.success) {
                     alert("success");
                 } else {
-                    alert("something went wrong");
+                    alert("ERROR: " + data.error.message[0]);
                 }
 
             },
