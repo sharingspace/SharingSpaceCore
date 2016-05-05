@@ -41,7 +41,7 @@ class MessagesController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $messages = Auth::user()->messagesTo()->with('entry','sender','conversation')->groupBy('thread_id')->get();
+        $messages = Auth::user()->messagesTo()->with('entry','sender','conversation')->groupBy('thread_id')->orderBy('created_at', 'DESC')->get();
         return view('account/inbox')->with('messages', $messages);
     }
 
@@ -74,6 +74,7 @@ class MessagesController extends Controller
      * The $userId is always required, because we do not store the recipients' ID in the conversation
      * (thread) record. The $entryId is optional, so that people can send messages from a user's profile.
      *
+     * @todo Fix the jankiness with thread_id
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
      * @internal param $Request
@@ -92,14 +93,19 @@ class MessagesController extends Controller
             $data['post_type'] = $entry->post_type;
         }
 
-        // Find the thread ID by the subject, entry_id, started_by and community_id.
-        // If there is no matching thread, create one.
-        $conversation = Conversation::firstOrCreate([
-            'subject' => e(Input::get('subject')),
-            'entry_id' => $entryId,
-            'started_by' => Auth::user()->id,
-            'community_id' => $request->whitelabel_group->id,
-        ]);
+        if (Input::has('thread_id')) {
+            $conversation = Conversation::find(e(Input::get('thread_id')));
+        } else {
+            // Find the thread ID by the subject, entry_id, started_by and community_id.
+            // If there is no matching thread, create one.
+            $conversation = Conversation::firstOrCreate([
+                'subject' => e(Input::get('subject')),
+                'entry_id' => $entryId,
+                'started_by' => Auth::user()->id,
+                'community_id' => $request->whitelabel_group->id,
+            ]);
+        }
+
         
         $offer = new Message;
         $offer->message = e(Input::get('message'));

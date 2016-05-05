@@ -62,6 +62,7 @@
         <!-- alert -->
 
         <input type="hidden" name="subject" value="{{ $conversation->subject }}">
+        <input type="hidden" name="thread_id" value="{{ $conversation->id }}">
         @if ($conversation->entry)
           <input type="hidden" name="entry_id" value="{{ $conversation->entry_id }}">
         @endif
