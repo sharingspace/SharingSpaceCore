@@ -52,11 +52,15 @@
       {!! csrf_field() !!}
 
       <div class="clearfix margin-top-30 margin-bottom-20">
+
+        <!-- alert -->
         <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           <i class="fa fa-exclamation-circle"></i>
           <strong id="offerStatusText"></strong><span id="offerStatus"></span>
-        </div> <!-- alert -->
+        </div>
+        <!-- alert -->
+
         <input type="hidden" name="subject" value="{{ $conversation->subject }}">
         @if ($conversation->entry)
           <input type="hidden" name="entry_id" value="{{ $conversation->entry_id }}">

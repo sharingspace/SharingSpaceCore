@@ -28,7 +28,7 @@
                 @if ($message->conversation->entry)
                     <a href="{{ route('entry.view', $message->conversation->entry->id) }}">
                         @if ($message->conversation->entry)
-                            {{ strtoupper($message->conversation->entry->post_type) }}: 
+                            {{ strtoupper($message->conversation->entry->post_type) }}:
                         @endif
                         {{ $message->conversation->entry->title }}</a>
                 @endif
