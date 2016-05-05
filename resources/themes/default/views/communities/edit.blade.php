@@ -109,7 +109,7 @@
                 <!-- Coupon -->
                 <div class="form-group col-md-12 col-sm-12" id="coupon_field" style="display:none;">
                    <label for="coupon">{{trans('general.community.coupon_code')}}</label>
-                    <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="{{trans('general.community.coupon_code')}}" />
+                    <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="coupon" />
                 </div>
 
                 <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
