@@ -17,6 +17,8 @@ use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Conversation;
+use DateTime;
+use DB;
 
 class Message extends Model
 {
@@ -87,7 +89,7 @@ class Message extends Model
     public function markMessageRead() {
 		$dt = new DateTime;
 		return DB::table('messages')
-            ->where('id', $this->message_id)
+            ->where('id', $this->id)
             ->update(array('read_on' => $dt->format('Y-m-d H:i:s')));
 	}
 

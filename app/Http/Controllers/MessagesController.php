@@ -59,6 +59,10 @@ class MessagesController extends Controller
 
         $conversation = Conversation::with('entry','sender','messages')->find($conversationId);
 
+        foreach ($conversation->messages as $message)
+        {
+            $message->markMessageRead();
+        }
         if ($request->user()->cannot('view-conversation', $conversation)) {
             return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
         }
