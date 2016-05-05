@@ -34,7 +34,7 @@
                     <a href="{{ route('entry.view', $message->conversation->entry->id) }}">{{ $message->conversation->entry->title }}</a>
                 @endif
             </td>
-            <td>{{ $message->sender->getDisplayName() }}</td>
+            <td><a href="{{ route('user.profile', $message->sender->id) }}"><img src="{{ $message->sender->gravatar() }}" class="avatar-sm">{{ $message->sender->getDisplayName() }}</a></td>
             <td><a href="{{ route('message.view', $message->conversation->id) }}">
                     {{ ($message->conversation->subject!='' ? $message->conversation->subject: '(No subject)') }}</a></td>
             <td>{{ $message->created_at->format('M j, Y') }}</td>
