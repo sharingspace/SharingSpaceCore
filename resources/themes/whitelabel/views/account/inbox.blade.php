@@ -6,18 +6,19 @@
 <div class="row">
   <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.messages.inbox')}}</h1>
     <!-- Begin messages table -->
-    <table class="table table-condensed"
+    <table
+    class="table table-condensed"
     name="messages"
     id="table"
     data-cookie="true"
-    data-cookie-id-table="messages">
+    data-cookie-id-table="inbox-messages">
       <thead>
           <tr>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
             <th data-sortable="true" data-field="title">{{ trans('general.entries.entry') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
-              <th data-sortable="true" data-field="title">Community</th>
+              <th data-sortable="true" data-field="title">{{ trans('general.community.community') }}</th>
           </tr>
       </thead>
       <tbody>
@@ -95,7 +96,7 @@
         refresh: 'fa-refresh'
     },
   });
-})
+
 
 
 </script>
