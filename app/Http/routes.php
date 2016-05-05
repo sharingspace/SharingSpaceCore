@@ -170,6 +170,13 @@ Route::group(
                 );
 
                 Route::get(
+                    'message/{messageId}',
+                    array(
+                    'as' => 'message.view',
+                    'uses' => 'MessagesController@getMessage')
+                );
+
+                Route::get(
                     'messages/ajax',
                     array(
                     'as' => 'messages.view.ajax',
