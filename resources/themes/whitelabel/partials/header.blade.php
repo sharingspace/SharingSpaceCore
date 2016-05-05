@@ -32,7 +32,7 @@
                             <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
                                 {{ Auth::user()->getUnreadMessages()->count() }} new messages
                             </div>
-                            @foreach (Auth::user()->getUnreadMessages() as $unread_messages)
+                            @foreach (Auth::user()->getUnreadMessages(5) as $unread_messages)
                                  <div class="clearfix margin-bottom-20"><!-- notification item -->
                                     <span class="label label-success label-square pull-left">
                                     	<i class="fa fa-comment"></i>

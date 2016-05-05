@@ -15,24 +15,28 @@
       <thead>
           <tr>
             <th data-sortable="true" data-field="post_type"><span class="sr-only">{{ trans('general.entries.post_type') }}</span></th>
-            <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+            <th data-sortable="true" data-field="title">{{ trans('general.entries.entry') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.from') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
-            <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
           </tr>
       </thead>
       <tbody>
           @foreach ($messages as $message)
           <tr>
-            <td>{{ strtoupper($message->entry->post_type) }}</td>
             <td>
-                @if ($message->entry)
-                    <a href="{{ route('entry.view', $message->entry->id) }}">{{ $message->entry->title }}</a>
+                @if ($message->conversation->entry)
+                {{ strtoupper($message->conversation->entry->post_type) }}
+                @endif
+            </td>
+            <td>
+                @if ($message->conversation->entry)
+                    <a href="{{ route('entry.view', $message->conversation->entry->id) }}">{{ $message->conversation->entry->title }}</a>
                 @endif
             </td>
             <td>{{ $message->sender->getDisplayName() }}</td>
-            <td><a href="{{ route('message.view', $message->id) }}">{{ $message->message }}</a></td>
+            <td><a href="{{ route('message.view', $message->conversation->id) }}">
+                    {{ ($message->conversation->subject!='' ? $message->conversation->subject: '(No subject)') }}</a></td>
             <td>{{ $message->created_at->format('M j, Y') }}</td>
           </tr>
           @endforeach

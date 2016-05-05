@@ -35,6 +35,7 @@ return [
     ],
 
     'entries'  => [
+          'entry' => 'Entry',
           'post_type' => 'Type',
           'title' => 'Title',
           'qty' => 'QTY',

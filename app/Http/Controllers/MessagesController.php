@@ -22,8 +22,10 @@ use Helper;
 use Log;
 use Gate;
 use App\Message;
+use App\Conversation;
 use App\Entry;
 use App\User;
+use Config;
 
 class MessagesController extends Controller
 {
@@ -39,7 +41,7 @@ class MessagesController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $messages = Auth::user()->messagesTo()->with('entry','sender')->get();
+        $messages = Auth::user()->messagesTo()->with('entry','sender','conversation')->groupBy('thread_id')->get();
         return view('account/inbox')->with('messages', $messages);
     }
 
@@ -49,46 +51,67 @@ class MessagesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
      * @internal param $Request
-     * @param int $messageId
+     * @param int $conversationId
      * @return View
      */
-    public function getMessage(Request $request, $messageId)
+    public function getMessage(Request $request, $conversationId)
     {
-        $message = Message::with('entry','sender','recipient')->find($messageId);
-        return view('account/message')->with('message', $message);
+        $conversation = Conversation::with('entry','sender','messages')->find($conversationId);
+        return view('account/message')->with('conversation', $conversation);
     }
 
 
 
 
 
-    public function postCreate(Request $request, $entryId = null) {
+    public function postCreate(Request $request, $userId, $entryId = null) {
 
-//        if ($request->user()->cannot('send-message', $entryId)) {
-//            return redirect()->route('browse')->with('error', trans('general.messages.messages.not_allowed'));
-//        }
+        $recipient = User::find($userId);
 
-        $message = new Message;
         if ($entryId) {
-            $entry = Entry::find($entryId)->first();
+            $entry = Entry::find($entryId);
+            $data['entry_name'] = $entry->name;
+            $data['entry_id'] = $entry->id;
+            $data['post_type'] = $entry->post_type;
         }
 
-        $message->message = e(Input::get('message'));
-        $message->sent_by = Auth::user()->id;
-        $message->community_id = $request->whitelabel_group->id;
+        $conversation = Conversation::firstOrCreate([
+            'subject' => e(Input::get('subject')),
+            'entry_id' => $entryId,
+            'started_by' => Auth::user()->id,
+            'community_id' => $request->whitelabel_group->id,
+        ]);
+        
+        $offer = new Message;
+        $offer->message = e(Input::get('message'));
+        $offer->sent_by = Auth::user()->id;
+        $offer->sent_to = $userId;
+        $conversation = $offer->conversation()->associate($conversation);
 
-        if ($entry) {
-            $message->entry_id = $entry->id;
-            $message->sent_to = $entry->created_by;
-        }
+        $data['email'] = $send_to_email = $recipient->email;
+        $data['name'] = $send_to_name =  $recipient->getDisplayName();
+        $data['thread_id'] = $conversation->id;
+        $data['subject'] = $conversation->subject;
+        $data['offer'] = $offer->message;
+
+        $data['community'] = $request->whitelabel_group->name;
+        $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.Config::get('app.domain');
 
 
-        if ($message->save()) {
+
+        if ($offer->save()) {
+
+            \Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
+                $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
+            });
             return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
         } else {
-            return response()->json(['success'=>false, 'error'=>$message->getErrors()]);
+            return response()->json(['success'=>false, 'error'=>$offer->getErrors()]);
         }
     }
+
+
+
 
     public function postCreateDirect(Request $request, $userId = null) {
 
@@ -114,6 +137,11 @@ class MessagesController extends Controller
 
 
         if ($message->save()) {
+            Mail::send(array('emails.new-msg'), $data, function($message) use ($sendto_email, $sendto_fullname, $msg_subject)
+            {
+                $message->to($sendto_email, $sendto_fullname)->subject($msg_subject);
+            });
+
             return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
         } else {
             return response()->json(['success'=>false, 'error'=>$message->getErrors()]);

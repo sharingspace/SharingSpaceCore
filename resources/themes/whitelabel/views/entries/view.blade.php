@@ -143,9 +143,16 @@
                                     <!--MAKE AN OFFER-->
 
                                     {!! csrf_field() !!}
+                                        <div class="col-md-12 margin-bottom-8 {{ $errors->first('title', ' has-error') }}">
+                                            <!-- Subject -->
+                                            <label class="input">
+                                                <input type="text" name="subject" class="form-control" placeholder="Subject..." autofocus>
+                                            </label>
+                                        </div> <!-- col 6 -->
                                       <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
-                                        <textarea rows="5" name="message" id="message" class="form-control" placeholder='your offer &#133;'></textarea>
+                                        <textarea rows="5" name="message" id="message" class="form-control" placeholder="Your offer &#133;"></textarea>
                                       </div>  <!-- col-xs-12 -->
+
                                       <p class='margin-bottom-6 pull-left'>I would like to:</p>
 
             							<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom: 20px;">
@@ -277,15 +284,14 @@ $(document).ready(function () {
         $('#offerStatusText').html('');
         $('#offerStatus').html('');
         $('#offerStatusbox').removeClass('alert alert-success alert-danger');
+        $('#offerStatusbox').show();
 
         $.ajax({
             type: "POST",
-            url: "{{ route('messages.create.save', $entry->id) }}",
+            url: "{{ route('messages.create.save', [$entry->created_by, $entry->id]) }}",
             data: $('#offerForm').serialize(),
 
             success: function(data){
-
-                $('#offerStatusbox').show();
 
                 if (data.success) {
                     $('#offerStatusbox').addClass('alert alert-success');
@@ -300,7 +306,8 @@ $(document).ready(function () {
 
             },
             error: function(data){
-                alert("failure");
+                $('#offerStatusbox').addClass('alert alert-danger');
+                $('#offerStatus').html('Something went wrong :(');
             }
         });
         return false;

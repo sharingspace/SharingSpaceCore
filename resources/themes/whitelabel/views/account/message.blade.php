@@ -5,7 +5,9 @@
 
 <section class="container padding-top-0 browse_table">
 <div class="row">
-  <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.messages.message_from', ['name' => $message->sender->getDisplayName() ]) }}</h1>
+
+  <h1 class="margin-bottom-0 size-24 text-center">{{ $conversation->subject }}</h1>
+    @foreach ($conversation->messages as $message)
 
   <!-- post -->
   <div class="clearfix margin-bottom-60">
@@ -13,6 +15,7 @@
     <div class="border-bottom-1 border-top-1 padding-10">
       <span class="pull-right size-11 margin-top-3 text-muted">{{ $message->created_at->format('M i, Y h:iA') }}</span>
       <strong>{{ $message->sender->getDisplayName()  }}</strong></a>
+
     </div>
 
     <div class="block-review-content">
@@ -34,6 +37,7 @@
 
   </div>
   <!-- /post -->
+  @endforeach
 
 
   <!-- reply -->
@@ -53,7 +57,10 @@
           <i class="fa fa-exclamation-circle"></i>
           <strong id="offerStatusText"></strong><span id="offerStatus"></span>
         </div> <!-- alert -->
-        
+        <input type="hidden" name="subject" value="{{ $conversation->subject }}">
+        @if ($conversation->entry)
+          <input type="hidden" name="entry_id" value="{{ $conversation->entry_id }}">
+        @endif
         <textarea class="summernote form-control" data-height="200" data-lang="en-US" name="message"></textarea>
       </div>
 
@@ -83,7 +90,7 @@
 
       $.ajax({
         type: "POST",
-        url: "{{ route('messages.create.save', $message->entry->id) }}",
+        url: "{{ route('messages.create.save', $conversation->findSendToId(Auth::user())) }}",
         data: $('#offerForm').serialize(),
 
         success: function(data){
@@ -103,7 +110,8 @@
 
         },
         error: function(data){
-          alert("failure");
+          $('#offerStatusbox').addClass('alert alert-danger');
+          $('#offerStatus').html('Something went wrong :(');
         }
       });
       return false;

@@ -16,7 +16,7 @@ use App\User;
 use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Conversation;
+use App\Conversation;
 
 class Message extends Model
 {
@@ -48,7 +48,7 @@ class Message extends Model
      * @return \Illuminate\Support\Collection
      */
     public function conversation() {
-        return $this->belongsTo('Conversation', 'thread_id');
+        return $this->belongsTo('App\Conversation', 'thread_id');
     }
 
 

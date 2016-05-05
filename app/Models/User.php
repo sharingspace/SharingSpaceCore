@@ -24,6 +24,7 @@ use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use App\Social;
 use App\Message;
+use App\Conversation;
 use DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
@@ -374,9 +375,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since  [v1.0]
+     * @param integer $limit
     * @return collection
     */
-    public function getUnreadMessages() {
+    public function getUnreadMessages($limit = null) {
     	static $cache;
 
     	if ($cache) {
@@ -385,7 +387,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			$unread_messages = Message::join('users', 'users.id', '=', 'messages.sent_by')
 			->where('sent_to', '=', $this->id)
 			->whereNull('users.deleted_at')
-			->whereNull('read_on')->get();
+			->whereNull('read_on')
+            ->orderBy('messages.created_at', 'DESC');
+
+            if ($limit!='') {
+                $unread_messages = $unread_messages->limit($limit);
+            } else {
+                $unread_messages = $unread_messages->get();
+            }
+
 			$cache = $unread_messages;
 			return $unread_messages;
     	}

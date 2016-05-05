@@ -295,7 +295,7 @@ Route::group(
                 );
 
                 Route::post(
-                    'messages/new/{entryId?}',
+                    'messages/new/{userId}/{entryId?}',
                     array(
                     'as' => 'messages.create.save',
                     'uses' => 'MessagesController@postCreate')
