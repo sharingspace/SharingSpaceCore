@@ -21,31 +21,31 @@
         <!-- NOTIFICATION BOX -->
 				<li class="notifications-popdown">
 					<a href="#">
-                        @if (Auth::user()->getUnreadMessages()->count())
-						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessages()->count() }}</span>
+                        @if (Auth::user()->getLimitedUnreadMessages())
+						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessagesCount() }}</span>
                         @endif
 						<i class="fa fa-envelope-o"></i>
 					</a>
 
-					<div class="notifications-popdown-box" style="display: none;">
+					<div class="notifications-popdown-box" style="display: none;border-left: 1px rgba(91, 91, 91, 0.2) solid; padding-left: 10px;">
 						<div class="notifications-popdown-wrapper">
                             <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
-                                {{ Auth::user()->getUnreadMessages()->count() }} new messages
+                                {{ Auth::user()->getUnreadMessagesCount() }} new messages
                             </div>
-                            @foreach (Auth::user()->getUnreadMessages(5) as $unread_messages)
-                                 <div class="clearfix margin-bottom-20"><!-- notification item -->
-                                    <span class="label label-success label-square pull-left">
-                                    	<i class="fa fa-comment"></i>
-                                    </span>
+                            @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
+                                 <div class="clearfix margin-bottom-20">
+                                     <!-- notification item -->
+                                    	<img src="{{ $unread_messages->sender->gravatar() }}" class="avatar-sm pull-left" style="margin-left: 5px; margin-top: 5px;">
                                     <span class="size-14 text-muted">
-                                        <b>New Message</b>: {{ $unread_messages->message }}
+                                        <b>New Message</b> from {{ $unread_messages->sender->getDisplayName() }}:
+                                        <a href="/account/message/{{ $unread_messages->conversation->id }}">{{ $unread_messages->message }}</a>
                                     </span>
                                    </div><!-- /notification item -->
                             @endforeach
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
-							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">VIEW MESSAGES</a>
+							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">VIEW ALL MESSAGES</a>
 							<!-- <span class="pull-left"><strong>TOTAL:</strong> $54.39</span> -->
 						</div>
 						<!-- /quick cart footer -->

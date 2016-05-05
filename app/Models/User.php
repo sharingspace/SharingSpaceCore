@@ -378,27 +378,48 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param integer $limit
     * @return collection
     */
-    public function getUnreadMessages($limit = null) {
-    	static $cache;
+    public function getLimitedUnreadMessages() {
+    	static $unread_cache;
 
-    	if ($cache) {
-    		return $cache;
+    	if ($unread_cache) {
+    		return $unread_cache;
     	} else {
-			$unread_messages = Message::join('users', 'users.id', '=', 'messages.sent_by')
+			$unread_messages = Message::join('users', 'users.id', '=', 'messages.sent_to')->with('conversation')
 			->where('sent_to', '=', $this->id)
 			->whereNull('users.deleted_at')
 			->whereNull('read_on')
             ->orderBy('messages.created_at', 'DESC');
 
-            if ($limit!='') {
-                $unread_messages = $unread_messages->limit($limit);
-            } else {
-                $unread_messages = $unread_messages->get();
-            }
-
-			$cache = $unread_messages;
+            $unread_messages = $unread_messages->take(5)->get();
+			$unread_cache = $unread_messages;
 			return $unread_messages;
     	}
+
+    }
+
+
+    /**
+     * Get the count of unread messages
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @param integer $limit
+     * @return collection
+     */
+    public function getUnreadMessagesCount() {
+        static $unread_count_cache;
+
+        if ($unread_count_cache) {
+            return $unread_count_cache;
+        } else {
+            $unread_messages_count = Message::join('users', 'users.id', '=', 'messages.sent_to')
+                ->where('sent_to', '=', $this->id)
+                ->whereNull('users.deleted_at')
+                ->whereNull('read_on')->count();
+
+            $unread_count_cache = $unread_messages_count;
+            return $unread_messages_count;
+        }
 
     }
 
