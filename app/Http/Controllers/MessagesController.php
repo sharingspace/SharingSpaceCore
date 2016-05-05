@@ -45,7 +45,7 @@ class MessagesController extends Controller
         return view('account/inbox')->with('messages', $messages);
     }
 
-    /**
+     /**
      * Returns a view that displays a specific message
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -63,7 +63,19 @@ class MessagesController extends Controller
 
 
 
-
+     /**
+     * Handles AJAX request to create a new message.
+     *
+     * The $userId is always required, because we do not store the recipients' ID in the conversation
+     * (thread) record. The $entryId is optional, so that people can send messages from a user's profile.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @internal param $Request
+     * @param int $userId
+     * @param int $entryId
+     * @return View
+     */
     public function postCreate(Request $request, $userId, $entryId = null) {
 
         $recipient = User::find($userId);
@@ -75,6 +87,8 @@ class MessagesController extends Controller
             $data['post_type'] = $entry->post_type;
         }
 
+        // Find the thread ID by the subject, entry_id, started_by and community_id.
+        // If there is no matching thread, create one.
         $conversation = Conversation::firstOrCreate([
             'subject' => e(Input::get('subject')),
             'entry_id' => $entryId,
@@ -86,6 +100,8 @@ class MessagesController extends Controller
         $offer->message = e(Input::get('message'));
         $offer->sent_by = Auth::user()->id;
         $offer->sent_to = $userId;
+
+        // Associate the conversation with the new message (via thread_id) in the messages table
         $conversation = $offer->conversation()->associate($conversation);
 
         $data['email'] = $send_to_email = $recipient->email;
@@ -96,7 +112,6 @@ class MessagesController extends Controller
 
         $data['community'] = $request->whitelabel_group->name;
         $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.Config::get('app.domain');
-
 
 
         if ($offer->save()) {
