@@ -407,8 +407,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * @author [D. Linnard] [<david@linnard.com>]
     * @since  [v1.0]
     * @param int $user_id
-    * @param int $entry_id
-    * @return no return
+    * @return boolean
     */
     public static function deleteAvatar($user_id)
     {

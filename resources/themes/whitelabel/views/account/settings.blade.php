@@ -22,7 +22,7 @@
         <li><a href="#social" data-toggle="tab">Social</a></li>
 				<li><a href="#avatar" data-toggle="tab">Avatar</a></li>
 				<li><a href="#password" data-toggle="tab">Password</a></li>
-				<li><a href="#privacy" data-toggle="tab">Privacy</a></li>
+				<!-- <li><a href="#privacy" data-toggle="tab">Privacy</a></li> -->
 			</ul>
 
 			<div class="tab-content margin-top-20">
@@ -240,7 +240,7 @@
 
 				</div>
 				<!-- /PASSWORD TAB -->
-
+        @if (0)
 				<!-- PRIVACY TAB -->
 				<div class="tab-pane fade" id="privacy">
           <form role="form" method="post" action="{{ route('user.privacy.save') }}">
@@ -275,6 +275,7 @@
           </form>
 
 				</div> <!-- /PRIVACY TAB -->
+        @endif
 			</div>
 		</div>
 
