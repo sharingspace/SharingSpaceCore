@@ -14,7 +14,7 @@ class AddCommunityItToMessages extends Migration
     {
         Schema::table('messages', function(Blueprint $table)
         {
-            $table->string('community_id')->nullable()->default(NULL);
+            $table->integer('community_id')->nullable()->default(NULL);
         });
     }
 
