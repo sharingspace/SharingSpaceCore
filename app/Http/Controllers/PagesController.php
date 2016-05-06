@@ -49,7 +49,8 @@ class PagesController extends Controller
                 if ($request->whitelabel_group->group_type == 'S') {
                     return view('auth/login-unbranded')->withError('You must be logged in and a member to see this.');
                 } else {
-                    return view('auth/login')->withError('You must be logged in and a member to see this.');
+                    $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->orderBy('created_at', 'desc')->get();
+                    return view('home')->with('entries', $entries);
                 }
             }
         } else {
