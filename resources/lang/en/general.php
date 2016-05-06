@@ -197,6 +197,7 @@ return [
 
         'messages' => [
             'unauthorized' => 'You are not authorized to view that conversation.',
+            'not_found' => 'That conversation does not exist.',
         ],
 
     ],

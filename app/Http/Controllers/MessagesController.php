@@ -60,16 +60,23 @@ class MessagesController extends Controller
     public function getMessage(Request $request, $conversationId)
     {
 
-        $conversation = Conversation::with('entry','sender','messages')->find($conversationId);
+        if ($conversation = Conversation::with('entry','sender','messages')->find($conversationId)) 
+        {
 
-        if ($request->user()->cannot('view-conversation', $conversation)) {
-            return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
+            if ($request->user()->cannot('view-conversation', $conversation)) {
+                return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
+            }
+
+            foreach ($conversation->messages as $message) {
+                $message->markMessageRead();
+            }
+            return view('account/message')->with('conversation', $conversation);
+            
         }
 
-        foreach ($conversation->messages as $message) {
-            $message->markMessageRead();
-        }
-        return view('account/message')->with('conversation', $conversation);
+        return redirect()->to('browse')->with('error', trans('general.messages.messages.not_found'));
+
+        
     }
 
 
