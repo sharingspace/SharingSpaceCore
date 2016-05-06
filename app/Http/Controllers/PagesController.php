@@ -47,6 +47,7 @@ class PagesController extends Controller
 
             } else {
                 if ($request->whitelabel_group->group_type == 'S') {
+                    LOG::debug('Secret group');
                     return view('auth/login-unbranded')->withError('You must be logged in and a member to see this.');
                 } else {
                     $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->orderBy('created_at', 'desc')->get();
