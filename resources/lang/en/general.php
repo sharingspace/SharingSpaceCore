@@ -181,6 +181,7 @@ return [
       'choose_file'  => 'Choose file',
       'banner_tip' => 'Tip. Images with an aspect ratio of 4:1 will fit exactly.',
       'logo_tip' => 'Tip. For best results, use an image that is 250px x 40px.',
+      'cover_image' => 'Cover image'
     ],
 
 
@@ -193,7 +194,8 @@ return [
       'from'        => 'From',
       'created_at'  => 'Sent On',
       'message'       => 'Message',
-      'message_from'       => 'Message From :name',
+      'message_from'  => 'Message From :name',
+      'sent' => 'Your message has been sent',
 
         'messages' => [
             'unauthorized' => 'You are not authorized to view that conversation.',

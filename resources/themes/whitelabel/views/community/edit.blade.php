@@ -120,13 +120,14 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <!-- Cover upload -->
                 <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                  <label for="cover_img">Cover image</label>
+                  <label for="cover_img">{{ trans('general.uploads.cover_image') }}</label>
                   <div class="fancy-file-upload fancy-file-info">
                     <i class="fa fa-picture-o"></i>
-                    <input type="file" class="form-control" name="cover_img" onchange="jQuery(this).next('input').val(this.value);" />
-                    <input type="text" class="form-control" placeholder="Cover image upload - no file selected" readonly="" />
+                    <input type="file" class="form-control" id="cover_img" name="cover_img" onchange="jQuery(this).next('input').val(this.value);" />
+                    <input type="text" class="form-control" id="cover_shadow_input" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
                     <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                   </div>
+                  <p class='too_large_cover smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
                   <p>{{ trans('general.uploads.banner_tip')}}</p>
                 </div>
               </div>
@@ -141,16 +142,18 @@
                 <label for="cover_img">Logo image</label>
                   <div class="fancy-file-upload fancy-file-info">
                     <i class="fa fa-picture-o"></i>
-                    <input type="file" class="form-control" name="logo" onchange="jQuery(this).next('input').val(this.value);" />
-                    <input type="text" class="form-control" placeholder="Logo upload - no file selected" readonly="" />
+                    <input type="file" class="form-control" id="logo_img" name="logo" onchange="jQuery(this).next('input').val(this.value);" />
+                    <input type="text" class="form-control" id="logo_shadow_input" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
                     <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                   </div>
+                  <p class='too_large_logo smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
+
                   <p>{{ trans('general.uploads.logo_tip')}}</p>
                 </div>
               </div>
-              <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10" style="background-color:#fff;height:60px">
+              <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10" style="background-color:#fff;height:100px">
                 <div class="col-md-4 col-md-offset-4" style="position:absolute;top:35%;">
-                  <img src="{{ $whitelabel_group->getLogo() }}" style=" width: 100%;height: 100%;object-fit:cover;overflow: hidden;background-color:white">
+                  <img src="{{ $whitelabel_group->getLogo() }}" style="object-fit:cover;overflow: hidden;">
                 </div>
               </div>
               </div> <!-- row -->
@@ -249,8 +252,24 @@
 
 $( document ).ready(function() {
 
-  $("#file").change(function() {
-    $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+  $("#cover_img").change(function() {
+    var maxSize = $('#MAX_FILE_SIZE').val();
+    $('#cover_shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+
+    if ($("#cover_img")[0].files[0].size > maxSize) {
+      $("#cover_shadow_input").val("");
+      $('p.too_large_cover').show().addClass("error_message").fadeOut(5000, "swing");
+    }
+  });
+
+  $("#logo_img").change(function() {
+    var maxSize = $('#MAX_FILE_SIZE').val();
+    $('#logo_shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+
+    if ($("#logo_img")[0].files[0].size > maxSize) {
+      $("#logo_shadow_input").val("");
+      $('p.too_large_logo').show().addClass("error_message").fadeOut(5000, "swing");
+    }
   });
 
   $(document).on( "click", "#select_all", function( e ) {
