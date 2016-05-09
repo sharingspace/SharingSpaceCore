@@ -91,6 +91,10 @@ return [
       'save_avatar' => 'Save Avatar Changes',
       'avatar_success' => 'Your avatar has been updated',
       'avatar_failure' => 'Something went wrong. Your uploaded image has not been saved',
+      'latin_chars' => 'Only latin characters and numbers',
+      'login_by_email' => 'Sign-in with email',
+      'login_by_social' => 'or with a social network',
+      'signup_by_email' => 'Sign-up with email'
     ],
 
     'community'  => [

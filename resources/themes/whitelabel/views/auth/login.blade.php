@@ -24,7 +24,7 @@
         <form class="nomargin sky-form boxed" method="post" action="{{ route('login') }}">
           {!! csrf_field() !!}
           <header>
-            <i class="fa fa-sign-in"></i>  {{ trans('general.nav.login') }}
+            <i class="fa fa-sign-in"></i>  {{ trans('general.user.login_by_email') }}
           </header>
 
           <fieldset class="nomargin">
@@ -42,7 +42,7 @@
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.user.latin_chars') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
@@ -65,7 +65,7 @@
         <form action="#" method="post" class="sky-form boxed">
 
           <header>
-            <i class="fa fa-globe"></i> Register using your favourite social network
+            &hellip; {{ trans('general.user.login_by_social') }}
           </header>
 
           <fieldset class="nomargin">
@@ -93,16 +93,12 @@
             </div>
 
           </fieldset>
-
           <footer>
-            <!-- {!! trans('auth.dont_have_account') !!} -->
+            {!! trans('auth.no_account') !!}
           </footer>
-
         </form>
-
       </div>
       <!-- /SOCIAL LOGIN -->
-
     </div>
 
 
