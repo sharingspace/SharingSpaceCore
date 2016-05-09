@@ -107,11 +107,11 @@
                       <div class="col-md-8 form-group {{ $errors->first('file', 'has-error') }}">
                         <div class="fancy-file-upload fancy-file-info">
                           <i class="fa fa-picture-o"></i>
-                <input id="choose-file" type="file" class="form-control" name="file" accept="image/jpg,image/png,image/jpeg,image/gif" onchange="jQuery(this).next('input').val(this.value);"/>
-                <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
+                          <input id="choose-file" type="file" class="form-control" name="file" accept="image/jpg,image/png,image/jpeg,image/gif" onchange="jQuery(this).next('input').val(this.value);"/>
+                          <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
                           <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                         </div> <!-- fancy -->
-              <p class='too_large smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
+                        <p class='too_large smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
                       </div> <!-- col 11 -->
 
                       <div class="col-md-1 bounding-box" id="current_image" style="position:relative;height:50px;">

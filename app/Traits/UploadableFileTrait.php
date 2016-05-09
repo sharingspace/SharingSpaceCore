@@ -67,7 +67,7 @@ trait UploadableFileTrait
                 //Log::debug("moveAndStoreImage: We already have an entry )"+$id+"), does it already have media?");
 
                 $entry = \App\Entry::find($id);
-                if ($entry->media()->count())
+                if (!empty($entry) && $entry->media()->count())
                 {
                     //Log::debug("moveAndStoreImage: We already have an image associated with an entry");
                     // We already have an image associated with an entry, so delete the existing image first
