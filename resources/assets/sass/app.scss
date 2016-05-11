@@ -7624,6 +7624,7 @@ $color-blue: #1BC3E1;
 $color-green: #9AE14F;
 
 #add_tile_wrapper {
+  margin-top:0;
 	.tile_container *[id^='nbutton_'], .tile_container *[class^='nbutton_'] {
 			cursor: pointer;
 			display: block;
@@ -7634,6 +7635,10 @@ $color-green: #9AE14F;
 			font-size: 14px;
 			text-align: center;
 	}
+
+  .checkbox label {
+    padding-left:25px;
+  }
 
 	.tile_info, .tile_exchanges {
 		font-size:16px;
@@ -7774,6 +7779,12 @@ $color-green: #9AE14F;
     font-size: 14px;
 		text-align: center;
 	}
+}
+
+@media only screen and (min-width: 760px) {
+  #add_tile_wrapper {
+    margin-top:20px;
+  }
 }
 
 .page_banner {

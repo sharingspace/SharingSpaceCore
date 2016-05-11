@@ -8117,6 +8117,10 @@ Quick add
 
 /* these are bootstraps media breaks */
 
+#add_tile_wrapper {
+  margin-top: 0;
+}
+
 #add_tile_wrapper .tile_container *[id^='nbutton_'],
 #add_tile_wrapper .tile_container *[class^='nbutton_'] {
   cursor: pointer;
@@ -8127,6 +8131,10 @@ Quick add
   color: white;
   font-size: 14px;
   text-align: center;
+}
+
+#add_tile_wrapper .checkbox label {
+  padding-left: 25px;
 }
 
 #add_tile_wrapper .tile_info,
@@ -8261,6 +8269,12 @@ Quick add
   color: white;
   font-size: 14px;
   text-align: center;
+}
+
+@media only screen and (min-width: 760px) {
+  #add_tile_wrapper {
+    margin-top: 20px;
+  }
 }
 
 .page_banner {

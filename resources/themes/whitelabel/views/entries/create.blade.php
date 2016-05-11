@@ -13,28 +13,28 @@
        <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.entries.create') }}</h1>
 
         <!-- Added tiles .... -->
-        <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-        <table class="table" id="create_table" >
-          <caption>You Added</caption>
-          <thead>
-              <tr>
-                  <th>{{ trans('general.entries.post_type') }}</th>
-                  <th>{{ trans('general.entries.qty') }}</th>
-                  <th>{{ trans('general.entries.title') }}</th>
-                  <th>{{ trans('general.entries.exchange_types') }}</th>
-                  <th>{{ trans('general.entries.keywords') }}</th>
-                  <th>Action</th>
-                  <th style='display:none'></th>
-              </tr>
-          </thead>
-        </table>
+        <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 margin-bottom-0">
+          <table class="table" id="create_table" style="display:none;">
+            <caption>You Added</caption>
+            <thead>
+                <tr>
+                    <th>{{ trans('general.entries.post_type') }}</th>
+                    <th>{{ trans('general.entries.qty') }}</th>
+                    <th>{{ trans('general.entries.title') }}</th>
+                    <th>{{ trans('general.entries.exchange_types') }}</th>
+                    <th>{{ trans('general.entries.keywords') }}</th>
+                    <th>Action</th>
+                    <th style='display:none'></th>
+                </tr>
+            </thead>
+          </table>
         </div>
       </div>
     </section>
 
 			<section>
 
-				<div id="add_tile_wrapper" class="container margin-top-20">
+				<div id="add_tile_wrapper" class="container">
 					<div class="row">
 						<!-- Entry -->
 						<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
@@ -52,39 +52,9 @@
                   {!! csrf_field() !!}
         <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value={{ trans('general.entries.max_size')}} />
     							<input type="hidden" name="upload_key" id="upload_key" value="" />
+                  <div class="row">
 
-                	<div class="col-md-3 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
-                  	<div class="form-group" style="margin-bottom: 5px;">
-                    	<fieldset class="margin-bottom-10">
-
-                      	<legend class="sr-only">Exchange by:</legend>
-
-                        {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
-												<div class="exchange_types">
-
-                          <!-- checkboxes for exchange types -->
-                          <div class="checkbox">
-                            @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-                              <div class="col-md-12 pull-left margin-bottom-10">
-                                <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                      {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
-                                  <i></i> {{ $exchange_types->name }}
-                                </label>
-                              </div>
-                            @endforeach
-                            <div class="col-md-12 pull-left margin-bottom-10">
-                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                                {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
-                                <i></i> {{trans('general.community.all_exchanges')}}
-                              </label>
-                            </div>
-                          </div>
-                        </div> <!-- exchange_types -->
-                      </fieldset>
-                    </div> <!-- form-group -->
-                  </div> <!-- col-md-3 -->
-
-                  <div class="col-md-9 col-sm-8 col-xs-12">
+                  <div class="col-md-9 col-sm-8 col-xs-12 col-md-push-3 col-sm-push-4">
                 		<div class="row">
                   		<div class="col-md-3 margin-bottom-10 {{ $errors->first('post_type', ' has-error') }}">
                       	<select class="form-control" name="post_type" id="post_type">
@@ -104,7 +74,7 @@
                   		</div> <!-- col 6 -->
 
                       <!-- File upload -->
-                      <div class="col-md-8 form-group {{ $errors->first('file', 'has-error') }}">
+                      <div class="col-md-8 col-sm-8 col-xs-12 form-group {{ $errors->first('file', 'has-error') }}">
                         <div class="fancy-file-upload fancy-file-info">
                           <i class="fa fa-picture-o"></i>
                           <input id="choose-file" type="file" class="form-control" name="file" accept="image/jpg,image/png,image/jpeg,image/gif" onchange="jQuery(this).next('input').val(this.value);"/>
@@ -114,7 +84,7 @@
                         <p class='too_large smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
                       </div> <!-- col 11 -->
 
-                      <div class="col-md-1 bounding-box" id="current_image" style="position:relative;height:50px;">
+                      <div class="col-md-1 col-sm-4 col-xs-12" id="current_image" style="position:relative;height:50px;">
                        <div id="image_box" class="pull-left" style="background-size: contain;
 position: absolute;background-position: center;background-repeat: no-repeat;height: 100%;width: 100%;">
 
@@ -172,6 +142,39 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
                       </div> <!-- col 2 -->
                     </div> <!-- row -->
                   </div> <!-- col 9 -->
+
+                  <div class="col-md-3 col-sm-4 col-xs-12 col-md-pull-9 col-sm-pull-8" > <!-- style="border-right:#CCC thin solid;" -->
+                    <div class="form-group" style="margin-bottom: 5px;">
+                      <fieldset class="margin-bottom-10">
+
+                        <legend class="sr-only">Exchange by:</legend>
+
+                        {{ $errors->first('tile_exchange_type', '<div class="alert-no-fade alert-danger col-sm-12"><i class="icon-remove-sign"></i> :message</div>') }}
+                        <div class="exchange_types">
+
+                          <!-- checkboxes for exchange types -->
+                          <div class="checkbox">
+                            @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                              <div class="col-md-12 pull-left margin-bottom-10">
+                                <label class="checkbox col-md-12 pull-left margin-bottom-10 padding-left-10">
+                      {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
+                                  <i></i> {{ $exchange_types->name }}
+                                </label>
+                              </div>
+                            @endforeach
+                            <div class="col-md-12 pull-left margin-bottom-10">
+                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                                {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
+                                <i></i> {{trans('general.community.all_exchanges')}}
+                              </label>
+                            </div>
+                          </div>
+                        </div> <!-- exchange_types -->
+                      </fieldset>
+                    </div> <!-- form-group -->
+                  </div> <!-- col-md-3 -->
+
+                  </div>  <!-- row -->
                 </form>
               </div> <!-- row -->
 				</div> <!-- add_tile_wrapper -->
