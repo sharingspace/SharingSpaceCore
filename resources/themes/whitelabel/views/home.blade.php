@@ -8,7 +8,7 @@
 {{-- Page content --}}
 @section('content')
 
-<section class="info-bar">
+<section class="info-bar hidden-xs">
 	<div class="container">
 
 		<div class="row">
