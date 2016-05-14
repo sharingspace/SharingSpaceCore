@@ -21,9 +21,9 @@
         <!-- NOTIFICATION BOX -->
 				<li class="notifications-popdown">
 					<a href="#">
-                        @if (Auth::user()->getUnreadMessagesCount() > 0)
+            @if (Auth::user()->getUnreadMessagesCount() > 0)
 						<span class="badge badge-red btn-xs badge-corner-sm">{{ Auth::user()->getUnreadMessagesCount() }}</span>
-                        @endif
+            @endif
 						<i class="fa fa-envelope-o"></i>
 					</a>
 
@@ -107,17 +107,24 @@
               @endif
             </a>
 
+            <div class="navbar-header pull-right">
+              <ul class="nav navbar-nav pull-left">
+                <li class="margin-right-10">
+                  <a class="padding-right-0 margin-right-20" href="{{ route('entry.create.form') }}">
+                    <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i></button>
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-		<div class="navbar-collapse pull-right nav-main-collapse collapse">
-			<nav class="nav-main">
-
-				<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-
-                @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
+		        <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
+			         <nav class="nav-main">
+				        <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+                  @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
                     <li>
                         <a href="{{ route('join-community') }}">Join Hub</a>
                     </li>
-                @endif
+                  @endif
 
                   <li{!! (Route::is('home') ? ' class="active"' : '') !!}>
                     <a href="{{ route('home') }}/#table">
@@ -134,13 +141,7 @@
                   @if (strlen($whitelabel_group->about))
                   {!! (Route::is('home') ? '<li><a href="" id="display_about">About</a></li>' : '') !!}
                   @endif
-                  <li>
-                    <a href="{{ route('entry.create.form') }}">
-                      <button type="button" class="btn btn-sm btn-warning">
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </a>
-                  </li>
+                 
                   @can('update-community', $whitelabel_group)
                   <li>
                     <a href="{{ route('community.edit.form')}}"><i class="fa fa-lg fa-cog"></i></a>
