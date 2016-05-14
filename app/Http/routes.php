@@ -481,6 +481,10 @@ Route::group(
         | Default homepage stuff
         |--------------------------------------------------------------------------
         */
+         Route::get(
+            'features', function() {
+            return View::make('features');
+        });
 
         Route::get(
             'terms',

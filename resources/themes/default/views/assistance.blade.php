@@ -2,14 +2,6 @@
 
 @section('content')
 
-
-<section class="padding-top-0">
-  <div class='page_banner sharing_fixed_banner'>
-    <h1>{{trans('pricing.for_free') }}</h1>
-  </div>
-</section>
-
-
 <section id="pricing">
   <div class="container">
     <div class="row">

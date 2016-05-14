@@ -1,12 +1,6 @@
 @extends('layouts.master')
 @section('content')
 
-<section class="padding-top-0">
-  <div class="page_banner sharing_fixed_banner">
-    <h1>{{ trans('coop.coop_headline') }}</h1>
-  </div>
-</section>
-
 <section id="why" class="padding-xxs">
   <div class="container">
 

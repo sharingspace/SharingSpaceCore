@@ -6,14 +6,9 @@
 @parent
 @stop
 
-
 {{-- Page content --}}
 @section('content')
-<section class="padding-top-0">
-  <div class='page_banner sharing_fixed_banner'>
-    <h1>Terms &amp; Conditions</h1>
-  </div>
-</section>
+
 <!-- -->
 			<section>
 				<div class="container margin-top-20">
