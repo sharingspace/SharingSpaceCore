@@ -40,23 +40,38 @@
 			<!-- <script src="assets/js/extensions/debug/bootstrap-debugger.js"></script> -->
     @endif
   <link rel="shortcut icon" href="/favicon.ico">
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/hp/normalize.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/hp/webflow.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/hp/anyshare-corp.webflow.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
 
 <body class="smoothscroll enable-animation">
   <!-- wrapper -->
 		<div id="wrapper">
 
-      <div>@include('partials.header')</div>
+      @if (Route::is('home'))
+        {{--*/ $bannerHeight = '500px' /*--}}
+        <div>@include('partials.header')</div>
+      @else
+      {{--*/ $bannerHeight = '300px' /*--}}
 
-      @if (!Route::is('home'))
+        <div>@include('partials.header')</div>
         <!-- Notifications -->
 
-          <div class="col-md-12 margin-top-0">
-            @include('notifications')
-          </div>
-
+        <div class="col-md-12 margin-top-0">
+          @include('notifications')
+        </div>
       @endif
-
 
       <div>@yield('content')</div>
 
@@ -77,6 +92,24 @@
 
 </script>
 
+<script type="text/javascript" src="{{ asset('assets/js/webflow.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){       
+     var scroll_start = 30;
+     var startchange = $('#header');
+     var offset = startchange.offset();
+     $(document).scroll(function() { 
+        scroll_start = $(this).scrollTop();
+        console.log("scroll scroll_start = "+scroll_start +", offset.top = "+offset.top);
+
+        if(scroll_start > offset.top) {
+            $('#header').css('background-color', 'white');
+         } else {
+            $('#header').css('background-color', 'transparent');
+         }
+     });
+  });
+</script>
 
 </body>
 </html>

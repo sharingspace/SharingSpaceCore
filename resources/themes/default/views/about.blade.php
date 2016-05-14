@@ -2,17 +2,11 @@
 
 @section('content')
 
-<section class="padding-top-0">
-  <div class='page_banner sharing_fixed_banner'>
-    <h1>About</h1>
-  </div>
-</section>
-
 <section id="why" class="padding-xxs">
   <div class="container">
 
     <header class="text-center margin-bottom-60">
-      <h2 style="font-size:48px;">{{ trans('about.why_headline') }}</h2>
+      <h2 class="margin-bottom-20">{{ trans('about.why_headline') }}</h2>
       <p class="lead font-lato">{{ trans('about.mission_subheadline') }}</p>
     </header>
 
@@ -54,7 +48,7 @@
   <div class="container">
 
     <header class="text-center margin-bottom-60">
-      <h2 style="font-size:48px;">{{ trans('about.what_how') }}</h2>
+      <h2 class="margin-bottom-20">{{ trans('about.what_how') }}</h2>
       <p class="lead font-lato">{{ trans('about.what_how_subheadline') }}</p>
     </header>
 

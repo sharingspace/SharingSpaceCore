@@ -25,7 +25,7 @@
 }
 #topMain.nav-pills>li>a.dropdown-toggle:after {
 	display: block;
-	content: "\f107";
+	//content: "\f107";
 	position: absolute;
 	top: 50%;
 	right: 10px;

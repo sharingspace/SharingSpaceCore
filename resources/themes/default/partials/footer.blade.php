@@ -3,40 +3,49 @@
 <footer id="footer">
 	<div class="copyright">
     <div class="container">
-      <div class="col-md-4 col-sm-12 pull-md-left text-center-sm  text-center-xs margin-top-10">
-        &copy; {{ date("Y") }} All Rights Reserved, AnyShare Society. 
-      </div> <!-- col 3 -->
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="row">
+            <div class="col-md-4 col-sm-12 pull-md-left text-center-sm  text-center-xs margin-top-6 margin-bottom-6">
+              <a href="/" class="w-nav-brand">
+                <img width="20" src="{{ asset('assets/img/hp/anyshare-mark.png') }}" class="footer-mark">
+              </a>
+            <!-- &copy; {{ date("Y") }} All Rights Reserved, AnyShare Society. -->
+            </div> <!-- col 3 -->
 
-      <div class="col-md-6 col-sm-12 pull-md-left text-center-sm text-center-xs margin-top-10">
-        <ul class="text-center nomargin list-inline mobile-block">
-          <li><a href="http://blog.massmosaic.com">News</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/coop">Coop</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li><a href="/terms">Terms &amp; Conditions</a></li>
-          <li><a href="/privacy">Privacy</a></li>
-          <li><a href="#" data-toggle="modal" data-target="#subscribe">Newsletter</a></li>
-        </ul>
+            <div class="col-md-6 col-sm-12 text-center-sm text-center-xs margin-top-10">
+              <ul class="nomargin list-inline mobile-block pull-right">
+                <li><a href="/about">About</a></li>
+                <li><a href="http://blog.massmosaic.com">News</a></li>
+                <!-- <li><a href="/coop">Coop</a></li>
+                <li><a href="/pricing">Pricing</a></li> -->
+                <li><a href="/terms">Terms</a></li>
+                <li><a href="/privacy">Privacy</a></li>
+                <!-- <li><a href="#" data-toggle="modal" data-target="#subscribe">Newsletter</a></li> -->
+              </ul>
+            </div>
+            <!-- 
+            <div class="col-md-2 col-sm-12 socials text-center-sm text-center-xs margin-top-10">
+              <a href="https://www.facebook.com/mass.mosaic/" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-facebook"></i>
+              </a>
+
+              <a href="https://twitter.com/massmosaic" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-twitter"></i>
+              </a>
+
+              <a href="https://plus.google.com/+Massmosaic/videos" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Google plus">
+                <i class="fa fa-google"></i>
+                <i class="fa fa-google"></i>
+              </a>
+            </div> --><!-- col 2 -->
+      	</div>
       </div>
-
-      <div class="col-md-2 col-sm-12 socials text-center-sm text-center-xs margin-top-10">
-        <a href="https://www.facebook.com/mass.mosaic/" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
-          <i class="fa fa-facebook"></i>
-          <i class="fa fa-facebook"></i>
-        </a>
-
-        <a href="https://twitter.com/massmosaic" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
-          <i class="fa fa-twitter"></i>
-          <i class="fa fa-twitter"></i>
-        </a>
-
-        <a href="https://plus.google.com/+Massmosaic/videos" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Google plus">
-          <i class="fa fa-google"></i>
-          <i class="fa fa-google"></i>
-        </a>
-      </div> <!-- col 2 -->
-	</div>
+    </div>
   </div>
+</div>
 
 </footer>
 <!-- /FOOTER -->
