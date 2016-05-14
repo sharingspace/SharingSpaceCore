@@ -54,7 +54,7 @@ return [
           'save' => 'Save',
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
-          'file_placeholder' => 'no file selected (maxiumum size is 4MB)',
+          'file_placeholder' => 'no file selected (max size is 4MB)',
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',
