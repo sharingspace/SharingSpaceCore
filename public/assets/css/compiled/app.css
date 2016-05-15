@@ -7437,7 +7437,7 @@ ul.search-history {
   }
 
   #footer .mobile-block {
-    margin-bottom: 25px !important;
+    margin-bottom: 15px !important;
   }
 
   #footer.footer-fixed .mobile-block {
@@ -7470,10 +7470,6 @@ ul.search-history {
   #footer .footer-gallery > img {
     float: none;
     margin-right: 0;
-  }
-
-  #footer .row > div {
-    margin-bottom: 60px;
   }
 }
 
