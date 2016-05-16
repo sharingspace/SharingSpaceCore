@@ -94,7 +94,9 @@
 
 <script type="text/javascript" src="{{ asset('assets/js/webflow.js') }}"></script>
 <script type="text/javascript">
-  $(document).ready(function(){       
+  $(document).ready(function(){ 
+    //$('#autoplay_movies').css('height',  window.innerHeight); 
+      
      var scroll_start = 30;
      var startchange = $('#header');
      var offset = startchange.offset();
@@ -104,8 +106,12 @@
 
         if(scroll_start > offset.top) {
             $('#header').css('background-color', 'white');
+            $('#header').removeClass('header_noDropShadow');
+            $('#header').addClass('header_dropShadow');
          } else {
             $('#header').css('background-color', 'transparent');
+            $('#header').removeClass('header_dropShadow');
+            $('#header').addClass('header_noDropShadow');
          }
      });
   });

@@ -12,9 +12,8 @@
       <div class="row">
         <div class="col-md-6 overview-column">
           <h3 id="opportunity">The Opportunity</h3>
-          <p class="text">In the past, it would cost&nbsp;<em>over</em> <strong>$10k</strong>​ for you to make a&nbsp;<em>Sharing Economy Website</em>&nbsp;to connect&nbsp;people's needs &amp; resources.
-            <br>
-            <br>Now, you can use the&nbsp;AnyShare! Make a&nbsp;Sharing Website&nbsp;for any group or community in&nbsp;<em>under</em>&nbsp;<strong><em>1 minute</em></strong>!</p>
+          <p class="text">Make a Sharing Website for any group or community in under <strong>1 minute!</strong></p>
+          <p class="text">In the past, it would cost over <strong>$10k</strong> for you to make a Sharing Economy Website to connect people's needs &amp; resources. With AnyShare its' cheap and easy!</p>
         </div>
         <div class="col-md-6"><img src="{{ asset('assets/img/hp/anyshare-interface.jpg') }}" class="product-image">
         </div>

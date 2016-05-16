@@ -1,7 +1,7 @@
 <div class="w-section">
-    <div data-autoplay="data-autoplay" data-loop="data-loop" data-wf-ignore="data-wf-ignore" data-poster-url="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-poster-00001.png" data-video-urls="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.webm,https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.mp4" class="w-background-video background-video" style="height:{{$bannerHeight}}">
+    <div id="autoplay_movies" data-autoplay="data-autoplay" data-loop="data-loop" data-wf-ignore="data-wf-ignore" data-poster-url="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-poster-00001.png" data-video-urls="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.webm,https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.mp4" class="w-background-video background-video" style="height:{{$bannerHeight}}">
         <div class="w-nav nav-bar">
-            <div id="header" class="sticky clearfix header-sm" style="background-color:transparent!important;border:none!important;box-shadow:none!important;">
+            <div id="header" class="header_dropShadow sticky clearfix header-sm" style="background-color:transparent!important;">
 
                 <!-- TOP NAV -->
                 <div id="topNav" >
