@@ -60,10 +60,13 @@
 		<div id="wrapper">
 
       @if (Route::is('home'))
+
+        {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}
         {{--*/ $bannerHeight = '500px' /*--}}
         <div>@include('partials.header')</div>
       @else
-      {{--*/ $bannerHeight = '300px' /*--}}
+        {{--*/ $bannerClasses = '' /*--}}
+        {{--*/ $bannerHeight = '350px' /*--}}
 
         <div>@include('partials.header')</div>
         <!-- Notifications -->
@@ -95,7 +98,7 @@
 <script type="text/javascript" src="{{ asset('assets/js/webflow.js') }}"></script>
 <script type="text/javascript">
   $(document).ready(function(){ 
-    //$('#autoplay_movies').css('height',  window.innerHeight); 
+    $('.max_autoplay_movies').css('height',  window.innerHeight); 
       
      var scroll_start = 30;
      var startchange = $('#header');

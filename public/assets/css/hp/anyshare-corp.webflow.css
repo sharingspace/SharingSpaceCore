@@ -6,6 +6,7 @@
   background-color: transparent;
   font-family: 'Open Sans', sans-serif;
   color: #ccc;
+  position: relative;
 }
 
 .logo {
@@ -29,13 +30,17 @@
 }
 
 .heading {
-  margin-top: 10%;
   margin-bottom: 0px;
   padding-bottom: 10px;
   font-family: 'Open Sans', sans-serif;
   font-size: 50px;
   text-align: center;
   color:white;
+  position: absolute;
+  top : 45%;
+  left: 50%;
+  -ms-transform: translate(-45%, -50%);
+  transform: translate(-45%, -50%);
 }
 
 .subheading {
@@ -204,13 +209,11 @@ img {
 }
 
 .footer-mark {
-  //padding-top: 17px;
   width:20px;
 }
 
 @media (max-width: 991px) {
   .heading {
-    margin-top: 24%;
     padding-bottom: 3px;
     font-size: 41px;
   }
@@ -247,7 +250,6 @@ img {
 
 @media (max-width: 767px) {
   .heading {
-    margin-top: 36%;
     font-size: 35px;
   }
   .subheading {
@@ -291,7 +293,6 @@ img {
 
 @media (max-width: 479px) {
   .heading {
-    margin-top: 53%;
     padding-bottom: 0px;
     font-size: 22px;
   }
