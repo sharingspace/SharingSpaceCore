@@ -6,15 +6,15 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <div class="row">
-            <div class="col-md-4 col-sm-12 pull-md-left text-center-sm  text-center-xs margin-top-6 margin-bottom-6">
+            <div class="col-md-6 margin-top-6 margin-bottom-6">
               <a href="/" class="w-nav-brand">
                 <img width="20" src="{{ asset('assets/img/hp/anyshare-mark.png') }}" class="footer-mark">
               </a>
             <!-- &copy; {{ date("Y") }} All Rights Reserved, AnyShare Society. -->
             </div> <!-- col 3 -->
 
-            <div class="col-md-6 col-sm-12 text-center-sm text-center-xs margin-top-10">
-              <ul class="nomargin list-inline mobile-block pull-right">
+            <div class="col-md-6 margin-top-6 margin-bottom-6">
+              <ul class="margin-bottom-6 padding-bottom-0 list-inline mobile-block pull-right">
                 <li><a href="/about">About</a></li>
                 <li><a href="http://blog.massmosaic.com">News</a></li>
                 <!-- <li><a href="/coop">Coop</a></li>
@@ -41,12 +41,12 @@
                 <i class="fa fa-google"></i>
               </a>
             </div> --><!-- col 2 -->
-      	</div>
+
+        	</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 </footer>
 <!-- /FOOTER -->
 
