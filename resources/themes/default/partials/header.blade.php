@@ -42,8 +42,8 @@
             </div>
         </div>
         @if (Route::is('home'))
-            <h1 class="heading">Join the Sharing Revolution<br>
-            <span class="subheading">Build a Website that unlocks the potential around you.</span><br>
+            <h1 class="heading">{{ trans('home.home_headline') }}<br>
+            <span class="subheading">{{ trans('home.subhome_headline') }}</span><br>
             <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button size-20"">START NOW</a></h1>
             <div class="scroll-button-div"></div>
         @elseif (Route::is('login'))
