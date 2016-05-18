@@ -8,9 +8,8 @@ return [
     |--------------------------------------------------------------------------
     */
     'homepage' => 'home page',
-    'home_headline' => 'We\'ve Fixed the Problem with Sharing',
-    'subhome_headline2' => 'You choose who you want to deal with!',
-    'subhome_headline' => 'a cooperative network for the people you choose',
+    'home_headline' => 'Join the Sharing Revolution!',
+    'subhome_headline' => 'Build a Website that unlocks the potential around you.',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'free_trial' => 'Try a sharing hub free for 15 days',

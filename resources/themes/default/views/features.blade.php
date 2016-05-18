@@ -10,13 +10,13 @@
                     <p class="features-text">Set how your users can exchange on your own sharing website. Rent, Trade, Gift, Borrow, Buy/Sell or any combination of these you desire.</p>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/exchange_how_u_like.png') }}">
                 </div>
             </div>
 
             <div class="row feature-row">
-               <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive img-center" src="{{ asset('assets/img/features/exchange_what_u_like.png') }}">
                 </div>
 
@@ -32,13 +32,13 @@
                     <p class="features-text">Entries can be interacted in a powerful list view, with search and sortable columns. Plus download the entries in either csv, txt, json or xml formats.</p>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/interactive_entries.png') }}">
                 </div>
             </div>
 
             <div class="row feature-row">
-                <div class="col-md-6 col-sm-6 pull-left">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/community.png') }}">
                 </div>
 
@@ -54,13 +54,13 @@
                     <p class="features-text">Sharing Websites can be from 1 - 100k members and from anyplace on the Earth.</p>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/unlimited_size.png') }}">
                 </div>
             </div>
             
             <div class="row feature-row">
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/custom_look.png') }}">
                 </div>
 
@@ -76,13 +76,13 @@
                     <p class="features-text">Public, private, and secret Sharing Websites make it easy for you to control visibility.</p>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/privacy_control.png') }}">
                 </div>
             </div>
 
             <div class="row feature-row">
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/social.png') }}">
                 </div>
 
@@ -98,13 +98,13 @@
                     <p class="features-text">Access entries and user data through your own API.</p>
                 </div>
 
-                <div class="col-md-6 col-sm-6 pull-left">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/api.png') }}">
                 </div>
             </div>
 
             <div class="row feature-row">
-                <div class="col-md-6 col-sm-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/slack.png') }}">
                 </div>
 
@@ -120,13 +120,25 @@
                     <p class="features-text">Keep track of who’s visiting your Sharing Website and all the analytics that Google analytics brings you.</p>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-6">
                     <img class="feature_image img-responsive" src="{{ asset('assets/img/features/google_anal.png') }}">
                 </div>
             </div>
         </div>
     </div>
-</div
+</div>
+  <div class="w-section cta-section">
+    <div class="w-container">
+      <div class="w-row">
+        <div class="w-col w-col-9">
+          <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
+        </div>
+        <div class="w-col w-col-3">
+          <a href="{{ route('community.create.form') }}" class="w-button cta-button">{{ trans('general.nav.start_now') }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 @stop
 
