@@ -2,11 +2,6 @@
 
 @section('content')
 
-
-
- 
- 
-
   <div class="w-section overview-section">
     <div class="w-container">
       <div class="row">
