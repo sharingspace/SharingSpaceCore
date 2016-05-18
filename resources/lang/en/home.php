@@ -9,7 +9,7 @@ return [
     */
     'homepage' => 'home page',
     'home_headline' => 'Join the Sharing Revolution!',
-    'subhome_headline' => 'Build a Sharing Website with AnyShare.',
+    'subhome_headline' => 'Build a Website that unlocks the potential around you.',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'free_trial' => 'Try a sharing hub free for 15 days',

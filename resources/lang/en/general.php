@@ -11,7 +11,7 @@ return [
     'browse_button' => 'Browse Here',
     'copyright' => 'Copyright',
     'no_about_data'  => 'The owner of this group has not entered any information about it yet.',
-    'seo_title' => 'Create a sharing hub with AnyShare',
+    'seo_title' => 'Build a Sharing Website with AnyShare',
     'token_expired' => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
 
 
