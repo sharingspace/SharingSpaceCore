@@ -36,12 +36,27 @@
   font-size: 50px;
   text-align: center;
   color:white;
-  position: absolute;
-  top : 45%;
-  left: 50%;
+  position: relative;
+  top : 30%;
+  text-align:center;
   width:100%;
-  -ms-transform: translate(-45%, -50%);
-  transform: translate(-45%, -50%);
+  -ms-transform: translate(0, -30%);
+  transform: translate(0, -30%);
+}
+
+.hp_heading {
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
+  text-align: center;
+  color:white;
+  position: relative;
+  top : 40%;
+  text-align:center;
+  width:100%;
+  -ms-transform: translate(0, -40%);
+  transform: translate(0, -40%);
 }
 
 .subheading {

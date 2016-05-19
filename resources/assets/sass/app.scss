@@ -8235,3 +8235,9 @@ $color-green: #9AE14F;
     text-align: center;
   }
 }
+
+@media (max-width: $screen-xs-max) {
+  video::-webkit-media-controls {
+      display:none !important;
+  }
+}

@@ -8729,6 +8729,12 @@ Quick add
     text-align: center;
   }
 }
+
+@media (max-width: 767px) {
+  video::-webkit-media-controls {
+    display: none !important;
+  }
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

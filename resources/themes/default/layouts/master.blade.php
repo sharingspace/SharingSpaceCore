@@ -105,7 +105,6 @@
      var offset = startchange.offset();
      $(document).scroll(function() { 
         scroll_start = $(this).scrollTop();
-        console.log("scroll scroll_start = "+scroll_start +", offset.top = "+offset.top);
 
         if(scroll_start > offset.top) {
             $('#header').css('background-color', 'white');
