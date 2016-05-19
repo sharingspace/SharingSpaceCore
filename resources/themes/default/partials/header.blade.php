@@ -1,5 +1,7 @@
 <div class="w-section">
-    <div data-autoplay="data-autoplay" data-loop="data-loop" data-wf-ignore="data-wf-ignore" data-poster-url="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-poster-00001.png" data-video-urls="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.webm,https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.mp4" class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
+    <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
+    <video autoplay="autoplay" loop="loop" poster='https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi%20High%20v4-poster-00001.png'><source src="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.webm" data-wf-ignore=""><source src="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.mp4" data-wf-ignore="">
+    </video>
         <div class="w-nav nav-bar">
             <div id="header" class="header_dropShadow sticky clearfix header-sm" style="background-color:transparent!important;">
 
@@ -42,7 +44,7 @@
             </div>
         </div>
         @if (Route::is('home'))
-            <h1 class="heading">{{ trans('home.home_headline') }}<br>
+            <h1 class="hp_heading">{{ trans('home.home_headline') }}<br>
             <span class="subheading">{{ trans('home.subhome_headline') }}</span><br>
             <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button size-20"">START NOW</a></h1>
             <div class="scroll-button-div"></div>
@@ -50,10 +52,13 @@
             <h1 class="heading">{{trans('general.nav.login') }}</h1>
         @elseif (Route::is('register'))
             <h1 class="heading">{{trans('general.nav.register') }}</h1>
+        @elseif (Route::is('community.create.form'))
+            <h1 class="heading">{{trans('general.community.create') }}</h1>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
 
         @endif
+
     </div>
 </div>
