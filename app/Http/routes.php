@@ -515,10 +515,11 @@ Route::group(
         );
 
         Route::get(
-            'coop',
+            'coop', 
+            array('as' => 'coop',
             function () {
                 return view('coop');
-            }
+            })
         );
 
         Route::get(
@@ -530,9 +531,11 @@ Route::group(
 
         Route::get(
             'financial_assist',
+            array(
+            'as' => 'assistance',
             function () {
                 return view('assistance');
-            }
+            })
         );
 
         Route::post(
