@@ -32,8 +32,9 @@ return [
         'a2' => 'A. You can cancel your subscription at any time. Before doing so, you can keep your data, by using the inbuilt api.',
     ],
     'financial_assist' => [
+        'apply' => 'Apply for Financial Assistance',
       'success' => 'You application for financial assistance has been successfully sent',
-      'error' => 'We seem to be having a problem processing your application',
+      'error' => 'We seem to be having a problem processing your application'
     ],
 
 ];

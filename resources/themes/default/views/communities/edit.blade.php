@@ -11,11 +11,6 @@
 @section('content')
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<section class="padding-top-0">
-  <div class='page_banner sharing_fixed_banner'>
-    <h1>{{trans('general.community.create')}}</h1>
-  </div>
-</section>
 
 <!-- -->
 <section>

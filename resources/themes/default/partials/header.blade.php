@@ -54,11 +54,13 @@
             <h1 class="heading">{{trans('general.nav.register') }}</h1>
         @elseif (Route::is('community.create.form'))
             <h1 class="heading">{{trans('general.community.create') }}</h1>
+        @elseif (Route::is('assistance'))
+            <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
+        @elseif (Route::is('coop'))
+            <h1 class="heading">{{ trans('coop.headline') }}</h1>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
-
         @endif
-
     </div>
 </div>
