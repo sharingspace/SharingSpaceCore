@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         // --------------------------------
         // If the user is a super admin, let them through no matter what
         $gate->before(function ($user, $ability) {
-            if ($user->isSuperAdmin()) {
+            if ($user->superadmin=='1') {
                 return true;
             }
         });
