@@ -1,6 +1,6 @@
 <div class="w-section">
     <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
-    <video autoplay="autoplay" loop="loop" poster='https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi%20High%20v4-poster-00001.png'><source src="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.webm" data-wf-ignore=""><source src="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.mp4" data-wf-ignore="">
+    <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'><source src="/assets/movies/anyshare_homepage_vid.webm" data-wf-ignore=""><source src="/assets/movies/anyshare_homepage_vid.mp4" data-wf-ignore="">
     </video>
         <div class="w-nav nav-bar">
             <div id="header" class="header_dropShadow sticky clearfix header-sm" style="background-color:transparent!important;">
