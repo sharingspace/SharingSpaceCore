@@ -58,8 +58,8 @@
                 		<div class="row">
                   		<div class="col-md-3 margin-bottom-10 {{ $errors->first('post_type', ' has-error') }}">
                       	<select class="form-control" name="post_type" id="post_type">
-                        	<option value="want">I want</option>
-                        	<option value="have">I have</option>
+                        	<option value="want">{{ trans('general.entries.want')}}</option>
+                        	<option value="have">{{ trans('general.entries.have')}}</option>
                       	</select>
                   		</div> <!-- col 3 -->
                       <div class="col-md-3 margin-bottom-10">
@@ -69,7 +69,7 @@
                   		<div class="col-md-6 margin-bottom-8 {{ $errors->first('title', ' has-error') }}">
                     		<!-- Name -->
                     		<label class="input">
-            		<input type="text" name="title" id="title" class="form-control" placeholder="Description" autofocus>
+            		<input type="text" name="title" id="title" class="form-control" placeholder="{{ trans('general.entries.title_placeholder')}}" autofocus>
                     		</label>
                   		</div> <!-- col 6 -->
 
@@ -102,7 +102,7 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
                         <div class="form-group {{ $errors->first('description', 'has-error') }}">
                           <!-- Description -->
                           <label class="input">
-                            <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="Detailed description..."></textarea>
+                            <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.details_placeholder')}}"></textarea>
                           </label>
                         </div> <!-- form group -->
                       </div> <!-- col 12 -->
@@ -111,7 +111,7 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
                         <!-- Tags -->
                         <div class="form-group {{ $errors->first('tags', 'has-error') }}">
                           <label class="input">
-                        		<input data-role="tagsinput" type="text" name="tags" id="tags"  class="col-md-12 form-control"  placeholder="Keywords, comma-separated" placeholder="Separate each tag with a comma">
+                        		<input data-role="tagsinput" type="text" name="tags" id="tags"  class="col-md-12 form-control"  placeholder="{{ trans('general.entries.tag_placeholder')}}">
                       		</label>
                         </div> <!-- tags -->
                       </div> <!-- col 12 -->
@@ -121,7 +121,7 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
                         <div class="form-group {{ $errors->first('location', 'has-error') }}">
                           <label class="control-label sr-only" for="location">Location</label>
                           <div class="input-group">
-                            <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}">
+                            <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}">
                             <div class="input-group-addon" id="basic-addon2">
                               <i class="fa fa-location-arrow" id="geolocate"></i>
                             </div>
@@ -133,7 +133,7 @@ position: absolute;background-position: center;background-repeat: no-repeat;heig
                       <div class="col-md-10 col-sm-10 col-xs-10">
                         <label class="checkbox pull-left" for="visible_checkbox">
                           {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
-                          <i></i> Visible only to you
+                          <i></i> {{ trans('general.entries.visible')}}
                         </label>
                       </div> <!-- col 10 -->
 
