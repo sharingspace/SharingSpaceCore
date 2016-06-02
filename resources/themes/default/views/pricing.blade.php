@@ -14,7 +14,7 @@
         <tbody>
           <tr><td>{{ trans('pricing.unlimited_users') }}</td><td><i class='fa fa-check fa-check'></i></td></tr>
           <tr><td>{{ trans('pricing.unlimited_entries') }}</td><td><i class='fa fa-check fa-check'></i></td></tr>
-          <tr><td>{{ trans('pricing.your_logo') }} Your logo</td><td><i class='fa fa-check fa-check'></i></td></tr>
+          <tr><td>{{ trans('pricing.your_logo') }}</td><td><i class='fa fa-check fa-check'></i></td></tr>
           <tr><td>{{ trans('pricing.api') }}</td><td><i class='fa fa-check fa-check'></i></td></tr>
           <tr><td>{{ trans('pricing.analytics') }}<td><i class='fa fa-check fa-check'></i></td></tr>
           <tr><td>{{ trans('pricing.ssl') }}<td><i class='fa fa-check fa-check'></i></td></tr>

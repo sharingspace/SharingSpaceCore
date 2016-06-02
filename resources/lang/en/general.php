@@ -38,7 +38,7 @@ return [
     'entries'  => [
           'entry' => 'Entry',
           'post_type' => 'Type',
-          'title' => 'Title',
+          'title' => 'Entry',
           'qty' => 'QTY',
           'author' => 'Author',
           'posted_by' => 'Posted by',

@@ -72,13 +72,13 @@
     data-cookie-id-table="communityListingv1">
       <thead>
           <tr>
-            <th data-sortable="true" data-field="post_type"><span class="sr-onlyy">{{ trans('general.entries.post_type') }}</span></th>
             <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
             <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
             <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
             <th data-sortable="true" data-field="created_at" data-visible="false">{{ trans('general.entries.created_at') }}</th>
-            <th class="hidden-xs" data-sortable="false" data-field="tags">{{ trans('general.entries.tags') }}</th>
+            <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.entries.tags') }}</th>
             <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
+            <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange_types') }}</th>
             <!-- <th data-sortable="false" data-field="image" >Image</th> -->
           </tr>
       </thead>
