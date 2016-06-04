@@ -102,7 +102,8 @@ return [
       'latin_chars' => 'Only latin characters and numbers',
       'login_by_email' => 'Sign-in with email',
       'login_by_social' => 'or with a social network',
-      'signup_by_email' => 'Sign-up with email'
+      'signup_by_email' => 'Sign-up with email',
+      'verify_account' => 'Needed to verify your account'
     ],
 
     'community'  => [
