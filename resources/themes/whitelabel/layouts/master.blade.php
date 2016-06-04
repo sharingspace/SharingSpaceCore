@@ -29,7 +29,7 @@
 
     <!-- PAGE LEVEL SCRIPTS -->
 		<link href="{{ asset('assets/css/header-1.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/color_scheme/orange.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/color_scheme/darkorange.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Table style -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css" type="text/css" media="screen" />

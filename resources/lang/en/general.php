@@ -38,7 +38,13 @@ return [
     'entries'  => [
           'entry' => 'Entry',
           'post_type' => 'Type',
-          'title' => 'Title',
+          'want' => 'Want',
+          'have' => 'Have',
+          'title' => 'Entry',
+          'title_placeholder' => 'Description',
+          'details_placeholder' => 'Details',
+          'tag_placeholder' => 'Keywords, comma-separated',
+          'location_placeholder' => 'Near (optional)',
           'qty' => 'QTY',
           'author' => 'Author',
           'posted_by' => 'Posted by',
@@ -58,6 +64,7 @@ return [
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',
+          'visible' => 'Visible only to you',
 
           'messages' => [
             'invalid' => 'That entry is not valid.',

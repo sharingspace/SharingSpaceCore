@@ -513,11 +513,10 @@ class EntriesController extends Controller
 
         $allowed_columns =
         [
-        'title',
-        'location',
-        'tags',
-        'post_type',
-        'created_at'
+            'title',
+            'location',
+            'tags',
+            'created_at'
         ];
 
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
@@ -535,28 +534,35 @@ class EntriesController extends Controller
             $user = null;
         }
 
+        $exchangeTypes=array();
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
                 $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
             } else {
                 $actions = '';
             }
+            
+            foreach ($entry->exchangeTypes as $et) {
+                $exchangeTypes[] = $et->name;
+            }
 
             $rows[] = array(
-            'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
-            'post_type' => strtoupper($entry->post_type),
+            'title' => strtoupper($entry->post_type).': <a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
             'author' => '<img src="'.$entry->author->gravatar().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
             'location' => $entry->location,
             'created_at' => $entry->created_at->format('M jS, Y'),
             'actions' => $actions,
-            'tags' => $entry->tags
+            'tags' => $entry->tags,
+            'exchangeTypes' => implode(', ',$exchangeTypes)
             //'image' => '<img src="/assets/uploads/entries/',$entry->id.'/'.$images[0]->filename.'">'
             );
+
+            unset($exchangeTypes);
         }
 
         $data = array('total' => $count, 'rows' => $rows);
-        return $data;
 
+        return $data;
     }
 
     /**
