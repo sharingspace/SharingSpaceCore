@@ -542,6 +542,8 @@ class EntriesController extends Controller
                 $actions = '';
             }
             
+             // ensure array is empty
+            $exchangeTypes=[];
             foreach ($entry->exchangeTypes as $et) {
                 $exchangeTypes[] = $et->name;
             }
@@ -556,8 +558,6 @@ class EntriesController extends Controller
             'exchangeTypes' => implode(', ',$exchangeTypes)
             //'image' => '<img src="/assets/uploads/entries/',$entry->id.'/'.$images[0]->filename.'">'
             );
-
-            unset($exchangeTypes);
         }
 
         $data = array('total' => $count, 'rows' => $rows);
