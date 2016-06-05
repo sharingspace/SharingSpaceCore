@@ -148,6 +148,10 @@ return [
       'coupon' => 'Coupon',
       'have_coupon' => 'I have a coupon code',
       'coupon_code' => 'Coupon Code',
+      'edit_hub' => 'EDIT SHARING HUB',
+      'basic' => 'Basic',
+      'images' => 'Images',
+      'advanced' => 'Advanced',
       'wrong' => 'Something went wrong :(',
       'sub_type' => 'Subscription Type',
         'exchange_types' => [

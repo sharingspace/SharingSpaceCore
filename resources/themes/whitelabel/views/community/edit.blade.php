@@ -19,9 +19,9 @@
       <!-- Entry -->
       <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
         <ul class="nav nav-tabs nav-top-border">
-          <li class="active"><a href="#info" data-toggle="tab">Basic</a></li>
-          <li><a href="#hub_images" data-toggle="tab">Images</a></li>
-          <li><a href="#advanced" data-toggle="tab">Advanced</a></li>
+          <li class="active"><a href="#info" data-toggle="tab">{{trans('general.community.basic')}}</a></li>
+          <li><a href="#hub_images" data-toggle="tab">{{trans('general.community.images')}}</a></li>
+          <li><a href="#advanced" data-toggle="tab">{{trans('general.community.advanced')}}</a></li>
         </ul>
 
 
@@ -31,7 +31,7 @@
           <div class="tab-content margin-top-20">
             <!-- PERSONAL INFO TAB -->
             <div class="tab-pane fade in active" id="info">
-              <h2 class="size-16 uppercase">EDIT SHARING HUB</h2>
+              <h2 class="size-16 uppercase">{{trans('general.community.edit_hub')}}</h2>
               <div class="alert alert-danger" style="display:none" id="submission_error"></div>
 
               <!-- community form -->
@@ -95,15 +95,22 @@
                                 <i></i> {{trans('general.community.all_exchanges')}}
                               </label>
                             </div> <!-- col-md-12 -->
+
                             @foreach (\App\ExchangeType::all() as $exchange_types)
-                            <div class="col-md-12 pull-left margin-bottom-10">
-                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                              {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, $exchange_types->id, ['class' => 'exchanges']) }}
-                                <i></i> {{ $exchange_types->name }}
-                              </label>
-                            </div> <!-- col-md-12 -->
+                              <div class="col-md-12 pull-left margin-bottom-10">
+                                <label class="checkbox col-md-3 pull-left margin-bottom-10">
+                                  @if (array_key_exists($exchange_types->id, $allowed_exchanges))
+                                    {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true,
+                                    ['class' => 'exchanges']) }}
+                                  @else
+                                    {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, false,
+                                    ['class' => 'exchanges']) }}
+                                  @endif
+                                  <i></i>{{ $exchange_types->name }}
+                                </label>
+                              </div>            
                             @endforeach
-                           
+
                           </div> <!-- row -->
                         </div> <!-- checkbox -->
                       </div> <!-- exchange_types -->
