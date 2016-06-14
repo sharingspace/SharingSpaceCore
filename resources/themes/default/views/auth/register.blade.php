@@ -78,6 +78,11 @@
         </form>
         <!-- /register form -->
 
+        <div class="row margin-top-20">
+          <div class="col-md-12">
+            {!! trans('auth.already_have_account') !!}
+          </div>
+        </div>
       </div>
       <!-- /LOGIN -->
 
@@ -116,7 +121,7 @@
           </fieldset>
 
           <footer>
-            {!! trans('auth.already_have_account') !!}
+            <!-- {!! trans('auth.already_have_account') !!} -->
           </footer>
 
         </form>
