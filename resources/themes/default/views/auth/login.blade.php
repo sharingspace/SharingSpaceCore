@@ -57,6 +57,11 @@
         </form>
         <!-- /register form -->
 
+        <div class="row margin-top-20">
+          <div class="col-md-12">
+            {!! trans('auth.no_account') !!}
+          </div>
+        </div>
       </div>
       <!-- /LOGIN -->
 
