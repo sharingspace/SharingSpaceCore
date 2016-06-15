@@ -79,7 +79,8 @@ return [
             'save_new' => 'Your new entry has been created!',
             'save_failed' => 'Something went wrong. Your entry edit has not been saved',
             'upload_failed' => 'Something went wrong. Your uploaded image has not been saved',
-            'errors' => 'Your entry was not saved due to the following errors'
+            'errors' => 'Your entry was not saved due to the following errors',
+            'no_exchange_types' => 'An exchange type was not selected'
           ],
     ],
 

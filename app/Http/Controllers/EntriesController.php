@@ -109,6 +109,7 @@ class EntriesController extends Controller
     public function postAjaxCreate(Request $request)
     {
         $entry = new \App\Entry();
+
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
         $entry->description    = e(Input::get('description'));
@@ -117,6 +118,16 @@ class EntriesController extends Controller
         $entry->qty    = e(Input::get('qty'));
         $upload_key = e(Input::get('upload_key'));
         $entry->visible = e(Input::get('private')) ? 0 : 1;
+        $exchange_types = Input::get('exchange_types');
+
+        $validator = Validator::make($request->all(), $entry->getRules());
+        if ($validator->fails()) {
+            return response()->json(['success'=>false, 'errors'=>$validator->messages()]);
+        }
+
+        if (empty($exchange_types)) {
+            return response()->json(['success'=>false, 'errors'=>array('message' => trans("general.entries.messages.no_exchange_types"))]);
+        }
 
         if (Input::get('location')) {
             $entry->location = e(Input::get('location'));
@@ -124,17 +135,14 @@ class EntriesController extends Controller
         }
 
         if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-            $entry->latitude         = $latlong['lat'];
-            $entry->longitude     = $latlong['lng'];
-        }
-
-        if ($entry->isInvalid()) {
-            return response()->json(['success'=>false, 'error'=>$entry->getErrors()]);
+            $entry->latitude = $latlong['lat'];
+            $entry->longitude = $latlong['lng'];
         }
 
         if ($request->whitelabel_group->entries()->save($entry)) {
-            Log::debug("Saving whitelabel group, id: ".$entry->id." upload_key: ".$upload_key);
+            //Log::debug("************************ Saved whitelabel group, id: ".$entry->id." upload_key: ".$upload_key);
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
+
             $types=$typeIds=[];
 
             foreach ($entry->exchangeTypes as $et) {
@@ -144,10 +152,10 @@ class EntriesController extends Controller
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                Log::debug("We have a file - and, weirdly, kinda shouldn't?");
+                //Log::debug("We have a file - and, weirdly, kinda shouldn't?");
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
             } else {
-                Log::debug("no file was detected, we should just be moving files from temp-to-perm");
+                //Log::debug("no file was detected, we should just be moving files from temp-to-perm");
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
