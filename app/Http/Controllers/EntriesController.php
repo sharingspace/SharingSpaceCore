@@ -498,9 +498,9 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id);
+            $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id)->orderBy('entries.created_at', 'desc');
         } else {
-            $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted()->orderBy('entries.created_at', 'desc');
         }
 
         if (Input::has('search')) {
