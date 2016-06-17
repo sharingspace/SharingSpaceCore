@@ -32,9 +32,9 @@
               		<tbody>
                     @foreach ($subscriptions as $subscription)
                       <tr>
-                        <td>{{ $subscription->community->name }}</td>
+                        <td><a href="{{$subscription->community->name}}.anysha.re">{{ $subscription->community->name }}</a></td>
                         <td>{{ $subscription->community->created_at }}</td>
-                        <td>blah</td>
+                        <td></td>
                       </tr>
                     @endforeach
 
