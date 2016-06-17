@@ -79,6 +79,7 @@ class PagesController extends Controller
         $data['budget'] = Input::get('budget');
         $data['timePeriod'] = Input::get('timePeriod');
         $data['market'] = Input::get('market');
+        $data['logo'] = public_path()."/assets/img/anyshare-logo-squares.png";
 
         $sent = Mail::send(
             array('emails.freeAnyshare', 'emails.freeAnyshareText'), ['data'=>$data],

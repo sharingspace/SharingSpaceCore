@@ -1,5 +1,13 @@
 @extends('emails/layouts/html')
 
+@section('logo')
+@if (empty($logo))
+{{ $community }}
+@else
+{{ $logo }}
+@endif
+@stop
+
 @section('content')
     <p>Dear {{ $name }},</p>
 

@@ -323,9 +323,6 @@ body, .email_body_cell {
 .jumbotron_native_cell, .jumbotron_native_small_cell, .jumbotron_button_native, .primary_btn td {
   background-color: #e84545;
 }
-.jumbotron_cell {
-  background-image: url(images/jumbotron.jpg);
-}
 a, .secondary_btn a, .secondary_btn span, h6, h6 small, .amount {
   color: #e84545;
 }
@@ -400,34 +397,24 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                             <tr>
                             <td align="left" width="184">
                             <![endif]-->
-                            <div class="one_third" style="display: inline-block;width: 100%;vertical-align: top;text-align: left;max-width: 184px;">
+                            <div class="one_half" style="display: inline-block;width: 100%;vertical-align: top;text-align: left;max-width:300px;">
                               <table width="100%" align="left" class="column" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;">
                                 <tbody>
                                   <tr>
-                                    <td class="column_cell logo_cell font_default" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;vertical-align: top;text-align: left;"><a href="#" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;"><img src="https://anysha.re/assets/img/anyshare-logo-squares.png" width="200" height="41" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;"></a></td>
+                                    <td class="column_cell logo_cell font_default" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;vertical-align: top;text-align: left;">
+                                      <a href="#" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">
+
+
+
+
+
+
+                                      </a>
+                                    </td>
                                   </tr>
                                 </tbody>
                               </table>
                             </div><!-- end .one_third --> 
-                            <!--[if (gte mso 9)|(IE)]>
-                                </td>
-                                <td align="left" width="368">
-                            <![endif]-->
-                            <!--<div class="two_thirds" style="display: inline-block;width: 100%;vertical-align: top;text-align: left;max-width: 368px;">
-                              <table width="100%" class="column" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;">
-                                <tbody>
-                                  <tr>
-                                    <td class="column_cell font_default tagline_cell" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;vertical-align: top;text-align: left;font-size: 16px;color: #999999;"><strong style="font-weight: bold;">Monthly Newsletter</strong></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div><!-- end .two_thirds --> 
-                            <!--[if (gte mso 9)|(IE)]>
-                                </td>
-                              </tr>
-                            </table>
-                            <![endif]-->
-                          
                           </td>
                         </tr>
                       </tbody>
@@ -437,12 +424,6 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                       <tbody>
                         <tr>
                           <td class="jumbotron_native_cell" style="padding: 32px;vertical-align: middle;text-align: center;background-color: #e84545;">
-                          
-                            <img src="images/app_image.png" width="240" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">
-                            <!-- <h3 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;padding: 0;font-weight: normal;font-size: 19px;line-height: 28px;margin-top: 10px;margin-bottom: 10px;color: #ffffff;"><strong style="font-weight: bold;">Your Sharing Hub is Ready!</strong></h3>
-                            <h5 style="font-family: Helvetica, Arial, sans-serif;margin-left: 0;margin-right: 0;padding: 0;font-size: 16px;line-height: 23px;font-weight: 400;margin-top: 8px;margin-bottom: 8px;color: #ffffff;">Congratulations on creating the "Hub Name" Sharing Hub.<br> 
-                              Url: "whitelabel name".anysha.re <br>
-                              </h5> -->
                             <table class="hruler" width="80" border="0" align="center" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 80px;margin-left: auto;margin-right: auto;clear: both;">
                               <tbody>
                                 <tr>
@@ -468,9 +449,9 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                         <tr>
                           <td align="center" class="footer_cell font_default" style="padding: 16px 32px 8px;font-family: Helvetica, Arial, sans-serif;">
                             <p style="text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;color: #999999;">
-                              <a href="https://www.facebook.com/mass.mosaic/" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/facebook-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">&nbsp;</a> &nbsp;&nbsp;
-                              <a href="https://twitter.com/massmosaic" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/twitter-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">&nbsp;
-                              </a> &nbsp;&nbsp; <a href="https://plus.google.com/+Massmosaic/videos" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/googleplus-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">&nbsp;</a> </p>
+                              <a href="https://www.facebook.com/anyshare.coop/" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/facebook-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">&nbsp;</a> &nbsp;&nbsp;
+                              <a href="https://twitter.com/anyshare.coop" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/twitter-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;"></p>
+
                             <p style="text-align:center; font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;color:#999999;"><strong style="font-weight: bold;">AnyShare Society, </strong><a href="https://arcosanti.org" target="blank">Arcosanti</a>, Arizona, USA</p>
                             
                         </tr>
