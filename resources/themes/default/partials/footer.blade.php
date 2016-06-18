@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <div class="row">
-            <div class="col-md-6 margin-top-6 margin-bottom-6">
+            <div class="col-md-4 margin-top-6 margin-bottom-6">
               <a href="/" class="w-nav-brand">
                 <img width="20" src="{{ asset('assets/img/hp/anyshare-mark.png') }}" class="footer-mark">
               </a>
@@ -17,25 +17,27 @@
               <ul class="margin-bottom-6 padding-bottom-0 list-inline mobile-block pull-right">
                 <li><a href="/about">About</a></li>
                 <li><a href="http://blog.massmosaic.com">News</a></li>
-                <!-- <li><a href="/coop">Coop</a></li>
-                <li><a href="/pricing">Pricing</a></li> -->
+                <li><a href="/coop">Coop</a></li>
+                <!-- <li><a href="/pricing">Pricing</a></li> -->
                 <li><a href="/terms">Terms</a></li>
                 <li><a href="/privacy">Privacy</a></li>
                 <!-- <li><a href="#" data-toggle="modal" data-target="#subscribe">Newsletter</a></li> -->
               </ul>
             </div>
-            <!-- 
-            <div class="col-md-2 col-sm-12 socials text-center-sm text-center-xs margin-top-10">
-              <a href="https://www.facebook.com/mass.mosaic/" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
+            <div class="col-md-2 col-sm-12 socials text-center-sm text-center-xs margin-top-0 margin-bottom-0">
+              <a href="https://www.facebook.com/anyshare.coop/" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
                 <i class="fa fa-facebook"></i>
                 <i class="fa fa-facebook"></i>
               </a>
 
-              <a href="https://twitter.com/massmosaic" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
+              <a href="https://twitter.com/anyshare_coop" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
                 <i class="fa fa-twitter"></i>
                 <i class="fa fa-twitter"></i>
               </a>
+            </div>
+            
 
+<!-- 
               <a href="https://plus.google.com/+Massmosaic/videos" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Google plus">
                 <i class="fa fa-google"></i>
                 <i class="fa fa-google"></i>

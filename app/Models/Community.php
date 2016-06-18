@@ -139,7 +139,7 @@ class Community extends Model
         $cover_img = null;
 
         if ($this->cover_img!='') {
-            $cover_img = Config::get('services.cdn.default').'/uploads/community-covers/'.$this->id.'/'.$this->cover_img;
+            $cover_img = config('services.cdn.default').'/uploads/community-covers/'.$this->id.'/'.$this->cover_img;
         }
 
         return $cover_img;
@@ -157,7 +157,7 @@ class Community extends Model
     {
 
         if ($this->logo) {
-            return Config::get('services.cdn.default').'/uploads/community-logos/'.$this->id.'/'.$this->logo;
+            return config('services.cdn.default').'/uploads/community-logos/'.$this->id.'/'.$this->logo;
         } else {
             return false;
         }
@@ -174,10 +174,22 @@ class Community extends Model
     {
 
         if ($this->profile_img!='') {
-            return Config::get('services.cdn.default').'/uploads/community-profiles/'.$this->id.'/'.$this->profile_img;
+            return config('services.cdn.default').'/uploads/community-profiles/'.$this->id.'/'.$this->profile_img;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get the profile image url based on app environment
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return string
+     */
+    public function getCommunityUrl()
+    {
+        return 'https://'.$this->subdomain.'.'.config('app.domain');
     }
 
 

@@ -38,7 +38,13 @@ return [
     'entries'  => [
           'entry' => 'Entry',
           'post_type' => 'Type',
-          'title' => 'Title',
+          'want' => 'Want',
+          'have' => 'Have',
+          'title' => 'Entry',
+          'title_placeholder' => 'Description',
+          'details_placeholder' => 'Details',
+          'tag_placeholder' => 'Keywords, comma-separated',
+          'location_placeholder' => 'Near (optional)',
           'qty' => 'QTY',
           'author' => 'Author',
           'posted_by' => 'Posted by',
@@ -58,6 +64,7 @@ return [
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',
+          'visible' => 'Visible only to you',
 
           'messages' => [
             'invalid' => 'That entry is not valid.',
@@ -72,6 +79,8 @@ return [
             'save_new' => 'Your new entry has been created!',
             'save_failed' => 'Something went wrong. Your entry edit has not been saved',
             'upload_failed' => 'Something went wrong. Your uploaded image has not been saved',
+            'errors' => 'Your entry was not saved due to the following errors',
+            'no_exchange_types' => 'An exchange type was not selected'
           ],
     ],
 
@@ -95,7 +104,8 @@ return [
       'latin_chars' => 'Only latin characters and numbers',
       'login_by_email' => 'Sign-in with email',
       'login_by_social' => 'or with a social network',
-      'signup_by_email' => 'Sign-up with email'
+      'signup_by_email' => 'Sign-up with email',
+      'verify_account' => 'Needed to verify your account'
     ],
 
     'community'  => [
@@ -140,6 +150,10 @@ return [
       'coupon' => 'Coupon',
       'have_coupon' => 'I have a coupon code',
       'coupon_code' => 'Coupon Code',
+      'edit_hub' => 'EDIT SHARING HUB',
+      'basic' => 'Basic',
+      'images' => 'Images',
+      'advanced' => 'Advanced',
       'wrong' => 'Something went wrong :(',
       'sub_type' => 'Subscription Type',
         'exchange_types' => [

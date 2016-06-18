@@ -34,7 +34,7 @@ class CommunitySubscription extends Model
     */
     public function user()
     {
-        return $this->belongsTo('\App\Models\User', 'billable_id', 'id');
+        return $this->belongsTo('\App\User', 'billable_id', 'id');
     }
 
     /**

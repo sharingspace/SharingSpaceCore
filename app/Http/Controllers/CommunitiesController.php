@@ -273,7 +273,14 @@ class CommunitiesController extends Controller
         $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->lists('name');
 
         $community = \App\Community::find($request->whitelabel_group->id);
-        return view('community.edit')->with('community', $community)->with('themes', $themes);
+        $exchanges = $community->exchangeTypes;
+        $allowed_exchanges=array();
+        foreach ($exchanges as $exchange) {
+            $allowed_exchanges[$exchange->id] = $exchange->id;
+        }
+
+        $all_exchange_types = \App\ExchangeType::all(); 
+        return view('community.edit')->with('community', $community)->with('allowed_exchanges', $allowed_exchanges)->with('all_exchange_types', $all_exchange_types)->with('themes', $themes);
     }
 
 
@@ -326,7 +333,12 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->withErrors($community->getErrors());
         }
 
-        $community->exchangeTypes()->sync(Input::get('exchange_types'));
+        if (Input::has('exchange_types')) {
+            $community->exchangeTypes()->sync(Input::get('exchange_types'));
+        } else {
+            $community->exchangeTypes()->sync(ExchangeType::all());
+        }
+
 
         return redirect()->route('community.edit.form')->with('success', trans('general.community.messages.save_edits'));
     }

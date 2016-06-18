@@ -20,5 +20,5 @@ return [
     'sign_in_with' => 'Sign-in with :social_network',
     'accept_tos' => 'I accept the <a href="#" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>',
     'already_have_account' => 'Already have an account? <a href="../auth/login">Sign-in now</a>',
-    'no_account' => 'Don\'t have an account? <a href="../auth/register">Sign-Up</a> here'
+    'no_account' => 'Don\'t have an account? <a href="../auth/register">Sign-up here</a>'
 ];

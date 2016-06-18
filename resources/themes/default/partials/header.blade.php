@@ -1,6 +1,6 @@
 <div class="w-section">
     <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
-    <video autoplay="autoplay" loop="loop" poster='https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi%20High%20v4-poster-00001.png'><source src="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.webm" data-wf-ignore=""><source src="https://daks2k3a4ib2z.cloudfront.net/5732933114b267cf667f7706/5732950814b267cf667f7c6c_homepage-Wi-Fi High v4-transcode.mp4" data-wf-ignore="">
+    <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'><source src="/assets/movies/anyshare_homepage_vid.webm" data-wf-ignore=""><source src="/assets/movies/anyshare_homepage_vid.mp4" data-wf-ignore="">
     </video>
         <div class="w-nav nav-bar">
             <div id="header" class="header_dropShadow sticky clearfix header-sm" style="background-color:transparent!important;">
@@ -36,6 +36,9 @@
                                     <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
                                     <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
                                     @endif
+                                    @can('admin')
+                                        <li><a href="{{ route('admin.index') }}">Admin</a></li>
+                                    @endcan
                                 </ul>
                             </nav>
                         </div>
@@ -54,11 +57,13 @@
             <h1 class="heading">{{trans('general.nav.register') }}</h1>
         @elseif (Route::is('community.create.form'))
             <h1 class="heading">{{trans('general.community.create') }}</h1>
+        @elseif (Route::is('assistance'))
+            <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
+        @elseif (Route::is('coop'))
+            <h1 class="heading">{{ trans('coop.headline') }}</h1>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
-
         @endif
-
     </div>
 </div>

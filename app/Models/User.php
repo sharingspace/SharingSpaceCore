@@ -142,9 +142,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function isAdminOfCommunity($community)
     {
-        return $this->communities()->where('community_id', '=', $community->id)
-        ->where('is_admin', '=', '1')
-        ->count() > 0;
+        return $this->communities()
+            ->where('community_id', '=', $community->id)
+            ->where('is_admin', '=', '1')
+            ->count() > 0;
     }
 
 
@@ -158,7 +159,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function canAdmin($community)
     {
-        if (($this->isAdminOfCommunity($community)) ||  ($this->isSuperAdmin())) {
+        if (($this->isAdminOfCommunity($community)) ||  ($this->superadmin=='1')) {
             return true;
         } else {
             return false;

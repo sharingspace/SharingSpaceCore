@@ -28,7 +28,6 @@
           </header>
 
           <fieldset class="nomargin">
-
             <div class="margin-bottom-10{{ $errors->first('email', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
@@ -46,7 +45,7 @@
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
-
+          </fieldset>
 
           <div class="row margin-bottom-20">
             <div class="col-md-12">
@@ -57,6 +56,11 @@
         </form>
         <!-- /register form -->
 
+        <div class="row margin-top-10">
+          <div class="col-md-12">
+            {!! trans('auth.no_account') !!}
+          </div>
+        </div>
       </div>
       <!-- /LOGIN -->
 

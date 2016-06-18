@@ -109,6 +109,7 @@ class EntriesController extends Controller
     public function postAjaxCreate(Request $request)
     {
         $entry = new \App\Entry();
+
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
         $entry->description    = e(Input::get('description'));
@@ -117,6 +118,16 @@ class EntriesController extends Controller
         $entry->qty    = e(Input::get('qty'));
         $upload_key = e(Input::get('upload_key'));
         $entry->visible = e(Input::get('private')) ? 0 : 1;
+        $exchange_types = Input::get('exchange_types');
+
+        $validator = Validator::make($request->all(), $entry->getRules());
+        if ($validator->fails()) {
+            return response()->json(['success'=>false, 'errors'=>$validator->messages()]);
+        }
+
+        if (empty($exchange_types)) {
+            return response()->json(['success'=>false, 'errors'=>array('message' => trans("general.entries.messages.no_exchange_types"))]);
+        }
 
         if (Input::get('location')) {
             $entry->location = e(Input::get('location'));
@@ -124,17 +135,14 @@ class EntriesController extends Controller
         }
 
         if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-            $entry->latitude         = $latlong['lat'];
-            $entry->longitude     = $latlong['lng'];
-        }
-
-        if ($entry->isInvalid()) {
-            return response()->json(['success'=>false, 'error'=>$entry->getErrors()]);
+            $entry->latitude = $latlong['lat'];
+            $entry->longitude = $latlong['lng'];
         }
 
         if ($request->whitelabel_group->entries()->save($entry)) {
-            Log::debug("Saving whitelabel group, id: ".$entry->id." upload_key: ".$upload_key);
+            //Log::debug("************************ Saved whitelabel group, id: ".$entry->id." upload_key: ".$upload_key);
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
+
             $types=$typeIds=[];
 
             foreach ($entry->exchangeTypes as $et) {
@@ -144,10 +152,10 @@ class EntriesController extends Controller
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                Log::debug("We have a file - and, weirdly, kinda shouldn't?");
+                //Log::debug("We have a file - and, weirdly, kinda shouldn't?");
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
             } else {
-                Log::debug("no file was detected, we should just be moving files from temp-to-perm");
+                //Log::debug("no file was detected, we should just be moving files from temp-to-perm");
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
@@ -490,9 +498,9 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id);
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->where('created_by', $user_id);
         } else {
-            $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -513,14 +521,13 @@ class EntriesController extends Controller
 
         $allowed_columns =
         [
-        'title',
-        'location',
-        'tags',
-        'post_type',
-        'created_at'
+            'title',
+            'location',
+            'tags',
+            'created_at'
         ];
 
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
 
         $count = $entries->count();
@@ -535,28 +542,35 @@ class EntriesController extends Controller
             $user = null;
         }
 
+        $exchangeTypes=array();
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
                 $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
             } else {
                 $actions = '';
             }
+            
+             // ensure array is empty
+            $exchangeTypes=[];
+            foreach ($entry->exchangeTypes as $et) {
+                $exchangeTypes[] = $et->name;
+            }
 
             $rows[] = array(
-            'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
-            'post_type' => strtoupper($entry->post_type),
+            'title' => strtoupper($entry->post_type).': <a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
             'author' => '<img src="'.$entry->author->gravatar().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
             'location' => $entry->location,
             'created_at' => $entry->created_at->format('M jS, Y'),
             'actions' => $actions,
-            'tags' => $entry->tags
+            'tags' => $entry->tags,
+            'exchangeTypes' => implode(', ',$exchangeTypes)
             //'image' => '<img src="/assets/uploads/entries/',$entry->id.'/'.$images[0]->filename.'">'
             );
         }
 
         $data = array('total' => $count, 'rows' => $rows);
-        return $data;
 
+        return $data;
     }
 
     /**

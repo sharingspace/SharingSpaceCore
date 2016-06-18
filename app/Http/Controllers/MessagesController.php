@@ -138,9 +138,12 @@ class MessagesController extends Controller
         $data['community'] = $request->whitelabel_group->name;
         $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.Config::get('app.domain');
 
+        if (!empty($request->whitelabel_group->logo)) {
+            $img = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
+            $data['logo'] = '<img src="'.$img.'" height="41" alt="" style="max-height:100%;line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">';
+        }
 
         if ($offer->save()) {
-
             \Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
                 $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
             });
@@ -149,6 +152,4 @@ class MessagesController extends Controller
             return response()->json(['success'=>false, 'error'=>$offer->getErrors()]);
         }
     }
-    
-
 }
