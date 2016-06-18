@@ -498,9 +498,9 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id)->orderBy('entries.created_at', 'desc');
+            $entries = $request->whitelabel_group->entries()->with('author')->where('created_by', $user_id);
         } else {
-            $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted()->orderBy('entries.created_at', 'desc');
+            $entries = $request->whitelabel_group->entries()->with('author')->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -527,7 +527,7 @@ class EntriesController extends Controller
             'created_at'
         ];
 
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
 
         $count = $entries->count();
