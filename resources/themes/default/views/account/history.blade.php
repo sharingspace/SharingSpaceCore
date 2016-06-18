@@ -32,7 +32,11 @@
               		<tbody>
                     @foreach ($subscriptions as $subscription)
                       <tr>
-                        <td><a href="{{$subscription->community->subdomain}}.anysha.re">{{ $subscription->community->name }}</a></td>
+                        <td>
+							@if ($subscription->community)
+								<a href="{{ $subscription->community->subdomain}}.anysha.re">{{ $subscription->community->name }}</a>
+							@endif
+						</td>
                         <td>{{ $subscription->community->created_at }}</td>
                         <td></td>
                       </tr>
