@@ -118,15 +118,15 @@ trait UploadableFileTrait
 
     public static function deleteImage($entry_id, $user_id)
     {
-        $image = \DB::table('media')
+        if ($image = \DB::table('media')
             ->where('user_id', '=', $user_id)
             ->where('entry_id', '=', $entry_id)
-            ->first();
-        
-        //Log::debug("deleteImage: ".$image->filename);
+            ->first()) {
+            $file = public_path().'/assets/uploads/entries/'.$entry_id.'/'.$image->filename;
+            unlink($file);
 
-        $file = public_path().'/assets/uploads/entries/'.$entry_id.'/'.$image->filename;
-        unlink($file);
+        }
+        return false;
       }
 
 
