@@ -43,6 +43,13 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        // Check if the user can see the community entries
+        $gate->define('admin', function ($user) {
+            if ($user->superadmin=='1') {
+                return true;
+            }
+        });
+
         // --------------------------------
         // COMMUNTIY GATES
         // --------------------------------

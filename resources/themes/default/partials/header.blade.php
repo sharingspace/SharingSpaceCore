@@ -36,6 +36,9 @@
                                     <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
                                     <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
                                     @endif
+                                    @can('admin')
+                                        <li><a href="{{ route('admin.index') }}">Admin</a></li>
+                                    @endcan
                                 </ul>
                             </nav>
                         </div>
