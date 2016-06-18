@@ -8,7 +8,7 @@
         <div class="col-md-6 overview-column">
           <h3 id="opportunity">The Opportunity</h3>
           <p class="text">Make a Sharing Website for any group or community in under <strong>1 minute!</strong></p>
-          <p class="text">In the past, it would cost over <strong>$10k</strong> for you to make a Sharing Economy Website to connect people's needs &amp; resources. With AnyShare its' cheap and easy!</p>
+          <p class="text">In the past, it would cost over <strong>$10k</strong> for you to make a Sharing Economy Website to connect people's needs &amp; resources. With AnyShare, it's cheap and easy!</p>
         </div>
         <div class="col-md-6"><img src="{{ asset('assets/img/hp/anyshare-interface.jpg') }}" class="product-image">
         </div>
