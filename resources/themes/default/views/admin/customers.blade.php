@@ -32,6 +32,7 @@ p
                             <th>Hub</th>
                             <th>Active</th>
                             <th>Type</th>
+                            <th>Date</th>
                             <th>Trial Started</th>
                             <th>Trial Ends</th>
                             <th>Next Charge</th>
@@ -59,13 +60,17 @@ p
                                     {{ $subscription_meta->interval }}
                                 </td>
                                 <td>
-                                    {{ $subscription->trial_starts_at }}
+                                    {{ $subscription->created_at->format('M d, Y') }}
                                 </td>
                                 <td>
-                                    {{ date('M d, Y',strtotime($subscription->trial_ends_at)) }}
+                                    {{ ($subscription->trial_starts_at!='') ? date('M d, Y',strtotime($subscription->trial_starts_at)) : '' }}
                                 </td>
                                 <td>
-                                    {{ date('M d, Y',strtotime($subscription->period_ends_at)) }}
+                                    {{ ($subscription->trial_ends_at!='') ? date('M d, Y',strtotime($subscription->trial_ends_at)) : '' }}
+                                </td>
+                                <td>
+                                    {{ ($subscription->period_ends_at!='') ? date('M d, Y',strtotime($subscription->period_ends_at)) : '' }}
+
                                 </td>
                             </tr>
                         @endforeach
