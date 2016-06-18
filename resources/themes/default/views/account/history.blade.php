@@ -34,7 +34,7 @@
                       <tr>
                         <td>
 							@if ($subscription->community)
-								<a href="{{ $subscription->community->subdomain}}.anysha.re">{{ $subscription->community->name }}</a>
+								<a href="https://{{ $subscription->community->subdomain}}.anysha.re">{{ $subscription->community->name }}</a>
 							@endif
 						</td>
                         <td>
