@@ -333,7 +333,12 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->withErrors($community->getErrors());
         }
 
-        $community->exchangeTypes()->sync(Input::get('exchange_types'));
+        if (Input::has('exchange_types')) {
+            $community->exchangeTypes()->sync(Input::get('exchange_types'));
+        } else {
+            $community->exchangeTypes()->sync(ExchangeType::all());
+        }
+
 
         return redirect()->route('community.edit.form')->with('success', trans('general.community.messages.save_edits'));
     }
