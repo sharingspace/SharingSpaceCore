@@ -52,6 +52,7 @@ trait UploadableFileTrait
 
     public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $id = null, $upload_key = null)
     {
+        Log::debug("This is a ".$layoutType.' image');
         // Make the directory if it doesn't exist
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
@@ -63,7 +64,7 @@ trait UploadableFileTrait
         $img_path = $path.'/'.$filename;
 
         if ($file->move($path, $filename)) { // $destinationPath, $fileName
-            if ($id && $layoutType !='users') {
+            if ($id && $layoutType =='entries') {
                 //Log::debug("moveAndStoreImage: We already have an entry )"+$id+"), does it already have media?");
 
                 $entry = \App\Entry::find($id);
@@ -80,7 +81,6 @@ trait UploadableFileTrait
                 }
             }
             else {
-                //Log::debug("moveAndStoreImage: We were able to move file from $path to $filename!");
                 $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
             }
 
