@@ -5,6 +5,7 @@
 
 (function ($) {
     'use strict';
+    var sprintf = $.fn.bootstrapTable.utils.sprintf;
 
     var TYPE_NAME = {
         json: 'JSON',
@@ -14,8 +15,8 @@
         txt: 'TXT',
         sql: 'SQL',
         doc: 'MS-Word',
-        excel: 'Ms-Excel',
-        powerpoint: 'Ms-Powerpoint',
+        excel: 'MS-Excel',
+        powerpoint: 'MS-Powerpoint',
         pdf: 'PDF'
     };
 
@@ -25,6 +26,10 @@
         // 'json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'powerpoint', 'pdf'
         exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel'],
         exportOptions: {}
+    });
+
+    $.extend($.fn.bootstrapTable.defaults.icons, {
+        export: 'glyphicon-export icon-share'
     });
 
     var BootstrapTable = $.fn.bootstrapTable.Constructor,
@@ -43,9 +48,11 @@
             if (!$export.length) {
                 $export = $([
                     '<div class="export btn-group">',
-                        '<button class="btn btn-default dropdown-toggle" ' +
+                        '<button class="btn btn-default' +
+                            sprintf(' btn-%s', this.options.iconSize) +
+                            ' dropdown-toggle" ' +
                             'data-toggle="dropdown" type="button">',
-                            '<i class="fa fa-download"></i> ',
+                            sprintf('<i class="%s %s"></i> ', this.options.iconsPrefix, this.options.icons.export),
                             '<span class="caret"></span>',
                         '</button>',
                         '<ul class="dropdown-menu" role="menu">',
@@ -83,12 +90,11 @@
                         };
 
                     if (that.options.exportDataType === 'all' && that.options.pagination) {
-                        that.togglePagination();
-                        that.$el.on('load-success.bs.table', function () {
+                        that.$el.one('load-success.bs.table page-change.bs.table', function () {
                             doExport();
-                            that.$el.off('load-success.bs.table');
                             that.togglePagination();
                         });
+                        that.togglePagination();
                     } else if (that.options.exportDataType === 'selected') {
                         var data = that.getData(),
                             selectedData = that.getAllSelections();
