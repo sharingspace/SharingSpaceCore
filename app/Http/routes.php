@@ -533,7 +533,9 @@ Route::group(
 
         Route::get(
             'coop/signup',
-            array('as' => 'coop',
+            array(
+                'middleware' => ['auth'],
+                'as' => 'coop',
                 function () {
                     return view('coop-signup');
                 })
@@ -543,6 +545,7 @@ Route::group(
         Route::post(
             'coop/signup',
             array(
+                'middleware' => ['auth'],
                 'as' => 'coop.signup.submit',
                 'uses' => 'PagesController@postChargeCoop')
         );

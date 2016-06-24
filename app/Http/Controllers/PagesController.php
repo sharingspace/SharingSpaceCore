@@ -168,7 +168,7 @@ class PagesController extends Controller
         $customer->card()->syncWithStripe();
 
             Mail::send(
-                ['text' => 'emails.coop_welcome'],
+                ['text' => 'emails.coop-welcome'],
                 $data,
                 function ($message) use ($data) {
 
@@ -176,7 +176,7 @@ class PagesController extends Controller
                 }
             );
 
-            return redirect()->back()->with('success', trans('general.coop.signup_success'));
+            return redirect()->route('coop')->with('success', trans('coop.signup_success'));
 
 
     }
