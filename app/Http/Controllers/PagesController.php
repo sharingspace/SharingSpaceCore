@@ -153,7 +153,7 @@ class PagesController extends Controller
             // Create the charge
             $charge = $customer
                 ->charge()
-                ->create(50.05, [
+                ->create(50.00, [
                     'description' => 'AnyShare COOP Membership',
                 ])
             ;
