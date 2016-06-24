@@ -532,12 +532,30 @@ Route::group(
         );
 
         Route::get(
+            'coop/signup',
+            array('as' => 'coop',
+                function () {
+                    return view('coop-signup');
+                })
+        );
+
+
+        Route::post(
+            'coop/signup',
+            array(
+                'as' => 'coop.signup.submit',
+                'uses' => 'PagesController@postChargeCoop')
+        );
+
+        Route::get(
             'coop', 
             array('as' => 'coop',
             function () {
                 return view('coop');
             })
         );
+
+
 
         Route::get(
             'pricing',

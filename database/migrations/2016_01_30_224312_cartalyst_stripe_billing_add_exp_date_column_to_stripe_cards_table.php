@@ -11,18 +11,20 @@
  * bundled with this package in the LICENSE file.
  *
  * @package    Stripe Billing Laravel
- * @version    4.1.1
+ * @version    2.0.2
  * @author     Cartalyst LLC
  * @license    Cartalyst PSL
  * @copyright  (c) 2011-2016, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Cartalyst\Stripe\Billing\Laravel\Card\Card;
 
-class CartalystStripeBillingCreatePaymentRefundsTable extends Migration
+class CartalystStripeBillingAddExpDateColumnToStripeCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -31,20 +33,14 @@ class CartalystStripeBillingCreatePaymentRefundsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stripe_payment_refunds', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('payment_id')->index()->unsigned();
-            $table->string('stripe_id')->index();
-            $table->string('balance_transaction')->nullable();
-            $table->string('currency');
-            $table->decimal('amount', 15, 4);
-            $table->string('reason')->nullable();
-            $table->string('receipt_number')->nullable();
-            $table->text('metadata')->nullable();
-            $table->timestamps();
-
-            $table->engine = 'InnoDB';
+        Schema::table('stripe_cards', function (Blueprint $table) {
+            $table->timestamp('exp_date')->after('exp_year')->nullable();
         });
+
+        foreach (Card::all() as $card) {
+            $card->exp_date = Carbon::createFromDate($card->exp_year, $card->exp_month);
+            $card->save();
+        }
     }
 
     /**
@@ -54,6 +50,8 @@ class CartalystStripeBillingCreatePaymentRefundsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stripe_payment_refunds');
+        Schema::table('stripe_cards', function (Blueprint $table) {
+            $table->dropColumn('exp_date');
+        });
     }
 }
