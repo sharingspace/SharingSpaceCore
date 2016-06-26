@@ -526,9 +526,11 @@ Route::group(
 
         Route::get(
             'about',
-            function () {
-                return view('about');
-            }
+            array('as' => 'about',
+                function () {
+                    return view('about');
+                }
+            )
         );
 
         Route::get(
