@@ -1,7 +1,7 @@
 <div class="w-section">
     <div class="boo w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
         <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'>
-            @if (Route::is('about'))
+            @if (Route::is('about') || Route::is('coop'))
                 <source src="/assets/movies/clothing-transcode.webm" data-wf-ignore="">
                 <source src="/assets/movies/clothing-transcode.mp4" data-wf-ignore="">
             @else
@@ -72,6 +72,10 @@
             <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
         @elseif (Route::is('coop'))
             <h1 class="heading">{{ trans('coop.headline') }}</h1>
+            <h2 class="subheading">{{ trans('coop.mission_subheadline') }}</h2>
+        @elseif (Route::is('coop_success'))
+            <h1 class="heading">{{ trans('coop.congrats') }}</h1>
+            <h2 class="subheading">{{ trans('coop.you_are_member') }}</h2>
         @elseif (Route::is('about'))
             <h1 class="heading">{{trans('general.nav.about_mission') }}</h1>
             <h2 class="subheading">{{ trans('about.end_scarcity') }}</h2>

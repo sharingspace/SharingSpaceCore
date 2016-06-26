@@ -8675,7 +8675,7 @@ Quick add
   min-height: 300px;
 }
 
-.charlie_quote {
+.quote {
   color: snow;
   font-family: "Open Sans",sans-serif;
   margin-top: 50px;
@@ -8684,7 +8684,7 @@ Quick add
   line-height: 42px;
 }
 
-.citing {
+.citation {
   margin-top: 20px;
   font-style: normal;
   float: right;
@@ -8704,17 +8704,53 @@ Quick add
   text-align: center;
 }
 
-.about-cta {
+.cta {
   background-color: #ffc200;
   font-family: "Open Sans",sans-serif;
-  padding-bottom: 40px;
+  padding-bottom: 45px;
   padding-top: 40px;
   text-align: center;
 }
 
-.about-cta h2 {
+.cta h2 {
   margin: 0;
   padding: 0;
+}
+
+/**
+ * Coop page
+ *
+ **/
+
+#become_member,
+#we-the-people,
+#people-power,
+#imagine_coop,
+#fairshairs {
+  color: #6d6d6d;
+}
+
+#we-the-people {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/coop/we-the-people.jpg");
+  background-repeat: repeat, no-repeat;
+  background-size: auto auto, auto auto;
+  min-height: 300px;
+}
+
+#people-power {
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/coop/people-power_bg.jpg");
+  background-repeat: repeat, no-repeat;
+  background-size: auto auto, auto auto;
+  min-height: 300px;
+}
+
+#become_member h4 {
+  font-family: Montserrat,sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /**

@@ -171,23 +171,6 @@ img {
   font-weight: 600;
 }
 
-.quote {
-  padding-right: 30px;
-  padding-left: 30px;
-  opacity: 0.6;
-  font-size: 32px;
-  line-height: 42px;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.quote-name {
-  padding-right: 30px;
-  opacity: 0.6;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 800;
-  text-align: right;
-}
 
 .quote-description {
   opacity: 0.6;

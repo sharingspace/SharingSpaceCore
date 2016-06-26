@@ -49,12 +49,12 @@
   </div>
 </section>
 
- <section id="chaplin_quote" class="about-picture-bg">
+<section class="about-picture-bg">
   <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <div class="charlie_quote">“In this world there is room for everyone, and the good earth is rich and can provide for everyone. The way of life can be free and beautiful, but we have lost the way.”</div>
-          <div class="charlie_quote citing">- Charlie Chaplin</div>
+          <div class="quote">“In this world there is room for everyone, and the good earth is rich and can provide for everyone. The way of life can be free and beautiful, but we have lost the way.”</div>
+          <div class="quote citation">- Charlie Chaplin</div>
         </div>
     </div>
   </div>
@@ -101,7 +101,7 @@
 </section>
 
 <!-- /BUTTON CALLOUT -->
-<section class="about-cta">
+<section class="cta">
   <div class="container">
     <div class="row">
       <div class="col-md-9">
@@ -112,6 +112,5 @@
       </div>
   </div>
 </section>
-
 
 @stop
