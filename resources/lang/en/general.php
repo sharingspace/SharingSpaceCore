@@ -23,7 +23,7 @@ return [
           'login' => 'Sign-In',
           'logout' => 'Logout',
           'register' => 'Sign-Up',
-          'about' => 'About',
+          'about_mission' => 'Mission',
 					'basics' => 'Basics',
           'examples' => 'Examples',
           'features' => 'Features',

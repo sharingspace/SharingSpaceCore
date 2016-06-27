@@ -526,9 +526,11 @@ Route::group(
 
         Route::get(
             'about',
-            function () {
-                return view('about');
-            }
+            array('as' => 'about',
+                function () {
+                    return view('about');
+                }
+            )
         );
 
         Route::get(
@@ -541,7 +543,6 @@ Route::group(
                 })
         );
 
-
         Route::post(
             'coop/signup',
             array(
@@ -551,14 +552,13 @@ Route::group(
         );
 
         Route::get(
-            'coop', 
-            array('as' => 'coop',
-            function () {
-                return view('coop');
+            'coop/coop_success', 
+            array(
+                'as' => 'coop_success',
+                function () {
+                    return view('coop_success');
             })
         );
-
-
 
         Route::get(
             'pricing',

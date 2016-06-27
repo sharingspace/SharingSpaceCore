@@ -109,14 +109,12 @@ class PagesController extends Controller
      */
     public function postChargeCoop(Request $request)
     {
-
         $token = Input::get('stripeToken');
 
         // No stripe token - something went wrong :(
         if (!isset($token)) {
             return Redirect::back()->withInput()->with('error', 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
-
 
         $customer = Auth::user();
         $metadata = [];
@@ -131,7 +129,6 @@ class PagesController extends Controller
                     'metadata' => $metadata,
                 ]
             );
-
         }
 
         $data['name'] = $customer->getDisplayName();
@@ -149,39 +146,26 @@ class PagesController extends Controller
 
         // Create the charge
         try {
-
             // Create the charge
             $charge = $customer
                 ->charge()
                 ->create(50.00, [
                     'description' => 'AnyShare COOP Membership',
-                ])
-            ;
-
-
-
+                ]);
         } catch (\Exception $e) {
             return Redirect::back()->withInput()->with('error', 'Something went wrong while authorizing your card: '.$e->getMessage().'');
         }
 
-
         $customer->card()->syncWithStripe();
 
-            Mail::send(
-                ['text' => 'emails.coop-welcome'],
-                $data,
-                function ($message) use ($data) {
+        Mail::send(
+            ['text' => 'emails.coop-welcome'],
+            $data,
+            function ($message) use ($data) {
+                $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+            }
+        );
 
-                    $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
-                }
-            );
-
-            return redirect()->route('coop')->with('success', trans('coop.signup_success'));
-
-
+        return redirect()->route('coop_success')->with('success', trans('coop.signup_success'));
     }
-
-
-
-
 }

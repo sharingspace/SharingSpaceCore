@@ -7,7 +7,7 @@ return [
     | General Site Language Lines
     |--------------------------------------------------------------------------
     */
-
+    'end_scarcity' => 'End Scarcity with Community',
     'why_headline' => 'Why?',
     'mission_subheadline' => 'AnySha.re\'s mission is to end scarcity through community.',
     'what_how'  => 'What and How?',

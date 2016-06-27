@@ -29,45 +29,40 @@
   color: #757575;
 }
 
-.heading {
-  margin-bottom: 0px;
-  padding-bottom: 10px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 50px;
+.heading, .hp_subheading, .subheading {
+  margin:0;
   text-align: center;
   color:white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hp_subheading, .subheading {
+  font-size: 25px;
+  font-style: italic;
+  font-weight:600;
   position: relative;
-  top : 30%;
-  text-align:center;
-  width:100%;
+}
+
+.heading {
+  padding-bottom: 10px;
+  font-size: 50px;
+  position: relative;
+  top: 30%;
   -ms-transform: translate(0, -30%);
   transform: translate(0, -30%);
 }
 
-.hp_heading {
-  margin-bottom: 0px;
-  padding-bottom: 10px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 50px;
-  text-align: center;
-  color:white;
-  position: relative;
-  top : 40%;
-  text-align:center;
-  width:100%;
-  -ms-transform: translate(0, -40%);
-  transform: translate(0, -40%);
+.hp_subheading {
+  top: 32%;
+  line-height:50px;
+  -ms-transform: translate(0, -32%);
+  transform: translate(0, -32%);
 }
 
 .subheading {
-  margin-top: 0px;
-  margin-bottom: 14px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 25px;
-  font-style: italic;
-  font-weight:600;
-  text-align: center;
-  color:white;
+  top:30%;
+  -ms-transform: translate(0, -30%);
+  transform: translate(0, -30%);
 }
 
 .cta-button {
@@ -176,23 +171,6 @@ img {
   font-weight: 600;
 }
 
-.quote {
-  padding-right: 30px;
-  padding-left: 30px;
-  opacity: 0.6;
-  font-size: 32px;
-  line-height: 42px;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.quote-name {
-  padding-right: 30px;
-  opacity: 0.6;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 800;
-  text-align: right;
-}
 
 .quote-description {
   opacity: 0.6;
