@@ -1,7 +1,7 @@
 <div class="w-section">
     <div class="boo w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
         <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'>
-            @if (Route::is('about') || Route::is('coop'))
+            @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
                 <source src="/assets/movies/clothing-transcode.webm" data-wf-ignore="">
                 <source src="/assets/movies/clothing-transcode.mp4" data-wf-ignore="">
             @else

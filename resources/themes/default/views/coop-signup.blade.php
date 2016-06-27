@@ -117,9 +117,9 @@
           </div>
           <div class="form-group col-md-12 col-sm-12">
             <label class="coop-form-headings" for="name">Name:</label>
-            <input class="w-input" data-name="Name" id="name" maxlength="256" name="name" value="David"  placeholder="Enter your name" type="text">
+            <input class="w-input" data-name="Name" id="name" maxlength="256" name="name" value=""  placeholder="Enter your name" type="text">
             <label class="coop-form-headings" for="email">Email Address:</label>
-            <input class="w-input" data-name="Email" value="dslinnard@yahoo.com" id="email" maxlength="256" name="email" placeholder="Enter your email address" required="required" type="email">
+            <input class="w-input" data-name="Email" value="" id="email" maxlength="256" name="email" placeholder="Enter your email address" required="required" type="email">
           </div>
 
           <div class="form-group col-md-12 col-sm-12" id="form-card-number">
@@ -132,22 +132,22 @@
               <i class="fa fa-cc-discover"></i>
             </label>
 
-            <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="4242424242424242" />
+            <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="" />
           </div>
 
           <div class="form-group col-md-3 col-sm-12">
             <label for="exp_month">Month *</label>
-            <input id="exp_month" type="text" class="card-expiry-month form-control" value="01" data-stripe="exp-month">
+            <input id="exp_month" type="text" class="card-expiry-month form-control" value="" data-stripe="exp-month">
           </div>
 
           <div class="form-group col-md-3 col-sm-12">
             <label for="exp_year">Year *</label>
-            <input id="exp_year" type="text" class="card-expiry-year form-control" value="2019" data-stripe="exp-year">
+            <input id="exp_year" type="text" class="card-expiry-year form-control" value="" data-stripe="exp-year">
           </div>
 
           <div class="form-group col-md-3 col-sm-12">
             <label for="cvc">CVC *</label>
-            <input id="cvc" type="text" class="card-cvc form-control" value="123" data-stripe="cvc" />
+            <input id="cvc" type="text" class="card-cvc form-control" value="" data-stripe="cvc" />
           </div>
 
           <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
