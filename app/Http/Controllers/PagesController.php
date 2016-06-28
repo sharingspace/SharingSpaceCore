@@ -166,6 +166,6 @@ class PagesController extends Controller
             }
         );
 
-        return redirect()->route('coop_success')->with('success', trans('coop.signup_success'));
+        return redirect()->route('coop_success');
     }
 }

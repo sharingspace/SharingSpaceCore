@@ -8717,6 +8717,17 @@ Quick add
   padding: 0;
 }
 
+#backstory .team-headshot {
+  border-radius: 12px;
+}
+
+h2.white-secondary-heading {
+  color: #fff;
+  font-size: 39px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
 /**
  * Coop page
  *
@@ -8751,6 +8762,15 @@ Quick add
   line-height: 24px;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+.coop-member-now-div {
+  background-color: #ffc200;
+  border: 1px solid #b4b4b4;
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 5px 10px;
+  overflow: auto;
 }
 
 /**

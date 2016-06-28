@@ -44,7 +44,7 @@
 }
 
 .heading {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   font-size: 50px;
   position: relative;
   top: 30%;
@@ -54,7 +54,6 @@
 
 .hp_subheading {
   top: 32%;
-  line-height:50px;
   -ms-transform: translate(0, -32%);
   transform: translate(0, -32%);
 }
@@ -211,7 +210,7 @@ img {
 
 @media (max-width: 991px) {
   .heading {
-    padding-bottom: 3px;
+    padding-bottom: 20px;
     font-size: 41px;
   }
   .subheading {
@@ -290,8 +289,7 @@ img {
 
 @media (max-width: 479px) {
   .heading {
-    padding-bottom: 0px;
-    font-size: 22px;
+    font-size: 28px;
   }
   .subheading {
     font-size: 13px;
