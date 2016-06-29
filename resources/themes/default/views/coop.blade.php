@@ -109,53 +109,61 @@
 
         <p><a href="https://anyshare.freshdesk.com/support/solutions/17000001928" rel="noopener noreferrer" target="_blank">Visit the Frequently Asked Questions</a></p>
 
-        <h3 class="coop-now-heading">Fill in the following to become an AnyShare Coop Member</h3>
-        <!-- payment form -->
-        <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off" class="coop-member-now-div">
-          {!! csrf_field() !!}
-
-          <!-- Error box for payment errors -->
-          <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
-          </div>
-      
-          <div class="form-group col-md-12 col-sm-12" id="form-card-number">
-            <label for="card-number">Card Number *
-              <i class="fa fa-cc-visa help-text"></i>
-              <i class="fa fa-cc-amex"></i>
-              <i class="fa fa-cc-mastercard"></i>
-              <i class="fa fa-cc-diners-club"></i>
-              <i class="fa fa-cc-jcb"></i>
-              <i class="fa fa-cc-discover"></i>
-            </label>
-
-            <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="" />
-          </div>
-
-          <div class="form-group col-md-3 col-sm-12">
-            <label for="exp_month">Month *</label>
-            <input id="exp_month" type="text" class="card-expiry-month form-control" value="" data-stripe="exp-month">
-          </div>
-
-          <div class="form-group col-md-3 col-sm-12">
-            <label for="exp_year">Year *</label>
-            <input id="exp_year" type="text" class="card-expiry-year form-control" value="" data-stripe="exp-year">
-          </div>
-
-          <div class="form-group col-md-3 col-sm-12">
-            <label for="cvc">CVC *</label>
-            <input id="cvc" type="text" class="card-cvc form-control" value="" data-stripe="cvc" />
-          </div>
-
-          <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
-            <button type="submit" class="btn btn-primary" id="coop_signup">Signup</button>
-          </div>
-
-          <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
-            <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
-              Something went wrong :(
+        <div class="coop-member-now-div">
+        @if ($signedIn)
+          <h3 class="coop-now-heading">Fill in the following to become an AnyShare Coop Member</h3>
+          <!-- payment form -->
+          <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
+            <!-- Error box for payment errors -->
+            <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
             </div>
-          </div>
-        </form>
+        
+            <div class="form-group col-md-12 col-sm-12" id="form-card-number">
+              <label for="card-number">Card Number *
+                <i class="fa fa-cc-visa help-text"></i>
+                <i class="fa fa-cc-amex"></i>
+                <i class="fa fa-cc-mastercard"></i>
+                <i class="fa fa-cc-diners-club"></i>
+                <i class="fa fa-cc-jcb"></i>
+                <i class="fa fa-cc-discover"></i>
+              </label>
+
+              <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="" />
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12">
+              <label for="exp_month">Month *</label>
+              <input id="exp_month" type="text" class="card-expiry-month form-control" value="" data-stripe="exp-month">
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12">
+              <label for="exp_year">Year *</label>
+              <input id="exp_year" type="text" class="card-expiry-year form-control" value="" data-stripe="exp-year">
+            </div>
+
+            <div class="form-group col-md-3 col-sm-12">
+              <label for="cvc">CVC *</label>
+              <input id="cvc" type="text" class="card-cvc form-control" value="" data-stripe="cvc" />
+            </div>
+
+            <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
+              <button type="submit" class="btn btn-primary" id="coop_signup">Signup</button>
+            </div>
+
+            <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
+              <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
+                Something went wrong :(
+              </div>
+            </div>
+          </form>
+        @else
+          <h3 class="coop-now-heading">To become a Coop Member, please sign-in or sign-up and return here to complete your application.</h3>
+          <p>
+            <a href="{{ route('login') }}" class="btn btn-primary">{{ trans('general.nav.login') }} </a>
+            <a href="{{ route('register') }}" class="btn btn-primary">{{ trans('general.nav.register') }} </a>
+          </p>
+        @endif
+        </div>
       </div>
     </div>
   </div>

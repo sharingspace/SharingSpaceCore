@@ -31,7 +31,7 @@ class PagesController extends Controller
     * @since  [v1.0]
     * @return View
     */
-    public function getHomepage(Request $request, $hp = null)
+    public function getHomepage(Request $request)
     {
         if ($request->whitelabel_group) {
             LOG::debug('Whitelabel routing: Passed middleware, start getHomepage');
@@ -56,11 +56,26 @@ class PagesController extends Controller
             }
         } else {
             $communities = \App\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
-            return view('home'.$hp)->with('communities', $communities);
+            return view('home')->with('communities', $communities);
         }
 
     }
 
+   /**
+    * Returns a view to display the coop page. The reason I just don't
+    * call the view from the route as I need to know whether the user is logged
+    * in or not and this seemed the cleanest way
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return View
+    */
+    public function getCoopPage(Request $request)
+    {
+        return view('coop')->with('signedIn', Auth::check());
+    }
+
+    
     /**
     * Sends an email to request financial assistance.
     *

@@ -535,11 +535,9 @@ Route::group(
 
         Route::get(
             'coop',
-            array(
+             array(
                 'as' => 'coop',
-                function () {
-                    return view('coop');
-                })
+                'uses' => 'PagesController@getCoopPage')
         );
 
         Route::post(
@@ -584,7 +582,7 @@ Route::group(
         );
 
         Route::get(
-            '/{hp?}',
+            '/',
             array(
             'as' => 'home',
             'uses' => 'PagesController@getHomepage')
