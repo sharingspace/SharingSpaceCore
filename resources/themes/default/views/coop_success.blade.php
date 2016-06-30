@@ -6,7 +6,7 @@
     <div class="container margin-top-20 text-center">
         <div class="row text-muted">
             <div class="col-md-12">
-                <p class="lead">Congratulations, you're the newest AnyShare Coop Member. We're so happy to be working with you now. We'll email you when with details about voting, dividends and other Coop Member only privileges.</p>
+                <p class="lead">Congratulations, you’re the newest AnyShare Coop Member! We’re happy to be working with you now. We’ll email you soon with details about voting, dividends, and other Coop Member-Only privileges.In the meantime, let your friends on social media know that you’ve taken a big step towards creating a more fair and rewarding economy for all!</p>
             </div>
             
             <p class="lead">In the meantime, let those on social media know that you've taken steps to a fairer and more rewarding economy for all.</p>

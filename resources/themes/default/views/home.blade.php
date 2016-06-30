@@ -44,7 +44,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="quote">"For the first time in history it is now possible to take care of everybody at a higher standard of living than any have ever known"</div>
-          <div class="quote citation">-BUCKMINSTER FULLER</div>
+          <div class="quote citation">- Buckminster Fuller</div>
         </div>
         <div class="col-md-6">
           <div class="quote-description">AnyShare is heavily inspired by the work of Buckminster Fuller. Part of Bucky's work, shows how we can all live abundant lives. He says the first step to take on this path is to be able to view the whole earths resources. From there, you could easily see there is enough to go around for us all!
@@ -55,11 +55,11 @@
     </div>
   </section>
 
-  <section class="cta-section">
+  <section class="cta">
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
+          <h2 class="white-secondary-heading pull-left">Make your own Sharing Website</h2>
         </div>
         <div class="col-md-3">
           <a href="{{ route('community.create.form') }}" class="w-button cta-button">{{ trans('general.nav.start_now') }}</a>
