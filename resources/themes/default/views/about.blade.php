@@ -105,10 +105,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <h2 class="margin-bottom-20">Make your own Sharing Website</h2>
+        <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
       </div>
       <div class="col-md-3">
-        <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button size-20">START NOW</a>
+        <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button size-15">START NOW</a>
       </div>
   </div>
 </section>

@@ -17,7 +17,7 @@
               <ul class="margin-bottom-6 padding-bottom-0 list-inline mobile-block pull-right">
                 <li><a href="/about">About</a></li>
                 <li><a href="http://blog.massmosaic.com">News</a></li>
-                <li><a href="/coop/signup">Coop</a></li>
+                <li><a href="/coop">Coop</a></li>
                 <li><a href="/terms">Terms</a></li>
                 <li><a href="/privacy">Privacy</a></li>
               </ul>
@@ -80,4 +80,7 @@
     <!-- JAVASCRIPT FILES -->
     <script type="text/javascript" src="/assets/js/scripts.js"></script>
 
-    @yield('moar_scripts')
+<script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
+<script type="text/javascript">
+FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Support&submitThanks=Thank+you+for+your+feedback.+We'll+be+in+touch+soon.", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Support", "buttonColor": "white", "buttonBg": "#ec3838", "alignment": "3", "offset": "90%", "submitThanks": "Thank you for your feedback. We'll be in touch soon.", "formHeight": "500px", "url": "https://anyshare.freshdesk.com"} ); </script>
+@yield('moar_scripts')

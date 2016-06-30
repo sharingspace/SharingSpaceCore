@@ -534,20 +534,17 @@ Route::group(
         );
 
         Route::get(
-            'coop/signup',
-            array(
-                'middleware' => ['auth'],
+            'coop',
+             array(
                 'as' => 'coop',
-                function () {
-                    return view('coop-signup');
-                })
+                'uses' => 'PagesController@getCoopPage')
         );
 
         Route::post(
-            'coop/signup',
+            'coop',
             array(
                 'middleware' => ['auth'],
-                'as' => 'coop.signup.submit',
+                'as' => 'coop.submit',
                 'uses' => 'PagesController@postChargeCoop')
         );
 
@@ -585,7 +582,7 @@ Route::group(
         );
 
         Route::get(
-            '/{hp?}',
+            '/',
             array(
             'as' => 'home',
             'uses' => 'PagesController@getHomepage')
