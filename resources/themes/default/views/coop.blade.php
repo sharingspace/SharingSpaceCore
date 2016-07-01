@@ -3,74 +3,77 @@
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
-<section id="imagine_coop" class="padding-xxs">
+<section id="imagine_coop" class="margin-top-30">
   <div class="container">
-
     <div class="row">
-      <div class="col-md-12">
-        <h3 class="margin-bottom-30 text-center">Imagine a Cooperative Business where everyone impacted has a voice and a share in the profits</h3>
-      </div>
       <div class="col-md-6">
-        <p class="lead">AnyShare is making this vision a reality. We are the first business in the USA ever to include all stakeholder groups - and the first internet company in the world to do so too.</p>
-        <p class="lead">Founders, Investors, Employees, Customers AND Nature all benefit from our success.</p>
-      </div> <!-- col-md-6 -->
+        <p class="lead">Imagine a cooperative business where everyone can share their voice and the profits. AnyShare is making this vision a reality!</p>
+        <p class="lead">AnyShare is the the first business ever in the United States to share voting and profits with all stakeholder groups! We're also the first internet company in the world to it... whoo hoo! Read on to learn more...</p>
+      </div>
 
       <div class="col-md-6">
-      <img class="coop-image" src="/assets/img/coop/cooperative_tablet.jpg">
-      <div class="small">
-        <a target="_blank" href="http://creativecommons.org/licenses/by-sa/3.0/" rel="noopener noreferrer">CC BY-SA 3.0</a> Creator: <a target="_blank" href="http://nyphotographic.com/" rel="noopener noreferrer">NY</a>
-      </div>
+        <img class="coop-image" src="/assets/img/coop/sparkler.jpg">
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
   </div> <!-- container -->
 </section>
 
-
-<section id="we-the-people">
+<section class="BanKiMoon margin-top-20">
   <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <div class="quote">"Without democratizing our economy we will just not have the kind of society that we want to have, or that we claim to have. We are just not going to be a democracy."</div>
-          <div class="quote citation margin-bottom-30">- John Duda, Democracy Collaborative</div>
+          <div class="quote">"...[We] celebrate how cooperatives build a better world by advancing sustainable development, social integration and decent work."</div>
+          <div class="quote citation margin-bottom-30">- Ban Ki Moon
+        <br><strong><em class="text-light">Secretary General of United Nations</em></strong></div>
         </div>
     </div>
   </div>
 </section>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="small pull-right">
-        <a target="_blank" href="https://creativecommons.org/licenses/by/2.0/" rel="noopener noreferrer">CC BY 2.0</a>&nbsp;Creator:&nbsp;<a href="http://www.rollingrebellion.org/" target="_blank" rel="noopener noreferrer">Rolling Rebellion for Real Democracy</a>
+<section>
+  <div class="container margin-top-30">
+    <div class="row">
+      <div class="col-md-6">
+        <p class="lead">A Cooperative is collectively owned business that lets people meet economic, social, and cultural needs and aspirations together!</p>
+        <p class="lead">AnyShare is a special type of cooperative called "FairShares." This is a way for managing the ways types of members, including employees, customers, founders, and investors!</p>
+      </div>
+      <div class="col-md-6">
+        <img src="/assets/img/coop/coop-logos.jpg">
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<section id="fairshairs">
-  <div class="container text-center">
-      <div class="row">
-        <div class="col-md-6">
-          <img src="/assets/img/coop/FairShares-logo.png">
-          <p class="margin-top-20">AnyShare is a FairShares Cooperative.</p>
-          <p>FairShares is a philosophy for creating and sustaining multi-stakeholder Cooperatives that share power and wealth amongst their entrepreneurs (founders), producers (employees), consumers (customers) and investors. AnyShare also chooses to pay a percentage of our profits to environmental causes to make us the first complete Cooperative in the USA.</p>
-          <p><a href="http://fairshares.coop" rel="noopener noreferrer" target="_blank">For more information visit the FairShares Website</a></p>
+<section class="JohnDuda margin-top-20">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="quote">
+            "Without democratizing our economy we will just not have the kind of society that we want to have, or that we claim to have. We are just not going to be a democracy."
+          </div>
+          <div class="quote citation margin-bottom-30">- John Duda, PhD.
+            <br><strong><em class="text-light">Director of Communications at Democracy Collaborative</em></strong>
+          </div>
         </div>
-        
-        <div class="col-md-6 margin-top-20">
-          <img src="/assets/img/coop/coop_logo.png" alt="co op">
-          
-          <p class="margin-top-20">A Cooperative (also known as coop, co-operative or co-op) is an autonomous association of people united voluntarily to meet their common economic, social, and cultural needs and aspirations through a jointly owned and democratically controlled business.</p>
-          <p>As businesses driven by values not just profit, Cooperatives share internationally agreed principles and act together to build a better world through co-operation.</p>
-          <p><a href="http://ica.coop/en/whats-co-op/co-operative-identity-values-principles" rel="noopener noreferrer" target="_blank">Learn about the Cooperative Principles</a></p>
-        </div>
-      </div>
-      <!-- /FEATURED BOXES 3 -->
     </div>
-  </section>
-  <!-- / -->
+  </div>
+</section>
 
-<section id="people-power">
+<section>
+  <div class="container margin-top-30">
+    <div class="row">
+      <div class="col-md-6">
+        <p class="lead">By design, corporations benefit only the richest people, silence the people they impact, and hurt our environment.</p>
+        <p class="lead">AnyShare lets anyone shape and share in the benefits of our work. Our mission is to end scarcity through community. This serious work is possible through members like you!</p>
+      </div>
+      <div class="col-md-6">
+        <img src="/assets/img/coop/blindFold.jpg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="TreborScholz margin-top-20">
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
@@ -79,36 +82,34 @@
         </div>
         <div class="quote citation">
           - Trebor Scholz
+          <br><strong><em class="text-light">Director of Communications at Democracy Collaborative</em></strong>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="become_member">
+<section id="become_member margin-top-30">
   <div class="container">
-    <h3 class="backstory-heading">Become a Coop Member Now</h3>
+    <h3 class="backstory-heading">Join the AnyShare Cooperative!</h3>
     <div class="row">
       <div class="col-md-6">
         <h4>Coop Membership costs a once only US $50 fee</h4>
-        <p>To be an active Coop Member beyond the first year, all Coop Members need to do is spend a minimum of $10 within&nbsp;the year with AnyShare or add 10 entries to any Sharing Website.</p>
+        <p class="body-text">To be an active Coop Member beyond the first year, all Coop Members need to do is spend a minimum of $10 within&nbsp;the year with AnyShare or add 10 entries to any Sharing Website.</p>
+        
         <h4>As a Coop Member you receive:</h4>
-        <h5>Voting Rights</h5>
-        <p>You get to propose and vote on resolutions in our Annual General Meeting.</p>
-        <h5>Dividends</h5>
-        <p>70% of Net Profits are distributed back to Founders, Investors, Employees, Customers and Nature each year.</p>
-        <h5>Access to Coop Member only resources</h5>
-        <p>We will create online resources for Coop Members only.</p>
-        <h5>Knowledge you're making a real positive impact</h5>
-        <p>Becoming a Coop Member supports not only AnyShare, but a whole new way of doing business. AnyShare's success will encourage other businesses to share their success with everybody as well.</p>
+        <p class="body-text features-of-coop"><strong>Voting Rights</strong> - You can propose and vote on resolutions.
+        <br>
+        <strong>Dividends</strong> - 70% of Net Profits are distributed back to our members.
+        <br>
+        <strong>Access</strong> - to member-only resources
+        <br><strong>Insight</strong> - you're making a real positive impact</p>
+        
+        <h4>Want to know more?</h4>
+        <p class="body-text">We've prepared a FAQ to answer any queries you may have. <a href="https://anyshare.freshdesk.com/support/solutions/17000001928" rel="noopener noreferrer" target="_blank">Visit the Frequently Asked Questions</a>.</p>
       </div>
 
       <div class="col-md-6">
-        <h4>Want to know more?</h4>
-        <p>We've prepared a Frequently Asked Questions to answer any queries you may have. If after reading the FAQ you still aren't clear, please contact the AnyShare support team and they will happily answer any questions you may have.</p>
-
-        <p><a href="https://anyshare.freshdesk.com/support/solutions/17000001928" rel="noopener noreferrer" target="_blank">Visit the Frequently Asked Questions</a></p>
-
         <div class="coop-member-now-div">
         @if ($signedIn)
           <h3 class="coop-now-heading">Fill in the following to become an AnyShare Coop Member</h3>

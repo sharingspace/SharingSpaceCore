@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section id="why" class="padding-xxs">
+<section id="why" class="margin-top-30">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -49,7 +49,7 @@
   </div>
 </section>
 
-<section class="about-picture-bg">
+<section class="charlieChaplin">
   <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -105,11 +105,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
+        <h2 class="white-secondary-heading pull-left">Make your own Sharing Website</h2>
       </div>
       <div class="col-md-3">
-        <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button size-15">START NOW</a>
+        <a href="https://massmosaic.app/community/new" class="w-button cta-button">START NOW</a>
       </div>
+    </div>
   </div>
 </section>
 
