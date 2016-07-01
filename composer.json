@@ -27,10 +27,7 @@
 		{
 			"type": "vcs",
             "url": "git@github.com:snipe/stripe-billing-laravel.git"
-		},
-        {
-          "type": "composer", "url": "https://packages.cartalyst.com"
-        }
+		}
 	],
     "require-dev": {
         "fzaninotto/faker": "~1.4",
