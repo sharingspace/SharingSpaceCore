@@ -41,6 +41,7 @@
 		Block Review
 		Footer
 		Responsive
+    Bootstrap Media Defines
 		HomePage
 		Quick add
     Members
@@ -8051,6 +8052,8 @@ li.notifications-popdown .notifications-popdown-box {
   border-radius: 3px;
 }
 
+/********************** Bootstrap Media Defines ***********************/
+
 /********************** Home page ***********************/
 
 section#about p {
@@ -8073,13 +8076,26 @@ section#about p {
   margin-top: 10px !important;
 }
 
-@media only screen and (min-width: 760px) {
+h2.white-secondary-heading {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 30px;
+  margin-top: 0;
+}
+
+@media only screen and (min-width: 992px) {
   .callout h4 {
     font-size: 24px;
   }
 
   .callout h4 span {
     font-size: 20px;
+  }
+
+  h2.white-secondary-heading {
+    text-align: left;
+    margin-bottom: 0;
   }
 }
 
@@ -8765,20 +8781,8 @@ section.TreborScholz {
   text-align: center;
 }
 
-.cta h2 {
-  margin: 0;
-  padding: 0;
-}
-
 #backstory .team-headshot {
   border-radius: 12px;
-}
-
-h2.white-secondary-heading {
-  color: #fff;
-  font-size: 39px;
-  margin-bottom: 0;
-  margin-top: 0;
 }
 
 /**

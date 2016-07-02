@@ -42,6 +42,7 @@
 		Block Review
 		Footer
 		Responsive
+    Bootstrap Media Defines
 		HomePage
 		Quick add
     Members
@@ -7529,9 +7530,19 @@ li.notifications-popdown .notifications-popdown-box {
   }
 }
 
+/********************** Bootstrap Media Defines ***********************/
+
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
 
 /********************** Home page ***********************/
-
 
 section {
 	&#about {
@@ -7557,7 +7568,15 @@ section {
 	}
 }
 
-@media only screen and (min-width: 760px) {
+h2.white-secondary-heading {
+    text-align:center;
+    margin-bottom:10px;
+    color: #fff;
+    font-size: 30px;
+    margin-top: 0;
+}
+
+@media only screen and (min-width: $screen-md-min) {
 	.callout {
 		h4 {
 			font-size:24px;
@@ -7566,7 +7585,12 @@ section {
 			}
 		}
 	}
+  h2.white-secondary-heading {
+    text-align:left;
+    margin-bottom:0;
+  }
 }
+
 
 #coop, #pricing {
 	h2 {
@@ -7599,12 +7623,7 @@ Quick add
 ------------------------------------------
 */
 
-$screen-xs-max:767px;
-$screen-sm-min:768px;
-$screen-sm-max:991px;
-$screen-md-min:992px;
-$screen-md-max:1199px;
-$screen-lg-min:1200px;
+
 
 /* these are bootstraps media breaks */
 
@@ -8273,23 +8292,13 @@ section.TreborScholz {
   padding-bottom: 45px;
   padding-top: 40px;
   text-align:center;
-
-  h2 {
-    margin:0;
-    padding:0;
-  }
 }
 
 #backstory .team-headshot {
   border-radius: 12px;
 }
 
-h2.white-secondary-heading {
-  color: #fff;
-  font-size: 39px;
-  margin-bottom: 0;
-  margin-top: 0;
-}
+
 
 /**
  * Coop page

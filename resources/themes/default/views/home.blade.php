@@ -58,11 +58,11 @@
   <section class="cta">
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
-          <h2 class="white-secondary-heading pull-left">Make your own Sharing Website</h2>
+        <div class="col-md-9 col-sm-12 margin-bottom-20">
+          <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
         </div>
-        <div class="col-md-3">
-          <a href="{{ route('community.create.form') }}" class="w-button cta-button">{{ trans('general.nav.start_now') }}</a>
+        <div class="col-md-3 col-sm-12  margin-bottom-20">
+          <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button">{{ trans('general.nav.start_now') }}</a>
         </div>
       </div>
     </div>
