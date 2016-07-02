@@ -5,14 +5,14 @@
 <section id="why" class="margin-top-30">
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <p class="lead font-lato">The Earth is abundant, yet scarcity attacks our perception, identity, bank account, and more. It causes war, censorship, jealousy, control and inequality.</p>
       
         <p class="lead font-lato">Our 'leaders' cannot deliver solutions to fix the world. We need to put faith in ourselves and unite together. AnyShare empowers you and your community to do just that with:</p>
       </div> <!-- col-md-6 -->
 
-      <div class="col-md-6">
-       <img class="abundance-image" src="/assets/img/about/earth.jpg">
+      <div class="col-md-6 col-sm-6 hidden-xs">
+       <img class="img-responsive" src="/assets/img/about/earth.jpg">
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
   </div> <!-- container -->
@@ -75,23 +75,24 @@
       </div>
 
       <div class="row text-center">
-        <div class="col-md-3">
-          <img class="team-headshot" height="200" src="/assets/img/about/rob.jpg" width="200">
-          <h4 class="name">Rob Jameson <a href="https://twitter.com/robjameson" target="_blank" rel="noopener noreferrer"><img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
+        <div class="col-md-3 col-sm-6">
+          <img class="team-headshot img-responsive" height="200" src="/assets/img/about/rob.jpg" width="200">
+          <h4 class="name">Rob Jameson <a href="https://twitter.com/robjameson" target="_blank" rel="noopener noreferrer">
+          <img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
           <h4 class="role">Co-Founder / CEO</h4>
         </div>
-        <div class="col-md-3">
-        <img class="team-headshot" height="200" src="/assets/img/about/eric.jpg" width="200">
+        <div class="col-md-3 col-sm-6">
+        <img class="team-headshot img-responsive" height="200" src="/assets/img/about/eric.jpg" width="200">
           <h4 class="name">Eric Doriean <a href="https://twitter.com/EricDoriean" target="_blank" rel="noopener noreferrer"><img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
           <h4 class="role">Co-Founder / COO</h4>
         </div>
-        <div class="col-md-3">
-        <img class="team-headshot" height="200" src="/assets/img/about/alison.jpg" width="200">
+        <div class="col-md-3 col-sm-6">
+        <img class="team-headshot img-responsive" height="200" src="/assets/img/about/alison.jpg" width="200">
           <h4 class="name">Alison Gianotto <a href="https://twitter.com/snipeyhead" target="_blank" rel="noopener noreferrer"><img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
           <h4 class="role">Co-Founder / CTO </h4>
         </div>
-        <div class="col-md-3">
-        <img class="team-headshot" height="200" src="/assets/img/about/david.jpg" width="200">
+        <div class="col-md-3 col-sm-6">
+        <img class="team-headshot img-responsive" height="200" src="/assets/img/about/david.jpg" width="200">
           <h4 class="name">David Linnard</h4>
           <h4 class="role">Co-Founder / Sr. Developer</h4>
         </div>
@@ -105,10 +106,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <h2 class="white-secondary-heading pull-left">Make your own Sharing Website</h2>
+        <h2 class="white-secondary-heading pull-left margin-bottom-20">Make your own Sharing Website</h2>
       </div>
-      <div class="col-md-3">
-        <a href="https://massmosaic.app/community/new" class="w-button cta-button">START NOW</a>
+      <div class="col-md-3 margin-bottom-20">
+        <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button">START NOW</a>
       </div>
     </div>
   </div>

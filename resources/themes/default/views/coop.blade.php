@@ -6,13 +6,13 @@
 <section id="imagine_coop" class="margin-top-30">
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <p class="lead">Imagine a cooperative business where everyone can share their voice and the profits. AnyShare is making this vision a reality!</p>
         <p class="lead">AnyShare is the the first business ever in the United States to share voting and profits with all stakeholder groups! We're also the first internet company in the world to it... whoo hoo! Read on to learn more...</p>
       </div>
 
-      <div class="col-md-6">
-        <img class="coop-image" src="/assets/img/coop/sparkler.jpg">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <img class="img-responsive" src="/assets/img/coop/sparkler.jpg">
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
   </div> <!-- container -->
@@ -24,7 +24,8 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="quote">"...[We] celebrate how cooperatives build a better world by advancing sustainable development, social integration and decent work."</div>
           <div class="quote citation margin-bottom-30">- Ban Ki Moon
-        <br><strong><em class="text-light">Secretary General of United Nations</em></strong></div>
+            <br><strong><em class="text-light">Secretary General of United Nations</em></strong>
+          </div>
         </div>
     </div>
   </div>
@@ -33,12 +34,12 @@
 <section>
   <div class="container margin-top-30">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <p class="lead">A Cooperative is collectively owned business that lets people meet economic, social, and cultural needs and aspirations together!</p>
         <p class="lead">AnyShare is a special type of cooperative called "FairShares." This is a way for managing the ways types of members, including employees, customers, founders, and investors!</p>
       </div>
-      <div class="col-md-6">
-        <img src="/assets/img/coop/coop-logos.jpg">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <img class="img-responsive"src="/assets/img/coop/coop-logos.jpg">
       </div>
     </div>
   </div>
@@ -62,12 +63,12 @@
 <section>
   <div class="container margin-top-30">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <p class="lead">By design, corporations benefit only the richest people, silence the people they impact, and hurt our environment.</p>
         <p class="lead">AnyShare lets anyone shape and share in the benefits of our work. Our mission is to end scarcity through community. This serious work is possible through members like you!</p>
       </div>
-      <div class="col-md-6">
-        <img src="/assets/img/coop/blindFold.jpg">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <img class="img-responsive" src="/assets/img/coop/blindFold.jpg">
       </div>
     </div>
   </div>

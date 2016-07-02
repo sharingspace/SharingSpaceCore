@@ -128,12 +128,6 @@ img {
   color: #fff;
 }
 
-.white-secondary-heading {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: #fff;
-  font-size: 39px;
-}
 
 .use-heading {
   margin-bottom: 1px;
@@ -210,9 +204,6 @@ img {
     font-size: 18px;
     line-height: 25px;
   }
-  .white-secondary-heading {
-    font-size: 32px;
-  }
   .use-heading {
     font-size: 14px;
   }
@@ -240,10 +231,6 @@ img {
   }
   .subheading {
     font-size: 16px;
-  }
-  .white-secondary-heading {
-    margin-bottom: 21px;
-    text-align: center;
   }
   .use-description {
     width: 50%;
