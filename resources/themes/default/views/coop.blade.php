@@ -38,7 +38,7 @@
         <p class="lead">A Cooperative is collectively owned business that lets people meet economic, social, and cultural needs and aspirations together!</p>
         <p class="lead">AnyShare is a special type of cooperative called "FairShares." This is a way for managing the ways types of members, including employees, customers, founders, and investors!</p>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-10 col-xs-offset-1">
         <img class="img-responsive"src="/assets/img/coop/coop-logos.jpg">
       </div>
     </div>
@@ -116,6 +116,8 @@
           <h3 class="coop-now-heading">Fill in the following to become an AnyShare Coop Member</h3>
           <!-- payment form -->
           <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
+            {!! csrf_field() !!}
+
             <!-- Error box for payment errors -->
             <div class="form-group col-md-12 payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
             </div>
@@ -130,22 +132,22 @@
                 <i class="fa fa-cc-discover"></i>
               </label>
 
-              <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" value="" />
+              <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value="4242424242424242"' : '') !!} />
             </div>
 
             <div class="form-group col-md-3 col-sm-12">
-              <label for="exp_month">Month *</label>
-              <input id="exp_month" type="text" class="card-expiry-month form-control" value="" data-stripe="exp-month">
+              <label for="exp_month">{{trans('general.community.month')}} *</label>
+              <input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
             </div>
 
             <div class="form-group col-md-3 col-sm-12">
-              <label for="exp_year">Year *</label>
-              <input id="exp_year" type="text" class="card-expiry-year form-control" value="" data-stripe="exp-year">
+              <label for="exp_year">{{ trans('general.community.year') }} *</label>
+              <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder=" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
             </div>
 
             <div class="form-group col-md-3 col-sm-12">
-              <label for="cvc">CVC *</label>
-              <input id="cvc" type="text" class="card-cvc form-control" value="" data-stripe="cvc" />
+              <label for="cvc">{{ trans('general.community.cvc') }} *</label>
+              <input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
             </div>
 
             <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
@@ -154,7 +156,7 @@
 
             <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
               <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
-                Something went wrong :(
+              {{trans('general.community.wrong')}}
               </div>
             </div>
           </form>
