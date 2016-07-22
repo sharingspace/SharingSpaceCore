@@ -137,17 +137,17 @@
 
             <div class="form-group col-md-3 col-sm-12">
               <label for="exp_month">{{trans('general.community.month')}} *</label>
-              <input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
+              <input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
             </div>
 
             <div class="form-group col-md-3 col-sm-12">
               <label for="exp_year">{{ trans('general.community.year') }} *</label>
-              <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
+              <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="2016" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
             </div>
 
             <div class="form-group col-md-3 col-sm-12">
               <label for="cvc">{{ trans('general.community.cvc') }} *</label>
-              <input id="cvc" type="text" class="card-cvc form-control" placeholder="" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
+              <input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
             </div>
 
             <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12 nomargin clearfix">
