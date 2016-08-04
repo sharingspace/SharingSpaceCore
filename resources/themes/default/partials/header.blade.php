@@ -57,7 +57,7 @@
            <h1 class="heading">{{ trans('home.home_headline') }}</h1>
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
-                <div>
+                <div class="header_cta_button">
                     <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button size-20">START NOW</a>
                 </div>
             </h2>

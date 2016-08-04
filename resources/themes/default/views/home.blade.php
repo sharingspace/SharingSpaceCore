@@ -62,7 +62,7 @@
           <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
         </div>
         <div class="col-md-3 col-sm-12  margin-bottom-20">
-          <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button">{{ trans('general.nav.start_now') }}</a>
+          <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button pull-right">{{ trans('general.nav.start_now') }}</a>
         </div>
       </div>
     </div>

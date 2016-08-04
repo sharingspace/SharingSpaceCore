@@ -11,7 +11,7 @@
         <p class="lead">AnyShare is the the first business ever in the United States to share voting and profits with all stakeholder groups! We're also the first internet company in the world to it... whoo hoo! Read on to learn more...</p>
       </div>
 
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 hidden-xs">
         <img class="img-responsive" src="/assets/img/coop/sparkler.jpg">
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
@@ -34,12 +34,12 @@
 <section>
   <div class="container margin-top-30">
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
         <p class="lead">A Cooperative is collectively owned business that lets people meet economic, social, and cultural needs and aspirations together!</p>
         <p class="lead">AnyShare is a special type of cooperative called "FairShares." This is a way for managing the ways types of members, including employees, customers, founders, and investors!</p>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-10 col-xs-offset-1">
-        <img class="img-responsive"src="/assets/img/coop/coop-logos.jpg">
+      <div class="col-lg-4 col-md-5 col-sm-6 hidden-xs">
+        <img class="img-responsive" style="max-width:300px;" src="/assets/img/coop/coop-logos.jpg">
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
         <p class="lead">By design, corporations benefit only the richest people, silence the people they impact, and hurt our environment.</p>
         <p class="lead">AnyShare lets anyone shape and share in the benefits of our work. Our mission is to end scarcity through community. This serious work is possible through members like you!</p>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 hidden-xs">
         <img class="img-responsive" src="/assets/img/coop/blindFold.jpg">
       </div>
     </div>
