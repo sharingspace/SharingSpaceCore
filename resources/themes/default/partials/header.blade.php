@@ -1,5 +1,5 @@
 <div class="w-section">
-    <div class="boo w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
+    <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
         <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'>
             @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
                 <source src="/assets/movies/clothing-transcode.webm" data-wf-ignore="">
@@ -22,8 +22,9 @@
 
                         <!-- Logo -->
                         <a href="/" class="w-nav-brand">
-                                <img width="200" src="/assets/img/hp/anyshare-logo-web-retina.png" class="logo">
-                            </a>
+                            <!-- <img width="200" src="/assets/img/hp/anyshare-logo-web-retina.png" class="logo"> -->
+                            <img width="230" src="/assets/img/hp/anyshare-logo-beta.png" class="logo">
+                        </a>
 
                         <!-- Top Nav -->
                         <div class="navbar-collapse pull-right nav-main-collapse collapse">
