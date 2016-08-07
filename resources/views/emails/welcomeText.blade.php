@@ -1,6 +1,8 @@
+@extends('emails/layouts/text')
+
 Hi {{ $name }}!
 
-Your new community is ready!
+Your new Sharing Website is ready!
 
 http://{{ $subdomain}}.anysha.re
 

@@ -245,11 +245,11 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
 
             Mail::send(
-                ['text' => 'emails.welcome'],
+                ['text' => 'emails.welcomeText', 'html' => 'emails.welcomeHTML'],
                 $data,
                 function ($message) use ($data) {
 
-                    $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+                    $message->to($data['email'], $data['name'])->subject('Welcome to AnyShare!');
                 }
             );
 
