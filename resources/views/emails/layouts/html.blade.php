@@ -326,6 +326,10 @@ body, .email_body_cell {
 a, .secondary_btn a, .secondary_btn span, h6, h6 small, .amount {
   color: #e84545;
 }
+.email_content a.hub_link {
+  color:#fff;
+  text-decoration: underline;
+}
 h1, h3, h5, .primary_btn a, .primary_btn span {
   color: #ffffff;
 }
@@ -403,12 +407,7 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                                   <tr>
                                     <td class="column_cell logo_cell font_default" style="padding: 8px 16px;font-family: Helvetica, Arial, sans-serif;vertical-align: top;text-align: left;">
                                       <a href="#" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">
-
-
-
-
-
-
+                                        <img src="https://anysha.re/assets/img/anyshare-logo-squares.png" width="200" height="41" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">
                                       </a>
                                     </td>
                                   </tr>
@@ -447,12 +446,16 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                     <table class="footer" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                       <tbody>
                         <tr>
-                          <td align="center" class="footer_cell font_default" style="padding: 16px 32px 8px;font-family: Helvetica, Arial, sans-serif;">
-                            <p style="text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;color: #999999;">
+                          <td align="center" class="footer_cell font_default" style="padding: 10px 20px;font-family: Helvetica, Arial, sans-serif;">
+                            <p style="text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 20px;margin-top: 10px;margin-bottom: 16px;color: #999999;">
                               <a href="https://www.facebook.com/anyshare.coop/" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/facebook-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">&nbsp;</a> &nbsp;&nbsp;
                               <a href="https://twitter.com/anyshare.coop" style="display: inline-block;text-decoration: none;font-family: Helvetica, Arial, sans-serif;color: #e84545;">&nbsp;<img src="https://anysha.re/assets/img/social/twitter-color.png" width="32" height="32" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;"></p>
 
-                            <p style="text-align:center; font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 16px;margin-bottom: 24px;color:#999999;"><strong style="font-weight: bold;">AnyShare Society, </strong><a href="https://arcosanti.org" target="blank">Arcosanti</a>, Arizona, USA</p>
+                            <p style="text-align:center; font-family: Helvetica, Arial, sans-serif;font-size: 16px;line-height: 23px;margin-top: 10px;margin-bottom: 16px;color:#999999;">
+                            <strong style="font-weight: bold;">
+                              AnyShare Society,
+                            </strong>&nbsp;&nbsp;
+                            <a href="https://arcosanti.org" target="blank">Arcosanti</a>, Arizona, USA</p>
                             
                         </tr>
                       </tbody>
