@@ -7,7 +7,7 @@
     "require": {
       "aws/aws-sdk-php-laravel": "~3.0",
       "barryvdh/laravel-debugbar": "^2.0",
-      "cartalyst/stripe-billing-laravel": "~4.0",
+      "cartalyst/stripe-billing-laravel": "~3.0",
       "cviebrock/eloquent-sluggable": "^3.0",
       "erusev/parsedown": "dev-master",
       "graham-campbell/digitalocean": "~2.1",
@@ -18,7 +18,7 @@
       "laravel/socialite": "^2.0",
       "php": ">=5.5.9",
       "yaap/theme": "2.*",
-      "chrisbjr/api-guard": "^2.3",
+      "chrisbjr/api-guard": "3.1.*",
       "mcamara/laravel-localization": "1.0.*",
       "watson/validating": "^2.0",
         "doctrine/dbal": "^2.5"

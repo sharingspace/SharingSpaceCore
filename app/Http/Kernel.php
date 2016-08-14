@@ -35,5 +35,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'subdomain' => \App\Http\Middleware\SubdomainMiddleware::class,
         'community-auth'=>\App\Http\Middleware\CommunityPermissionMiddleware::class,
+        'apiguard' => \Chrisbjr\ApiGuard\Http\Middleware\ApiGuard::class,
     ];
 }

@@ -243,7 +243,6 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
-
+        'ApiGuardAuth' => Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class
     ],
-
 ];

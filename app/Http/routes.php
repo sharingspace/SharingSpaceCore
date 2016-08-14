@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 Route::group(
-    array('prefix' => 'api/v1'),
+    array('prefix' => 'api/v1', 'middleware' => 'auth'),
     function () {
 
         /*
