@@ -383,6 +383,14 @@ Route::group(
             'uses' => 'CommunitiesController@getEntriesView')
         );
 
+        Route::get(
+            'kiosk',
+            array(
+            'as' => 'kiosk',
+            'middleware' => 'community-auth',
+            'uses' => 'CommunitiesController@getKioskEntriesView')
+        );
+
         Route::post(
             '{entryId}/ajaxdelete',
             array(
