@@ -21,7 +21,7 @@
 <section id="features" class="padding-xxs">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 text-center">
+      <div class="col-md-6 text-center">
         <img class="about-icon" src="/assets/img/about/app.png" width="100">
         <h3 class="feature-heading">Sharing Websites</h3>
         <p class="paragraph-text">A Web based product for any group or community to share needs and resources together.</p>
@@ -29,20 +29,12 @@
           <a class="about-learn-more" href="/features">Learn more</a>
         </div>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-md-6 text-center">
         <img src="/assets/img/about/men-carrying-a-box.png" width="100">
         <h3 class="feature-heading">The Complete Cooperative</h3>
         <p class="paragraph-text">We’re passionate about helping businesses act ethically and collaboratively.</p>
         <div>
           <a class="about-learn-more" href="/coop">Learn more</a>
-        </div>
-      </div>
-      <div class="col-md-4 text-center">
-        <img src="/assets/img/about/holding-hands-in-a-row.png" width="100">
-        <h3 class="feature-heading">AnyShare Community</h3>
-        <p class="paragraph-text">Share news, questions, and ideas for making a abundant world for everyone.</p>
-        <div>
-          <a class="about-learn-more" href="http://blog.massmosaic.com/" target="_blank" rel="noopener noreferrer">Learn more</a>
         </div>
       </div>
     </div>
@@ -112,7 +104,7 @@
         <h2 class="white-secondary-heading pull-left margin-bottom-20">Make your own Sharing Website</h2>
       </div>
       <div class="col-md-3 margin-bottom-20">
-        <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button">START NOW</a>
+        <a href="https://massmosaic.app/community/new" class="w-button cta-button">START NOW</a>
       </div>
     </div>
   </div>
