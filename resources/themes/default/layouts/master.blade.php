@@ -37,7 +37,7 @@
 
     <!-- Bootstrap debug, very handy when working on a responsive layouts -->
     @if( getenv('APP_DEBUG'))
-			<!-- <script src="assets/js/extensions/debug/bootstrap-debugger.js"></script> -->
+			<!-- <script src="{{ asset('assets/js/extensions/debug/bootstrap_debugger.js')}}"></script> -->
     @endif
   <link rel="shortcut icon" href="/favicon.ico">
 

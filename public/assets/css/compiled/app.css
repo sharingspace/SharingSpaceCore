@@ -7680,7 +7680,7 @@ footer.sticky {
   }
 
   section div.row > div {
-    margin-bottom: 60px;
+    margin-bottom: 0;
   }
 
   section div.row.lightbox > div {
@@ -8914,6 +8914,15 @@ section.TreborScholz {
   video::-webkit-media-controls {
     display: none !important;
   }
+}
+
+/**
+ * Terms page
+ *
+ **/
+
+.terms li {
+  margin-bottom: 7px;
 }
 /** ************************************* **
 

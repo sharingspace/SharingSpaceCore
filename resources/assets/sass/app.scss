@@ -7192,7 +7192,7 @@ footer.sticky {
   section {
     div.row {
       > div {
-        margin-bottom: 60px;
+        margin-bottom:0; 
       }
       &.lightbox > div {
         margin-bottom: 0;
@@ -8421,5 +8421,15 @@ section.TreborScholz {
 @media (max-width: $screen-xs-max) {
   video::-webkit-media-controls {
       display:none !important;
+  }
+}
+
+/**
+ * Terms page
+ *
+ **/
+.terms {
+  li {
+    margin-bottom:7px;
   }
 }
