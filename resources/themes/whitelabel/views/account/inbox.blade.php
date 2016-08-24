@@ -17,7 +17,7 @@
             <th data-sortable="true" data-field="entry">{{ trans('general.entries.entry') }}</th>
             <th data-sortable="true" data-field="message">{{ trans('general.messages.message') }}</th>
             <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
-              <th data-sortable="true" data-field="community">{{ trans('general.community.community') }}</th>
+            <th data-sortable="true" data-field="community">{{ trans('general.community.community') }}</th>
           </tr>
       </thead>
       <tbody>

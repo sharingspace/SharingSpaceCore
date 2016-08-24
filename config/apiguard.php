@@ -13,7 +13,13 @@ return [
     */
 
     'logging'              => true,
+    'models'               => [
 
+        'apiKey' => \Chrisbjr\ApiGuard\Models\ApiKey::class,
+
+        'apiLog' => \Chrisbjr\ApiGuard\Models\ApiLog::class,
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | ApiKey model
@@ -102,5 +108,17 @@ return [
     */
 
     'methodLimitIncrement' => '1 hour',
+    'providers'            => [
 
+        /*
+        |--------------------------------------------------------------------------
+        | Authentication Provider
+        |--------------------------------------------------------------------------
+        |
+        | Specify the provider that is used to authenticate users.
+        |
+        */
+        'auth' => Chrisbjr\ApiGuard\Providers\Auth\Illuminate::class
+
+    ]
 ];

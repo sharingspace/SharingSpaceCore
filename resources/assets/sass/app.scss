@@ -42,6 +42,7 @@
 		Block Review
 		Footer
 		Responsive
+    Bootstrap Media Defines
 		HomePage
 		Quick add
     Members
@@ -7529,9 +7530,19 @@ li.notifications-popdown .notifications-popdown-box {
   }
 }
 
+/********************** Bootstrap Media Defines ***********************/
+
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
 
 /********************** Home page ***********************/
-
 
 section {
 	&#about {
@@ -7557,7 +7568,15 @@ section {
 	}
 }
 
-@media only screen and (min-width: 760px) {
+h2.white-secondary-heading {
+    text-align:center;
+    margin-bottom:10px;
+    color: #fff;
+    font-size: 39px;
+    margin-top: 0;
+}
+
+@media only screen and (min-width: $screen-md-min) {
 	.callout {
 		h4 {
 			font-size:24px;
@@ -7566,7 +7585,12 @@ section {
 			}
 		}
 	}
+  h2.white-secondary-heading {
+    text-align:left;
+    margin-bottom:0;
+  }
 }
+
 
 #coop, #pricing {
 	h2 {
@@ -7586,7 +7610,6 @@ section {
     margin-top: -2px;
     text-align: center;
     padding: 10px 0;
-
 	}
 
 	.form-control {
@@ -7600,12 +7623,7 @@ Quick add
 ------------------------------------------
 */
 
-$screen-xs-max:767px;
-$screen-sm-min:768px;
-$screen-sm-max:991px;
-$screen-md-min:992px;
-$screen-md-max:1199px;
-$screen-lg-min:1200px;
+
 
 /* these are bootstraps media breaks */
 
@@ -8149,6 +8167,7 @@ $color-green: #9AE14F;
   color:#0066c0;
 }
 
+
 /**
  * Footer region
  * 
@@ -8172,6 +8191,169 @@ $color-green: #9AE14F;
   width: 100% !important;
 }
 
+/**
+ * About page
+ *
+ **/
+
+
+section.bucky, section.BanKiMoon, section.JohnDuda, section.TreborScholz, section.charlieChaplin  {
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  background-attachment:scroll;  
+}
+
+section.charlieChaplin { 
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/about/forest.jpg");
+  background-repeat: repeat, no-repeat;
+  background-size: auto auto, auto auto;
+  min-height: 300px;
+}
+
+section.bucky {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .8), rgba(0, 0, 0, .6)), url('/assets/img/hp/BuckminsterFuller.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .8), rgba(0, 0, 0, .6)), url('/assets/img/hp/BuckminsterFuller.jpg');
+  background-position: 0px 0px, 50%;
+}
+
+section.BanKiMoon {
+  padding-top: 160px;
+  padding-bottom: 160px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .3)), url('/assets/img/coop/BanKiMoon.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .3)), url('/assets/img/coop/BanKiMoon.jpg');
+  background-position: 0px 0px, 50%;
+  min-height:400px;
+}
+
+section.JohnDuda {
+  padding-top: 160px;
+  padding-bottom: 160px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .4)), url('/assets/img/coop/JuhnDuda.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .4)), url('/assets/img/coop/JuhnDuda.jpg');
+  background-position: 0px 0px, 50%;
+  min-height:500px;
+}
+
+section.TreborScholz {
+  padding-top: 140px;
+  padding-bottom: 140px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .4)), url('/assets/img/coop/TreborScholz.jpg');
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .4)), url('/assets/img/coop/TreborScholz.jpg');
+  background-position: 0px 0px, 50%;
+  min-height:500px;
+}
+
+.quote {
+  font-style: italic;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  color: snow;
+  font-family: "Open Sans",sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 42px;
+}
+
+.citation {
+  font-family: "Open Sans",sans-serif;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 800;
+  margin-bottom: 53px;
+  margin-top: 0;
+  text-align: right;
+  opacity: 0.6;
+}
+
+.backstory-heading {
+  color: #000;
+  font-family: Montserrat,sans-serif;
+  font-size: 39px;
+  line-height: 40px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.backstory-heading {
+  text-align: center;
+}
+
+.cta {
+  background-color: #ffc200;
+  font-family: "Open Sans",sans-serif;
+  padding-bottom: 45px;
+  padding-top: 45px;
+  text-align:center;
+}
+
+#backstory .team-headshot {
+  border-radius: 12px;
+}
+
+
+
+/**
+ * Coop page
+ *
+ **/
+ #become_member, #we-the-people, #people-power, #imagine_coop, #fairshairs {
+  color: #6d6d6d;
+}
+
+#we-the-people
+{ 
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/coop/we-the-people.jpg");
+  background-repeat: repeat, no-repeat;
+  background-size: auto auto, auto auto;
+  min-height: 300px;
+}
+
+#people-power { 
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/coop/people-power_bg.jpg");
+  background-repeat: repeat, no-repeat;
+  background-size: auto auto, auto auto;
+  min-height: 300px;
+}
+
+#become_member {
+  h4 {
+    font-family: Montserrat,sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+}
+
+.coop-member-now-div {
+  background-color: #ffc200;
+  border: 1px solid #b4b4b4;
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 5px 10px;
+  overflow: auto;
+  h3 {
+    font-family: Montserrat,sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-bottom: 10px;
+    color:white;
+  }
+}
+
+.coop-member-now-div form label {
+  color:white;
+}
 
 /**
  * Media pull

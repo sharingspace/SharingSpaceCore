@@ -31,7 +31,7 @@ class PagesController extends Controller
     * @since  [v1.0]
     * @return View
     */
-    public function getHomepage(Request $request, $hp = null)
+    public function getHomepage(Request $request)
     {
         if ($request->whitelabel_group) {
             LOG::debug('Whitelabel routing: Passed middleware, start getHomepage');
@@ -56,11 +56,26 @@ class PagesController extends Controller
             }
         } else {
             $communities = \App\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
-            return view('home'.$hp)->with('communities', $communities);
+            return view('home')->with('communities', $communities);
         }
 
     }
 
+   /**
+    * Returns a view to display the coop page. The reason I just don't
+    * call the view from the route as I need to know whether the user is logged
+    * in or not and this seemed the cleanest way
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return View
+    */
+    public function getCoopPage(Request $request)
+    {
+        return view('coop')->with('signedIn', Auth::check());
+    }
+
+    
     /**
     * Sends an email to request financial assistance.
     *
@@ -95,5 +110,77 @@ class PagesController extends Controller
             return Redirect::back()->with('error', trans('pricing.financial_assist.error'));
         }
 
+    }
+
+
+    /**
+     * Validates and stores a new co-op membership charge
+     *
+     * @todo   Rip out Cartalyst's commercial stripe billing package and use Stripe native
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see    PageController::getCoopSignup()
+     * @since  [v1.0]
+     * @return Redirect
+     */
+    public function postChargeCoop(Request $request)
+    {
+        $token = Input::get('stripeToken');
+
+        // No stripe token - something went wrong :(
+        if (!isset($token)) {
+            return Redirect::back()->withInput()->with('error', 'Something went wrong. Please make sure javascript is enabled in your browser.');
+        }
+
+        $customer = Auth::user();
+        $metadata = [];
+
+        if ($customer->stripe_id=='') {
+            // Create the Stripe customer
+
+            $customer->createStripeCustomer(
+                [
+                    'email' => $customer->email,
+                    'description' => 'Name: '.$customer->getDisplayName(),
+                    'metadata' => $metadata,
+                ]
+            );
+        }
+
+        $data['name'] = $customer->getDisplayName();
+        $data['email'] = $customer->email;
+
+        if (!$customer->save()) {
+            return Redirect::back()->withInput()->with('error', 'Something went wrong.');
+        }
+
+        try {
+            $card = $customer->card()->makeDefault()->create($token);
+        } catch (\Exception $e) {
+            return Redirect::back()->withInput()->with('error', 'Something went wrong while trying to authorise your card: '.$e->getMessage().'');
+        }
+
+        // Create the charge
+        try {
+            // Create the charge
+            $charge = $customer
+                ->charge()
+                ->create(50.00, [
+                    'description' => 'AnyShare COOP Membership',
+                ]);
+        } catch (\Exception $e) {
+            return Redirect::back()->withInput()->with('error', 'Something went wrong while authorizing your card: '.$e->getMessage().'');
+        }
+
+        $customer->card()->syncWithStripe();
+
+        Mail::send(
+            ['text' => 'emails.coop-welcome'],
+            $data,
+            function ($message) use ($data) {
+                $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+            }
+        );
+
+        return redirect()->route('coop_success');
     }
 }

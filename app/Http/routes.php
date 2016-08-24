@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 Route::group(
-    array('prefix' => 'api/v1'),
+    array('prefix' => 'api/v1', 'middleware' => 'auth'),
     function () {
 
         /*
@@ -383,6 +383,14 @@ Route::group(
             'uses' => 'CommunitiesController@getEntriesView')
         );
 
+        Route::get(
+            'kiosk',
+            array(
+            'as' => 'kiosk',
+            'middleware' => 'community-auth',
+            'uses' => 'CommunitiesController@getKioskEntriesView')
+        );
+
         Route::post(
             '{entryId}/ajaxdelete',
             array(
@@ -526,16 +534,34 @@ Route::group(
 
         Route::get(
             'about',
-            function () {
-                return view('about');
-            }
+            array('as' => 'about',
+                function () {
+                    return view('about');
+                }
+            )
         );
 
         Route::get(
-            'coop', 
-            array('as' => 'coop',
-            function () {
-                return view('coop');
+            'coop',
+             array(
+                'as' => 'coop',
+                'uses' => 'PagesController@getCoopPage')
+        );
+
+        Route::post(
+            'coop',
+            array(
+                'middleware' => ['auth'],
+                'as' => 'coop.submit',
+                'uses' => 'PagesController@postChargeCoop')
+        );
+
+        Route::get(
+            'coop/coop_success', 
+            array(
+                'as' => 'coop_success',
+                function () {
+                    return view('coop_success');
             })
         );
 
@@ -564,7 +590,7 @@ Route::group(
         );
 
         Route::get(
-            '/{hp?}',
+            '/',
             array(
             'as' => 'home',
             'uses' => 'PagesController@getHomepage')

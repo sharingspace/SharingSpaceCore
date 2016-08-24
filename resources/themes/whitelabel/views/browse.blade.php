@@ -12,6 +12,8 @@
     id="table"
     data-url="{{ route('json.browse') }}"
     data-cookie="true"
+    data-sort-name="created_at"
+    data-sort-order="desc"
     data-cookie-id-table="communityListingv1">
       <thead>
           <tr>

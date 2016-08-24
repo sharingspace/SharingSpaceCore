@@ -10,7 +10,7 @@
 }
 
 .logo {
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .background-video {
@@ -29,45 +29,39 @@
   color: #757575;
 }
 
-.heading {
-  margin-bottom: 0px;
-  padding-bottom: 10px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 50px;
+.heading, .hp_subheading, .subheading {
+  margin:0;
   text-align: center;
   color:white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.hp_subheading, .subheading {
+  font-size: 25px;
+  font-style: italic;
+  font-weight:600;
   position: relative;
-  top : 30%;
-  text-align:center;
-  width:100%;
+}
+
+.heading {
+  padding-bottom: 13px;
+  font-size: 50px;
+  position: relative;
+  top: 35%;
   -ms-transform: translate(0, -30%);
   transform: translate(0, -30%);
 }
 
-.hp_heading {
-  margin-bottom: 0px;
-  padding-bottom: 10px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 50px;
-  text-align: center;
-  color:white;
-  position: relative;
-  top : 40%;
-  text-align:center;
-  width:100%;
-  -ms-transform: translate(0, -40%);
-  transform: translate(0, -40%);
+.hp_subheading {
+  top: 37%;
+  -ms-transform: translate(0, -32%);
+  transform: translate(0, -32%);
 }
 
 .subheading {
-  margin-top: 0px;
-  margin-bottom: 14px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 25px;
-  font-style: italic;
-  font-weight:600;
-  text-align: center;
-  color:white;
+  top:30%;
+  -ms-transform: translate(0, -30%);
+  transform: translate(0, -30%);
 }
 
 .cta-button {
@@ -75,6 +69,10 @@
   border-radius: 7px;
   background-color: #ec3838;
   text-align: center;
+}
+
+.header_cta_button {
+  margin-top:20px;
 }
 
 .cta-button.contained-button {
@@ -106,7 +104,7 @@
 
 .feature-heading {
   font-family: Montserrat,sans-serif;
-  margin: 15px 30px;
+  margin: 15px;
 }
 
 img {
@@ -134,12 +132,6 @@ img {
   color: #fff;
 }
 
-.white-secondary-heading {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  color: #fff;
-  font-size: 39px;
-}
 
 .use-heading {
   margin-bottom: 1px;
@@ -151,17 +143,7 @@ img {
   color: #fff;
 }
 
-.bucky-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .8), rgba(0, 0, 0, .6)), url('/assets/img/hp/BuckminsterFuller.jpg');
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, .8), rgba(0, 0, 0, .6)), url('/assets/img/hp/BuckminsterFuller.jpg');
-  background-position: 0px 0px, 50% -182px;
-  background-size: auto, cover;
-  background-repeat: repeat, no-repeat;
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-}
+
 
 .cta-section {
   padding-top: 60px;
@@ -176,26 +158,9 @@ img {
   font-weight: 600;
 }
 
-.quote {
-  padding-right: 30px;
-  padding-left: 30px;
-  opacity: 0.6;
-  font-size: 32px;
-  line-height: 42px;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.quote-name {
-  padding-right: 30px;
-  opacity: 0.6;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 800;
-  text-align: right;
-}
 
 .quote-description {
-  opacity: 0.6;
+  opacity: 0.8;
   line-height: 23px;
 }
 
@@ -233,18 +198,15 @@ img {
 
 @media (max-width: 991px) {
   .heading {
-    padding-bottom: 3px;
+    padding-bottom: 20px;
     font-size: 41px;
   }
   .subheading {
-    font-size: 18px;
+    font-size: 20px;
   }
   .text {
     font-size: 18px;
     line-height: 25px;
-  }
-  .white-secondary-heading {
-    font-size: 32px;
   }
   .use-heading {
     font-size: 14px;
@@ -270,13 +232,6 @@ img {
 @media (max-width: 767px) {
   .heading {
     font-size: 35px;
-  }
-  .subheading {
-    font-size: 16px;
-  }
-  .white-secondary-heading {
-    margin-bottom: 21px;
-    text-align: center;
   }
   .use-description {
     width: 50%;
@@ -312,11 +267,7 @@ img {
 
 @media (max-width: 479px) {
   .heading {
-    padding-bottom: 0px;
-    font-size: 22px;
-  }
-  .subheading {
-    font-size: 13px;
+    font-size: 28px;
   }
   .use-description {
     width: 50%;

@@ -123,7 +123,7 @@
                 cookieExpire = cookieExpire * 30 * 24 * 60 * 60;
                 break;
             case 'y':
-                cookieExpire = cookieExpire * 365 * 30 * 24 * 60 * 60;
+                cookieExpire = cookieExpire * 365 * 24 * 60 * 60;
                 break;
             default:
                 cookieExpire = undefined;
@@ -203,7 +203,7 @@
                                 searchControls = getCurrentSearchControls(that);
 
                             header.find(searchControls).each(function (index, ele) {
-                                field = $(this).parent().parent().parent().data('field');
+                                field = $(this).closest('[data-field]').data('field');
                                 result = $.grep(filterControl, function (valueObj) {
                                     return valueObj.field === field;
                                 });
@@ -244,9 +244,9 @@
             searchTextCookie = getCookie(this, this.options.cookieIdTable, cookieIds.searchText);
 
         //sortOrder
-        this.options.sortOrder = sortOrderCookie ? sortOrderCookie : 'asc';
+        this.options.sortOrder = sortOrderCookie ? sortOrderCookie : this.options.sortOrder;
         //sortName
-        this.options.sortName = sortOrderNameCookie ? sortOrderNameCookie : undefined;
+        this.options.sortName = sortOrderNameCookie ? sortOrderNameCookie : this.options.sortName;
         //pageNumber
         this.options.pageNumber = pageNumberCookie ? +pageNumberCookie : this.options.pageNumber;
         //pageSize
@@ -313,12 +313,16 @@
     
     BootstrapTable.prototype.selectPage = function (page) {
         _selectPage.apply(this, Array.prototype.slice.apply(arguments));
-        setCookie(this, idsStateSaveList.pageNumber, page);
+        setCookie(this, cookieIds.pageNumber, page);
     };
 
     BootstrapTable.prototype.onSearch = function () {
-        _onSearch.apply(this, Array.prototype.slice.apply(arguments));
-        setCookie(this, cookieIds.searchText, this.searchText);
+        var target = Array.prototype.slice.apply(arguments);
+        _onSearch.apply(this, target);
+
+        if ($(target[0].currentTarget).parent().hasClass('search')) {
+          setCookie(this, cookieIds.searchText, this.searchText);
+        }
     };
 
     BootstrapTable.prototype.deleteCookie = function (cookieName) {

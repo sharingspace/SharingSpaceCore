@@ -68,6 +68,22 @@ class CommunitiesController extends Controller
     }
 
     /**
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content to display the entries within a community, which
+    * is generated in getDatatable. Kiosk blade simply displays without
+    * header or footer
+    *
+    * @author [D.Linnard] [<dslinnard@gmail.com>]
+    * @see    CommunitiesController::getDatatable() method that generates the JSON response
+    * @since  [v1.0]
+    * @return View
+    */
+    public function getKioskEntriesView()
+    {
+        return view('kiosk');
+    }
+
+    /**
     * Returns a view that allows a user to request access to a community that is
     * non-public.
     *
@@ -245,11 +261,11 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
 
             Mail::send(
-                ['text' => 'emails.welcome'],
+                ['text' => 'emails.welcomeText', 'html' => 'emails.welcomeHTML'],
                 $data,
                 function ($message) use ($data) {
 
-                    $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+                    $message->to($data['email'], $data['name'])->subject('Welcome to AnyShare!');
                 }
             );
 
