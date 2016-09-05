@@ -67,7 +67,7 @@
 
     <table class="table table-condensed"
     name="communityListings"
-    id="table"
+    id="entry_browse_table"
     data-sort-name="created_at"
     data-sort-order="desc"
     data-url="{{ route('json.browse') }}"
@@ -76,6 +76,7 @@
       <thead>
         <tr>
           <th data-sortable="false" data-field="image">Image</th>
+          <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
           <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
           <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
           <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
@@ -124,7 +125,7 @@ $( document ).ready(function() {
     });
   });
 
-  $('#table').bootstrapTable({
+  $('#entry_browse_table').bootstrapTable({
     classes: 'table table-responsive table-no-bordered',
     undefinedText: '',
     iconsPrefix: 'fa',
@@ -156,7 +157,7 @@ $( document ).ready(function() {
     }
   });
 
-  $('#table').on('load-success.bs.table', function () {
+  $('#entry_browse_table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
   });
 
