@@ -597,7 +597,8 @@ class EntriesController extends Controller
 
             $rows[] = array(
               'image' => $imageTag,
-              'title' => strtoupper($entry->post_type).': <a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
+              'post_type' => strtoupper($entry->post_type),
+              'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
               'author' => '<img src="'.$entry->author->gravatar().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
               'location' => $entry->location,
               'created_at' => $entry->created_at->format('M jS, Y'),
