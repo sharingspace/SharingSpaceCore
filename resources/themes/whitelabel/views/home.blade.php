@@ -166,7 +166,7 @@ $( document ).ready(function() {
 
     if (!$('#about_panel').is(':visible')) {
       $("#about_panel").slideToggle('fast');
-      height = $("#about_panel p").height()+30+'px';
+      height = $("#about_panel p").height()+60+'px';
     }
     else {
       $("#about_panel").slideToggle('fast');
