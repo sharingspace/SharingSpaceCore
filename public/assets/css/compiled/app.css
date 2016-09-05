@@ -8654,6 +8654,107 @@ Quick add
   color: #0066c0;
 }
 
+#image_box_container {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  margin: auto;
+}
+
+#image_box_container #image_box {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  height: 250px;
+  background-image: url("");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 7px;
+  margin: auto;
+}
+
+#image_box_container #image_box img {
+  opacity: 0.5;
+}
+
+.image_controls {
+  position: absolute;
+  bottom: 0;
+  right: -15px;
+}
+
+.image_controls #rotate_image:hover,
+.image_controls #delete_image:hover {
+  cursor: pointer;
+}
+
+.image_controls i {
+  background-color: black;
+  float: right;
+  color: white;
+  padding: 5px;
+  min-width: 35px;
+  margin-right: 1px;
+}
+
+.image_controls i .fa-2x {
+  margin-bottom: 2px;
+}
+
+#entry_form #image_box_container,
+#edit_entry #image_box_container {
+  display: none;
+  background-color: #f2f2f2;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+#entry_form #image_box_container #image_box,
+#edit_entry #image_box_container #image_box {
+  border: #ddd 1px solid;
+}
+
+#entry_form #cancel_button,
+#edit_entry #cancel_button {
+  display: none;
+}
+
+#entry_form #progressbar,
+#edit_entry #progressbar {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#entry_form #progressbar .ui-progressbar-value,
+#edit_entry #progressbar .ui-progressbar-value {
+  margin: 0;
+}
+
+#entry_form #progressbar .percent_caption,
+#edit_entry #progressbar .percent_caption {
+  position: relative;
+  top: -23px;
+}
+
+#delete_img_checkbox_label {
+  display: none;
+}
+
+#dialog-confirm {
+  display: none;
+}
+
+#dialog-confirm i {
+  vertical-align: middle;
+  padding: 3px;
+}
+
+#dialog-confirm span {
+  font-size: 18px;
+}
+
 /**
  * Footer region
  * 

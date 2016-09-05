@@ -35,18 +35,18 @@ class EntriesController extends Controller
     public function getEntry(Request $request, $entryID)
     {
         if ($entry = \App\Entry::find($entryID)) {
-
             if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
                 return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
             $images = \DB::table('media')
-            ->where('entry_id', '=', $entryID)
-            ->get();
+              ->where('entry_id', '=', $entryID)
+              ->get();
+
             return view('entries.view')->with('entry', $entry)->with('images', $images);
 
         } else {
-            return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+          return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -56,7 +56,7 @@ class EntriesController extends Controller
             $imageName=null;
 
             if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
-                return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
+              return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
             }
 
             $types=[]; 
@@ -67,17 +67,18 @@ class EntriesController extends Controller
             }
 
             $image = \DB::table('media')
-                ->where('entry_id', '=', $entryID)
-                ->first();
+              ->where('entry_id', '=', $entryID)
+              ->first();
 
             if ($image) {
-                $imageName = $image->filename;
+              $imageName = $image->filename;
             }
 
             return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => $entry->tags, 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);            
 
-        } else {
-            return response()->json(['success'=>false, 'error'=>'test']);
+        }
+        else {
+          redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -109,7 +110,7 @@ class EntriesController extends Controller
     public function postAjaxCreate(Request $request)
     {
         $entry = new \App\Entry();
-
+        
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
         $entry->description    = e(Input::get('description'));
@@ -122,11 +123,11 @@ class EntriesController extends Controller
 
         $validator = Validator::make($request->all(), $entry->getRules());
         if ($validator->fails()) {
-            return response()->json(['success'=>false, 'errors'=>$validator->messages()]);
+          return response()->json(['success'=>false, 'errors'=>$validator->messages()]);
         }
 
         if (empty($exchange_types)) {
-            return response()->json(['success'=>false, 'errors'=>array('message' => trans("general.entries.messages.no_exchange_types"))]);
+            return response()->json(['success'=>false, 'error'=>trans("general.entries.messages.no_exchange_types")]);
         }
 
         if (Input::get('location')) {
@@ -140,7 +141,6 @@ class EntriesController extends Controller
         }
 
         if ($request->whitelabel_group->entries()->save($entry)) {
-            //Log::debug("************************ Saved whitelabel group, id: ".$entry->id." upload_key: ".$upload_key);
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             $types=$typeIds=[];
@@ -152,10 +152,16 @@ class EntriesController extends Controller
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                //Log::debug("We have a file - and, weirdly, kinda shouldn't?");
-                $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
+                Log::debug("We have a file - and, weirdly, kinda shouldn't?");
+                $rotation=null;
+                if (!empty(Input::get('rotation'))) {
+                    $rotation = Input::get('rotation');
+                }
+
+                if (!$entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation)) {
+                    return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.rotation_failed')]);
+                }
             } else {
-                //Log::debug("no file was detected, we should just be moving files from temp-to-perm");
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
@@ -167,7 +173,6 @@ class EntriesController extends Controller
         }
 
         return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
-
     }
 
 
@@ -180,6 +185,7 @@ class EntriesController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
+    /*
     public function postCreate(Request $request)
     {
         $entry = new \App\Entry();
@@ -210,14 +216,11 @@ class EntriesController extends Controller
                 // if the file was uploaded correctly
                 if ($entry->uploadImage(Auth::user(), Input::file('file'), 'entries')) {
 
-                    if (\App\Entry::moveImagesForNewTile(Auth::user(), $request->session()->get('upload_key'))) {
-                        echo response()->json(['success'=>true, 'tile_id'=>$entry->id, 'title'=>$entry->title, 'post_type'=>$entry->post_type, 'exchange_types'=>Input::get('exchange_types')]);
-                    } else {
+                    if (!\App\Entry::moveImagesForNewTile(Auth::user(), $request->session()->get('upload_key'))) {
                         return response()->json(['success'=>false]);
                     }
                     return response()->json(['success'=>false]);
                 }
-
             }
 
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
@@ -227,7 +230,7 @@ class EntriesController extends Controller
         }
         return redirect()->back()->with('error', trans('general.entries.messages.save_failed'));
 
-    }
+    }*/
 
     /**
     * Returns a form view to edit an entry
@@ -239,8 +242,8 @@ class EntriesController extends Controller
     */
     public function getEdit(Request $request, $entryID)
     {
-         // This should be pulled into a helper or macro
-         $post_types = array('want'=>'I want', 'have'=>'I have');
+        // This should be pulled into a helper or macro
+        $post_types = array('want'=>'I want', 'have'=>'I have');
 
         if ($entry = \App\Entry::find($entryID)) {
 
@@ -266,14 +269,12 @@ class EntriesController extends Controller
             foreach ($selected_exchange_types as $selected_exchange_type) {
                 $selected_exchanges[$selected_exchange_type->id] = $selected_exchange_type->id;
             }
-
             return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types)->with('selected_exchanges', $selected_exchanges)->with('image',$imageName);
 
-
-        } else {
+        }
+        else {
             return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
         }
-
     }
 
 
@@ -293,11 +294,11 @@ class EntriesController extends Controller
                 return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
             }
 
-            $entry->title    = e(Input::get('title'));
-            $entry->post_type    = e(Input::get('post_type'));
-            $entry->description    = e(Input::get('description'));
-            $entry->qty    = e(Input::get('qty'));
-            $entry->tags    = e(Input::get('tags'));
+            $entry->title = e(Input::get('title'));
+            $entry->post_type = e(Input::get('post_type'));
+            $entry->description = e(Input::get('description'));
+            $entry->qty = e(Input::get('qty'));
+            $entry->tags = e(Input::get('tags'));
             $entry->visible = e(Input::get('private')) ? 0 : 1;
 
             if (Input::get('location')) {
@@ -306,8 +307,8 @@ class EntriesController extends Controller
             }
 
             if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-                $entry->latitude           = $latlong['lat'];
-                $entry->longitude         = $latlong['lng'];
+                $entry->latitude = $latlong['lat'];
+                $entry->longitude = $latlong['lng'];
             }
 
             if (!$entry->save()) {
@@ -315,27 +316,31 @@ class EntriesController extends Controller
             }
 
             if (Input::hasFile('file')) {
-                $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
+                $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
             }
-            else if(Input::get('delete_img')) {
+            else if(Input::has('deleteImage')) {
                 \App\Entry::deleteImage($entry->id, $user->id);
                 \App\Entry::deleteImageFromDB($entry->id, $user->id);
+            }
+            else if(Input::has('rotation')) {
+                if(!\App\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                  return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+                }
             }
 
             $types=[]; 
             $typeIds=[];
-                $entry->exchangeTypes()->sync(Input::get('exchange_types'));
+            $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
-                foreach ($entry->exchangeTypes as $et) {
-                    array_push($types, $et->name);
-                    array_push($typeIds,$et->id);
-                }
+            foreach ($entry->exchangeTypes as $et) {
+                array_push($types, $et->name);
+                array_push($typeIds,$et->id);
+            }
 
             return response()->json(['success'=>true, 'create'=>false, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'typeIds' => $typeIds, 'tags' => $entry->tags]);
         }
 
         return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
-
     }
 
 
@@ -380,11 +385,20 @@ class EntriesController extends Controller
             }
 
             if (Input::hasFile('file')) {
-                $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
+                if (!empty(Input::get('rotation') && Input::get('rotation'))) {
+                    $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', Input::get('rotation'));
+                }
+                else {
+                    $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
+                }
             }
-            else if(Input::get('delete_img')) {
+            else if(Input::get('deleteImage')) {
                 \App\Entry::deleteImage($entry->id, $user->id);
                 \App\Entry::deleteImageFromDB($entry->id, $user->id);
+            } else if (Input::get('rotation')) {
+              if(!\App\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+              }
             }
             
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
@@ -411,8 +425,8 @@ class EntriesController extends Controller
 
             if (!$entry->checkUserCanEditEntry($user)) {
                 return response()->json(['success'=>false, 'message'=>trans('general.entries.messages.delete_not_allowed')]);
-            } else {
-
+            }
+            else {
                 if ($entry->delete()) {
                     $entry->exchangeTypes()->detach();
                     return response()->json(['success'=>true, 'entry_id'=>$entry->id, 'message'=>trans('general.entries.messages.delete_success')]);
@@ -439,17 +453,17 @@ class EntriesController extends Controller
 
             if (!$entry->checkUserCanEditEntry($user)) {
                 return redirect()->route('browse')->with('error', trans('general.entries.messages.delete_not_allowed'));
-            } else {
+            }
+            else {
                 if ($entry->delete()) {
                     $entry->exchangeTypes()->detach();
-                    return redirect()->route('browse')->with('success', trans('general.entries.messages.deleted'));
+                    return redirect()->route('browse')->with('success', trans('general.entries.messages.delete_success'));
                 }
                 return redirect()->route('entry.view', $entry->id)->with('error', trans('general.entries.messages.delete_failed'));
             }
 
         }
         return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
-
     }
 
 
@@ -470,18 +484,26 @@ class EntriesController extends Controller
 
         if (Input::hasFile('image')) {
             $uploaded = false;
-            if ($entry) {
-                $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries');
+            $rotation=null;
 
-            } else {
-                $uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'));
+            if(!empty(Input::get('rotation'))) {
+                $rotation = Input::get('rotation');
+            }
+            
+            if ($entry) {
+                $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries', $rotation);
+            } 
+            else {
+                $uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'), $rotation);
             }
             if ($uploaded) {
                 return response()->json(['success'=>true]);
-            } else {
+            } 
+            else {
                 return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.upload_fail')]);
             }
-        } else {
+        } 
+        else {
             return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.no_image')]);
         }
     }
@@ -499,7 +521,8 @@ class EntriesController extends Controller
     {
         if ($user_id) {
             $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->where('created_by', $user_id);
-        } else {
+        }
+        else {
             $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->NotCompleted();
         }
 
@@ -509,13 +532,15 @@ class EntriesController extends Controller
 
         if (Input::has('offset')) {
             $offset = e(Input::get('offset'));
-        } else {
+        }
+        else {
             $offset = 0;
         }
 
         if (Input::has('limit')) {
             $limit = e(Input::get('limit'));
-        } else {
+        }
+        else {
             $limit = 50;
         }
 
@@ -538,7 +563,8 @@ class EntriesController extends Controller
 
         if (Auth::check()) {
             $user = Auth::user();
-        } else {
+        }
+        else {
             $user = null;
         }
 
@@ -546,7 +572,8 @@ class EntriesController extends Controller
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
                 $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
-            } else {
+            }
+            else {
                 $actions = '';
             }
             
@@ -557,14 +584,13 @@ class EntriesController extends Controller
             }
 
             $rows[] = array(
-            'title' => strtoupper($entry->post_type).': <a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
-            'author' => '<img src="'.$entry->author->gravatar().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
-            'location' => $entry->location,
-            'created_at' => $entry->created_at->format('M jS, Y'),
-            'actions' => $actions,
-            'tags' => $entry->tags,
-            'exchangeTypes' => implode(', ',$exchangeTypes)
-            //'image' => '<img src="/assets/uploads/entries/',$entry->id.'/'.$images[0]->filename.'">'
+              'title' => strtoupper($entry->post_type).': <a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
+              'author' => '<img src="'.$entry->author->gravatar().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
+              'location' => $entry->location,
+              'created_at' => $entry->created_at->format('M jS, Y'),
+              'actions' => $actions,
+              'tags' => $entry->tags,
+              'exchangeTypes' => implode(', ',$exchangeTypes)
             );
         }
 
@@ -589,6 +615,5 @@ class EntriesController extends Controller
             $entry->save();
             return redirect()->route('browse')->with('success', trans('general.entries.messages.completed'));
         }
-
     }
 }

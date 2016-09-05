@@ -218,9 +218,6 @@ Route::group(
                     'as' => 'user.notifications.save',
                     'uses' => 'UserController@postUpdateNotifications')
                 );
-
-
-
         });
 
 
