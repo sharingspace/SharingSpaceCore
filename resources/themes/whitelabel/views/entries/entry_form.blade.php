@@ -45,9 +45,9 @@
                       <!-- Name -->
                       <label class="input">
                       @if(isset($entry))
-                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.title_placeholder')}}" value="{{ old('title', $entry->title) }}" autofocus>
+                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.entry_placeholder')}}" value="{{ old('title', $entry->title) }}" autofocus>
                       @else
-                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.title_placeholder')}}" value="" autofocus>
+                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.entry_placeholder')}}" value="" autofocus>
                       @endif
                       </label>
                     </div> <!-- col 6 -->
@@ -99,9 +99,9 @@
                   <!-- Description -->
                   <label class="input">
                     @if(isset($entry))
-                      <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.details_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
+                      <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
                     @else
-                      <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.details_placeholder')}}"></textarea>
+                      <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}"></textarea>
                     @endif
                   </label>
                 </div> <!-- col 12 -->
