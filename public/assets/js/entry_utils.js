@@ -134,9 +134,11 @@ function uploadFiles()
 
 $("#choose-file").change(function() {
   var maxSize = $('#MAX_FILE_SIZE').val();
-  if ($("#choose-file")[0].files[0].size > maxSize) {
+  var imageSize = $("#choose-file")[0].files[0].size;
+  // test for zero length as well as max size
+  if (!imageSize || imageSize > maxSize) {
     $("#shadow_input").val("");
-    $('p.too_large').show().addClass("error_message").fadeOut(50000, "swing");
+    $('p.too_large').show().addClass("error_message").fadeOut(8000, "swing");
   }
   else {
     $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
@@ -180,20 +182,24 @@ function progress(e)
 {
   if(e.lengthComputable) {
     var max = e.total;
-    var current = e.loaded;
-    var fraction = 100*current/max;
+    
+    // max should never be zero but check doesn't hurt
+    if (max) {
+      var current = e.loaded;
+      var fraction = parseInt(100*current/max, 10);
 
-    $("#progressbar .percent_caption").html("File upload: "+fraction+"%");
-    $("#progressbar").progressbar({
-        value: fraction
-    });
-
-    if (fraction >= 100) {
+      $("#progressbar .percent_caption").html("File upload: "+fraction+"%");
       $("#progressbar").progressbar({
-        value: 100
+          value: fraction
       });
-      $("#progressbar .percent_caption").html("File upload: 100%");
-      $("#progressbar").delay(1500).fadeOut(400);
+
+      if (fraction >= 100) {
+        $("#progressbar").progressbar({
+          value: 100
+        });
+        $("#progressbar .percent_caption").html("File upload: 100%");
+        $("#progressbar").delay(1500).fadeOut(400);
+      }
     }
   }  
 }
@@ -303,12 +309,15 @@ function resetForm()
   $('#entry_form')[0].reset();
   $('#tags').tagsinput('removeAll');
   $('#delete_image').removeClass('notUploaded');
-  $('#image_box').attr('style','');
+  $('#image_box').attr('style','').empty();
   $('#image_box_container').hide();
+  $('.image_controls').show();
   $('#cancel_button').hide();
+
   // get rid of any upadate_451 etc classes 
   $('#title').attr('class', 'form-control');
   $('#rotation').val('');
+  $('#deleteImage').val('');
 
   fileJustChosen = false;
   rotationAngle=0;

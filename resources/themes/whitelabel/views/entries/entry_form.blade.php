@@ -6,7 +6,7 @@
         @endif
           {!! csrf_field() !!}
           <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value={{ trans('general.entries.max_size')}} />
-                    <input type="hidden" name="upload_key" id="upload_key" value="" />
+          <input type="hidden" name="upload_key" id="upload_key" value="" />
           <input type="hidden" id="rotation" name="rotation" value=''>
           <input type="hidden" id="entryId" name="entryId" value=''>
           <input type="hidden" id="deleteImage" name="deleteImage" value=''>
