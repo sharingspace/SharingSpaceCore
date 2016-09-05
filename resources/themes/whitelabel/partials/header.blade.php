@@ -29,19 +29,19 @@
 
 					<div class="notifications-popdown-box" style="display: none;border-left: 1px rgba(91, 91, 91, 0.2) solid; padding-left: 10px;">
 						<div class="notifications-popdown-wrapper">
-                            <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
-                                {{ Auth::user()->getUnreadMessagesCount() }} new messages
-                            </div>
-                            @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
-                                 <div class="clearfix margin-bottom-20">
-                                     <!-- notification item -->
-                                    	<img src="{{ $unread_messages->sender->gravatar() }}" class="avatar-sm pull-left" style="margin-left: 5px; margin-top: 5px;">
-                                    <span class="size-14 text-muted">
-                                        <b>New Message</b> from {{ $unread_messages->sender->getDisplayName() }}:
-                                        <a href="/account/message/{{ $unread_messages->conversation->id }}">{{ $unread_messages->message }}</a>
-                                    </span>
-                                   </div><!-- /notification item -->
-                            @endforeach
+              <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
+                  {{ Auth::user()->getUnreadMessagesCount() }} new messages
+              </div>
+              @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
+                <div class="clearfix margin-bottom-20">
+                   <!-- notification item -->
+                  	<img src="{{ $unread_messages->sender->gravatar() }}" class="avatar-sm pull-left" style="margin-left: 5px; margin-top: 5px;">
+                  <span class="size-14 text-muted">
+                      <b>New Message</b> from {{ $unread_messages->sender->getDisplayName() }}:
+                      <a href="/account/message/{{ $unread_messages->conversation->id }}">{{ $unread_messages->message }}</a>
+                  </span>
+                </div><!-- /notification item -->
+              @endforeach
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
@@ -53,9 +53,6 @@
 					</div>
 				</li>
 				<!-- /QUICK SHOP CART -->
-
-
-
 
         @else
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
@@ -182,11 +179,15 @@
   <div class="row wl_usercover" style="position:relative; background-image: url({{ $whitelabel_group->getCover() }});"></div>
 @endif
 
+@if( strlen($whitelabel_group->about))
 <div class="row" style="position:relative;">
   @if( strlen($whitelabel_group->about))
-    <div id="about_panel" style="top:0;right: 0;bottom: 0;left: 0;position: absolute;">
+    <div id="about_panel" class="col-xs-12" style="top:0;right: 0;bottom: 0;left: auto;position: absolute;">
+      <i class="close_about pull-right fa fa-times fa-2x margin-right-10 margin-top-10"></i>
       <p style="vertical-align:middle">{{ $whitelabel_group->about }}</p>
     </div>
   @endif
 </div>
+@endif
+
 

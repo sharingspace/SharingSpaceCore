@@ -7995,6 +7995,10 @@ footer.sticky {
   padding: 20px;
 }
 
+#about_panel .close_about:hover {
+  cursor: pointer;
+}
+
 ul.exchange_types {
   font-size: 12px;
   list-style: none;
