@@ -52,6 +52,7 @@ return [
           'location' => 'Location',
           'created_at' => 'Created on',
 					'exchange_types' => 'Exchange Types',
+          'exchange' => 'Exchange',
           'keywords' => 'Keywords',
           'actions' => 'Actions',
           'view' => 'View Entry',
