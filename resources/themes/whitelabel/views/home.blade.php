@@ -181,6 +181,14 @@ $( document ).ready(function() {
     return false;
   });
 
+  $('.close_about').on('click', function(c){
+    $("#about_panel").slideToggle('fast');
+    $("#about_panel").parent().css('height', 0);
+    if ($('.wl_usercover').length) {
+      $(".wl_usercover").slideToggle();
+    }
+  });
+
   // we off screen the table headers as they are obvious.
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];
