@@ -583,7 +583,20 @@ class EntriesController extends Controller
                 $exchangeTypes[] = $et->name;
             }
 
+            $image = \DB::table('media')
+                ->where('entry_id', '=', $entry->id)
+                ->first();
+
+            if ($image) {
+                $imageTag = '<img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image">';
+            }
+            else {
+                $imageTag = null;
+            }
+
+
             $rows[] = array(
+              'image' => $imageTag,
               'title' => strtoupper($entry->post_type).': <a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
               'author' => '<img src="'.$entry->author->gravatar().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
               'location' => $entry->location,

@@ -8423,6 +8423,20 @@ Quick add
   width: 99%;
 }
 
+.browse_table img.entry_image {
+  width: auto;
+  max-width: 70px;
+  height: auto;
+  max-height: 70px;
+  margin: 0px 5px 0px 0px;
+  border-radius: 1px;
+  vertical-align: middle !important;
+}
+
+.browse_table td {
+  vertical-align: middle !important;
+}
+
 /**
   * About page
   */

@@ -74,16 +74,16 @@
     data-cookie="true"
     data-cookie-id-table="communityListingv1-{{ $whitelabel_group->id }}">
       <thead>
-          <tr>
-            <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
-            <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
-            <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
-            <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-            <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.entries.tags') }}</th>
-            <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
-            <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange_types') }}</th>
-            <!-- <th data-sortable="false" data-field="image" >Image</th> -->
-          </tr>
+        <tr>
+          <th data-sortable="false" data-field="image">Image</th>
+          <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+          <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
+          <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
+          <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+          <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.entries.tags') }}</th>
+          <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
+          <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange_types') }}</th>
+        </tr>
       </thead>
     </table>
     <!-- End entries table -->

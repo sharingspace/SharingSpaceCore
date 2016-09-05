@@ -101,9 +101,6 @@ $( document ).ready(function() {
     e.preventDefault();
     resetForm();
   });
-
-
-
 });
 
 </script>
