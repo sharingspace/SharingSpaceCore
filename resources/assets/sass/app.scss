@@ -7477,15 +7477,17 @@ footer.sticky {
 
 #about_panel {
   display: none;
-  border: solid 1px #c3c3c3;
   position:relative;
-  background-color: rgba(176,220,220,0.4);
-
-  p {
-    font-size:larger;
-    padding:20px;
+  .about_content {
+    background-color: rgba(243,243,243,0.4);
+    margin: 0 15px;
+    p {
+      font-size:larger;
+      text-align:left;
+    }
   }
   
+
   .close_about:hover {
     cursor: pointer;
   }
