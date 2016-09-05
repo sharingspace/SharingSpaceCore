@@ -102,13 +102,8 @@ $( document ).ready(function() {
     resetForm();
   });
 
-  $(document).on( "click", "#select_all", function(e) {
-    $('.exchanges').prop('checked', $(this).prop("checked"));
-  });
 
-  $(document).on( "click", ".exchanges", function(e) {
-    $('#select_all').prop('checked', false);
-  });
+
 });
 
 </script>
