@@ -7192,7 +7192,7 @@ footer.sticky {
   section {
     div.row {
       > div {
-        margin-bottom: 60px;
+        margin-bottom:0; 
       }
       &.lightbox > div {
         margin-bottom: 0;
@@ -7927,6 +7927,18 @@ $color-green: #9AE14F;
   .fixed-table-container table {
     width:99%; // seems to fix the annoying horizontal scroll bar bootstrap datatables
   }
+  img.entry_image {
+    width: auto;
+    max-width: 70px;
+    height: auto;
+    max-height: 70px;
+    margin: 0px 5px 0px 0px;
+    border-radius: 1px;
+    vertical-align:middle!important;
+  }
+  td {
+    vertical-align:middle!important;
+  }
 }
 
 /**
@@ -8167,7 +8179,95 @@ $color-green: #9AE14F;
   color:#0066c0;
 }
 
+#image_box_container {
+  width:250px;
+  height:250px;
+  position:relative;
+  margin:auto;
+ 
+  #image_box {
+    position:absolute;
+    top:0;
+    width:250px;
+    height:250px; 
+    background-image: url('');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin:7px;
+    margin:auto;
+    img {
+      opacity:0.5;
+    }
+  }
+}
 
+.image_controls {
+  position:absolute;
+  bottom:0;
+  right:-15px;
+  #rotate_image:hover, #delete_image:hover {
+    cursor:pointer;
+  }
+  i {
+    background-color:black;
+    float:right;
+    color:white;
+    padding:5px;
+    min-width:35px;
+    margin-right:1px;
+    .fa-2x {
+      margin-bottom:2px;
+    }
+  }
+}
+
+#entry_form, #edit_entry {
+  #image_box_container {
+  display:none;
+    background-color:#f2f2f2;
+    #image_box {
+      border: #ddd 1px solid;
+    }
+    margin-top:5px;
+    margin-bottom:10px;
+  }
+
+  #cancel_button {
+    display:none;
+  }
+
+  #progressbar {
+    margin-top:5px;
+    margin-bottom:5px;
+    text-align: center;
+    .ui-progressbar-value {
+      margin:0;
+    }
+    .percent_caption {
+      //width: 100%;
+      //float: left;
+      //line-height: 200%;
+      position:relative;
+      top:-23px;
+    }
+  }
+}
+
+#delete_img_checkbox_label {
+  display:none;
+}
+
+#dialog-confirm {
+  display:none;
+  i {
+    vertical-align: middle;
+    padding:3px;
+  }
+  span {
+    font-size:18px;
+  }
+}
 /**
  * Footer region
  * 
@@ -8421,5 +8521,15 @@ section.TreborScholz {
 @media (max-width: $screen-xs-max) {
   video::-webkit-media-controls {
       display:none !important;
+  }
+}
+
+/**
+ * Terms page
+ *
+ **/
+.terms {
+  li {
+    margin-bottom:7px;
   }
 }

@@ -108,9 +108,9 @@
             </a>
 
             <div class="navbar-header pull-right">
-              <ul class="nav navbar-nav pull-left">
-                <li class="margin-right-10">
-                  <a class="padding-right-0 margin-right-20" href="{{ route('entry.create.form') }}">
+              <ul class="nav navbar-nav">
+                <li class="margin-right-0">
+                  <a class="margin-top-0" href="{{ route('entry.create.form') }}">
                     <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i></button>
                   </a>
                 </li>

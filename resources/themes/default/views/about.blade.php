@@ -100,11 +100,15 @@
 <section class="cta">
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
-        <h2 class="white-secondary-heading pull-left margin-bottom-20">Make your own Sharing Website</h2>
-      </div>
-      <div class="col-md-3 margin-bottom-20">
-        <a href="https://massmosaic.app/community/new" class="w-button cta-button">START NOW</a>
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-sm-9 col-xs-12 margin-bottom-10">
+            <h2 class="white-secondary-heading pull-left margin-bottom-10">Make your own Sharing Website</h2>
+          </div>
+          <div class="col-sm-3 col-xs-12 margin-bottom-10">
+            <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button " style="width:100%">{{ trans('general.nav.start_now') }}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -55,12 +55,13 @@ return [
           'keywords' => 'Keywords',
           'actions' => 'Actions',
           'view' => 'View Entry',
-          'create' => 'Create entry',
+          'create' => 'Create Entry',
+          'save_entry' => 'Save',
 					'create_subheadline' => 'What do you want or have? Press "Enter" to make an new entry',
-          'save' => 'Save',
+          'cancel' => 'Cancel',
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
-          'file_placeholder' => 'no file selected (max size is 4MB)',
+          'file_placeholder' => 'no file selected (jpg, png, gif. Max size is 4MB)',
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',
@@ -79,8 +80,10 @@ return [
             'save_new' => 'Your new entry has been created!',
             'save_failed' => 'Something went wrong. Your entry edit has not been saved',
             'upload_failed' => 'Something went wrong. Your uploaded image has not been saved',
-            'errors' => 'Your entry was not saved due to the following errors',
-            'no_exchange_types' => 'An exchange type was not selected'
+            'errors' => 'Your entry was not saved due to the following errors: ',
+            'error' => 'Your entry was not saved due to the following error: ',
+            'no_exchange_types' => 'An exchange type was not selected',
+            'rotation_failed' => 'Something went wrong. We could not rotate and save your image' 
           ],
     ],
 
@@ -197,7 +200,7 @@ return [
     ],
 
     'uploads'  => [
-      'choose_file'  => 'Choose file',
+      'choose_file'  => 'Choose image',
       'banner_tip' => 'Tip. Images with an aspect ratio of 4:1 will fit exactly.',
       'logo_tip' => 'Tip. For best results, use an image that is 250px x 40px.',
       'cover_image' => 'Cover image'
