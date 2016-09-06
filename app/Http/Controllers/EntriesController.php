@@ -571,7 +571,12 @@ class EntriesController extends Controller
         $exchangeTypes=array();
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
-                $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'"><i class="fa fa-pencil" style="color:white;"></i></a> <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'"><i class="fa fa-trash"></i></button>';
+                $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'">
+                                <i class="fa fa-pencil" style="color:white;"></i></a>
+                            </button>
+                            <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'">
+                                <i class="fa fa-trash"></i>
+                            </button>';
             }
             else {
                 $actions = '';
