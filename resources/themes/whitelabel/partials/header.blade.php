@@ -124,7 +124,7 @@
                   @endif
 
                   <li{!! (Route::is('home') ? ' class="active"' : '') !!}>
-                    <a href="{{ route('home') }}/#table">
+                    <a href="{{ route('home') }}">
                       {{ trans('general.nav.browse') }}
                       {!! (Route::is('home') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
