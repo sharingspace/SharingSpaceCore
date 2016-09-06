@@ -153,9 +153,13 @@ $( document ).ready(function() {
         paginationSwitchDown: 'fa-caret-square-o-down',
         paginationSwitchUp: 'fa-caret-square-o-up',
         columns: 'fa-columns',
-        refresh: 'fa-refresh'
+        refresh: 'fa-refresh',
+        export: 'fa-download'
     }
   });
+
+  // for some reason the columns and refresh have their tooltips added automatically
+  $('.export > button').attr('title','Download data as');
 
   $('#entry_browse_table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
