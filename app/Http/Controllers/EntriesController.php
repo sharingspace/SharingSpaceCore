@@ -588,7 +588,7 @@ class EntriesController extends Controller
                 ->first();
 
             if ($image) {
-                $imageTag = '<img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image">';
+                $imageTag = '<a href="'.route('entry.view', $entry->id).'"><img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image"></a>';
             }
             else {
                 $imageTag = null;
