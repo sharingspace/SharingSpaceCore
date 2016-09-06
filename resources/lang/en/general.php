@@ -117,6 +117,7 @@ return [
       'settings'  => 'Sharing Hub Settings',
       'members'  => 'Member|Members',
       'save' => 'Update',
+      'join_website' => 'Join website',
       'create' => 'Start your own Sharing Hub for Free!',
       'name_placeholder' => 'My awesome sharing hub',
       'name' => 'Name for your Sharing Hub',
