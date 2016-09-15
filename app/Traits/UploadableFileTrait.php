@@ -12,6 +12,8 @@ namespace App;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Log;
+use Image;
+use Redirect;
 
 trait UploadableFileTrait
 {
@@ -35,24 +37,21 @@ trait UploadableFileTrait
     * @var boolean
     */
 
-    public function uploadImage(\App\User $user, UploadedFile $file, $layoutType)
+    public function uploadImage(\App\User $user, UploadedFile $file, $layoutType, $rotation=null)
     {
-        Log::debug("uploadImage ".$layoutType);
-
         $path = public_path().'/assets/uploads/'.$layoutType.'/'.$this->id.'/';
         $aws_path = 'assets/uploads/'.$layoutType.'/'.$this->id;
-        return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $this->id, null);
+        return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $rotation, $this->id, null);
     }
 
-    public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key)
+    public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key, $rotation=null)
     {
         $path = public_path().'/assets/uploads/'.$layoutType.'/user-'.$user->id.'-tmp';
-        return self::moveAndStoreImage($user, $file, $path, null, $layoutType, null, $upload_key);
+        return self::moveAndStoreImage($user, $file, $path, null, $layoutType, $rotation, null, $upload_key );
     }
 
-    public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $id = null, $upload_key = null)
+    public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $rotation, $entry_id,  $upload_key = null)
     {
-        Log::debug("This is a ".$layoutType.' image');
         // Make the directory if it doesn't exist
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
@@ -62,34 +61,40 @@ trait UploadableFileTrait
         $filename = $rand_filename.'.'.$file->getClientOriginalExtension();
 
         $img_path = $path.'/'.$filename;
-
+        
         if ($file->move($path, $filename)) { // $destinationPath, $fileName
-            if ($id && $layoutType =='entries') {
-                //Log::debug("moveAndStoreImage: We already have an entry )"+$id+"), does it already have media?");
+            if ($entry_id && $layoutType =='entries') {
 
-                $entry = \App\Entry::find($id);
+                $entry = \App\Entry::find($entry_id);
                 if (!empty($entry) && $entry->media()->count())
                 {
-                    //Log::debug("moveAndStoreImage: We already have an image associated with an entry");
                     // We already have an image associated with an entry, so delete the existing image first
-                    self::deleteImage($id, $user->id);
-                    self::replaceImageInDB($user->id, $id, $filename);
+                    self::deleteImage($entry_id, $user->id);
+                    self::replaceImageInDB($user->id, $entry_id, $filename);
                 }
                 else {
-                    //Log::debug("moveAndStoreImage: We were able to move file from $path to $filename!");
-                    $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+                    $res = self::saveImageToDB($entry_id, $filename, $layoutType, $user->id, $upload_key);
                 }
             }
             else {
-                $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+                $res = self::saveImageToDB($entry_id, $filename, $layoutType, $user->id, $upload_key);
             }
 
             if (!Media::is_animated_gif($img_path)) {
-              //Log::info("This is *NOT* an animated GIF, so try this...");
 
                 try {
 
                     if ($img = \Image::make($img_path)) {
+                        if ($rotation) {
+                            if (is_numeric($rotation)) {
+                                $img->rotate($rotation);
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+
+                        // finally we save the image as a new file
                         $img->resize(self::$uploadableImgs[$layoutType]['width'], self::$uploadableImgs[$layoutType]['height'], function ($constraint) {
                             $constraint->aspectRatio();
                         });
@@ -104,9 +109,47 @@ trait UploadableFileTrait
             }
 
             return $filename;
-
         }
         return false;
+    }
+
+    /**
+    * rotate an image
+    *
+    * @author [D. Linnard] [<david@linnard.com>]
+    * @param int $user_id
+    * @param int $entry_id
+    * @param string $layoutType
+    * @param int $rotation
+    * @return bool
+    * @since  [v1.0]
+    */   
+    public static function rotateImage($user_id, $entry_id, $layoutType, $rotation)
+    {
+        if ($image = \DB::table('media')
+            ->where('user_id', '=', $user_id)
+            ->where('entry_id', '=', $entry_id)
+            ->first()) {
+            
+            $file = public_path().'/assets/uploads/entries/'.$entry_id.'/'.$image->filename;
+                
+            if (!Media::is_animated_gif($file)) {
+                try {
+                    if ($img = \Image::make($file)) {
+                        $img->rotate($rotation);
+                        $img->save($file);
+                        return true;
+                    }
+                }
+                catch (Exception $e) {
+                    Log::error("Exception caught in rotateImage Trait: ".$e->getMessage());
+                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                    return false;
+                }
+            }
+        }
+        return false;
+
     }
 
    /**
@@ -127,7 +170,7 @@ trait UploadableFileTrait
 
         }
         return false;
-      }
+    }
 
 
     /**
@@ -147,8 +190,6 @@ trait UploadableFileTrait
         $src_path = public_path().'/assets/uploads/entries/user-'.$user->id.'-tmp';
 
         foreach ($tmp_images as $tmp_image) {
-            // Log::debug("okay, looking at one tmp image to migrate...".$tmp_image->filename);
-
             $filename = $tmp_image->filename;
             $src = $src_path.'/'.$filename;
             $dest = $dest_path.'/'.$filename;

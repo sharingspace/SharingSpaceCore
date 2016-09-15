@@ -282,9 +282,9 @@ class UserController extends Controller
     public function getJoinCommunity(Request $request)
     {
         if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-            return redirect()->route('browse')->withInput()->with('success', 'You have joined this community!');
+            return redirect()->route('browse')->withInput()->with('success', 'You have joined this website!');
         } else {
-            return redirect()->route('browse')->withInput()->with('error', 'Unable to join community');
+            return redirect()->route('browse')->withInput()->with('error', 'Unable to join website');
         }
 
     }
@@ -301,9 +301,9 @@ class UserController extends Controller
     public function getLeaveCommunity(Request $request)
     {
         if (Auth::user()->communities()->detach([$request->whitelabel_group->id])) {
-            return redirect()->route('browse')->withInput()->with('success', 'You have left this community!');
+            return redirect()->route('browse')->withInput()->with('success', 'You have left this website!');
         } else {
-            return redirect()->route('browse')->withInput()->with('error', 'Unable to leave community');
+            return redirect()->route('browse')->withInput()->with('error', 'Unable to leave website');
         }
 
     }

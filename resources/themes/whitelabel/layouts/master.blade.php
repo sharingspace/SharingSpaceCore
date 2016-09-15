@@ -22,6 +22,7 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('assets/css/compiled/bootstrap-social.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/compiled/app.css?v='.date('U') ) }}">
     <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}">
@@ -38,7 +39,10 @@
 
     <!-- jQuery 2.1.3-->
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
     <script src="{{ asset('assets/js/extensions/tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="{{ asset('assets/js/extensions/rotate/jQueryRotate.js')}}"></script>
     <script type="text/javascript">
     $( document ).ready(function() {
         if ($('.wl_usercover').length) {

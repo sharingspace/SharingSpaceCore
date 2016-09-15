@@ -67,23 +67,24 @@
 
     <table class="table table-condensed"
     name="communityListings"
-    id="table"
+    id="entry_browse_table"
     data-sort-name="created_at"
     data-sort-order="desc"
     data-url="{{ route('json.browse') }}"
     data-cookie="true"
     data-cookie-id-table="communityListingv1-{{ $whitelabel_group->id }}">
       <thead>
-          <tr>
-            <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
-            <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
-            <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
-            <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-            <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.entries.tags') }}</th>
-            <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
-            <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange_types') }}</th>
-            <!-- <th data-sortable="false" data-field="image" >Image</th> -->
-          </tr>
+        <tr>
+          <th data-sortable="false" data-field="image">Image</th>
+          <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
+          <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+          <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
+          <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
+          <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
+          <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+          <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.entries.tags') }}</th>
+          <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
+        </tr>
       </thead>
     </table>
     <!-- End entries table -->
@@ -124,7 +125,7 @@ $( document ).ready(function() {
     });
   });
 
-  $('#table').bootstrapTable({
+  $('#entry_browse_table').bootstrapTable({
     classes: 'table table-responsive table-no-bordered',
     undefinedText: '',
     iconsPrefix: 'fa',
@@ -152,11 +153,15 @@ $( document ).ready(function() {
         paginationSwitchDown: 'fa-caret-square-o-down',
         paginationSwitchUp: 'fa-caret-square-o-up',
         columns: 'fa-columns',
-        refresh: 'fa-refresh'
+        refresh: 'fa-refresh',
+        export: 'fa-download'
     }
   });
 
-  $('#table').on('load-success.bs.table', function () {
+  // for some reason the columns and refresh have their tooltips added automatically
+  $('.export > button').attr('title','Download data as');
+
+  $('#entry_browse_table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
   });
 
@@ -165,7 +170,7 @@ $( document ).ready(function() {
 
     if (!$('#about_panel').is(':visible')) {
       $("#about_panel").slideToggle('fast');
-      height = $("#about_panel p").height()+30+'px';
+      height = $("#about_panel p").height()+60+'px';
     }
     else {
       $("#about_panel").slideToggle('fast');
@@ -178,6 +183,14 @@ $( document ).ready(function() {
     }
 
     return false;
+  });
+
+  $('.close_about').on('click', function(c){
+    $("#about_panel").slideToggle('fast');
+    $("#about_panel").parent().css('height', 0);
+    if ($('.wl_usercover').length) {
+      $(".wl_usercover").slideToggle();
+    }
   });
 
   // we off screen the table headers as they are obvious.

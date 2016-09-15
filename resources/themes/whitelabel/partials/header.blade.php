@@ -29,19 +29,19 @@
 
 					<div class="notifications-popdown-box" style="display: none;border-left: 1px rgba(91, 91, 91, 0.2) solid; padding-left: 10px;">
 						<div class="notifications-popdown-wrapper">
-                            <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
-                                {{ Auth::user()->getUnreadMessagesCount() }} new messages
-                            </div>
-                            @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
-                                 <div class="clearfix margin-bottom-20">
-                                     <!-- notification item -->
-                                    	<img src="{{ $unread_messages->sender->gravatar() }}" class="avatar-sm pull-left" style="margin-left: 5px; margin-top: 5px;">
-                                    <span class="size-14 text-muted">
-                                        <b>New Message</b> from {{ $unread_messages->sender->getDisplayName() }}:
-                                        <a href="/account/message/{{ $unread_messages->conversation->id }}">{{ $unread_messages->message }}</a>
-                                    </span>
-                                   </div><!-- /notification item -->
-                            @endforeach
+              <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
+                  {{ Auth::user()->getUnreadMessagesCount() }} new messages
+              </div>
+              @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
+                <div class="clearfix margin-bottom-20">
+                   <!-- notification item -->
+                  	<img src="{{ $unread_messages->sender->gravatar() }}" class="avatar-sm pull-left" style="margin-left: 5px; margin-top: 5px;">
+                  <span class="size-14 text-muted">
+                      <b>New Message</b> from {{ $unread_messages->sender->getDisplayName() }}:
+                      <a href="/account/message/{{ $unread_messages->conversation->id }}">{{ $unread_messages->message }}</a>
+                  </span>
+                </div><!-- /notification item -->
+              @endforeach
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
@@ -53,9 +53,6 @@
 					</div>
 				</li>
 				<!-- /QUICK SHOP CART -->
-
-
-
 
         @else
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
@@ -108,9 +105,9 @@
             </a>
 
             <div class="navbar-header pull-right">
-              <ul class="nav navbar-nav pull-left">
-                <li class="margin-right-10">
-                  <a class="padding-right-0 margin-right-20" href="{{ route('entry.create.form') }}">
+              <ul class="nav navbar-nav">
+                <li class="margin-right-0">
+                  <a class="margin-top-0" href="{{ route('entry.create.form') }}">
                     <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i></button>
                   </a>
                 </li>
@@ -122,12 +119,12 @@
 				        <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
                   @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
                     <li>
-                        <a href="{{ route('join-community') }}">Join Hub</a>
+                        <a href="{{ route('join-community') }}">{{ trans('general.community.join_website')}}</a>
                     </li>
                   @endif
 
                   <li{!! (Route::is('home') ? ' class="active"' : '') !!}>
-                    <a href="{{ route('home') }}/#table">
+                    <a href="{{ route('home') }}">
                       {{ trans('general.nav.browse') }}
                       {!! (Route::is('home') ? '<span class="sr-only">(current)</span>' : '') !!}
                     </a>
@@ -182,11 +179,21 @@
   <div class="row wl_usercover" style="position:relative; background-image: url({{ $whitelabel_group->getCover() }});"></div>
 @endif
 
-<div class="row" style="position:relative;">
+@if( strlen($whitelabel_group->about))
+<div class="container" style="position:relative;">
   @if( strlen($whitelabel_group->about))
-    <div id="about_panel" style="top:0;right: 0;bottom: 0;left: 0;position: absolute;">
-      <p style="vertical-align:middle">{{ $whitelabel_group->about }}</p>
+    <div id="about_panel" style="top:0;right: 0;bottom: 0;left: auto;position: absolute;">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="about_content">
+            <i class="close_about pull-right fa fa-times fa-2x margin-right-10 margin-top-10"></i>
+            <p class="margin-left-15 margin-right-15 padding-top-30 padding-bottom-15">{{ $whitelabel_group->about }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   @endif
 </div>
+@endif
+
 
