@@ -7,7 +7,7 @@
     "require": {
       "aws/aws-sdk-php-laravel": "~3.0",
       "barryvdh/laravel-debugbar": "^2.0",
-      "cartalyst/stripe-billing-laravel": "~3.0",
+      "cartalyst/stripe-billing-laravel": "~4.0",
       "cviebrock/eloquent-sluggable": "^3.0",
       "erusev/parsedown": "dev-master",
       "graham-campbell/digitalocean": "~2.1",
@@ -24,11 +24,8 @@
         "doctrine/dbal": "^2.5"
     },
     "repositories": [
-		{
-			"type": "vcs",
-            "url": "git@github.com:snipe/stripe-billing-laravel.git"
-		}
-	],
+    { "type": "composer", "url": "https://packages.cartalyst.com" }
+    ],
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
