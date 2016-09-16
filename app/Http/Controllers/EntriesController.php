@@ -11,7 +11,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
 use Validator;
@@ -59,7 +58,7 @@ class EntriesController extends Controller
               return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.not_allowed')]);
             }
 
-            $types=[]; 
+            $types=[];
             $typeIds=[];
              foreach ($entry->exchangeTypes as $et) {
                 array_push($types, $et->name);
@@ -74,7 +73,7 @@ class EntriesController extends Controller
               $imageName = $image->filename;
             }
 
-            return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => $entry->tags, 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);            
+            return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => $entry->tags, 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);
 
         }
         else {
@@ -110,7 +109,7 @@ class EntriesController extends Controller
     public function postAjaxCreate(Request $request)
     {
         $entry = new \App\Entry();
-        
+
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
         $entry->description    = e(Input::get('description'));
@@ -328,7 +327,7 @@ class EntriesController extends Controller
                 }
             }
 
-            $types=[]; 
+            $types=[];
             $typeIds=[];
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
@@ -400,7 +399,7 @@ class EntriesController extends Controller
                 return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
               }
             }
-            
+
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             return redirect()->route('entry.view', $entry->id)->with('success', trans('general.entries.messages.save_edits'));
@@ -489,20 +488,20 @@ class EntriesController extends Controller
             if(!empty(Input::get('rotation'))) {
                 $rotation = Input::get('rotation');
             }
-            
+
             if ($entry) {
                 $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries', $rotation);
-            } 
+            }
             else {
                 $uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'), $rotation);
             }
             if ($uploaded) {
                 return response()->json(['success'=>true]);
-            } 
+            }
             else {
                 return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.upload_fail')]);
             }
-        } 
+        }
         else {
             return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.no_image')]);
         }
@@ -581,7 +580,7 @@ class EntriesController extends Controller
             else {
                 $actions = '';
             }
-            
+
              // ensure array is empty
             $exchangeTypes=[];
             foreach ($entry->exchangeTypes as $et) {

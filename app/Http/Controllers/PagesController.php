@@ -11,7 +11,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
 use Log;
@@ -75,7 +74,7 @@ class PagesController extends Controller
         return view('coop')->with('signedIn', Auth::check());
     }
 
-    
+
     /**
     * Sends an email to request financial assistance.
     *
@@ -101,7 +100,7 @@ class PagesController extends Controller
             function ($m) use ($data) {
                 $m->from($data['email'], $data['firstName'].' '.$data['lastName'])->to($data['toEmail'], 'AnyShare')->subject($data['subject']);
             }
-        ); 
+        );
 
         if( $sent) {
             return Redirect::back()->with('success', trans('pricing.financial_assist.success'));

@@ -10,7 +10,6 @@
  */
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller;
 use Auth;
 use Gate;
 use \App\CommunitySubscription;
