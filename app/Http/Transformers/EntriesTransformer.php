@@ -12,20 +12,20 @@ class EntriesTransformer
         foreach ($entries as $entry) {
 
             $entries_array[] = [
-                'id' => $entry->id,
-                'title' => $entry->title,
-                'post_type' => $entry->post_type,
-                'description' => $entry->description,
+                'id' => e($entry->id),
+                'title' => e($entry->title),
+                'post_type' => e($entry->post_type),
+                'description' => e($entry->description),
                 'location' =>
                     [
-                        'name' => $entry->location,
-                        'latitude' => $entry->latitude,
-                        'longitude' => $entry->longitude,
+                        'name' => e($entry->location),
+                        'latitude' => e($entry->latitude),
+                        'longitude' => e($entry->longitude),
                     ],
-                'author' => $entry->author->getDisplayName(),
-                'created_at' => $entry->created_at,
-                'tags' => $entry->tags,
-                'expires' => $entry->expires,
+                'author' => e($entry->author->getDisplayName()),
+                'created_at' => e($entry->created_at),
+                'tags' => e($entry->tags),
+                'expires' => e($entry->expires),
 
 
 
