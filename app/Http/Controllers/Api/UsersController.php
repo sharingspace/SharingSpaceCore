@@ -34,7 +34,7 @@ class UsersController extends ApiGuardController
 
         try {
 
-            $members = Community::findOrFail($request->whitelabel_group->id)->members()->paginate($per_page);
+            $members = Community::findOrFail($request->whitelabel_group->id)->members()->orderBy('created_at','desc')->paginate($per_page);
             return $this->response->withItem($members, new UserTransformer);
 
         } catch (ModelNotFoundException $e) {
