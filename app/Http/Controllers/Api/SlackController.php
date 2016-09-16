@@ -9,12 +9,8 @@
  */
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use App\Community;
-use App\Http\Transformers\CommunityTransformer;
-use App\Http\Transformers\MemberlistTransformer;
 use Input;
 use App\Entry;
 use App\User;

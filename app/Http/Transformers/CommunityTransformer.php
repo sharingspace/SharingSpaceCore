@@ -33,7 +33,7 @@ class MemberlistTransformer
     {
         return [
           'id' => $members->id,
-          'name' => $members->fullName(),
+          'name' => $members->getDisplayName(),
           'admin' => $members->is_admin,
 
         ];

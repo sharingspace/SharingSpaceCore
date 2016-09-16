@@ -1,40 +1,47 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
-use App\User;
+use App\Community;
+use Illuminate\Http\Request;
 use App\Http\Transformers\UserTransformer;
+
 
 class UsersController extends ApiGuardController
 {
 
-    protected $apiMethods = [
-      'all' => [
-          'keyAuthentication' => false
-      ],
-      'show' => [
-          'keyAuthentication' => false
-      ],
-    ];
 
-    public function all()
+    public function show(Request $request, $id)
     {
-        $users = User::paginate(20);
-        return $this->response->withCollection($users, new \App\Http\Transformers\UserTransformer);
+
+        try {
+            $member = Community::findOrFail($request->whitelabel_group->id)->members()->where('users.id','=',$id)->paginate(1);
+            return $this->response->withItem($member, new UserTransformer);
+
+        } catch (ModelNotFoundException $e) {
+            return $this->response->errorNotFound();
+        }
     }
 
 
-    public function show()
+    public function all(Request $request)
     {
-        $user = User::findOrFail($id);
-        return $this->response->withCollection($user, new \App\Http\Transformers\UserTransformer);
+        if ($request->has('per_page')) {
+            $per_page = $request->input('per_page');
+        } else {
+            $per_page = 20;
+        }
+
+        try {
+
+            $members = Community::findOrFail($request->whitelabel_group->id)->members()->paginate($per_page);
+            return $this->response->withItem($members, new UserTransformer);
+
+        } catch (ModelNotFoundException $e) {
+            return $this->response->errorNotFound();
+
+        }
     }
 
-    public function entries()
-    {
-        $user = User::findOrFail($id)->with('entries');
-        return $this->response->withCollection($user, new \App\Http\Transformers\EntriesTransformer);
-    }
+
 }

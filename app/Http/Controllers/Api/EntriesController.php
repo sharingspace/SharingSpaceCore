@@ -2,38 +2,61 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use App\Entry;
+use App\Community;
+use \App\Http\Transformers\EntriesTransformer;
 
 class EntriesController extends ApiGuardController
 {
 
-    protected $apiMethods = [
-      'all' => [
-          'keyAuthentication' => false
-      ],
-      'show' => [
-          'keyAuthentication' => false
-      ],
-      'entrylist' => [
-          'keyAuthentication' => false
-      ],
-    ];
 
 
-    public function all()
+    /**
+     * Display all entries within the current group
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return String JSON
+     */
+    public function all(Request $request)
     {
-        $entries = Entry::with('author')->paginate(20);
-        return $this->response->withCollection($entries, new \App\Http\Transformers\EntriesTransformer);
+
+        if ($request->has('per_page')) {
+            $per_page = $request->input('per_page');
+        } else {
+            $per_page = 20;
+        }
+
+
+        try {
+            $entries = Community::findOrFail($request->whitelabel_group->id)->entries()->with('author')->notCompleted()->paginate($per_page);
+            return $this->response->withItem($entries, new EntriesTransformer);
+
+        } catch (ModelNotFoundException $e) {
+            return $this->response->errorNotFound();
+
+        }
     }
 
+
+    /**
+     * Return details about a specific entry.
+     *
+     * We have to paginate(1) here, since the transformer is expecting an instance of the paginator.
+     * There may be a more elegant way to do this.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @param $id The ID of the entry
+     * @return String JSON
+     */
     public function show($id)
     {
         try {
 
-            $entry = Entry::findOrFail($id);
-            return $this->response->withItem($entry, new \App\Http\Transformers\EntriesTransformer);
+            $entry = Entry::findOrFail($id)->paginate(1);
+            return $this->response->withItem($entry, new EntriesTransformer);
 
         } catch (ModelNotFoundException $e) {
             return $this->response->errorNotFound();
@@ -43,16 +66,6 @@ class EntriesController extends ApiGuardController
     }
 
 
-    public function entrylist($id)
-    {
-        try {
 
-            $entry = Entry::findOrFail($id);
-            return $this->response->withItem($entry, new \App\Http\Transformers\EntriesTransformer);
 
-        } catch (ModelNotFoundException $e) {
-            return $this->response->errorNotFound();
-
-        }
-    }
 }

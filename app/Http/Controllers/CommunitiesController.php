@@ -11,7 +11,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
 use Input;
@@ -19,14 +18,13 @@ use Validator;
 use Redirect;
 use Config;
 use App\ExchangeType;
-use Form;
 use Pagetheme;
 use Mail;
 use Helper;
 use Carbon\Carbon;
 use DB;
 use Log;
-use App\Community;
+
 
 class CommunitiesController extends Controller
 {
@@ -295,7 +293,7 @@ class CommunitiesController extends Controller
             $allowed_exchanges[$exchange->id] = $exchange->id;
         }
 
-        $all_exchange_types = \App\ExchangeType::all(); 
+        $all_exchange_types = \App\ExchangeType::all();
         return view('community.edit')->with('community', $community)->with('allowed_exchanges', $allowed_exchanges)->with('all_exchange_types', $all_exchange_types)->with('themes', $themes);
     }
 

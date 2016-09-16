@@ -12,7 +12,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Auth;
 use Theme;
 use Validator;
@@ -60,7 +59,7 @@ class MessagesController extends Controller
     public function getMessage(Request $request, $conversationId)
     {
 
-        if ($conversation = Conversation::with('entry','sender','messages')->find($conversationId)) 
+        if ($conversation = Conversation::with('entry','sender','messages')->find($conversationId))
         {
 
             if ($request->user()->cannot('view-conversation', $conversation)) {
@@ -71,12 +70,12 @@ class MessagesController extends Controller
                 $message->markMessageRead();
             }
             return view('account/message')->with('conversation', $conversation);
-            
+
         }
 
         return redirect()->to('browse')->with('error', trans('general.messages.messages.not_found'));
 
-        
+
     }
 
 
@@ -120,7 +119,7 @@ class MessagesController extends Controller
             ]);
         }
 
-        
+
         $offer = new Message;
         $offer->message = e(Input::get('message'));
         $offer->sent_by = Auth::user()->id;
