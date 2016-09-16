@@ -5,23 +5,8 @@
 |--------------------------------------------------------------------------
 */
 Route::group(
-    array('prefix' => 'api/v1', 'middleware' => 'auth'),
+    array('prefix' => 'api/v1', 'middleware' => 'apiguard'),
     function () {
-
-        /*
-        |--------------------------------------------------------------------------
-        | API Community Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group(
-            array('prefix' => 'groups'),
-            function () {
-                Route::get('{id}/members', '\App\Http\Controllers\Api\CommunitiesController@memberlist');
-                Route::get('{id}/entries', '\App\Http\Controllers\Api\CommunitiesController@entrylist');
-                Route::get('{id}', '\App\Http\Controllers\Api\CommunitiesController@show');
-                Route::get('/', '\App\Http\Controllers\Api\CommunitiesController@all');
-            }
-        );
 
         /*
         |--------------------------------------------------------------------------
