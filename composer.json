@@ -14,14 +14,15 @@
       "laravelcollective/html" : "5.*",
       "intervention/image": "2.*",
       "jenssegers/rollbar": "^1.4",
-      "laravel/framework": "5.2.*",
+      "laravel/framework": "5.2.10",
       "laravel/socialite": "^2.0",
       "php": ">=5.5.9",
       "yaap/theme": "2.*",
       "chrisbjr/api-guard": "3.1.*",
       "mcamara/laravel-localization": "1.0.*",
       "watson/validating": "^2.0",
-        "doctrine/dbal": "^2.5"
+      "doctrine/dbal": "^2.5",
+      "barryvdh/laravel-translation-manager": "0.2.x-dev"
     },
     "repositories": [
     { "type": "composer", "url": "https://packages.cartalyst.com" }
