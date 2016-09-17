@@ -12,21 +12,21 @@ class UserTransformer
         foreach ($users as $user) {
 
             $users_array[] = [
-                'id' => $user->id,
+                'id' => e($user->id),
                 'profile_images' =>
                     [
-                        'avatar' => $user->imagefile,
-                        'cover' => $user->cover_img,
+                        'avatar' => e($user->imagefile),
+                        'cover' => e($user->cover_img),
                     ],
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
-                'display_name' => $user->display_name,
-                'bio' => $user->bio,
+                'first_name' => e($user->first_name),
+                'last_name' => e($user->last_name),
+                'display_name' => e($user->display_name),
+                'bio' => e($user->bio),
                 'location' =>
                     [
-                        'name' => $user->location,
-                        'latitude' => $user->latitude,
-                        'longitude' => $user->longitude,
+                        'name' => e($user->location),
+                        'latitude' => e($user->latitude),
+                        'longitude' => e($user->longitude),
                     ],
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
