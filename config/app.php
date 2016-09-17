@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://massmosaic5.dev'),
+    'url' => env('APP_URL', 'https://anysha.re'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ return [
     | This is the domain name, without protocol or port numbers.
     |
     */
-    'domain' => env('APP_DOMAIN', 'anyshare.dev'),
+    'domain' => env('APP_DOMAIN', 'anysha.re'),
 
 
 
@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'US/Pacific'),
 
     /*
     |--------------------------------------------------------------------------
