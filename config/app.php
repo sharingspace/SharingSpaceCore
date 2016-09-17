@@ -184,7 +184,6 @@ return [
         Jenssegers\Rollbar\RollbarServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        'Barryvdh\TranslationManager\ManagerServiceProvider',
 
     ],
 
