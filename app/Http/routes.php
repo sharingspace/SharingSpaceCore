@@ -4,6 +4,24 @@
 | API Routes
 |--------------------------------------------------------------------------
 */
+
+
+/*
+|--------------------------------------------------------------------------
+| API Slack Slash Routes
+| This doesn't use the API guard, since we cannot pass X-Authenticated headers.
+| As such, it shouldn't use the apiguard middleware.
+|--------------------------------------------------------------------------
+*/
+Route::group(
+    array('prefix' => 'api/v1/slack'),
+    function () {
+        Route::post('members', '\App\Http\Controllers\Api\SlackController@slackShowMembers');
+        Route::post('entry/{postType}', '\App\Http\Controllers\Api\SlackController@slackAddEntry');
+    }
+);
+
+
 Route::group(
     array('prefix' => 'api/v1', 'middleware' => 'apiguard'),
     function () {
@@ -34,18 +52,6 @@ Route::group(
             }
         );
 
-        /*
-        |--------------------------------------------------------------------------
-        | API Slack Slash Routes
-        |--------------------------------------------------------------------------
-        */
-        Route::group(
-            array('prefix' => 'slack'),
-            function () {
-                Route::post('members', '\App\Http\Controllers\Api\SlackController@slackShowMembers');
-                Route::post('entry/{postType}', '\App\Http\Controllers\Api\SlackController@slackAddEntry');
-            }
-        );
 
     }
 );
