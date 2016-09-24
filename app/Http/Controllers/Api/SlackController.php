@@ -10,16 +10,15 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
+use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
 use App\Community;
 use Input;
 use App\Entry;
 use App\User;
 use DB;
 
-class SlackController extends Controller
+class SlackController extends ApiGuardController
 {
-
-
     /**
     * Returns a JSON response for Slack that lists the members of a community.
     *
@@ -35,7 +34,6 @@ class SlackController extends Controller
     */
     public function slackShowMembers()
     {
-
         $message['response_type'] = 'in_channel';
         $count = 0;
 
@@ -58,13 +56,11 @@ class SlackController extends Controller
             if (count($all_members) > $count) {
                 $members .= ', ';
             }
-
         }
 
         $message['text'] = $members;
 
         return response()->json($message);
-
     }
 
     /**
@@ -84,11 +80,9 @@ class SlackController extends Controller
     */
     public function slackAddEntry($postType = 'want')
     {
-
         $text_pre = explode(' in:', Input::get('text'));
         $text = explode(' ', $text_pre[0]);
         $community_slug = trim($text_pre[1]);
-
 
         $entry = new Entry;
 
@@ -111,8 +105,6 @@ class SlackController extends Controller
             $entry->post_type = 'have';
             $use_token = config('services.slack.have');
         }
-
-
 
         //$message['response_type'] = 'ephemeral';
         $message['response_type'] = 'in_channel';
@@ -159,8 +151,6 @@ class SlackController extends Controller
             $message['text'] = 'Error ';
         }
 
-
         return response()->json($message);
-
     }
 }
