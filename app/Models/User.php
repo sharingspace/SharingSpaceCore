@@ -223,6 +223,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user = new User;
             $user->email = $socialUser->getEmail();
             $user->first_name = $socialUser->getName();
+            $user->display_name = $socialUser->getName();
             if (!$user->save()) {
                 return false;
             }
