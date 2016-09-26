@@ -185,9 +185,12 @@
                   <button type="button" class="" data-toggle="modal" data-target="#myModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
                 </legend>
                 <!-- Slack endpoint -->
-                <div class="form-group{{ $errors->first('slack_endpoint', ' has-error') }}">
-                  <label for="slack_endpoint">{{ trans('general.community.slack_endpoint')}}</label>
-                  <input type="text" name="slack_endpoint" class="form-control" placeholder="" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
+
+
+                <p>{{ trans('general.community.slack_optional')}}</p>
+                <div class="form-group{{ $errors->first('slack_botname', ' has-error') }}">
+                  <label for="slack_endpoint">{{ trans('general.community.slack_webhook')}} <button type="button" class="" data-toggle="modal" data-target="#slackEndPoint"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button></label>
+                  <input type="text" name="slack_endpoint" class="form-control" placeholder="https://hooks.slack.com/services/xxxxxxxxxxxxxxxxxxxxx" value="{{ Input::old('slack_endpoint', $community->slack_endpoint) }}">
                   {!! $errors->first('slack_endpoint', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack endpoint -->
 
@@ -247,6 +250,27 @@
         <p>{{ trans('general.community.slack_info.p3')}}</p>
         <p>{{ trans('general.community.slack_info.p4')}}</p>
         <p>{{ trans('general.community.slack_info.p5')}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="slackEndPoint" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{ trans('general.community.slack_webhook')}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Incoming Webhooks are a simple way to post messages from external sources into Slack. They make use of normal HTTP requests with a JSON payload that includes the message text and some options. Message Attachments can also be used in Incoming Webhooks to display richly-formatted messages that stand out from regular chat messages. See <a href="https://api.slack.com/incoming-webhooks">{{ trans('general.community.slack_setting_up_webhook')}}</a>.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
