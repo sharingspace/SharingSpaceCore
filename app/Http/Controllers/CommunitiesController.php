@@ -318,6 +318,10 @@ class CommunitiesController extends Controller
         $community->slack_endpoint    = e(Input::get('slack_endpoint'));
         $community->slack_botname    = e(Input::get('slack_botname'));
         $community->slack_channel    = e(Input::get('slack_channel'));
+        $community->slack_slash_want_token    = e(Input::get('slack_slash_want_token'));
+        $community->slack_slash_have_token    = e(Input::get('slack_slash_have_token'));
+        $community->slack_slash_members_token    = e(Input::get('slack_slash_members_token'));
+
         $community->ga    = e(Input::get('ga'));
 
         if (Input::get('location')) {

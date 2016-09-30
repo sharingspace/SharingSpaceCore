@@ -181,8 +181,8 @@
 
               <fieldset class="nomargin">
                 <legend>
-                  {{ trans('general.community.slack_integration')}}
-                  <button type="button" class="" data-toggle="modal" data-target="#myModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
+                  {{ trans('general.community.slackbot_integration')}}
+
                 </legend>
                 <!-- Slack endpoint -->
 
@@ -208,6 +208,44 @@
                   {!! $errors->first('slack_channel', '<span class="help-block">:message</span>') !!}
                 </div> <!-- Slack channel -->
               </fieldset>
+
+
+
+
+
+
+              <!-- Slack slash command settings -->
+              <fieldset class="nomargin">
+                <legend>
+                  {{ trans('general.community.slackslash_integration')}}
+                  <button type="button" class="" data-toggle="modal" data-target="#slackbotModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
+                </legend>
+
+
+                <!-- Want token -->
+
+                <p>{{ trans('general.community.slackslash_info')}}</p>
+                <div class="form-group{{ $errors->first('slack_slash_want_token', ' has-error') }}">
+                  <label for="slack_slash_want_token">{{ trans('general.community.slack_slash_want_token')}}
+                  <input type="text" name="slack_slash_want_token" class="form-control" value="{{ Input::old('slack_slash_want_token', $community->slack_slash_want_token) }}">
+                  {!! $errors->first('slack_slash_want_token', '<span class="help-block">:message</span>') !!}
+                </div> <!-- Slack endpoint -->
+
+                <!-- Slack botname -->
+                <div class="form-group{{ $errors->first('slack_slash_have_token', ' has-error') }}">
+                  <label for="slack_slash_have_token">{{ trans('general.community.slack_slash_have_token')}}</label>
+                  <input type="text" name="slack_slash_have_token" class="form-control" placeholder="" value="{{ Input::old('slack_slash_have_token', $community->slack_slash_have_token) }}">
+                  {!! $errors->first('slack_slash_have_token', '<span class="help-block">:message</span>') !!}
+                </div> <!-- Slack botname -->
+
+                <!-- Slack channel -->
+                <div class="form-group{{ $errors->first('slack_slash_members_token', ' has-error') }}">
+                  <label for="slack_channel">{{ trans('general.community.slack_slash_members_token')}}</label>
+                  <input type="text" name="slack_slash_members_token" class="form-control" placeholder="" value="{{ Input::old('slack_slash_members_token', $community->slack_slash_members_token) }}">
+                  {!! $errors->first('slack_slash_members_token', '<span class="help-block">:message</span>') !!}
+                </div> <!-- Slack channel -->
+              </fieldset>
+
 
               <fieldset class="nomargin">
                 <legend>{{ trans('general.community.analytics')}}</legend>
@@ -235,14 +273,14 @@
 
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="slackbotModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ trans('general.community.slack_integration')}}</h4>
+        <h4 class="modal-title">{{ trans('general.community.slackbot_integration')}}</h4>
       </div>
       <div class="modal-body">
         <p>{{ trans('general.community.slack_info.p1')}}</p>

@@ -39,15 +39,17 @@ class SlackController extends Controller
         $message['response_type'] = 'in_channel';
         $count = 0;
 
-        if (Input::get('token')!=config('services.slack.members')) {
-            $message['text'] = 'That token is incorrect.';
-            return response()->json($message);
-        }
-
         if (!$community = Community::where('subdomain', '=', e(Input::get('text')))->first()) {
             $message['text'] = 'Invalid community.';
             return response()->json($message);
         }
+
+        if (Input::get('token')!=$community->slack_slash_members_token) {
+            $message['text'] = 'That token is incorrect.';
+            return response()->json($message);
+        }
+
+
 
         $all_members = $community->members()->get();
         $members = $all_members->count().' members in the <https://'.$community->subdomain.'.'.config('app.domain').'|'.$community->name.'> hub:'."\n";
@@ -89,6 +91,16 @@ class SlackController extends Controller
         $text = explode(' ', $text_pre[0]);
         $community_slug = trim($text_pre[1]);
 
+        if ($community_slug) {
+            if (!$community = Community::where('subdomain', '=', e($community_slug))->first()) {
+                $message['text'] = 'The '.e($text[2]).' community is invalid.';
+                return response()->json($message);
+            }
+        } else {
+            $message['text'] = 'No community given.';
+            return response()->json($message);
+        }
+
 
         $entry = new Entry;
 
@@ -106,15 +118,12 @@ class SlackController extends Controller
 
         if ($postType=='want') {
             $entry->post_type = 'want';
-            $use_token = config('services.slack.want');
+            $use_token = $community->slack_slash_want_token;
         } else {
             $entry->post_type = 'have';
-            $use_token = config('services.slack.have');
+            $use_token = $community->slack_slash_have_token;
         }
 
-
-
-        //$message['response_type'] = 'ephemeral';
         $message['response_type'] = 'in_channel';
 
         if (Input::get('token')!=$use_token) {
@@ -122,15 +131,7 @@ class SlackController extends Controller
             return response()->json($message);
         }
 
-        if ($community_slug) {
-            if (!$community = Community::where('subdomain', '=', e($community_slug))->first()) {
-                $message['text'] = 'The '.e($text[2]).' community is invalid.';
-                return response()->json($message);
-            }
-        } else {
-            $message['text'] = 'No community given.';
-            return response()->json($message);
-        }
+
 
         // TODO: This is messy and should be refactored
         $slack_users = DB::table('communities_users')
