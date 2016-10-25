@@ -28,7 +28,7 @@
   				<tbody>
   					@foreach ($members as $member)
   						<tr>
-                <td class="member_thumb"><img src="{{ $member->gravatar() }}"></div></td>
+                <td class="member_thumb"><img src="{{ $member->gravatar_img() }}"></div></td>
                 <td><a href="{{ route('user.profile', [$member->id]) }}">{{ $member->getDisplayName() }}</a>
 
                 @if ($member->canAdmin($whitelabel_group))

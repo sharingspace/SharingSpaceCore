@@ -16,6 +16,7 @@ use App\User;
 use App\ExchangeType;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
+use Carbon\Carbon;
 use Log;
 
 class Community extends Model
@@ -113,6 +114,65 @@ class Community extends Model
         return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin');
     }
 
+   /**
+    * Gets a list of join requests for the community, ignore anyone rejected or approved
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @param $request
+    * @since  [v1.0]
+    * @return View
+    */
+    public function requests()
+    {
+        return $this->belongsToMany('App\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_at')->whereNull('rejected_at')->withPivot('message');
+    }
+
+
+    /**
+    * Mark that a user request to a closed hub has been rejected
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function rejectUser($rejected_by, $user_id, $community_id)
+    {
+        $user_request = \App\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
+        $user_request->rejected_at = Carbon::now();
+        $user_request->rejected_by = $rejected_by;
+        $user_request->save();
+    }
+
+
+   /**
+    * Mark that a user request to a closed hub has been accepted
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return collection
+    */
+    public function acceptUser($approved_by, $user_id, $community_id)
+    {
+        $user_request = \App\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
+        $user_request->approved_at = Carbon::now();
+        $user_request->approved_by = $approved_by;
+        $user_request->save();
+    }
+
+
+   /**
+    * Get the number of join requests for the community, ignore anyone rejected or approved
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @param $request
+    * @since  [v1.0]
+    * @return View
+    */    
+    public function requestCount()
+    {
+        return count($this->requests()->get());
+    }
+
 
     /**
     * Get the admins of a community.
@@ -125,7 +185,6 @@ class Community extends Model
     {
         return $this->members()->where('is_admin','=',1);
     }
-
 
     /**
     * Get the cover image url based on app environment
@@ -267,6 +326,17 @@ class Community extends Model
         return $this->where('group_type', '!=', 'S');
     }
 
+    /**
+    * Is a community open?
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */
+    public function isOpen()
+    {
+        return ($this->group_type == 'O');
+    }
 
     /**
     * scopeEntriesInCommunity

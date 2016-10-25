@@ -18,8 +18,11 @@
     <div class="row">
 
       <!-- LOGIN -->
-      <div class="col-md-6 col-sm-6">
+      <div class="col-xs-12 size-18 margin-bottom-30">
+        {!! trans('auth.no_account') !!}
+      </div>
 
+      <div class="col-xs-6">
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post" action="{{ route('login') }}">
           {!! csrf_field() !!}
@@ -34,7 +37,7 @@
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
               </label>
-              {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
+              {!! $errors->first('email', '<span class="help-block alert-info ">:message</span>') !!}
             </div>
 
             <div class="margin-bottom-10{{ $errors->first('password', ' has-error') }}">
@@ -52,7 +55,6 @@
               <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
             </div>
           </div>
-
         </form>
         <!-- /register form -->
 
@@ -92,9 +94,6 @@
             </div>
 
           </fieldset>
-          <footer>
-            {!! trans('auth.no_account') !!}
-          </footer>
         </form>
       </div>
       <!-- /SOCIAL LOGIN -->
@@ -104,5 +103,9 @@
   </div>
 </section>
 <!-- / -->
+<script type="text/javascript">
+$( document ).ready(function() {
 
+});
+</script>
 @stop

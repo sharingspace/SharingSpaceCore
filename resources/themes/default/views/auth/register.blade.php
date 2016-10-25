@@ -15,16 +15,17 @@
   <div class="container margin-top-40">
 
     <div class="row">
-
       <!-- LOGIN -->
       <div class="col-md-6 col-sm-6">
 
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
+          <input type="hidden" name="subdomain" id="subdomain" value="{{!empty($subdomain)?$subdomain:''}}" />
+
           <header>
-            <i class="fa fa-users"></i>  {{ trans('general.nav.register') }}
-            </header>
+            <i class="fa fa-users"></i> Email &hellip;
+          </header>
 
           <fieldset class="nomargin">
 
@@ -91,7 +92,7 @@
         <form action="#" method="post" class="sky-form boxed">
 
           <header class="size-18 margin-bottom-20">
-            Register using your favourite social network
+            <i class="fa fa-users"></i> Social Network &hellip;
           </header>
 
           <fieldset class="nomargin">

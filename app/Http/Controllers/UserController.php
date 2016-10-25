@@ -17,6 +17,7 @@ use Input;
 use Redirect;
 use Helper;
 use App\Message;
+use Mail;
 use Log;
 
 class UserController extends Controller
@@ -76,7 +77,6 @@ class UserController extends Controller
     */
     public function postSettings()
     {
-
         if ($user = User::find(Auth::user()->id)) {
 
             $user->first_name = e(Input::get('first_name'));
@@ -136,7 +136,7 @@ class UserController extends Controller
             return redirect()->route('user.settings.view')->with('success', trans('general.user.social_success'));
         }
 
-        // Damn that user was an imposter!
+        // Damn, that user was an imposter!
         return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.social_failure'));
     }
 
@@ -180,7 +180,6 @@ class UserController extends Controller
     */
     public function postUpdatePassword()
     {
-
         if ($user = User::find(Auth::user()->id)) {
 
             $user->password = e(Input::get('password'));
@@ -195,7 +194,6 @@ class UserController extends Controller
 
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
-
     }
 
 
@@ -209,7 +207,6 @@ class UserController extends Controller
     */
     public function postUpdateNotifications()
     {
-
         if ($user = User::find(Auth::user()->id)) {
 
             if (!$user->save()) {
@@ -222,8 +219,8 @@ class UserController extends Controller
 
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
-
     }
+
 
     /**
     * Validates and stores the users updated privacy settings.
@@ -265,7 +262,61 @@ class UserController extends Controller
         } else {
             echo 'Invalid user';
         }
+    }
 
+
+   /**
+    * Accepts a user to sharing community, sends user an email and updates community request table
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Redirect
+    */
+    public function getAcceptUser(Request $request)
+    {
+        if ($user = User::findOrFail(Input::get('user_id'))) {
+
+            if ($user->communities()->sync([$request->whitelabel_group->id])) {
+                // mark user as accepted
+                $request->whitelabel_group->acceptUser(Auth::user()->id, Input::get('user_id'), $request->whitelabel_group->id);
+
+                // send an email to the user letting them know
+                $data['uc_subdomain'] = ucfirst($request->whitelabel_group->name);
+                $data['subdomain'] = $request->whitelabel_group->name;
+                $data['name'] = $user->display_name;
+                $data['subject'] = 'Welcome to the '.$data['uc_subdomain']. ' Share!';
+                $data['to_email'] = $user->email;
+                //getAcceptUserLOG::debug('getAcceptUser: email to be sent to = '.$user->email.'  '.Input::get('user_id'));
+
+                Mail::send(['text' => 'emails.acceptedText', 'html' => 'emails.acceptedHTML'], $data,
+                    function ($message) use ($data) {
+                        $message->to($data['to_email'], $data['name'])->subject($data['subject']);
+                    }
+                );
+
+                return response()->json(['success'=>true, 'alert_class' => 'success', 'message'=>e(Input::get('displayName')). ' has joined '.ucfirst($request->whitelabel_group->name).'!', 'user_id'=>Input::get('user_id')]);
+            }
+            else {
+                return redirect()->route('browse')->withInput()->with('error', 'Unable to join website');
+            }
+        }
+        else {
+            return redirect()->route('browse')->withInput()->with('error', 'user not found');
+        }
+    }
+
+
+   /**
+    * Marks a pending user to sharing community as rejected
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return json response
+    */
+    public function getRejectUser(Request $request)
+    {
+        $request->whitelabel_group->rejectUser(Auth::user()->id, Input::get('user_id'), $request->whitelabel_group->id);
+        return response()->json(['success'=>true, 'alert_class' => 'warning', 'message'=>e(Input::get('displayName')).' has been declined from '.ucfirst($request->whitelabel_group->name), 'user_id'=>Input::get('user_id')]);
     }
 
 
@@ -280,13 +331,19 @@ class UserController extends Controller
     */
     public function getJoinCommunity(Request $request)
     {
-        if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-            return redirect()->route('browse')->withInput()->with('success', 'You have joined this website!');
-        } else {
-            return redirect()->route('browse')->withInput()->with('error', 'Unable to join website');
+        //LOG::debug('getJoinCommunity: entered');
+        if ($request->whitelabel_group->isOpen()) {
+            if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
+                return redirect()->route('browse')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
+            } else {
+                return redirect()->route('browse')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
+            }
         }
-
+        else {
+            return view('request-access', ['error'=>'Sorry, this hub is closed. Please request to become a member', 'name' => $request->whitelabel_group->name] );
+        }
     }
+
 
     /**
     * Leaves a community
@@ -304,23 +361,8 @@ class UserController extends Controller
         } else {
             return redirect()->route('browse')->withInput()->with('error', 'Unable to leave website');
         }
-
     }
 
-
-    /**
-    * Gets a list of join requests for the community admin
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param $request
-    * @since  [v1.0]
-    * @return View
-    */
-    public function getJoinRequests(Request $request)
-    {
-
-
-    }
 
     /**
     * Gets the list of communities a user is a member of

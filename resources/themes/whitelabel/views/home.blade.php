@@ -165,34 +165,6 @@ $( document ).ready(function() {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
   });
 
-  $("#display_about").click(function(e){
-    var height;
-
-    if (!$('#about_panel').is(':visible')) {
-      $("#about_panel").slideToggle('fast');
-      height = $("#about_panel p").height()+60+'px';
-    }
-    else {
-      $("#about_panel").slideToggle('fast');
-      height = '0px';
-    }
-
-    $("#about_panel").parent().css('height', height);
-    if ($('.wl_usercover').length) {
-      $(".wl_usercover").slideToggle();
-    }
-
-    return false;
-  });
-
-  $('.close_about').on('click', function(c){
-    $("#about_panel").slideToggle('fast');
-    $("#about_panel").parent().css('height', 0);
-    if ($('.wl_usercover').length) {
-      $(".wl_usercover").slideToggle();
-    }
-  });
-
   // we off screen the table headers as they are obvious.
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];

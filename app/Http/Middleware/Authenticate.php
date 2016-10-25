@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Log;
 
 class Authenticate
 {
@@ -37,8 +38,9 @@ class Authenticate
         if ($this->auth->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('auth/login')->withError('You must be logged in to do that.');
+            } 
+            else {
+                return redirect()->guest('auth/login')->with('info', 'You must be logged in to view a sharing hub');
             }
         }
 

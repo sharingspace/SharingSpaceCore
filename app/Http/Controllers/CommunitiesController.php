@@ -96,7 +96,8 @@ class CommunitiesController extends Controller
         ->where('user_id', '=', $user->id)
         ->where('community_id', '=', $request->whitelabel_group->id)
         ->count();
-        return view('request-access')->with('requests', $requests);
+
+        return view('request-access', ['requests'=>$requests,'name'=>$request->whitelabel_group->name]);
     }
 
     /**
@@ -111,6 +112,7 @@ class CommunitiesController extends Controller
     public function postRequestAccess(Request $request)
     {
         $user = Auth::user();
+
         DB::table('community_join_requests')->insert(
             [
             'user_id' => $user->id,
@@ -121,6 +123,32 @@ class CommunitiesController extends Controller
         return redirect()->route('community.request-access.form');
     }
 
+    /**
+    * Gets a list of join requests for the community
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @param $request
+    * @since  [v1.0]
+    * @return View
+    */
+    public function getJoinRequests(Request $request)
+    {
+        $join_requests = $request->whitelabel_group->requests()->get();
+        return view('join_requests')->with('join_requests', $join_requests);
+    }
+
+    /**
+    * Returns number of join requests for a community, we exclude all approved or declined requests
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @param $request
+    * @since  [v1.0]
+    * @return int
+    */    
+    public function getJoinRequestCount(Request $request)
+    {
+        return count($request->whitelabel_group->requests()->get());
+    }
 
 
     /**
@@ -165,7 +193,6 @@ class CommunitiesController extends Controller
     */
     public function postCreate(Request $request)
     {
-
         $token = Input::get('stripeToken');
 
         // No stripe token - something went wrong :(
