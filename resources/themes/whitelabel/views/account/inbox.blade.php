@@ -25,7 +25,7 @@
           <tr>
               <td>
                   <a href="{{ route('user.profile', $message->sender->id) }}">
-                      <img src="{{ $message->sender->gravatar() }}" class="avatar-sm">
+                      <img src="{{ $message->sender->gravatar_img() }}" class="avatar-sm">
                       {{ $message->sender->getDisplayName() }} 
                   </a>
               </td>

@@ -26,45 +26,58 @@ class CommunityPermissionMiddleware
      */
     public function handle($request, Closure $next)
     {
-
         // This is a whitelabel group, otherwise skip it
         if ($request->whitelabel_group) {
-            LOG::debug('Whitelabel routing: This is a valid whitelabel group.');
-            // This group is not restricted
-            if ($request->whitelabel_group->group_type=='O') {
-                LOG::debug('Whitelabel routing: This is an open group');
-                return $next($request);
+            //LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
+            if ($request->whitelabel_group->group_type!='O') {
+                //LOG::debug('CommunityPermissionMiddleware: This is a closed or secret group');
 
-            } else {
                 // If the user is logged in, check that they are a member
                 // and are allowed to see this group
                 if (Auth::check())
                 {
-
-                    // LOG::debug('Whitelabel routing: User is logged in.');
-                    if (Auth::user()->canSeeCommunity($request->whitelabel_group)) {
-                         LOG::debug('Whitelabel routing: This user is authorized to see this.');
+                    //LOG::debug('CommunityPermissionMiddleware: User is logged in');
+                    if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
+                        //LOG::debug('CommunityPermissionMiddleware: exit This user is authorized to see this community');
                         return $next($request);
-                    } else {
-                         LOG::debug('Whitelabel routing: User is not allowed to view this group.');
-                        return view('request-access')->withError('You must be a member of this group to view this page.');
+                    } else if ($request->whitelabel_group->group_type=='C') {
+                        //LOG::debug('CommunityPermissionMiddleware: exit Closed hub');
+                        return view('request-access', ['error'=>'This hub is closed. Please request to become a member', 'name' => $request->whitelabel_group->name] );
                     }
-
-                    // User is not logged in
-                } else {
-                     LOG::debug('Whitelabel routing: User is not logged in.');
-                    if ($request->whitelabel_group->group_type=='S') {
-                        LOG::debug('Whitelabel routing: User is not logged in and this community requires authorization.');
-                        return view('auth/login-unbranded')->withError('You must be logged in and a member to see this.');
+                    else {
+                        //LOG::debug('CommunityPermissionMiddleware: exit User is logged in and hub is secret');
+                        return view('auth/login-unbranded')->withError('Secret Hub. You must be invited to join this hub');
                     }
-                     LOG::debug('Whitelabel routing: User is not logged in, but the community does not require authorization.');
-                    return $next($request);
-
                 }
-
+                else { // User is not logged in
+                    //LOG::debug('CommunityPermissionMiddleware: User is not logged in.');
+                    if ($request->whitelabel_group->group_type=='S') {
+                        //LOG::debug('CommunityPermissionMiddleware: exit User is not logged in and this community is secret.');
+                        return view('auth/login-unbranded')->withError('This hub is secret. You must be invited to join this hub.');
+                    }
+                    else if ($request->whitelabel_group->group_type=='C') {
+                        //LOG::debug('CommunityPermissionMiddleware: exit User is not logged in and this community is closed, redirecting to login page');
+                        return view('auth/login')->withError('This hub is closed. Please request to become a member.');
+                    }
+                    
+                    //LOG::debug('CommunityPermissionMiddleware: exit User is not logged in, but the community does not require authorization.');
+                    return $next($request);
+                }
             }
-
+            else { // This group is not restricted
+                if (Auth::check()) {
+                    if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
+                        //LOG::debug('CommunityPermissionMiddleware: exit This user is authorized to see this open hub');
+                        return $next($request);
+                    }
+                    else {
+                        LOG::debug('CommunityPermissionMiddleware: Open hub but user is not a member');
+                        //return view('join-open', ['error'=>'Thank you, you\'re a member of Anyshare. Do you want to become a member of the sharing hub, ', 'name' => $request->whitelabel_group->name] );
+                    }
+                }
+            }
         }
+        //LOG::debug('CommunityPermissionMiddleware: exit');
 
         return $next($request);
     }

@@ -191,7 +191,7 @@
 
               <div class="col-md-1" style="position:relative;height:50px;">
                 <div id="image_box" class="pull-left" style="background-size: contain;
-    position: absolute;background-position: center;background-repeat: no-repeat;height: 100%;width: 100%;background-image:url('{{ Auth::user()->gravatar() }}')">
+    position: absolute;background-position: center;background-repeat: no-repeat;height: 100%;width: 100%;background-image:url('{{ Auth::user()->gravatar_img() }}')">
                 </div>
               </div>
 
@@ -283,7 +283,7 @@
 		<!-- LEFT -->
 		<div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8 margin-top-20">
 			<div class="thumbnail text-center">
-				<img src="{{ Auth::user()->gravatar() }}?s=400" alt="" />
+				<img src="{{ Auth::user()->gravatar_img() }}?s=400" alt="" />
 				<h2 class="size-18 margin-top-10 margin-bottom-0">{{ Auth::user()->getDisplayName() }}</h2>
 				<h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">{{ Auth::user()->location }}</h3>
 			</div>
@@ -300,7 +300,7 @@ $( document ).ready(function() {
   $("#remove_img_button").hide();
   $("#delete_img_checkbox_label").hide();
 
-  var image = "{{ Auth::user()->gravatar() }}";
+  var image = "{{ Auth::user()->gravatar_img() }}";
   if (image) {
     $('#image_box').css("background-image", "url("+image+")");
     $("#delete_img_checkbox_label").show();

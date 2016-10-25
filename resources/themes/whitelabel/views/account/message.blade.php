@@ -25,7 +25,7 @@
         <div class="block-review-avatar text-center">
           <div class="push-bit">
             <a href="{{ route('user.profile', $message->sender->id) }}">
-              <img src="{{ $message->sender->gravatar() }}" width="100" alt="avatar">
+              <img src="{{ $message->sender->gravatar_img() }}" width="100" alt="avatar">
             </a>
           </div>
 

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Log;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -56,10 +57,30 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if the user can see the community entries
         $gate->define('view-browse', function ($user, $community) {
+          //Log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
+
           if ($user->canSeeCommunity($community)) {
+            //Log::debug("view-browse ************** can view view-browse");
+            return true;
+          }
+          //Log::debug("view-browse ************** cannot view view-browse");
+        });
+
+        // Check if the user can see the community about page
+        $gate->define('view-about', function ($user, $community) {
+          //Log::debug("view-about ************** entered");
+
+          if(($community->group_type=='O') || ($user->isMemberOfCommunity($community) || $user->isSuperAdmin() || $community->group_type!='S')) { 
+            if (strlen($community->about)) {
+              //Log::debug("view-about ************** can view");
               return true;
+            }
+            //Log::debug("view-about ************** cannot view");
           }
         });
+
+        //@elseif (strlen($whitelabel_group->about) && 
+        //      ($whitelabel_group->scopeIsPublic() || (Auth::check() && !Auth::user()->isMemberOfCommunity($whitelabel_group))))
 
         // Check if the user can join a community
         // (they are not already a member)
@@ -114,8 +135,5 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
-
-
-
     }
 }

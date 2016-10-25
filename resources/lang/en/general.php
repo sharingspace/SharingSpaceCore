@@ -109,7 +109,8 @@ return [
       'login_by_email' => 'Sign-in with email',
       'login_by_social' => 'or with a social network',
       'signup_by_email' => 'Sign-up with email',
-      'verify_account' => 'Needed to verify your account'
+      'verify_account' => 'Needed to verify your account',
+      'join_requests' => 'Join Requets'
     ],
 
     'community'  => [
@@ -117,7 +118,7 @@ return [
       'settings'  => 'Sharing Hub Settings',
       'members'  => 'Member|Members',
       'save' => 'Update',
-      'join_website' => 'Join website',
+      'join_website' => 'Join Sharing Hub',
       'create' => 'Start your own Sharing Hub for Free!',
       'name_placeholder' => 'My awesome sharing hub',
       'name' => 'Name for your Sharing Hub',
