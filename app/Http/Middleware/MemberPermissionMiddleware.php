@@ -29,12 +29,17 @@ class MemberPermissionMiddleware
     // This is a whitelabel group, otherwise skip it
     if ($request->whitelabel_group) {
       if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
-        //LOG::debug('CommunityPermissionMiddleware: This user is authorized to see this open hub');
+        //LOG::debug('MemberPermissionMiddleware: This user is authorized to see this open hub');
         return $next($request);
       }
       else {
-        //LOG::debug('CommunityPermissionMiddleware: Open hub but user is not a member');
-        return view('join-open', ['error'=>'To see this page you need to be a member of the sharing hub, ', 'name' => $request->whitelabel_group->name] );
+        //LOG::debug('MemberPermissionMiddleware: Open hub but user is not a member');
+        if ($request->path() == "users/".Auth::user()->id) {
+          // let them see their own profile
+          return $next($request);
+        }
+
+        return view('join-open', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
       }
     }
 

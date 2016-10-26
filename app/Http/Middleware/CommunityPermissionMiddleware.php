@@ -71,8 +71,13 @@ class CommunityPermissionMiddleware
                         return $next($request);
                     }
                     else {
-                        LOG::debug('CommunityPermissionMiddleware: Open hub but user is not a member');
-                        //return view('join-open', ['error'=>'Thank you, you\'re a member of Anyshare. Do you want to become a member of the sharing hub, ', 'name' => $request->whitelabel_group->name] );
+                        //LOG::debug('CommunityPermissionMiddleware: Open hub but user is not a member, path = ('.$request->path().') ('."users/".Auth::user()->id.")");
+
+                        if ($request->path() == "/" || $request->path() == "entry/json.browse" || $request->path() == "users/".Auth::user()->id ) {
+                            return $next($request);
+                        }
+
+                        return view('join-open', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
                     }
                 }
             }
