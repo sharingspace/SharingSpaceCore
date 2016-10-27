@@ -34,7 +34,7 @@
                                     <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
                                     @if (Auth::check())
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar() }}" class="avatar-smm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-smm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ route('user.history') }}">{{ trans('general.nav.order_history') }} </a></li>
                                             <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
@@ -66,7 +66,12 @@
         @elseif (Route::is('login'))
             <h1 class="heading">{{trans('general.nav.login') }}</h1>
         @elseif (Route::is('register'))
-            <h1 class="heading">{{trans('general.nav.register') }}</h1>
+            <h1 class="heading">
+                {{trans('general.nav.register') }}
+            @if (!empty($subdomain))
+                <h2 class="subheading size-30 margin-top-20">To join <em>{{ucfirst($subdomain)}}'s</em> share,<br>create an account with AnyShare</h2>
+            @endif
+            </h1>
         @elseif (Route::is('community.create.form'))
             <h1 class="heading">{{trans('general.community.create') }}</h1>
         @elseif (Route::is('assistance'))

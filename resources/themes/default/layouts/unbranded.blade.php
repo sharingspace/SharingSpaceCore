@@ -46,9 +46,7 @@
 <body class="smoothscroll enable-animation">
     <!-- wrapper -->
 	<div id="wrapper">
-        <div>@include('partials.unbranded_header')</div>
         <div>@yield('content')</div>
-        <div>@include('partials.footer')</div>
     </div>
     <!-- /wrapper -->
 </body>

@@ -76,12 +76,12 @@
 
 
       @if (!Route::is('home'))
-          <!-- Notifications -->
-
-            <div class="col-md-12">
-              @include('notifications')
-            </div>
-
+        <!-- Notifications -->
+        <div  id="notifications" class="container">
+          <div class="row">
+            @include('notifications')
+          </div>
+        </div>
       @endif
 
       <div>@yield('content')</div>

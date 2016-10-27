@@ -9046,6 +9046,15 @@ section.TreborScholz {
 .terms li {
   margin-bottom: 7px;
 }
+
+/**
+ * Authorization
+ *
+ **/
+
+#notifications i {
+  vertical-align: middle;
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

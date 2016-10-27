@@ -321,10 +321,10 @@ body, .email_body_cell {
   background-color: #353536;
 }
 .jumbotron_native_cell, .jumbotron_native_small_cell, .jumbotron_button_native, .primary_btn td {
-  background-color: #e84545;
+  background-color: #D8A1A1;//#e84545;
 }
 a, .secondary_btn a, .secondary_btn span, h6, h6 small, .amount {
-  color: #e84545;
+  color: #D8A1A1;//#e84545;
 }
 .email_content a.hub_link {
   color:#fff;
@@ -394,7 +394,7 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                     <table class="header" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                       <tbody>
                         <tr>
-                          <td class="header_cell" style="padding: 24px 16px;vertical-align: top;font-size: 0;text-align: left;-webkit-border-radius: 4px 4px 0 0;border-radius: 4px 4px 0 0;border-top: 8px solid #e84545;border-bottom: 1px solid #ebebeb;">
+                          <td class="header_cell" style="padding: 24px 16px;vertical-align: top;font-size: 0;text-align: left;-webkit-border-radius: 4px 4px 0 0;border-radius: 4px 4px 0 0;border-top: 8px solid #D8A1A1;border-bottom: 1px solid #ebebeb;">
                           
                             <!--[if (gte mso 9)|(IE)]>
                             <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="vertical-align: top;">
@@ -422,7 +422,7 @@ h1, h2, h3, h4, h5, h6, p, a, .tagline_cell {
                     <table class="jumbotron_native" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                       <tbody>
                         <tr>
-                          <td class="jumbotron_native_cell" style="padding: 32px;vertical-align: middle;text-align: center;background-color: #e84545;">
+                          <td class="jumbotron_native_cell" style="padding: 32px;vertical-align: middle;text-align: center;background-color: #D8A1A1;;">
                             <table class="hruler" width="80" border="0" align="center" cellpadding="0" cellspacing="0" style="border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 80px;margin-left: auto;margin-right: auto;clear: both;">
                               <tbody>
                                 <tr>

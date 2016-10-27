@@ -54,7 +54,9 @@
 
                   <!-- Type -->
                   <div class="form-group">
-                    <label for="group_type">{{trans('general.community.type')}} *</label>
+                    <label for="group_type">{{trans('general.community.type')}} *
+                      <button type="button" class="" data-toggle="modal" data-target="#privacyLevelModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
+                    </label>
                     {!! Form::community_types('group_type', Input::old('group_type', $community->group_type)) !!}
                     {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
                   </div> <!-- Type -->
@@ -211,9 +213,6 @@
 
 
 
-
-
-
               <!-- Slack slash command settings -->
               <fieldset class="nomargin">
                 <legend>
@@ -272,7 +271,32 @@
 <!-- / -->
 
 
-<!-- Modal -->
+<!-- Modals -->
+
+<div id="privacyLevelModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Choosing a Privacy Level</h4>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><strong>Open</strong> - an open sharing website lets anyone join and exchange. It's the most permissive way to build a community with AnyShare. </li>
+          <li><strong>Closed</strong> - a closed sharing website lets you approve members before they join. You can also invite members! Visitors to your sharing website can see basic information on its content, but not the details.</li>
+          <!-- <li><strong>Secret</strong> - a secret sharing website is hidden from anyone who is not a member. It is the top level of privacy on AnyShare. </li> -->
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div id="slackbotModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 

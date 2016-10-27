@@ -16,20 +16,18 @@
   <div class="container margin-top-40">
 
     <div class="row">
-
-        <div class="col-md-12">
+      @if (!empty($error))
+        <div class="col-md-6 col-md-offset-3">
           <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <i class="fa fa-exclamation-circle"></i>
-            You must be logged in to view this community.
+            {{$error}}
           </div> <!-- alert -->
-        </div> <!-- col-md-12 -->
-
-
+        </div> <!-- col-md-6 -->
+      @endif
 
       <!-- LOGIN -->
       <div class="col-md-6 col-sm-6">
-
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post" action="{{ route('login') }}">
           {!! csrf_field() !!}
@@ -38,7 +36,6 @@
           </header>
 
           <fieldset class="nomargin">
-
             <div class="margin-bottom-10{{ $errors->first('email', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
@@ -57,33 +54,26 @@
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
 
-
-          <div class="row margin-bottom-20">
-            <div class="col-md-12">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
+            <div class="row margin-bottom-20">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
+              </div>
             </div>
-          </div>
-
+          </fieldset>
         </form>
-        <!-- /register form -->
-
       </div>
       <!-- /LOGIN -->
 
       <!-- SOCIAL LOGIN -->
       <div class="col-md-6 col-sm-6">
         <form action="#" method="post" class="sky-form boxed">
-
           <header>
-            <i class="fa fa-globe"></i> Register using your favourite social network
+            <i class="fa fa-globe"></i> Sign-in using your favourite social network
           </header>
 
           <fieldset class="nomargin">
-
             <div class="row">
-
               <div class="col-md-8 col-md-offset-2">
-
                 <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/auth/facebook">
                     <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
                 </a>
@@ -101,7 +91,6 @@
                 </a>
               </div>
             </div>
-
           </fieldset>
 
           <footer>
@@ -112,10 +101,7 @@
 
       </div>
       <!-- /SOCIAL LOGIN -->
-
     </div>
-
-
   </div>
 </section>
 <!-- / -->

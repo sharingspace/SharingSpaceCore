@@ -69,7 +69,7 @@
         <form action="#" method="post" class="sky-form boxed">
 
           <header>
-            <i class="fa fa-globe"></i> Register using your favourite social network
+            <i class="fa fa-globe"></i> Sign-in using your favourite social network
           </header>
 
           <fieldset class="nomargin">
