@@ -1,12 +1,12 @@
 <div class="w-section">
-    <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
+    <div class="w-background-video background-video {{$bannerClasses}}" style="color:red;height:{{$bannerHeight}}">
         <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'>
             @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
                 <source src="/assets/movies/clothing-transcode.webm" data-wf-ignore="">
                 <source src="/assets/movies/clothing-transcode.mp4" data-wf-ignore="">
             @else
-                <source src="/assets/movies/anyshare_homepage_vid.webm" data-wf-ignore="">
-                <source src="/assets/movies/anyshare_homepage_vid.mp4" data-wf-ignore="">
+                <source src="/assets/movies/anyshare_homepage_vid-transcode.webm" data-wf-ignore="">
+                <source src="/assets/movies/anyshare_homepage_vid-transcode.mp4" data-wf-ignore="">
             @endif
         </video>
         <div class="w-nav nav-bar">
@@ -41,8 +41,9 @@
                                         </ul>
                                     </li>
                                     @else
+                                    <li><a href="{{ route('register') }}">Try</a></li>
+
                                     <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
-                                    <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
                                     @endif
                                     @can('admin')
                                         <li><a href="{{ route('admin.index') }}">Admin</a></li>
@@ -59,7 +60,7 @@
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
                 <div class="header_cta_button">
-                    <a href="{{ route('community.create.form') }}" class="w-button cta-button contained-button size-20">START NOW</a>
+                    <a href="{{ route('community.create.form') }}" class="btn-warning btn btn-sm contained-button size-18 weight-800 font-smoothing">1 Minute Start</a>
                 </div>
             </h2>
             <div class="scroll-button-div"></div>
