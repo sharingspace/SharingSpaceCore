@@ -8,8 +8,8 @@ return [
     |--------------------------------------------------------------------------
     */
     'homepage' => 'home page',
-    'home_headline' => 'Join the Sharing Revolution!',
-    'subhome_headline' => 'Build a Website that unlocks the potential around you.',
+    'home_headline' => 'Make a Share',
+    'subhome_headline' => 'An Exchange Platform for Any Group',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'free_trial' => 'Try a Share free for 15 days',
