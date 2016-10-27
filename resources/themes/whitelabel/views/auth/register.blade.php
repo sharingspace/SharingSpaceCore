@@ -64,7 +64,7 @@
 
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
               <label class="checkbox nomargin">
-                <input checked class="checked-agree" type="checkbox" name="join-hub"><i></i><strong>{{ucfirst('testgroup')}}</strong> - I want to join this sharing hub
+                <input checked class="checked-agree" type="checkbox" name="join-hub"><i></i><strong>{{ucfirst('testgroup')}}</strong> - I want to join this Share
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>

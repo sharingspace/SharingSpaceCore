@@ -12,6 +12,6 @@ Explain why you don’t have the budget to pay? {{{$data['budget']}}}
 
 Is this budget limitation temporary or will it continue indefinitely? {{{$data['timePeriod']}}}
 
-How will you market your Sharing Hub? {{{$data['market']}}}
+How will you market your Share? {{{$data['market']}}}
 
 @stop

@@ -105,7 +105,7 @@
           <ul class="nav navbar-nav">
             <li class="margin-right-0">
               <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i> Entry</button>
               </a>
             </li>
           </ul>
@@ -119,7 +119,7 @@
               <li>
                 <a style="color:white;" href="{{ route('join-community') }}">
                   <button type="button" class="btn btn-warning btn-sm">
-                    Join this sharing hub
+                    Join this Share
                   </button>
                 </a>
               </li>
