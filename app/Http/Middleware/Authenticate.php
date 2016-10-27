@@ -40,7 +40,7 @@ class Authenticate
                 return response('Unauthorized.', 401);
             } 
             else {
-                return redirect()->guest('auth/login')->with('info', 'You must be logged in to view a sharing hub');
+                return redirect()->guest('auth/login')->with('info', 'You must be logged in to view a Share');
             }
         }
 

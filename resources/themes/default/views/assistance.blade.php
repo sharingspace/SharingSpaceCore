@@ -34,7 +34,7 @@
         {{ form::label('timePeriod', 'Is this budget limitation temporary or will it continue indefinitely?') }}
         {{ form::textarea('timePeriod', null, array('size' => '60x3', 'required' => 'required')) }}
 
-        {{ form::label('market', 'How will you market your Sharing Hub?') }}
+        {{ form::label('market', 'How will you market your Share?') }}
         {{ form::textarea('market', null, array('size' => '60x3', 'required' => 'required')) }}
         <div class="clearfix"></div>
 

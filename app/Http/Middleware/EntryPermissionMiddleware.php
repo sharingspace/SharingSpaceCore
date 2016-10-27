@@ -33,7 +33,7 @@ class EntryPermissionMiddleware
         }
         else {
             //LOG::debug('Whitelabel routing: User is not allowed to create enties: '.$request->whitelabel_group->name);
-            return view('request-access')->with('groupName', ucfirst($request->whitelabel_group->name))->withError('You must be a member of this sharing hub to create an entry.');
+            return view('request-access')->with('groupName', ucfirst($request->whitelabel_group->name))->withError('You must be a member of this Share to create an entry.');
         }
 
         return $next($request);
