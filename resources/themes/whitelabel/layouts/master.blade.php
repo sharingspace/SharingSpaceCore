@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
   <head>
-    <!-- *** General page information *** -->
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
     <meta charset="UTF-8"/>
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+
     <title>
       @section('title')
         {{ $whitelabel_group->name }}
