@@ -25,7 +25,7 @@
                 <ol>
                     <li>You must be 18 years or older or at least the age of majority in the jurisdiction where you reside or from which you use this Service.</li>
 
-                    <li>To access and use the Services, you must register for a AnyShare account ("Account") by providing your full legal name, a valid email address, and any other information indicated as required. AnyShare may reject your application for an Account, or cancel an existing Account, for any reason, in our sole discretion.</li>
+                    <li>To access and use the Services, you must sign-up for a AnyShare account ("Account") by providing your full legal name, a valid email address, and any other information indicated as required. AnyShare may reject your application for an Account, or cancel an existing Account, for any reason, in our sole discretion.</li>
                 
                     <li>You acknowledge that AnyShare will use the email address you provide as the primary method for communication.</li>
 
