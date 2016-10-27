@@ -67,7 +67,7 @@ return [
 
     'rollbar' => array(
         'access_token' => env('ROLLBAR_TOKEN'),
-        'level' => 'debug',
+        'level' => env('ROLLBAR_DEBUG_LVL', 'error'),
     ),
 
     'slack' => array(
