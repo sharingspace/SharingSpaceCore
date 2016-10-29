@@ -54,6 +54,8 @@
 /** Globals
  ******************************************************************/
 
+/********************** Bootstrap Media Defines ***********************/
+
 html {
   height: 100%;
 }
@@ -1319,6 +1321,16 @@ section.dark.page-header ul.page-options a {
   color: #333;
   cursor: pointer;
   position: relative;
+}
+
+.add_entry_button {
+  margin-right: 30px;
+}
+
+@media only screen and (min-width: 768px) {
+  .add_entry_button {
+    margin-right: 0;
+  }
 }
 
 /* shadows */
@@ -8058,8 +8070,6 @@ li.notifications-popdown .notifications-popdown-box {
   padding: 4px 3px;
   border-radius: 3px;
 }
-
-/********************** Bootstrap Media Defines ***********************/
 
 /********************** Home page ***********************/
 

@@ -62,7 +62,7 @@ return [
           'cancel' => 'Cancel',
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
-          'file_placeholder' => 'no file selected (jpg, png, gif. Max size is 4MB)',
+          'file_placeholder' => 'jpg, png, gif. Max size is 4MB',
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',

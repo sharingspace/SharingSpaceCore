@@ -1,9 +1,11 @@
         <!-- entry form -->
+        <form method="post" 
         @if(isset($entry))
-        <form method="post" action="{{ route('entry.edit.save', $entry->id) }}" enctype="multipart/form-data" autocomplete="off" class="nomargin">
+          action="{{ route('entry.edit.save', $entry->id) }}" 
         @else
-        <form method="post" action="{{ route('entry.create.ajax.save') }}" enctype="multipart/form-data" autocomplete="off" class="nomargin" id='entry_form'>
+          action="{{ route('entry.create.ajax.save') }}"
         @endif
+          enctype="multipart/form-data" autocomplete="off" class="margin-left-10 margin-right-10">
           {!! csrf_field() !!}
           <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value={{ trans('general.entries.max_size')}} />
           <input type="hidden" name="upload_key" id="upload_key" value="" />
@@ -12,7 +14,35 @@
           <input type="hidden" id="deleteImage" name="deleteImage" value=''>
 
           <div class="row">
-            <div class="col-lg-9 col-md-9 col-md-push-3">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+              <div class="form-group" style="margin-bottom: 5px;">
+                <fieldset class="margin-bottom-10">
+
+                  <legend class="sr-only">Exchange by:</legend>
+                  <div class="exchange_types">
+                    <!-- checkboxes for exchange types -->
+                    <div class="checkbox">
+                      @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                        <div class="col-sm-12 col-xs-6 pull-left margin-bottom-10">
+                          <label class="checkbox col-md-12 pull-left margin-bottom-10 padding-left-10">
+                            {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
+                            <i></i> {{ $exchange_types->name }}
+                          </label>
+                        </div>
+                      @endforeach
+                      <div class="col-xs-12 pull-left margin-bottom-10">
+                        <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                          {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
+                          <i></i> {{trans('general.community.all_exchanges')}}
+                        </label>
+                      </div>
+                    </div>
+                  </div> <!-- exchange_types -->
+                </fieldset>
+              </div> <!-- form-group -->
+            </div> <!-- col-md-3 -->
+
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
               <div class="row">
                 <div class="col-md-12">
                   <div class="row">
@@ -132,10 +162,10 @@
                   </div> <!-- input-group -->
                 </div>
 
-                <div class="col-xs-9">
+                <div class="col-sm-6 col-xs-12">
                   <label class="checkbox pull-left" for="visible_checkbox">
                     @if(isset($entry))
-                    {{ Form::checkbox('private', 1, !old('visible',$entry->visible), array('id'=>'visible_checkbox')) }}
+                      {{ Form::checkbox('private', 1, !old('visible',$entry->visible), array('id'=>'visible_checkbox')) }}
                     @else
                       {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
                     @endif
@@ -143,7 +173,7 @@
                   </label>
                 </div> <!-- col 10 -->
 
-                <div class="col-xs-3 ">
+                <div class="col-sm-6 col-xs-12 ">
                   @if(isset($entry))
                     <button class="btn btn-info pull-right">
                   @else
@@ -156,32 +186,6 @@
               </div> <!-- row -->
             </div> <!-- col 9 -->
 
-            <div class="col-md-3 col-sm-4 col-xs-12 col-md-pull-9 col-sm-pull-8">
-              <div class="form-group" style="margin-bottom: 5px;">
-                <fieldset class="margin-bottom-10">
 
-                  <legend class="sr-only">Exchange by:</legend>
-                  <div class="exchange_types">
-                    <!-- checkboxes for exchange types -->
-                    <div class="checkbox">
-                      @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-                        <div class="col-md-12 pull-left margin-bottom-10">
-                          <label class="checkbox col-md-12 pull-left margin-bottom-10 padding-left-10">
-                            {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
-                            <i></i> {{ $exchange_types->name }}
-                          </label>
-                        </div>
-                      @endforeach
-                      <div class="col-md-12 pull-left margin-bottom-10">
-                        <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                          {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
-                          <i></i> {{trans('general.community.all_exchanges')}}
-                        </label>
-                      </div>
-                    </div>
-                  </div> <!-- exchange_types -->
-                </fieldset>
-              </div> <!-- form-group -->
-            </div> <!-- col-md-3 -->
           </div>  <!-- row -->
         </form>
