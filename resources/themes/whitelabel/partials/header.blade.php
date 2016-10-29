@@ -103,9 +103,9 @@
         @if (Auth::check() && Auth::user()->canSeeCommunity($whitelabel_group))
         <div class="navbar-header pull-right">
           <ul class="nav navbar-nav">
-            <li class="margin-right-0">
+            <li class="add_entry_button">
               <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i> Entry</button>
+                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> Entry</span></button>
               </a>
             </li>
           </ul>
