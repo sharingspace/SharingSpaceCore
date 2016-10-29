@@ -36,7 +36,7 @@
 
               <!-- community form -->
               <div class="row">
-                <div class="col-md-8 col-sm-8 col-xs-8">
+                <div class="col-md-8 col-sm-8 col-xs-12">
                   <fieldset class="nomargin">
                     <div class="form-group{{ $errors->first('name', ' has-error') }}">
                       <label class="control-label" for="name">{{trans('general.community.name')}} *</label>
@@ -81,7 +81,7 @@
                   </div> <!-- Location -->                 
                 </div> <!-- col-md-8 -->
 
-                <div class="col-md-4 col-sm-4 col-xs-4" style="border-right:#CCC thin solid;">
+                <div class="col-md-4 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
                   <div class="form-group" style="margin-bottom: 5px;">
                     <fieldset class="margin-bottom-10">
 
@@ -91,28 +91,28 @@
                         <!-- checkboxes for exchange types -->
                         <div class="checkbox">
                           <div class="row">
-                           <div class="col-md-12 pull-left margin-bottom-10">
-                              <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                           
+                            @foreach (\App\ExchangeType::all() as $exchange_types)
+                            <div class="col-xs-12 pull-left margin-bottom-10">
+                              <label class="checkbox pull-left margin-bottom-10">
+                                @if (array_key_exists($exchange_types->id, $allowed_exchanges))
+                                  {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true,
+                                  ['class' => 'exchanges']) }}
+                                @else
+                                  {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, false,
+                                  ['class' => 'exchanges']) }}
+                                @endif
+                                <i></i>{{ $exchange_types->name }}
+                              </label>
+                            </div>            
+                            @endforeach
+
+                            <div class="col-xs-12 pull-left margin-bottom-10">
+                              <label class="checkbox pull-left margin-bottom-10">
                                 {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
                                 <i></i> {{trans('general.community.all_exchanges')}}
                               </label>
                             </div> <!-- col-md-12 -->
-
-                            @foreach (\App\ExchangeType::all() as $exchange_types)
-                              <div class="col-md-12 pull-left margin-bottom-10">
-                                <label class="checkbox col-md-3 pull-left margin-bottom-10">
-                                  @if (array_key_exists($exchange_types->id, $allowed_exchanges))
-                                    {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true,
-                                    ['class' => 'exchanges']) }}
-                                  @else
-                                    {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, false,
-                                    ['class' => 'exchanges']) }}
-                                  @endif
-                                  <i></i>{{ $exchange_types->name }}
-                                </label>
-                              </div>            
-                            @endforeach
-
                           </div> <!-- row -->
                         </div> <!-- checkbox -->
                       </div> <!-- exchange_types -->
@@ -121,7 +121,6 @@
                 </div> <!-- col-md-4 -->
               </div> <!-- row -->
             </div> <!-- PERSONAL INFO TAB -->
-
 
             <!-- IMAGES TAB -->
             <div class="tab-pane fade" id="hub_images">

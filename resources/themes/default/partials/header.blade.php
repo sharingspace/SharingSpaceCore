@@ -16,14 +16,14 @@
                 <div id="topNav" >
                     <div class="container">
                         <!-- Mobile Menu Button -->
-                        <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                        <button class="btn btn-mobile text-white" data-toggle="collapse" data-target=".nav-main-collapse">
                             <i class="fa fa-bars"></i>
                         </button>
 
                         <!-- Logo -->
                         <a href="/" class="w-nav-brand">
-                            <!-- <img width="200" src="/assets/img/hp/anyshare-logo-web-retina.png" class="logo"> -->
-                            <img width="230" src="/assets/img/hp/anyshare-logo-beta.png" class="logo">
+                            <img width="200" src="/assets/img/hp/anyshare-logo-web-retina.png" class="logo">
+                            <!-- <img width="230" src="/assets/img/hp/anyshare-logo-beta.png" class="logo"> -->
                         </a>
 
                         <!-- Top Nav -->
