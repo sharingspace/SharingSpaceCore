@@ -8559,29 +8559,141 @@ Quick add
   * Pricing page
   **/
 
-#pricing table {
-  color: #222;
-  font-size: 12px;
-  font-weight: 500;
+#pricing .table-layout {
+  display: table;
+  width: 300px;
+  padding: 5px;
 }
 
-#pricing table th {
+#pricing .table-layout .table-cell {
+  display: table-cell;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  color: white;
+}
+
+#pricing .table-layout .table-cell ul {
+  list-style: none;
+}
+
+#pricing .pricing_header,
+#pricing .pricing-footer {
+  background-color: #53CFE9;
+  text-align: center;
+}
+
+#pricing .pricing_header p.price,
+#pricing .pricing-footer p.price {
+  position: relative;
+}
+
+#pricing .pricing_header p.price {
+  margin: 10px 0;
+  padding-top: 20px;
+}
+
+#pricing .pricing_header p.price span {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+#pricing .pricing_header p.price sup {
+  font-size: 14px;
+  position: absolute;
+  top: 10px;
+  left: 100px;
+}
+
+#pricing .pricing_header p.price sub {
+  font-size: 14px;
+  position: absolute;
+  bottom: 12px;
+  right: 80px;
+}
+
+#pricing .pricing-footer {
+  height: 60px;
+}
+
+#pricing .pricing-footer p.price {
+  padding-top: 18px;
+}
+
+#pricing .pricing-footer p.price span {
+  font-size: 50px;
+}
+
+#pricing .pricing-footer p.price sup {
+  font-size: 14px;
+  position: absolute;
+  top: 15px;
+  left: 133px;
+}
+
+#pricing .pricing-footer p.price sub {
+  font-size: 14px;
+  position: absolute;
+  bottom: 12px;
+  right: 110px;
+}
+
+#pricing .pricing-footer a button {
+  color: white;
+  font-size: 50px;
+  margin-top: -12px;
+}
+
+#pricing .pricing_header .content {
+  height: 70px;
+}
+
+#pricing .pricing_header .content:after {
+  border-top-color: #82DACA;
+}
+
+#pricing .features {
+  background-color: white;
+  background: #FFFFFF;
   text-align: left;
+  color: #9C9C9C;
+  padding: 10px 0;
+  font-size: 16px;
+  margin-left: 40px;
 }
 
-#pricing table th:nth-child(2),
-#pricing table td:nth-child(2) {
-  text-align: center;
+#pricing .features li {
+  margin-bottom: 10px;
 }
 
-#pricing table caption {
+#pricing .features li:first-child {
+  margin-top: 15px;
+}
+
+#pricing .features li:last-child {
+  margin-bottom: 0;
+}
+
+#pricing h2 {
+  background: #3ec6e0 none repeat scroll 0 0;
+  margin-top: 0;
   text-align: center;
-  margin-bottom: 15px;
+  color: white;
+  padding: 4px 0;
 }
 
 @media (min-width: 768px) {
-  #pricing table {
-    font-size: 16px;
+  #pricing .table-layout {
+    width: 350px;
+  }
+
+  #pricing .pricing_header p.price sup {
+    top: 10px;
+    left: 120px;
+  }
+
+  #pricing .pricing_header p.price sub {
+    bottom: 12px;
+    right: 100px;
   }
 }
 
