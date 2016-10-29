@@ -105,7 +105,7 @@
                       <!-- contains background image -->
                     </div>
                     <div class="row">
-                      <div class="col-md-12 image_controls">
+                      <div class="col-xs-12 image_controls">
                         <div class="row">
                           <div class="col-xs-12">
                             <i class="fa fa-2x fa-rotate-right" aria-hidden="true" id="rotate_image" title="rotate image"></i>
@@ -125,7 +125,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-xs-12">
                   <!-- Description -->
                   <label class="input">
                     @if(isset($entry))
@@ -136,7 +136,7 @@
                   </label>
                 </div> <!-- col 12 -->
 
-                <div class="col-md-12">
+                <div class="col-xs-12">
                 <!-- Tags -->
                   <label class="input">
                     @if(isset($entry))
@@ -147,7 +147,7 @@
                   </label>
                 </div> <!-- col 12 -->
                     
-                <div class="col-md-12">
+                <div class="col-xs-12">
                   <!-- Location -->
                   <label class="control-label sr-only" for="location">Location</label>
                   <div class="input-group">
