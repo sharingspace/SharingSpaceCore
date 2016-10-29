@@ -524,9 +524,13 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::get(
-            'features', function() {
-            return View::make('features');
-        });
+            'features', 
+            array('as' => 'features',
+                function () {
+                    return view('features');
+                }
+            )
+        );
 
         Route::get(
             'terms',

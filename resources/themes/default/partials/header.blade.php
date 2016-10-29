@@ -86,6 +86,9 @@
         @elseif (Route::is('about'))
             <h1 class="heading">{{trans('general.nav.about_mission') }}</h1>
             <h2 class="subheading">{{ trans('about.end_scarcity') }}</h2>
+        @elseif (Route::is('features'))
+            <h1 class="heading">Features.</h1>
+            <h2 class="subheading">"Shares" help a group or community exchange.</h2>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
