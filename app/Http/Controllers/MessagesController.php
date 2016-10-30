@@ -42,8 +42,9 @@ class MessagesController extends Controller
     {
         $messages = Auth::user()->messagesTo()
             ->with('conversation.entry','sender','conversation','conversation.community')
-            ->groupBy('thread_id')
+            ->orderBy('thread_id')
             ->orderBy('created_at', 'DESC')->get();
+
         return view('account/inbox')->with('messages', $messages);
     }
 
@@ -58,10 +59,8 @@ class MessagesController extends Controller
      */
     public function getMessage(Request $request, $conversationId)
     {
-
         if ($conversation = Conversation::with('entry','sender','messages')->find($conversationId))
         {
-
             if ($request->user()->cannot('view-conversation', $conversation)) {
                 return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
             }
@@ -70,45 +69,47 @@ class MessagesController extends Controller
                 $message->markMessageRead();
             }
             return view('account/message')->with('conversation', $conversation);
-
         }
 
         return redirect()->to('browse')->with('error', trans('general.messages.messages.not_found'));
-
-
     }
 
 
-
-
-     /**
-     * Handles AJAX request to create a new message.
-     *
-     * The $userId is always required, because we do not store the recipients' ID in the conversation
-     * (thread) record. The $entryId is optional, so that people can send messages from a user's profile.
-     *
-     * @todo Fix the jankiness with thread_id
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since  [v1.0]
-     * @internal param $Request
-     * @param int $userId
-     * @param int $entryId
-     * @return View
-     */
-    public function postCreate(Request $request, $userId, $entryId = null) {
+    /**
+    * Handles AJAX request to create a new message.
+    *
+    * The $userId is always required, because we do not store the recipients' ID in the conversation
+    * (thread) record. The $entryId is optional, so that people can send messages from a user's profile.
+    *
+    * @todo Fix the jankiness with thread_id
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @internal param $Request
+    * @param int $userId
+    * @param int $entryId
+    * @return View
+    */
+    public function postCreate(Request $request, $userId, $entryId = null)
+    {
+        $data = array();
+        $conversation = null;
 
         $recipient = User::find($userId);
-
         if ($entryId) {
             $entry = Entry::find($entryId);
-            $data['entry_name'] = $entry->name;
-            $data['entry_id'] = $entry->id;
-            $data['post_type'] = $entry->post_type;
+            if (!empty($entry)) {
+                $data['entry_name'] = $entry->title;
+                $data['entry_id'] = $entry->id;
+                $data['post_type'] = $entry->post_type;
+            }
         }
 
         if (Input::has('thread_id')) {
+            //log::debug("postCreate: thread_id = ".Input::get('thread_id'));
             $conversation = Conversation::find(e(Input::get('thread_id')));
         } else {
+            //log::debug("postCreate: no thread_id = ");
+
             // Find the thread ID by the subject, entry_id, started_by and community_id.
             // If there is no matching thread, create one.
             $conversation = Conversation::firstOrCreate([
@@ -119,6 +120,11 @@ class MessagesController extends Controller
             ]);
         }
 
+        if (!empty($conversation)) {
+            $data['thread_subject'] = e(Input::get('thread_subject'));
+            $data['thread_id'] = $conversation->id;
+            //Log::debug("postCreate1. thread_id = ".$data['thread_id'].'  thread_subject ='.$data['thread_subject']);
+        }
 
         $offer = new Message;
         $offer->message = e(Input::get('message'));
@@ -130,15 +136,13 @@ class MessagesController extends Controller
 
         $data['email'] = $send_to_email = $recipient->email;
         $data['name'] = $send_to_name =  $recipient->getDisplayName();
-        $data['thread_id'] = $conversation->id;
-        $data['subject'] = $conversation->subject;
         $data['offer'] = $offer->message;
-
         $data['community'] = $request->whitelabel_group->name;
         $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.Config::get('app.domain');
 
-        if (!empty($request->whitelabel_group->logo)) {
+        if (!empty($request->whitelabel_group->logo)) { //.
             $img = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
+            // just for testing locally $img = 'https://anyshare.coop/assets/img/hp/anyshare-logo-beta.png';
             $data['logo'] = '<img src="'.$img.'" height="41" alt="" style="max-height:100%;line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">';
         }
 
