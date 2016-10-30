@@ -141,12 +141,10 @@
             @endcan
 
             @if ((strlen($whitelabel_group->about) && 
-                  (($whitelabel_group->group_type!='S') || 
-                  (Auth::user()->isMemberOfCommunity($whitelabel_group) || 
-                  $user->isSuperAdmin()))))
-                  <?php Log::debug("header view-about ************** returning true");?>
-
-                <li><a href="" id="display_about">About</a></li>
+                (($whitelabel_group->group_type!='S') || 
+                (Auth::user()->isMemberOfCommunity($whitelabel_group) || 
+                $user->isSuperAdmin()))))
+              <li><a href="" id="display_about">About</a></li>
             @endif
 
             @can('update-community', $whitelabel_group)
