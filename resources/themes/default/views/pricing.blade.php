@@ -33,7 +33,7 @@
           <li><i class="fa fa-random"></i>10 Ways to Exchange</li>
           <li><i class="fa fa-cog"></i>Customize Your Branding</li>
           <li><i class="fa fa-user-secret"></i>Choose your Privacy Level</li>
-          <li><i class="fa fa-slack"></i>Integrations (Slack, Google Analytics, and more!)</li>
+          <li><i class="fa fa-slack"></i>Slack Integration</li>
           <li><i class="fa fa-money"></i>Price Security</li>
         </ul>
         <!-- /FEATURES -->

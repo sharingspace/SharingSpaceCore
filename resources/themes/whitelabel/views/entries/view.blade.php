@@ -153,8 +153,7 @@
                   </div> <!-- col 12 -->
 
                   <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
-                    <textarea rows="5" name="message" id="message" class="form-control" placeholder="Your offer &#133;">
-                    </textarea>
+                    <textarea rows="5" name="message" id="message" class="form-control" placeholder="Your offer &#133;"></textarea>
                   </div>  <!-- col-xs-12 -->
 
                   <p class='margin-bottom-6 pull-left'>I would like to:</p>

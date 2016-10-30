@@ -5,7 +5,7 @@
         @else
           action="{{ route('entry.create.ajax.save') }}"
         @endif
-          enctype="multipart/form-data" autocomplete="off" class="margin-left-10 margin-right-10">
+          enctype="multipart/form-data" autocomplete="off" class="margin-left-10 margin-right-10" id="entry_form">
           {!! csrf_field() !!}
           <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value={{ trans('general.entries.max_size')}} />
           <input type="hidden" name="upload_key" id="upload_key" value="" />
