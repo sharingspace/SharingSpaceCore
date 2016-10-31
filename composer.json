@@ -9,7 +9,7 @@
       "barryvdh/laravel-debugbar": "^2.0",
       "cartalyst/stripe-billing-laravel": "~4.0",
       "cviebrock/eloquent-sluggable": "^3.0",
-      "erusev/parsedown": "dev-master",
+      "graham-campbell/markdown": "^7.0",
       "laravelcollective/html" : "5.*",
       "intervention/image": "2.*",
       "jenssegers/rollbar": "^1.4",
