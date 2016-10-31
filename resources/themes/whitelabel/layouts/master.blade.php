@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ Helper::cdn('css/compiled/app.css?v='.date('U') ) }}" type="text/css">
     <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha256-uKEg9s9/RiqVVOIWQ8vq0IIqdJTdnxDMok9XhiqnApU=" crossorigin="anonymous" type="text/css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> 
     <!-- PAGE LEVEL SCRIPTS -->
     <link href="{{ Helper::cdn('css/header-1.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ Helper::cdn('css/color_scheme/darkorange.css') }}" rel="stylesheet" type="text/css" />
