@@ -8,8 +8,8 @@ Form::macro('community_types', function ($name = "group_type", $selected = null)
     $types = array(
     '' => trans('general.community.type'),
     'O'=> trans('general.community.open.type'),
-    'C'=> trans('general.community.closed.type'),
-    'S'=> trans('general.community.secret.type')
+    'C'=> trans('general.community.closed.type')
+    /* 'S'=> trans('general.community.secret.type') */
     );
 
     $select = '<select required name="'.$name.'" class="select2" style="width: 100%;">';

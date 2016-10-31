@@ -26,6 +26,7 @@ use App\Social;
 use App\Message;
 use App\Conversation;
 use DB;
+use Log;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
@@ -116,6 +117,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Social', 'user_id');
     }
 
+
     /**
     * Returns whether a user is a superadmin.
     *
@@ -131,6 +133,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return false;
         }
     }
+
 
     /**
     * Returns whether or not the user is an admin of a community
@@ -166,6 +169,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
     }
 
+
     /**
     * Return whether or not the user can view the community.
     *
@@ -176,13 +180,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function canSeeCommunity($community)
     {
-        if ((($this->isMemberOfCommunity($community)) || ($this->isSuperAdmin())) ||   ($community->group_type!='S')) {
+        //LOG::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
+
+        if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type=='O') { 
+            //log::debug("canSeeCommunity: user can see hub");
             return true;
-        } else {
+        }
+        else {
+            //log::debug("canSeeCommunity: user cannot see hub");
             return false;
         }
     }
-
 
 
     /**
@@ -193,9 +201,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * @since  [v1.0]
     * @return string
     */
-    public function gravatar($size = null)
+    public function gravatar_img($size = null)
     {
-        if ($this->gravatar) {
+        if (!empty($this->gravatar)) {
             return "/assets/uploads/users/".$this->id."/".$this->gravatar;
         } else {
             return "//gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm' )";
@@ -214,7 +222,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public static function saveSocialAccount($socialUser, $provider)
     {
-
         // Check to see if a user exists in the users table first
         $user =  User::where('email', '=', $socialUser->getEmail())->first();
 
@@ -239,11 +246,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
           $social->access_token = $socialUser->token;
           $social->save();
 
-
         return $user;
-
-
     }
+
 
     /**
     * Checks to see if a user's social info has already been saved
@@ -259,7 +264,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
          ->where('access_token', '=', $user->token)
          ->where('service', '=', $provider)
          ->get();
-
     }
 
 
@@ -290,7 +294,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id');
     }
 
-
+ 
     /**
     * Returns entries by user
     *
@@ -303,6 +307,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('\App\Entry','created_by');
     }
 
+
     /**
     * Checks if a user is a member of a community
     *
@@ -313,8 +318,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function isMemberOfCommunity($community)
     {
+        //LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$this->communities()->where('community_id', '=', $community->id)->count());
         return $this->communities()->where('community_id', '=', $community->id)->count() > 0;
     }
+
 
     /**
     * Returns communities by user
@@ -327,6 +334,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
     }
+
+
+    // a user has many requests
+    public function getRequests($community)
+    {
+        return $this->hasMany('App\CommunityJoinRequests', 'communities_users', 'community_id', 'user_id');
+    }
+
 
     /**
     * Returns the user full name, it simply concatenates
@@ -349,6 +364,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+
     /**
      * Gets conversations the user is involved in
      *
@@ -360,6 +376,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('\App\Conversation','started_by');
     }
+
 
     /**
     * Gets messages sent to user
@@ -397,7 +414,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			$unread_cache = $unread_messages;
 			return $unread_messages;
     	}
-
     }
 
 
@@ -422,8 +438,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $unread_count_cache = $unread_messages_count;
             return $unread_messages_count;
         }
-
     }
+
 
     /**
     * Save the image to the DB. This method handles cover images, logos and profile images.
@@ -445,6 +461,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return false;
     }
+
 
     /**
     * Deletes a users avatar
@@ -471,7 +488,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return false;
     }
-
-
-
 }

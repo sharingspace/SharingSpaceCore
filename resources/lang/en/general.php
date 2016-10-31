@@ -62,7 +62,7 @@ return [
           'cancel' => 'Cancel',
           'edit' => 'Edit Entry',
           'browse_entries' => 'Browse entries',
-          'file_placeholder' => 'no file selected (jpg, png, gif. Max size is 4MB)',
+          'file_placeholder' => 'jpg, png, gif. Max size is 4MB',
           'max_file_size' => 'The maximum file size is 4MB',
           'max_size' => '4096000',
           'remove' => 'Remove',
@@ -109,21 +109,22 @@ return [
       'login_by_email' => 'Sign-in with email',
       'login_by_social' => 'or with a social network',
       'signup_by_email' => 'Sign-up with email',
-      'verify_account' => 'Needed to verify your account'
+      'verify_account' => 'Needed to verify your account',
+      'join_requests' => 'Join Requets'
     ],
 
     'community'  => [
-      'community'  => 'Sharing Hub',
-      'settings'  => 'Sharing Hub Settings',
+      'community'  => 'Share',
+      'settings'  => 'Share Settings',
       'members'  => 'Member|Members',
       'save' => 'Update',
-      'join_website' => 'Join website',
-      'create' => 'Start your own Sharing Hub for Free!',
-      'name_placeholder' => 'My awesome sharing hub',
-      'name' => 'Name for your Sharing Hub',
-      'subdomain' => ' Subdomain (xxx.anysha.re) for your Sharing Hub',
+      'join_website' => 'Join Share',
+      'create' => 'Start your own Share for Free!',
+      'name_placeholder' => 'My awesome Sharehare',
+      'name' => 'Name for your Share',
+      'subdomain' => ' Subdomain (xxx.anysha.re) for your Share',
       'subdomain_placeholder' => 'your hubname.anysha.re',
-      'description' => 'Describe your sharing hub',
+      'description' => 'Describe your Share',
       'detailed_description' => 'Detailed description',
       'exchange_options' => 'Choose the allowed exchange options',
       'all_exchanges' => 'All exchanges',
@@ -143,13 +144,13 @@ return [
       'analytics' => 'Google analytics integration',
       'ga_tracking_id' => 'Google analytics tracking id',
       'for_example' => 'For example: UA-000000-01',
-      'p1' => 'You can start a sharing hub in under 1 minute and enjoy it free for 15 days.
+      'p1' => 'You can start a Share in under 1 minute and enjoy it free for 15 days.
       We are currently in beta, so keep in mind features are still being added. This
       introductory cost is available for a limited time only. Email us at information
       info@anysha.re with questions about current features.',
       'p2' => 'You will not be charged until your free trial ends on',
       'p3' => 'No commitments, cancel at any time.',
-      'save_success' => 'Welcome to your new sharing hub! Get started adding entries now.',
+      'save_success' => 'Welcome to your new Share! Get started adding entries now.',
       'type' => 'Choose a privacy level',
       'payment_info' => 'credit card information',
       'after_trial' => 'after 15 day free trial',
@@ -163,7 +164,7 @@ return [
       'coupon' => 'Coupon',
       'have_coupon' => 'I have a coupon code',
       'coupon_code' => 'Coupon Code',
-      'edit_hub' => 'EDIT SHARING HUB',
+      'edit_hub' => 'EDIT SHARE',
       'basic' => 'Basic',
       'images' => 'Images',
       'advanced' => 'Advanced',
@@ -175,25 +176,25 @@ return [
         ],
 
         'open'  => [
-          'title'  => 'Open Sharing Hub',
+          'title'  => 'Open Share',
           'text'  => 'Anyone can join',
           'type' => 'Open'
         ],
         'closed'  => [
-          'title'  => 'Closed Sharing Hub',
+          'title'  => 'Closed Share',
           'text'  => 'Invite-only to post',
           'type' => 'Closed'
         ],
         'secret'  => [
-          'title'  => 'Secret Sharing Hub',
+          'title'  => 'Secret Share',
           'text'  => 'Only members can view',
           'type' => 'Secret'
         ],
 
         'messages' => [
-          'save_edits' => 'Your sharing hub settings have been saved',
-          'save_new' => 'Your new sharing hub has been created!',
-          'save_failed' => 'Something went wrong. Your sharing hub settings have not been saved',
+          'save_edits' => 'Your Share settings have been saved',
+          'save_new' => 'Your new Share has been created!',
+          'save_failed' => 'Something went wrong. Your Share settings have not been saved',
         ],
 
         'slack_info' => [
@@ -201,7 +202,7 @@ return [
           'p2' => 'To list members, type: /members <hub subdomain>',
           'p3' => 'To add an entry, type: /want <qty> <example text> in:<hub subdomain> and /have <qty> <example text> in:<hub subdomain>',
           'p4' => 'The <qty> is optional, and if it\'s missing, it will default to one. For example, /have <example text> in:<hub subdomain> is the same as /have 1 <example text> in:<hub subdomain>.',
-          'p5' => 'New entries added through the slash command will have all of the exchange types available for that hub selected.',
+          'p5' => 'New entries added through the slash command will have all of the exchange types available for that Share selected.',
          ]
 
     ],
@@ -229,13 +230,9 @@ return [
       'message_from'  => 'Message From :name',
       'sent' => 'Your message has been sent',
 
-        'messages' => [
-            'unauthorized' => 'You are not authorized to view that conversation.',
-            'not_found' => 'That conversation does not exist.',
-        ],
-
+      'messages' => [
+          'unauthorized' => 'You are not authorized to view that conversation.',
+          'not_found' => 'That conversation does not exist.',
+      ],
     ],
-
-
-
 ];

@@ -55,6 +55,16 @@
 /** Globals
  ******************************************************************/
 
+/********************** Bootstrap Media Defines ***********************/
+
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
 html {
   height: 100%;
 }
@@ -1191,6 +1201,16 @@ section {
     cursor: pointer;
     position: relative;
   }
+}
+
+.add_entry_button {
+  margin-right:30px;
+}
+
+@media only screen and (min-width: $screen-sm-min) {
+  .add_entry_button {
+    margin-right:0;
+  } 
 }
 
 /* shadows */
@@ -7536,16 +7556,7 @@ li.notifications-popdown .notifications-popdown-box {
   }
 }
 
-/********************** Bootstrap Media Defines ***********************/
 
-$screen-sm-min: 768px;
-$screen-md-min: 992px;
-$screen-lg-min: 1200px;
-
-// So media queries don't overlap when required, provide a maximum
-$screen-xs-max: ($screen-sm-min - 1);
-$screen-sm-max: ($screen-md-min - 1);
-$screen-md-max: ($screen-lg-min - 1);
 
 
 /********************** Home page ***********************/
@@ -8022,7 +8033,7 @@ $color-green: #9AE14F;
  * Members page
  **/
 
-#members {
+#members, #messages {
   .member_thumb {
     img {
       border:none;
@@ -8055,30 +8066,140 @@ $color-green: #9AE14F;
 /**
   * Pricing page
   **/
-
-#pricing { 
-  table  {
-    color:#222;
-    font-size:12px;
-    font-weight:500;
-    th {
-      text-align:left;
-    }
-    th:nth-child(2), td:nth-child(2) {
-      text-align:center;
-    }
+#pricing {
+  .table-layout {
+    display:table;
+    width:300px;
+    padding:5px;
   }
-  table caption {
+
+  .table-layout .table-cell {
+      display:table-cell;
+      border:solid 1px #ccc;
+      border-radius:5px;
+      color:white;
+
+      ul {
+        list-style: none;
+      }
+  }
+
+  .fixed-width-200 {
+      //width:350px;
+  }
+
+  .pricing_header, .pricing-footer {
+    background-color: #53CFE9;
     text-align:center;
-    margin-bottom: 15px;
+    p.price {
+      position:relative;
+    }
   }
 
+  .pricing_header {
+    p.price {
+      margin:10px 0;
+      padding-top:20px;
+      span {
+        font-size: 70px;
+        font-weight: bold;
+      }
+      sup {
+        font-size: 14px;
+        position: absolute;
+        top: 10px;
+        left: 100px;
+      }
+      sub {
+        font-size:14px;
+        position: absolute;
+        bottom: 12px;
+        right: 80px;
+      }
+    }
+  }
+
+  .pricing-footer {
+    height:60px;
+    p.price {
+      padding-top:18px;
+      span {
+        font-size: 50px;
+      }
+      sup {
+        font-size: 14px;
+        position: absolute;
+        top: 15px;
+        left: 133px;
+      }
+      sub {
+        font-size:14px;
+        position: absolute;
+        bottom: 12px;
+        right: 110px;
+      }
+    }
+    a button {
+      color:white;
+      font-size:50px;
+      margin-top:-12px;
+    }
+  }
+
+  .pricing_header .content {
+    height:70px;
+    &:after{ 
+      border-top-color: #82DACA;  
+    }
+  }
+
+  .features {
+    background-color: white;
+    background: #FFFFFF;
+    text-align: left;
+    color: #9C9C9C;
+    padding: 10px 0;
+    font-size: 16px;
+    margin-left:40px;
+    li {
+      margin-bottom:10px;
+      &:first-child {
+        margin-top:15px;
+      }
+      &:last-child {
+        margin-bottom:0;
+      }
+    }
+  }
+
+  h2 {
+    background: #3ec6e0 none repeat scroll 0 0;
+    margin-top:0;
+    text-align:center;
+    color:white;
+    padding:4px 0;
+  }
+
+  
 }
+
 
 @media (min-width: $screen-sm-min) {
   #pricing { 
-    table  {
-      font-size:16px;
+    .table-layout {
+      width:350px;
+    }
+    .pricing_header {
+      p.price {
+        sup {
+          top: 10px;
+          left: 120px;
+        }
+        sub {
+          bottom: 12px;
+          right: 100px;
+        }
+      }
     }
   }
 }
@@ -8537,5 +8658,16 @@ section.TreborScholz {
 .terms {
   li {
     margin-bottom:7px;
+  }
+}
+
+/**
+ * Authorization
+ *
+ **/
+ 
+#notifications {
+  i {
+    vertical-align:middle;
   }
 }

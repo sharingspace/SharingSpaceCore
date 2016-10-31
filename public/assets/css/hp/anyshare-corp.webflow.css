@@ -48,6 +48,7 @@
   font-size: 50px;
   position: relative;
   top: 35%;
+  line-height: 130%;
   -ms-transform: translate(0, -30%);
   transform: translate(0, -30%);
 }

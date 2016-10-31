@@ -5,7 +5,13 @@
      {{ trans('general.entries.create') }} ::
 @parent
 @stop
-
+@if($errors->any())
+      <ul class="alert alert-danger">
+        @foreach($errors->any() as $error)
+          <li>{{$error}}</li>
+        @endforeach
+      </ul>
+    @endif
 {{-- Page content --}}
 @section('content')
   <section class="container">

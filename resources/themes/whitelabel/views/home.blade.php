@@ -91,10 +91,10 @@
   </div>
 </section>
 
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.min.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.min.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/export/bootstrap-table-export.min.js" integrity="sha256-Hn0j2CZE8BjcVTBcRLjiSJnLBMEHkdnsfDgYH3EAeVQ=" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 
@@ -163,34 +163,6 @@ $( document ).ready(function() {
 
   $('#entry_browse_table').on('load-success.bs.table', function () {
     $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
-  });
-
-  $("#display_about").click(function(e){
-    var height;
-
-    if (!$('#about_panel').is(':visible')) {
-      $("#about_panel").slideToggle('fast');
-      height = $("#about_panel p").height()+60+'px';
-    }
-    else {
-      $("#about_panel").slideToggle('fast');
-      height = '0px';
-    }
-
-    $("#about_panel").parent().css('height', height);
-    if ($('.wl_usercover').length) {
-      $(".wl_usercover").slideToggle();
-    }
-
-    return false;
-  });
-
-  $('.close_about').on('click', function(c){
-    $("#about_panel").slideToggle('fast');
-    $("#about_panel").parent().css('height', 0);
-    if ($('.wl_usercover').length) {
-      $(".wl_usercover").slideToggle();
-    }
   });
 
   // we off screen the table headers as they are obvious.

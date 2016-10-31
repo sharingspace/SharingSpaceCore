@@ -219,6 +219,7 @@ Route::group(
                 Route::get(
                     '{userID}',
                     array(
+                    'middleware' => ['auth','community-auth', 'member-auth'],
                     'as' => 'user.profile',
                     'uses' => 'UserController@getProfile')
                 );
@@ -245,7 +246,7 @@ Route::group(
                 Route::get(
                     'new',
                     array(
-                    'middleware' => ['auth','community-auth'],
+                    'middleware' => ['auth','community-auth','entry-auth'],
                     'as' => 'entry.create.form',
                     'uses' => 'EntriesController@getCreate')
                 );
@@ -393,15 +394,36 @@ Route::group(
             'as' => 'members',
             'uses' => 'CommunitiesController@getMembers')
         );
-
+       Route::get(
+            'accept',
+            array(
+            'middleware' => 'auth',
+            'as' => 'accept-user',
+            'uses' => 'UserController@getAcceptUser')
+        );
+        Route::get(
+            'reject',
+            array(
+            'middleware' => 'auth',
+            'as' => 'reject-community',
+            'uses' => 'UserController@getRejectUser')
+        );
         Route::get(
             'join',
             array(
-            'middleware' => 'community-auth',
+            'middleware' => 'auth',
             'as' => 'join-community',
             'uses' => 'UserController@getJoinCommunity')
         );
 
+        Route::get(
+            'requests',
+            array(
+            'middleware' => 'auth',
+            'as' => 'join-requests',
+            'uses' => 'CommunitiesController@getJoinRequests')
+        );
+        
         Route::group(
             array('prefix' => 'community'),
             function () {
@@ -464,6 +486,13 @@ Route::group(
             ]
         );
 
+        Route::get(
+            'join-open',
+            array(
+            'middleware' => 'auth',
+            'uses' => 'UserController@getJoinCommunity')
+        );
+
         // Stripe Webhook...
         Route::post(
             'webhook/stripe',
@@ -487,17 +516,21 @@ Route::group(
                         'as' => 'admin.index',
                         'uses' => 'AdminController@getCustomerList')
                 );
-         });
+        });
 
         /*
         |--------------------------------------------------------------------------
         | Default homepage stuff
         |--------------------------------------------------------------------------
         */
-         Route::get(
-            'features', function() {
-            return View::make('features');
-        });
+        Route::get(
+            'features', 
+            array('as' => 'features',
+                function () {
+                    return view('features');
+                }
+            )
+        );
 
         Route::get(
             'terms',
@@ -581,6 +614,7 @@ Route::group(
             '/',
             array(
             'as' => 'home',
+            'middleware' => ['community-auth'],
             'uses' => 'PagesController@getHomepage')
         );
     }

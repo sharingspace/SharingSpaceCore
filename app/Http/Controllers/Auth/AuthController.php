@@ -11,6 +11,9 @@ use Socialite;
 use Auth;
 use Config;
 use Illuminate\Http\Request;
+use Input;
+use Redirect;
+use Log;
 
 class AuthController extends Controller
 {
@@ -37,6 +40,42 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    public function getRegister(Request $request)
+    {
+        session('subdomain');
+        if (session()->has('subdomain')) {
+            return view('auth.register')->with('subdomain', session('subdomain'));
+        }
+        
+        return view('auth.register');
+    }
+
+    public function postRegister(Request $request)
+    {
+      // call the RegistersUsers::postRegister method
+      // hold onto the return value for later
+      $redirect = $this->register($request);
+
+      $user = $request->user();
+      if ($user) {
+
+        if (Input::get('subdomain')) {
+
+          $parsed_url = parse_url($request->url());
+
+          //LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain').'  '.$parsed_url['host']);
+          return view('join_community')->with('subdomain', Input::get('subdomain'))->with('host', $parsed_url['host']);
+        }
+        //LOG::debug('postRegister: no subdomain');
+
+        return Redirect::back()->with('success', "You have successfully created an Anyshare account");
+      }
+      else {
+        return Redirect::back()->with('error',  "Sorry, something went wrong creating your Anyshare account");
+      }
+    }
+
+
     /**
      * Redirect the user to the OAuth authentication page.
      *
@@ -47,6 +86,7 @@ class AuthController extends Controller
         if ($request->whitelabel_group) {
             $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
         }
+
         return Socialite::driver($provider)->redirect();
     }
 

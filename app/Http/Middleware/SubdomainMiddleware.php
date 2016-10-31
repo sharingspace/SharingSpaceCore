@@ -20,6 +20,9 @@ use Closure;
 use Config;
 use App\Community;
 use Carbon\Carbon;
+use Log;
+use Route;
+use Redirect;
 
 function extract_domain($domain)
 {
@@ -52,10 +55,26 @@ class SubdomainMiddleware
    */
     public function handle($request, Closure $next)
     {
-
+        //LOG::debug('SubdomainMiddleware: entered: path = '.$request->path());
+        
         $parsed_url = parse_url($request->url());
         $subdomain = extract_subdomains($parsed_url['host']);
         $now = Carbon::now();
+        
+        if ((strpos($request->path(), 'auth/register') !== FALSE) && $subdomain) {
+            // if someone is registering from a  whitelabel, redirect them to register
+            // on the corporate site. 
+            $url = str_replace($subdomain.".", '', $request->url());
+            return redirect($url)->with('subdomain',$subdomain);
+        }
+        else if ((strpos($request->path(), 'join') !== FALSE) && $request->subdomain) {
+
+            $parsed_url = parse_url($request->url());
+            $url = $parsed_url['scheme'].'://'.$request->subdomain.'.'.$parsed_url['host'].'/join';
+            //LOG::debug('SubdomainMiddleware: scheme ='.$parsed_url['scheme'].'  '.$request->subdomain.'.'.$parsed_url['host'].'   '.$url);
+
+            return redirect($url);
+        }
 
         // FIXME - add   ->where('subdomain_expires_at', '>', $now) back in
         if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api')) {
@@ -63,7 +82,6 @@ class SubdomainMiddleware
             ->whereNotNull('subdomain')->first();
 
             if ($group) {
-
                 $request->valid_whitelabel = true;
                 $request->whitelabel_group = $group;
                 $request->corporate_default = false;
@@ -83,6 +101,5 @@ class SubdomainMiddleware
         }
 
         return $next($request);
-
     }
 }

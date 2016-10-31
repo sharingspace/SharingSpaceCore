@@ -14,7 +14,7 @@
 <h2>Is this budget limitation temporary or will it continue indefinitely?</h2>
 <p>{{{$data['timePeriod']}}}</p>
 
-<h2>How will you market your Sharing Hub?</h2>
+<h2>How will you market your Share?</h2>
 <p>{{{$data['market']}}}</p>
 
 @stop
