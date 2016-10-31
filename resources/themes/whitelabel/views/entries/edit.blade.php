@@ -33,7 +33,7 @@
   var imageName = "{{$image}}";
 </script>
 
-<script src="{{ asset('assets/js/entry_utils.js')}}"></script>
+<script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
 
 <script type="text/javascript">
 if (imageName.length>0) {

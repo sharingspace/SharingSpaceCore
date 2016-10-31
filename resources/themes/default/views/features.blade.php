@@ -11,13 +11,13 @@
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
-                    <img class="feature_image img-responsive" src="{{ asset('assets/img/features/community.png') }}">
+                    <img class="feature_image img-responsive" src="{{ Helper::cdn('img/features/community.png') }}">
                 </div>
             </div>
 
             <div class="row feature-row">
                 <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
-                    <img class="feature_image img-responsive img-center" src="{{ asset('assets/img/features/exchange_how_u_like.png') }}">
+                    <img class="feature_image img-responsive img-center" src="{{ Helper::cdn('img/features/exchange_how_u_like.png') }}">
                 </div>
 
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -33,13 +33,13 @@
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
-                    <img class="feature_image img-responsive" src="{{ asset('assets/img/features/custom_look.png') }}">
+                    <img class="feature_image img-responsive" src="{{ Helper::cdn('img/features/custom_look.png') }}">
                 </div>
             </div>
 
             <div class="row feature-row">
                 <div class="col-lg-4 col-md-3 col-sm-4 hidden-xs">
-                    <img class="feature_image img-responsive" src="{{ asset('assets/img/features/api.png') }}">
+                    <img class="feature_image img-responsive" src="{{ Helper::cdn('img/features/api.png') }}">
                 </div>
 
                 <div class="col-lg-8 col-md-9 col-sm-8 col-xs-12">

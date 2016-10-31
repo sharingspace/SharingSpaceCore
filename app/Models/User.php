@@ -204,7 +204,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function gravatar_img($size = null)
     {
         if (!empty($this->gravatar)) {
-            return "/assets/uploads/users/".$this->id."/".$this->gravatar;
+            return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar;
         } else {
             return "//gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm";
         }

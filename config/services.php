@@ -36,9 +36,9 @@ return [
     ],
 
     'cdn' => array(
-        'secure' => env('CDN_HTTPS'),
-        'insecure' => env('CDN_HTTP'),
-        'default' => env('CDN_DEFAULT'),
+        'secure' => env('CDN_HTTPS', '/assets'),
+        'insecure' => env('CDN_HTTP', '/assets'),
+        'default' => env('CDN_DEFAULT', '/assets'),
 	  ),
 
     'github' => [

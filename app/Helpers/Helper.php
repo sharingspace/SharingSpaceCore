@@ -15,6 +15,15 @@ class Helper
     /**
     * Returns a CDN url
     *
+    * @return String
+    */
+    public static function cdn($path) {
+        return config('services.cdn.default').'/'.$path;
+    }
+
+    /**
+    * Returns a CDN url
+    *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since  [v1.0]
     * @return String

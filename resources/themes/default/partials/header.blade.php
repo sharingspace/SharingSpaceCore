@@ -1,12 +1,12 @@
 <div class="w-section">
     <div class="w-background-video background-video {{$bannerClasses}}" style="color:red;height:{{$bannerHeight}}">
-        <video autoplay="autoplay" loop="loop" poster='/assets/img/hp/poster.png'>
+        <video autoplay="autoplay" loop="loop" poster='{{ Helper::cdn('img/hp/poster.png') }}'>
             @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
-                <source src="/assets/movies/clothing-transcode.webm" data-wf-ignore="">
-                <source src="/assets/movies/clothing-transcode.mp4" data-wf-ignore="">
+                <source src="{{ Helper::cdn('movies/clothing-transcode.webm') }}" data-wf-ignore="">
+                <source src="{{ Helper::cdn('movies/clothing-transcode.mp4') }}" data-wf-ignore="">
             @else
-                <source src="/assets/movies/anyshare_homepage_vid-transcode.webm" data-wf-ignore="">
-                <source src="/assets/movies/anyshare_homepage_vid-transcode.mp4" data-wf-ignore="">
+                <source src="{{ Helper::cdn('movies/anyshare_homepage_vid-transcode.webm') }}" data-wf-ignore="">
+                <source src="{{ Helper::cdn('movies/anyshare_homepage_vid-transcode.mp4') }}" data-wf-ignore="">
             @endif
         </video>
         <div class="w-nav nav-bar">
@@ -22,7 +22,7 @@
 
                         <!-- Logo -->
                         <a href="/" class="w-nav-brand">
-                            <img width="200" src="/assets/img/hp/anyshare-logo-web-retina.png" class="logo">
+                            <img width="200" src="{{ Helper::cdn('img/hp/anyshare-logo-web-retina.png') }}" class="logo">
                             <!-- <img width="230" src="/assets/img/hp/anyshare-logo-beta.png" class="logo"> -->
                         </a>
 

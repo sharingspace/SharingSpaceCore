@@ -38,8 +38,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/export/bootstrap-table-export.min.js" integrity="sha256-Hn0j2CZE8BjcVTBcRLjiSJnLBMEHkdnsfDgYH3EAeVQ=" crossorigin="anonymous"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ Helper::cdn('js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

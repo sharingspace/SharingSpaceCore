@@ -10,7 +10,7 @@
               <div class="row">
                 <div class="col-md-4 col-sm-1 hidden-xs margin-top-6 margin-bottom-6">
                   <a href="/" class="w-nav-brand">
-                    <img width="20" src="{{ asset('/assets/img/hp/anyshare-mark.png') }}" class="footer-mark">
+                    <img width="20" src="{{ Helper::cdn('img/hp/anyshare-mark.png') }}" class="footer-mark">
                   </a>
                 <!-- &copy; {{ date("Y") }} All Rights Reserved, AnyShare Society. -->
                 </div> <!-- col 3 -->
@@ -82,9 +82,9 @@
   </div>
 </div> <!-- subscribe -->
     <!-- JAVASCRIPT FILES -->
-    <script type="text/javascript" src="/assets/js/scripts.js"></script>
+    <script type="text/javascript" src="{{ Helper::cdn('js/scripts.js') }}"></script>
 
-<script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
+<script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js" async></script>
 <script type="text/javascript">
 FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Support&submitThanks=Thank+you+for+your+feedback.+We'll+be+in+touch+soon.", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Support", "buttonColor": "white", "buttonBg": "#686868", "alignment": "2", "offset": "90%", "submitThanks": "Thank you for your feedback. We'll be in touch soon.", "formHeight": "500px", "url": "https://anyshare.freshdesk.com"} ); </script>
 @yield('moar_scripts')

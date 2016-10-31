@@ -12,7 +12,7 @@
       </div> <!-- col-md-6 -->
 
       <div class="col-md-6 col-sm-6 hidden-xs">
-       <img class="img-responsive" src="/assets/img/about/earth.jpg">
+       <img class="img-responsive" src="{{ Helper::cdn('img/about/earth.jpg') }}">
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
   </div> <!-- container -->
@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 text-center">
-        <img class="about-icon" src="/assets/img/about/app.png" width="100">
+        <img class="about-icon" src="{{ Helper::cdn('img/about/app.png') }}" width="100">
         <h3 class="feature-heading">Sharing Websites</h3>
         <p class="paragraph-text">A Web based product for any group or community to share needs and resources together.</p>
         <div>
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="col-md-6 text-center">
-        <img src="/assets/img/about/men-carrying-a-box.png" width="100">
+        <img src="{{ Helper::cdn('img/about/men-carrying-a-box.png') }}" width="100">
         <h3 class="feature-heading">The Complete Cooperative</h3>
         <p class="paragraph-text">We’re passionate about helping businesses act ethically and collaboratively.</p>
         <div>
@@ -68,26 +68,26 @@
 
       <div class="row text-center">
         <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2">
-          <img class="team-headshot img-responsive" src="/assets/img/about/rob.jpg">
+          <img class="team-headshot img-responsive" src="{{ Helper::cdn('img/about/rob.jpg') }}">
           <h4 class="name">Rob Jameson <a href="https://twitter.com/robjameson" target="_blank" rel="noopener noreferrer">
-          <img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
+          <img class="twitter-follow" src="{{ Helper::cdn('img/social/twitter-color.png') }}" width="20"></a></h4>
           <h4 class="role">Co-Founder / CEO</h4>
         </div>
         <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2">
-          <img class="team-headshot img-responsive" src="/assets/img/about/eric.jpg">
+          <img class="team-headshot img-responsive" src="{{ Helper::cdn('img/about/eric.jpg') }}">
           <h4 class="name">Eric Doriean <a href="https://twitter.com/EricDoriean" target="_blank" rel="noopener noreferrer">
-          <img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
+          <img class="twitter-follow" src="{{ Helper::cdn('img/social/twitter-color.png') }}" width="20"></a></h4>
           <h4 class="role">Co-Founder / COO</h4>
         </div>
 
         <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2">
-        <img class="team-headshot img-responsive" height="200" src="/assets/img/about/alison.jpg" width="200">
+        <img class="team-headshot img-responsive" height="200" src="{{ Helper::cdn('img/about/alison.jpg') }}" width="200">
           <h4 class="name">Alison Gianotto <a href="https://twitter.com/snipeyhead" target="_blank" rel="noopener noreferrer">
-          <img class="twitter-follow" src="assets/img/social/twitter-color.png" width="20"></a></h4>
+          <img class="twitter-follow" src="{{ Helper::cdn('img/social/twitter-color.png') }}" width="20"></a></h4>
           <h4 class="role">Co-Founder / CTO </h4>
         </div>
         <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2">
-        <img class="team-headshot img-responsive" height="200" src="/assets/img/about/david.jpg" width="200">
+        <img class="team-headshot img-responsive" height="200" src="{{ Helper::cdn('img/about/david.jpg') }}" width="200">
           <h4 class="name">David Linnard</h4>
           <h4 class="role">Co-Founder / Sr. Developer</h4>
         </div>
