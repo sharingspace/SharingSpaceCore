@@ -55,7 +55,7 @@
 <div class="w-container">
   <div class="w-row">
     <div class="w-col w-col-9">
-      <h2 class="white-secondary-heading">Make your own Share</h2>
+      <h2 class="white-secondary-heading">Make your Share now!</h2>
     </div>
     <div class="w-col w-col-3">
       <a href="{{ route('community.create.form') }}" class="w-button cta-button">{{ trans('general.nav.start_now') }}</a>
