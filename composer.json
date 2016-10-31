@@ -10,7 +10,6 @@
       "cartalyst/stripe-billing-laravel": "~4.0",
       "cviebrock/eloquent-sluggable": "^3.0",
       "erusev/parsedown": "dev-master",
-      "graham-campbell/digitalocean": "~2.1",
       "laravelcollective/html" : "5.*",
       "intervention/image": "2.*",
       "jenssegers/rollbar": "^1.4",
