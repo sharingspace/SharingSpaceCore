@@ -28,7 +28,7 @@ class AddUserToUploads extends Migration
     {
       Schema::rename('media', 'entries_media');
       Schema::table('entries_media', function ($table) {
-         $table->dropColumn('user_id','upload_key');
+         $table->dropColumn(['user_id','upload_key']);
       });
 
     }

@@ -106,6 +106,6 @@ class CreateEntryTables extends Migration
         Schema::dropIfExists('entries_media');
         Schema::dropIfExists('messages');
         Schema::dropIfExists('entries_community_join');
-
+        Schema::dropIfExists('entries');
     }
 }

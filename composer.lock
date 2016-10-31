@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "46d5e146eacb6829a8e0fea87fe482ec",
-    "content-hash": "1bb2a44a52662a8bc573e06f38435b55",
+    "hash": "38cebc3e19bb3a8d91b46e143874a406",
+    "content-hash": "884062bcbf7fa9b42a7e7cce90f1e0a1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1291,151 +1291,41 @@
             "time": "2016-07-14 12:33:35"
         },
         {
-            "name": "erusev/parsedown",
-            "version": "dev-master",
+            "name": "graham-campbell/markdown",
+            "version": "v7.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "e3c3e2855422d88d43be9aef098d0e07cfde9c12"
+                "url": "https://github.com/GrahamCampbell/Laravel-Markdown.git",
+                "reference": "3880211af508324c58845536a790a6127f159233"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/e3c3e2855422d88d43be9aef098d0e07cfde9c12",
-                "reference": "e3c3e2855422d88d43be9aef098d0e07cfde9c12",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Parsedown": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "Parser for Markdown.",
-            "homepage": "http://parsedown.org",
-            "keywords": [
-                "markdown",
-                "parser"
-            ],
-            "time": "2016-10-25 14:39:55"
-        },
-        {
-            "name": "graham-campbell/digitalocean",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GrahamCampbell/Laravel-DigitalOcean.git",
-                "reference": "1b8470b1e6e442384247fedfc96f438f3b3e7049"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-DigitalOcean/zipball/1b8470b1e6e442384247fedfc96f438f3b3e7049",
-                "reference": "1b8470b1e6e442384247fedfc96f438f3b3e7049",
-                "shasum": ""
-            },
-            "require": {
-                "graham-campbell/manager": "^2.3",
-                "illuminate/contracts": "5.1.*|5.2.*",
-                "illuminate/support": "5.1.*|5.2.*",
-                "php": ">=5.5.9",
-                "toin0u/digitalocean-v2": "^1.0"
-            },
-            "require-dev": {
-                "graham-campbell/testbench": "^3.1",
-                "guzzle/guzzle": "^3.7",
-                "guzzlehttp/guzzle": "^5.0",
-                "kriswallsmith/buzz": "^0.10",
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^4.8|^5.0"
-            },
-            "suggest": {
-                "guzzle/guzzle": "Enables the guzzle connector.",
-                "guzzlehttp/guzzle": "Enables the guzzle5 connector.",
-                "kriswallsmith/buzz": "Enables the buzz connector."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GrahamCampbell\\DigitalOcean\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com"
-                }
-            ],
-            "description": "DigitalOcean Is A DigitalOcean Bridge For Laravel 5",
-            "keywords": [
-                "Bridge",
-                "DigitalOceanV2",
-                "Graham Campbell",
-                "GrahamCampbell",
-                "Laravel DigitalOcean",
-                "Laravel-DigitalOcean",
-                "digitalocean",
-                "digitalocean bridge",
-                "digitalocean-v2",
-                "framework",
-                "laravel"
-            ],
-            "time": "2015-11-14 11:52:21"
-        },
-        {
-            "name": "graham-campbell/manager",
-            "version": "v2.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GrahamCampbell/Laravel-Manager.git",
-                "reference": "fd9052082e2c69c9a67d3e8d7dfa94cb33f8ab0b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Manager/zipball/fd9052082e2c69c9a67d3e8d7dfa94cb33f8ab0b",
-                "reference": "fd9052082e2c69c9a67d3e8d7dfa94cb33f8ab0b",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/3880211af508324c58845536a790a6127f159233",
+                "reference": "3880211af508324c58845536a790a6127f159233",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "5.1.*|5.2.*|5.3.*",
                 "illuminate/support": "5.1.*|5.2.*|5.3.*",
+                "illuminate/view": "5.1.*|5.2.*|5.3.*",
+                "league/commonmark": "^0.15",
                 "php": ">=5.5.9"
             },
             "require-dev": {
-                "graham-campbell/testbench-core": "^1.1",
+                "graham-campbell/testbench": "^3.1",
+                "league/commonmark-extras": "^0.1.2",
                 "mockery/mockery": "^0.9.4",
                 "phpunit/phpunit": "^4.8|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "7.0-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "GrahamCampbell\\Manager\\": "src/"
+                    "GrahamCampbell\\Markdown\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1448,19 +1338,19 @@
                     "email": "graham@alt-three.com"
                 }
             ],
-            "description": "Manager Provides Some Manager Functionality For Laravel 5",
+            "description": "Markdown Is A CommonMark Wrapper For Laravel 5",
             "keywords": [
                 "Graham Campbell",
                 "GrahamCampbell",
-                "Laravel Manager",
-                "Laravel-Manager",
-                "connector",
+                "Laravel Markdown",
+                "Laravel-Markdown",
+                "common mark",
+                "commonmark",
                 "framework",
-                "interface",
                 "laravel",
-                "manager"
+                "markdown"
             ],
-            "time": "2016-04-26 14:27:59"
+            "time": "2016-09-20 12:25:34"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2126,6 +2016,75 @@
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
             "time": "2016-01-27 22:29:54"
+        },
+        {
+            "name": "league/commonmark",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/commonmark.git",
+                "reference": "19fb96643beba24e681c371dc133e25409742664"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/19fb96643beba24e681c371dc133e25409742664",
+                "reference": "19fb96643beba24e681c371dc133e25409742664",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.8"
+            },
+            "replace": {
+                "colinodell/commonmark-php": "*"
+            },
+            "require-dev": {
+                "cebe/markdown": "~1.0",
+                "erusev/parsedown": "~1.0",
+                "jgm/commonmark": "0.26",
+                "michelf/php-markdown": "~1.4",
+                "mikehaertl/php-shellcommand": "~1.2.0",
+                "phpunit/phpunit": "~4.3|~5.0",
+                "scrutinizer/ocular": "~1.1",
+                "symfony/finder": "~2.3|~3.0"
+            },
+            "suggest": {
+                "league/commonmark-extras": "Library of useful extensions including smart punctuation"
+            },
+            "bin": [
+                "bin/commonmark"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.16-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\CommonMark\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Colin O'Dell",
+                    "email": "colinodell@gmail.com",
+                    "homepage": "https://www.colinodell.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Markdown parser for PHP based on the CommonMark spec",
+            "homepage": "https://github.com/thephpleague/commonmark",
+            "keywords": [
+                "commonmark",
+                "markdown",
+                "parser"
+            ],
+            "time": "2016-09-14 15:44:35"
         },
         {
             "name": "league/flysystem",
@@ -3867,77 +3826,6 @@
                 "dump"
             ],
             "time": "2016-07-26 08:03:56"
-        },
-        {
-            "name": "toin0u/digitalocean-v2",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/toin0u/DigitalOceanV2.git",
-                "reference": "74ef7393da5cf759ae050a8b5c7578b59d996a69"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/toin0u/DigitalOceanV2/zipball/74ef7393da5cf759ae050a8b5c7578b59d996a69",
-                "reference": "74ef7393da5cf759ae050a8b5c7578b59d996a69",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "guzzle/guzzle": "~3.7",
-                "guzzlehttp/guzzle": "~5.0",
-                "kriswallsmith/buzz": "~0.10",
-                "phpspec/phpspec": "~2.0"
-            },
-            "suggest": {
-                "guzzle/guzzle": "To use GuzzleAdapter, require guzzle/guzzle:~3.7.",
-                "guzzlehttp/guzzle": "To use GuzzleV5Adapter, require guzzlehttp/guzzle:~5.0.",
-                "kriswallsmith/buzz": "To use BuzzAdapter, require kriswallsmith/buzz:~0.10."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DigitalOceanV2\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antoine Corcy",
-                    "email": "contact@sbin.dk",
-                    "homepage": "http://sbin.dk",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Yassir Hannnoun",
-                    "email": "yassir.hannoun@gmail.com",
-                    "homepage": "https://yassirh.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "DigitalOcean API v2 PHP 5.4+ library",
-            "homepage": "https://github.com/toin0u/DigitalOceanV2",
-            "keywords": [
-                "Cloud Hosting",
-                "SSD",
-                "api",
-                "digitalocean",
-                "vps"
-            ],
-            "time": "2015-06-25 16:43:34"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -5757,7 +5645,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "erusev/parsedown": 20,
         "barryvdh/laravel-translation-manager": 20
     },
     "prefer-stable": false,
