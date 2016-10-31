@@ -145,8 +145,8 @@ img {
 }
 
 .cta-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: #ffc200;
   font-family: 'Open Sans', sans-serif;
 }
@@ -184,6 +184,10 @@ img {
   .uses-row {
     padding-top: 50px;
     padding-bottom: 50px;
+  }
+  .cta-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 }
 
