@@ -35,11 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'cdn' => array(
+    'cdn' => [
         'secure' => env('CDN_HTTPS', '/assets'),
         'insecure' => env('CDN_HTTP', '/assets'),
         'default' => env('CDN_DEFAULT', '/assets'),
-	  ),
+	],
+
+    'cloudflare' => [
+        'email' => env('CLOUDFLARE_EMAIL'),
+        'secret' => env('CLOUDFLARE_SECRET'),
+    ],
 
     'github' => [
         'client_id' => env('GITHUB_CLIENT'),

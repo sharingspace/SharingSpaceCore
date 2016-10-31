@@ -21,7 +21,8 @@
       "mcamara/laravel-localization": "1.0.*",
       "watson/validating": "^2.0",
       "doctrine/dbal": "^2.5",
-      "barryvdh/laravel-translation-manager": "0.2.x-dev"
+      "barryvdh/laravel-translation-manager": "0.2.x-dev",
+        "jamesryanbell/cloudflare": "^1.8"
     },
     "repositories": [
     { "type": "composer", "url": "https://packages.cartalyst.com" }

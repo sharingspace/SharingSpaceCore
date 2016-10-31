@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38cebc3e19bb3a8d91b46e143874a406",
-    "content-hash": "884062bcbf7fa9b42a7e7cce90f1e0a1",
+    "hash": "ea4b7080dfb10a710f02e61e849263e9",
+    "content-hash": "474ceb9a29beef36ad189b0533e7160f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1671,6 +1671,47 @@
                 }
             ],
             "time": "2015-04-20 18:58:01"
+        },
+        {
+            "name": "jamesryanbell/cloudflare",
+            "version": "1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jamesryanbell/cloudflare.git",
+                "reference": "231b2b375203cea8691ec7c35fe6a0cddd979b74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jamesryanbell/cloudflare/zipball/231b2b375203cea8691ec7c35fe6a0cddd979b74",
+                "reference": "231b2b375203cea8691ec7c35fe6a0cddd979b74",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cloudflare\\": "src/CloudFlare"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Bell",
+                    "email": "james@james-bell.co.uk"
+                }
+            ],
+            "description": "CloudFlare API - PHP",
+            "keywords": [
+                "api",
+                "cloudflare"
+            ],
+            "time": "2016-10-16 19:03:29"
         },
         {
             "name": "jenssegers/rollbar",
