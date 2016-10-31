@@ -64,7 +64,13 @@ class Entry extends Model
     ];
 
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'expires', 'completed_at'];
+
+    protected $casts = [
+        'enabled' => 'boolean',
+        'visible' => 'boolean',
+    ];
+
 
     /**
     * The attributes that are mass assignable.

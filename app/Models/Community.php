@@ -127,7 +127,7 @@ class Community extends Model
     */
     public function requests()
     {
-        return $this->belongsToMany('App\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_at')->whereNull('rejected_at')->withPivot('message');
+        return $this->belongsToMany('App\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_by')->whereNull('rejected_by')->withPivot('message');
     }
 
 
@@ -264,7 +264,7 @@ class Community extends Model
     */
     public function subscription()
     {
-        return $this->hasOne('\App\Subscription', 'id', 'community_id');
+        return $this->hasOne('\App\CommunitySubscription', 'id', 'community_id');
     }
 
 
