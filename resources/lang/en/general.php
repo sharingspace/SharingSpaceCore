@@ -19,7 +19,7 @@ return [
           'browse' => 'Browse',
           'create' => 'Create',
           'try_it' => 'Free Trial',
-          'start_now' => 'START NOW',
+          'start_now' => 'FREE TO TRY',
           'login' => 'Sign-In',
           'logout' => 'Logout',
           'register' => 'Sign-Up',

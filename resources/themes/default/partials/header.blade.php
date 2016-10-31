@@ -60,7 +60,7 @@
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
                 <div class="header_cta_button">
-                    <a href="{{ route('community.create.form') }}" class="btn-warning btn btn-sm contained-button size-18 weight-800 font-smoothing">1 Minute Start</a>
+                    <a href="{{ route('community.create.form') }}" class="btn-warning btn btn-sm contained-button size-18 weight-800 font-smoothing">{{ trans('general.nav.start_now') }}</a>
                 </div>
             </h2>
             <div class="scroll-button-div"></div>

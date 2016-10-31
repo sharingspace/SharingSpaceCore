@@ -9,7 +9,7 @@ return [
     */
     'homepage' => 'home page',
     'home_headline' => 'Make a Share',
-    'subhome_headline' => 'An Exchange Platform for Any Group',
+    'subhome_headline' => 'An Exchange Platform for Any Community or Group',
     'callout_headline'  => 'This is a callout headline.',
     'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'free_trial' => 'Try a Share free for 15 days',

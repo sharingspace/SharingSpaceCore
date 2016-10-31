@@ -8156,6 +8156,7 @@ h2.white-secondary-heading {
   color: #fff;
   font-size: 39px;
   margin-top: 0;
+  line-height: 45px;
 }
 
 @media only screen and (min-width: 992px) {
