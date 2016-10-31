@@ -144,8 +144,6 @@ img {
   color: #fff;
 }
 
-
-
 .cta-section {
   padding-top: 60px;
   padding-bottom: 60px;
@@ -158,7 +156,6 @@ img {
   font-size: 12px;
   font-weight: 600;
 }
-
 
 .quote-description {
   opacity: 0.8;
@@ -179,8 +176,15 @@ img {
 .uses-row {
   margin-right: 0px;
   margin-left: 0px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media only screen and (min-width:768px) {
+  .uses-row {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
 
 .disclaimer {
