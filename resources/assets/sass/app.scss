@@ -8150,21 +8150,21 @@ $color-green: #9AE14F;
   .pricing-footer {
     height:60px;
     p.price {
-      padding-top:18px;
+      padding-top:22px;
       span {
         font-size: 50px;
       }
       sup {
         font-size: 14px;
         position: absolute;
-        top: 15px;
-        left: 133px;
+        top: 19px;
+        left: 110px;
       }
       sub {
         font-size:14px;
         position: absolute;
-        bottom: 12px;
-        right: 110px;
+        bottom: 10px;
+        right: 90px;
       }
     }
     a button {
@@ -8210,8 +8210,6 @@ $color-green: #9AE14F;
     color:white;
     padding:4px 0;
   }
-
-  
 }
 
 
@@ -8229,6 +8227,18 @@ $color-green: #9AE14F;
         sub {
           bottom: 12px;
           right: 100px;
+        }
+      }
+    }
+    .pricing-footer {
+      p.price {
+        sup {
+          top: 20px;
+          left: 133px;
+        }
+        sub {
+          bottom: 12px;
+          right: 110px;
         }
       }
     }
