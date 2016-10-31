@@ -22,6 +22,9 @@ use Log;
 class Community extends Model
 {
 
+    use ValidatingTrait;
+    use UploadableFileTrait;
+
     /**
     * The database table used by the model.
     *
@@ -37,14 +40,14 @@ class Community extends Model
     * @var boolean
     */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UploadableFileTrait;
 
     protected $rules = [
       'name'            => 'required|string|min:2|max:255',
       'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
       'group_type'      => 'required',
     ];
+
+    protected $dates = ['deleted_at', 'subdomain_expires_at', 'limittypes_expires_at'];
 
     /*
     * Set traits for uploadable image
