@@ -5,6 +5,7 @@
 
 	TABLE CONTENTS
 	-------------------------------
+    Mixins
 		Globals
 		Boxed
 		Color Background
@@ -51,10 +52,6 @@
     Footer
     Tagsinput
 *****************************************************/
-
-/** Globals
- ******************************************************************/
-
 /********************** Bootstrap Media Defines ***********************/
 
 $screen-sm-min: 768px;
@@ -65,6 +62,130 @@ $screen-lg-min: 1200px;
 $screen-xs-max: ($screen-sm-min - 1);
 $screen-sm-max: ($screen-md-min - 1);
 $screen-md-max: ($screen-lg-min - 1);
+
+/********************** Mixins ***********************/
+
+@mixin linearGradient($top, $bottom){
+  background: $top; /* Old browsers */
+  background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+// Create spacing classes
+@mixin create_spacing_classes($start, $stop, $inc)
+{
+  $dirs:'top', 'right', 'bottom', 'left';
+  $types:'margin', 'padding';
+
+  @for $i from $start through $stop {
+    @each $type in $types {
+      @each $dir in $dirs {
+        .#{nth($type,1)}-#{nth($dir,1)}-#{$i*$inc}{
+          #{nth($type,1)}-#{nth($dir,1)}:#{$i*$inc}px!important;
+        }
+      }
+      .#{nth($type,1)}-x-#{$i*$inc} {
+        #{nth($type,1)}-left:#{$i*$inc}px!important;
+        #{nth($type,1)}-right:#{$i*$inc}px!important;
+      }
+      .#{nth($type,1)}-y-#{$i*$inc } {
+        #{nth($type,1)}-top:#{$i*$inc}px;
+        #{nth($type,1)}-bottom:#{$i*$inc}px!important;
+      }
+      .#{nth($type,1)}-all-#{$i*$inc} {
+        #{nth($type,1)}:#{$i*$inc}px!important;
+      }
+    }
+  }
+}
+
+// fine spacing. margin-right-1, margin-left-2, margin-bottom-3, margin-top-4 etc
+//@include create_spacing_classes(1, 4, 1);
+
+// coarse spacing. margin-top-0, margin-right-5, margin-left-15, margin-bottom-20, margin-top-25, margin-top-30, padding-top-0 etc
+//@include create_spacing_classes(0, 6, 5);
+
+// Create additional bootstrap col class mixin
+@mixin create_bootstrap_cols($name, $width)
+{
+  .col-xs-#{$name} {
+    @include make-xs-column($width);
+  }
+  .col-sm-#{$name} {
+    @include make-sm-column($width);
+  }
+  .col-md-#{$name} {
+    @include make-md-column($width);
+  }
+  .col-lg-#{$name} {
+    @include make-lg-column($width);
+  }
+}
+
+// Extending bootstrap to includes some additional column layouts
+//@include create_bootstrap_cols('fifth', 2.4);
+//@include create_bootstrap_cols('seventh', 1.7);
+//@include create_bootstrap_cols('eighth', 1.5);
+//@include create_bootstrap_cols('ninth', 1.33);
+//@include create_bootstrap_cols('tenth', 1.2);
+
+@media (max-width: $screen-xs-max) {
+  .pull-right-xs {
+    float: right;
+  }
+  .pull-left-xs {
+    float: left;
+  }
+  .center-xs {
+    text-align:center;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .pull-right-sm {
+    float: right;
+  }
+  .pull-left-sm {
+    float: left;
+  }
+  .center-sm {
+    text-align:center;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .pull-right-md {
+    float: right;
+  }
+  .pull-left-md {
+    float: left;
+  }
+  .center-md {
+    text-align:center;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .pull-right-lg {
+    float: right;
+  }
+  .pull-left-lg {
+    float: left;
+  }
+  .center-lg {
+    text-align:center;
+  }
+}
+
+/** Globals
+ ******************************************************************/
+
+
 html {
   height: 100%;
 }
@@ -6781,13 +6902,8 @@ ul.search-history {
 #footer {
   color: rgba(255, 255, 255, 0.6);
   background: #313131;
-  background: -moz-linear-gradient(top, #555555 0%, #313131 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a1d2b), color-stop(100%, #313131));
-  background: -webkit-linear-gradient(top, #555555 0%, #313131 100%);
-  background: -o-linear-gradient(top, #555555 0%, #313131 100%);
-  background: -ms-linear-gradient(top, #555555 0%, #313131 100%);
-  background: linear-gradient(to bottom, #555555 0%, #313131 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#313131',GradientType=0 );
+  //@include linearGradient(#555555, #313131);
+  
   > {
     .container {
       padding-top: 60px;
@@ -8671,3 +8787,5 @@ section.TreborScholz {
     vertical-align:middle;
   }
 }
+
+/*************** Bootstrap extensions ******************/

@@ -4,6 +4,7 @@
 
 	TABLE CONTENTS
 	-------------------------------
+    Mixins
 		Globals
 		Boxed
 		Color Background
@@ -51,10 +52,68 @@
     Tagsinput
 *****************************************************/
 
+/********************** Bootstrap Media Defines ***********************/
+
+/********************** Mixins ***********************/
+
+@media (max-width: 767px) {
+  .pull-right-xs {
+    float: right;
+  }
+
+  .pull-left-xs {
+    float: left;
+  }
+
+  .center-xs {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .pull-right-sm {
+    float: right;
+  }
+
+  .pull-left-sm {
+    float: left;
+  }
+
+  .center-sm {
+    text-align: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .pull-right-md {
+    float: right;
+  }
+
+  .pull-left-md {
+    float: left;
+  }
+
+  .center-md {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pull-right-lg {
+    float: right;
+  }
+
+  .pull-left-lg {
+    float: left;
+  }
+
+  .center-lg {
+    text-align: center;
+  }
+}
+
 /** Globals
  ******************************************************************/
-
-/********************** Bootstrap Media Defines ***********************/
 
 html {
   height: 100%;
@@ -7197,8 +7256,6 @@ ul.search-history {
 #footer {
   color: rgba(255, 255, 255, 0.6);
   background: #313131;
-  background: linear-gradient(to bottom, #555555 0%, #313131 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#313131',GradientType=0 );
 }
 
 #footer > .container {
@@ -9182,6 +9239,8 @@ section.TreborScholz {
 #notifications i {
   vertical-align: middle;
 }
+
+/*************** Bootstrap extensions ******************/
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!
