@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-5 col-md-5">
   			      <div class="thumbnail text-center">
-                <img src="{{ $user->gravatar_img() }}?s=400" alt="" />
+                <img src="{{ $user->gravatar_img() }}&s=400" alt="" />
               </div>
             </div>
             <div class="col-lg-7 col-md-7">
