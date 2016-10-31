@@ -17,7 +17,7 @@ $factory->defineAs(App\User::class, 'user', function ($faker) {
       'first_name' => $faker->firstName,
       'last_name' => $faker->lastName,
       'email' => $faker->email,
-      'password' => $faker->address,
+      'password' => bcrypt('password'),
       'remember_token' => str_random(10),
     ];
 });
@@ -29,7 +29,7 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
       'first_name' => $faker->firstName,
       'last_name' => $faker->lastName,
       'email' => $faker->email,
-      'password' => $faker->address,
+      'password' => bcrypt('password'),
       'remember_token' => str_random(10),
       'admin' => true,
     ];

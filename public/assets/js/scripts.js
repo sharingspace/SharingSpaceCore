@@ -5,7 +5,7 @@
 		jQuery.browserDetect();
 
 		// Load Bootstrap JS
-		loadScript(plugin_path + 'bootstrap/js/bootstrap.min.js', function() {
+		loadScript('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js', function() {
 
 			Init(false);
 
@@ -14,7 +14,7 @@
 
 		/* --- */
 		if(jQuery("html").hasClass("chrome") && jQuery("body").hasClass("smoothscroll")) {
-			loadScript(plugin_path + 'smoothscroll.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.5/SmoothScroll.min.js', function() {
 				jQuery.smoothScroll();
 			});
 		}
@@ -719,7 +719,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'jquery.nav.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js', function() {
 
 				jQuery(_container).onePageNav({
 					currentClass: 		'active',
@@ -745,7 +745,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'owl-carousel/owl.carousel.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js', function() {
 
 				_container.each(function() {
 
@@ -973,7 +973,7 @@
 
 		if(_el.length > 0) {
 
-			loadScript(plugin_path + 'magnific-popup/jquery.magnific-popup.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js', function() {
 
 				if(typeof(jQuery.magnificPopup) == "undefined") {
 					return false;
@@ -1158,7 +1158,7 @@
 		var _container = jQuery('#YTPlayer');
 
 		if(_container.length > 0) {
-			loadScript(plugin_path + 'jquery.mb.YTPlayer.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.mb.YTPlayer/3.0.9/jquery.mb.YTPlayer.min.js', function() {
 
 
 				if(jQuery().mb_YTPlayer) {
@@ -1209,7 +1209,7 @@
 		var _container = jQuery('.mix-grid');
 
 		if(_container.length > 0) {
-			loadScript(plugin_path + 'mixitup/jquery.mixitup.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/mixitup/2.1.11/jquery.mixitup.min.js', function() {
 
 				if(jQuery().mixitup) {
 
@@ -1315,7 +1315,7 @@
 		var _container = jQuery('img.lazy');
 
 		if(_container.length > 0) {
-			loadScript(plugin_path + 'lazyload/jquery.lazyload.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js', function() {
 
 				if(jQuery().lazyload) {
 
@@ -1368,7 +1368,7 @@
 		var portfolio_isotope_container = jQuery("#portfolio.portfolio-isotope");
 
 		if(portfolio_isotope_container.length > 0) {
-			loadScript(plugin_path + 'isotope/isotope.pkgd.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.1/isotope.pkgd.min.js', function() {
 
 				// Isotope Portfolio
 				if(jQuery().isotope) {
@@ -1698,7 +1698,7 @@
 					_bigImageNo 	= Number(_bigImageNo) - 1;
 					_container.find('a:eq('+_bigImageNo+')').css({ width: _firstElemWidth*2 + 'px'});
 
-					loadScript(plugin_path + 'isotope/isotope.pkgd.min.js', function() {
+					loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.1/isotope.pkgd.min.js', function() {
 
 						setTimeout( function() {
 							_container.isotope({
@@ -1731,7 +1731,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'select2/js/select2.full.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js', function() {
 
 				if(jQuery().select2) {
 					jQuery('select.select2').select2();
@@ -1751,7 +1751,7 @@
 		var _container = jQuery('input.masked');
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'form.masked/jquery.maskedinput.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js', function() {
 
 				_container.each(function() {
 
@@ -1784,7 +1784,7 @@
 		var _container_1 = jQuery('.datepicker');
 
 		if(_container_1.length > 0) {
-			loadScript(plugin_path + 'bootstrap.datepicker/js/bootstrap-datepicker.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js', function() {
 
 				if(jQuery().datepicker) {
 
@@ -1793,7 +1793,7 @@
 							_lang 	=	_t.attr('data-lang') || 'en';
 
 						if(_lang != 'en' && _lang != '') { // load language file
-							loadScript(plugin_path + 'bootstrap.datepicker/locales/bootstrap-datepicker.'+_lang+'.min.js');
+							loadScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.'+_lang+'.min.js');
 						}
 
 						jQuery(this).datepicker({
@@ -1830,8 +1830,8 @@
 		var _container_2 = jQuery('.rangepicker');
 
 		if(_container_2.length > 0) {
-			loadScript(plugin_path + 'bootstrap.daterangepicker/moment.min.js', function() {
-				loadScript(plugin_path + 'bootstrap.daterangepicker/daterangepicker.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/moment.min.js', function() {
+				loadScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.js', function() {
 
 					if(jQuery().datepicker) {
 
@@ -1893,7 +1893,7 @@
 		var _container_4 = jQuery('.colorpicker');
 
 		if(_container_4.length > 0) {
-			loadScript(plugin_path + 'spectrum/spectrum.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js', function() {
 
 				if(jQuery().spectrum) {
 
@@ -1973,7 +1973,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'infinite-scroll/jquery.infinitescroll.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js', function() {
 
 					_navSelector	= _container.attr('data-nextSelector') || "#inf-load-nex",
 					_itemSelector	= _container.attr('data-itemSelector') || ".item",
@@ -2097,7 +2097,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'typeahead.bundle.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js', function() {
 
 				if(jQuery().typeahead) {
 
@@ -2210,7 +2210,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'slimscroll/jquery.slimscroll.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js', function() {
 
 				if(jQuery().slimScroll) {
 
@@ -2351,7 +2351,7 @@
 
 		if(data_background != '') {
 
-			loadScript(plugin_path + 'jquery.backstretch.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js', function() {
 
 				if(data_background) {
 					jQuery.backstretch(data_background);
@@ -2375,7 +2375,7 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'widget.mediaelementbuild/mediaelement-and-player.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement/2.23.4/mediaelement-and-player.min.js', function() {
 
 
 

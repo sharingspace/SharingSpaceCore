@@ -32,7 +32,7 @@
 <!-- / -->
 
 
-<script src="{{ asset('assets/js/jquery.limit-1.2.js')}}"></script>
+<script src="{{ Helper::cdn('js/jquery.limit-1.2.js')}}"></script>
 <script>
 $('textarea').limit('140','#charsLeft');
 </script>

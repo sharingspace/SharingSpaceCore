@@ -24,6 +24,9 @@ class AddTimestampsToCommunityJoin extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('communities_users', function ($table) {
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+        });
     }
 }

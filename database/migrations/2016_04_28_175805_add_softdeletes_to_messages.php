@@ -24,6 +24,8 @@ class AddSoftdeletesToMessages extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('messages', function ($table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 }

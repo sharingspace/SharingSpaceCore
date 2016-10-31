@@ -15,6 +15,15 @@ class Helper
     /**
     * Returns a CDN url
     *
+    * @return String
+    */
+    public static function cdn($path) {
+        return config('services.cdn.default').'/'.$path;
+    }
+
+    /**
+    * Returns a CDN url
+    *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since  [v1.0]
     * @return String
@@ -50,8 +59,7 @@ class Helper
      */
     public static function parseText($str)
     {
-        $Parsedown = new Parsedown();
-        return $Parsedown->text(e($str));
+        return Markdown::convertToHtml($str);
     }
 
 
@@ -69,7 +77,7 @@ class Helper
 
         if ($location!='') {
             try {
-                $json = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($location));
+                $json = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($location));
                 $parsedjson = json_decode($json, true);
 
                 if (key_exists(0, $parsedjson['results'])) {

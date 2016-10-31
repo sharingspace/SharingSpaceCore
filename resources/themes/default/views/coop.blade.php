@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-md-6 col-sm-6 hidden-xs">
-        <img class="img-responsive" src="/assets/img/coop/sparkler.jpg">
+        <img class="img-responsive" src="{{ Helper::cdn('img/coop/sparkler.jpg') }}">
       </div> <!-- col-md-6 -->
     </div> <!-- row -->
   </div> <!-- container -->
@@ -39,7 +39,7 @@
         <p class="lead">AnyShare is a special type of cooperative called "FairShares." This is a way for managing the ways types of members, including employees, customers, founders, and investors!</p>
       </div>
       <div class="col-lg-4 col-md-5 col-sm-6 hidden-xs">
-        <img class="img-responsive" style="max-width:300px;" src="/assets/img/coop/coop-logos.jpg">
+        <img class="img-responsive" style="max-width:300px;" src="{{ Helper::cdn('img/coop/coop-logos.jpg') }}">
       </div>
     </div>
   </div>
@@ -68,7 +68,7 @@
         <p class="lead">AnyShare lets anyone shape and share in the benefits of our work. Our mission is to end scarcity through community. This serious work is possible through members like you!</p>
       </div>
       <div class="col-md-6 col-sm-6 hidden-xs">
-        <img class="img-responsive" src="/assets/img/coop/blindFold.jpg">
+        <img class="img-responsive" src="{{ Helper::cdn('img/coop/blindFold.jpg') }}">
       </div>
     </div>
   </div>

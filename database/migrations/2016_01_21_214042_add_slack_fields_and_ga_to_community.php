@@ -38,12 +38,12 @@ class AddSlackFieldsAndGaToCommunity extends Migration
     {
       Schema::table('settings', function(Blueprint $table)
       {
-        $table->dropColumn('slack_endpoint','slack_channel', 'slack_botname','ga');
+        $table->dropColumn(['slack_endpoint','slack_channel', 'slack_botname','ga']);
       });
       
       Schema::table('communities', function(Blueprint $table)
       {
-        $table->dropColumn('slack_endpoint','slack_channel', 'slack_botname','ga');
+        $table->dropColumn(['slack_endpoint','slack_channel', 'slack_botname','ga']);
       });
     }
 }

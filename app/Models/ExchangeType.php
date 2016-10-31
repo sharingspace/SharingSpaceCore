@@ -22,6 +22,14 @@ class ExchangeType extends Model
   */
     protected $table = 'exchange_types';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+    public $timestamps = FALSE;
 
     /**
     * Returns entries associated with an exchange type

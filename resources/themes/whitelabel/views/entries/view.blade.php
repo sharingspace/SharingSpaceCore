@@ -17,9 +17,9 @@
         <div id="image_box_container"> 
           <div id="image_box" 
             @if($images && $images[0]->filename)
-              style="background-image:url('/assets/uploads/entries/{{ $entry->id }}/{{ $images[0]->filename }}')">
+              style="background-image:url('{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}')">
             @else
-               style="background-image:url('/assets/img/default/new-default-{{{ $entry->post_type }}}.jpg')">
+               style="background-image:url('{{ Helper::cdn('img/default/new-default-'.$entry->post_type.'.jpg') }}')">
             @endif
           </div>
         </div>
@@ -211,7 +211,7 @@
         @if($images)
           @foreach ($images as $image)
             <div class="col-xs-3 col-sm-3 col-md-3" style="margin-top:20px;object-fit:contain;">
-              <img src="/assets/uploads/entries/{{ $entry->id }}/{{ $image->filename }}" height="250" width="250" border="1">
+              <img src="{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$image->filename) }}" height="250" width="250" border="1">
             </div>
           @endforeach
         @endif

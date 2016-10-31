@@ -276,6 +276,9 @@ class CommunitiesController extends Controller
 
 
         if ($community->save()) {
+            // Creating anyshare.coop subdomains in Cloudflare right now. 
+            // Will switch to anysha.re soon
+            dispatch (new \App\Jobs\CreateSubdomain($community->subdomain, 'anyshare.coop'));
 
             // Save the community_id to the subscriptions table
             $subscription = \App\CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
@@ -294,7 +297,7 @@ class CommunitiesController extends Controller
                 }
             );
 
-            return redirect('http://'.$community->subdomain.'.'.Config::get('app.domain').'/community/edit')->with('success', trans('general.community.save_success'));
+            return redirect('https://'.$community->subdomain.'.'.Config::get('app.domain').'/community/edit')->with('success', trans('general.community.save_success'));
 
         }
 

@@ -28,7 +28,7 @@ class AddTokensToCommunity extends Migration
      */
     public function down()
     {
-        Schema::table('users', function(Blueprint $table)
+        Schema::table('communities', function(Blueprint $table)
         {
             $table->dropColumn('slack_slash_want_token');
             $table->dropColumn('slack_slash_have_token');

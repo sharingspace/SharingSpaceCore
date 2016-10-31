@@ -25,6 +25,19 @@ class CommunitySubscription extends Model
 
     protected $errors;
 
+    protected $dates = [
+        'period_starts_at', 
+        'period_ends_at', 
+        'ended_at',
+        'canceled_at',
+        'trial_starts_at',
+        'trial_ends_at',
+    ];
+
+    protected $casts = [
+        'active' => 'boolean'
+    ];
+
     /**
     * Returns the subscription information for a user.
     *

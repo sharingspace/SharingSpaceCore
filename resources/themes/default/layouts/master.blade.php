@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
   <head>
-    <!-- *** General page information *** -->
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
     <meta charset="UTF-8"/>
+    <link rel="dns-prefetch" href="//assets.anyshare.coop">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+
     <title>
       @section('title')
         {{ trans('general.seo_title')}}
@@ -18,33 +22,35 @@
     <meta name="keywords" content="">
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/css/compiled/bootstrap-social.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/compiled/app.css') }}">
-    <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css" integrity="sha256-aNI8KR/Gy4Hb87gooy9+CAjWOeVdSA0S5sd9XMmj4Xo=" crossorigin="anonymous" type="text/css" />
+    <link rel="stylesheet" href="{{ Helper::cdn('css/compiled/app.css?v='.date('U')) }}" type="text/css">
+    <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha256-uKEg9s9/RiqVVOIWQ8vq0IIqdJTdnxDMok9XhiqnApU=" crossorigin="anonymous" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> 
     <!-- PAGE LEVEL SCRIPTS -->
-		<link href="{{ asset('assets/css/header-1.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/color_scheme/orange.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ Helper::cdn('css/header-1.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ Helper::cdn('css/color_scheme/darkorange.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Table style -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" integrity="sha256-lHY6r+cFHp2F/XXDvi4iczsIj7nl0r+CBVFD8KdtFqc=" crossorigin="anonymous" type="text/css" media="screen" />
 
     <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
 
-    <!-- jQuery 2.1.4-->
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
+    <!-- jQuery 2.2.4-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" integrity="sha256-tQ3x4V2JW+L0ew/P3v2xzL46XDjEWUExFkCDY0Rflqc=" crossorigin="anonymous"></script>
+    
     <!-- Bootstrap debug, very handy when working on a responsive layouts -->
     @if( getenv('APP_DEBUG'))
 			<!-- <script src="{{ asset('assets/js/extensions/debug/bootstrap_debugger.js')}}"></script> -->
     @endif
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/hp/normalize.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/hp/webflow.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/hp/anyshare-corp.webflow.css') }}">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="{{ Helper::cdn('css/hp/webflow.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ Helper::cdn('css/hp/anyshare-corp.webflow.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.26/webfontloader.js" integrity="sha256-+6jNhQy77vjBVW8D4TAIG0HBtnzN9YreZOvtii8vrAM=" crossorigin="anonymous" async></script>
   <script>
     WebFont.load({
       google: {
@@ -52,7 +58,7 @@
       }
     });
   </script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
   </head>
 
 <body class="smoothscroll enable-animation">
@@ -95,7 +101,7 @@
 
 </script>
 
-<script type="text/javascript" src="{{ asset('assets/js/webflow.js') }}"></script>
+<script type="text/javascript" src="{{ Helper::cdn('js/webflow.js') }}"></script>
 <script type="text/javascript">
   $(document).ready(function(){ 
     //$('.max_autoplay_movies').css('height',  window.innerHeight); 

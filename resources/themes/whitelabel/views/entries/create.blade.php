@@ -68,7 +68,7 @@
   var rotationAngle=0;
 </script>
 
-<script src="{{ asset('assets/js/entry_utils.js')}}"></script>
+<script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
 
 <script type="text/javascript">
 $( document ).ready(function() {
