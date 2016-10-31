@@ -8084,13 +8084,41 @@ $color-green: #9AE14F;
       }
   }
 
-  .fixed-width-200 {
-      //width:350px;
+  /* arrow creation .... */
+  .content:after, .content:before,.pricing-footer:before,.pricing-footer:after {
+    //top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
   }
+
+  .pricing-footer:after,.pricing-footer:before{
+      top:0;
+  }
+
+  .content:after,.pricing-footer:after {
+    border-color: rgba(136, 183, 213, 0);   
+    border-width: 5px;
+    margin-left: -5px;
+  }
+
+  .content:after{   
+    border-top-color: #53CFE9;  
+  }
+
+  .pricing-footer:after{
+    border-top-color: #FFFFFF;
+  }
+  /* .... arrow creation*/
 
   .pricing_header, .pricing-footer {
     background-color: #53CFE9;
     text-align:center;
+    position:relative;
     p.price {
       position:relative;
     }
@@ -8122,21 +8150,21 @@ $color-green: #9AE14F;
   .pricing-footer {
     height:60px;
     p.price {
-      padding-top:18px;
+      padding-top:22px;
       span {
         font-size: 50px;
       }
       sup {
         font-size: 14px;
         position: absolute;
-        top: 15px;
-        left: 133px;
+        top: 19px;
+        left: 110px;
       }
       sub {
         font-size:14px;
         position: absolute;
-        bottom: 12px;
-        right: 110px;
+        bottom: 10px;
+        right: 90px;
       }
     }
     a button {
@@ -8169,6 +8197,9 @@ $color-green: #9AE14F;
       &:last-child {
         margin-bottom:0;
       }
+      a {
+        color:#9C9C9C;
+      }
     }
   }
 
@@ -8179,8 +8210,6 @@ $color-green: #9AE14F;
     color:white;
     padding:4px 0;
   }
-
-  
 }
 
 
@@ -8198,6 +8227,18 @@ $color-green: #9AE14F;
         sub {
           bottom: 12px;
           right: 100px;
+        }
+      }
+    }
+    .pricing-footer {
+      p.price {
+        sup {
+          top: 20px;
+          left: 133px;
+        }
+        sub {
+          bottom: 12px;
+          right: 110px;
         }
       }
     }

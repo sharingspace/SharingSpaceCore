@@ -8564,6 +8564,11 @@ Quick add
   * Pricing page
   **/
 
+#pricing {
+  /* arrow creation .... */
+  /* .... arrow creation*/
+}
+
 #pricing .table-layout {
   display: table;
   width: 300px;
@@ -8581,10 +8586,44 @@ Quick add
   list-style: none;
 }
 
+#pricing .content:after,
+#pricing .content:before,
+#pricing .pricing-footer:before,
+#pricing .pricing-footer:after {
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+#pricing .pricing-footer:after,
+#pricing .pricing-footer:before {
+  top: 0;
+}
+
+#pricing .content:after,
+#pricing .pricing-footer:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-width: 5px;
+  margin-left: -5px;
+}
+
+#pricing .content:after {
+  border-top-color: #53CFE9;
+}
+
+#pricing .pricing-footer:after {
+  border-top-color: #FFFFFF;
+}
+
 #pricing .pricing_header,
 #pricing .pricing-footer {
   background-color: #53CFE9;
   text-align: center;
+  position: relative;
 }
 
 #pricing .pricing_header p.price,
@@ -8621,7 +8660,7 @@ Quick add
 }
 
 #pricing .pricing-footer p.price {
-  padding-top: 18px;
+  padding-top: 22px;
 }
 
 #pricing .pricing-footer p.price span {
@@ -8631,15 +8670,15 @@ Quick add
 #pricing .pricing-footer p.price sup {
   font-size: 14px;
   position: absolute;
-  top: 15px;
-  left: 133px;
+  top: 19px;
+  left: 110px;
 }
 
 #pricing .pricing-footer p.price sub {
   font-size: 14px;
   position: absolute;
-  bottom: 12px;
-  right: 110px;
+  bottom: 10px;
+  right: 90px;
 }
 
 #pricing .pricing-footer a button {
@@ -8678,6 +8717,10 @@ Quick add
   margin-bottom: 0;
 }
 
+#pricing .features li a {
+  color: #9C9C9C;
+}
+
 #pricing h2 {
   background: #3ec6e0 none repeat scroll 0 0;
   margin-top: 0;
@@ -8699,6 +8742,16 @@ Quick add
   #pricing .pricing_header p.price sub {
     bottom: 12px;
     right: 100px;
+  }
+
+  #pricing .pricing-footer p.price sup {
+    top: 20px;
+    left: 133px;
+  }
+
+  #pricing .pricing-footer p.price sub {
+    bottom: 12px;
+    right: 110px;
   }
 }
 
