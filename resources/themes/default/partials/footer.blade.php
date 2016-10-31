@@ -20,6 +20,7 @@
                     <li><a href="/about">About</a></li>
                     <!-- <li><a href="http://blog.massmosaic.com">News</a></li>
                     <li><a href="/coop">Coop</a></li>  -->
+                    <li><a href="https://anyshare.freshdesk.com/support/home">Help</a></li>
                     <li><a href="/terms">Terms</a></li>
                     <li><a href="/privacy">Privacy</a></li>
                   </ul>
