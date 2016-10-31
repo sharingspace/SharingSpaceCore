@@ -29,12 +29,13 @@
         <!-- /CONTENT -->
         <!-- FEATURES -->
         <ul class="features">
-          <li><i class="fa fa-group"></i>1000 Users</li>
-          <li><i class="fa fa-random"></i>10 Ways to Exchange</li>
-          <li><i class="fa fa-cog"></i>Customize Your Branding</li>
-          <li><i class="fa fa-user-secret"></i>Choose your Privacy Level</li>
-          <li><i class="fa fa-slack"></i>Slack Integration</li>
-          <li><i class="fa fa-money"></i>Price Security</li>
+          <li><i class="fa fa-group" aria-hidden="true"></i><a href="#" data-toggle="tooltip" data-placement="top" title="The maximum number of people in your Share!">1000 Users</a></li>
+          <li><i class="fa fa-random" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Gift, buy, trade, rent, collaborate, share and more">10 Ways to Exchange</a></li>
+          <li><i class="fa fa-cog" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Logo, profile, social networks">Customize Your Branding</a></li>
+          <li><i class="fa fa-download" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="From csv to an API, you have options">Dynamic Import/Export options</a></li>
+          <li><i class="fa fa-user-secret" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Public or Private. Secret coming soon">Choose your Privacy Level</a></li>
+          <li><i class="fa fa-slack" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Slack API">Slack Integration</a></li>
+          <li><i class="fa fa-money" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Guarantee of prices staying $10 for your Share">Price Security</a></li>
         </ul>
         <!-- /FEATURES -->
 
