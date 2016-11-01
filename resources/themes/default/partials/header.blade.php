@@ -89,6 +89,9 @@
         @elseif (Route::is('features'))
             <h1 class="heading">Features.</h1>
             <h2 class="subheading">"Shares" help a group or community exchange.</h2>
+        @elseif (Route::is('auth/register'))
+            <h1 class="heading">Try</h1>
+            <h2 class="subheading">"Join public Shares for FREE.<br>Or start your own in 1 minute!</h2>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
