@@ -139,158 +139,152 @@
 
 
 <!-- MODAL -->
-			<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								&times;
-							</button>
-							<h4 class="modal-title" id="myModal">Terms &amp; Conditions</h4>
-						</div>
-
-						<div class="modal-body modal-short">
-							<h4><b>Introduction</b></h4>
-							<p>These terms and conditions govern your use of this website; by using this website, you accept these terms and conditions in full.   If you disagree with these terms and conditions or any part of these terms and conditions, you must not use this website.</p>
-							<p>[You must be at least [18] years of age to use this website.  By using this website [and by agreeing to these terms and conditions] you warrant and represent that you are at least [18] years of age.]</p>
-
-
-							<h4><strong>License to use website</strong></h4>
-							<p>Unless otherwise stated, [NAME] and/or its licensors own the intellectual property rights in the website and material on the website.  Subject to the license below, all these intellectual property rights are reserved.</p>
-							<p>You may view, download for caching purposes only, and print pages [or [OTHER CONTENT]] from the website for your own personal use, subject to the restrictions set out below and elsewhere in these terms and conditions.</p>
-							<p>You must not:</p>
-							<ul>
-								<li>republish material from this website (including republication on another website);</li>
-								<li>sell, rent or sub-license material from the website;</li>
-								<li>show any material from the website in public;</li>
-								<li>reproduce, duplicate, copy or otherwise exploit material on this website for a commercial purpose;]</li>
-								<li>[edit or otherwise modify any material on the website; or]</li>
-								<li>[redistribute material from this website [except for content specifically and expressly made available for redistribution].]</li>
-							</ul>
-							<p>[Where content is specifically made available for redistribution, it may only be redistributed [within your organisation].]</p>
-
-							<h4><strong>Acceptable use</strong></h4>
-							<p>You must not use this website in any way that causes, or may cause, damage to the website or impairment of the availability or accessibility of the website; or in any way which is unlawful, illegal, fraudulent or harmful, or in connection with any unlawful, illegal, fraudulent or harmful purpose or activity.</p>
-							<p>You must not use this website to copy, store, host, transmit, send, use, publish or distribute any material which consists of (or is linked to) any spyware, computer virus, Trojan horse, worm, keystroke logger, rootkit or other malicious computer software.</p>
-							<p>You must not conduct any systematic or automated data collection activities (including without limitation scraping, data mining, data extraction and data harvesting) on or in relation to this website without [NAME'S] express written consent.</p>
-							<p>[You must not use this website to transmit or send unsolicited commercial communications.]</p>
-							<p>[You must not use this website for any purposes related to marketing without [NAME'S] express written consent.]</p>
-
-							<h4><strong>Restricted access</strong></h4>
-							<p>[Access to certain areas of this website is restricted.]  [NAME] reserves the right to restrict access to [other] areas of this website, or indeed this entire website, at [NAME'S] discretion.</p>
-							<p>If [NAME] provides you with a user ID and password to enable you to access restricted areas of this website or other content or services, you must ensure that the user ID and password are kept confidential.</p>
-							<p>[[NAME] may disable your user ID and password in [NAME'S] sole discretion without notice or explanation.]</p>
-
-							<h4><strong>User content</strong></h4>
-							<p>In these terms and conditions, "your user content" means material (including without limitation text, images, audio material, video material and audio-visual material) that you submit to this website, for whatever purpose.</p>
-							<p>You grant to [NAME] a worldwide, irrevocable, non-exclusive, royalty-free license to use, reproduce, adapt, publish, translate and distribute your user content in any existing or future media.  You also grant to [NAME] the right to sub-license these rights, and the right to bring an action for infringement of these rights.</p>
-							<p>Your user content must not be illegal or unlawful, must not infringe any third party's legal rights, and must not be capable of giving rise to legal action whether against you or [NAME] or a third party (in each case under any applicable law).</p>
-							<p>You must not submit any user content to the website that is or has ever been the subject of any threatened or actual legal proceedings or other similar complaint.</p>
-							<p>[NAME] reserves the right to edit or remove any material submitted to this website, or stored on [NAME'S] servers, or hosted or published upon this website.</p>
-							<p>[Notwithstanding [NAME'S] rights under these terms and conditions in relation to user content, [NAME] does not undertake to monitor the submission of such content to, or the publication of such content on, this website.]</p>
-
-							<h4><strong>No warranties</strong></h4>
-							<p>This website is provided "as is" without any representations or warranties, express or implied.  [NAME] makes no representations or warranties in relation to this website or the information and materials provided on this website.</p>
-							<p>Without prejudice to the generality of the foregoing paragraph, [NAME] does not warrant that:</p>
-							<ul>
-								<li>this website will be constantly available, or available at all; or</li>
-								<li>the information on this website is complete, true, accurate or non-misleading.</li>
-							</ul>
-							<p>Nothing on this website constitutes, or is meant to constitute, advice of any kind.  [If you require advice in relation to any [legal, financial or medical] matter you should consult an appropriate professional.]</p>
-
-							<h4><strong>Limitations of liability</strong></h4>
-							<p>[NAME] will not be liable to you (whether under the law of contact, the law of torts or otherwise) in relation to the contents of, or use of, or otherwise in connection with, this website:</p>
-							<ul>
-								<li>[to the extent that the website is provided free-of-charge, for any direct loss;]</li>
-								<li>for any indirect, special or consequential loss; or</li>
-								<li>for any business losses, loss of revenue, income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill, or loss or corruption of information or data.</li>
-							</ul>
-							<p>These limitations of liability apply even if [NAME] has been expressly advised of the potential loss.</p>
-
-							<h4><strong>Exceptions</strong></h4>
-							<p>Nothing in this website disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or limit; and nothing in this website disclaimer will exclude or limit [NAME'S] liability in respect of any:</p>
-							<ul>
-								<li>death or personal injury caused by [NAME'S] negligence;</li>
-								<li>fraud or fraudulent misrepresentation on the part of [NAME]; or</li>
-								<li>matter which it would be illegal or unlawful for [NAME] to exclude or limit, or to attempt or purport to exclude or limit, its liability.</li>
-							</ul>
-
-							<h4><strong>Reasonableness</strong></h4>
-							<p>By using this website, you agree that the exclusions and limitations of liability set out in this website disclaimer are reasonable.</p>
-							<p>If you do not think they are reasonable, you must not use this website.</p>
-
-							<h4><strong>Other parties</strong></h4>
-							<p>[You accept that, as a limited liability entity, [NAME] has an interest in limiting the personal liability of its officers and employees.  You agree that you will not bring any claim personally against [NAME'S] officers or employees in respect of any losses you suffer in connection with the website.]</p>
-							<p>[Without prejudice to the foregoing paragraph,] you agree that the limitations of warranties and liability set out in this website disclaimer will protect [NAME'S] officers, employees, agents, subsidiaries, successors, assigns and sub-contractors as well as [NAME].</p>
-
-							<h4><strong>Unenforceable provisions</strong></h4>
-							<p>If any provision of this website disclaimer is, or is found to be, unenforceable under applicable law, that will not affect the enforceability of the other provisions of this website disclaimer.</p>
-
-							<h4><strong>Indemnity</strong></h4>
-							<p>You hereby indemnify [NAME] and undertake to keep [NAME] indemnified against any losses, damages, costs, liabilities and expenses (including without limitation legal expenses and any amounts paid by [NAME] to a third party in settlement of a claim or dispute on the advice of [NAME'S] legal advisers) incurred or suffered by [NAME] arising out of any breach by you of any provision of these terms and conditions[, or arising out of any claim that you have breached any provision of these terms and conditions].</p>
-
-							<h4><strong>Breaches of these terms and conditions</strong></h4>
-							<p>Without prejudice to [NAME'S] other rights under these terms and conditions, if you breach these terms and conditions in any way, [NAME] may take such action as [NAME] deems appropriate to deal with the breach, including suspending your access to the website, prohibiting you from accessing the website, blocking computers using your IP address from accessing the website, contacting your internet service provider to request that they block your access to the website and/or bringing court proceedings against you.</p>
-
-							<h4><strong>Variation</strong></h4>
-							<p>[NAME] may revise these terms and conditions from time-to-time.  Revised terms and conditions will apply to the use of this website from the date of the publication of the revised terms and conditions on this website.  Please check this page regularly to ensure you are familiar with the current version.</p>
-
-							<h4><strong>Assignment</strong></h4>
-							<p>[NAME] may transfer, sub-contract or otherwise deal with [NAME'S] rights and/or obligations under these terms and conditions without notifying you or obtaining your consent.</p>
-							<p>You may not transfer, sub-contract or otherwise deal with your rights and/or obligations under these terms and conditions.</p>
-
-							<h4><strong>Severability</strong></h4>
-							<p>If a provision of these terms and conditions is determined by any court or other competent authority to be unlawful and/or unenforceable, the other provisions will continue in effect.  If any unlawful and/or unenforceable provision would be lawful or enforceable if part of it were deleted, that part will be deemed to be deleted, and the rest of the provision will continue in effect.</p>
-
-							<h4><strong>Entire agreement</strong></h4>
-							<p>These terms and conditions [, together with [DOCUMENTS],] constitute the entire agreement between you and [NAME] in relation to your use of this website, and supersede all previous agreements in respect of your use of this website.</p>
-
-							<h4><strong>Law and jurisdiction</strong></h4>
-							<p>These terms and conditions will be governed by and construed in accordance with [GOVERNING LAW], and any disputes relating to these terms and conditions will be subject to the [non-]exclusive jurisdiction of the courts of [JURISDICTION].</p>
-
-							<h4><strong>About these website terms and conditions</strong></h4>
-							<p>
-								We created these website terms and conditions with the help of a free website terms and conditions form developed by Contractology and available at <a href="#">www.yourwebsite.com</a>.
-								Contractology supply a wide variety of commercial legal documents, such as <a href="#">template data protection statements</a>.
-							</p>
-
-							<h4><strong>Registrations and authorisations</strong></h4>
-							<p>[[NAME] is registered with [TRADE REGISTER].  You can find the online version of the register at [URL].  [NAME'S] registration number is [NUMBER].]</p>
-							<p>[[NAME] is subject to [AUTHORISATION SCHEME], which is supervised by [SUPERVISORY AUTHORITY].]</p>
-							<p>[[NAME] is registered with [PROFESSIONAL BODY].  [NAME'S] professional title is [TITLE] and it has been granted in [JURISDICTION].  [NAME] is subject to the [RULES] which can be found at [URL].]</p>
-							<p>[[NAME] subscribes to the following code[s] of conduct: [CODE(S) OF CONDUCT].  [These codes/this code] can be consulted electronically at [URL(S)].</p>
-							<p>[[NAME'S] [TAX] number is [NUMBER].]]</p>
-
-							<h4><strong>[NAME'S] details</strong></h4>
-							<p>The full name of [NAME] is [FULL NAME].</p>
-							<p>[[NAME] is registered in [JURISDICTION] under registration number [NUMBER].]</p>
-							<p>[NAME'S] [registered] address is [ADDRESS].</p>
-							<p>You can contact [NAME] by email to [EMAIL].</p>
-
-
-							<p class="margin-top30">
-								<strong>By using this  WEBSITE TERMS AND CONDITIONS template document, you agree to the
-								<a href="#">terms and conditions</a> set out on
-								<a href="#">yourdomain.com</a>.  You must retain the credit
-								set out in the section headed "ABOUT THESE WEBSITE TERMS AND CONDITIONS".  Subject to the licensing restrictions, you should
-								edit the document, adapting it to the requirements of your jurisdiction, your business and your
-								website.  If you are not a lawyer, we recommend that you take professional legal advice in relation to the editing and
-								use of the template.</strong>
-							</p>
-
-
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> I Agree</button>
-
-							<a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> Print</span></a>
-						</div>
-
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModal">Terms &amp; Conditions</h4>
 			</div>
-			<!-- /MODAL -->
+
+			<div class="modal-body modal-short">
+        <p>By signing up for the AnyShare service ("Service") or any of the services of AnyShare Society (“AnyShare”) you are agreeing to be bound by the following terms and conditions ("Terms of Service"). The Services offered by AnyShare under the Terms of Service include products and services to help you create and manage an online sharing website ("Online Services"). Any new features or tools which are added to the current Service shall be also subject to the Terms of Service.</p>
+
+        <p>AnyShare reserves the right to update and change the Terms of Service by posting updates and changes to the AnyShare website. You are advised to check the Terms of Service from time to time for any updates or changes that may impact you.</p>
+
+        <p>You must read, agree with and accept all of the terms and conditions contained in this Terms of Service agreement and AnyShare’s <a href="/privacy">Privacy Policy</a> before you may become an AnyShare user.</p>
+
+
+        <h2>Account Terms</h2>
+        <ol>
+          <li>You must be 18 years or older or at least the age of majority in the jurisdiction where you reside or from which you use this Service.</li>
+
+          <li>To access and use the Services, you must sign-up for a AnyShare account ("Account") by providing your full legal name, a valid email address, and any other information indicated as required. AnyShare may reject your application for an Account, or cancel an existing Account, for any reason, in our sole discretion.</li>
+
+          <li>You acknowledge that AnyShare will use the email address you provide as the primary method for communication.</li>
+
+          <li>You are responsible for keeping your password secure. AnyShare cannot and will not be liable for any loss or damage from your failure to maintain the security of your Account and password.</li>
+
+          <li>You are responsible for all activity and content such as data, graphics, photos and links that is uploaded under your AnyShare Account ("Sharing Website Content"). You must not transmit any worms or viruses or any code of a destructive nature.</li>
+
+          <li>A breach or violation of any term in the Terms of Service as determined in the sole discretion of AnyShare will result in an immediate termination of your services.</li>
+          </ol>
+
+        <h2>Account Activation</h2>
+        <ol>
+          <li>Subject to section 2.2, the person signing up for the Service will be the contracting party ("Account Owner") for the purposes of our Terms of Service and will be the person who is authorized to use any corresponding account we may provide to the Account Owner in connection with the Service.</li>
+          <li>If you are signing up for the Service on behalf of your employer, your employer shall be the Account Owner. If you are signing up for the Service on behalf of your employer, then you represent and warrant that you have the authority to bind your employer to our Terms of Service.</li>
+        </ol>
+
+        <h2>General Conditions</h2>
+        <p>You must read, agree with and accept all of the terms and conditions contained in these Terms of Service and the <a href="/privacy">Privacy Policy</a> before you may become a member of AnyShare.</p>
+        <ol>
+          <li>Technical support is only provided to paying Account holders and is only available via email.</li>
+          <li>The Terms of Service shall be governed by and interpreted in accordance with the laws of the State of Delaware and the laws of USA applicable therein, without regard to principles of conflicts of laws. The parties irrevocably and unconditionally submit to the exclusive jurisdiction of the courts of the State of Delaware with respect to any dispute or claim arising out of or in connection with the Terms of Service. The United Nations Convention on Contracts for the International Sale of Goods will not apply to these Terms of Service and is hereby expressly excluded.</li>
+          <li>You acknowledge and agree that AnyShare may amend these Terms of Service at any time by posting the relevant amended and restated Terms of Service on AnyShare’s website, available at <a href="/terms">terms</a> and such amendments to the Terms of Service are effective as of the date of posting. Your continued use of the Services after the amended Terms of Service are posted to AnyShare’s website constitutes your agreement to, and acceptance of, the amended Terms of Service. If you do not agree to any changes to the Terms of Service, do not continue to use the Service.</li>
+          <li>You may not use the AnyShare service for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws), the laws applicable to you in your customer’s jurisdiction, or the laws of USA and the State of Delaware. You will comply with all applicable laws, rules and regulations in your use of the Service.</li>
+          <li>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by AnyShare.</li>
+          <li>You shall not purchase search engine or other pay per click keywords (such as Google AdWords), or domain names that use AnyShare or AnyShare trademarks and/or variations and misspellings thereof.</li>
+          <li>Questions about the Terms of Service should be sent to info@anysha.re</li>
+          <li>You understand that your Sharing Website Content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit Card information is always encrypted during transfer over networks.</li>
+          <li>You acknowledge and agree that your use of the Service, including information transmitted to or stored by AnyShare, is governed by its privacy policy at <a href="/privacy">privacy</a></li>
+          <li>The parties have required that the Terms of Service and all documents relating thereto be drawn up in English.</li>
+        </ol>
+
+        <h2>AnyShare Rights</h2>
+        <ol>
+          <li>We reserve the right to modify or terminate the Service for any reason, without notice at any time.</li>
+          <li>We reserve the right to refuse service to anyone for any reason at any time.</li>
+          <li>We may, but have no obligation to, remove Sharing Website Content and Accounts containing content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service.</li>
+          <li>Verbal or written abuse of any kind (including threats of abuse or retribution) of any AnyShare customer, AnyShare employee, member, or officer will result in immediate Account termination.</li>
+          <li>AnyShare does not pre-screen Sharing Website Content and it is in our sole discretion to refuse or remove any Sharing Website Content that is available via the Service.</li>
+          <li>We reserve the right to provide our services to your competitors and make no promise of exclusivity in any particular market segment. You further acknowledge and agree that AnyShare employees and contractors may also be AnyShare customers/merchants and that they may compete with you, although they may not use your confidential information in doing so.</li>
+          <li>In the event of a dispute regarding Account ownership, we reserve the right to request documentation to determine or confirm Account ownership. Documentation may include, but is not limited to, a scanned copy of your business license, government issued photo ID, the last four digits of the credit card on file, etc.</li>
+          <li>AnyShare retains the right to determine, in our sole judgment, rightful Account ownership and transfer an Account to the rightful owner. If we are unable to reasonably determine the rightful Account owner, AnyShare reserves the right to temporarily disable an Account until resolution has been determined between the disputing parties.</li>
+        </ol>
+
+        <h2>Limitation of Liability</h2>
+        <ol>
+          <li>You expressly understand and agree that AnyShare shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses resulting from the use of or inability to use the service.</li>
+          <li>You agree to indemnify, defend and hold AnyShare, its affiliates, subsidiaries, directors, officers, employees and suppliers (collectively "Indemnified Person(s)") harmless from and against any and all third party claims and any related liability, loss, and expense (including damage awards, settlement amounts, and reasonable legal fees), brought against any Indemnified Person(s), arising out of, related to or which may arise from Your breach of the terms and conditions of this Agreement or in relation to the Sharing Website or any business, activity or transactions carried out or performed on the Sharing Website.</li>
+          <li>In no event shall AnyShare or our suppliers be liable for lost profits or any special, incidental or consequential damages arising out of or in connection with our site, our services or these Terms of Service (however arising including negligence). You agree to indemnify and hold the Indemnified Person(s) harmless from any claim or demand, including reasonable attorneys' fees, made by any third party due to or arising out of your breach of these Terms of Service or the documents it incorporates by reference, or your violation of any law or the rights of a third party.</li>
+          <li>Your use of the Service is at your sole risk. The Service is provided on an "as is" and "as available" basis without any warranty or condition, express, implied or statutory.</li>
+          <li>AnyShare does not warrant that the Service will be uninterrupted, timely, secure, or error-free.</li>
+          <li>AnyShare does not warrant that the results that may be obtained from the use of the Service will be accurate or reliable.</li>
+          <li>AnyShare does not warrant that the quality of any products, services, information, or other material purchased or obtained by you through the Service will meet your expectations, or that any errors in the Service will be corrected.</li>
+        </ol>
+
+        <h2>Waiver and Complete Agreement</h2>
+        <p>The failure of AnyShare to exercise or enforce any right or provision of the Terms of Service shall not constitute a waiver of such right or provision. The Terms of Service constitutes the entire agreement between you and AnyShare and govern your use of the Service, superseding any prior agreements between you and AnyShare (including, but not limited to, any prior versions of the Terms of Service).</p>
+
+        <h2>Intellectual Property and Customer Content</h2>
+        <ol>
+          <li>You retain any copyright that you may have in Your Content.</li>
+          <li>You hereby agree that Your Content:
+            <ol type="a">
+              <li>is hereby licensed under the Creative Commons Attribution Non-Commercial 4.0 License and may be used under the terms of that license or any later version of a Creative Commons Attribution License, or </li>
+              <li>is in the public domain (such as Content that is not copyrightable or Content you make available under CC0), or </li>
+              <li>if not owned by you, (i) is available under a Creative Commons Attribution Non-Commercial 4.0 License or (ii) is a media file that is available under any Creative Commons license or that you are authorized by law to post or share through any of the Services, such as under the fair use doctrine, and that is prominently marked as being subject to third party copyright.</li>
+            </ol>
+          </li>
+        </ol>
+
+        <h2>Payment of Fees</h2>
+        <ol>
+          <li>AnyShare may charge You the mutually agreed fees for the use of the Service. If any fees are chargeable for the Service, they shall be charged from You monthly or at other mutually agreed intervals.</li>
+          <li>Unless and to the extent expressly indicated otherwise, listed fees and any amounts payable are net amounts exclusive of possibly applicable sales tax, or any other applicable taxes and charges imposed by any government entity in connection with Your use of the Service. You are liable for any any such taxes and charges.</li>
+          <li>If a payment is late from its due date, then AnyShare has the right to suspend the provision of the Service temporarily until the payment is made.</li>
+          <li>AnyShare reserves the right to change pricing when needed. AnyShare shall notify You of a change in the fees charged for the Service at least 30 days in advance and You should wish not to accept the change in fees,</li>
+          <li>AnyShare does not provide refunds.</li>
+        </ol>
+
+        <h2>Cancellation and Termination</h2>
+        <ol>
+          <li>You may cancel your Account at anytime by emailing support@anyha.re and then following the specific instructions indicated to you in AnyShare's response.</li>
+          <li>Upon termination of the Services by either party for any reason:
+          <ol type="a">
+            <li>AnyShare will cease providing you with the Services and you will no longer be able to access your Account;</li>
+            <li>unless otherwise provided in the Terms of Service, you will not be entitled to any refunds of any Fees, pro rata or otherwise;</li>
+            <li>any outstanding balance owed to AnyShare for your use of the Services through the effective date of such termination will immediately become due and payable in full; and</li>
+            <li>your Sharing Website will be taken offline.</li>
+          </ol>
+          </li>
+          <li>If at the date of termination of the Service, there are any outstanding Fees owed by you, you will receive one final invoice via email. Once that invoice has been paid in full, you will not be charged again.</li>
+          <li>We reserve the right to modify or terminate the AnyShare Service or your Account for any reason, without notice at any time.</li>
+          <li>Fraud: Without limiting any other remedies, AnyShare may suspend or terminate your Account if we suspect that you (by conviction, settlement, insurance or escrow investigation, or otherwise) have engaged in fraudulent activity in connection with the Site.</li>
+        </ol>
+
+        <h2>Modifications to the Service and Prices</h2>
+        <ol>
+          <li>Prices for using the Services are subject to change upon 30 days notice from AnyShare. Such notice may be provided at any time by posting the changes to the AnyShare Site (anysha.re) or the administration menu of your AnyShare Sharing Website via an announcement.</li>
+          <li>AnyShare reserves the right at any time, and from time to time, to modify or discontinue, the Service (or any part thereof) with or without notice.</li>
+          <li>AnyShare shall not be liable to you or to any third party for any modification, price change, suspension or discontinuance of the Service.</li>
+        </ol>
+
+        <h2>Third Party Services</h2>
+        <ol>
+          <li>In addition to these Terms of Service, you also agree to be bound by the additional service-specific terms applicable to services you purchase from, or that are provided by, AnyShare's partners or other third parties.</li>
+          <li>AnyShare may from time to time recommend, provide you with access to, or enable third party software, applications ("Apps"), products, services or website links (collectively, "Third Party Services") for your consideration or use. Such Third Party Services are made available only as a convenience, and your purchase, access or use of any such Third Party Services is solely between you and the applicable third party services provider ("Third Party Provider"). Any use by you of Third Party Services offered through the Services or AnyShare’s website is entirely at your own risk and discretion, and it is your responsibility to read the terms and conditions and/or privacy policies applicable to such Third Party Services before using them.</li>
+          <li>We do not provide any warranties with respect to Third Party Services. You acknowledge that AnyShare has no control over Third Party Services, and shall not be responsible or liable to anyone for such Third Party Services. The availability of Third Party Services on AnyShare’s websites, or the integration or enabling of such Third Party Services with the Services does not constitute or imply an endorsement, authorization, sponsorship, or affiliation by or with AnyShare. AnyShare strongly recommends that you seek specialist advice before using or relying on Third Party Services, to ensure they will meet your needs. In particular, tax calculators should be used for reference only and not as a substitute for independent tax advice when assessing the correct tax rates you should charge to your customers.</li>
+          <li>If you install or enable a Third Party Service for use with the Services, you grant us permission to allow the applicable Third Party Provider to access your data and to take any other actions as required for the interoperation of the Third Party Service with the Services, and any exchange of data or other interaction between you and the Third Party Provider is solely between you and such Third Party Provider. AnyShare is not responsible for any disclosure, modification or deletion of your data or Store Content, or for any corresponding losses or damages you may suffer, as a result of access by a Third Party Service or a Third Party Provider to your data or Store Content.</li>
+          <li>Under no circumstances shall AnyShare be liable for any direct, indirect, incidental, special, consequential, punitive, extraordinary, exemplary or other damages whatsoever, that result from any Third Party Services or your contractual relationship with any Third Party Provider, including any Expert. These limitations shall apply even if AnyShare has been advised of the possibility of such damages. The foregoing limitations shall apply to the fullest extent permitted by applicable law.</li>
+        </ol>
+
+        <h2>DMCA Notice and Takedown Procedure</h2>
+        <p>AnyShare supports the protection of intellectual property and asks AnyShare merchants to do the same. It's our policy to respond to all notices of alleged copyright infringement. If someone believes that one of our merchants is infringing their intellectual property rights, they can send a DMCA Notice to AnyShare's designated agent using our form. Upon receiving a DMCA Notice, we may remove or disable access to the material claimed to be a copyright infringement. Once provided with a notice of takedown, the merchant can reply with a counter notification using our form if they object to the complaint. The original complainant has 14 business days after we receive a counter notification to seek a court order restraining the merchant from engaging in the infringing activity, otherwise we restore the material. </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> I Agree</button>
+
+        <a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> Print</span></a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+<!-- /MODAL -->
 
 @stop
