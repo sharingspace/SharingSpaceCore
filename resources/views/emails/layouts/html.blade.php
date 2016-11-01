@@ -249,7 +249,10 @@
                     <tr>
                       <td class="thin_red_top">
                         <div class="grey_background">
-                          <?php echo $logo;?>
+                          <?php if(!empty($logo)){
+                            echo $logo;
+                          }  
+                          ?>
                         </div>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
