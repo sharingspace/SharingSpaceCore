@@ -14,7 +14,7 @@
     <div class="container margin-top-20">
         <div class="row">
             <div class="col-md-10 col-md-offset-1 terms">
-                <p>By signing up for the AnyShare service ("Service") or any of the services of AnyShare Society (“AnyShare”) you are agreeing to be bound by the following terms and conditions ("Terms of Service"). The Services offered by AnyShare under the Terms of Service include products and services to help you create and manage an online sharing website ("Online Services"). Any new features or tools which are added to the current Service shall be also subject to the Terms of Service.</p>
+                <p>By signing up for the AnyShare service ("Service") or any of the services of AnyShare Society (“AnyShare”) you are agreeing to be bound by the following terms and conditions ("Terms of Service"). The Services offered by AnyShare under the Terms of Service include products and services to help you create and manage an online Share ("Online Services"). Any new features or tools which are added to the current Service shall be also subject to the Terms of Service.</p>
 
                 <p>AnyShare reserves the right to update and change the Terms of Service by posting updates and changes to the AnyShare website. You are advised to check the Terms of Service from time to time for any updates or changes that may impact you.</p>
 
@@ -31,7 +31,7 @@
 
                     <li>You are responsible for keeping your password secure. AnyShare cannot and will not be liable for any loss or damage from your failure to maintain the security of your Account and password.</li>
 
-                    <li>You are responsible for all activity and content such as data, graphics, photos and links that is uploaded under your AnyShare Account ("Sharing Website Content"). You must not transmit any worms or viruses or any code of a destructive nature.</li>
+                    <li>You are responsible for all activity and content such as data, graphics, photos and links that is uploaded under your AnyShare Account ("Share Content"). You must not transmit any worms or viruses or any code of a destructive nature.</li>
 
                     <li>A breach or violation of any term in the Terms of Service as determined in the sole discretion of AnyShare will result in an immediate termination of your services.</li>
                 </ol>
@@ -52,7 +52,7 @@
                     <li>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by AnyShare.</li>
                     <li>You shall not purchase search engine or other pay per click keywords (such as Google AdWords), or domain names that use AnyShare or AnyShare trademarks and/or variations and misspellings thereof.</li>
                     <li>Questions about the Terms of Service should be sent to info@anysha.re</li>
-                    <li>You understand that your Sharing Website Content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit Card information is always encrypted during transfer over networks.</li>
+                    <li>You understand that your Share Content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit Card information is always encrypted during transfer over networks.</li>
                     <li>You acknowledge and agree that your use of the Service, including information transmitted to or stored by AnyShare, is governed by its privacy policy at <a href="/privacy">privacy</a></li>
                     <li>The parties have required that the Terms of Service and all documents relating thereto be drawn up in English.</li>
                 </ol>
@@ -61,9 +61,9 @@
                 <ol>
                     <li>We reserve the right to modify or terminate the Service for any reason, without notice at any time.</li>
                     <li>We reserve the right to refuse service to anyone for any reason at any time.</li>
-                    <li>We may, but have no obligation to, remove Sharing Website Content and Accounts containing content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service.</li>
+                    <li>We may, but have no obligation to, remove Share Content and Accounts containing content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service.</li>
                     <li>Verbal or written abuse of any kind (including threats of abuse or retribution) of any AnyShare customer, AnyShare employee, member, or officer will result in immediate Account termination.</li>
-                    <li>AnyShare does not pre-screen Sharing Website Content and it is in our sole discretion to refuse or remove any Sharing Website Content that is available via the Service.</li>
+                    <li>AnyShare does not pre-screen Share Content and it is in our sole discretion to refuse or remove any Share Content that is available via the Service.</li>
                     <li>We reserve the right to provide our services to your competitors and make no promise of exclusivity in any particular market segment. You further acknowledge and agree that AnyShare employees and contractors may also be AnyShare customers/merchants and that they may compete with you, although they may not use your confidential information in doing so.</li>
                     <li>In the event of a dispute regarding Account ownership, we reserve the right to request documentation to determine or confirm Account ownership. Documentation may include, but is not limited to, a scanned copy of your business license, government issued photo ID, the last four digits of the credit card on file, etc.</li>
                     <li>AnyShare retains the right to determine, in our sole judgment, rightful Account ownership and transfer an Account to the rightful owner. If we are unable to reasonably determine the rightful Account owner, AnyShare reserves the right to temporarily disable an Account until resolution has been determined between the disputing parties.</li>
@@ -72,7 +72,7 @@
                 <h2>Limitation of Liability</h2>
                 <ol>
                     <li>You expressly understand and agree that AnyShare shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses resulting from the use of or inability to use the service.</li>
-                    <li>You agree to indemnify, defend and hold AnyShare, its affiliates, subsidiaries, directors, officers, employees and suppliers (collectively "Indemnified Person(s)") harmless from and against any and all third party claims and any related liability, loss, and expense (including damage awards, settlement amounts, and reasonable legal fees), brought against any Indemnified Person(s), arising out of, related to or which may arise from Your breach of the terms and conditions of this Agreement or in relation to the Sharing Website or any business, activity or transactions carried out or performed on the Sharing Website.</li>
+                    <li>You agree to indemnify, defend and hold AnyShare, its affiliates, subsidiaries, directors, officers, employees and suppliers (collectively "Indemnified Person(s)") harmless from and against any and all third party claims and any related liability, loss, and expense (including damage awards, settlement amounts, and reasonable legal fees), brought against any Indemnified Person(s), arising out of, related to or which may arise from Your breach of the terms and conditions of this Agreement or in relation to the Share or any business, activity or transactions carried out or performed on the Share.</li>
                     <li>In no event shall AnyShare or our suppliers be liable for lost profits or any special, incidental or consequential damages arising out of or in connection with our site, our services or these Terms of Service (however arising including negligence). You agree to indemnify and hold the Indemnified Person(s) harmless from any claim or demand, including reasonable attorneys' fees, made by any third party due to or arising out of your breach of these Terms of Service or the documents it incorporates by reference, or your violation of any law or the rights of a third party.</li>
                     <li>Your use of the Service is at your sole risk. The Service is provided on an "as is" and "as available" basis without any warranty or condition, express, implied or statutory.</li>
                     <li>AnyShare does not warrant that the Service will be uninterrupted, timely, secure, or error-free.</li>
@@ -112,7 +112,7 @@
                             <li>AnyShare will cease providing you with the Services and you will no longer be able to access your Account;</li>
                             <li>unless otherwise provided in the Terms of Service, you will not be entitled to any refunds of any Fees, pro rata or otherwise;</li>
                             <li>any outstanding balance owed to AnyShare for your use of the Services through the effective date of such termination will immediately become due and payable in full; and</li>
-                            <li>your Sharing Website will be taken offline.</li>
+                            <li>your Share will be taken offline.</li>
                         </ol>
                     </li>
                     <li>If at the date of termination of the Service, there are any outstanding Fees owed by you, you will receive one final invoice via email. Once that invoice has been paid in full, you will not be charged again.</li>
@@ -122,7 +122,7 @@
 
                 <h2>Modifications to the Service and Prices</h2>
                 <ol>
-                    <li>Prices for using the Services are subject to change upon 30 days notice from AnyShare. Such notice may be provided at any time by posting the changes to the AnyShare Site (anysha.re) or the administration menu of your AnyShare Sharing Website via an announcement.</li>
+                    <li>Prices for using the Services are subject to change upon 30 days notice from AnyShare. Such notice may be provided at any time by posting the changes to the AnyShare Site (anysha.re) or the administration menu of your AnyShare Share via an announcement.</li>
                     <li>AnyShare reserves the right at any time, and from time to time, to modify or discontinue, the Service (or any part thereof) with or without notice.</li>
                     <li>AnyShare shall not be liable to you or to any third party for any modification, price change, suspension or discontinuance of the Service.</li>
                 </ol>
