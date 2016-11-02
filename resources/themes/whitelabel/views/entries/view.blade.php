@@ -148,7 +148,7 @@
                   <div class="col-md-12 margin-bottom-8 {{ $errors->first('title', ' has-error') }}">
                     <!-- Subject -->
                     <label class="input">
-                      <input type="text" name="subject" class="form-control" placeholder="Subject..." autofocus>
+                      <input type="text" name="subject" class="form-control" placeholder="Subject &#133;" autofocus>
                     </label>
                   </div> <!-- col 12 -->
 
@@ -163,7 +163,7 @@
                       @if (count($entry->exchangeTypes) > 0)
                         @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                           <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6">
-                            <input type="checkbox" name="{{ strtolower($entry->exchangeTypes[$i]->name) }}" value="1" id="{{strtolower($entry->exchangeTypes[$i]->name) }}"> 
+                            <input type="checkbox" name="exchange_types[]" value="{{ strtolower($entry->exchangeTypes[$i]->name) }}" id="{{strtolower($entry->exchangeTypes[$i]->name) }}"> 
                             {{ $entry->exchangeTypes[$i]->name }}
                           </div> <!-- col-sm-3 -->
                         @endfor

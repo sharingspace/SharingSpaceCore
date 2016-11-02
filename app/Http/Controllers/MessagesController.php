@@ -104,12 +104,21 @@ class MessagesController extends Controller
             }
         }
 
+        $exchanges = array();
+        if (Input::has('exchange_types')) {
+            $exchanges_types = Input::get('exchange_types');
+            foreach ($exchanges_types as $et) {
+                $exchanges[] = $et;
+            }
+
+            $data['exchanges']  =implode(", ", $exchanges);
+        }
+
         if (Input::has('thread_id')) {
             //log::debug("postCreate: thread_id = ".Input::get('thread_id'));
             $conversation = Conversation::find(e(Input::get('thread_id')));
-        } else {
-            //log::debug("postCreate: no thread_id = ");
-
+        }
+        else {
             // Find the thread ID by the subject, entry_id, started_by and community_id.
             // If there is no matching thread, create one.
             $conversation = Conversation::firstOrCreate([
@@ -123,7 +132,6 @@ class MessagesController extends Controller
         if (!empty($conversation)) {
             $data['thread_subject'] = e(Input::get('thread_subject'));
             $data['thread_id'] = $conversation->id;
-            //Log::debug("postCreate1. thread_id = ".$data['thread_id'].'  thread_subject ='.$data['thread_subject']);
         }
 
         $offer = new Message;
@@ -137,21 +145,24 @@ class MessagesController extends Controller
         $data['email'] = $send_to_email = $recipient->email;
         $data['name'] = $send_to_name =  $recipient->getDisplayName();
         $data['offer'] = $offer->message;
-        $data['community'] = $request->whitelabel_group->name;
+        $data['community'] = ucfirst($request->whitelabel_group->name);
         $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.Config::get('app.domain');
 
         if (!empty($request->whitelabel_group->logo)) { //.
+            // just for testing locally 
+            //$img = 'https://anyshare.coop/assets/img/hp/anyshare-logo-beta.png';
             $img = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
-            // just for testing locally $img = 'https://anyshare.coop/assets/img/hp/anyshare-logo-beta.png';
-            $data['logo'] = '<img src="'.$img.'" height="41" alt="" style="max-height:100%;line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">';
-        }
 
+            $data['logo'] = '<img src="'.$img.'" height="41" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">';
+        }
+        
         if ($offer->save()) {
             \Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
                 $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
             });
             return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
-        } else {
+        }
+        else {
             return response()->json(['success'=>false, 'error'=>$offer->getErrors()]);
         }
     }
