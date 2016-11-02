@@ -9,9 +9,7 @@
           ANYSHARE STYLES
       ------------------------------------- */
       .thin_red_top {
-        border-top:#e8c9c9 9px solid;
-        border-bottom:#e8c9c9 9px solid;
-
+        border-top:#e8c9c9 9px solid!important;
         border-radius: 4px;
       }
 
@@ -21,9 +19,9 @@
       }
 
       .thick_red {
-        background-color:#e8c9c9;
+        background-color:#f0dbdb;
         padding:15px 10px;
-        color:#000!important;
+        color:#404040!important;
       }
 
       .grey_background {
@@ -54,7 +52,7 @@
         width: 100%; }
         table td {
           font-family: sans-serif;
-          font-size: 14px;
+          font-size: 16px;
           vertical-align: top; }
       /* -------------------------------------
           BODY & CONTAINER
@@ -239,7 +237,9 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+            <span class="preheader">
+              @yield('preheader')
+            </span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -247,12 +247,9 @@
                 <td class="wrapper">
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td class="thin_red_top">
+                      <td style="border-top:#f0dbdb 9px solid;border-bottom:#f0dbdb 9px solid;border-radius: 4px;">
                         <div class="grey_background">
-                          <?php if(!empty($logo)){
-                            echo $logo;
-                          }  
-                          ?>
+                          @yield('logo')
                         </div>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
@@ -272,7 +269,6 @@
                           </tbody>
                         </table>
                       </td>
-
                     </tr>
                   </table>
                 </td>
