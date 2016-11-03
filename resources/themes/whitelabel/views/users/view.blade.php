@@ -15,47 +15,51 @@
      <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.profile.profile')}} {{ $user->getDisplayName() }}</h1>
   		<!-- LEFT -->
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-5">
+        <div class="col-md-5 col-sm-12 col-xs-12">
           <div class="row">
-            <div class="col-md-12">
-              <h2 class="margin-bottom-20 size-20 text-center">Profile</h2>
-            </div>
-            <div class="col-lg-5 col-md-5">
-  			      <div class="thumbnail text-center">
-                <img src="{{ $user->gravatar_img() }}&s=400" alt="" />
+            <div class="col-xs-5">
+  			      <div class="thumbnail">
+                <img src="{{ Auth::user()->gravatar_img() }}?s=400" alt="" />
               </div>
             </div>
-            <div class="col-lg-7 col-md-7">
+            <div class="col-xs-7">
               <div class="text-muted">
-                <ul class="list-unstyled nomargin">
+                <ul class="list-unstyled margin-left-10">
                   @if($user->location)
-                    <li class="margin-bottom-6"><i class="fa fa-location-arrow width-20"></i> {{ $user->location }}</li>
+                    <li class="margin-bottom-6"><i class="fa fa-location-arrow"></i>{{ $user->location }}</li>
                   @endif
                   @if ($user->website)
-                    <li class="margin-bottom-6"><i class="fa fa-globe width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->website }}">{{ $user->getDisplayName() }}'s  website</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-globe"></i><a href="{{ $user->website }}">{{ $user->getDisplayName() }}'s  website</a></li>
                   @endif
 
                   @if ($user->twitter)
-                    <li class="margin-bottom-6"><i class="fa fa-twitter width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->twitter }}">Twitter</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-twitter-square"></i><a href="{{ $user->twitter }}">Twitter</a></li>
                   @endif
 
                   @if ($user->fb_url)
-                    <li class="margin-bottom-6"><i class="fa fa-facebook width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->facebook }}">Facebook</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-facebook-square"></i><a href="{{ $user->facebook }}">Facebook</a></li>
                   @endif
 
                   @if ($user->pinterest)
-                    <li class="margin-bottom-6"><i class="fa fa-pinterest width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->pinterest }}">Pinterest</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-pinterest-square"></i><a href="{{ $user->pinterest }}">Pinterest</a></li>
                   @endif
 
                   @if ($user->google)
-                    <li class="margin-bottom-6"><i class="fa fa-google width-20 hidden-xs hidden-sm"></i> <a href="{{ $user->google }}">Google +</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-google-plus-square"></i><a href="{{ $user->google }}">Google +</a></li>
+                  @endif
+
+                  @if ($user->youtube)
+                    <li class="margin-bottom-6"><i class="fa fa-youtube-square"></i><a href="{{ $user->youtube }}">Youtube</a></li>
                   @endif
                 </ul>
               </div> <!-- muted -->
             </div> <!-- col 6 -->
-            <div class="col-md-12"
+            @if ($user->bio)
+            <div class="col-xs-12">
+              <p class="margin-bottom-6"><strong>Bio:</strong></p>
               <p>{{ $user->bio }}</p>
             </div> <!-- col 12 -->
+            @endif
             <div class="col-md-12">
               @if (Auth::check())
                 @if (Auth::user()->id!=$user->id)
@@ -88,7 +92,7 @@
             </div> <!-- col 12 -->
           </div> <!-- row -->
         </div> <!-- col 6 -->
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-md-7 col-sm-12 col-xs-12">
           <h2 class="margin-bottom-20 size-20 text-center">Exchanges</h2>
 
           <!-- Begin entries table -->
