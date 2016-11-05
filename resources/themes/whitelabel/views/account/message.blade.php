@@ -12,8 +12,8 @@
   <!-- post -->
   <div class="clearfix">
     <div class="border-bottom-1 border-top-1 padding-10">
-      <span class="pull-right size-11 margin-top-3 text-muted">{{ $message->created_at->format('M i, Y h:iA') }}</span>
-      <a href="{{ route('user.profile', [$message->sender->id]) }}">
+      <span class="pull-right size-11 margin-top-3 text-muted">Sent: {{ $message->created_at->format('M i, Y h:iA') }}</span>
+      From: <a href="{{ route('user.profile', [$message->sender->id]) }}">
         {{ $message->sender->getDisplayName()}}
       </a>
     </div>
