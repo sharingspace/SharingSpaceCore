@@ -42,7 +42,7 @@ class MessagesController extends Controller
     {
         $messages = Auth::user()->messagesTo()
             ->with('conversation.entry','sender','conversation','conversation.community')
-            ->orderBy('thread_id')
+            ->groupBy('thread_id')
             ->orderBy('created_at', 'DESC')->get();
 
         return view('account/inbox')->with('messages', $messages);
@@ -72,6 +72,30 @@ class MessagesController extends Controller
         }
 
         return redirect()->to('browse')->with('error', trans('general.messages.messages.not_found'));
+    }
+
+    /**
+    * Handles AJAX request to delete a message.
+    *
+    * @todo Work how to delete a message on one or both sides of the convesation
+    * @author [D. Linnard] [<sdslinnard@gmail.com>]
+    * @since  [v1.0]
+    * @internal param $Request
+    * @param int $messageId
+    * @return json repsonse, true or false
+    */    
+    public function postDeleteMessage(Request $request, $messageId)
+    {
+        if ($message = \App\Message::find($messageId)) {
+            if ($message->sent_to == Auth::user()->id) {
+                \App\Message::destroy($messageId);
+                //return response()->json(['success'=>false]);
+
+                return response()->json(['success'=>true, 'messageId'=>$messageId]);
+            }
+        }
+
+        return response()->json(['success'=>false]);
     }
 
 

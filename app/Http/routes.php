@@ -167,6 +167,13 @@ Route::group(
                     'uses' => 'MessagesController@getMessage')
                 );
 
+                Route::post(
+                    'message/ajaxdelete/{messageId}',
+                    array(
+                    'as' => 'message.delete',
+                    'uses' => 'MessagesController@postDeleteMessage')
+                );
+
                 Route::get(
                     'messages/ajax',
                     array(

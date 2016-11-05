@@ -223,7 +223,7 @@ return [
     ],
 
     'messages'      => [
-      'inbox'       => 'Messages Inbox',
+      'inbox'       => 'Message Inbox',
       'from'        => 'From',
       'created_at'  => 'Sent On',
       'message'       => 'Message',

@@ -14,7 +14,7 @@
 
 		/* --- */
 		if(jQuery("html").hasClass("chrome") && jQuery("body").hasClass("smoothscroll")) {
-			loadScript('https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.5/SmoothScroll.min.js', function() {
+			loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-smooth-scroll/2.0.0/jquery.smooth-scroll.min.js', function() {
 				jQuery.smoothScroll();
 			});
 		}
