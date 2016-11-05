@@ -49,7 +49,7 @@ class MessagesController extends Controller
     }
 
      /**
-     * Returns a view that displays a specific message
+     * Returns a view that displays a specific message thread
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
@@ -57,8 +57,9 @@ class MessagesController extends Controller
      * @param int $conversationId
      * @return View
      */
-    public function getMessage(Request $request, $conversationId)
+    public function getMessageThread(Request $request, $conversationId)
     {
+        //log::debug("getMessageThread: threadId = ".$conversationId);
         if ($conversation = Conversation::with('entry','sender','messages')->find($conversationId))
         {
             if ($request->user()->cannot('view-conversation', $conversation)) {

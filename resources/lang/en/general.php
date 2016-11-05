@@ -226,7 +226,7 @@ return [
       'inbox'       => 'Message Inbox',
       'from'        => 'From',
       'created_at'  => 'Sent On',
-      'message'       => 'Message',
+      'thread'       => 'Thread',
       'message_from'  => 'Message From :name',
       'sent' => 'Your message has been sent',
 

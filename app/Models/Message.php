@@ -118,6 +118,4 @@ class Message extends Model
         $messages->load('sender','recipient','tile');
         return $messages;
     }
-
-
 }
