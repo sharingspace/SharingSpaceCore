@@ -60,16 +60,21 @@ class MessagesController extends Controller
     public function getMessageThread(Request $request, $conversationId)
     {
         //log::debug("getMessageThread: threadId = ".$conversationId);
-        if ($conversation = Conversation::with('entry','sender','messages')->find($conversationId))
+        if ($conversation = Conversation::with(['entry','sender', 'messages' => function ($query) {
+            $query->where('messages.deleted_by_recipient', '<>', Auth::user()->id)
+            ->where('messages.deleted_by_sender', '<>', Auth::user()->id)
+            ->orderBy('messages.created_at', 'desc');
+        }])->find($conversationId))
+    
         {
             if ($request->user()->cannot('view-conversation', $conversation)) {
                 return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
             }
 
             foreach ($conversation->messages as $message) {
-                $message->markMessageRead();
+               $message->markMessageRead();
             }
-            return view('account/message')->with('conversation', $conversation);
+            return view('account/messages')->with('conversation', $conversation);
         }
 
         return redirect()->to('browse')->with('error', trans('general.messages.messages.not_found'));
@@ -87,11 +92,10 @@ class MessagesController extends Controller
     */    
     public function postDeleteMessage(Request $request, $messageId)
     {
+        //log::debug("postDeleteMessage: entered");
         if ($message = \App\Message::find($messageId)) {
-            if ($message->sent_to == Auth::user()->id) {
-                \App\Message::destroy($messageId);
-                //return response()->json(['success'=>false]);
 
+            if ($message->markMessageDeleted(Auth::user()->id)) {
                 return response()->json(['success'=>true, 'messageId'=>$messageId]);
             }
         }

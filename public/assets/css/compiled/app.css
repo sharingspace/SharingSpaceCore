@@ -8591,10 +8591,10 @@ Quick add
 #messages .member_thumb img {
   border: none;
   height: 60px;
-  max-width: 100px;
-  display: block;
+  max-width: 60px;
   margin-left: auto;
   margin-right: auto;
+  margin: 5px 2px;
 }
 
 #members .bio,
@@ -16765,12 +16765,14 @@ section.dark h2.owl-featured {
   animation-name: slideOutUp;
 }
 
-/**	15. Fontawesome v4.4.0
+/**	15. Fontawesome v4.7.0
 	http://fontawesome.github.io/Font-Awesome/
 *************************************************** **/
 
 @font-face {
   font-family: 'FontAwesome';
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }

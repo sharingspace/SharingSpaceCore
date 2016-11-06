@@ -224,6 +224,8 @@ return [
 
     'messages'      => [
       'inbox'       => 'Message Inbox',
+      'sent_by'     => 'Sent by',
+      'message'     => 'Message',
       'from'        => 'From',
       'created_at'  => 'Sent On',
       'thread'       => 'Thread',
