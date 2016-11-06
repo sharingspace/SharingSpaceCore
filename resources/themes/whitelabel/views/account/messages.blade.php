@@ -6,7 +6,7 @@
 <section id="messages" class="container padding-top-0 browse_table">
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="margin-bottom-0 size-24 text-center">{{ $conversation->subject }}</h1>
+      <h1 class="size-24 text-center">{{ $conversation->subject }}</h1>
 
       <form method="post" enctype="multipart/form-data" autocomplete="off" class="margin-left-10 margin-right-10" id="message_form">
         {!! csrf_field() !!}    <!-- Begin messages table -->
@@ -19,7 +19,7 @@
             <tr>
               <th data-sortable="true" data-field="author" style="width:18%;">{{ trans('general.messages.sent_by') }}</th>
               <th data-sortable="true" data-field="message"  style="width:40%;">{{ trans('general.messages.message') }}</th>
-              <th data-sortable="true" data-field="thread">{{ trans('general.messages.thread') }}</th>
+              <th class="hidden-xs" data-sortable="true" data-field="thread">{{ trans('general.messages.thread') }}</th>
 
               <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
               <th data-sortable="true" data-field="community">{{ trans('general.community.community') }}</th>
@@ -31,22 +31,24 @@
             <tr>
               <td>
                 <a class="member_thumb pull-left" href="{{ route('user.profile', $message->sender->id) }}">
-                  <img src="{{ $message->sender->gravatar_img() }}">
+                  <img class="hidden-xs" src="{{ $message->sender->gravatar_img() }}">
                   {{ $message->sender->getDisplayName() }} 
                 </a>
               </td>
               <td>
                 {!!  Helper::parseText($message->message) !!}
               </td>
-              <td>
+              <td class="hidden-xs">
                 <a href="{{ route('message.view', $message->conversation->id) }}">
                   {{ ($message->conversation->subject!='' ? $message->conversation->subject: '(No subject)') }}
                 </a>
               </td>
               <td>
-                {{ date('M j, Y g:ia', strtotime($message->created_at)) }}
+                <span class="hidden-xs">{{ date('M j, Y g:ia', strtotime($message->created_at)) }}</span>
+                <span class="visible-xs">{{ date('M j, Y', strtotime($message->created_at)) }}</span>
+
               </td>
-              <td>
+              <td class="hidden-xs">
                 @if ($message->conversation->community)
                   {{ $message->conversation->community->name }}
                 @endif
