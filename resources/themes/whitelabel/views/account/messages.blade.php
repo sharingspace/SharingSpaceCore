@@ -19,8 +19,6 @@
             <tr>
               <th data-sortable="true" data-field="author" style="width:18%;">{{ trans('general.messages.sent_by') }}</th>
               <th data-sortable="true" data-field="message"  style="width:40%;">{{ trans('general.messages.message') }}</th>
-              <th class="hidden-xs" data-sortable="true" data-field="thread">{{ trans('general.messages.thread') }}</th>
-
               <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
               <th data-sortable="true" data-field="community">{{ trans('general.community.community') }}</th>
               <th data-sortable="false" data-field="actions"></th>
@@ -38,11 +36,7 @@
               <td>
                 {!!  Helper::parseText($message->message) !!}
               </td>
-              <td class="hidden-xs">
-                <a href="{{ route('message.view', $message->conversation->id) }}">
-                  {{ ($message->conversation->subject!='' ? $message->conversation->subject: '(No subject)') }}
-                </a>
-              </td>
+            
               <td>
                 <span class="hidden-xs">{{ date('M j, Y g:ia', strtotime($message->created_at)) }}</span>
                 <span class="visible-xs">{{ date('M j, Y', strtotime($message->created_at)) }}</span>
