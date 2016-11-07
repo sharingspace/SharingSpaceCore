@@ -168,7 +168,7 @@ Route::group(
                 );
 
                 Route::post(
-                    'message/ajaxdelete/{messageId}',
+                    'message/thread/ajaxdelete/{messageId}',
                     array(
                     'as' => 'message.delete',
                     'uses' => 'MessagesController@postDeleteMessage')

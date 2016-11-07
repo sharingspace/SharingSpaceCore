@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Conversation;
 use DateTime;
 use DB;
+use Log;
 
 class Message extends Model
 {
@@ -100,22 +101,50 @@ class Message extends Model
     * @return boolean
     */
     public function markMessageRead() {
-		$dt = new DateTime;
-		return DB::table('messages')
+        $dt = new DateTime;
+        return DB::table('messages')
             ->where('id', $this->id)
             ->update(array('read_on' => $dt->format('Y-m-d H:i:s')));
-	}
-    
+    }
+
+    /**
+    * Marks the message as deleted
+    *
+    * @author [D.Linnard] [<dslinnard@gmail.com>]
+    * @param int $userId
+    * @since  [v1.0]
+    * @return boolean
+    */
+    public function markMessageDeleted($user_id)
+    {
+        $message = \App\Message::find($this->id);
+        if (!empty($message)) {
+            if ($user_id == $message->sent_by) {
+                $deleted_by = "deleted_by_sender";
+            }
+            else {
+                $deleted_by = "deleted_by_recipient";
+            }
+
+            return DB::table('messages')
+                ->where('id', $this->id)
+                ->update(array($deleted_by => $user_id));
+        }
+        
+        return false;
+    }    
 
     public static function getSentToUser($user_id)
     {
         $messages = Message::join('entries', 'entry.id', '=', 'messages.entry_id')
-        ->join('users', 'users.id', '=', 'messages.sent_by')
-        ->where('sent_to', '=', $user_id)
-        ->whereNull('users.deleted_at')
-        ->orderBy('messages.sent_on', 'desc')
-        ->get();
+            ->join('users', 'users.id', '=', 'messages.sent_by')
+            ->where('sent_to', '=', $user_id)
+            ->whereNull('users.deleted_at')
+            ->orderBy('messages.sent_on', 'desc')
+            ->get();
+
         $messages->load('sender','recipient','tile');
+
         return $messages;
     }
 }
