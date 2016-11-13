@@ -43,7 +43,7 @@
                                         </ul>
                                     </li>
                                     @else
-                                    <li><a href="{{ route('register_user') }}">Try</a></li>
+                                    <li><a href="{{ route('user.register') }}">Try</a></li>
 
                                     <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
                                     @endif
@@ -93,6 +93,9 @@
             <h2 class="subheading">"Join public Shares for FREE.<br>Or start your own in 1 minute!</h2>
         @elseif (Route::is('user.history'))
             <h1 class="heading">{{ trans('general.nav.my_orders') }}</h1>
+        @elseif (Route::is('user.register'))
+            <h1 class="heading">{{ trans('auth.create_account') }}</h1>
+            <h2 class="subheading">{{ trans('auth.join_public_shares') }}</h2>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
