@@ -93,7 +93,7 @@ Route::group(
                 Route::get(
                     'register',
                     array(
-                    'as' => 'register',
+                    'as' => 'register_user',
                     'uses' => 'Auth\AuthController@getRegister')
                 );
 
