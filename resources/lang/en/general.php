@@ -31,7 +31,8 @@ return [
           'settings' => 'Settings',
           'profile' => 'Profile',
           'create_sharing_hub' => 'Create',
-					'order_history' => 'Order History',
+					'my_orders' => 'My Orders',
+          'billing_history' => 'Billing History',
           'tos' => 'Terms and Conditions',
           'share+' => 'Share +'
     ],
@@ -116,6 +117,8 @@ return [
 
     'community'  => [
       'community'  => 'Share',
+      'date' => 'Date',
+      'fee' => 'Fee',
       'settings'  => 'Share Settings',
       'members'  => 'Member|Members',
       'save' => 'Update',

@@ -38,7 +38,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-smm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="{{ route('user.history') }}">{{ trans('general.nav.order_history') }} </a></li>
+                                            <li><a href="{{ route('user.history') }}">{{ trans('general.nav.my_orders') }} </a></li>
                                             <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
                                         </ul>
                                     </li>
@@ -91,6 +91,8 @@
         @elseif (Route::is('auth/register'))
             <h1 class="heading">Try</h1>
             <h2 class="subheading">"Join public Shares for FREE.<br>Or start your own in 1 minute!</h2>
+        @elseif (Route::is('user.history'))
+            <h1 class="heading">{{ trans('general.nav.my_orders') }}</h1>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
