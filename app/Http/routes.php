@@ -163,8 +163,15 @@ Route::group(
                 Route::get(
                     'message/thread/{messageId}',
                     array(
-                    'as' => 'message.view',
+                    'as' => 'messages.view',
                     'uses' => 'MessagesController@getMessageThread')
+                );
+
+                Route::get(
+                    'message/{messageId}',
+                    array(
+                    'as' => 'message.view',
+                    'uses' => 'MessagesController@getMessage')
                 );
 
                 Route::post(

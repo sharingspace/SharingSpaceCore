@@ -115,12 +115,7 @@
 /** Globals
  ******************************************************************/
 
-html {
-  height: 100%;
-}
-
 body {
-  height: 100%;
   color: #666;
   background-color: #fff;
   font-family: 'Open Sans',Arial,Helvetica,sans-serif;
@@ -176,6 +171,15 @@ section:before {
 
 section header.section-header {
   margin-bottom: 80px;
+}
+
+.member_thumb img {
+  border: none;
+  height: 50px;
+  max-width: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 5px 2px;
 }
 
 div.alternate {
@@ -1243,11 +1247,9 @@ section.dark.page-header ul.page-options a {
   /* used on center - example: page-coming-soon-1.html */
 }
 
-/* force uppercase links */
+/* force uppercase links , #mainMenu ul li a, #topMain ul li a */
 
-#topBar ul li a,
-#mainMenu ul li a,
-#topMain ul li a {
+#topBar ul > li > a {
   text-transform: uppercase;
 }
 
@@ -8116,6 +8118,12 @@ li.notifications-popdown .notifications-popdown-box {
   z-index: 2200;
 }
 
+@media only screen and (min-width: 768px) {
+  li.notifications-popdown .notifications-popdown-box {
+    width: 400px;
+  }
+}
+
 .notifications-popdown-footer {
   padding: 10px 10px 0 10px;
 }
@@ -8586,16 +8594,6 @@ Quick add
 /**
  * Members page
  **/
-
-#members .member_thumb img,
-#messages .member_thumb img {
-  border: none;
-  height: 60px;
-  max-width: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  margin: 5px 2px;
-}
 
 #members .bio,
 #messages .bio {
@@ -9292,6 +9290,13 @@ section.TreborScholz {
 
 #notifications i {
   vertical-align: middle;
+}
+
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /*************** Bootstrap extensions ******************/
@@ -10100,6 +10105,10 @@ h6 > span {
   padding-right: 0 !important;
 }
 
+.padding-right-5 {
+  padding-right: 5 !important;
+}
+
 .margin-top-0 {
   margin-top: 0 !important;
 }
@@ -10114,6 +10123,14 @@ h6 > span {
 
 .margin-top-3 {
   margin-top: 3px !important;
+}
+
+.margin-top-4 {
+  margin-top: 4px !important;
+}
+
+.margin-top-5 {
+  margin-top: 5px !important;
 }
 
 .margin-top-6 {
@@ -10326,6 +10343,10 @@ h6 > span {
 
 .margin-right-3 {
   margin-right: 3px !important;
+}
+
+.margin-right-5 {
+  margin-right: 5px !important;
 }
 
 .margin-right-6 {

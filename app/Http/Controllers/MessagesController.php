@@ -48,6 +48,46 @@ class MessagesController extends Controller
         return view('account/inbox')->with('messages', $messages);
     }
 
+
+    /**
+     * Returns a view that displays a single messages
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @internal param $Request
+     * @return View
+     *
+     */
+    public function getMessage(Request $request, $messageId)
+    {
+        $user = Auth::user();
+        if ($user) {
+            //log::debug("getMessage: found message ".$messageId); 
+
+            if ($message = \App\Message::find($messageId)) {
+                if (($message->sent_by == $user->id) || ($message->sent_to == $user->id)) {
+                    //log::debug("getMessage: message belongs to us ".$messageId.$message->id);
+
+                    if (!$message->messageDeleted($user->id)) {
+                        $conversation = \App\Conversation::find($message->thread_id);
+
+                        if ($conversation) {
+                            //log::debug("getMessage: found conversation ".$conversation->subject);
+                            return view('account/message')->with('message', $message)->with('conversation_subject', $conversation->subject);
+                        }
+                    }
+                }
+                else {
+                    //log::debug("getMessage: message does not belong to user ".$messageId."  ".$user->id);
+                }
+            }
+        }
+        //log::debug("getMessage: did not find message ".$messageId);
+
+        return view('account/message')->with('error', "No message found");
+    }
+
+
      /**
      * Returns a view that displays a specific message thread
      *
@@ -56,16 +96,19 @@ class MessagesController extends Controller
      * @internal param $Request
      * @param int $conversationId
      * @return View
+     * if ($conversation = Conversation::with(['entry','sender', 'messages' => function ($query) {
+            $query->where('messages.deleted_by_recipient', '<>', Auth::user()->id)
+            ->where('messages.deleted_by_sender', '<>', Auth::user()->id)
+            ->orderBy('messages.created_at', 'desc');
+        }])->find($conversationId))
      */
     public function getMessageThread(Request $request, $conversationId)
     {
         //log::debug("getMessageThread: threadId = ".$conversationId);
         if ($conversation = Conversation::with(['entry','sender', 'messages' => function ($query) {
             $query->where('messages.deleted_by_recipient', '<>', Auth::user()->id)
-            ->where('messages.deleted_by_sender', '<>', Auth::user()->id)
-            ->orderBy('messages.created_at', 'desc');
+            ->where('messages.deleted_by_sender', '<>', Auth::user()->id);
         }])->find($conversationId))
-    
         {
             if ($request->user()->cannot('view-conversation', $conversation)) {
                 return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
@@ -92,15 +135,13 @@ class MessagesController extends Controller
     */    
     public function postDeleteMessage(Request $request, $messageId)
     {
-        //log::debug("postDeleteMessage: entered");
         if ($message = \App\Message::find($messageId)) {
-
             if ($message->markMessageDeleted(Auth::user()->id)) {
-                return response()->json(['success'=>true, 'messageId'=>$messageId]);
+                return response()->json(['success'=>true, 'message'=>"Message deleted", 'message_id' => $messageId]);
             }
         }
 
-        return response()->json(['success'=>false]);
+        return response()->json(['success'=>false, 'message'=>"Sorry message not found", 'message_id' => $messageId]);
     }
 
 
@@ -122,7 +163,6 @@ class MessagesController extends Controller
     {
         $data = array();
         $conversation = null;
-
         $recipient = User::find($userId);
         if ($entryId) {
             $entry = Entry::find($entryId);
@@ -184,15 +224,16 @@ class MessagesController extends Controller
 
             $data['logo'] = '<img src="'.$img.'" height="41" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">';
         }
-        
+
         if ($offer->save()) {
             \Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
                 $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
             });
+
             return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
         }
         else {
-            return response()->json(['success'=>false, 'error'=>$offer->getErrors()]);
+            return response()->json(['success'=>false, 'message'=>trans('general.messages.sent_error')]);
         }
     }
 }

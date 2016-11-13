@@ -186,12 +186,8 @@ $screen-md-max: ($screen-lg-min - 1);
  ******************************************************************/
 
 
-html {
-  height: 100%;
-}
 
 body {
-  height: 100%;
   color: #666;
   background-color: #fff;
   font-family: 'Open Sans',Arial,Helvetica,sans-serif;
@@ -243,6 +239,15 @@ section {
   header.section-header {
     margin-bottom: 80px;
   }
+}
+
+.member_thumb img {
+  border:none;
+  height: 50px;
+  max-width:50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin:5px 2px;
 }
 
 div.alternate {
@@ -1196,9 +1201,9 @@ section {
   }
 }
 
-/* force uppercase links */
+/* force uppercase links , #mainMenu ul li a, #topMain ul li a */
 
-#topBar ul li a, #mainMenu ul li a, #topMain ul li a {
+#topBar ul > li > a{
   text-transform: uppercase;
 }
 
@@ -7659,6 +7664,12 @@ li.notifications-popdown .notifications-popdown-box {
   z-index: 2200;
 }
 
+@media only screen and (min-width: $screen-sm-min) {
+  li.notifications-popdown .notifications-popdown-box {
+    width: 400px;
+  }
+}
+
 .notifications-popdown-footer {
   padding: 10px 10px 0 10px;
   > span {
@@ -8151,16 +8162,7 @@ $color-green: #9AE14F;
  **/
 
 #members, #messages {
-  .member_thumb {
-    img {
-      border:none;
-      height: 60px;
-      max-width:60px;
-      margin-left: auto;
-      margin-right: auto;
-      margin:5px 2px;
-    }
-  }
+
 
   .bio {
     width:40%; 
@@ -8830,4 +8832,10 @@ section.TreborScholz {
   }
 }
 
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /*************** Bootstrap extensions ******************/

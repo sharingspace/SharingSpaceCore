@@ -1,7 +1,7 @@
 @extends('emails/layouts/html')
 
 @section('preheader')
-@if ($entry_name)
+@if (!empty($entry_name))
     You have an offer concerning {{$entry_name}}
 @endif
 @stop
@@ -23,7 +23,7 @@
         <p>You've received a new message to the thread <strong>{{$thread_subject}}</strong>, in the Share <strong><a href="{{$community_url}}" style="color: white;">{{ $community }}</a></strong>
     @endif
 
-    @if (isset($entry_name))
+    @if (!empty($entry_name))
         on the entry titled <strong><a href="{{$community_url}}/entry/{{$entry_id}}" style="color: white;">{{$entry_name}}</a></strong>
     @endif
 :</p>
