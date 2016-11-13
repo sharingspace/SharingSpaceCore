@@ -30,7 +30,7 @@ class EntriesController extends ApiGuardController
 
 
         try {
-            $entries = Community::findOrFail($request->whitelabel_group->id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
+            $entries = Community::findOrFail($request->whitelabel_group->id)->entries()->with(['author', 'media'])->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
             return $this->response->withItem($entries, new EntriesTransformer);
 
         } catch (ModelNotFoundException $e) {

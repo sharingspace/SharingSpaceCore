@@ -519,10 +519,10 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->where('created_by', $user_id);
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes', 'media')->where('created_by', $user_id);
         }
         else {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes', 'media')->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -587,17 +587,12 @@ class EntriesController extends Controller
                 $exchangeTypes[] = $et->name;
             }
 
-            $image = \DB::table('media')
-                ->where('entry_id', '=', $entry->id)
-                ->first();
-
-            if ($image) {
+            if ($entry->media->count() != 0) {
+                $image = $entry->media->first();
                 $imageTag = '<a href="'.route('entry.view', $entry->id).'"><img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image"></a>';
-            }
-            else {
+            } else {
                 $imageTag = null;
             }
-
 
             $rows[] = array(
               'image' => $imageTag,
