@@ -35,7 +35,6 @@ class UserController extends Controller
             $user = Auth::user();
             return view('home')->with('user', $user);
         }
-
     }
 
     /**
@@ -340,7 +339,7 @@ class UserController extends Controller
             }
         }
         else {
-            return view('request-access', ['error'=>'Sorry, this hub is closed. Please request to become a member', 'name' => $request->whitelabel_group->name] );
+            return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
         }
     }
 

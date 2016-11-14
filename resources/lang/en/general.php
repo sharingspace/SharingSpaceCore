@@ -112,12 +112,37 @@ return [
       'login_by_social' => 'or with a social network',
       'signup_by_email' => 'Sign-up with email',
       'verify_account' => 'Needed to verify your account',
-      'join_requests' => 'Join Requets'
+      'join_requests' => 'Join Requets',
+      'request_access' => [
+        'headline' => 'Awesome!',
+        'your_request' => 'You have asked to become a member of this community.',
+        'notified' => 'You will be notified by email when an admin approves your membership.',
+        'oops' => 'Oops!',
+        'must_be_member' => 'You must be a member of this Share to view it.',
+        'request_access' => 'Request Access to',
+        'admin_msg' => 'Message to Share Admin:',
+        'admin_msg_placeholder' => 'Message to the admin...',
+        'max_140' => 'Max 140 characters',
+        'chars_remain' => 'characters remaining',
+        'hint' => 'Hint:',
+        'submit' => 'SUBMIT REQUEST',
+        'sorry_closed' => 'Sorry, this Share is closed. A closed Share needs to approve members before they join.',
+        'hint' => 'Hint: '
+      ],
+
+      'request_access_sent' => [
+        'headline' => 'Awesome!',
+        'request_sent' => 'Your request has been sent.',
+        'notified' => 'You will be notified by email when an admin approves your membership.',
+      ]
     ],
 
     'community'  => [
-      'community'  => 'Share',
+      'community' => 'Share',
+      'location' => 'Location',
+      'about' => 'About',
       'date' => 'Date',
+      'action' => 'Action',
       'fee' => 'Fee',
       'settings'  => 'Share Settings',
       'members'  => 'Member|Members',
@@ -155,7 +180,7 @@ return [
       'p2' => 'You will not be charged until your free trial ends on',
       'p3' => 'No commitments, cancel at any time.',
       'save_success' => 'Welcome to your new Share! Get started adding entries now.',
-      'type' => 'Choose a privacy level *',
+      'type' => 'Choose a privacy level',
       'payment_info' => 'credit card information',
       'after_trial' => 'after 30 day free trial',
       'start_trial' => '30 day free trial',
@@ -174,41 +199,42 @@ return [
       'advanced' => 'Advanced',
       'wrong' => 'Something went wrong :(',
       'sub_type' => 'Subscription Type',
-        'exchange_types' => [
-          'title' => 'Exchange Type|Exchange Types',
-          'all_allowed' => 'All exchange types welcome',
-        ],
+      'exchange_types' => [
+        'title' => 'Exchange Type|Exchange Types',
+        'all_allowed' => 'All exchange types welcome',
+      ],
 
-        'open'  => [
-          'title'  => 'Open Share',
-          'text'  => 'Anyone can join',
-          'type' => 'Open'
-        ],
-        'closed'  => [
-          'title'  => 'Closed Share',
-          'text'  => 'Invite-only to post',
-          'type' => 'Closed'
-        ],
-        'secret'  => [
-          'title'  => 'Secret Share',
-          'text'  => 'Only members can view',
-          'type' => 'Secret'
-        ],
-
-        'messages' => [
-          'save_edits' => 'Your Share settings have been saved',
-          'save_new' => 'Your new Share has been created!',
-          'save_failed' => 'Something went wrong. Your Share settings have not been saved',
-        ],
-
-        'slack_info' => [
-          'p1' => 'Slack is a messaging app for teams (https://slack.com/). AnyShare integrates with slack to allow you to add entries and show members from within the app.',
-          'p2' => 'To list members, type: /members <hub subdomain>',
-          'p3' => 'To add an entry, type: /want <qty> <example text> in:<hub subdomain> and /have <qty> <example text> in:<hub subdomain>',
-          'p4' => 'The <qty> is optional, and if it\'s missing, it will default to one. For example, /have <example text> in:<hub subdomain> is the same as /have 1 <example text> in:<hub subdomain>.',
-          'p5' => 'New entries added through the slash command will have all of the exchange types available for that Share selected.',
-         ]
-
+      'open'  => [
+        'title'  => 'Open Share',
+        'text'  => 'Anyone can join',
+        'type' => 'Open'
+      ],
+      'closed'  => [
+        'title'  => 'Closed Share',
+        'text'  => 'Invite-only to post',
+        'type' => 'Closed'
+      ],
+      'secret'  => [
+        'title'  => 'Secret Share',
+        'text'  => 'Only members can view',
+        'type' => 'Secret'
+      ],
+      'membership' => [
+        'memberships' => 'Memberships',
+        'leave' => 'leave',
+      ],
+      'messages' => [
+        'save_edits' => 'Your Share settings have been saved',
+        'save_new' => 'Your new Share has been created!',
+        'save_failed' => 'Something went wrong. Your Share settings have not been saved',
+      ],
+      'slack_info' => [
+        'p1' => 'Slack is a messaging app for teams (https://slack.com/). AnyShare integrates with slack to allow you to add entries and show members from within the app.',
+        'p2' => 'To list members, type: /members <hub subdomain>',
+        'p3' => 'To add an entry, type: /want <qty> <example text> in:<hub subdomain> and /have <qty> <example text> in:<hub subdomain>',
+        'p4' => 'The <qty> is optional, and if it\'s missing, it will default to one. For example, /have <example text> in:<hub subdomain> is the same as /have 1 <example text> in:<hub subdomain>.',
+        'p5' => 'New entries added through the slash command will have all of the exchange types available for that Share selected.',
+       ]
     ],
     'members' => [
       'members' => 'Members',
