@@ -33,19 +33,27 @@
                   {{ Auth::user()->getUnreadMessagesCount() }} new messages
               </div>
               @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
-                <div class="clearfix margin-bottom-20">
-                   <!-- notification item -->
-                  	<img src="{{ $unread_messages->sender->gravatar_img() }}" class="avatar-sm pull-left" style="margin-left: 5px; margin-top: 5px;">
-                  <span class="size-14 text-muted">
-                      <b>New Message</b> from {{ $unread_messages->sender->getDisplayName() }}:
-                      <a href="/account/message/{{ $unread_messages->conversation->id }}">{{ $unread_messages->message }}</a>
+                <div class="clearfix margin-bottom-10 member_thumb">
+                  <!-- notification item -->
+                  <img src="{{ $unread_messages->sender->gravatar_img() }}" class="pull-left" style="margin-left: 5px; margin-top: 5px;">
+                  <span class="text-muted">
+                    {{ $unread_messages->sender->getDisplayName() }}
+                  </span>
+                  <span class="text-muted">
+                    <span class="pull-right margin-right-5">
+                      {{ date('M j, Y', strtotime($unread_messages->created_at)) }}
+                    </span>
+                    <br>
+                    <a href="/account/message/thread/{{ $unread_messages->thread_id }}">
+                      {{Str::limit($unread_messages->message, 50)}}
+                    </a>
                   </span>
                 </div><!-- /notification item -->
               @endforeach
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
-							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">VIEW ALL MESSAGES</a>
+							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">View all Messages</a>
 							<!-- <span class="pull-left"><strong>TOTAL:</strong> $54.39</span> -->
 						</div>
 						<!-- /quick cart footer -->

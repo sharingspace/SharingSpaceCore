@@ -119,6 +119,8 @@ class Message extends Model
     {
         $message = \App\Message::find($this->id);
         if (!empty($message)) {
+            //log::debug("markMessageDeleted message found ".$this->id);
+
             if ($user_id == $message->sent_by) {
                 $deleted_by = "deleted_by_sender";
             }
@@ -130,7 +132,11 @@ class Message extends Model
                 ->where('id', $this->id)
                 ->update(array($deleted_by => $user_id));
         }
+        else {
+            //log::debug("markMessageDeleted message not found ".$this->id);
+        }
         
+
         return false;
     }    
 
@@ -147,4 +153,35 @@ class Message extends Model
 
         return $messages;
     }
+
+
+    /**
+    * Checks whether user has deleted the message
+    *
+    * @author [D.Linnard] [<dslinnard@gmail.com>]
+    * @param int $userId
+    * @since  [v1.0]
+    * @return boolean
+    */
+    public function messageDeleted($user_id)
+    {
+        $message = \App\Message::find($this->id);
+        if (!empty($message)) {
+
+            if (($user_id == $message->deleted_by_sender) || 
+                ($user_id == $message->deleted_by_recipient)) {
+                //log::debug("messageDeleted message has been deleted");
+                return true;
+            }
+            else {
+                //log::debug("messageDeleted message has not been deleted");
+                return false;
+            }
+        }
+        else {
+            //log::debug("messageDeleted message could not be found ".$this->id);
+        }
+        
+        return true;
+    }    
 }

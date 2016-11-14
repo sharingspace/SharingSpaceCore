@@ -10,52 +10,53 @@
 
       <form method="post" enctype="multipart/form-data" autocomplete="off" class="margin-left-10 margin-right-10" id="message_form">
         {!! csrf_field() !!}    <!-- Begin messages table -->
-        <table
-        name="messages"
-        id="table"
-        data-cookie="true"
-        data-cookie-id-table="inbox-messages">
-          <thead>
-            <tr>
-              <th data-sortable="true" data-field="author" style="width:18%;">{{ trans('general.messages.sent_by') }}</th>
-              <th data-sortable="true" data-field="message"  style="width:40%;">{{ trans('general.messages.message') }}</th>
-              <th data-sortable="true" data-field="created_at">{{ trans('general.messages.created_at') }}</th>
-              <th data-sortable="true" data-field="community">{{ trans('general.community.community') }}</th>
-              <th data-sortable="false" data-field="actions"></th>
-            </tr>
-          </thead>
-          <tbody>
-          @foreach ($conversation->messages as $message)
-            <tr>
-              <td>
-                <a class="member_thumb pull-left" href="{{ route('user.profile', $message->sender->id) }}">
-                  <img class="hidden-xs" src="{{ $message->sender->gravatar_img() }}">
-                  {{ $message->sender->getDisplayName() }} 
-                </a>
-              </td>
-              <td>
-                {!!  Helper::parseText($message->message) !!}
-              </td>
-            
-              <td>
-                <span class="hidden-xs">{{ date('M j, Y g:ia', strtotime($message->created_at)) }}</span>
-                <span class="visible-xs">{{ date('M j, Y', strtotime($message->created_at)) }}</span>
-
-              </td>
-              <td class="hidden-xs">
+        
+        @foreach ($conversation->messages as $message)
+        <div class="row messageRow message_{{$message->id}}">  
+          <div class="col-xs-1">
+            <a class="member_thumb pull-left" href="{{ route('user.profile', $message->sender->id) }}">
+              <img class="hidden-xs margin-right-10" src="{{ $message->sender->gravatar_img() }}">
+            </a>
+          </div>
+          <div class="col-xs-8">
+            <div class="row">
+              <div class="col-xs-12 padding-top-10">
+                <strong class="sent_by">{{ $message->sender->getDisplayName() }}</strong>
                 @if ($message->conversation->community)
-                  {{ $message->conversation->community->name }}
+                  <span> / {{ $message->conversation->community->name }}</span>
                 @endif
-              </td>
-              <td>
-                <button class="btn btn-danger btn-sm button_delete" id="messageid_{{$message->id}}">
-                  <i class="fa fa-trash"></i>
-                </button>       
-              </td>
-            </tr>
-          @endforeach
-          </tbody>
-        </table>
+              </div>
+              <div class="col-xs-12">
+                @if (strlen($message->message) > 100)
+                  <a data-toggle="collapse" data-target="#expand_{{$message->id}}">
+                  @if (empty($message->read_on))
+                    <i class="fa fa-eye-slash fa-lg pull-left text-green margin-top-5"></i>
+                  @endif
+                @endif
+                  {!! Str::limit(Helper::parseText($message->message), 100) !!}
+                @if (strlen($message->message) > 100)
+                  </a>
+                @endif
+                <div id="expand_{{$message->id}}" class="collapse">
+                  {!! Helper::parseText($message->message) !!}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-2">
+            <span class="hidden-sm hidden-xs">{{ date('M j, Y g:ia', strtotime($message->created_at)) }}</span>
+            <span class="visible-sm visible-xs">{{ date('M j, Y', strtotime($message->created_at)) }}</span>
+          </div>
+
+          <div class="col-xs-1">
+            <button class="btn btn-danger btn-sm button_delete" id="messageid_{{$message->id}}">
+              <i class="fa fa-trash"></i>
+            </button>       
+          </div>
+        </div>
+        @endforeach
+
       <!-- End messages table -->
       </form>
     </div>
@@ -72,7 +73,7 @@
         <form id="offerForm" class="block-review-content">
           {!! csrf_field() !!}
 
-          <div class="clearfix margin-top-30 margin-bottom-20">
+          <div class="margin-top-30 margin-bottom-20">
 
             <!-- alert -->
             <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
@@ -87,7 +88,7 @@
             @if ($conversation->entry)
               <input type="hidden" name="entry_id" value="{{ $conversation->entry_id }}">
             @endif
-            <textarea class="summernote form-control" data-height="200" data-lang="en-US" name="message"></textarea>
+            <textarea class="messageText form-control" data-height="200" data-lang="en-US" name="message"></textarea>
           </div>
 
           <button class="btn btn-3d btn-sm btn-reveal btn-teal">
@@ -106,32 +107,40 @@
 </div>
 
 <script>
-$(document).ready(function () {
+$(window).load(function () {
+  // scroll to reply box, this works on firefix and chrome
+  window.setTimeout(function() {
+    $(window).scrollTop($(document).height()); 
+  }, 0);
+});
 
+$(document).ready(function () {
   $("#offerForm").submit(function(){
     $('#offerStatusbox').hide();
     $('#offerStatusText').html('');
     $('#offerStatus').html('');
     $('#offerStatusbox').removeClass('alert alert-success alert-danger');
-    //console.log($('#offerForm').serialize());
+    //console.log($('#offerForm').serialize()); $conversation->entryId
+    console.log({{$conversation->findSendToId(Auth::user())}}+"   "+{{$conversation->entry_id}});
     $.ajax({
       type: "POST",
-      url: "{{ route('messages.create.save', $conversation->findSendToId(Auth::user())) }}",
+      url: "{{ route('messages.create.save', [$conversation->findSendToId(Auth::user()), $conversation->entry_id]) }}",
       data: $('#offerForm').serialize(),
 
       success: function(data){
-
         $('#offerStatusbox').show();
 
         if (data.success) {
           $('#offerStatusbox').addClass('alert alert-success');
-          $('#offerStatusText').html('Success!');
-          $('#offerStatus').html(data.success.message);
-
+          $('#offerStatusText').html('Success! '+data.message);
+          $('#offerStatusbox').fadeTo(1000, 500).slideUp(500);
+          $('.messageText').val('');
+          //var lastRow = $('.messageRow').last();
+          //var clone = $(lastRow).clone();
+          //$(clone).clone().insertAfter(lastRow);
         } else {
-          $('#offerStatusbox').addClass('alert alert-danger');
-          $('#offerStatusText').html('Error: ');
-          $('#offerStatus').html(data.error.message[0]);
+          $('#offerStatusbox').addClass('alert alert-warning');
+          $('#offerStatusText').html('Error: '+data.message);
         }
 
       },
@@ -146,35 +155,39 @@ $(document).ready(function () {
   function displayFlashMessage(status, data)
   {
     if('success' == status ) {
-      messageHTML ='<div class="alert alert-'+data.alert_class+' margin-top-3 margin-bottom-3"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="fa margin-right-10 fa-check"></i>'+data.message+'</div>';
+      messageHTML ='<div class="alert alert-'+status+' margin-top-0 margin-bottom-6 alert_'+data.message_id+'"><i class="fa margin-right-10 fa-check"></i>'+data.message+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>';
+      $('.message_'+data.message_id).before(messageHTML);
+      $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);
     }
     else {
-      messageHTML ='<div class="alert alert-error margin-top-3 margin-bottom-3"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="fa margin-right-10 fa-exclamation"></i></div>';
+      messageHTML ='<div class="alert alert-'+status+' alert-dismissable margin-top-0 margin-bottom-6 alert_'+data.message_id+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="fa margin-right-10 fa-exclamation"></i>'+data.message+'</div>';
+      $('.message_'+data.message_id).before(messageHTML);
+      $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);
     }
-    $('#submission_error').append(messageHTML);
-    $('#submission_error').show();
   }
 
   function deleteMessage(object)
   {
     var message_id = object.attr("id").split("_")[1];
-    var $url = "ajaxdelete/"+message_id;
-    //console.log(message_id+"   "+$url);
+    var url = "ajaxdelete/"+message_id;
+    //console.log(message_id+"   "+url);
 
-    $.post($url,{_token: $('input[name=_token]').val()},function (replyData)
+    $.post(url,{_token: $('input[name=_token]').val()},function (replyData)
     {
       if (replyData.success) {
-        //console.log("message deleted!!!"+replyData.messageId);
+        //console.log("message deleted!!!"+replyData.message_id);
+        displayFlashMessage("success",replyData);
 
-        $('#messageid_'+replyData.messageId).closest('tr').fadeOut(300, function(){ $(this).remove();});
+        $('.row.message_'+replyData.message_id).fadeTo(1000, 500).slideUp(500).$(this).remove();
       } 
       else {
-        //console.log("message error!!!"+replyData.messageId);
+        //console.log("message error!!!"+replyData.message_id+replyData.message);
 
-        displayFlashMessage("danger",replyData.error);
+        displayFlashMessage("warning",replyData);
       }
     }).fail(function (jqxhr,errorStatus) {
-      parseAndDisplayError(errorStatus);
+      console.log("message error: "+errorStatus); 
+      //parseAndDisplayError(errorStatus);
     });
   }
 
