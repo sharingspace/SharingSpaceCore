@@ -439,7 +439,7 @@ Route::group(
         );
         
         Route::group(
-            array('prefix' => 'community'),
+            array('prefix' => 'share'),
             function () {
 
                 Route::get(
