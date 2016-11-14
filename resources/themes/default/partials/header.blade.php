@@ -5,8 +5,8 @@
                 <source src="{{ Helper::cdn('movies/clothing-transcode.webm') }}" data-wf-ignore="">
                 <source src="{{ Helper::cdn('movies/clothing-transcode.mp4') }}" data-wf-ignore="">
             @else
-                <source src="{{ Helper::cdn('movies/anyshare_homepage_vid-transcode.webm') }}" data-wf-ignore="">
-                <source src="{{ Helper::cdn('movies/anyshare_homepage_vid-transcode.mp4') }}" data-wf-ignore="">
+                <source src="{{ Helper::cdn('movies/homepage-720-high.webm') }}" data-wf-ignore="">
+                <source src="{{ Helper::cdn('movies/homepage-720-high.mp4') }}" data-wf-ignore="">
             @endif
         </video>
         <div class="w-nav nav-bar">
