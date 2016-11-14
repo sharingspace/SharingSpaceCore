@@ -115,19 +115,20 @@ return [
       'join_requests' => 'Join Requets',
       'request_access' => [
         'headline' => 'Awesome!',
-        'your_request' => 'You have asked to become a member of this community.',
+        'your_request' => 'You have asked to become a member of this Share.',
         'notified' => 'You will be notified by email when an admin approves your membership.',
         'oops' => 'Oops!',
         'must_be_member' => 'You must be a member of this Share to view it.',
         'request_access' => 'Request Access to',
-        'admin_msg' => 'Message to Share Admin:',
-        'admin_msg_placeholder' => 'Message to the admin...',
+        'admin_msg' => 'Message to Share:',
+        'admin_msg_placeholder' => '',
         'max_140' => 'Max 140 characters',
         'chars_remain' => 'characters remaining',
         'hint' => 'Hint:',
-        'submit' => 'SUBMIT REQUEST',
+        'submit' => 'Submit',
         'sorry_closed' => 'Sorry, this Share is closed. A closed Share needs to approve members before they join.',
-        'hint' => 'Hint: '
+        'hint' => 'Hint: ',
+        'still_pending' => 'Your request to become a member of this Share is still pending'
       ],
 
       'request_access_sent' => [

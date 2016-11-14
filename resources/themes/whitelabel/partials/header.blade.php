@@ -125,7 +125,7 @@
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
             @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
               <li>
-                <a style="color:white;" href="{{ route('join-community') }}">
+                <a style="color:white;" href="{{ route('community.request-access.form') }}">
                   <button type="button" class="btn btn-warning btn-sm">
                     Join this Share
                   </button>

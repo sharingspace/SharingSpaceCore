@@ -39,4 +39,7 @@ class CommunityJoinRequest extends Model
         // a request belongs to a user
         return $this->belongsTo('App\Community');
     }
+
+ 
+
 }

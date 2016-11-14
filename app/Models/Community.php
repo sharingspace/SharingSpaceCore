@@ -17,6 +17,7 @@ use App\ExchangeType;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use Carbon\Carbon;
+use DB;
 use Log;
 
 class Community extends Model
@@ -354,5 +355,15 @@ class Community extends Model
     public function scopeEntriesInCommunity($query)
     {
         return $query->whereIn('category_id', $categoryIdListing);
+    }
+
+    public function getRequestCount($user_id)
+    {
+        // find out whther they have already asked to join this share
+        return $request_count = DB::table('community_join_requests')
+        ->where('user_id', '=', $user_id)
+        ->where('community_id', '=', $this->id)
+        ->whereNull('approved_by')
+        ->count();
     }
 }

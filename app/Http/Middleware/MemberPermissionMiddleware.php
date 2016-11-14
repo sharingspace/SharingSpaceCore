@@ -39,7 +39,7 @@ class MemberPermissionMiddleware
           return $next($request);
         }
 
-        return view('join-open', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
+        return view('join-open-community', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
       }
     }
 

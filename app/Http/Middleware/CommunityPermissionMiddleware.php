@@ -41,8 +41,16 @@ class CommunityPermissionMiddleware
                         //LOG::debug('CommunityPermissionMiddleware: exit This user is authorized to see this community');
                         return $next($request);
                     } else if ($request->whitelabel_group->group_type=='C') {
-                        //LOG::debug('CommunityPermissionMiddleware: exit Closed hub');
-                        return view('request-access', ['error'=>'This hub is closed. Please request to become a member', 'name' => $request->whitelabel_group->name] );
+                        $request_count = $request->whitelabel_group->getRequestCount(Auth::user()->id);
+                        //LOG::debug('CommunityPermissionMiddleware: exit Closed hub '.$request_count);
+
+                        if ($request_count) {
+                            $request_count++; // user alreday has a request pending, this will trigger the correct message
+                            return view('request-access', ['request_count'=>$request_count, 'name' => $request->whitelabel_group->name] );
+                        }
+                        else {
+                            return view('request-access', ['request-access' => 0, 'name' => $request->whitelabel_group->name] );
+                        }
                     }
                     else {
                         //LOG::debug('CommunityPermissionMiddleware: exit User is logged in and hub is secret');
@@ -77,7 +85,7 @@ class CommunityPermissionMiddleware
                             return $next($request);
                         }
 
-                        return view('join-open', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
+                        return view('join-open-community', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
                     }
                 }
             }
