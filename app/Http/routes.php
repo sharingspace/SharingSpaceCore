@@ -484,7 +484,7 @@ Route::group(
         Route::get(
             'request-access',
             [
-            'middleware' => ['auth'],
+            'middleware' => ['auth', 'community-auth'],
             'as' => 'community.request-access.form',
             'uses' => 'CommunitiesController@getRequestAccess'
             ]
@@ -504,6 +504,7 @@ Route::group(
             'join-open',
             array(
             'middleware' => 'auth',
+            'as' => 'join-open-community',
             'uses' => 'UserController@getJoinCommunity')
         );
 

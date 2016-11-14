@@ -93,38 +93,42 @@ class CommunitiesController extends Controller
     {
         $user = Auth::user();
 
-        // find out whther they have already asked to join this share
-        $requests = DB::table('community_join_requests')
-        ->where('user_id', '=', $user->id)
-        ->where('community_id', '=', $request->whitelabel_group->id)
-        ->count();
+        // find out whether they have already asked to join this share
+        $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
-        return view('request-access', ['requests'=>$requests,'name'=>$request->whitelabel_group->name]);
+        //LOG::debug("getRequestAccess: ".$request_count);
+        return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
     }
 
     /**
     * Stores the access request
     *
-    * @todo   Send an email to the community owner
+    * @todo   Send an email to the community owner and add request to community request table
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see    CommunitiesController::getRequestAccess()
     * @since  [v1.0]
     * @return Redirect
+    * @todo: send email to admin
     */
     public function postRequestAccess(Request $request)
     {
         $user = Auth::user();
+        $request_count = $request->whitelabel_group->getRequestCount($user->id);
+        //Log::debug("postRequestAccess. request_count: ".$request_count);
 
-        DB::table('community_join_requests')->insert(
-            [
-            'user_id' => $user->id,
-            'community_id' => $request->whitelabel_group->id,
-            'message' => e(Input::get('message')),
-            ]
-        );
+        if (!$request_count) {
+            DB::table('community_join_requests')->insert(
+                [
+                'user_id' => $user->id,
+                'community_id' => $request->whitelabel_group->id,
+                'message' => e(Input::get('message')),
+                ]
+            );
+            $request_count = 1;
+        }
 
         // redirect them back to same form page, but this time display different content
-        return view('request-access', ['name'=>$request->whitelabel_group->name]);
+        return view('request-access', ['request_count'=>$request_count, 'name'=>$request->whitelabel_group->name]);
     }
 
     /**
@@ -140,20 +144,6 @@ class CommunitiesController extends Controller
         $join_requests = $request->whitelabel_group->requests()->get();
         return view('join_requests')->with('join_requests', $join_requests);
     }
-
-    /**
-    * Returns number of join requests for a community, we exclude all approved or declined requests
-    *
-    * @author [D. Linnard] [<dslinnard@yahoo.com>]
-    * @param $request
-    * @since  [v1.0]
-    * @return int
-    */    
-    public function getJoinRequestCount(Request $request)
-    {
-        return count($request->whitelabel_group->requests()->get());
-    }
-
 
     /**
     * Returns a view lists the members of a community.

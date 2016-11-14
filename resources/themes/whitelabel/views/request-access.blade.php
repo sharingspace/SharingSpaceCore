@@ -8,6 +8,12 @@
 
 {{-- Page content --}}
 @section('content')
+<!-- this does a lot:
+1) If Closed it displays a form
+2) If they have submitted the form they get an awsome, your request to join has been sent message. (request count = 0)
+3) If closed and they have already asked to join it displays a message telling them that their request is pending (request count > 0)
+Your request to become a member of this Share is still pending'
+-->
 
 <section>
   <div class="container">
@@ -16,20 +22,23 @@
         <h1 class="margin-bottom-20 size-24 text-center">{{ trans('general.user.request_access.request_access') }} {{ucfirst($name)}}</h1>
       </div>
       <div class="col-sm-8 col-md-offset-2 col-xs-12">
-        @if (!empty($error))
+        @if (empty($request_count) || (!empty($request_count) && $request_count==0))
         <div class="alert alert-warning">
-          @if ($error == "closed")
           <p>{{ trans('general.user.request_access.sorry_closed') }}</p>
-          @endif
         </div>
         @endif
 
-        @if (empty($requests))
+        @if (!empty($request_count) && $request_count)
         <!-- ALERT -->
         <div class="alert alert-mini alert-success margin-bottom-30">
           <button type="button" class="close" data-dismiss="alert alert-info" aria-hidden="true">&times;</button>
-          <p class="size-20"><strong> {{ trans('general.user.request_access.headline')}}</strong> {{ trans('general.user.request_access.your_request')}}</p>
-          <p class="size-14">{{ trans('general.user.request_access.notified')}}</p>
+
+          @if ($request_count==1)
+            <p class="size-20"><strong>{{ trans('general.user.request_access.headline')}}</strong> {{ trans('general.user.request_access.your_request')}}</p>
+            <p class="size-14">{{ trans('general.user.request_access.notified')}}</p>
+          @else
+            <p class="size-20">{{ trans('general.user.request_access.still_pending')}}</p>
+          @endif
         </div><!-- /ALERT -->
         @else
         <div class="box-static box-border-top padding-30">
