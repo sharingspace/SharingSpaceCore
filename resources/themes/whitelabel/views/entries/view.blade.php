@@ -238,26 +238,6 @@
   </div> <!-- row -->
 </section>
 
-<!-- Modal -->
-<div id="offer1" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Lorem ipsum Dolor</h4>
-      </div>
-      <div class="modal-body">
-        <p>Nulla scelerisque diam sed dui mattis fermentum. Sed vel elit quam. Fusce et urna facilisis, commodo lorem at, mattis nisi. Mauris nibh mauris, elementum pulvinar metus at, ornare faucibus neque. Praesent placerat odio metus, eget condimentum erat maximus sit amet. </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 $(document).ready(function () {
 

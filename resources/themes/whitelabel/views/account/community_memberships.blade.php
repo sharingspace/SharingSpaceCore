@@ -10,28 +10,34 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
+  <div class="row">
+    <h1 class="margin-bottom-0  size-24 text-center">{{ trans('general.community.membership.memberships') }}</h1>
 
-        <h1 class="margin-bottom-0  size-24 text-center">Communities</h1>
-
-    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
-            <div class="table-responsive">
-       			<table class="table table-condensed" id="members">
-          			<tbody>
-        			@foreach ($communities as $community)
-        				<tr>
-                        <td class="col-md-3"> {{ $community->name }}</td>
-                        <td class="col-md-2"> {{ $community->location }}</td>
-                        <td class="col-md-6"> {{ $community->about }}</td>
-                        <td class="col-md-1"> <a href="/account/leave/{{ $community->id }}" class="btn btn-sm btn-warning">Leave</a></td>
-                        </tr>
-          			@endforeach
-              		</tbody>
-          	    </table>
-            </div> <!-- table responsive -->
-        </div> <!-- col-lg-12 -->
-
-	</div> <!-- row -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
+      <div class="table-responsive">
+        <table class="table table-condensed" id="members">
+          <tbody>
+            <tr>
+              <th class="col-md-3">{{ trans('general.community.community') }}</th>
+              <th class="col-md-2">{{ trans('general.community.location') }}</th>
+              <th class="col-md-6">{{ trans('general.community.about') }}</th>
+              <th class="col-md-1 text-center">{{ trans('general.community.action') }}</th>
+            </th>
+          @foreach ($communities as $community)
+            <tr>
+              <td class="col-md-3"> {{ $community->name }}</td>
+              <td class="col-md-2"> {{ $community->location }}</td>
+              <td class="col-md-6"> {{ Str::limit($community->about, 200) }}</td>
+              <td class="col-md-1 text-center">
+                <a href="/account/leave/{{ $community->id }}" class="btn btn-sm btn-warning">{{ trans('general.community.membership.leave') }}</a>
+              </td>
+            </tr>
+          @endforeach
+          </tbody>
+        </table>
+      </div> <!-- table responsive -->
+    </div> <!-- col-lg-12 -->
+  </div> <!-- row -->
 </div> <!-- #container -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>

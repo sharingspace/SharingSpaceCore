@@ -92,6 +92,8 @@ class CommunitiesController extends Controller
     public function getRequestAccess(Request $request)
     {
         $user = Auth::user();
+
+        // find out whther they have already asked to join this share
         $requests = DB::table('community_join_requests')
         ->where('user_id', '=', $user->id)
         ->where('community_id', '=', $request->whitelabel_group->id)
@@ -120,7 +122,9 @@ class CommunitiesController extends Controller
             'message' => e(Input::get('message')),
             ]
         );
-        return redirect()->route('community.request-access.form');
+
+        // redirect them back to same form page, but this time display different content
+        return view('request-access', ['name'=>$request->whitelabel_group->name]);
     }
 
     /**
