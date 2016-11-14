@@ -33,6 +33,8 @@
                                     <li><a href="{{ URL::to('features') }}">{{ trans('general.nav.features') }}</a></li>
                                     <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
                                     @if (Auth::check())
+                                    <li><button class="margin-top-10 btn-warning btn btn-sm contained-button size-18 weight-800 font-smoothing bg_share+ "><a class="text-white" href="{{ route('community.create.form') }}" >{{ trans('general.nav.share+') }}</a></button></li>
+
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-smm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
@@ -59,9 +61,6 @@
            <h1 class="heading">{{ trans('home.home_headline') }}</h1>
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
-                <div class="header_cta_button">
-                    <a href="{{ route('community.create.form') }}" class="btn-warning btn btn-sm contained-button size-18 weight-800 font-smoothing">{{ trans('general.nav.start_now') }}</a>
-                </div>
             </h2>
             <div class="scroll-button-div"></div>
         @elseif (Route::is('login'))
