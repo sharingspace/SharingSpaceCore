@@ -22,7 +22,6 @@
               {!! csrf_field() !!}
 
             <div class="col-md-12 text-muted">
-              <p class="margin-bottom-10">{{trans('general.community.p1')}}</p>
               <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+15 days"))}}. {{trans('general.community.p3')}}</p>
             </div>
 
@@ -45,7 +44,7 @@
 
                 <!-- Type -->
                 <div class="form-group{{ $errors->first('group_type', ' has-error') }}">
-                    <label for="group_type">{{trans('general.community.type')}} *</label>
+                    <label for="group_type">{{trans('general.community.type')}}</label>
                     {!! Form::community_types('group_type', Input::old('group_type', old('group_type'))) !!}
                     {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
                 </div>
