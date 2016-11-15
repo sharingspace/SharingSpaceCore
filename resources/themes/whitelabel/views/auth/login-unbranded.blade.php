@@ -40,7 +40,7 @@
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
-                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.login.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
@@ -49,7 +49,7 @@
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.login.latin') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
@@ -68,7 +68,7 @@
       <div class="col-md-6 col-sm-6">
         <form action="#" method="post" class="sky-form boxed">
           <header>
-            <i class="fa fa-globe"></i> Sign-in using your favourite social network
+            <i class="fa fa-globe"></i>  {{ trans('general.login.social') }}
           </header>
 
           <fieldset class="nomargin">

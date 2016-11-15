@@ -18,11 +18,11 @@
    			<table class="table table-condensed" id="members">
         	<thead>
             <tr>
-              <th data-sortable="false"><span class='sr-only'>Image</span></th>
-              <th data-sortable="true" class="name">Name</th>
-              <th data-sortable="true" class="location">Location</th>
-              <th data-sortable="false" class="bio">Bio</th>
-              <th data-sortable="true">Member since</th>
+              <th data-sortable="false"><span class='sr-only'>{{trans('general.members.image')}}</span></th>
+              <th data-sortable="true" class="name">{{trans('general.members.name')}}</th>
+              <th data-sortable="true" class="location">{{trans('general.members.location')}}</th>
+              <th data-sortable="false" class="bio">{{trans('general.members.bio')}}</th>
+              <th data-sortable="true">{{trans('general.members.member_since')}}</th>
             </tr>
           </thead>
   				<tbody>

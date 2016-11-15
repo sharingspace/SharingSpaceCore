@@ -18,7 +18,7 @@
               <div class="form-group" style="margin-bottom: 5px;">
                 <fieldset class="margin-bottom-10">
 
-                  <legend class="sr-only">Exchange by:</legend>
+                  <legend class="sr-only">{{ trans('general.entries.edit.exchange_by') }}</legend>
                   <div class="exchange_types">
                     <!-- checkboxes for exchange types -->
                     <div class="checkbox">
@@ -96,7 +96,7 @@
                 </div> <!-- col 12-->
 
                 <div id="dialog-confirm" title="Delete image?">
-                  <p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i><span>This image will be permanently deleted. Are you sure?</span></p>
+                  <p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i><span>{{ trans('general.entries.edit.delete_image') }}</span></p>
                 </div>
 
                 <div class="pull-right col-xs-12">
@@ -108,10 +108,10 @@
                       <div class="col-xs-12 image_controls">
                         <div class="row">
                           <div class="col-xs-12">
-                            <i class="fa fa-2x fa-rotate-right" aria-hidden="true" id="rotate_image" title="rotate image"></i>
+                            <i class="fa fa-2x fa-rotate-right" aria-hidden="true" id="rotate_image" title="{{ trans('general.entries.edit.rotate_image') }}"></i>
                           </div>
                           <div class="col-xs-12">
-                            <i class="fa fa-2x fa-times" aria-hidden="true" id="delete_image" title="remove image"></i>
+                            <i class="fa fa-2x fa-times" aria-hidden="true" id="delete_image" title="{{ trans('general.entries.edit.remove_image') }}"></i>
                           </div>
                         </div>
                       </div>
@@ -149,7 +149,7 @@
                     
                 <div class="col-xs-12">
                   <!-- Location -->
-                  <label class="control-label sr-only" for="location">Location</label>
+                  <label class="control-label sr-only" for="location">{{ trans('general.entries.edit.location') }}</label>
                   <div class="input-group">
                     @if(isset($entry))
                       <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">

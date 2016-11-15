@@ -75,7 +75,7 @@
     data-cookie-id-table="communityListingv1-{{ $whitelabel_group->id }}">
       <thead>
         <tr>
-          <th data-sortable="false" data-field="image">Image</th>
+          <th data-sortable="false" data-field="image">{{ trans('general.members.image')}}</th>
           <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
           <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
           <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>

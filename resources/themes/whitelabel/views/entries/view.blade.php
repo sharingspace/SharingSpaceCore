@@ -33,7 +33,7 @@
 
           @if($entry->author->getDisplayName())
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>By:</strong> {{$entry->author->getDisplayName()}}
+            <strong>{{ trans('general.entries.by') }}</strong> {{$entry->author->getDisplayName()}}
           </div>
           @endif
 
@@ -43,31 +43,31 @@
             @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
               <?php array_push($exchanges, strtolower($entry->exchangeTypes[$i]->name)); ?>
             @endfor
-            <strong>Exchange types:</strong> {{implode(', ', $exchanges)}}
+            <strong>{{ trans('general.entries.type') }}</strong> {{implode(', ', $exchanges)}}
           </div>
           @endif
 
           @if($entry->qty)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>Quantity:</strong> {{$entry->qty}}
+            <strong>{{ trans('general.entries.quantity') }}</strong> {{$entry->qty}}
           </div>
           @endif
 
           @if($entry->location)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>Location:</strong> {{ $entry->location }}
+            <strong>{{ trans('general.entries.location') }}</strong> {{ $entry->location }}
           </div>
           @endif
 
            @if($entry->description)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>Description:</strong> {{ $entry->description }}
+            <strong>{{ trans('general.entries.description') }}</strong> {{ $entry->description }}
           </div>
           @endif
 
           @if($entry->tags)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>Keywords:</strong> {{ $entry->tags }}
+            <strong>{{ trans('general.entries.keywords') }}</strong> {{ $entry->tags }}
           </div>
           @endif
 
@@ -81,13 +81,13 @@
 
                 @can('update-entry', $entry)
                   <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
-                  <i class="fa fa-pencil"></i> Edit</a>
+                  <i class="fa fa-pencil"></i> {{ trans('general.entries.edit') }}</a>
 
                   @if ($entry->completed_at=='')
                     <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
-                    <i class="glyphicon glyphicon-ok"></i> Mark Completed</a>
+                    <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
                   @endif
-                    {{ Form::button('<i class="fa fa-trash"></i> Delete', array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
+                    {{ Form::button("<i class='fa fa-trash'></i> trans('general.entries.delete')", array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
                 @endcan
 
               {{ Form::close() }}
@@ -105,25 +105,25 @@
           <a href="#make_offer" role="tab" data-toggle="tab">
             @if (Auth::check())
               @if (Auth::user()->id == $entry->created_by)
-                View Offers
+                {{ trans('general.entries.view_offer') }}
               @else
-                Make Offer
+                {{ trans('general.entries.make_offer') }}
               @endif
             @else
-              Make Offer
+              {{ trans('general.entries.make_offer') }}
             @endif
           </a>
         </li>
 
         @if ($images && count($images) > 1)
         <li>
-          <a href="#view_images_tab" role="tab" data-toggle="tab">More Images</a>
+          <a href="#view_images_tab" role="tab" data-toggle="tab">{{ trans('general.entries.more_images') }}</a>
         </li>
         @endif
 
         <!-- <li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li> -->
         <li>
-          <a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">Comments</a>
+          <a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">{{ trans('general.entries.comments_tab') }}</a>
         </li>
       </ul> <!-- nav-tabs -->
 
@@ -141,7 +141,7 @@
               @if (Auth::user()->id != $entry->created_by)
                 @if ((!$entry->expired) && ($entry->completed_at==''))
                 <form id="offerForm">
-                  <p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> Only the owner of this entry can see these messages.</p>
+                  <p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> {{ trans('general.entries.only_owner') }}</p>
 
                   <!--MAKE AN OFFER-->
                   {!! csrf_field() !!}
@@ -153,10 +153,10 @@
                   </div> <!-- col 12 -->
 
                   <div class="col-xs-12 col-sm-12 col-md-12 form-group clearfix">
-                    <textarea rows="5" name="message" id="message" class="form-control" placeholder="Your offer &#133;"></textarea>
+                    <textarea rows="5" name="message" id="message" class="form-control" placeholder="{{ trans('general.entries.subject_placeholder') }}"></textarea>
                   </div>  <!-- col-xs-12 -->
 
-                  <p class='margin-bottom-6 pull-left'>I would like to:</p>
+                  <p class='margin-bottom-6 pull-left'>{{ trans('general.entries.i_would_like') }}</p>
                   <div class="col-xs-12 col-sm-12 col-md-12 padding-bottom-20">
                     <div class="form-group {{ $errors->first('message', 'has-error') }}">
                       <ul class="exchange_types">
@@ -174,7 +174,7 @@
 
                   <div class="col-md-9 col-sm-12 col-xs-12 form-group" id="amountbox" style="display:none;">
                     <div class="col-md-3">
-                      <p class="help-block">Offer an amount</p>
+                      <p class="help-block">{{ trans('general.entries.offer_amount') }}</p>
                     </div>
 
                     <div class="input-group col-md-3">
@@ -186,22 +186,22 @@
                   </div>  <!-- col-md-9 -->
 
                   <div class="col-xs-12 col-sm-12  col-md-3  form-group pull-right">
-                    <button type="submit" class="btn btn-warning pull-right" id="messageSubmit">Make Offer</button>
+                    <button type="submit" class="btn btn-warning pull-right" id="messageSubmit">{{ trans('general.entries.make_offer') }}</button>
                   </div>  <!-- col-md-3 -->
                 </form>
 
                 @else  <!-- expired -->
                   @if ($entry->expired)
-                    <p>Sorry, this tile has expired!</p>
+                    <p>{{ trans('general.entries.sorry_expired') }}</p>
                   @elseif ($entry->completed_at!='')
-                    <p>This entry has been completed and is no longer available for offers. Still interested? <a href="{{ route('entry.create.form') }}">List it as a want or a have</a>!</p>
+                    <p>{{ trans('general.entries.completed_interest') }} <a href="{{ route('entry.create.form') }}">{{ trans('general.entries.list') }}</a></p>
                   @endif
                 @endif <!-- expired -->
               @else
-                <p>Offers on this entry go here.</p>
+                <p>{{ trans('general.entries.offer_here') }}</p>
               @endif <!-- user -->
             @else
-              <p>Please <a class="btn btn-warning btn-xs" href="/auth/signin">Sign in</a> or <a class="btn btn-info btn-xs" href="/auth/signup">Sign up</a> to make an offer</p>
+              <p>{{ trans('general.entries.please') }} <a class="btn btn-warning btn-xs" href="/auth/signin">{{ trans('general.entries.offer_here') }}{{ trans('general.entries.sign_in') }}</a> {{ trans('general.entries.or') }} <a class="btn btn-info btn-xs" href="/auth/signup">{{ trans('general.entries.sign_up') }}</a> {{ trans('general.entries.to_make_offer') }}</p>
             @endif <!-- logged in -->
 
           </div> <!-- col-xs-12 -->
@@ -223,13 +223,13 @@
             <div id="map" style="height: 250px;"></div>
           @else
             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px;">
-              <p>The owner of this tile has not posted any location information yet.</p>
+              <p>{{ trans('general.entries.no_location') }}</p>
             </div>
           @endif <!-- latitude, longitude -->
         </div> <!-- tab-pane -->
 
         <div class="tab-pane" id="comments">
-          <p class="help-block">Comments posted here are publicly viewable.</p>
+          <p class="help-block">{{ trans('general.entries.public_comments') }}</p>
           <div class="fb-comments" data-href="{{ URL::to('entry/'.$entry->id.'/view/') }}" data-numposts="5" data-colorscheme="light" data-width="800" style="width: 100%">
           </div>
         </div>  <!-- tab-pane -->
