@@ -33,7 +33,7 @@
                                     <li><a href="{{ URL::to('features') }}">{{ trans('general.nav.features') }}</a></li>
                                     <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
                                     @if (Auth::check())
-                                    <li><button class="margin-top-10 btn-warning btn btn-sm contained-button size-18 weight-800 font-smoothing bg_share+ "><a class="text-white" href="{{ route('community.create.form') }}" >{{ trans('general.nav.share+') }}</a></button></li>
+                                    
 
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-smm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
@@ -42,6 +42,8 @@
                                             <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
                                         </ul>
                                     </li>
+
+                                    <li><button class="margin-top-15 btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing bg_share+ "><a class="text-white" href="{{ route('community.create.form') }}" >{{ trans('general.nav.share+') }}</a></button></li>
                                     @else
                                     <li><a href="{{ route('user.register') }}">Try</a></li>
 
