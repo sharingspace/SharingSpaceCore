@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.entries.edit') }} ::
+     {{ trans('general.entries.edit_entry') }} ::
 @parent
 @stop
 
@@ -14,7 +14,7 @@
 <section>
   <div id="edit_entry" class="container margin-top-20">
     <div class="row">
-      <h1 class="margin-bottom-20 size-24 text-center">{{ trans('general.entries.edit') }}</h1>
+      <h1 class="margin-bottom-20 size-24 text-center">{{ trans('general.entries.edit_entry') }}</h1>
       <!-- Entry form -->
 @include('./entries/entry_form')
     </div>

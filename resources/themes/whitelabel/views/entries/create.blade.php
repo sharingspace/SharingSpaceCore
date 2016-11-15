@@ -21,7 +21,7 @@
       <!-- Added tiles .... -->
       <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 margin-bottom-0">
         <table class="table" id="create_table" style="display:none;">
-          <caption>You Added</caption>
+          <caption>{{ trans('general.entries.added') }}</caption>
           <thead>
             <tr>
               <th>{{ trans('general.entries.post_type') }}</th>
@@ -29,7 +29,7 @@
               <th>{{ trans('general.entries.title') }}</th>
               <th>{{ trans('general.entries.exchange_types') }}</th>
               <th>{{ trans('general.entries.keywords') }}</th>
-              <th>Action</th>
+              <th>{{ trans('general.entries.action') }}</th>
               <th style='display:none'></th>
             </tr>
           </thead>

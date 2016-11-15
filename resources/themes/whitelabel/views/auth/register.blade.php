@@ -64,7 +64,7 @@
 
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
               <label class="checkbox nomargin">
-                <input checked class="checked-agree" type="checkbox" name="join-hub"><i></i><strong>{{ucfirst('testgroup')}}</strong> - I want to join this Share
+                <input checked class="checked-agree" type="checkbox" name="join-hub"><i></i><strong>{{ucfirst('testgroup')}}</strong>{{ trans('general.register.i_want_to_join') }}
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>
@@ -147,7 +147,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 								&times;
 							</button>
-							<h4 class="modal-title" id="myModal">Terms &amp; Conditions</h4>
+							<h4 class="modal-title" id="myModal">{{ trans('general.register.terms') }} &amp; {{ trans('general.register.conditions') }}</h4>
 						</div>
 
 						<div class="modal-body modal-short">
@@ -283,10 +283,10 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> I Agree</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.register.cancel') }}</button>
+							<button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> {{ trans('general.register.i_agree') }}</button>
 
-							<a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> Print</span></a>
+							<a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> {{ trans('general.register.print') }}</span></a>
 						</div>
 
 					</div><!-- /.modal-content -->

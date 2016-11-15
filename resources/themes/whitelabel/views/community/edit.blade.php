@@ -147,7 +147,7 @@
               <!-- Logo upload -->
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                <label for="cover_img">Logo image</label>
+                <label for="cover_img">{{ trans('general.community.logo')}}</label>
                   <div class="fancy-file-upload fancy-file-info">
                     <i class="fa fa-picture-o"></i>
                     <input type="file" class="form-control" id="logo_img" name="logo" onchange="jQuery(this).next('input').val(this.value);" />
@@ -176,7 +176,7 @@
                 <label for="theme">
                   {{ trans('general.community.choose_theme')}}
                 </label>
-                {{ Form::select('theme', $themes, $community->theme, array('class'=>'select2', 'style'=>'width:100%')) }}
+                {{ Form::select('theme', $themes, $community->theme, array('class'=>'select', 'style'=>'width:100%')) }}
                 {!! $errors->first('theme', '<span class="help-block">:message</span>') !!}
               </div> <!-- Theme -->
 
@@ -249,7 +249,7 @@
                 <legend>{{ trans('general.community.analytics')}}</legend>
                 <!-- Google analytics ID -->
                 <div class="form-group{{ $errors->first('ga', ' has-error') }}">
-                  <label for="slack_channel" class="sr-only">Google analytics tracking id</label>
+                  <label for="slack_channel" class="sr-only">{{ trans('general.community.ga_id') }}</label>
 
                   <input type="text" name="ga" class="form-control" placeholder="{{ trans('general.community.for_example')}}" value="{{ Input::old('ga', $community->ga) }}">
                   {!! $errors->first('ga', '<span class="help-block">:message</span>') !!}
@@ -283,13 +283,13 @@
       </div>
       <div class="modal-body">
         <ul>
-          <li><strong>Open</strong> - an open sharing website lets anyone join and exchange. It's the most permissive way to build a community with AnyShare. </li>
-          <li><strong>Closed</strong> - a closed sharing website lets you approve members before they join. You can also invite members! Visitors to your sharing website can see basic information on its content, but not the details.</li>
-          <!-- <li><strong>Secret</strong> - a secret sharing website is hidden from anyone who is not a member. It is the top level of privacy on AnyShare. </li> -->
+          <li><strong>{{ trans('general.community.open.type') }}</strong> - {{ trans('general.community.open.desc') }}</li>
+          <li><strong>{{ trans('general.community.closed.type') }}</strong> - {{ trans('general.community.closed.desc') }}</li>
+          <!-- <li><strong>{{ trans('general.community.secret.type') }}</strong> - {{ trans('general.community.secret.desc') }}</li> -->
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
       </div>
     </div>
 
@@ -331,7 +331,7 @@
         <h4 class="modal-title">{{ trans('general.community.slack_webhook')}}</h4>
       </div>
       <div class="modal-body">
-        <p>Incoming Webhooks are a simple way to post messages from external sources into Slack. They make use of normal HTTP requests with a JSON payload that includes the message text and some options. Message Attachments can also be used in Incoming Webhooks to display richly-formatted messages that stand out from regular chat messages. See <a href="https://api.slack.com/incoming-webhooks">{{ trans('general.community.slack_setting_up_webhook')}}</a>.</p>
+        <p>{{ trans('general.community.incoming_hook')}} <a href="https://api.slack.com/incoming-webhooks">{{ trans('general.community.slack_setting_up_webhook')}}</a>.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -18,11 +18,11 @@
 		<div class="col-lg-9 col-md-9 col-sm-8 col-lg-push-3 col-md-push-3 col-sm-push-4 margin-bottom-80 margin-top-20">
 
 			<ul class="nav nav-tabs nav-top-border">
-				<li class="active"><a href="#info" data-toggle="tab">Personal Info</a></li>
-        <li><a href="#social" data-toggle="tab">Social</a></li>
-				<li><a href="#avatar" data-toggle="tab">Avatar</a></li>
-				<li><a href="#password" data-toggle="tab">Password</a></li>
-				<!-- <li><a href="#privacy" data-toggle="tab">Privacy</a></li> -->
+				<li class="active"><a href="#info" data-toggle="tab">{{trans('general.settings.personal')}}</a></li>
+        <li><a href="#social" data-toggle="tab">{{trans('general.settings.social')}}</a></li>
+				<li><a href="#avatar" data-toggle="tab">{{trans('general.settings.avatar')}}</a></li>
+				<li><a href="#password" data-toggle="tab">{{trans('general.settings.password')}}</a></li>
+				<!-- <li><a href="#privacy" data-toggle="tab">{{trans('general.settings.privacy')}}Privacy</a></li> -->
 			</ul>
 
 			<div class="tab-content margin-top-20">
@@ -36,44 +36,44 @@
 
             <!-- Display Name -->
             <div class="col-md-12 form-group {{ $errors->first('display_name', 'has-error') }}">
-               <label class="control-label" for="display_name">Display Name</label>
+               <label class="control-label" for="display_name">{{trans('general.settings.display_name')}}</label>
                 <input type="text" placeholder="Awesome66" class="form-control" name="display_name" value="{{ Input::old('display_name', Auth::user()->display_name) }}">
                 {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- Email  -->
             <div class="col-md-12 form-group {{ $errors->first('email', 'has-error') }}">
-               <label class="control-label" for="email">Email</label>
+               <label class="control-label" for="email">{{trans('general.settings.email')}}</label>
                 <input type="text" placeholder="you@example.com" class="form-control" name="email" autocomplete="off" value="{{ Input::old('email', Auth::user()->email) }}" readonly onfocus="this.removeAttribute('readonly');" style="background-color: white;">
                 {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- First Name -->
             <div class="col-md-12 form-group {{ $errors->first('first_name', 'has-error') }}">
-               <label class="control-label" for="first_name">First Name</label>
-                <input type="text" placeholder="Felicia" class="form-control" name="first_name" value="{{ Input::old('first_name', Auth::user()->first_name) }}">
+               <label class="control-label" for="first_name">{{trans('general.settings.first_name')}}</label>
+                <input type="text" placeholder="{{trans('general.settings.first_name_placeholder')}}" class="form-control" name="first_name" value="{{ Input::old('first_name', Auth::user()->first_name) }}">
                 {!! $errors->first('first_name', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- Last Name -->
             <div class="col-md-12 form-group {{ $errors->first('last_name', 'has-error') }}">
-               <label class="control-label" for="last_name">Last Name</label>
-                <input type="text" placeholder="Doe" class="form-control" name="last_name" value="{{ Input::old('last_name', Auth::user()->last_name) }}">
+               <label class="control-label" for="last_name">{{trans('general.settings.last_name')}}</label>
+                <input type="text" placeholder="{{trans('general.settings.last_name_placeholder')}}" class="form-control" name="last_name" value="{{ Input::old('last_name', Auth::user()->last_name) }}">
                 {!! $errors->first('last_name', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- About -->
             <div class="col-md-12 form-group {{ $errors->first('bio', 'has-error') }}">
-               <label class="control-label" for="bio">About</label>
-								 <textarea class="form-control" rows="3" placeholder="About Me..." name="bio">{{ Input::old('bio', Auth::user()->bio) }}</textarea>
+               <label class="control-label" for="bio">{{trans('general.settings.about')}}</label>
+								 <textarea class="form-control" rows="3" placeholder="{{trans('general.settings.about_placeholder')}}" name="bio">{{ Input::old('bio', Auth::user()->bio) }}</textarea>
                 {!! $errors->first('bio', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- Location -->
             <div class="col-md-12 form-group {{ $errors->first('location', 'has-error') }}">
-              <label class="control-label" for="location">Location</label>
+              <label class="control-label" for="location">{{trans('general.settings.location')}}</label>
               <div class="input-group">
-              <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}" placeholder="Address, City, Country">
+              <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}" placeholder="{{trans('general.settings.location_placeholder')}}">
               <div class="input-group-addon" id="basic-addon2"><i class="fa fa-location-arrow" id="geolocate"></i></div>
                {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
              </div>
@@ -81,8 +81,8 @@
 
             <!-- Website -->
             <div class="col-md-12 form-group {{ $errors->first('website', 'has-error') }}">
-               <label class="control-label" for="website">Website Url</label>
-                <input type="text" placeholder="http://www.yourwebsite.com" class="form-control" name="website" value="{{ Input::old('website', Auth::user()->website) }}">
+               <label class="control-label" for="website">{{trans('general.settings.web_url')}}</label>
+                <input type="text" placeholder="{{trans('general.settings.web_placeholder')}}" class="form-control" name="website" value="{{ Input::old('website', Auth::user()->website) }}">
                 {!! $errors->first('website', '<span class="help-block">:message</span>') !!}
             </div>
 
@@ -101,7 +101,7 @@
             {{ csrf_field() }}
 
   					<div class="col-md-12">
-            	<h4>Social Links &amp; Connections</h4>
+            	<h4>{{trans('general.settings.social_links')}} &amp; {{trans('general.settings.connections')}}</h4>
             </div>
 
             <div class="col-md-12 social">
@@ -149,7 +149,7 @@
                 <div class=" col-sm-10" style="margin-top: -5px">
                   <div class="checkbox">
                     <label>
-                      {{ Form::checkbox('post_to_fb', '1', Input::old('post_to_fb', Auth::user()->post_to_fb)) }} Post my tiles to my Facebook profile
+                      {{ Form::checkbox('post_to_fb', '1', Input::old('post_to_fb', Auth::user()->post_to_fb)) }} {{trans('general.settings.fb_post')}}
                     </label>
                   </div>
                 </div> <!-- col-md-10 -->
@@ -158,7 +158,7 @@
                   <div class="checkbox">
                     <label>
                       {{ Form::checkbox('fave_to_fb', '1', Input::old('fave_to_fb', Auth::user()->fave_to_fb)) }}
-                      Post my faves to my Facebook profile
+                      {{trans('general.settings.fb_fav')}}
                     </label>
                   </div>
                 </div> <!-- col-md-10 -->
@@ -199,12 +199,12 @@
                 <button id="remove_img_button" class="pull-right smooth_font btn btn-warning btn-sm margin-left-10 margin-top-6">{{trans('general.entries.remove')}}</button>
                 <label id="delete_img_checkbox_label" class="pull-right margin-top-6" for="delete_img">
                   {{ Form::checkbox('delete_img', 1, 0, ['id'=>'delete_img'])}}
-                  <i></i> Delete image
+                  <i></i> {{trans('general.settings.delete_image')}}
                 </label>
               </div>
 
   						<div class="col-md-12 col-sm-12 margin-top-20">
-  							<p>We recommend using an image that is a 250 pixels by 250 pixels.</p>
+  							<p>{{trans('general.settings.image_recommend')}}</p>
   						</div>
   					</div> <!-- row -->
 
@@ -220,15 +220,15 @@
             {{ csrf_field() }}
 
 						<div class="form-group">
-							<label class="control-label">Current Password</label>
+							<label class="control-label">{{trans('general.settings.current_pw')}}</label>
 							<input type="password" class="form-control" name="password">
 						</div>
 						<div class="form-group">
-							<label class="control-label">New Password</label>
+							<label class="control-label">{{trans('general.settings.new_pw')}}</label>
 							<input type="password" class="form-control" name="new_password">
 						</div>
 						<div class="form-group">
-							<label class="control-label">Re-type New Password</label>
+							<label class="control-label">{{trans('general.settings.retype_pw')}}</label>
 							<input type="password" class="form-control" name="confirm_password">
 						</div>
 
@@ -246,26 +246,26 @@
           <form role="form" method="post" action="{{ route('user.privacy.save') }}">
             {{ csrf_field() }}
             <div class="col-md-12 pull-left margin-bottom-10">
-              <label class="checkbox col-md-12 pull-left margin-bottom-10">Allow my entries to be seen by visitors
-                {{ Form::checkbox('agree') }} <i></i> 
+              <label class="checkbox col-md-12 pull-left margin-bottom-10">{{trans('general.settings.see_entries')}}
+                {{ Form::checkbox(trans('general.settings.agree')) }} <i></i> 
               </label>
             </div>
 
             <div class="col-md-12 pull-left margin-bottom-10">
-              <label class="checkbox col-md-12 pull-left margin-bottom-10">Allow my profile to show on member page
-                {{ Form::checkbox('agree') }} <i></i> 
+              <label class="checkbox col-md-12 pull-left margin-bottom-10">{{trans('general.settings.see_members')}}
+                {{ Form::checkbox(trans('general.settings.agree')) }} <i></i> 
               </label>
             </div>
 
             <div class="col-md-12 pull-left margin-bottom-10">
-              <label class="checkbox col-md-12 pull-left margin-bottom-10">Allow members to contact me with offers
-                {{ Form::checkbox('agree') }} <i></i> 
+              <label class="checkbox col-md-12 pull-left margin-bottom-10">{{trans('general.settings.contact')}}
+                {{ Form::checkbox(trans('general.settings.agree')) }} <i></i> 
               </label>
             </div>
 
             <div class="col-md-12 pull-left margin-bottom-10">
-              <label class="checkbox col-md-12 pull-left margin-bottom-10">Allow contact form on profile page
-                {{ Form::checkbox('agree') }} <i></i> 
+              <label class="checkbox col-md-12 pull-left margin-bottom-10">{{trans('general.settings.contact_form')}}
+                {{ Form::checkbox(trans('general.settings.agree')) }} <i></i> 
               </label>
             </div>
 
