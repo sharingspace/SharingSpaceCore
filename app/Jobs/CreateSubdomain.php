@@ -33,12 +33,7 @@ class CreateSubdomain extends Job implements ShouldQueue
         $client = new \Cloudflare\Api(config('services.cloudflare.email'), config('services.cloudflare.secret'));
         $client->setCurlOption(CURLOPT_SSL_VERIFYPEER, false);
         $dns = new \Cloudflare\Zone\Dns($client);
-        if ($this->domain == 'anyshare.coop') {
-            $dns->create('e0cd975ea66a6154cc1820a011e76392', 'CNAME', $this->subdomain, $this->domain, 1, true);
-        } elseif ($this->domain == 'anysha.re') {
+        $dns->create('e0cd975ea66a6154cc1820a011e76392', 'CNAME', $this->subdomain, config('app.domain'), 1, true);
 
-        }
-
-        
     }
 }
