@@ -6,6 +6,7 @@ use App\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Log;
 
 class CreateSubdomain extends Job implements ShouldQueue
 {
@@ -34,6 +35,7 @@ class CreateSubdomain extends Job implements ShouldQueue
         $client->setCurlOption(CURLOPT_SSL_VERIFYPEER, false);
         $dns = new \Cloudflare\Zone\Dns($client);
         $dns->create('e0cd975ea66a6154cc1820a011e76392', 'CNAME', $this->subdomain, config('app.domain'), 1, true);
+        Log::debug('New subdomain '.$this->subdomain.' on domain '.config('app.domain').' created successfully.');
 
     }
 }
