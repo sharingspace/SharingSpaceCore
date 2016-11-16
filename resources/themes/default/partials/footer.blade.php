@@ -12,17 +12,17 @@
                   <a href="/" class="w-nav-brand">
                     <img width="20" src="{{ Helper::cdn('img/hp/anyshare-mark.png') }}" class="footer-mark">
                   </a>
-                <!-- &copy; {{ date("Y") }} All Rights Reserved, AnyShare Society. -->
+                <!-- &copy; {{ date("Y") }} {{ trans('footer.rights_reserved') }} -->
                 </div> <!-- col 3 -->
 
                 <div class="col-md-6 col-sm-9 col-xs-12 center-xs margin-top-6 margin-bottom-6">
                   <ul class="margin-bottom-6 padding-bottom-0 list-inline mobile-block pull-right-sm">
-                    <li><a href="/about">About</a></li>
-                    <!-- <li><a href="http://blog.massmosaic.com">News</a></li>
-                    <li><a href="/coop">Coop</a></li>  -->
-                    <li><a href="https://anyshare.freshdesk.com/support/home">Support</a></li>
-                    <li><a href="/terms">Terms</a></li>
-                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/about">{{ trans('footer.about') }}</a></li>
+                    <!-- <li><a href="http://blog.massmosaic.com">{{ trans('footer.blog') }}</a></li>
+                    <li><a href="/coop">{{ trans('footer.coop') }}</a></li>  -->
+                    <li><a href="https://anyshare.freshdesk.com/support/home">{{ trans('footer.support') }}</a></li>
+                    <li><a href="/terms">{{ trans('footer.terms') }}</a></li>
+                    <li><a href="/privacy">{{ trans('footer.privacy') }}</a></li>
                   </ul>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 socials center-xs margin-top-0 margin-bottom-0">
@@ -62,7 +62,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Subscribe</h4>
+        <h4 class="modal-title">{{ trans('footer.subscribe') }}</h4>
       </div>
       <div class="modal-body">
         <form class="validate margin-bottom-10" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
@@ -70,13 +70,13 @@
             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
             <input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
             <span class="input-group-btn">
-              <button class="btn btn-success" type="submit">Subscribe</button>
+              <button class="btn btn-success" type="submit">{{ trans('footer.subscribe') }}</button>
             </span>
           </div>
         </form>      
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('footer.modal_close') }}</button>
       </div>
     </div>
 

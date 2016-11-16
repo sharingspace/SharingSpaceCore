@@ -6,10 +6,10 @@
     <div class="container margin-top-20 text-center">
         <div class="row text-muted">
             <div class="col-md-12">
-                <p class="lead">Congratulations, you’re the newest AnyShare Coop Member! We’re happy to be working with you now. We’ll email you soon with details about voting, dividends, and other Coop Member-Only privileges.In the meantime, let your friends on social media know that you’ve taken a big step towards creating a more fair and rewarding economy for all!</p>
+                <p class="lead">{{ trans('coop.congrats')}}</p>
             </div>
             
-            <p class="lead">In the meantime, let those on social media know that you've taken steps to a fairer and more rewarding economy for all.</p>
+            <p class="lead">{{ trans('coop.meantime')}}</p>
             
             <div class="col-md-6">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//anysha.re/coop" target="_blank">
@@ -27,10 +27,10 @@
     <div class="container margin-top-20 text-center">
         <div class="row text-muted">
         <div class="col-md-9">
-          <h2 class="white-secondary-heading">Make your own Sharing Website</h2>
+          <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
         </div>
         <div class="col-md-3">
-            <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button size-20">START NOW</a>
+            <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
         </div>
       </div>
     </div>

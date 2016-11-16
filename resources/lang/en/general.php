@@ -34,7 +34,11 @@ return [
 			'my_orders' => 'My Orders',
       'billing_history' => 'Billing History',
       'tos' => 'Terms and Conditions',
-      'share+' => 'Share +'
+      'share+' => 'Share +',
+      'memberships' => 'Memberships',
+      'new_messages' => 'new messages',
+      'view_all' => 'View all messages',
+      'about' => 'About',
     ],
 
     'settings' => [
@@ -71,6 +75,11 @@ return [
       'contact_form' => 'Allow contact form on profile page',
     ],
 
+    'email' => [
+      'today' => 'today',
+      'reply' => 'Leave a Reply',
+      'submit' => 'Send',
+    ],
 
     'entries'  => [
       'entry' => 'Entry',
@@ -230,9 +239,15 @@ return [
       'i_agree' => 'I agree',
       'print' => 'Print',
       'message' => ':message',
-      'i_want_to_join' => ' - I want to join this Share'
+      'i_want_to_join' => ' - I want to join this Share',
+      'join_share' => 'Join this Share'
     ],
     'community'  => [
+      'join_headline' => 'Join Share',
+      'account_great' => 'Great, you have created an AnyShare account',
+      'share_join' => 'Do you wish to join',
+      'closed_share' => 'If this is a closed hub, you will need to request to join.',
+      'join'  => 'Join',
       'community' => 'Share',
       'location' => 'Location',
       'about' => 'About',
