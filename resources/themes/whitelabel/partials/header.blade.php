@@ -123,7 +123,7 @@
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-            @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)))
+            @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)) && !$whitelabel_group->getRequestCount(Auth::user()->id))
               <li>
                 <a style="color:white;" href="{{ route('community.request-access.form') }}">
                   <button type="button" class="btn btn-warning btn-sm">
