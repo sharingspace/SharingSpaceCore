@@ -291,7 +291,7 @@ class CommunitiesController extends Controller
                 }
             );
 
-            return redirect('https://'.$community->subdomain.'.'.Config::get('app.domain').'/community/edit')->with('success', trans('general.community.save_success'));
+            return redirect('https://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success', trans('general.community.save_success'));
 
         }
 
