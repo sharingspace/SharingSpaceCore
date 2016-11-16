@@ -11,7 +11,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> Memberships</a></li>
+            <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> {{ trans('general.nav.memberships') }}</a></li>
             <li><a href="{{ route('user.profile', Auth::user()->id) }}"><i class="fa fa-user"></i> {{ trans('general.nav.profile') }}</a></li>
             <li><a href="{{ route('user.settings.view') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
             <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
@@ -30,7 +30,7 @@
 					<div class="notifications-popdown-box" style="display: none;border-left: 1px rgba(91, 91, 91, 0.2) solid; padding-left: 10px;">
 						<div class="notifications-popdown-wrapper">
               <div class="clearfix margin-bottom-20 text-center"><!-- notification item -->
-                  {{ Auth::user()->getUnreadMessagesCount() }} new messages
+                  {{ Auth::user()->getUnreadMessagesCount() }} {{ trans('general.nav.new_messages') }}
               </div>
               @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
                 <div class="clearfix margin-bottom-10 member_thumb">
@@ -53,7 +53,7 @@
 
 						<!-- quick cart footer -->
 						<div class="notifications-popdown-footer clearfix">
-							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">View all Messages</a>
+							<a href="/account/messages" class="btn btn-primary btn-xs pull-right">{{ trans('general.nav.view_all') }}</a>
 							<!-- <span class="pull-left"><strong>TOTAL:</strong> $54.39</span> -->
 						</div>
 						<!-- /quick cart footer -->
@@ -113,7 +113,7 @@
           <ul class="nav navbar-nav">
             <li class="add_entry_button">
               <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> Entry</span></button>
+                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.entry') }}</span></button>
               </a>
             </li>
           </ul>
@@ -127,7 +127,7 @@
               <li>
                 <a style="color:white;" href="{{ route('community.request-access.form') }}">
                   <button type="button" class="btn btn-warning btn-sm">
-                    Join this Share
+                    {{ trans('general.register.join_share') }}
                   </button>
                 </a>
               </li>
@@ -152,7 +152,7 @@
                 (($whitelabel_group->group_type!='S') || 
                 (Auth::user()->isMemberOfCommunity($whitelabel_group) || 
                 $user->isSuperAdmin()))))
-              <li><a href="" id="display_about">About</a></li>
+              <li><a href="" id="display_about">{{ trans('general.nav.about') }}</a></li>
             @endif
 
             @can('update-community', $whitelabel_group)

@@ -40,7 +40,7 @@
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
-                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('auth.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
@@ -49,7 +49,7 @@
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('auth.latin') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
@@ -58,7 +58,7 @@
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
-                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('auth.latin') }}</b>
               </label>
               {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
             </div>
@@ -92,7 +92,7 @@
         <form action="#" method="post" class="sky-form boxed">
 
           <header class="size-18 margin-bottom-20">
-            <i class="fa fa-users"></i> Social Network &hellip;
+            <i class="fa fa-users"></i> {{ trans('auth.social_signup') }}
           </header>
 
           <fieldset class="nomargin">
@@ -146,7 +146,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
-				<h4 class="modal-title" id="myModal">Terms &amp; Conditions</h4>
+				<h4 class="modal-title" id="myModal">{{ trans('auth.terms') }} &amp; {{ trans('auth.conditions') }}</h4>
 			</div> <!-- modal-header -->
 
 			<div class="modal-body modal-short">

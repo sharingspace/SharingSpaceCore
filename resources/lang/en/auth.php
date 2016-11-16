@@ -22,5 +22,14 @@ return [
     'already_have_account' => 'Already have an account? <a href="../auth/login">Sign-in now</a>',
     'no_account' => 'Don\'t have an account? <a href="../auth/register">Sign-up here</a> first.',
     'create_account' => 'Create an AnyShare Account',
-    'join_public_shares' => 'Join public Shares for FREE'
+    'join_public_shares' => 'Join public Shares for FREE',
+    'verify' => 'Needed to verify your account',
+    'latin' => 'Only latin characters and numbers',
+    'social' => 'Login using a social network',
+    'social_signup' => 'Sign up using a social network',
+    'terms' => 'Terms',
+    'conditions' => 'Conditions',
+    'cancel' => 'Cancel',
+    'agree' => 'I Agree',
+    'print' => 'Print',
 ];

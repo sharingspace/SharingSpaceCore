@@ -50,7 +50,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="{{ Helper::cdn('css/hp/webflow.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ Helper::cdn('css/hp/anyshare-corp.webflow.css') }}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.26/webfontloader.js" integrity="sha256-+6jNhQy77vjBVW8D4TAIG0HBtnzN9YreZOvtii8vrAM=" crossorigin="anonymous" async></script>
+  <!-- David - webFont would not load when "async" added to it -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.26/webfontloader.js" integrity="sha256-+6jNhQy77vjBVW8D4TAIG0HBtnzN9YreZOvtii8vrAM=" crossorigin="anonymous"></script>
   <script>
     WebFont.load({
       google: {

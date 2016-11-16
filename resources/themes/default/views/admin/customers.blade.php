@@ -27,15 +27,15 @@ p
                            data-cookie-id-table="customers">
                         <thead>
                         <tr>
-                            <th>User</th>
-                            <th>Email</th>
-                            <th>Hub</th>
-                            <th>Active</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Trial Started</th>
-                            <th>Trial Ends</th>
-                            <th>Next Charge</th>
+                            <th>{{ trans('customers.user') }}</th>
+                            <th>{{ trans('customers.email') }}</th>
+                            <th>{{ trans('customers.share') }}</th>
+                            <th>{{ trans('customers.active') }}</th>
+                            <th>{{ trans('customers.type') }}</th>
+                            <th>{{ trans('customers.date') }}</th>
+                            <th>{{ trans('customers.trial_start') }}</th>
+                            <th>{{ trans('customers.trial_end') }}</th>
+                            <th>{{ trans('customers.next_charge') }}</th>
                         </tr>
                         </thead>
                         <tbody>
