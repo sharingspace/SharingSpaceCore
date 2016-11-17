@@ -58,6 +58,10 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
+    'google_maps' => [
+        'api_key' => env('GOOGLE_MAPS_API_KEY'),
+    ],
+
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT'),
         'client_secret' => env('FACEBOOK_SECRET'),

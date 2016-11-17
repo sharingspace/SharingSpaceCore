@@ -1,5 +1,5 @@
 
-<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false&amp;key={{ config('services.google_maps.api_key') }}"></script>
 <script>
 $(function(){
 		function initialize() {
