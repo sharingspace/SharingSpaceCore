@@ -45,7 +45,7 @@
 
                                     <li><button class="margin-top-15 btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing bg_share+ "><a class="text-white" href="{{ route('community.create.form') }}" >{{ trans('general.nav.share+') }}</a></button></li>
                                     @else
-                                    <li><a href="{{ route('user.register') }}">Try</a></li>
+                                    <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
 
                                     <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
                                     @endif
@@ -85,8 +85,8 @@
             <h1 class="heading">{{ trans('coop.congrats') }}</h1>
             <h2 class="subheading">{{ trans('coop.you_are_member') }}</h2>
         @elseif (Route::is('about'))
-            <h1 class="heading">{{trans('general.nav.about_mission') }}</h1>
-            <h2 class="subheading">{{ trans('about.end_scarcity') }}</h2>
+            <h1 class="heading">{{trans('about.headline') }}</h1>
+            <h2 class="subheading">{{ trans('about.sub_headline') }}</h2>
         @elseif (Route::is('features'))
             <h1 class="heading">Features.</h1>
             <h2 class="subheading">"Shares" help a group or community exchange.</h2>
@@ -98,6 +98,8 @@
         @elseif (Route::is('user.register'))
             <h1 class="heading">{{ trans('auth.create_account') }}</h1>
             <h2 class="subheading">{{ trans('auth.join_public_shares') }}</h2>
+        @elseif (Route::is('pricing_page'))
+            <h1 class="heading">{{ trans('pricing.headline') }}</h1>
         @else  
             <!-- using route name as the h1 -->
             <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>

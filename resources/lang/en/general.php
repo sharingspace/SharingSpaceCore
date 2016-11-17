@@ -18,7 +18,7 @@ return [
     'nav'  => [
       'browse' => 'Browse',
       'create' => 'Create',
-      'try_it' => 'Free Trial',
+      'try' => 'Try',
       'start_now' => 'FREE TO TRY',
       'login' => 'Sign-In',
       'logout' => 'Logout',
