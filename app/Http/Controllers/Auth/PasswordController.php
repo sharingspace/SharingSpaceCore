@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+/**
+ * This controller handles password resets for the user.
+ * It uses the built-in Laravel magic of ResetsPasswords, so we
+ * don't actually do much here.
+ *
+ * @author [A. Gianotto] [<snipe@snipe.net>]
+ * @version    v1.0
+ */
 class PasswordController extends Controller
 {
     /*
@@ -28,5 +36,14 @@ class PasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Get the e-mail subject line to be used for the reset link email.
+     * Overriding method "getEmailSubject()" from trait "use ResetsPasswords"
+     * @return string
+     */
+    public function getEmailSubject(){
+        return property_exists($this, 'subject') ? $this->subject : 'Password Reset';
     }
 }
