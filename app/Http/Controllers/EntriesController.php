@@ -519,10 +519,10 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->where('created_by', $user_id);
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
         }
         else {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes')->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -567,7 +567,7 @@ class EntriesController extends Controller
             $user = null;
         }
 
-        $exchangeTypes=array();
+
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
                 $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'">
@@ -587,9 +587,7 @@ class EntriesController extends Controller
                 $exchangeTypes[] = $et->name;
             }
 
-            $image = \DB::table('media')
-                ->where('entry_id', '=', $entry->id)
-                ->first();
+            $image = $entry->media->first();
 
             if ($image) {
                 $imageTag = '<a href="'.route('entry.view', $entry->id).'"><img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image"></a>';
