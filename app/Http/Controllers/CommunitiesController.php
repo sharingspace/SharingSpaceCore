@@ -187,7 +187,8 @@ class CommunitiesController extends Controller
     */
     public function postCreate(Request $request)
     {
-        $token = Input::get('stripeToken');
+
+        $token = $request->input('stripeToken');
 
         // No stripe token - something went wrong :(
         if (!isset($token)) {
@@ -196,9 +197,9 @@ class CommunitiesController extends Controller
 
         $community = new \App\Community();
 
-        $community->name    = e(Input::get('name'));
-        $community->subdomain    = strtolower(e(Input::get('subdomain')));
-        $community->group_type    = e(Input::get('group_type'));
+        $community->name    = e($request->input('name'));
+        $community->subdomain    = strtolower(e($request->input('subdomain')));
+        $community->group_type    = e($request->input('group_type'));
         $community->created_by    = Auth::user()->id;
 
         if ($community->isInvalid()) {
@@ -220,7 +221,7 @@ class CommunitiesController extends Controller
             $customer->createStripeCustomer(
                 [
                 'email' => $customer->email,
-                'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e(Input::get('name')),
+                'description' => 'Name: '.$customer->getDisplayName().', Hub Name: '.e($request->input('name')),
                 'metadata' => $metadata,
                 ]
             );
@@ -229,9 +230,9 @@ class CommunitiesController extends Controller
 
         $data['name'] = $customer->getDisplayName();
         $data['email'] = $customer->email;
-        $data['community_name'] = e(Input::get('name'));
-        $data['subdomain'] = strtolower(Input::get('subdomain'));
-        $data['type'] = e(Input::get('subscription_type'));
+        $data['community_name'] = e($request->input('name'));
+        $data['subdomain'] = strtolower($request->input('subdomain'));
+        $data['type'] = e($request->input('subscription_type'));
 
         if (!$customer->save()) {
             return Redirect::back()->withInput()->with('error', 'Something went wrong.');
@@ -247,14 +248,14 @@ class CommunitiesController extends Controller
         try {
             $stripe_subscription = $customer
                 ->subscription()
-                ->onPlan(e(Input::get('subscription_type')))
+                ->onPlan(e($request->input('subscription_type')))
                 //->trialFor(Carbon::now()->addDays(15))
                 ->create();
 
             // set the given discount
             if (Input::has('coupon')) {
                 try {
-                    $customer->applyStripeDiscount(e(Input::get('coupon')));
+                    $customer->applyStripeDiscount(e($request->input('coupon')));
                 } catch (\Exception $e) {
                     return Redirect::back()->withInput()->with('error', 'Something went wrong while trying to process your coupon request: '.$e->getMessage().'');
                 }
@@ -274,6 +275,8 @@ class CommunitiesController extends Controller
             // Will switch to anysha.re soon
             dispatch (new \App\Jobs\CreateSubdomain($community->subdomain, 'anyshare.coop'));
 
+            Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
+
             // Save the community_id to the subscriptions table
             $subscription = \App\CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
             $subscription->community_id = $community->id;
@@ -286,12 +289,11 @@ class CommunitiesController extends Controller
                 ['text' => 'emails.welcomeText', 'html' => 'emails.welcomeHTML'],
                 $data,
                 function ($message) use ($data) {
-
                     $message->to($data['email'], $data['name'])->subject('Welcome to AnyShare!');
                 }
             );
 
-            return redirect('https://'.$community->subdomain.'.'.Config::get('app.domain'))->with('success', trans('general.community.save_success'));
+            return redirect('https://'.$community->subdomain.'.'.config('app.domain'))->with('success', trans('general.community.save_success'));
 
         }
 

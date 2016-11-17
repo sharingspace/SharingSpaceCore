@@ -4,6 +4,6 @@ Hi {{ $name }}!
 
 Your new Sharing Website is ready!
 
-http://{{ $subdomain}}.anysha.re
+https://{{ $subdomain}}.{{ config('app.domnain') }}
 
 Keep being awesome.

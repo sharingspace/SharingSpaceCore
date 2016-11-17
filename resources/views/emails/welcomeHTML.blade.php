@@ -6,7 +6,7 @@
 
     <p>Your new Sharing Website is ready!</p>
 
-    <p><a class="hub_link" href="http://{{ $subdomain}}.anysha.re">{{ $subdomain}}.anysha.re</a></p>
+    <p><a class="hub_link" href="https://{{ $subdomain }}.{{ config('app.domain') }}">{{ $subdomain }}.{{ config('app.domain') }}</a></p>
 
     <p>Keep being awesome.</p>
 </div>
