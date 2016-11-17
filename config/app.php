@@ -184,6 +184,7 @@ return [
         Jenssegers\Rollbar\RollbarServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class
 
     ],
 
@@ -243,6 +244,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
-        'ApiGuardAuth' => Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class
+        'ApiGuardAuth' => Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
     ],
 ];

@@ -8,6 +8,7 @@
  * @package AnyShare
  * @version v1.0
  */
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class Helper
 {
@@ -50,8 +51,7 @@ class Helper
      */
     public static function parseText($str)
     {
-        $Parsedown = new Parsedown();
-        return $Parsedown->text(e($str));
+        return Markdown::convertToHtml($str);
     }
 
 
