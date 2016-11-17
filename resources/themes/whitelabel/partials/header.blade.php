@@ -181,16 +181,18 @@
 
 @if( strlen($whitelabel_group->about))
 <div class="container" style="position:relative;">
-  <div id="about_panel" style="top:0;right: 0;bottom: 0;left: auto;position: absolute;">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="about_content">
-          <i class="close_about pull-right fa fa-times fa-2x margin-right-10 margin-top-10"></i>
-          <p class="margin-left-15 margin-right-15 padding-top-30 padding-bottom-15">{{ $whitelabel_group->about }}</p>
+    <div id="about_panel" style="top:0;right: 0;bottom: 0;left: auto;position: absolute;">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="about_content">
+            <i class="close_about pull-right fa fa-times fa-2x margin-right-10 margin-top-10"></i>
+              <div class="margin-left-15 margin-right-15 padding-top-30 padding-bottom-15">
+                  {!! Markdown::convertToHtml($whitelabel_group->about) !!}
+              </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
 @endif
 
