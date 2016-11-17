@@ -603,9 +603,11 @@ Route::group(
 
         Route::get(
             'pricing',
-            function () {
-                return view('pricing');
-            }
+            array(
+                'as' => 'pricing_page',
+                function () {
+                    return view('pricing');
+            })
         );
 
         Route::get(
