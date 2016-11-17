@@ -8838,4 +8838,43 @@ section.TreborScholz {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/**
+ * about page
+ *
+ **/
+.fancy_font {
+  font-style: italic;
+  font-family: "Open Sans",sans-serif;
+}
+
+.about_intro {
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:35px;
+}
+
+.about_headline {
+  font-size:25px;
+  font-style: italic;
+  font-family: "Open Sans",sans-serif;
+  margin-bottom:15px;
+}
+
+.about_cta {
+  background-color: #04970a;
+}
+
+.worked_hard {
+  padding-top: 160px;
+  padding-bottom: 172px;
+  background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .6), hsla(0, 0%, 48%, .6)),  url("/assets/img/about/worked_hard.jpg");
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, .6), hsla(0, 0%, 48%, .6)),  url("/assets/img/about/worked_hard.jpg");
+  background-position: 0px 0px, 0px 0px;
+  background-size: auto, cover!important;
+  background-repeat: repeat, no-repeat;
+  color: #fff;
+  text-align: center;
+}
+
 /*************** Bootstrap extensions ******************/
