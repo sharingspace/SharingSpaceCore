@@ -152,7 +152,7 @@
                 (($whitelabel_group->group_type!='S') || 
                 (Auth::user()->isMemberOfCommunity($whitelabel_group) || 
                 $user->isSuperAdmin()))))
-              <li><a href="" id="display_about">{{ trans('general.nav.about') }}</a></li>
+              <li><a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.nav.about') }}</a></li>
             @endif
 
             @can('update-community', $whitelabel_group)
@@ -180,19 +180,24 @@
 @endif
 
 @if( strlen($whitelabel_group->about))
-<div class="container" style="position:relative;">
-    <div id="about_panel" style="top:0;right: 0;bottom: 0;left: auto;position: absolute;">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="about_content">
-            <i class="close_about pull-right fa fa-times fa-2x margin-right-10 margin-top-10"></i>
-              <div class="margin-left-15 margin-right-15 padding-top-30 padding-bottom-15">
-                  {!! Markdown::convertToHtml($whitelabel_group->about) !!}
-              </div>
-          </div>
-        </div>
+<!-- Modals -->
+
+<div id="aboutModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">About {{$whitelabel_group->name}}</h4>
+      </div>
+      <div class="modal-body">
+        {!! Markdown::convertToHtml($whitelabel_group->about) !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
       </div>
     </div>
+  </div>
 </div>
 @endif
 
