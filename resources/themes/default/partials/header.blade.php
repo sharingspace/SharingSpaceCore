@@ -22,7 +22,7 @@
 
                         <!-- Logo -->
                         <a href="/" class="w-nav-brand">
-                            <img width="200" src="{{ Helper::cdn('img/hp/anyshare-logo-web-retina.png') }}" class="logo">
+                            <img width="230" src="{{ Helper::cdn('img/hp/anyshare-logo-web-retina.png') }}" class="logo">
                             <!-- <img width="230" src="/assets/img/hp/anyshare-logo-beta.png" class="logo"> -->
                         </a>
 
@@ -63,17 +63,19 @@
            <h1 class="heading">{{ trans('home.home_headline') }}</h1>
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
+                <div class="header_cta_button">
+                    <a class="w-button cta-button contained-button size-20" href="https://anyshare.coop/community/new">{{ trans('general.nav.try') }}</a>
+                </div>
             </h2>
-            <div class="scroll-button-div"></div>
         @elseif (Route::is('login'))
             <h1 class="heading">{{trans('general.nav.login') }}</h1>
         @elseif (Route::is('register'))
-            <h1 class="heading">
+            <h2 class="heading">
                 {{trans('general.nav.register') }}
             @if (!empty($subdomain))
                 <h2 class="subheading size-30 margin-top-20">To join <em>{{ucfirst($subdomain)}}'s</em> share,<br>create an account with AnyShare</h2>
             @endif
-            </h1>
+            </h2>
         @elseif (Route::is('community.create.form'))
             <h1 class="heading">{{trans('general.community.create') }}</h1>
         @elseif (Route::is('assistance'))

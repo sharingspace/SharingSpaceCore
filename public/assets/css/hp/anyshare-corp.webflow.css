@@ -10,7 +10,7 @@
 }
 
 .logo {
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 .background-video {
@@ -47,14 +47,14 @@
   padding-bottom: 13px;
   font-size: 50px;
   position: relative;
-  top: 35%;
+  top: 23%;
   line-height: 130%;
   -ms-transform: translate(0, -30%);
   transform: translate(0, -30%);
 }
 
 .hp_subheading {
-  top: 37%;
+  top: 23%;
   -ms-transform: translate(0, -32%);
   transform: translate(0, -32%);
 }

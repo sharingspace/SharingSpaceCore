@@ -68,9 +68,8 @@
 		<div id="wrapper">
 
       @if (Route::is('home'))
-
         {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}
-        {{--*/ $bannerHeight = '750px' /*--}}
+        {{--*/ $bannerHeight = '906px' /*--}}
         <div>@include('partials.header')</div>
       @else
         {{--*/ $bannerClasses = '' /*--}}
