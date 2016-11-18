@@ -53,6 +53,10 @@
             </div>
           </div>
 
+            <footer>
+             Forgot your password? <a href="{{ route('forgot_password.email.form') }}">Click here.</a>
+            </footer>
+
         </form>
         <!-- /register form -->
 
