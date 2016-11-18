@@ -67,6 +67,47 @@ Route::group(
         |--------------------------------------------------------------------------
         */
 
+        // Forgotten password
+        Route::get(
+            'auth/forgot',
+            array(
+                'as' => 'forgot_password.email.form',
+                'uses' => 'Auth\PasswordController@getEmail')
+        );
+
+        // Forgotten password
+        Route::post(
+            'auth/forgot',
+            array(
+                'as' => 'forgot_password.email.send',
+                'uses' => 'Auth\PasswordController@postEmail')
+        );
+
+        // Password Reset Token
+        Route::get(
+            'password/reset/{token?}',
+            array(
+                'as' => 'forgot_password.token',
+                'uses' => 'Auth\PasswordController@showResetForm')
+        );
+
+
+        // Password Reset Token
+        Route::post(
+            'password/reset',
+            array(
+                'as' => 'forgot_password',
+                'uses' => 'Auth\PasswordController@reset')
+        );
+
+        // Password Reset Token
+        Route::get(
+            'password/reset',
+            array(
+                'as' => 'forgot_password',
+                'uses' => 'Auth\PasswordController@reset')
+        );
+
         Route::group(
             array('prefix' => 'auth'),
             function () {
@@ -585,3 +626,4 @@ Route::group(
         );
     }
 );
+
