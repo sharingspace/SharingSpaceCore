@@ -28,7 +28,6 @@ class FixSomeIncorrectColumnTypes extends Migration
             $table->string('logo', 100)->nullable()->default(NULL)->change();
 
             // Add some indexes
-            $table->index('created_by');
             $table->index('parent_id');
             $table->index('group_type');
             $table->index('subdomain');
