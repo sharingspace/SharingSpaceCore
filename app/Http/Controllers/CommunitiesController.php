@@ -347,9 +347,13 @@ class CommunitiesController extends Controller
         $community->slack_slash_want_token    = e(Input::get('slack_slash_want_token'));
         $community->slack_slash_have_token    = e(Input::get('slack_slash_have_token'));
         $community->slack_slash_members_token    = e(Input::get('slack_slash_members_token'));
+        $community->ga = e(Input::get('ga'));
+        $community->show_info_bar = e(Input::get('show_info_bar'));
 
-        $community->ga    = e(Input::get('ga'));
-
+        if ($community->show_info_bar == null) {
+            $community->show_info_bar = 1;
+        }
+       
         if (Input::get('location')) {
             $community->location = e(Input::get('location'));
             $latlong = Helper::latlong(Input::get('location'));

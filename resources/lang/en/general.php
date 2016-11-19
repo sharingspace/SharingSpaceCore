@@ -314,6 +314,7 @@ return [
       'logo' => 'Logo image',
       'ga_id' => 'Google analytics tracking id',
       'close' => 'Close',
+      'info_box' => 'This is the information bar that is shown on your home page. Use the checkbox to hide it.',
       'incoming_hook' => 'Incoming Webhooks are a simple way to post messages from external sources into Slack. They make use of normal HTTP requests with a JSON payload that includes the message text and some options. Message Attachments can also be used in Incoming Webhooks to display richly-formatted messages that stand out from regular chat messages. See ',
 
       'exchange_types' => [

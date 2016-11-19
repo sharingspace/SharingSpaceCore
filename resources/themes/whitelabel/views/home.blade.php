@@ -8,6 +8,7 @@
 {{-- Page content --}}
 @section('content')
 
+@if ($whitelabel_group->show_info_bar)
 <section class="info-bar hidden-xs">
 	<div class="container">
 
@@ -53,7 +54,7 @@
 		</div>
 	</div>
 </section>
-<!-- /INFO BAR -->
+@endif <!-- /INFO BAR -->
 
 <div class="col-md-12 margin-top-20">
   <!-- Notifications -->

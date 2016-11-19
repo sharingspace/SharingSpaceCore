@@ -78,7 +78,19 @@
                       </div>
                       {!! $errors->first('location', '<span class="help-block">:message</span>') !!}
                    </div>
-                  </div> <!-- Location -->                 
+                  </div> <!-- Location --> 
+
+                  <label class="margin-top-6" for="info_bar" style="display: block;">
+                    Hide home page information bar?
+                    <input name="show_info_bar" type="checkbox" value="0"
+                    @if (!$whitelabel_group->show_info_bar)
+                      checked
+                    @endif
+                    >
+                    <button type="button" class="" data-toggle="modal" data-target="#infoBarModal">
+                      <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
+                    </button>
+                  </label>
                 </div> <!-- col-md-8 -->
 
                 <div class="col-md-4 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
@@ -272,9 +284,27 @@
 
 <!-- Modals -->
 
+<div id="infoBarModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Hide Information Bar?</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{trans('general.community.info_box')}}</p>
+        <img src="/assets/img/info_bar.png" width="100%" alt="home page information bar featuring privacy level of share, number of members and exchange types" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="privacyLevelModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -292,7 +322,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
       </div>
     </div>
-
   </div>
 </div>
 
