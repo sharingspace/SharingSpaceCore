@@ -19,6 +19,7 @@ return [
       'browse' => 'Browse',
       'create' => 'Create',
       'try' => 'Try',
+      'try_now' => 'Try Now',
       'start_now' => 'FREE TO TRY',
       'login' => 'Sign-In',
       'logout' => 'Logout',
@@ -39,6 +40,7 @@ return [
       'new_messages' => 'new messages',
       'view_all' => 'View all messages',
       'about' => 'About',
+      'join_public_shares_free' => 'Join public Shares for FREE.<br>Or start your own in 1 minute!'
     ],
 
     'settings' => [

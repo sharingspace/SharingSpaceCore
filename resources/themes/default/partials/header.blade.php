@@ -64,7 +64,7 @@
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
                 <div class="header_cta_button">
-                    <a class="w-button cta-button contained-button size-20" href="https://anyshare.coop/community/new">{{ trans('general.nav.try') }}</a>
+                    <a class="w-button cta-button contained-button size-20" href="https://anyshare.coop/community/new">{{ trans('general.nav.try_now') }}</a>
                 </div>
             </h2>
         @elseif (Route::is('login'))
@@ -93,8 +93,8 @@
             <h1 class="heading">Features.</h1>
             <h2 class="subheading">"Shares" help a group or community exchange.</h2>
         @elseif (Route::is('auth/register'))
-            <h1 class="heading">Try</h1>
-            <h2 class="subheading">"Join public Shares for FREE.<br>Or start your own in 1 minute!</h2>
+            <h1 class="heading">{{ trans('general.nav.try_now') }}</h1>
+            <h2 class="subheading">{!! trans('general.nav.join_public_shares_free')!!}</h2>
         @elseif (Route::is('user.history'))
             <h1 class="heading">{{ trans('general.nav.my_orders') }}</h1>
         @elseif (Route::is('user.register'))

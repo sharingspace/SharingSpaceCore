@@ -47,14 +47,13 @@
   padding-bottom: 13px;
   font-size: 50px;
   position: relative;
-  top: 23%;
-  line-height: 130%;
-  -ms-transform: translate(0, -30%);
-  transform: translate(0, -30%);
+  top: 35%;
+  -ms-transform: translate(0,-30%);
+  transform: translate(0,-30%);
 }
 
 .hp_subheading {
-  top: 23%;
+  top: 37%;
   -ms-transform: translate(0, -32%);
   transform: translate(0, -32%);
 }
