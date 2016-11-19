@@ -293,7 +293,7 @@
         <h4 class="modal-title">Hide Information Bar?</h4>
       </div>
       <div class="modal-body">
-        <p>The information bar as shown below, appears on the front page.</p>
+        <p>{{trans('general.community.info_box')}}</p>
         <img src="/assets/img/info_bar.png" width="100%" alt="home page information bar featuring privacy level of share, number of members and exchange types" />
       </div>
       <div class="modal-footer">
