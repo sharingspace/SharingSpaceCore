@@ -9337,6 +9337,10 @@ section.TreborScholz {
   text-align: center;
 }
 
+.no_bullets {
+  list-style-type: none;
+}
+
 /*************** Bootstrap extensions ******************/
 /** ************************************* **
 
