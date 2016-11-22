@@ -57,7 +57,7 @@
             @if ($user->bio)
             <div class="col-xs-12">
               <p class="margin-bottom-6"><strong>Bio:</strong></p>
-              <p>{{ $user->bio }}</p>
+              {!! Markdown::convertToHtml($user->bio) !!}
             </div> <!-- col 12 -->
             @endif
             <div class="col-md-12">

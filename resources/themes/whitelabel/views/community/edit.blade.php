@@ -63,7 +63,8 @@
 
                   <!-- Description -->
                   <div class="form-group {{ $errors->first('about', 'has-error') }}">
-                    <label class="input">{{trans('general.community.description')}}
+                    <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a href="
+https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )
                       <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="{{trans('general.community.detailed_description')}}">{{ Input::old('about', $community->about) }}</textarea>
                     </label>
                   </div> <!-- Description -->
@@ -293,7 +294,6 @@
         <h4 class="modal-title">Hide Information Bar?</h4>
       </div>
       <div class="modal-body">
-        <p>{{trans('general.community.info_box')}}</p>
         <img src="/assets/img/info_bar.png" width="100%" alt="home page information bar featuring privacy level of share, number of members and exchange types" />
       </div>
       <div class="modal-footer">
@@ -327,7 +327,6 @@
 
 <div id="slackbotModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -345,7 +344,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
 

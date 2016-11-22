@@ -13,6 +13,7 @@ return [
     'no_about_data'  => 'The owner of this group has not entered any information about it yet.',
     'seo_title' => 'Build a Sharing Website with AnyShare',
     'token_expired' => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
+    'markdown' => 'markdown allowed',
 
 
     'nav'  => [
@@ -58,7 +59,7 @@ return [
       'email_placeholder' => 'you@example.com',
       'first_name_placeholder' => 'First Name', 
       'last_name_placeholder' => 'Last Name',
-      'about_placeholder' => 'About me...',
+      'about_placeholder' => 'About me',
       'web_url' => 'Website URL',
       'web_placeholder' => 'http://yourwebsite.com',
       'social_links' => 'Social Links', 
