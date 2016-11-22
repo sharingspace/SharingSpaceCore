@@ -49,19 +49,6 @@ class PasswordController extends Controller
         return property_exists($this, 'subject') ? $this->subject : 'Password Reset';
     }
 
-
-    /**
-     * In respons eto a reset password link, display the reset password form
-     *
-     * @param  string  $token
-     * @return reset password view
-     */    
-    public function showResetForm($token)
-    {
-        return view('auth.passwords.reset')->with('token', $token);
-    }
-
-
     /**
      * Get the response for after the reset link has been successfully sent.
      *
