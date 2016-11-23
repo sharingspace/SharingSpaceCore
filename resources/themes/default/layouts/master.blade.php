@@ -69,7 +69,7 @@
 
       @if (Route::is('home'))
         {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}
-        {{--*/ $bannerHeight = '906px' /*--}}
+        {{--*/ $bannerHeight = '938px' /*--}}
         <div>@include('partials.header')</div>
       @else
         {{--*/ $bannerClasses = '' /*--}}
@@ -105,7 +105,7 @@
 <script type="text/javascript" src="{{ Helper::cdn('js/webflow.js') }}"></script>
 <script type="text/javascript">
   $(document).ready(function(){ 
-    //$('.max_autoplay_movies').css('height',  window.innerHeight); 
+    $('.max_autoplay_movies').css('height', window.innerHeight); 
       
      var scroll_start = 30;
      var startchange = $('#header');

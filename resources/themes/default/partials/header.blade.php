@@ -1,5 +1,5 @@
 <div class="w-section">
-    <div class="w-background-video background-video {{$bannerClasses}}" style="color:red;height:{{$bannerHeight}}">
+    <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
         <video autoplay="autoplay" loop="loop" poster='{{ Helper::cdn('img/hp/poster.png') }}'>
             @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
                 <source src="{{ Helper::cdn('movies/clothing-transcode.webm') }}" data-wf-ignore="">
