@@ -164,7 +164,7 @@
           <h3 class="coop-now-heading">To become a Coop Member, please sign-in or sign-up and return here to complete your application.</h3>
           <p>
             <a href="{{ route('login') }}" class="btn btn-primary">{{ trans('general.nav.login') }} </a>
-            <a href="{{ route('register') }}" class="btn btn-primary">{{ trans('general.nav.register') }} </a>
+            <a href="{{ route('user.register') }}" class="btn btn-primary">{{ trans('general.nav.register') }} </a>
           </p>
         @endif
         </div>
