@@ -7,6 +7,7 @@
         <div class="row text-muted">
             <div class="col-md-12">
                 <p class="lead">{{ trans('coop.congrats')}}</p>
+                <p class="lead">{{ trans('coop.you_are_member')}}</p>
             </div>
             
             <p class="lead">{{ trans('coop.meantime')}}</p>

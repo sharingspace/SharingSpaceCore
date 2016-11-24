@@ -29,7 +29,7 @@ class CommunityPermissionMiddleware
         // This is a whitelabel group, otherwise skip it
         if ($request->whitelabel_group) {
             //LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
-            if ($request->whitelabel_group->group_type!='O') {
+            if ($request->whitelabel_group->group_type != 'O') {
                 //LOG::debug('CommunityPermissionMiddleware: This is a closed or secret group');
 
                 // If the user is logged in, check that they are a member
@@ -72,7 +72,7 @@ class CommunityPermissionMiddleware
                     return $next($request);
                 }
             }
-            else { // This group is not restricted
+            else { // This group is not restricted, ie open
                 if (Auth::check()) {
                     if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
                         //LOG::debug('CommunityPermissionMiddleware: exit This user is authorized to see this open hub');
@@ -82,10 +82,12 @@ class CommunityPermissionMiddleware
                         //LOG::debug('CommunityPermissionMiddleware: Open hub but user is not a member, path = ('.$request->path().') ('."users/".Auth::user()->id.")");
 
                         if ($request->path() == "/" || $request->path() == "entry/json.browse" || $request->path() == "users/".Auth::user()->id ) {
+                            // we let people see some pages of an open share
                             return $next($request);
                         }
-
-                        return view('join-open-community', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
+                        
+                        // lets ask the user whether they would like to join this share
+                        return view('join-open', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
                     }
                 }
             }

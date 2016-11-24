@@ -85,7 +85,7 @@
           </div>
           <div class="col-sm-3 col-xs-12 margin-top-10">
             <button type="button" class="btn" style="background-color:black">
-              <a class="text-white bold" href="{{ route('community.create.form') }}" style="width:100%">{{ trans('about.lets_go') }}</a>
+              <a class="text-white bold" href="{{ route('coop') }}" style="width:100%">{{ trans('about.lets_go') }}</a>
             </button>
           </div>
         </div>
