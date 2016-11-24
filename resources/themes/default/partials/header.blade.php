@@ -87,7 +87,6 @@
             <h2 class="subheading">{{ trans('coop.mission_subheadline') }}</h2>
         @elseif (Route::is('coop_success'))
             <h1 class="heading">{{ trans('coop.congrats') }}</h1>
-            <h2 class="subheading">{{ trans('coop.you_are_member') }}</h2>
         @elseif (Route::is('about'))
             <h1 class="heading">{{trans('about.headline') }}</h1>
             <h2 class="subheading">{{ trans('about.sub_headline') }}</h2>
