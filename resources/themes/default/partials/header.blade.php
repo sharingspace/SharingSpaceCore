@@ -64,7 +64,9 @@
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
                 <div class="header_cta_button">
-                    <a class="w-button cta-button contained-button size-20" href="https://anyshare.coop/community/new">{{ trans('general.nav.try_now') }}</a>
+                    <a class="w-button cta-button contained-button size-20" href="{{ route('community.create.form') }}">
+                        {{ trans('general.nav.try_now') }}
+                    </a>
                 </div>
             </h2>
         @elseif (Route::is('login'))
