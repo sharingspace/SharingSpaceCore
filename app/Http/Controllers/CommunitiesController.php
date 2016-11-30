@@ -187,7 +187,6 @@ class CommunitiesController extends Controller
     */
     public function postCreate(Request $request)
     {
-
         $token = $request->input('stripeToken');
 
         // No stripe token - something went wrong :(
@@ -225,14 +224,20 @@ class CommunitiesController extends Controller
                 'metadata' => $metadata,
                 ]
             );
-
         }
 
         $data['name'] = $customer->getDisplayName();
         $data['email'] = $customer->email;
-        $data['community_name'] = e($request->input('name'));
+        $data['community_name'] = e(ucfirst($request->input('name')));
         $data['subdomain'] = strtolower($request->input('subdomain'));
         $data['type'] = e($request->input('subscription_type'));
+        if( Config::get('app.debug')) {
+            // this is for testing only
+            $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+        }
+        else {
+            $data['logo'] = Config::get('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
+        }
 
         if (!$customer->save()) {
             return Redirect::back()->withInput()->with('error', 'Something went wrong.');
@@ -265,17 +270,16 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->with('error', 'Something went wrong creating your subscription: '.$e->getMessage().'');
         }
 
-
         $customer->subscription()->syncWithStripe();
         $customer->card()->syncWithStripe();
-
 
         if ($community->save()) {
             // Creating anyshare.coop subdomains in Cloudflare right now. 
             // Will switch to anysha.re soon
+            // linnard - need to check with Alison about whether this should e removed
             dispatch (new \App\Jobs\CreateSubdomain($community->subdomain, 'anyshare.coop'));
 
-            Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
+            //Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
 
             // Save the community_id to the subscriptions table
             $subscription = \App\CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
@@ -293,10 +297,8 @@ class CommunitiesController extends Controller
                 }
             );
 
-            return redirect('https://'.$community->subdomain.'.'.config('app.domain').'/community/edit')->with('success', trans('general.community.save_success'));
-
+            return redirect('https://'.$community->subdomain.'.'.config('app.domain').'/share/edit')->with('success', trans('general.community.save_success'));
         }
-
     }
 
 

@@ -3,38 +3,18 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Simple Transactional Email</title>
+    <title>AnyShare.coop Email</title>
     <style>
-     /* --------------------
-          ANYSHARE STYLES
-      ------------------------------------- */
-      .thin_red_top {
-        border-top:#e8c9c9 9px solid!important;
-        border-radius: 4px;
-      }
-
-      .thin_red_bottom {
-        border-top:#e8c9c9 9px solid;
-        border-radius: 4px;
-      }
-
-      .thick_red {
-        background-color:#f0dbdb;
-        padding:15px 10px;
-        color:#404040!important;
-      }
-
-      .grey_background {
-        padding:20px 10px;
-        background-color: #F5F5F5;
-      }
+ 
       /* -------------------------------------
           GLOBAL RESETS
       ------------------------------------- */
       img {
         border: none;
         -ms-interpolation-mode: bicubic;
-        max-width: 100%; }
+        max-width: 100%;
+      }
+
       body {
         background-color: #D8A1A1;
         font-family: sans-serif;
@@ -44,22 +24,28 @@
         margin: 0;
         padding: 0; 
         -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%; }
+        -webkit-text-size-adjust: 100%;
+      }
       table {
         border-collapse: separate;
         mso-table-lspace: 0pt;
         mso-table-rspace: 0pt;
-        width: 100%; }
-        table td {
-          font-family: sans-serif;
-          font-size: 16px;
-          vertical-align: top; }
+        width: 100%;
+      }
+
+      table td {
+        font-family: sans-serif;
+        font-size: 16px;
+        vertical-align: top;
+      }
       /* -------------------------------------
           BODY & CONTAINER
       ------------------------------------- */
       .body {
         background-color: #f6f6f6;
-        width: 100%; }
+        width: 100%;
+      }
+
       /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
       .container {
         display: block;
@@ -68,71 +54,79 @@
         max-width: 580px;
         padding: 10px;
         width: auto !important;
-        width: 580px; }
+        width: 580px;
+      }
+
       /* This should also be a block element, so that it will fill 100% of the .container */
       .content {
         box-sizing: border-box;
         display: block;
         Margin: 0 auto;
         max-width: 580px;
-        padding: 10px; }
+        padding: 10px;
+      }
       /* -------------------------------------
           HEADER, FOOTER, MAIN
       ------------------------------------- */
       .main {
         background: #fff;
         border-radius: 3px;
-        width: 100%; }
+        width: 100%;
+      }
+
       .wrapper {
         box-sizing: border-box;
-        padding: 20px; }
-      .footer {
+        padding: 20px;
+      }
+      .header, .footer {
+        background-color:#222;
         clear: both;
-        padding-top: 10px;
         text-align: center;
-        width: 100%; }
-        .footer td,
-        .footer p,
-        .footer span,
-        .footer a {
-          color: #999999;
-          font-size: 12px;
-          text-align: center; }
+        width: 100%; 
+        color: #fff;
+      }
+      .header {
+        margin-bottom:10px;
+        margin-top:10px;
+        border-radius:5px;
+        padding-top:10px;
+        font-size: 30px;
+        line-height:40px;
+        font-weight:bold; 
+      }
+      .footer {
+        border-radius:5px;
+        font-size: 16px;
+        line-height:25px;      
+      }
       /* -------------------------------------
           TYPOGRAPHY
       ------------------------------------- */
-      h1,
-      h2,
-      h3,
-      h4 {
+      h1, h2, h3, h4 {
         color: #000000;
         font-family: sans-serif;
         font-weight: 400;
         line-height: 1.4;
         margin: 0;
-        Margin-bottom: 30px; }
+        Margin-bottom: 30px;
+      }
       h1 {
         font-size: 35px;
         font-weight: 300;
         text-align: center;
-        text-transform: capitalize; }
-      p,
-      ul,
-      ol {
+        text-transform: capitalize;
+      }
+      p, ul, ol {
         font-family: sans-serif;
         font-size: 14px;
         font-weight: normal;
         margin: 0;
-        Margin-bottom: 15px; }
-        p li,
-        ul li,
-        ol li {
-          list-style-position: inside;
-          margin-left: 5px; }
-      a {
-        color: #3498db;
-        text-decoration: underline; }
-
+        Margin-bottom: 15px;
+      }
+      p li, ul li, ol li {
+        list-style-position: inside;
+        margin-left: 5px;
+      }
       /* -------------------------------------
           OTHER STYLES THAT MIGHT BE USEFUL
       ------------------------------------- */
@@ -152,17 +146,6 @@
         margin-top: 0; }
       .mb0 {
         margin-bottom: 0; }
-      .preheader {
-        color: transparent;
-        display: none;
-        height: 0;
-        max-height: 0;
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
-        mso-hide: all;
-        visibility: hidden;
-        width: 0; }
       .powered-by a {
         text-decoration: none; }
       hr {
@@ -223,34 +206,43 @@
           font-weight: inherit !important;
           line-height: inherit !important;
           text-decoration: none !important; } 
-        
+        .btn-primary a {
+          color: #6ECFF7 !important;
+        }
         .btn-primary a:hover {
-          background-color: #34495e !important;
-          border-color: #34495e !important; } }
+          color: #666 !important;
+        } }
+
+    /* --------------------
+          ANYSHARE STYLES
+      ------------------------------------- */
+
+      .email_body {
+        padding-top:20px;
+        padding-left:5px;
+        color:#666!important;
+      }
+      .email_body a:hover {
+        color:#222!important;
+      }
     </style>
   </head>
   <body class="">
     <table border="0" cellpadding="0" cellspacing="0" class="body">
+     
       <tr>
         <td>&nbsp;</td>
         <td class="container">
           <div class="content">
-
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">
-              @yield('preheader')
-            </span>
-            <table class="main">
 
+            <table class="main">
               <!-- START MAIN CONTENT AREA -->
               <tr>
                 <td class="wrapper">
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td style="border-top:#f0dbdb 9px solid;border-bottom:#f0dbdb 9px solid;border-radius: 4px;">
-                        <div class="grey_background">
-                          @yield('logo')
-                        </div>
+                      <td>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -258,8 +250,23 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td class="thick_red">
+                                      <td>
+                                        @yield('logo')
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="header">
+                                        @yield('header')
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="email_body">
                                         @yield('content')
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="footer">
+                                        AnyShare Society
                                       </td>
                                     </tr>
                                   </tbody>
@@ -275,25 +282,8 @@
               </tr>
 
               <!-- END MAIN CONTENT AREA -->
-              </table>
+            </table>
 
-            <!-- START FOOTER -->
-            <div class="footer">
-              <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td class="content-block">
-                    <strong style="font-weight: bold;">
-                      AnyShare Society,
-                    </strong>
-                    &nbsp;&nbsp;
-                    <a href="https://arcosanti.org" target="blank">Arcosanti</a>, Arizona, USA
-                  </td>
-                </tr>
-              </table>
-            </div>
-
-            <!-- END FOOTER -->
-            
 <!-- END CENTERED WHITE CONTAINER --></div>
         </td>
         <td>&nbsp;</td>

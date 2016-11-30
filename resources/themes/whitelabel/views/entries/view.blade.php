@@ -81,13 +81,13 @@
 
                 @can('update-entry', $entry)
                   <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
-                  <i class="fa fa-pencil"></i> {{ trans('general.entries.edit') }}</a>
+                  <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
 
                   @if ($entry->completed_at=='')
                     <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
                     <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
                   @endif
-                    {{ Form::button("<i class='fa fa-trash'></i> trans('general.entries.delete')", array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
+                  {{ Form::button("<i class='fa fa-trash'></i> trans('general.entries.delete')", array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
                 @endcan
 
               {{ Form::close() }}
