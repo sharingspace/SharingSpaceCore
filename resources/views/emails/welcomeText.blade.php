@@ -1,9 +1,12 @@
 @extends('emails/layouts/text')
 
+Welcome to {{$community_name}}
+
 Hi {{ $name }}!
 
-Your new Sharing Website is ready!
+Your new Share is ready! Use the link below to finalize your Share settings.
 
-https://{{ $subdomain}}.{{ config('app.domnain') }}
+{{ $subdomain }}.{{ config('app.domain') }}
 
-Keep being awesome.
+Sincerely,
+Your {{$community_name}} bot
