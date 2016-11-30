@@ -285,7 +285,16 @@ class UserController extends Controller
                 $data['name'] = $user->display_name;
                 $data['subject'] = 'Welcome to the '.$data['uc_subdomain']. ' Share!';
                 $data['to_email'] = $user->email;
-                //getAcceptUserLOG::debug('getAcceptUser: email to be sent to = '.$user->email.'  '.Input::get('user_id'));
+                //LOG::debug('getAcceptUser: email to be sent to = '.$user->email.'  '.Input::get('user_id'));
+                if (!empty($request->whitelabel_group->logo)) {
+                    if( Config('app.debug')) {
+                        // this is for testing only
+                        $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+                    }
+                    else {
+                        $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
+                    }
+                }
 
                 Mail::send(['text' => 'emails.acceptedText', 'html' => 'emails.acceptedHTML'], $data,
                     function ($message) use ($data) {
