@@ -84,9 +84,11 @@
             <h2 class="white-secondary-heading pull-left margin-bottom-10">{{trans('about.you_can_own')}}</h2>
           </div>
           <div class="col-sm-3 col-xs-12 margin-top-10">
-            <button type="button" class="btn" style="background-color:black">
-              <a class="text-white bold" href="{{ route('coop') }}" style="width:100%">{{ trans('about.lets_go') }}</a>
-            </button>
+              <a class="text-white bold" href="{{ route('coop') }}" style="width:100%">
+                <button type="button" class="btn" style="background-color:black">
+                  {{ trans('about.lets_go') }}
+                </button>
+              </a>
           </div>
         </div>
       </div>

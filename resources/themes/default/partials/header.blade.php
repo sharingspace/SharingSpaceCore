@@ -43,7 +43,13 @@
                                         </ul>
                                     </li>
 
-                                    <li><button class="margin-top-15 btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing bg_share+ "><a class="text-white" href="{{ route('community.create.form') }}" >{{ trans('general.nav.share+') }}</a></button></li>
+                                    <li>
+                                        <a class="text-white" href="{{ route('community.create.form') }}" >
+                                            <button class="btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing">
+                                                {{trans('general.nav.share+')}}
+                                            </button>
+                                        </a>
+                                    </li>
                                     @else
                                     <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
 
