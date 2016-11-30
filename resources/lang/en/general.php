@@ -199,9 +199,10 @@ return [
       'login_by_social' => 'or with a social network',
       'signup_by_email' => 'Sign-up with email',
       'verify_account' => 'Needed to verify your account',
-      'join_requests' => 'Join Requets',
+      'join_requests' => 'Join Requests',
       'request_access' => [
         'headline' => 'Awesome!',
+        'request_to_join' => 'Request to Join',
         'your_request' => 'You have asked to become a member of this Share.',
         'notified' => 'You will be notified by email when an admin approves your membership.',
         'oops' => 'Oops!',

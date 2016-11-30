@@ -225,6 +225,10 @@
       .email_body a:hover {
         color:#222!important;
       }
+
+      .logo {
+        margin: 0 auto 10px;
+      }
     </style>
   </head>
   <body class="">
@@ -250,7 +254,7 @@
                                 <table border="0" cellpadding="0" cellspacing="0">
                                   <tbody>
                                     <tr>
-                                      <td>
+                                      <td class="logo">
                                         @yield('logo')
                                       </td>
                                     </tr>

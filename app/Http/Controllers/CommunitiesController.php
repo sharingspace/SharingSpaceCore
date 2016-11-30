@@ -228,10 +228,10 @@ class CommunitiesController extends Controller
 
         $data['name'] = $customer->getDisplayName();
         $data['email'] = $customer->email;
-        $data['community_name'] = e(ucfirst($request->input('name')));
+        $data['community_name'] = e($request->input('name'));
         $data['subdomain'] = strtolower($request->input('subdomain'));
         $data['type'] = e($request->input('subscription_type'));
-        if( Config::get('app.debug')) {
+        if( Config('app.debug')) {
             // this is for testing only
             $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
         }
@@ -274,11 +274,6 @@ class CommunitiesController extends Controller
         $customer->card()->syncWithStripe();
 
         if ($community->save()) {
-            // Creating anyshare.coop subdomains in Cloudflare right now. 
-            // Will switch to anysha.re soon
-            // linnard - need to check with Alison about whether this should e removed
-            dispatch (new \App\Jobs\CreateSubdomain($community->subdomain, 'anyshare.coop'));
-
             //Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
 
             // Save the community_id to the subscriptions table
