@@ -63,7 +63,7 @@
 
                   <!-- Description -->
                   <div class="form-group {{ $errors->first('about', 'has-error') }}">
-                    <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a href="
+                    <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a target="_blank" href="
 https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )
                       <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="{{trans('general.community.detailed_description')}}">{{ Input::old('about', $community->about) }}</textarea>
                     </label>
@@ -358,7 +358,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         <h4 class="modal-title">{{ trans('general.community.slack_webhook')}}</h4>
       </div>
       <div class="modal-body">
-        <p>{{ trans('general.community.incoming_hook')}} <a href="https://api.slack.com/incoming-webhooks">{{ trans('general.community.slack_setting_up_webhook')}}</a>.</p>
+        <p>{{ trans('general.community.incoming_hook')}} <a target="_blank" href="https://api.slack.com/incoming-webhooks">{{ trans('general.community.slack_setting_up_webhook')}}</a>.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

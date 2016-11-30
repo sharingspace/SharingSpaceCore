@@ -217,12 +217,14 @@ class MessagesController extends Controller
         $data['community'] = ucfirst($request->whitelabel_group->name);
         $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
 
-        if (!empty($request->whitelabel_group->logo)) { //.
-            // just for testing locally 
-            //$img = 'https://anyshare.coop/assets/img/hp/anyshare-logo-beta.png';
-            $img = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
-
-            $data['logo'] = '<img src="'.$img.'" height="41" alt="" style="line-height: 1;mso-line-height-rule: exactly;outline: none;border: 0;text-decoration: none;-ms-interpolation-mode: bicubic;">';
+        if (!empty($request->whitelabel_group->logo)) {
+            if( config('app.debug')) {
+                // this is for testing only
+                $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+            }
+            else {
+                $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
+            }
         }
 
         if ($offer->save()) {

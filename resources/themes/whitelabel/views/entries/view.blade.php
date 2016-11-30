@@ -87,7 +87,7 @@
                     <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
                     <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
                   @endif
-                  {{ Form::button("<i class='fa fa-trash'></i> trans('general.entries.delete')", array('type' => 'submit', 'class' => 'btn btn-xs btn-warning'))}}
+                  <button type="submit" class="btn btn-xs btn-warning"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
                 @endcan
 
               {{ Form::close() }}
