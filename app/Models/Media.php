@@ -79,7 +79,7 @@ class Media extends Model
                         $s3 = AWS::get('s3');
                         $s3->putObject(
                             array(
-                            'Bucket'     => Config::get('app.aws_bucket'),
+                            'Bucket'     => config('app.aws_bucket'),
                             'Key'        => $aws_path.'/'.$orig_filename,
                             'SourceFile' => $img_path,
                             'CacheControl' => 'max-age=172800',
@@ -128,7 +128,7 @@ class Media extends Model
                     $s3 = AWS::get('s3');
                     $s3->putObject(
                         array(
-                        'Bucket'     => Config::get('app.aws_bucket'),
+                        'Bucket'     => config('app.aws_bucket'),
                         'Key'        => $aws_path.'/'.$filename,
                         'SourceFile' => $img_path,
                         'CacheControl' => 'max-age=172800',

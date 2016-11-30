@@ -287,7 +287,7 @@ class UserController extends Controller
                 $data['to_email'] = $user->email;
                 //LOG::debug('getAcceptUser: email to be sent to = '.$user->email.'  '.Input::get('user_id'));
                 if (!empty($request->whitelabel_group->logo)) {
-                    if( Config('app.debug')) {
+                    if( config('app.debug')) {
                         // this is for testing only
                         $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
                     }

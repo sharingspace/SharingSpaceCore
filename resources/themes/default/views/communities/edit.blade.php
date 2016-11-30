@@ -128,7 +128,7 @@
 
       <script type="text/javascript">
         // This identifies your website in the createToken call below
-        Stripe.setPublishableKey('{{ Config::get('services.stripe.key') }}');
+        Stripe.setPublishableKey('{{ config('services.stripe.key') }}');
         // ...
       </script>
 

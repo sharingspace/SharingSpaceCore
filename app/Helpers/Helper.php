@@ -37,12 +37,12 @@ class Helper
         }
 
         if (isset($manifest['assets/'.$file])) {
-            $cdn_version_url = str_replace('/assets', '/', Config::get('services.cdn.default'));
+            $cdn_version_url = str_replace('/assets', '/', config('services.cdn.default'));
             return $cdn_version_url.$manifest['assets/'.$file];
 
         } else {
             // This file is not in the versioned manifest, so just include it
-            return Config::get('services.cdn.default').'/'.$file;
+            return config('services.cdn.default').'/'.$file;
         }
 
         throw new InvalidArgumentException("File {$file} not defined in asset manifest.");

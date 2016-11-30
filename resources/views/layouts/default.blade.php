@@ -47,7 +47,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ Config::get('app.url') }}">My Awesome Site</a>
+      <a class="navbar-brand" href="{{ config('app.url') }}">My Awesome Site</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

@@ -101,9 +101,9 @@ class AuthController extends Controller
         if ($request->session()->has('auth_subdomain')) {
             $subdomain = $request->session()->get('auth_subdomain');
             $request->session()->forget('auth_subdomain');
-            $redirect = 'https://'.$subdomain.'.'.Config::get('app.domain');
+            $redirect = 'https://'.$subdomain.'.'.config('app.domain');
         } else {
-            $redirect = Config::get('app.url');
+            $redirect = config('app.url');
         }
         try {
 

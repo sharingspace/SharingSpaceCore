@@ -208,7 +208,7 @@ class CommunitiesController extends Controller
         $customer = Auth::user();
         $metadata = array(
         //'name' => $customer->name,
-        //'subdomain' => strtolower(e(Input::get('subdomain'))).Config::get('session.domain'),
+        //'subdomain' => strtolower(e(Input::get('subdomain'))).config('session.domain'),
         //'email' => $customer->email,
         //'hub_name' => e(Input::get('name')),
         );
@@ -231,12 +231,12 @@ class CommunitiesController extends Controller
         $data['community_name'] = e($request->input('name'));
         $data['subdomain'] = strtolower($request->input('subdomain'));
         $data['type'] = e($request->input('subscription_type'));
-        if( Config('app.debug')) {
+        if( config('app.debug')) {
             // this is for testing only
             $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
         }
         else {
-            $data['logo'] = Config::get('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
+            $data['logo'] = config('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
         }
 
         if (!$customer->save()) {
