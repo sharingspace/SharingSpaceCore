@@ -46,7 +46,7 @@ p
                                 <td><a href="mailto:{{ $subscription->user->email }}">{{ $subscription->user->email }}</a></td>
                                 <td>
                                     @if ($subscription->community)
-                                        <a href="{{ $subscription->community->getCommunityUrl() }}.">{{ $subscription->community->name }}</a>
+                                        <a href="{{ $subscription->community->getCommunityUrl() }}">{{ $subscription->community->name }}</a>
                                     @endif
                                 </td>
                                 <td>
