@@ -217,7 +217,7 @@ class MessagesController extends Controller
                 $data['email'] = $send_to_email = $recipient->email;
                 $data['name'] = $send_to_name =  $recipient->getDisplayName();
                 $data['offer'] = $offer->message;
-                $data['community'] = ucfirst($request->whitelabel_group->name);
+                $data['community_name'] = ucfirst($request->whitelabel_group->name);
                 $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
 
                 if (!empty($request->whitelabel_group->logo)) {
