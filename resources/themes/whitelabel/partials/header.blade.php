@@ -69,7 +69,7 @@
       </ul>
 
       <!-- left -->
-      <ul class="top-links list-inline hide">
+      <ul class="top-links list-inline">
         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         <li>
           <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
