@@ -255,22 +255,29 @@ $(document).ready(function () {
           url: "{{ route('messages.create.save', [$entry->created_by, $entry->id]) }}",
           data: $('#offerForm').serialize(),
 
-          success: function(data){
+          success: function(data, textStatus, xhr){
             if (data.success) {
               $('#offerStatusbox').addClass('alert alert-success');
-              $('#offerStatusText').html('Success!');
-              $('#offerStatus').html(data.success.message);
+              $('#offerStatusText').html('Success! ');
+              $('#offerStatus').html(data.message);
             } else {
               $('#offerStatusbox').addClass('alert alert-danger');
               $('#offerStatusText').html('Error: ');
-              $('#offerStatus').html(data.error.message[0]);
+              $('#offerStatus').html(data.message);
             }
           },
-          error: function(data){
+          error: function(xhr, textStatus, errorThrown) {
+            console.log('xhr.status = ' + xhr.status + '\n' +
+              'thrown error = ' + errorThrown + '\n' +
+              'xhr.statusText = '  + xhr.statusText + '\n' +
+              'textStatus = '  + textStatus + '\n' +
+              'responseText = ' + xhr.responseText);
+ 
             $('#offerStatusbox').addClass('alert alert-danger');
             $('#offerStatus').html('Something went wrong :(');
           }
         });
+
         return false;
     });
 });

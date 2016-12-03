@@ -25,6 +25,7 @@ use App\Conversation;
 use App\Entry;
 use App\User;
 use Config;
+use Mail;
 
 class MessagesController extends Controller
 {
@@ -163,79 +164,90 @@ class MessagesController extends Controller
     {
         $data = array();
         $conversation = null;
-        $recipient = User::find($userId);
-        if ($entryId) {
-            $entry = Entry::find($entryId);
-            if (!empty($entry)) {
-                $data['entry_name'] = $entry->title;
-                $data['entry_id'] = $entry->id;
-                $data['post_type'] = $entry->post_type;
-            }
-        }
-
-        $exchanges = array();
-        if (Input::has('exchange_types')) {
-            $exchanges_types = Input::get('exchange_types');
-            foreach ($exchanges_types as $et) {
-                $exchanges[] = $et;
+        if ($recipient = User::find($userId)) {
+            if ($entryId) {
+                if ($entry = Entry::find($entryId)) {
+                    $data['entry_name'] = $entry->title;
+                    $data['entry_id'] = $entry->id;
+                    $data['post_type'] = $entry->post_type;
+                }
             }
 
-            $data['exchanges']  =implode(", ", $exchanges);
-        }
+            $exchanges = array();
+            if (Input::has('exchange_types')) {
+                $exchanges_types = Input::get('exchange_types');
+                foreach ($exchanges_types as $et) {
+                    $exchanges[] = $et;
+                }
 
-        if (Input::has('thread_id')) {
-            //log::debug("postCreate: thread_id = ".Input::get('thread_id'));
-            $conversation = Conversation::find(e(Input::get('thread_id')));
-        }
-        else {
-            // Find the thread ID by the subject, entry_id, started_by and community_id.
-            // If there is no matching thread, create one.
-            $conversation = Conversation::firstOrCreate([
-                'subject' => e(Input::get('subject')),
-                'entry_id' => $entryId,
-                'started_by' => Auth::user()->id,
-                'community_id' => $request->whitelabel_group->id,
-            ]);
-        }
+                $data['exchanges']  =implode(", ", $exchanges);
+            }
 
-        if (!empty($conversation)) {
-            $data['thread_subject'] = e(Input::get('thread_subject'));
-            $data['thread_id'] = $conversation->id;
-        }
-
-        $offer = new Message;
-        $offer->message = e(Input::get('message'));
-        $offer->sent_by = Auth::user()->id;
-        $offer->sent_to = $userId;
-
-        // Associate the conversation with the new message (via thread_id) in the messages table
-        $conversation = $offer->conversation()->associate($conversation);
-
-        $data['email'] = $send_to_email = $recipient->email;
-        $data['name'] = $send_to_name =  $recipient->getDisplayName();
-        $data['offer'] = $offer->message;
-        $data['community'] = ucfirst($request->whitelabel_group->name);
-        $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
-
-        if (!empty($request->whitelabel_group->logo)) {
-            if( config('app.debug')) {
-                // this is for testing only
-                $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+            if (Input::has('thread_id')) {
+                $conversation = Conversation::find(e(Input::get('thread_id')));
             }
             else {
-                $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
+                // Find the thread ID by the subject, entry_id, started_by and community_id.
+                // If there is no matching thread, create one.
+                $conversation = Conversation::firstOrCreate([
+                    'subject' => e(Input::get('subject')),
+                    'entry_id' => $entryId,
+                    'started_by' => Auth::user()->id,
+                    'community_id' => $request->whitelabel_group->id,
+                ]);
+            }
+
+            if (!empty($conversation)) {
+                $data['thread_subject'] = e(Input::get('thread_subject'));
+                $data['thread_id'] = $conversation->id;
+            }
+            else {
+                log::debug("postCreate: conversation empty");
+            }
+
+            $offer = new Message;
+            if (!empty($offer)) {
+                $offer->message = e(Input::get('message'));
+                $offer->sent_by = Auth::user()->id;
+                $offer->sent_to = $userId;
+
+                // Associate the conversation with the new message (via thread_id) in the messages table
+                $conversation = $offer->conversation()->associate($conversation);
+
+                $data['email'] = $send_to_email = $recipient->email;
+                $data['name'] = $send_to_name =  $recipient->getDisplayName();
+                $data['offer'] = $offer->message;
+                $data['community'] = ucfirst($request->whitelabel_group->name);
+                $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
+
+                if (!empty($request->whitelabel_group->logo)) {
+                    if( config('app.debug')) {
+                        // this is for testing only
+                        $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+                    }
+                    else {
+                        $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
+                    }
+                }
+
+                if ($offer->save()) {
+                    Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
+                        $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
+                    });
+
+                    return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
+                }
+                else {
+                    return response()->json(['success'=>false, 'message'=>trans('general.messages.sent_error')]);
+                }
+            }
+            else {
+                log::debug("postCreate: message empty");
             }
         }
-
-        if ($offer->save()) {
-            \Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
-                $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
-            });
-
-            return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
-        }
         else {
-            return response()->json(['success'=>false, 'message'=>trans('general.messages.sent_error')]);
+            // could not find recipient
+            log::debug("postCreate: could not find recipient");
         }
-    }
+    }               
 }
