@@ -5,7 +5,6 @@
     Accounts -
     @parent
 @stop
-p
 
 {{-- Page content --}}
 @section('content')
