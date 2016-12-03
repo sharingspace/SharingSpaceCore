@@ -16,9 +16,9 @@
     <p style="margin-top:10px;">Dear {{$name}},</p>
 
     @if (empty($thread_subject))
-        <p>You've received a new message from the Share <strong><a href="{{$community_url}}">{{ $community }}</a></strong>
+        <p>You've received a new message from the Share <strong><a href="{{$community_url}}">{{ $community_name }}</a></strong>
     @else
-        <p>You've received a new message to the thread <strong>{{$thread_subject}}</strong>, in the Share <strong><a href="{{$community_url}}">{{ $community }}</a></strong>
+        <p>You've received a new message to the thread <strong>{{$thread_subject}}</strong>, in the Share <strong><a href="{{$community_url}}">{{ $community_name }}</a></strong>
     @endif
 
     @if (!empty($entry_name))
