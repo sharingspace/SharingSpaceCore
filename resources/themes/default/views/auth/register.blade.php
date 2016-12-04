@@ -16,15 +16,14 @@
 
     <div class="row">
       <!-- LOGIN -->
-      <div class="col-md-6 col-sm-6">
-
+      <div class="col-sm-6 col-xs-12">
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
           <input type="hidden" name="subdomain" id="subdomain" value="{{!empty($subdomain)?$subdomain:''}}" />
 
           <header>
-            <i class="fa fa-users"></i> Email &hellip;
+            <i class="fa fa-envelope"></i> Email &hellip;
           </header>
 
           <fieldset class="nomargin">
@@ -88,7 +87,7 @@
       <!-- /LOGIN -->
 
       <!-- SOCIAL LOGIN -->
-      <div class="col-md-6 col-sm-6">
+      <div class="col-sm-6 col-xs-12">
         <form action="#" method="post" class="sky-form boxed">
 
           <header class="size-18 margin-bottom-20">

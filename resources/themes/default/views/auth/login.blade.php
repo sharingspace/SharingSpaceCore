@@ -17,8 +17,7 @@
     <div class="row">
 
       <!-- LOGIN -->
-      <div class="col-md-6 col-sm-6">
-
+      <div class="col-sm-6 col-xs-12">
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
@@ -64,10 +63,10 @@
       <!-- /LOGIN -->
 
       <!-- SOCIAL LOGIN -->
-      <div class="col-md-6 col-sm-6">
+      <div class="col-sm-6 col-xs-12">
         <form action="#" method="post" class="sky-form boxed">
           <header>
-            <i class="fa fa-globe"></i> {{ trans('auth.social') }}
+            <i class="fa fa-users"></i> {{ trans('auth.social') }}
           </header>
 
           <fieldset class="nomargin">
