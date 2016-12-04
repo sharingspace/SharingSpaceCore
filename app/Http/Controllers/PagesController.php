@@ -109,6 +109,7 @@ class PagesController extends Controller
 
         // No stripe token - something went wrong :(
         if (!isset($token)) {
+            log::debug("postChargeCoop: no token");
             return Redirect::back()->withInput()->with('error', 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
 
@@ -131,12 +132,16 @@ class PagesController extends Controller
         $data['email'] = $customer->email;
 
         if (!$customer->save()) {
+            log::debug("postChargeCoop: save failed");
+
             return Redirect::back()->withInput()->with('error', 'Something went wrong.');
         }
 
         try {
             $card = $customer->card()->makeDefault()->create($token);
         } catch (\Exception $e) {
+            log::debug("postChargeCoop: create failed");
+
             return Redirect::back()->withInput()->with('error', 'Something went wrong while trying to authorise your card: '.$e->getMessage().'');
         }
 
@@ -149,6 +154,8 @@ class PagesController extends Controller
                     'description' => 'AnyShare COOP Membership',
                 ]);
         } catch (\Exception $e) {
+            log::debug("postChargeCoop: charge failed");
+
             return Redirect::back()->withInput()->with('error', 'Something went wrong while authorizing your card: '.$e->getMessage().'');
         }
 

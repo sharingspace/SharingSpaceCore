@@ -6,7 +6,6 @@
     <div class="container margin-top-20 text-center">
         <div class="row text-muted">
             <div class="col-md-12">
-                <p class="lead">{{ trans('coop.congrats')}}</p>
                 <p class="lead">{{ trans('coop.you_are_member')}}</p>
             </div>
             
@@ -31,7 +30,7 @@
           <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
         </div>
         <div class="col-md-3">
-            <a href="https://massmosaic.app/community/new" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
+            <a href="{{route('community.create.form')}}" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
         </div>
       </div>
     </div>
