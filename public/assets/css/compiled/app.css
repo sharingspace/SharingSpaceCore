@@ -9341,6 +9341,21 @@ section.TreborScholz {
   list-style-type: none;
 }
 
+/******************* about box */
+
+.about_info {
+  line-height: 160%;
+  font-weight: bold;
+  font-size: 15px;
+  color: #333;
+}
+
+.about_info span {
+  color: gray;
+  font-style: italic;
+  font-weight: normal;
+}
+
 /*************** Bootstrap extensions ******************/
 /** ************************************* **
 
