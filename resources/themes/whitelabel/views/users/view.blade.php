@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-xs-5">
   			      <div class="thumbnail">
-                <img src="{{ Auth::user()->gravatar_img() }}?s=400" alt="" />
+                <img src="{{ $user->gravatar_img() }}?s=400" alt="" />
               </div>
             </div>
             <div class="col-xs-7">
@@ -187,36 +187,36 @@ $( document ).ready(function() {
 $(document).ready(function () {
 
   $("#offerForm").submit(function(){
-    $('#offerStatusbox').hide();
-    $('#offerStatusText').html('');
-    $('#offerStatus').html('');
-    $('#offerStatusbox').removeClass('alert alert-success alert-danger');
+  $('#offerStatusbox').hide();
+  $('#offerStatusText').html('');
+  $('#offerStatus').html('');
+  $('#offerStatusbox').removeClass('alert alert-success alert-danger');
 
-    $.ajax({
-        type: "POST",
-        url: "{{ route('messages.create.save', $user->id) }}",
-        data: $('#offerForm').serialize(),
+  $.ajax({
+      type: "POST",
+      url: "{{ route('messages.create.save', $user->id) }}",
+      data: $('#offerForm').serialize(),
 
-        success: function(data){
+      success: function(data){
 
-            $('#offerStatusbox').show();
+          $('#offerStatusbox').show();
 
-            if (data.success) {
-                $('#offerStatusbox').addClass('alert alert-success');
-                $('#offerStatusText').html('Success!');
-                $('#offerStatus').html(data.success.message);
+          if (data.success) {
+              $('#offerStatusbox').addClass('alert alert-success');
+              $('#offerStatusText').html('Success!');
+              $('#offerStatus').html(data.success.message);
 
-            } else {
-                $('#offerStatusbox').addClass('alert alert-danger');
-                $('#offerStatusText').html('Error: ');
-                $('#offerStatus').html(data.error.message[0]);
-            }
+          } else {
+              $('#offerStatusbox').addClass('alert alert-danger');
+              $('#offerStatusText').html('Error: ');
+              $('#offerStatus').html(data.error.message[0]);
+          }
 
-        },
-        error: function(data){
-            $('#offerStatusbox').addClass('alert alert-danger');
-            $('#offerStatus').html('Something went wrong :(');
-        }
+      },
+      error: function(data){
+          $('#offerStatusbox').addClass('alert alert-danger');
+          $('#offerStatus').html('Something went wrong :(');
+      }
     });
     return false;
   });

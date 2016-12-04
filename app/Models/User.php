@@ -203,12 +203,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function gravatar_img($size = null)
     {
-        if (!empty($this->gravatar)) {
+        if (!empty($this->avatar_img)) {
+            //log::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
+            return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img;
+        } 
+        else if (!empty($this->gravatar)) {
+            // this can one day be removed or used to store the gravatar email hash
+            //log::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
             return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar;
-        } else {
-            return "//gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm";
         }
-    }
+        else {
+            //log::debug("Using http://gravatar.com/avatar/".md5(strtolower(trim($this->email))));
+            return "http://gravatar.com/avatar/".md5(strtolower(trim($this->email)));
+        }
+     }
 
 
     /**
@@ -452,7 +460,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function saveImageToDB($id, $filename, $type, $upload_key = null)
     {
         if ($user = User::find($id)) {
-            $user->gravatar = $filename;
+            $user->avatar_img = $filename;
 
             if (!$user->save()) {
                 return false;
@@ -474,12 +482,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function deleteAvatar($user_id)
     {
         if ($user = User::find($user_id)) {
-            if ($user->gravatar) {
-                $filename = public_path().'/assets/uploads/users'.$user_id.'/'.$user->gravatar;
+            if ($user->avatar_img) {
+                $filename = public_path().'/assets/uploads/users'.$user_id.'/'.$user->avatar_img;
                 \File::Delete($filename);
                 if (!\File::exists($filename))
                 {
-                    $user->gravatar = null;
+                    $user->avatar_img = null;
                     if ($user->save()) {
                         return true;
                     }
