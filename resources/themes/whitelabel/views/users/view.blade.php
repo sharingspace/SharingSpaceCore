@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.members') }} ::
+     {{ trans('general.members') }} ::
 @parent
 @stop
 
@@ -145,10 +145,10 @@
     exportDataType: 'all',
     exportTypes: ['csv', 'txt','json', 'xml'],
     maintainSelected: true,
-    paginationFirstText: "@lang('pagination.first')",
-    paginationLastText: "@lang('pagination.last')",
-    paginationPreText: "@lang('pagination.previous')",
-    paginationNextText: "@lang('pagination.next')",
+    paginationFirstText: "@lang('general.first')",
+    paginationLastText: "@lang('general.last')",
+    paginationPreText: "@lang('general.prev')",
+    paginationNextText: "@lang('general.next')",
     pageList: ['10','25','50','100','150','200'],
     icons: {
         paginationSwitchDown: 'fa-caret-square-o-down',

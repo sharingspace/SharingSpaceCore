@@ -31,7 +31,7 @@
 
             <div class=" margin-bottom-10{{ $errors->first('display_name', ' has-error') }}">
               <label class="input">
-                <input type="text" placeholder="{{ trans('general.user.display_name') }}" name="display_name" value="{{ old('display_name') }}">
+                <input type="text" placeholder="{{ trans('general.name') }}" name="display_name" value="{{ old('display_name') }}">
               </label>
               {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
             </div>
@@ -40,7 +40,7 @@
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
-                <b class="tooltip tooltip-bottom-right">{{ trans('auth.verify') }}</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
@@ -48,8 +48,8 @@
             <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">{{ trans('auth.latin') }}</b>
+                <input type="password" placeholder="{{ trans('general.password') }}" name="password">
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
@@ -58,13 +58,18 @@
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
-                <b class="tooltip tooltip-bottom-right">{{ trans('auth.latin') }}</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
-              <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms_and_conditions"><i></i>{!! trans('auth.accept_tos') !!}
+              <label class="checkbox nomargin">
+                <input class="checked-agree" type="checkbox" name="terms_and_conditions">
+                <i></i>{!! trans('auth.accept_tos') !!} 
+                <a href="#" data-toggle="modal" data-target="#termsModal">
+                  {!! trans('auth.accept_tos2') !!}
+                </a>
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>
@@ -81,7 +86,7 @@
 
         <div class="row margin-top-20">
           <div class="col-md-12">
-            {!! trans('auth.already_have_account') !!}
+            {!! trans('auth.already_have_account') !!} <a href="../auth/login">{!! trans('auth.signin_now') !!}</a>
           </div>
         </div>
       </div>
@@ -146,7 +151,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 					&times;
 				</button>
-				<h4 class="modal-title" id="myModal">{{ trans('auth.terms') }} &amp; {{ trans('auth.conditions') }}</h4>
+				<h4 class="modal-title" id="myModal">{{ trans('general.terms') }} &amp; {{ trans('general.conditions') }}</h4>
 			</div> <!-- modal-header -->
 
 			<div class="modal-body modal-short">
@@ -187,7 +192,7 @@
           <li>You may not use the AnyShare service for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws), the laws applicable to you in your customer’s jurisdiction, or the laws of USA and the State of Delaware. You will comply with all applicable laws, rules and regulations in your use of the Service.</li>
           <li>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by AnyShare.</li>
           <li>You shall not purchase search engine or other pay per click keywords (such as Google AdWords), or domain names that use AnyShare or AnyShare trademarks and/or variations and misspellings thereof.</li>
-          <li>Questions about the Terms of Service should be sent to info@anyshare.coop</li>
+          <li>Questions about the Terms of Service should be sent to info@anysha.re</li>
           <li>You understand that your Share Content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit Card information is always encrypted during transfer over networks.</li>
           <li>You acknowledge and agree that your use of the Service, including information transmitted to or stored by AnyShare, is governed by its privacy policy at <a href="/privacy">privacy</a></li>
           <li>The parties have required that the Terms of Service and all documents relating thereto be drawn up in English.</li>

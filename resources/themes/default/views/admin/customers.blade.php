@@ -27,11 +27,11 @@
                         <thead>
                         <tr>
                             <th>{{ trans('customers.user') }}</th>
-                            <th>{{ trans('customers.email') }}</th>
-                            <th>{{ trans('customers.share') }}</th>
+                            <th>{{ trans('general.email') }}</th>
+                            <th>{{ trans('general.share') }}</th>
                             <th>{{ trans('customers.active') }}</th>
                             <th>{{ trans('customers.type') }}</th>
-                            <th>{{ trans('customers.date') }}</th>
+                            <th>{{ trans('general.date') }}</th>
                             <th>{{ trans('customers.trial_start') }}</th>
                             <th>{{ trans('customers.trial_end') }}</th>
                             <th>{{ trans('customers.next_charge') }}</th>
@@ -114,10 +114,10 @@
             exportDataType: 'all',
             exportTypes: ['csv', 'txt','json', 'xml'],
             maintainSelected: true,
-            paginationFirstText: "{{ trans('pagination.first') }}",
-            paginationLastText: "{{ trans('pagination.last') }}",
-            paginationPreText: "{{ trans('pagination.previous') }}",
-            paginationNextText: "{{ trans('pagination.next') }}",
+            paginationFirstText: "{{ trans('general.first') }}",
+            paginationLastText: "{{ trans('general.last') }}",
+            paginationPreText: "{{ trans('general.prev') }}",
+            paginationNextText: "{{ trans('general.next') }}",
             pageList: ['10','25','50','100','150','200'],
             formatShowingRows: function (pageFrom, pageTo, totalRows) {
                 return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';

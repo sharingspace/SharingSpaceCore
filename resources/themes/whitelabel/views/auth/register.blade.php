@@ -30,7 +30,7 @@
 
             <div class=" margin-bottom-10{{ $errors->first('display_name', ' has-error') }}">
               <label class="input">
-                <input type="text" placeholder="{{ trans('general.user.display_name') }}" name="display_name" value="{{ old('display_name') }}">
+                <input type="text" placeholder="{{ trans('general.name') }}" name="display_name" value="{{ old('display_name') }}">
               </label>
               {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
             </div>
@@ -39,7 +39,7 @@
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
-                <b class="tooltip tooltip-bottom-right">{{ trans('general.user.verify_account') }}</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
@@ -47,8 +47,8 @@
             <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">{{ trans('general.user.latin_chars') }}</b>
+                <input type="password" placeholder="{{ trans('general.password') }}" name="password">
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
@@ -57,7 +57,7 @@
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
-                <b class="tooltip tooltip-bottom-right">{{ trans('general.user.latin_chars') }}</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
             </div>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
-              <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms_and_conditions"><i></i>{!! trans('auth.accept_tos') !!}
+              <label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms_and_conditions"><i></i> {!! trans('auth.accept_tos') !!} <a href="#" data-toggle="modal" data-target="#termsModal"> {!! trans('auth.accept_tos2') !!}</a>
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>
@@ -123,7 +123,7 @@
           </fieldset>
 
           <footer>
-            {!! trans('auth.already_have_account') !!}
+            {!! trans('auth.already_have_account') !!} <a href="../auth/login">{!! trans('auth.signin_now') !!}</a>
           </footer>
 
         </form>
@@ -147,7 +147,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 								&times;
 							</button>
-							<h4 class="modal-title" id="myModal">{{ trans('general.register.terms') }} &amp; {{ trans('general.register.conditions') }}</h4>
+							<h4 class="modal-title" id="myModal">{{ trans('general.terms') }} &amp; {{ trans('general.conditions') }}</h4>
 						</div>
 
 						<div class="modal-body modal-short">
@@ -283,10 +283,10 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.register.cancel') }}</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.cancel') }}</button>
 							<button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> {{ trans('general.register.i_agree') }}</button>
 
-							<a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> {{ trans('general.register.print') }}</span></a>
+							<a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> {{ trans('general.print') }}</span></a>
 						</div>
 
 					</div><!-- /.modal-content -->

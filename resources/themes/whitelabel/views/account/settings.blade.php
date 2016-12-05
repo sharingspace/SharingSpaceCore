@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.members') }} ::
+     {{ trans('general.members') }} ::
 @parent
 @stop
 
@@ -21,7 +21,7 @@
 				<li class="active"><a href="#info" data-toggle="tab">{{trans('general.settings.personal')}}</a></li>
         <li><a href="#social" data-toggle="tab">{{trans('general.settings.social')}}</a></li>
 				<li><a href="#avatar" data-toggle="tab">{{trans('general.settings.avatar')}}</a></li>
-				<li><a href="#password" data-toggle="tab">{{trans('general.settings.password')}}</a></li>
+				<li><a href="#password" data-toggle="tab">{{trans('general.password')}}</a></li>
 				<!-- <li><a href="#privacy" data-toggle="tab">{{trans('general.settings.privacy')}}Privacy</a></li> -->
 			</ul>
 

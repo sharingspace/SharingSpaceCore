@@ -19,7 +19,7 @@
 
       <!-- LOGIN -->
       <div class="col-xs-12 size-18 margin-bottom-30">
-        {!! trans('auth.no_account') !!}
+        {!! trans('auth.no_account') !!} <a href="../auth/register">{!! trans('auth.signup_here') !!}</a> {!! trans('auth.signup_first') !!}
       </div>
 
       <div class="col-xs-6">
@@ -43,8 +43,8 @@
             <div class="margin-bottom-10{{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">{{ trans('general.user.latin_chars') }}</b>
+                <input type="password" placeholder="{{ trans('general.password') }}" name="password">
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>

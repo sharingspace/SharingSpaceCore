@@ -31,7 +31,7 @@
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
-                <b class="tooltip tooltip-bottom-right">{{ trans('auth.verify') }}</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
@@ -39,8 +39,8 @@
             <div class="margin-bottom-10{{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">{{ trans('auth.latin') }}</b>
+                <input type="password" placeholder="{{ trans('general.password') }}" name="password">
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
@@ -57,7 +57,7 @@
 
         <div class="row margin-top-10">
           <div class="col-md-12">
-            {!! trans('auth.no_account') !!}
+            {!! trans('auth.no_account') !!} <a href="../auth/register">{!! trans('auth.signup_here') !!}</a> {!! trans('auth.signup_first') !!}
           </div>
         </div>
       </div>

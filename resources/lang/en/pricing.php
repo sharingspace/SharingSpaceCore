@@ -9,14 +9,15 @@ return [
     */
 
     'headline' => 'Pricing',
-    'intro_p1'=> 'It\'s 100% free to join and use AnyShare.',
+    'intro_p1'=> 'It is 100% free to join and use AnyShare.',
     'intro_p2'=> 'If you want to make your own Share that people can join, you get a 30 day free trial.',
-    'intro_p3'=> 'Then, a guarantee of $10/mo for life. (This is just for our beta period.)',
-    'intro_p4'=> 'We\'re a cooperative, so if you want to join us click <a href="/coop">here!</a>',
+    'intro_p3'=> 'Then, a guarantee of $10 per month for life. (This is just for our beta period.)',
+    'intro_p4'=> 'We are a cooperative, so if you want to join us',
+    'intro_p5'=> 'click here!',    
     'beta_price' => 'Beta Price Offer',
     'currency' => '$',
     'cost' => '10',
-    'pay_period' => '/mo.',
+    'pay_period' => 'per month',
     'max_users' => '1000 Users',
     'ways_to_exchange' => '10 Ways to Exchange',
     'your_branding' => 'Customize Your Branding',
@@ -39,12 +40,7 @@ return [
     'fees_us_dollars' => 'All fees in US dollars',
     'for_free' => 'Get AnyShare for Free',
     'apply_now' => 'Apply Now',
-    'q_a' => [
-        'q1' => 'Q. I can\'t afford AnyShare right now. Can I still use it?',
-        'a1' => 'A. We don’t want to stop groups that don’t have the budget to pay, from using AnyShare. If this applies to you, you can apply to receive AnyShare for free.',
-        'q2' => 'Q. What if I want to cancel my subscription?',
-        'a2' => 'A. You can cancel your subscription at any time. Before doing so, you can keep your data, by using the inbuilt api.',
-    ],
+    
     'financial_assist' => [
         'apply' => 'Apply for Financial Assistance',
       'success' => 'You application for financial assistance has been successfully sent',

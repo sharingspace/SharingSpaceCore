@@ -38,7 +38,8 @@
   <div class="worked_hard">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center bold larger size-40 margin-top-30">
-          {!!trans('about.banner_desc')!!}
+          {!!trans('about.banner_desc')!!}</br>
+          {!!trans('about.banner_desc2')!!}
         </div>
     </div>
   </div>
@@ -54,7 +55,7 @@
         <img src="{{ asset('assets/img/about/crowd.jpg') }}">
         <p class="about_intro">{{trans('about.background_intro')}}</p>
         <h4 class="about_headline">{{trans('about.background_headline')}}</h4>
-        <p>{!!trans('about.background_desc')!!}</p>
+        <p>{!!trans('about.background_desc')!!} <a href="http://www.fairshares.coop/" target="_blank">FairShares Coop</a> {!!trans('about.background_desc2')!!}</p>
       </div> <!-- col-sm-4 -->
 
       <div class="col-sm-4 col-xs-12">
@@ -68,7 +69,7 @@
         <img src="{{ asset('assets/img/about/earth_green.jpg') }}">
         <p class="about_intro">{{trans('about.what_next_intro')}}</p>
         <h4 class="about_headline">{{trans('about.what_next_headline')}}</h4>
-        <p>{!!trans('about.what_next_desc')!!}</p>
+        <p>{!!trans('about.what_next_desc')!!} <a href="http://support.anyshare.coop/support/solutions/articles/17000001408-can-you-explain-who-the-stakeholder-groups-are-" target="_blank">{!!trans('about.what_next_desc2')!!}</a>{!!trans('about.what_next_desc3')!!}</p>
       </div> <!-- col-sm-4 -->
     </div> <!-- row -->
   </div> <!-- container -->
@@ -84,11 +85,9 @@
             <h2 class="white-secondary-heading pull-left margin-bottom-10">{{trans('about.you_can_own')}}</h2>
           </div>
           <div class="col-sm-3 col-xs-12 margin-top-10">
-              <a class="text-white bold" href="{{ route('coop') }}" style="width:100%">
-                <button type="button" class="btn" style="background-color:black">
-                  {{ trans('about.lets_go') }}
-                </button>
-              </a>
+              <button type="button" class="btn" style="background-color:black">
+              <a class="text-white bold" href="{{ route('coop') }}" style="width:100%">{{ trans('about.lets_go') }}</a>
+              </button>
           </div>
         </div>
       </div>

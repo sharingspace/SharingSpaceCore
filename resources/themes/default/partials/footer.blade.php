@@ -17,12 +17,12 @@
 
                 <div class="col-md-6 col-sm-9 col-xs-12 center-xs margin-top-6 margin-bottom-6">
                   <ul class="margin-bottom-6 padding-bottom-0 list-inline mobile-block pull-right-sm">
-                    <li><a href="/about">{{ trans('footer.about') }}</a></li>
+                    <li><a href="/about">{{ trans('general.about') }}</a></li>
                     <!-- <li><a href="http://blog.massmosaic.com">{{ trans('footer.blog') }}</a></li>
                     <li><a href="/coop">{{ trans('footer.coop') }}</a></li>  -->
                     <li><a href="https://anyshare.freshdesk.com/support/home">{{ trans('footer.support') }}</a></li>
-                    <li><a href="/terms">{{ trans('footer.terms') }}</a></li>
-                    <li><a href="/privacy">{{ trans('footer.privacy') }}</a></li>
+                    <li><a href="/terms">{{ trans('general.terms') }}</a></li>
+                    <li><a href="/privacy">{{ trans('general.privacy') }}</a></li>
                   </ul>
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 socials center-xs margin-top-0 margin-bottom-0">

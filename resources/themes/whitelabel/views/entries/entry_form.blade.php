@@ -149,7 +149,7 @@
                     
                 <div class="col-xs-12">
                   <!-- Location -->
-                  <label class="control-label sr-only" for="location">{{ trans('general.entries.edit.location') }}</label>
+                  <label class="control-label sr-only" for="location">{{ trans('general.location') }}</label>
                   <div class="input-group">
                     @if(isset($entry))
                       <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">

@@ -42,7 +42,7 @@ return [
     
     'data_retension' => [
       'title' => 'Data Retention Policy, Managing Your Information',
-      'p1' => 'We will retain User Provided data from when you use the Website. We will retain and use the data as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. If you\’d like us to delete User Provided Data that you have provided via the Website, please contact us at info@anyshare.coop and we will respond in a reasonable time.',
+      'p1' => 'We will retain User Provided data from when you use the Website. We will retain and use the data as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. If you\’d like us to delete User Provided Data that you have provided via the Website, please contact us at info@anysha.re and we will respond in a reasonable time.',
     ],
 
     'third_parties' => [
@@ -89,7 +89,7 @@ return [
 
     'children' => [
       'title' => 'Children',
-      'p1' => 'We do not use the Website to knowingly solicit data from or market to children under the age of 13. If a parent or guardian becomes aware that his or her child has provided us with information without their consent, he or she should contact us at info@anyshare.coop. We will delete such information from our files within a reasonable time.',
+      'p1' => 'We do not use the Website to knowingly solicit data from or market to children under the age of 13. If a parent or guardian becomes aware that his or her child has provided us with information without their consent, he or she should contact us at info@anysha.re. We will delete such information from our files within a reasonable time.',
     ],
 
     'security' => [
