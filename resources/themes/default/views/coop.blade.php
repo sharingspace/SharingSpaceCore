@@ -49,7 +49,7 @@
             Note: This is for joining our cooperative. If you'd like to signup for the website, go <a href="{{ route('login') }}" class="link">here</a>.
           </div>
 
-          <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
+          <form method="post" action="#" id="payment-form" enctype="multipart/form-data">
             {!! csrf_field() !!}
 
             <label class="field" for="name">Name:</label>

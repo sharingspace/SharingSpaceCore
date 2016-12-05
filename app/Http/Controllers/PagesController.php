@@ -69,7 +69,7 @@ class PagesController extends Controller
         $data['firstName'] = Input::get('firstName');
         $data['lastName'] = Input::get('lastName');
         $data['email'] = Input::get('email');
-        $data['toEmail'] = 'info@anysha.re';
+        $data['toEmail'] = 'info@anyshare.coop';
         $data['subject'] = 'Application for free Anyshare hub';
         $data['howUse'] = Input::get('howUse');
         $data['budget'] = Input::get('budget');
@@ -168,11 +168,13 @@ class PagesController extends Controller
             $data['logo'] = config('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
         }
         
+        $emails = [$data['email'], 'info@anyshare.coop'];
+
         Mail::send(
             ['html' => 'emails.coop-welcomeHTML', 'text' => 'emails.coop-welcomeText'],
             $data,
-            function ($message) use ($data) {
-                $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
+            function ($message) use ($data, $emails) {
+                $message->to($emails, $data['name'])->subject('Welcome to AnySha.re!');
             }
         );
 
