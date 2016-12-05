@@ -109,6 +109,7 @@ class PagesController extends Controller
 
         // No stripe token - something went wrong :(
         if (!isset($token)) {
+            log::debug("postChargeCoop: no token");
             return Redirect::back()->withInput()->with('error', 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
 
@@ -131,12 +132,16 @@ class PagesController extends Controller
         $data['email'] = $customer->email;
 
         if (!$customer->save()) {
+            log::debug("postChargeCoop: save failed");
+
             return Redirect::back()->withInput()->with('error', 'Something went wrong.');
         }
 
         try {
             $card = $customer->card()->makeDefault()->create($token);
         } catch (\Exception $e) {
+            log::debug("postChargeCoop: create failed");
+
             return Redirect::back()->withInput()->with('error', 'Something went wrong while trying to authorise your card: '.$e->getMessage().'');
         }
 
@@ -149,13 +154,22 @@ class PagesController extends Controller
                     'description' => 'AnyShare COOP Membership',
                 ]);
         } catch (\Exception $e) {
+            log::debug("postChargeCoop: charge failed");
+
             return Redirect::back()->withInput()->with('error', 'Something went wrong while authorizing your card: '.$e->getMessage().'');
         }
 
         $customer->card()->syncWithStripe();
-
+        if( config('app.debug')) {
+            // this is for testing only
+            $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+        }
+        else {
+            $data['logo'] = config('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
+        }
+        
         Mail::send(
-            ['text' => 'emails.coop-welcome'],
+            ['html' => 'emails.coop-welcomeHTML', 'text' => 'emails.coop-welcomeText'],
             $data,
             function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');
