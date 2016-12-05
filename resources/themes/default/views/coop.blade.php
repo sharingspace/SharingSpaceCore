@@ -61,15 +61,15 @@
             <div class="form-group">
               <label class="field" for="field">Your Interest:</label>
               {{Form::select('interest', ['' => 'Pick an interest...',
-                                          'general' => 'General', 
-                                          'good_idea' => 'Supporting a good idea',
-                                          'partnerships' => 'Partnerships',
-                                          'equity' => 'Equity',
-                                          'employment' => 'Employment'], null, ['required', 'class' => 'form-control'])}}
+                                          'General' => 'General', 
+                                          'Supporting a good idea' => 'Supporting a good idea',
+                                          'Partnerships' => 'Partnerships',
+                                          'Equity' => 'Equity',
+                                          'Employment' => 'Employment'], null, ['required', 'class' => 'form-control'])}}
             </div>
 
-            <label class="checkbox clearfix" for="checkbox">
-              <input class="w-checkbox-input" data-name="Checkbox" id="checkbox" name="checkbox" type="checkbox">
+            <label class="checkbox">
+             {{ Form::checkbox('involved', '1', null) }}
               <i></i> I'd like to see how I can get involved
             </label>
 
