@@ -17,11 +17,11 @@ return [
     'terms' => 'Terms',
     'create' => 'Create',
     'about' => 'About',
-    'email' => 'Email',
+    'email_address' => 'Email',
     'admin' => 'Admin',
     'create_acct' => 'create an account with AnyShare.',
-    'first-name' => 'First Name',
-    'last-name' => 'Last Name',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
     'entry' => 'Entry',
     'to_join' => 'To join',
     'type' => 'Type',
@@ -62,6 +62,8 @@ return [
     'share_help' => '"Shares" help a group or community exchange.',
     'join_free' => 'Join public Shares for FREE.',
     'one_min' => 'Or start your own in 1 minute!',
+    'markdown' => 'markdown allowed',
+
 
     'nav'  => [
       'browse' => 'Browse',

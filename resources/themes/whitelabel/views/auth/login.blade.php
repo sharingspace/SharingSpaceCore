@@ -19,7 +19,7 @@
 
       <!-- LOGIN -->
       <div class="col-xs-12 size-18 margin-bottom-30">
-        {!! trans('auth.no_account') !!} <a href="../auth/register">{!! trans('auth.signup_here') !!}</a> {!! trans('auth.signup_first') !!}
+        {!! trans('auth.no_account') !!} <a href="../auth/register">{{ trans('general.nav.register') }}</a> {{ strtolower(trans('general.first')) }}
       </div>
 
       <div class="col-xs-6">

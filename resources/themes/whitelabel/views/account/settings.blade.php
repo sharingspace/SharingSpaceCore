@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.members') }} ::
+     {{ trans('general.nav.settings') }} ::
 @parent
 @stop
 
@@ -43,21 +43,21 @@
 
             <!-- Email  -->
             <div class="col-md-12 form-group {{ $errors->first('email', 'has-error') }}">
-               <label class="control-label" for="email">{{trans('general.settings.email')}}</label>
+               <label class="control-label" for="email">{{trans('general.email_address')}}</label>
                 <input type="text" placeholder="you@example.com" class="form-control" name="email" autocomplete="off" value="{{ Input::old('email', Auth::user()->email) }}" readonly onfocus="this.removeAttribute('readonly');" style="background-color: white;">
                 {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- First Name -->
             <div class="col-md-12 form-group {{ $errors->first('first_name', 'has-error') }}">
-               <label class="control-label" for="first_name">{{trans('general.settings.first_name')}}</label>
+               <label class="control-label" for="first_name">{{trans('general.first_name')}}</label>
                 <input type="text" placeholder="{{trans('general.settings.first_name_placeholder')}}" class="form-control" name="first_name" value="{{ Input::old('first_name', Auth::user()->first_name) }}">
                 {!! $errors->first('first_name', '<span class="help-block">:message</span>') !!}
             </div>
 
             <!-- Last Name -->
             <div class="col-md-12 form-group {{ $errors->first('last_name', 'has-error') }}">
-               <label class="control-label" for="last_name">{{trans('general.settings.last_name')}}</label>
+               <label class="control-label" for="last_name">{{trans('general.last_name')}}</label>
                 <input type="text" placeholder="{{trans('general.settings.last_name_placeholder')}}" class="form-control" name="last_name" value="{{ Input::old('last_name', Auth::user()->last_name) }}">
                 {!! $errors->first('last_name', '<span class="help-block">:message</span>') !!}
             </div>
@@ -72,7 +72,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 
             <!-- Location -->
             <div class="col-md-12 form-group {{ $errors->first('location', 'has-error') }}">
-              <label class="control-label" for="location">{{trans('general.settings.location')}}</label>
+              <label class="control-label" for="location">{{trans('general.location')}}</label>
               <div class="input-group">
               <input type="text" class="form-control" id="location" name="location" placeholder="Near (optional)" aria-describedby="basic-addon2" value="{{{ Input::old('location', Auth::user()->location) }}}" placeholder="{{trans('general.settings.location_placeholder')}}">
               <div class="input-group-addon" id="basic-addon2"><i class="fa fa-location-arrow" id="geolocate"></i></div>
