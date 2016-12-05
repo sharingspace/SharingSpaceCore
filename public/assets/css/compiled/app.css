@@ -9368,7 +9368,7 @@ Quick add
   font-size: 14px;
   position: absolute;
   bottom: 12px;
-  right: 80px;
+  right: 45px;
 }
 
 #pricing .pricing-footer {
@@ -9394,7 +9394,7 @@ Quick add
   font-size: 14px;
   position: absolute;
   bottom: 10px;
-  right: 90px;
+  right: 54px;
 }
 
 #pricing .pricing-footer a button {
@@ -9457,7 +9457,7 @@ Quick add
 
   #pricing .pricing_header p.price sub {
     bottom: 12px;
-    right: 100px;
+    right: 70px;
   }
 
   #pricing .pricing-footer p.price sup {
@@ -9467,7 +9467,7 @@ Quick add
 
   #pricing .pricing-footer p.price sub {
     bottom: 12px;
-    right: 110px;
+    right: 77px;
   }
 }
 
