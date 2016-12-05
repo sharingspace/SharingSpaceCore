@@ -201,7 +201,7 @@ return [
 		//'yo'          => ['name' => 'Yoruba',                 'script' => 'Latn', 'native' => 'Èdè Yorùbá'],
 		//'de-AT'       => ['name' => 'Austrian German',        'script' => 'Latn', 'native' => 'Österreichisches Deutsch'],
 		//'is'          => ['name' => 'Icelandic',              'script' => 'Latn', 'native' => 'íslenska'],
-		//'cs'          => ['name' => 'Czech',                  'script' => 'Latn', 'native' => 'čeština'],
+		'cs'          => ['name' => 'Czech',                  'script' => 'Latn', 'native' => 'čeština'],
 		//'bas'         => ['name' => 'Basa',                   'script' => 'Latn', 'native' => 'Ɓàsàa'],
 		//'mas'         => ['name' => 'Masai',                  'script' => 'Latn', 'native' => 'ɔl-Maa'],
 		//'haw'         => ['name' => 'Hawaiian',               'script' => 'Latn', 'native' => 'ʻŌlelo Hawaiʻi'],
