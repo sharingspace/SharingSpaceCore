@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.our_members') }} ::
+     {{ trans('general.members.members') }} ::
 @parent
 @stop
 
@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="row">
-  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.our_members')}}</h1>
+  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members.members')}}</h1>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
@@ -20,7 +20,7 @@
             <tr>
               <th data-sortable="false"><span class='sr-only'>{{trans('general.members.image')}}</span></th>
               <th data-sortable="true" class="name">{{trans('general.name')}}</th>
-              <th data-sortable="true" class="location">{{trans('general.members.location')}}</th>
+              <th data-sortable="true" class="location">{{trans('general.location')}}</th>
               <th data-sortable="false" class="bio">{{trans('general.members.bio')}}</th>
               <th data-sortable="true">{{trans('general.members.member_since')}}</th>
             </tr>
