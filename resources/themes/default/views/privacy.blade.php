@@ -74,7 +74,7 @@
         <p>{{trans('privacy.changes.p1') }}</p>
 
         <h3>{{trans('privacy.contact.title') }}</h3>
-        <p>{{trans('privacy.contact.p1') }} <a href="mailto:info@anysha.re">info@anysha.re</a></p>
+        <p>{{trans('privacy.contact.p1') }} <a href="mailto:info@anyshare.coop">info@anyshare.coop</a></p>
       </div>
     </div>
   </div>

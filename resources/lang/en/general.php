@@ -290,7 +290,7 @@ return [
       'p1' => 'You can start a Share in under 1 minute and enjoy it free for 15 days.
       We are currently in beta, so keep in mind features are still being added. This
       introductory cost is available for a limited time only. Email us at information
-      info@anysha.re with questions about current features.',
+      info@anyshare.coop with questions about current features.',
       'p2' => 'You will not be charged until your free trial ends on',
       'p3' => 'No commitments, cancel at any time.',
       'save_success' => 'Welcome to your new Share! Get started adding entries now.',
