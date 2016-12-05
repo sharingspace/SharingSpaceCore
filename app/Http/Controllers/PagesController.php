@@ -160,9 +160,16 @@ class PagesController extends Controller
         }
 
         $customer->card()->syncWithStripe();
-
+        if( config('app.debug')) {
+            // this is for testing only
+            $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+        }
+        else {
+            $data['logo'] = config('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
+        }
+        
         Mail::send(
-            ['text' => 'emails.coop-welcome'],
+            ['html' => 'emails.coop-welcomeHTML', 'text' => 'emails.coop-welcomeText'],
             $data,
             function ($message) use ($data) {
                 $message->to($data['email'], $data['name'])->subject('Welcome to AnySha.re!');

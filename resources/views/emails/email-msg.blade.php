@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-    <p style="margin-top:10px;">Dear {{$name}},</p>
+    <p>Dear {{$name}},</p>
 
     @if (empty($thread_subject))
         <p>You've received a new message from the Share <strong><a href="{{$community_url}}">{{ $community_name }}</a></strong>

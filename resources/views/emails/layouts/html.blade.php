@@ -121,7 +121,8 @@
         font-size: 14px;
         font-weight: normal;
         margin: 0;
-        Margin-bottom: 15px;
+        margin-bottom: 15px;
+        line-height: 20px;
       }
       p li, ul li, ol li {
         list-style-position: inside;
@@ -265,6 +266,7 @@
                                     </tr>
                                     <tr>
                                       <td class="email_body">
+                                        <br>
                                         @yield('content')
                                       </td>
                                     </tr>
