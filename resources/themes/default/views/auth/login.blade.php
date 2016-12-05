@@ -57,7 +57,7 @@
 
         <div class="row margin-top-10">
           <div class="col-md-12">
-            {!! trans('auth.no_account') !!} <a href="../auth/register">{!! trans('auth.signup_here') !!}</a> {!! trans('auth.signup_first') !!}
+            {!! trans('auth.no_account') !!} <a href="../auth/register">{!! trans('general.nav.register') !!}</a> {{ strtolower(trans('general.first')) }}
           </div>
         </div>
       </div>

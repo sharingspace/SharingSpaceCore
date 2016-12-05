@@ -20,11 +20,9 @@ return [
     'before_this_intro' => 'This circulation helps us co-exist in a state of abundance.',
     'before_this_headline' => 'Before This...',
     'before_this_desc' => 'Team AnyShare is from various countries, with multiple IT veterans with 20+ years experience. We have seen technology for in humanitarian and social evolution grow exponentially and are grateful to be part of this wave of new potential.',
-    
     'banner_desc' => 'We have worked hard to start',
     'banner_desc2' => 'a new kind of Cooperative in the U.S.',
     'complete_coop' => 'Introducing the "Complete Cooperative"',
-
     'background_intro' => 'All people included in the company bylaws, voting, and dividends!',
     'background_headline' => 'Background...',
     'background_desc' => 'AnyShare Society has modified the',
@@ -35,7 +33,7 @@ return [
     'what_next_intro' => 'Align your ethics, community, and income with a passive investment',
     'what_next_headline' => 'What is next?',
     'what_next_desc' => 'We recommend you read',
-    'what_next_desc2' => 'this article'
+    'what_next_desc2' => 'this article',
     'what_next_desc3' => ' on the different levels of involvement. All AnyShare Coop members are recommended to join the "community" class first. Click the button below to join this exciting new type of Cooperative!',
     'you_can_own' => 'You can co-own AnyShare!',
     'lets_go' => 'Lets Go',
