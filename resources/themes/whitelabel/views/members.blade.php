@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.members') }} ::
+     {{ trans('general.our_members') }} ::
 @parent
 @stop
 
@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="row">
-  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members')}}</h1>
+  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.our_members')}}</h1>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
