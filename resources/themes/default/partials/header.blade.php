@@ -66,7 +66,7 @@
             </div>
         </div>
         @if (Route::is('home'))
-           <h1 class="heading">{{ trans('home.home_headline') }}</h1>
+           <h1 class="heading">{{ trans('general.make-share') }}</h1>
             <h2 class="hp_subheading">
                 {{ trans('home.subhome_headline') }}<br>
                 <div class="header_cta_button">
@@ -85,7 +85,7 @@
             @endif
             </h2>
         @elseif (Route::is('community.create.form'))
-            <h1 class="heading">{{trans('general.community.create') }}</h1>
+            <h1 class="heading">{{trans('general.make-share') }}</h1>
         @elseif (Route::is('assistance'))
             <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
         @elseif (Route::is('coop'))

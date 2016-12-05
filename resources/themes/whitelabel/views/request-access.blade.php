@@ -34,8 +34,8 @@ Your request to become a member of this Share is still pending'
           <button type="button" class="close" data-dismiss="alert alert-info" aria-hidden="true">&times;</button>
 
           @if ($request_count==1)
-            <p class="size-20"><strong>{{ trans('general.user.request_access.headline')}}</strong> {{ trans('general.user.request_access.your_request')}}</p>
-            <p class="size-14">{{ trans('general.user.request_access.notified')}}</p>
+            <p class="size-20"><strong>{{ trans('general.headline')}}</strong> {{ trans('general.user.request_access.your_request')}}</p>
+            <p class="size-14">{{ trans('general.notified')}}</p>
           @else
             <p class="size-20">{{ trans('general.user.request_access.still_pending')}}</p>
           @endif
@@ -70,7 +70,7 @@ Your request to become a member of this Share is still pending'
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                <button class="btn btn-primary">{{ trans('general.user.request_access.request_to_join')}}</button>
+                <button class="btn btn-primary">{{ trans('general.user.request_access.submit')}}</button>
               </div>
             </div>
           </form>

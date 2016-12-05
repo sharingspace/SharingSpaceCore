@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.members') }} ::
+     {{ trans('general.members.members') }} ::
 @parent
 @stop
 
@@ -18,10 +18,10 @@
         <table class="table table-condensed" id="members">
           <tbody>
             <tr>
-              <th class="col-md-3">{{ trans('general.community.community') }}</th>
-              <th class="col-md-2">{{ trans('general.community.location') }}</th>
-              <th class="col-md-6">{{ trans('general.community.about') }}</th>
-              <th class="col-md-1 text-center">{{ trans('general.community.action') }}</th>
+              <th class="col-md-3">{{ trans('general.share') }}</th>
+              <th class="col-md-2">{{ trans('general.location') }}</th>
+              <th class="col-md-6">{{ trans('general.about') }}</th>
+              <th class="col-md-1 text-center">{{ trans('general.action') }}</th>
             </th>
           @foreach ($communities as $community)
             <tr>

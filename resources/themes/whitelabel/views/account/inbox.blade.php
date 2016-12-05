@@ -93,10 +93,10 @@
     exportDataType: 'all',
     exportTypes: ['csv', 'txt','json', 'xml'],
     maintainSelected: true,
-    paginationFirstText: "{{ trans('pagination.first') }}",
-    paginationLastText: "{{ trans('pagination.last') }}",
-    paginationPreText: "{{ trans('pagination.previous') }}",
-    paginationNextText: "{{ trans('pagination.next') }}",
+    paginationFirstText: "{{ trans('general.first') }}",
+    paginationLastText: "{{ trans('general.last') }}",
+    paginationPreText: "{{ trans('general.prev') }}",
+    paginationNextText: "{{ trans('general.next') }}",
     pageList: ['10','25','50','100','150','200'],
     formatShowingRows: function (pageFrom, pageTo, totalRows) {
         return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' messages';

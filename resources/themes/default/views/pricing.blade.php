@@ -9,7 +9,8 @@
         <p>{{trans('pricing.intro_p1')}}</p>
         <p>{{trans('pricing.intro_p2')}}</p>
         <p>{{trans('pricing.intro_p3')}}</p>
-        <p>{!!trans('pricing.intro_p4')!!}</p>
+        <p>{!!trans('pricing.intro_p4')!!} <a href="/coop">{!!trans('pricing.intro_p5')!!}</a></p>
+
       </div>
     </div>
     <div class="table-layout center-block">
@@ -22,7 +23,7 @@
             <p class="price">
               <sup>{{trans('pricing.currency')}}</sup>
               <span>{{trans('pricing.cost')}}</span>
-              <sub>{{trans('pricing.pay_period')}}</sub>
+              <sub>{{trans('general.month')}}</sub>
             </p>
           </div>
         </div>
@@ -34,7 +35,7 @@
           <li><i class="fa fa-cog" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Logo, profile, social networks">{{trans('pricing.your_branding')}}</a></li>
           <li><i class="fa fa-download" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="From csv to an API, you have options">{{trans('pricing.import_export')}}</a></li>
           <li><i class="fa fa-user-secret" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Public or Private. Secret coming soon">{{trans('pricing.privacy_level')}}</a></li>
-          <li><i class="fa fa-slack" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Slack API">{{trans('pricing.slack')}}</a></li>
+          <li><i class="fa fa-slack" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Slack API">{{trans('general.slack')}}</a></li>
           <li><i class="fa fa-money" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Guarantee of prices staying $10 for your Share">{{trans('pricing.price_security')}}</a></li>
         </ul>
         <!-- /FEATURES -->

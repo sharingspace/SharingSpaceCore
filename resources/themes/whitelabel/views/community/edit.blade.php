@@ -262,7 +262,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                 <legend>{{ trans('general.community.analytics')}}</legend>
                 <!-- Google analytics ID -->
                 <div class="form-group{{ $errors->first('ga', ' has-error') }}">
-                  <label for="slack_channel" class="sr-only">{{ trans('general.community.ga_id') }}</label>
+                  <label for="slack_channel" class="sr-only">{{ trans('general.ga-id') }}</label>
 
                   <input type="text" name="ga" class="form-control" placeholder="{{ trans('general.community.for_example')}}" value="{{ Input::old('ga', $community->ga) }}">
                   {!! $errors->first('ga', '<span class="help-block">:message</span>') !!}
@@ -297,7 +297,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         <img src="/assets/img/info_bar.png" width="100%" alt="home page information bar featuring privacy level of share, number of members and exchange types" />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
       </div>
     </div>
   </div>
@@ -319,7 +319,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
       </div>
     </div>
   </div>
@@ -341,7 +341,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         <p>{{ trans('general.community.slack_info.p5')}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close') }}</button>
       </div>
     </div>
   </div>

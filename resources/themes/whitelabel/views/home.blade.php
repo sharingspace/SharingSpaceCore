@@ -83,8 +83,8 @@
           <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
           <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>
           <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-          <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.entries.tags') }}</th>
-          <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.entries.actions') }}</th>
+          <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.keywords') }}</th>
+          <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.actions') }}</th>
         </tr>
       </thead>
     </table>
@@ -142,10 +142,10 @@ $( document ).ready(function() {
     exportDataType: 'all',
     exportTypes: ['csv', 'txt','json', 'xml'],
     maintainSelected: true,
-    paginationFirstText: "{{ trans('pagination.first') }}",
-    paginationLastText: "{{ trans('pagination.last') }}",
-    paginationPreText: "{{ trans('pagination.previous') }}",
-    paginationNextText: "{{ trans('pagination.next') }}",
+    paginationFirstText: "{{ trans('gernal.first') }}",
+    paginationLastText: "{{ trans('general.last') }}",
+    paginationPreText: "{{ trans('general.prev') }}",
+    paginationNextText: "{{ trans('general.next') }}",
     pageList: ['10','25','50','100','150','200'],
     formatShowingRows: function (pageFrom, pageTo, totalRows) {
         return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';

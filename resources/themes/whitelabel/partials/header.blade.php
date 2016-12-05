@@ -11,7 +11,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> {{ trans('general.nav.memberships') }}</a></li>
+            <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> {{ trans('general.memberships') }}</a></li>
             <li><a href="{{ route('user.profile', Auth::user()->id) }}"><i class="fa fa-user"></i> {{ trans('general.nav.profile') }}</a></li>
             <li><a href="{{ route('user.settings.view') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
             <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
@@ -113,7 +113,7 @@
           <ul class="nav navbar-nav">
             <li class="add_entry_button">
               <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.entry') }}</span></button>
+                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
               </a>
             </li>
           </ul>
@@ -142,7 +142,7 @@
               </li>
               <li{!! (Route::is('members') ? ' class="active"' : '') !!}>
                 <a href="{{ route('members') }}">
-                  {{ trans('general.nav.members') }}
+                  {{ trans('general.our_members') }}
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
@@ -152,7 +152,7 @@
                 (($whitelabel_group->group_type!='S') || 
                 (Auth::user()->isMemberOfCommunity($whitelabel_group) || 
                 $user->isSuperAdmin()))))
-              <li><a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.nav.about') }}</a></li>
+              <li><a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a></li>
             @endif
 
             @can('update-community', $whitelabel_group)
@@ -209,7 +209,7 @@
         {!! Markdown::convertToHtml($whitelabel_group->about) !!}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
       </div>
     </div>
   </div>
@@ -223,7 +223,7 @@
         <p>Learn more about privacy <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035663-privacy-options-for-shares">here</a></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.community.close')}}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
       </div>
     </div>
   </div>

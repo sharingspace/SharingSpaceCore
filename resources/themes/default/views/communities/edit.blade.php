@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.create_sharing_hub') }} ::
+     {{ trans('general.create') }} ::
 @parent
 @stop
 

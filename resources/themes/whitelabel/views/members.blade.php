@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.members') }} ::
+     {{ trans('general.members.members') }} ::
 @parent
 @stop
 
@@ -19,8 +19,8 @@
         	<thead>
             <tr>
               <th data-sortable="false"><span class='sr-only'>{{trans('general.members.image')}}</span></th>
-              <th data-sortable="true" class="name">{{trans('general.members.name')}}</th>
-              <th data-sortable="true" class="location">{{trans('general.members.location')}}</th>
+              <th data-sortable="true" class="name">{{trans('general.name')}}</th>
+              <th data-sortable="true" class="location">{{trans('general.location')}}</th>
               <th data-sortable="false" class="bio">{{trans('general.members.bio')}}</th>
               <th data-sortable="true">{{trans('general.members.member_since')}}</th>
             </tr>

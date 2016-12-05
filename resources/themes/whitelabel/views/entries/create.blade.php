@@ -28,8 +28,8 @@
               <th>{{ trans('general.entries.qty') }}</th>
               <th>{{ trans('general.entries.title') }}</th>
               <th>{{ trans('general.entries.exchange_types') }}</th>
-              <th>{{ trans('general.entries.keywords') }}</th>
-              <th>{{ trans('general.entries.action') }}</th>
+              <th>{{ trans('general.keywords') }}</th>
+              <th>{{ trans('general.action') }}</th>
               <th style='display:none'></th>
             </tr>
           </thead>

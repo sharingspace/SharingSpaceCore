@@ -48,8 +48,8 @@
             <div class="margin-bottom-10{{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.user.password') }}" name="password">
-                <b class="tooltip tooltip-bottom-right">{{ trans('general.login.latin') }}</b>
+                <input type="password" placeholder="{{ trans('general.password') }}" name="password">
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
               </label>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>

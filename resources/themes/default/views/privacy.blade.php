@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-  {{ trans('general.privacy.title') }} ::
+  {{ trans('general.privacy') }} ::
 @parent
 @stop
 
