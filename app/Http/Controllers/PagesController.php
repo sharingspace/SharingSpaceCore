@@ -167,7 +167,10 @@ class PagesController extends Controller
         else {
             $data['logo'] = config('app.url').'/assets/img/hp/anyshare-logo-web-retina.png';
         }
-        
+
+        $data['interest'] = Input::get('interest');
+        $data['involved'] = Input::get('involved');
+
         $emails = [$data['email'], 'info@anyshare.coop'];
 
         Mail::send(
