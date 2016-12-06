@@ -35,7 +35,7 @@ return [
     'what_next_intro' => 'Align your ethics, community, and income with a passive investment',
     'what_next_headline' => 'What is next?',
     'what_next_desc' => 'We recommend you read',
-    'what_next_desc2' => 'this article'
+    'what_next_desc2' => 'this article',
     'what_next_desc3' => ' on the different levels of involvement. All AnyShare Coop members are recommended to join the "community" class first. Click the button below to join this exciting new type of Cooperative!',
     'you_can_own' => 'You can co-own AnyShare!',
     'lets_go' => 'Lets Go',
