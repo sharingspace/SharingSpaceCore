@@ -64,10 +64,10 @@ return [
     'one_min' => 'Or start your own in 1 minute!',
     'markdown' => 'markdown allowed',
 
-
     'nav'  => [
       'browse' => 'Browse',
       'try' => 'Try',
+      'try_now' => 'Try Now',
       'start_now' => 'FREE TO TRY',
       'login' => 'Sign-In',
       'logout' => 'Logout',
