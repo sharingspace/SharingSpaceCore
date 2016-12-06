@@ -68,6 +68,7 @@ return [
     'nav'  => [
       'browse' => 'Browse',
       'try' => 'Try',
+      'try_now' => 'Try Now',
       'start_now' => 'FREE TO TRY',
       'login' => 'Sign-In',
       'logout' => 'Logout',

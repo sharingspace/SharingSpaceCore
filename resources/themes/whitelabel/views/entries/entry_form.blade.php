@@ -24,7 +24,7 @@
                     <div class="checkbox">
                       @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
                         <div class="col-sm-12 col-xs-6 pull-left margin-bottom-10">
-                          <label class="checkbox col-md-12 pull-left margin-bottom-10 padding-left-10">
+                          <label class="checkbox col-md-12 pull-left margin-bottom-10">
                             {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
                             <i></i> {{ $exchange_types->name }}
                           </label>
