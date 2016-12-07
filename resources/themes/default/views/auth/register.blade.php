@@ -38,7 +38,7 @@
             <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
-                <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
+                <input type="text" placeholder="{{ trans('general.email') }}" name="email" value="{{ old('email') }}">
                 <b class="tooltip tooltip-bottom-right">{{ trans('general.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
@@ -280,7 +280,7 @@
         <p>AnyShare supports the protection of intellectual property and asks AnyShare merchants to do the same. It's our policy to respond to all notices of alleged copyright infringement. If someone believes that one of our merchants is infringing their intellectual property rights, they can send a DMCA Notice to AnyShare's designated agent using our form. Upon receiving a DMCA Notice, we may remove or disable access to the material claimed to be a copyright infringement. Once provided with a notice of takedown, the merchant can reply with a counter notification using our form if they object to the complaint. The original complainant has 14 business days after we receive a counter notification to seek a court order restraining the merchant from engaging in the infringing activity, otherwise we restore the material. </p>
       </div><!-- /.modal-body -->
 
-      <div class="modal-footer">
+      <div class="modal-footer hidden">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> I Agree</button>
 
