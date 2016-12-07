@@ -47,5 +47,6 @@ return [
     'ceo' => 'Co-Founder / CEO',
     'coo'  => 'Co-Founder / COO',
     'cto'  => 'Co-Founder / CTO',
-    'senior_dev' => 'Co-Founder / Sr. Developer'
+    'senior_dev' => 'Co-Founder / Sr. Developer',
+    'cta' => 'We\'ve trailblazing a<br>new kind of Cooperative!',
 ];
