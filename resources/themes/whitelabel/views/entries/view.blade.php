@@ -43,7 +43,7 @@
             @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
               <?php array_push($exchanges, strtolower($entry->exchangeTypes[$i]->name)); ?>
             @endfor
-            <strong>{{ trans('general.entries.type') }}</strong> {{implode(', ', $exchanges)}}
+            <strong>{{ trans('general.type') }}</strong> {{implode(', ', $exchanges)}}
           </div>
           @endif
 
@@ -55,7 +55,7 @@
 
           @if($entry->location)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>{{ trans('general.entries.location') }}</strong> {{ $entry->location }}
+            <strong>{{ trans('general.location') }}</strong> {{ $entry->location }}
           </div>
           @endif
 
@@ -67,7 +67,7 @@
 
           @if($entry->tags)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>{{ trans('general.entries.keywords') }}</strong> {{ $entry->tags }}
+            <strong>{{ trans('general.keywords') }}</strong> {{ $entry->tags }}
           </div>
           @endif
 

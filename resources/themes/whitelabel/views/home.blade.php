@@ -32,7 +32,7 @@
 			<div class="col-sm-4">
 				<i class="glyphicon glyphicon-user"></i>
 
-				<h3 class="uppercase">{{ $whitelabel_group->members->count() }} {{ trans_choice('general.community.members', $whitelabel_group->members->count()) }}</h3>
+				<h3 class="uppercase">{{ $whitelabel_group->members->count() }} {{ trans_choice('general.our_members', $whitelabel_group->members->count()) }}</h3>
                 @if ($whitelabel_group->created_at)
 				<p>Since {{ $whitelabel_group->created_at->format('M j, Y') }}</p>
                 @endif

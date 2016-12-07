@@ -22,7 +22,7 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>{{ trans('general.community.community')}}</th>
+                <th>{{ trans('general.share')}}</th>
                 <th>{{ trans('general.date')}}</th>
                 <th>{{ trans('general.community.fee')}}</th>
               </tr>
