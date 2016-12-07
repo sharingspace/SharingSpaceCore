@@ -32,15 +32,13 @@
   </div> <!-- container -->
 </section>
 
-
-
-<section>
-  <div class="worked_hard">
+<section class="orange_cta ">
+  <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2 text-center bold larger size-40 margin-top-30">
-          {!!trans('about.banner_desc')!!}</br>
-          {!!trans('about.banner_desc2')!!}
-        </div>
+      <div class="col-xs-8 col-xs-offset-2">
+        <h2>{!!trans('about.cta')!!}</h2>
+        <img src="{{ asset('assets/img/about/coop_fairshares.png')}}" alt="fairshares coop">
+      </div>
     </div>
   </div>
 </section>
