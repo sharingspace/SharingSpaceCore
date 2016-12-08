@@ -23,7 +23,7 @@
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
           <header>
-            <i class="fa fa-users"></i>  {{ trans('general.user.signup_by_email') }}
+            <i class="fa fa-envelope"></i> {{ trans('general.user.signup_by_email')}}
             </header>
 
           <fieldset class="nomargin">

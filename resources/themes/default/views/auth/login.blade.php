@@ -15,6 +15,10 @@
   <div class="container margin-top-40">
 
     <div class="row">
+      <!-- LOGIN -->
+      <div class="col-xs-12 size-18 margin-bottom-30">
+        {!! trans('auth.no_account') !!} <a href="../auth/register">{{ trans('general.nav.register') }}</a> {{ strtolower(trans('general.first')) }}
+      </div>
 
       <!-- LOGIN -->
       <div class="col-sm-6 col-xs-12">
@@ -22,7 +26,7 @@
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
           <header>
-            <i class="fa fa-sign-in"></i>  {{ trans('general.nav.login') }}
+            <i class="fa fa-sign-in"></i> {{ trans('general.user.login_by_email') }}
           </header>
 
           <fieldset class="nomargin">
@@ -53,12 +57,6 @@
 
         </form>
         <!-- /register form -->
-
-        <div class="row margin-top-10">
-          <div class="col-md-12">
-            {!! trans('auth.no_account') !!} <a href="../auth/register">{!! trans('auth.signup_here') !!}</a> {!! trans('auth.signup_first') !!}
-          </div>
-        </div>
       </div>
       <!-- /LOGIN -->
 

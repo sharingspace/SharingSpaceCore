@@ -23,7 +23,7 @@
           <input type="hidden" name="subdomain" id="subdomain" value="{{!empty($subdomain)?$subdomain:''}}" />
 
           <header>
-            <i class="fa fa-envelope"></i> Email &hellip;
+            <i class="fa fa-envelope"></i> {{ trans('general.user.signup_by_email')}}
           </header>
 
           <fieldset class="nomargin">
