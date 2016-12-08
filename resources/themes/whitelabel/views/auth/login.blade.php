@@ -35,7 +35,7 @@
             <div class="margin-bottom-10{{ $errors->first('email', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
-                <input type="text" placeholder="{{ trans('general.user.email') }}" name="email" value="{{ old('email') }}">
+                <input type="text" placeholder="{{ trans('general.email_address') }}" name="email" value="{{ old('email') }}">
               </label>
               {!! $errors->first('email', '<span class="help-block alert-info ">:message</span>') !!}
             </div>

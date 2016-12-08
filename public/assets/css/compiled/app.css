@@ -8753,8 +8753,9 @@ ul.exchange_types li:last-child:after {
 }
 
 .avatar-sm {
-  height: 20px;
+  max-height: 25px;
   /* fallback for older browsers */
+  height: auto;
   width: 20px;
   margin: 0px 5px 0px 0px;
   border-radius: 3px;
