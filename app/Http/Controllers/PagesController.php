@@ -177,7 +177,7 @@ class PagesController extends Controller
             ['html' => 'emails.coop-welcomeHTML', 'text' => 'emails.coop-welcomeText'],
             $data,
             function ($message) use ($data, $emails) {
-                $message->to($emails, $data['name'])->subject('Welcome to AnySha.re!');
+                $message->to($emails, $data['name'])->subject('Welcome to AnyShare!');
             }
         );
 

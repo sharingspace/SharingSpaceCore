@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'community@anyshare.coop', 'name' => 'AnySha.re'],
+    'from' => ['address' => 'community@anyshare.coop', 'name' => 'AnyShare'],
 
     /*
     |--------------------------------------------------------------------------
