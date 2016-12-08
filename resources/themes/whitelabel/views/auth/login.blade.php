@@ -22,12 +22,12 @@
         {!! trans('auth.no_account') !!} <a href="../auth/register">{{ trans('general.nav.register') }}</a> {{ strtolower(trans('general.first')) }}
       </div>
 
-      <div class="col-xs-6">
+      <div class="col-sm-6 col-xs-12 margin-bottom-10">
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post" action="{{ route('login') }}">
           {!! csrf_field() !!}
           <header>
-            <i class="fa fa-sign-in"></i>  {{ trans('general.user.login_by_email') }}
+            <i class="fa fa-sign-in"></i> {{ trans('general.user.login_by_email') }}
           </header>
 
           <fieldset class="nomargin">
@@ -56,10 +56,9 @@
             </div>
           </div>
 
-            <footer>
-             Forgot your password? <a href="{{ route('forgot_password.email.form') }}">Click here.</a>
-            </footer>
-
+          <footer>
+           Forgot your password? <a href="{{ route('forgot_password.email.form') }}">Click here.</a>
+          </footer>
         </form>
         <!-- /register form -->
 
@@ -67,7 +66,7 @@
       <!-- /LOGIN -->
 
       <!-- SOCIAL LOGIN -->
-      <div class="col-md-6 col-sm-6">
+      <div class="col-sm-6 col-xs-12">
         <form action="#" method="post" class="sky-form boxed">
 
           <header>
