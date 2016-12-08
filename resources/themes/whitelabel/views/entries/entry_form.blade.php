@@ -154,7 +154,7 @@
                     @if(isset($entry))
                       <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">
                     @else
-                      <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.location_placeholder')}}" aria-describedby="basic-addon2" value="">
+                      <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="">
                     @endif                   
                     <div class="input-group-addon" id="basic-addon2">
                       <i class="fa fa-location-arrow" id="geolocate"></i>
