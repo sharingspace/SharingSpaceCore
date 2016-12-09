@@ -10116,6 +10116,18 @@ section.TreborScholz {
   font-weight: normal;
 }
 
+/******************* messaging */
+
+#messages .row.messageRow {
+  margin: 3px 0;
+  padding: 2px 0;
+  background-color: #fafafa;
+}
+
+#messages .row.messageRow p {
+  margin-bottom: 15px;
+}
+
 /*************** Bootstrap extensions ******************/
 /** ************************************* **
 

@@ -8,9 +8,6 @@
     <div class="col-xs-12">
       <h1 class="size-24 text-center">{{ $conversation->subject }}</h1>
 
-      <form method="post" enctype="multipart/form-data" autocomplete="off" class="margin-left-10 margin-right-10" id="message_form">
-        {!! csrf_field() !!}    <!-- Begin messages table -->
-        
         @foreach ($conversation->messages as $message)
           {{--*/
             $messageId = $message->id;
@@ -37,10 +34,7 @@
           $readOn = "";
           $community = "readOn_clone";
         /*--}}        
-        @include('./account/message_row')
-
-      <!-- End messages table -->
-      </form>
+        @include('./account/message_row') 
     </div>
 
     <div class="col-xs-12">
