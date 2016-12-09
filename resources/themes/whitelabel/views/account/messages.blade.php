@@ -12,50 +12,32 @@
         {!! csrf_field() !!}    <!-- Begin messages table -->
         
         @foreach ($conversation->messages as $message)
-        <div class="row messageRow message_{{$message->id}}">  
-          <div class="col-xs-1">
-            <a class="member_thumb pull-left" href="{{ route('user.profile', $message->sender->id) }}">
-              <img class="hidden-xs margin-right-10" src="{{ $message->sender->gravatar_img() }}">
-            </a>
-          </div>
-          <div class="col-xs-8">
-            <div class="row">
-              <div class="col-xs-12 padding-top-10">
-                <strong class="sent_by">{{ $message->sender->getDisplayName() }}</strong>
-                @if ($message->conversation->community)
-                  <span> / {{ $message->conversation->community->name }}</span>
-                @endif
-              </div>
-              <div class="col-xs-12">
-                @if (strlen($message->message) > 100)
-                  <a data-toggle="collapse" data-target="#expand_{{$message->id}}">
-                  @if (empty($message->read_on))
-                    <i class="fa fa-eye-slash fa-lg pull-left text-green margin-top-5"></i>
-                  @endif
-                @endif
-                  {!! Str::limit(Helper::parseText($message->message), 100) !!}
-                @if (strlen($message->message) > 100)
-                  </a>
-                @endif
-                <div id="expand_{{$message->id}}" class="collapse">
-                  {!! Helper::parseText($message->message) !!}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-xs-2">
-            <span class="hidden-sm hidden-xs">{{ date('M j, Y g:ia', strtotime($message->created_at)) }}</span>
-            <span class="visible-sm visible-xs">{{ date('M j, Y', strtotime($message->created_at)) }}</span>
-          </div>
-
-          <div class="col-xs-1">
-            <button class="btn btn-danger btn-sm button_delete" id="messageid_{{$message->id}}">
-              <i class="fa fa-trash"></i>
-            </button>       
-          </div>
-        </div>
+          {{--*/
+            $messageId = $message->id;
+            $displayName = $message->sender->getDisplayName();
+            $avatar = $message->sender->gravatar_img();
+            $senderId = $message->sender->id;
+            $createdAt = $message->created_at;
+            $messageText = Helper::parseText($message->message);
+            $readOn = $message->read_on;
+            $community = $message->conversation->community->name;
+          /*--}}
+          @include('./account/message_row')
+      
         @endforeach
+        
+        {{--*/
+          $rowClass="hidden";
+          $messageId = "id_clone";
+          $displayName = "displayName_clone";
+          $avatar = "avatar_clone";
+          $senderId = "senderId_clone";
+          $createdAt = "createdAt_clone";
+          $messageText = "messageText_clone";
+          $readOn = "";
+          $community = "readOn_clone";
+        /*--}}        
+        @include('./account/message_row')
 
       <!-- End messages table -->
       </form>
@@ -121,7 +103,8 @@ $(document).ready(function () {
     $('#offerStatus').html('');
     $('#offerStatusbox').removeClass('alert alert-success alert-danger');
     //console.log($('#offerForm').serialize()); $conversation->entryId
-    console.log({{$conversation->findSendToId(Auth::user())}}+"   "+{{$conversation->entry_id}});
+    //console.log({{$conversation->findSendToId(Auth::user())}}+"   "+{{$conversation->entry_id}});
+
     $.ajax({
       type: "POST",
       url: "{{ route('messages.create.save', [$conversation->findSendToId(Auth::user()), $conversation->entry_id]) }}",
@@ -135,10 +118,19 @@ $(document).ready(function () {
           $('#offerStatusText').html('Success! '+data.message);
           $('#offerStatusbox').fadeTo(1000, 500).slideUp(500);
           $('.messageText').val('');
-          //var lastRow = $('.messageRow').last();
-          //var clone = $(lastRow).clone();
-          //$(clone).clone().insertAfter(lastRow);
-        } else {
+          var clone = $('.message_id_clone').clone();
+          $(clone).clone().insertBefore('.message_id_clone');
+          var message_id = "message_"+data.messageData['messageId'];
+          $('.message_id_clone').first().addClass(message_id).removeClass('message_id_clone');
+          message_id = "."+message_id; 
+          $( message_id +' .sent_by').text(data.messageData['displayName']);
+          $( message_id +' .shareName').text(data.messageData['shareName']);
+          $( message_id +' .messageText').text(data.messageData['message']);
+          $( message_id +' .member_thumb img').attr('src', data.messageData['avatar']);
+          $( message_id +' .button_delete').attr('id', 'messageid_'+data.messageData['messageId']);
+          $( message_id).removeClass('hidden');
+        }
+        else {
           $('#offerStatusbox').addClass('alert alert-warning');
           $('#offerStatusText').html('Error: '+data.message);
         }
@@ -178,7 +170,7 @@ $(document).ready(function () {
         //console.log("message deleted!!!"+replyData.message_id);
         displayFlashMessage("success",replyData);
 
-        $('.row.message_'+replyData.message_id).fadeTo(1000, 500).slideUp(500).$(this).remove();
+        $('.row.message_'+replyData.message_id).fadeTo("fast", 500).slideUp(500).remove();
       } 
       else {
         //console.log("message error!!!"+replyData.message_id+replyData.message);

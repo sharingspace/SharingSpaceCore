@@ -217,7 +217,7 @@ class MessagesController extends Controller
                 $data['email'] = $send_to_email = $recipient->email;
                 $data['name'] = $send_to_name =  $recipient->getDisplayName();
                 $data['offer'] = $offer->message;
-                $data['community_name'] = ucfirst($request->whitelabel_group->name);
+                $data['community_name'] = $request->whitelabel_group->name;
                 $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
 
                 if (!empty($request->whitelabel_group->logo)) {
@@ -235,7 +235,15 @@ class MessagesController extends Controller
                         $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
                     });
 
-                    return response()->json(['success'=>true, 'message'=>trans('general.messages.sent')]);
+                    $messageData = ['messageId' => $offer->id,
+                                'displayName' => $send_to_name,
+                               'avatar' => Auth::user()->gravatar_img(),
+                                'senderId' => $offer->sent_by,
+                                'createdAt' => date('M j, Y g:ia'),
+                                'message' => $offer->message,
+                                'shareName' => $request->whitelabel_group->name];
+
+                    return response()->json(['success'=>true, 'messageData' => $messageData, 'message'=>trans('general.messages.sent')]);
                 }
                 else {
                     return response()->json(['success'=>false, 'message'=>trans('general.messages.sent_error')]);
