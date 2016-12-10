@@ -2,10 +2,9 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.register') }} ::
+     {{ trans('general.nav.register') }} :: 
 @parent
 @stop
-
 
 {{-- Page content --}}
 @section('content')
@@ -13,14 +12,14 @@
 <!-- -->
 <section>
   <div class="container margin-top-40">
-
     <div class="row">
       <!-- LOGIN -->
       <div class="col-sm-6 col-xs-12">
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
-          <input type="hidden" name="subdomain" id="subdomain" value="{{!empty($subdomain)?$subdomain:''}}" />
+          <input type="hidden" name="subdomain" id="subdomain" value="{{$subdomain or ''}}" />
+          <input type="hidden" name="shareName" value="{{$shareName  or ''}}" />
 
           <header>
             <i class="fa fa-envelope"></i> {{ trans('general.user.signup_by_email')}}
@@ -135,8 +134,6 @@
       <!-- /SOCIAL LOGIN -->
 
     </div>
-
-
   </div>
 </section>
 <!-- / -->
