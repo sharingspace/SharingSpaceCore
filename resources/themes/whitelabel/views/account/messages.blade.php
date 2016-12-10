@@ -97,7 +97,6 @@ $(document).ready(function () {
     $('#offerStatus').html('');
     $('#offerStatusbox').removeClass('alert alert-success alert-danger');
     //console.log($('#offerForm').serialize()); $conversation->entryId
-    //console.log({{$conversation->findSendToId(Auth::user())}}+"   "+{{$conversation->entry_id}});
 
     $.ajax({
       type: "POST",

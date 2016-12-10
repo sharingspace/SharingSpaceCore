@@ -215,10 +215,11 @@ class MessagesController extends Controller
                 $conversation = $offer->conversation()->associate($conversation);
 
                 $data['email'] = $send_to_email = $recipient->email;
-                $data['name'] = $send_to_name =  $recipient->getDisplayName();
+                $data['name'] = $recipient->getDisplayName();
                 $data['offer'] = $offer->message;
                 $data['community_name'] = $request->whitelabel_group->name;
                 $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
+                $data['sent_by_name'] = Auth::user()->getDisplayName();
 
                 if (!empty($request->whitelabel_group->logo)) {
                     if( config('app.debug')) {
@@ -236,7 +237,7 @@ class MessagesController extends Controller
                     });
 
                     $messageData = ['messageId' => $offer->id,
-                                'displayName' => $send_to_name,
+                                'displayName' => $data['name'],
                                'avatar' => Auth::user()->gravatar_img(),
                                 'senderId' => $offer->sent_by,
                                 'createdAt' => date('M j, Y g:ia'),
@@ -246,7 +247,7 @@ class MessagesController extends Controller
                     return response()->json(['success'=>true, 'messageData' => $messageData, 'message'=>trans('general.messages.sent')]);
                 }
                 else {
-                    return response()->json(['success'=>false, 'message'=>trans('general.messages.sent_error')]);
+                    return response()->json(['success'=>false, 'message'=> trans('general.messages.sent_error')]);
                 }
             }
             else {
