@@ -13,19 +13,18 @@
 <section>
 	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
+    @if($images && $images[0]->filename)
     	<div class="col-lg-4 col-sm-5 col-xs-12 margin-top-20">
         <div id="image_box_container"> 
-          <div id="image_box" 
-            @if($images && $images[0]->filename)
-              style="background-image:url('{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}')">
-            @else
-               style="background-image:url('{{ Helper::cdn('img/default/new-default-'.$entry->post_type.'.jpg') }}')">
-            @endif
+          <div id="image_box" style="background-image:url('{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}')">
           </div>
         </div>
       </div> <!-- col-md-4 -->
-
-			<div class="col-lg-4 col-sm-7 col-xs-12 margin-top-20">
+      
+      <div class="col-lg-4 col-sm-7 col-xs-12 margin-top-20">
+      @else
+      <div class="col-xs-12 margin-top-20">
+      @endif
       	<div class="row">
         	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
          		<h1 class="size-18 margin-bottom-0"><span class="sr-only">{{ trans('general.entries.view') }},</span> {{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>

@@ -8459,6 +8459,22 @@ $color-green: #9AE14F;
   }
 }
 
+.want_square {
+  width: 20px;
+  height: 20px;
+  background-color: #EC971F;
+  border-radius: 3px;
+  display: block;
+}
+
+.have_square {
+  width: 20px;
+  height: 20px;
+  background-color: #179BD7;
+  border-radius: 3px;
+  display: block;
+}
+
 .entry_img_view {
   color: blue;
   font-family:Arial,san-serif;

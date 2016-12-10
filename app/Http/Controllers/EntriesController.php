@@ -593,7 +593,7 @@ class EntriesController extends Controller
                 $imageTag = '<a href="'.route('entry.view', $entry->id).'"><img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image"></a>';
             }
             else {
-                $imageTag = null;
+                $imageTag = '<a href="'.route('entry.view', $entry->id).'" class="'.$entry->post_type.'_square"></a>';
             }
 
 
