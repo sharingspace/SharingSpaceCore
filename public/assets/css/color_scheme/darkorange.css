@@ -19,6 +19,28 @@
   /* Safari */
 }
 
+.textColor_darkorange {
+  background-color: #e67e00 !important;
+}
+
+.btn-colored {
+  background-color: #e67e00 !important;
+  border-color: #804600;
+  color: #fff;
+}
+
+.btn-light-colored {
+  background-color: #ffaf4d;
+  border-color: #e67e00;
+  color: #fff;
+}
+
+.btn-dark-colored {
+  background-color: #804600;
+  border-color: #1a0e00;
+  color: #fff;
+}
+
 a,
 a:focus:not(.btn),
 section.dark a,

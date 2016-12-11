@@ -13,11 +13,23 @@
 		background-color: $primaryColor !important;
 	}
 
-	.btn-colored {
-		background-color: $primaryColor !important;
-		border-color: darken($primaryColor, 20%);
-		color: #fff;
-	}
+    .btn-colored {
+        background-color: $primaryColor !important;
+        border-color: darken($primaryColor, 20%);
+        color: #fff;
+    }
+
+    .btn-light-colored {
+        background-color: lighten($primaryColor, 20%);
+        border-color: $primaryColor;
+        color: #fff;
+    }
+
+    .btn-dark-colored {
+        background-color: darken($primaryColor, 20%);
+        border-color: darken($primaryColor, 40%);
+        color: #fff;
+    }
 
 	a,
 	a:focus:not(.btn),

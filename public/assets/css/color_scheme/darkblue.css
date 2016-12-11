@@ -1,22 +1,44 @@
-/** Dark Blue #1980B6
+/** Dark Blue #0000cc
 ******************************************************************/
 
 ::-moz-selection {
-  background: #1980B6;
+  background: #0000cc;
 }
 
 ::selection {
-  background: #1980B6;
+  background: #0000cc;
 }
 
 ::-moz-selection {
-  background: #1980B6;
+  background: #0000cc;
   /* Firefox */
 }
 
 ::-webkit-selection {
-  background: #1980B6;
+  background: #0000cc;
   /* Safari */
+}
+
+.textColor_darkblue {
+  background-color: #0000cc !important;
+}
+
+.btn-colored {
+  background-color: #0000cc !important;
+  border-color: #000066;
+  color: #fff;
+}
+
+.btn-light-colored {
+  background-color: #3333ff;
+  border-color: #0000cc;
+  color: #fff;
+}
+
+.btn-dark-colored {
+  background-color: #000066;
+  border-color: black;
+  color: #fff;
 }
 
 a,
@@ -82,7 +104,7 @@ a.href-reset.active,
 .box-icon.box-icon-color i,
 .switch-primary.switch-round > input:checked + .switch-label:after,
 section.dark .nav-tabs.nav-clean > li.active > a {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 #sidepanel.sidepanel-theme-color,
@@ -127,7 +149,7 @@ i.ico-color,
 #progressBar #bar,
 #page-menu,
 #page-menu ul {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 /* !important required */
@@ -136,7 +158,7 @@ i.ico-color,
 #music-player .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
 section .theme-background,
 .swiper-pagination-bullet-active {
-  background-color: #1980B6 !important;
+  background-color: #0000cc !important;
 }
 
 .inews-content-inner h3 > a,
@@ -145,7 +167,7 @@ div.side-nav ul > li.active > a,
 .pagination.pagination-simple > li.active > a,
 div.side-nav ul.list-group-bordered > li > a:hover,
 section .theme-color {
-  color: #1980B6 !important;
+  color: #0000cc !important;
 }
 
 .primary-slider .ui-slider .ui-slider-handle,
@@ -158,7 +180,7 @@ a.thumbnail:hover,
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  border-color: #1980B6;
+  border-color: #0000cc;
 }
 
 .open > .dropdown-toggle.btn-primary,
@@ -168,43 +190,43 @@ a.thumbnail:hover,
 .btn-primary:hover
 .pagination > .active > a,
 .pagination > .active > a:hover {
-  border-color: #1980B6;
+  border-color: #0000cc;
 }
 
 #topNav ul.dropdown-menu {
   /* submenu border top color */
-  border-top-color: #1980B6;
+  border-top-color: #0000cc;
 }
 
 section.featured-grid div.row > div .ribbon:before,
 .modal-content {
-  border-top-color: #1980B6;
+  border-top-color: #0000cc;
 }
 
 #topNav ul.dropdown-menu {
-  border-color: #1980B6 #fff #fff;
+  border-color: #0000cc #fff #fff;
 }
 
 #topNav div.submenu-dark ul.dropdown-menu {
-  border-color: #1980B6 #3F3F3F #3F3F3F;
+  border-color: #0000cc #3F3F3F #3F3F3F;
 }
 
 #topNav div.submenu-color ul.dropdown-menu {
-  border-color: #1980B6 #3F3F3F #3F3F3F;
+  border-color: #0000cc #3F3F3F #3F3F3F;
 }
 
 #topMain li.search .search-box {
-  border-top: #1980B6 2px solid;
+  border-top: #0000cc 2px solid;
 }
 
 /* COLOR DROP DOWN MENU */
 
 #topNav div.submenu-color ul.dropdown-menu {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 #topNav div.submenu-color ul.dropdown-menu {
-  border-color: #888 #1980B6 #1980B6;
+  border-color: #888 #0000cc #0000cc;
 }
 
 #topNav div.submenu-color ul.dropdown-menu a.dropdown-toggle {
@@ -247,7 +269,7 @@ section.theme-color div.heading-title.heading-dotted h4,
 section.theme-color div.heading-title.heading-dotted h5,
 section.theme-color div.heading-title.heading-dotted h6 {
   color: #fff;
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 section.theme-color div.heading-title h1,
@@ -256,7 +278,7 @@ section.theme-color div.heading-title h3,
 section.theme-color div.heading-title h4,
 section.theme-color div.heading-title h5,
 section.theme-color div.heading-title h6 {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 section.theme-color div.heading-title h1 span,
@@ -294,14 +316,14 @@ body.menu-vertical #mainMenu.sidebar-vertical .dropdown-menu > .active > a:focus
 body.menu-vertical #mainMenu.sidebar-vertical .dropdown-menu > .active > a:hover,
 body.menu-vertical #mainMenu.sidebar-vertical .navbar-default .navbar-nav > .active > a,
 body.menu-vertical #mainMenu.sidebar-vertical .sidebar-nav .navbar li:hover > a {
-  color: #1980B6 !important;
+  color: #0000cc !important;
 }
 
 /**	[Shortcode] Buttons
 *************************************************** **/
 
 section.dark .btn-default:hover {
-  color: #1980B6;
+  color: #0000cc;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -309,7 +331,7 @@ section.dark .btn-default:hover {
 *************************************************** **/
 
 section.page-header .breadcrumb a:hover {
-  color: #1980B6 !important;
+  color: #0000cc !important;
   text-decoration: none;
 }
 
@@ -322,20 +344,20 @@ div.divider.divider-color i {
 
 div.divider.divider-color:before,
 div.divider.divider-color:after {
-  border-top: #1980B6 1px solid;
+  border-top: #0000cc 1px solid;
 }
 
 div.divider.divider-color i {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 div.divider.divider-circle.divider-color i {
   color: #fff;
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 div.divider.divider-border > a:hover > i {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 /**	[Shortcode] Headings
@@ -343,32 +365,32 @@ div.divider.divider-border > a:hover > i {
 
 div.heading-title.heading-line-single.heading-color:before,
 div.heading-title.heading-line-double.heading-color:before {
-  border-color: #1980B6;
+  border-color: #0000cc;
 }
 
 div.heading-border-bottom.heading-color {
-  border-bottom-color: #1980B6;
+  border-bottom-color: #0000cc;
 }
 
 div.heading-title.heading-border.heading-color,
 div.heading-title.heading-border.heading-inverse.heading-color {
-  border-color: #1980B6;
+  border-color: #0000cc;
 }
 
 section.dark div.heading-title.heading-border-bottom {
-  border-bottom-color: #1980B6;
+  border-bottom-color: #0000cc;
 }
 
 /**	[Shortcode] Icon Boxes
 *************************************************** **/
 
 .box-icon a.box-icon-title:hover > h2 {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 .box-icon a.box-icon-title:hover > i {
   color: #fff;
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 .box-icon a.box-icon-more {
@@ -377,17 +399,17 @@ section.dark div.heading-title.heading-border-bottom {
 
 .box-icon a.box-icon-more:hover,
 section.dark .box-icon a.box-icon-more:hover {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 .box-video a.box-video-title:hover h2,
 .box-video a.box-image-title:hover h2 {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 .box-flip .box2 {
   color: #fff;
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 .box-flip .box2 h1,
@@ -400,15 +422,15 @@ section.dark .box-icon a.box-icon-more:hover {
 }
 
 .box-static.box-border-top {
-  border-color: #1980B6;
+  border-color: #0000cc;
 }
 
 /**	[Shortcode] Navigations
 *************************************************** **/
 
 .navbar-primary {
-  border-color: #1980B6 !important;
-  background-color: #1980B6 !important;
+  border-color: #0000cc !important;
+  background-color: #0000cc !important;
 }
 
 /**	[Shortcode] Paginations
@@ -416,8 +438,8 @@ section.dark .box-icon a.box-icon-more:hover {
 
 section.dark .pagination > li.active > a,
 .pagination > li.active > a {
-  border-color: #1980B6;
-  background-color: #1980B6;
+  border-color: #0000cc;
+  background-color: #0000cc;
 }
 
 /** [Shortcode] Process Steps
@@ -425,7 +447,7 @@ section.dark .pagination > li.active > a,
 
 .process-wizard-primary > .process-wizard-step > .process-wizard-dot,
 .process-wizard-primary > .process-wizard-step > .progress > .progress-bar {
-  background: #1980B6;
+  background: #0000cc;
 }
 
 .process-wizard-primary > .process-wizard-step > .process-wizard-dot:after {
@@ -435,8 +457,8 @@ section.dark .pagination > li.active > a,
 ul.process-steps li.active a,
 ul.process-steps li.active a:focus,
 ul.process-steps li.active:hover > a {
-  background-color: #1980B6 !important;
-  border-color: #1980B6 !important;
+  background-color: #0000cc !important;
+  border-color: #0000cc !important;
 }
 
 ul.process-steps li.active h1,
@@ -445,7 +467,7 @@ ul.process-steps li.active h3,
 ul.process-steps li.active h4,
 ul.process-steps li.active h5,
 ul.process-steps li.active h6 {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 /** [Shortcode] Process Steps
@@ -454,12 +476,12 @@ ul.process-steps li.active h6 {
 div.mega-price-table .pricing-title,
 div.mega-price-table .pricing-head,
 div.mega-price-table .pricing.popular {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 div.mega-price-table .pricing:hover h4,
 div.mega-price-table .pricing-table i.fa {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 /** Styled Icons
@@ -467,8 +489,8 @@ div.mega-price-table .pricing-table i.fa {
 
 section.dark i.ico-hover:hover,
 i.ico-hover:hover {
-  background-color: #1980B6;
-  border-color: #1980B6;
+  background-color: #0000cc;
+  border-color: #0000cc;
 }
 
 /** [Shortcode] Tabs
@@ -476,20 +498,20 @@ i.ico-hover:hover {
 
 .nav-tabs.nav-top-border > li.active > a,
 .nav-tabs.nav-top-border > li.active > a:hover {
-  border-top-color: #1980B6 !important;
+  border-top-color: #0000cc !important;
 }
 
 .nav-tabs.nav-bottom-border > li.active > a,
 .nav-tabs.nav-bottom-border > li.active > a:hover {
-  border-bottom-color: #1980B6 !important;
+  border-bottom-color: #0000cc !important;
 }
 
 .nav-tabs.nav-alternate > li.active > a {
-  background-color: #1980B6 !important;
+  background-color: #0000cc !important;
 }
 
 .nav-tabs > li.active > a {
-  color: #1980B6 !important;
+  color: #0000cc !important;
 }
 
 /** Sky Forms
@@ -502,11 +524,11 @@ i.ico-hover:hover {
 /**/
 
 .sky-form .toggle i:before {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 .sky-form .button {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 /**/
@@ -516,21 +538,21 @@ i.ico-hover:hover {
 /**/
 
 .sky-form .radio input + i:after {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
 
 .sky-form .checkbox input + i:after {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 .sky-form .radio input:checked + i,
 .sky-form .checkbox input:checked + i,
 .sky-form .toggle input:checked + i {
-  border-color: #1980B6;
+  border-color: #0000cc;
 }
 
 .sky-form .rating input:checked ~ label {
-  color: #1980B6;
+  color: #0000cc;
 }
 
 /** Hover Buttons
@@ -539,7 +561,7 @@ i.ico-hover:hover {
 .hvr-border-fade:hover,
 .hvr-border-fade:focus,
 .hvr-border-fade:active {
-  box-shadow: inset 0 0 0 4px #1980B6, 0 0 1px transparent;
+  box-shadow: inset 0 0 0 4px #0000cc, 0 0 1px transparent;
 }
 
 .hvr-fade:hover,
@@ -572,5 +594,5 @@ i.ico-hover:hover {
 .hvr-overline-from-right:before,
 .hvr-underline-reveal:before,
 .hvr-overline-reveal:before {
-  background-color: #1980B6;
+  background-color: #0000cc;
 }
