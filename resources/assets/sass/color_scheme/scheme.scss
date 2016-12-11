@@ -9,6 +9,9 @@
 		background: $primaryColor; /* Safari */
 	}
 
+	.textColor_#{$colorName} {
+		background-color: $primaryColor !important;;
+	}
 
 	a,
 	a:focus:not(.btn),

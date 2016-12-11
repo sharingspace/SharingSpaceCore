@@ -346,6 +346,7 @@ class CommunitiesController extends Controller
         $community->slack_slash_members_token    = e(Input::get('slack_slash_members_token'));
         $community->ga = e(Input::get('ga'));
         $community->show_info_bar = e(Input::get('show_info_bar'));
+        $community->color = e(Input::get('theme_color'));
 
         if ($community->show_info_bar == null) {
             $community->show_info_bar = 1;

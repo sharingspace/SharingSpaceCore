@@ -84,7 +84,20 @@ return [
       'new_messages' => 'new messages',
       'view_all' => 'View all messages',
     ],
-
+    'color' => [
+      'color_theme' => 'Choose a color theme',
+      'blue' => 'blue',
+      'brown' => 'brown',
+      'darkblue' => 'darkblue',
+      'darkgreen' => 'darkgreen',
+      'darkorange' => 'darkorange',
+      'green' => 'green',
+      'lightgrey' => 'lightgrey',
+      'orange' => 'orange',
+      'pink' => 'pink',
+      'red' => 'red',
+      'yellow' => 'yellow',
+    ],
     'settings' => [
       'personal' => 'Personal Info',
       'social' => 'Social',
