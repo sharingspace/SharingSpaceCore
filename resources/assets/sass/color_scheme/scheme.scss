@@ -10,7 +10,13 @@
 	}
 
 	.textColor_#{$colorName} {
-		background-color: $primaryColor !important;;
+		background-color: $primaryColor !important;
+	}
+
+	.btn-colored {
+		background-color: $primaryColor !important;
+		border-color: darken($primaryColor, 20%);
+		color: #fff;
 	}
 
 	a,

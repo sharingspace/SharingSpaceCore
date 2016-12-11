@@ -115,7 +115,7 @@
           <ul class="nav navbar-nav">
             <li class="add_entry_button">
               <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
+                <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
               </a>
             </li>
           </ul>
