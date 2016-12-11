@@ -75,9 +75,9 @@
                       <!-- Name -->
                       <label class="input">
                       @if(isset($entry))
-                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.entry_placeholder')}}" value="{{ old('title', $entry->title) }}" autofocus>
+                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entry')}}" value="{{ old('title', $entry->title) }}" autofocus>
                       @else
-                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.entry_placeholder')}}" value="" autofocus>
+                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entry')}}" value="" autofocus>
                       @endif
                       </label>
                     </div> <!-- col 6 -->

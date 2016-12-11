@@ -78,7 +78,7 @@
         <tr>
           <th data-sortable="false" data-field="image">{{ trans('general.members.image')}}</th>
           <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
-          <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+          <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
           <th class="hidden-xs" data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
           <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
           <th data-sortable="true" data-field="location">{{ trans('general.location') }}</th>

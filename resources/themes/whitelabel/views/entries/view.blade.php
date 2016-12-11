@@ -228,7 +228,7 @@
         </div> <!-- tab-pane -->
 
         <div class="tab-pane" id="comments">
-          <p class="help-block">{{ trans('general.entries.public_comments') }}</p>
+          <p class="help-block">{{trans('general.entries.public_comments')}}</p>
           <div class="fb-comments" data-href="{{ URL::to('entry/'.$entry->id.'/view/') }}" data-numposts="5" data-colorscheme="light" data-width="800" style="width: 100%">
           </div>
         </div>  <!-- tab-pane -->
