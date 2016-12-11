@@ -15,7 +15,7 @@ Form::macro('theme_color', function ($name = "theme_color", $selected = null) {
     'orange' => trans('general.color.orange'),
     'pink' => trans('general.color.pink'),
     'red' => trans('general.color.red'),
-    'yellow' => trans('general.color.yellow')
+    'gold' => trans('general.color.gold')
     );
 
     $select = '<select required name="'.$name.'" class="select" style="width: 100%;">';

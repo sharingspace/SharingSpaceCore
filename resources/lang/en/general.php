@@ -96,7 +96,7 @@ return [
       'orange' => 'orange',
       'pink' => 'pink',
       'red' => 'red',
-      'yellow' => 'yellow',
+      'gold' => 'gold',
     ],
     'settings' => [
       'personal' => 'Personal Info',
