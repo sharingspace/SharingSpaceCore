@@ -28,7 +28,7 @@ elixir(function(mix) {
     mix.sass('color_scheme/orange.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/pink.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/red.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/yellow.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/gold.scss','public/assets/css/color_scheme');
 
     mix.codeception();
 });
