@@ -22,13 +22,13 @@ return [
     'create_acct' => 'create an account with AnyShare.',
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
-    'entry' => 'Entry',
+    'entry' => 'What',
     'to_join' => 'To join',
     'type' => 'Type',
     'near' => 'Near (optional)',
     'cancel' => 'Cancel',
-    'location' => 'Location:',
-    'keywords' => 'Keywords:',
+    'location' => 'Where',
+    'keywords' => 'Keywords',
     'password' => 'Password',
     'upload_failed' => 'Something went wrong. Your uploaded image has not been saved.',
     'latin_chars' => 'Only latin characters and numbers',
@@ -59,9 +59,6 @@ return [
     'slack' => 'Slack Integration',
     'ga' => 'Google Analytics',
     'privacy' => 'Privacy',
-    'share_help' => '"Shares" help a group or community exchange.',
-    'join_free' => 'Join public Shares for FREE.',
-    'one_min' => 'Or start your own in 1 minute!',
     'markdown' => 'markdown allowed',
 
 
@@ -127,8 +124,6 @@ return [
       'post_type' => 'Type',
       'want' => 'Want',
       'have' => 'Have',
-      'title' => 'Entry',
-      'entry_placeholder' => 'Entry',
       'description_placeholder' => 'Description',
       'tag_placeholder' => 'Keywords, comma-separated',
       'location_placeholder' => 'Near (optional)',
@@ -137,7 +132,7 @@ return [
       'posted_by' => 'Posted by',
       'created_at' => 'Created on',
       'exchange_types' => 'Exchange Types',
-      'exchange' => 'Exchange',
+      'exchange' => 'How',
       'view' => 'View Entry',
       'create_entry' => 'Create Entry',
       'save_entry' => 'Save',
@@ -149,7 +144,7 @@ return [
       'max_size' => '4096000',
       'remove' => 'Remove',
       'visible' => 'Visible only to you',
-      'by' => 'By:',
+      'by' => 'Who',
       'ex-type' => 'Exchange types:',
       'quantity' => 'Quantity:',
       'description' => 'Description:',
@@ -175,7 +170,7 @@ return [
       'sign_up' => 'Sign Up',
       'to_make_offer' => 'to make an offer',
       'no_location' => 'The owner of this tile has not posted any location information yet.',
-      'public_comments ' => 'Comments posted here are publicly viewable.',
+      'public_comments' => 'Comments posted here are publicly viewable.',
       'added' => 'You added',
 
       'messages' => [
@@ -200,7 +195,7 @@ return [
         'delete_image' => 'This image will be permanently deleted. Are you sure?',
         'rotate_image' => 'rotate image',
         'remove_image' => 'remove image',
-        'exchange_by' => 'Exchange by:',
+        'exchange_by' => 'How:',
       ],
     ],
 
@@ -325,19 +320,19 @@ return [
         'title'  => 'Open Share',
         'text'  => 'Anyone can join',
         'type' => 'Open',
-        'desc' => 'an open sharing website lets anyone join and exchange. It is the most permissive way to build a community with AnyShare.'
+        'desc' => 'an open Share lets anyone join and exchange. It is the most permissive way to build members.'
       ],
       'closed'  => [
         'title'  => 'Closed Share',
-        'text'  => 'Invite-only to post',
+        'text'  => 'Invite-only to join',
         'type' => 'Closed',
-        'desc' => 'a closed sharing website lets you approve members before they join. You can also invite members! Visitors to your sharing website can see basic information on its content, but not the details.'
+        'desc' => 'a closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details.'
       ],
       'secret'  => [
         'title'  => 'Secret Share',
         'text'  => 'Only members can view',
         'type' => 'Secret',
-        'desc' => 'a secret sharing website is hidden from anyone who is not a member. It is the top level of privacy on AnyShare.'
+        'desc' => 'a secret Share is hidden from anyone who is not a member. It is the top level of secrecy.'
       ],
       'membership' => [
         'leave' => 'leave',
@@ -359,7 +354,7 @@ return [
       'members' => 'Members',
       'image' => 'Image',
       'bio' => 'Bio',
-      'member_since' => 'Member since',
+      'member_since' => 'Joined',
     ],
 
     'uploads'  => [
@@ -378,7 +373,7 @@ return [
     ],
 
     'messages'      => [
-      'inbox'       => 'Message Inbox',
+      'inbox'       => 'Messages',
       'sent_by'     => 'Sent by',
       'from'        => 'From',
       'created_at'  => 'Sent On',

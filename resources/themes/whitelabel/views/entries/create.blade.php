@@ -26,7 +26,7 @@
             <tr>
               <th>{{ trans('general.entries.post_type') }}</th>
               <th>{{ trans('general.entries.qty') }}</th>
-              <th>{{ trans('general.entries.title') }}</th>
+              <th>{{ trans('general.entry') }}</th>
               <th>{{ trans('general.entries.exchange_types') }}</th>
               <th>{{ trans('general.keywords') }}</th>
               <th>{{ trans('general.action') }}</th>
