@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Community;
 use Socialite;
 use Auth;
 use Config;
@@ -44,7 +45,10 @@ class AuthController extends Controller
     {
         session('subdomain');
         if (session()->has('subdomain')) {
-            return view('auth.register')->with('subdomain', session('subdomain'));
+            $group = Community::where('subdomain', '=', session('subdomain'))
+                        ->whereNotNull('subdomain')->first();
+
+            return view('auth.register')->with('subdomain', session('subdomain'))->with('shareName', $group->name);
         }
         
         return view('auth.register');
@@ -63,8 +67,10 @@ class AuthController extends Controller
 
           $parsed_url = parse_url($request->url());
 
-          //LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain').'  '.$parsed_url['host']);
-          return view('join_community')->with('subdomain', Input::get('subdomain'))->with('host', $parsed_url['host']);
+          LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain').'  '.Input::get('shareName').'  '.$parsed_url['host']);
+          return view('join_community')->with('subdomain', Input::get('subdomain'))
+                                      ->with('shareName', Input::get('shareName'))
+                                      ->with('host', $parsed_url['host']);
         }
         //LOG::debug('postRegister: no subdomain');
 
