@@ -120,6 +120,7 @@ return [
       'today' => 'today',
       'reply' => 'Leave a Reply',
       'submit' => 'Send',
+      'leave_message' => 'Leave a message for',
     ],
 
     'entries'  => [

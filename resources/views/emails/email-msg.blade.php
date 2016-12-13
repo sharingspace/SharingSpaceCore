@@ -9,22 +9,25 @@
 @stop
 
 @section('header')
-    You have an offer concerning {{$entry_name}}
+    @if (isset($entry_name))
+        You have an offer concerning {{$entry_name}} from {{$sent_by_name}}
+    @elseif (isset($sent_by_name))
+        You have a message from {{$sent_by_name}}
+    @endif
 @stop
 
 @section('content')
     <p>Dear {{$name}},</p>
 
     @if (empty($thread_subject))
-        <p>You've received a new message from the Share <strong><a href="{{$community_url}}">{{ $community_name }}</a></strong>
+        <p>You've received a new message from the Share <strong><a href="{{$community_url}}">{{$community_name}}</a></strong>
     @else
-        <p>You've received a new message to the thread <strong>{{$thread_subject}}</strong>, in the Share <strong><a href="{{$community_url}}">{{ $community_name }}</a></strong>
+        <p>You've received a new message to the thread <strong>{{$thread_subject}}</strong>, in the Share <strong><a href="{{$community_url}}">{{$community_name}}</a></strong>
     @endif
-
-    @if (!empty($entry_name))
+    @if (isset($entry_name))
         on the entry titled <strong><a href="{{$community_url}}/entry/{{$entry_id}}">{{$entry_name}}</a></strong>
     @endif
-:</p>
+</p>
 
     <blockquote>&ldquo;<em>{{ $offer }}</em>&rdquo;</blockquote>
 
