@@ -90,7 +90,7 @@
           <li>
             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
               <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
-              {{{ $properties['native'] }}}
+              <!-- $properties['native'] -->
             </a>
           </li>
           @endforeach
