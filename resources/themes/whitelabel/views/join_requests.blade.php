@@ -36,8 +36,8 @@
                 <td>{{$request->email}}</td>
                 <td>{{$request->pivot['message']}}</td>
                 <td>
-                  <button class="button_accept smooth_font btn btn-success btn-sm" data-userid="{{$request->id}}" data-communityid="{{$whitelabel_group->id}}">Accept</button>
-                  <button class="button_reject smooth_font btn btn-danger btn-sm margin-left-10" data-userid="{{$request->id}}" "data-communityid="{{$whitelabel_group->id}}">Decline</button></td>
+                  <button class="button_accept smooth_font btn btn-light-colored btn-sm" data-userid="{{$request->id}}" data-communityid="{{$whitelabel_group->id}}">Accept</button>
+                  <button class="button_reject smooth_font btn btn-dark-colored btn-sm margin-left-10" data-userid="{{$request->id}}" "data-communityid="{{$whitelabel_group->id}}">Decline</button></td>
               </tr>
             @endforeach
           </tbody>

@@ -92,6 +92,10 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                       <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
                     </button>
                   </label>
+
+                  <label for="theme_color">{{trans('general.color.color_theme')}}</label>
+                  {!! Form::theme_color('theme_color', Input::old('color', $community->color)) !!}
+                  {!! $errors->first('color', '<span class="help-block">:message</span>') !!}
                 </div> <!-- col-md-8 -->
 
                 <div class="col-md-4 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">

@@ -31,7 +31,7 @@
 
     <!-- PAGE LEVEL SCRIPTS -->
     <link href="{{ Helper::cdn('css/header-1.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ Helper::cdn('css/color_scheme/darkorange.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ Helper::cdn('css/color_scheme/{{$whitelabel_group->color}}.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Table style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" integrity="sha256-lHY6r+cFHp2F/XXDvi4iczsIj7nl0r+CBVFD8KdtFqc=" crossorigin="anonymous" type="text/css" media="screen" />
@@ -54,7 +54,6 @@
     <!-- /wrapper -->
 
 @include('partials.geo-lookup')
-
 <script>
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
