@@ -26,15 +26,15 @@
 <section class="cta margin-top-30">
     <div class="container margin-top-20 text-center">
         <div class="row text-muted">
-        <div class="col-md-9">
-          <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
+            <div class="col-md-9">
+              <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
+            </div>
+            <div class="col-md-3">
+                <a href="{{route('community.create.form')}}" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
+            </div>
         </div>
-        <div class="col-md-3">
-            <a href="{{route('community.create.form')}}" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
-        </div>
-      </div>
     </div>
-  </div>
+</section>
 <!-- / -->
 
 @section('moar_scripts')
