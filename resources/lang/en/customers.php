@@ -12,4 +12,5 @@ return [
     'trial_start' => 'Trial Started',
     'trial_end' => 'Trial Ends',
     'next_charge' => 'Next Charge',
+    'payment_interval' => 'Payment interval',
 ];
