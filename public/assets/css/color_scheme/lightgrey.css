@@ -19,6 +19,28 @@
   /* Safari */
 }
 
+.textColor_lightgrey {
+  background-color: #9E9E9E !important;
+}
+
+.btn-colored {
+  background-color: #9E9E9E !important;
+  border-color: #6b6b6b;
+  color: #fff;
+}
+
+.btn-light-colored {
+  background-color: #d1d1d1;
+  border-color: #9E9E9E;
+  color: #fff;
+}
+
+.btn-dark-colored {
+  background-color: #6b6b6b;
+  border-color: #383838;
+  color: #fff;
+}
+
 a,
 a:focus:not(.btn),
 section.dark a,
@@ -123,6 +145,7 @@ i.ico-color,
 .info-bar.info-bar-color,
 .music-album-title:hover,
 .inews-item .inews-thumbnail .inews-sticky,
+.btn > .new-primary,
 #progressBar #bar,
 #page-menu,
 #page-menu ul {
