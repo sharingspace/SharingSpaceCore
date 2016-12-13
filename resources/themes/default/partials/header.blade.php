@@ -23,13 +23,6 @@
             <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
           </ul>
         </li>
-        <li>
-          <a class="text-white" href="{{ route('community.create.form') }}" >
-            <button class="btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing">
-              {{trans('general.nav.share+')}}
-            </button>
-          </a>
-        </li>
         <!-- NOTIFICATION BOX -->
         @if (0)
         <li class="notifications-popdown">
@@ -120,6 +113,14 @@
                 <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
                   <li><a href="{{ URL::to('features') }}">{{ trans('general.nav.features') }}</a></li>
                   <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
+                  <li>
+                    <a class="text-white" href="{{ route('community.create.form') }}" >
+                      <button class="btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing">
+                        {{trans('general.nav.share+')}}
+                      </button>
+                    </a>
+                  </li>
+
                   <!-- <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
                   <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li> -->
                 </ul>
