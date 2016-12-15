@@ -2712,6 +2712,13 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       border-top: rgba(0, 0, 0, 0.05) 1px solid;
     }
   }
+  .language_select {
+    img {
+      width: 16px;
+      height: 11px;
+      margin-top: -2px;
+    }
+  }
   &.dark {
     color: #ccc;
     background-color: #363839;
@@ -2723,8 +2730,10 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       color: #fff !important;
       background-color: #333;
     }
-    ul.top-links > li {
-      border-right: rgba(255, 255, 255, 0.1) 1px solid;
+    ul.top-links {
+      & > li {
+        border-right: rgba(255, 255, 255, 1) 1px solid;
+      }
     }
   }
 }
@@ -2782,9 +2791,22 @@ body.boxed #topBar.dark ul.top-links > li {
       display: inline-block;
       margin-left: -3px;
       position: relative;
-      border-right: rgba(0, 0, 0, 0.1) 1px solid;
+      border-right: rgba(white, 0.1) 2px solid;
+      &:last-child {
+        border-right: none;
+      }
       &:hover > .dropdown-menu {
         display: block !important;
+      }
+
+      div {
+        vertical-align: middle;
+        a {
+          color: lightgrey;
+          &:hover {
+            color: white;
+          }
+        }
       }
     }
   }
