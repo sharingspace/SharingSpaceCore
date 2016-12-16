@@ -197,7 +197,7 @@
 
 <script type="text/javascript">
 // This identifies your website in the createToken call below
-Stripe.setPublishableKey('pk_test_TVE0hOGlAHi679PKRgU3R3wi');
+Stripe.setPublishableKey('{{ config('services.stripe.key') }}');
 
 $(function(){
   $('#payment-form').submit(function(event) {
