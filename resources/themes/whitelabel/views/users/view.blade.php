@@ -106,7 +106,7 @@
             <caption class="my_exchanges sr-only">Exchanges</caption>
             <thead>
               <tr>
-                <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
+                <th data-sortable="true" data-field="post_type">{{ trans('general.type') }}</th>
                 <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
                 <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
                 <th data-sortable="true" data-field="tags">{{ trans('general.entries.keywords') }}</th>
