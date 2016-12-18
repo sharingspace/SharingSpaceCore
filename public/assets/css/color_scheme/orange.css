@@ -25,19 +25,19 @@
 
 .btn-colored {
   background-color: #EC971F !important;
-  border-color: #985e0d;
+  border-color: #a6670e;
   color: #fff;
 }
 
 .btn-light-colored {
-  background-color: #f4c37d;
+  background-color: #f3bc6f;
   border-color: #EC971F;
   color: #fff;
 }
 
 .btn-dark-colored {
-  background-color: #985e0d;
-  border-color: #3a2405;
+  background-color: #a6670e;
+  border-color: #563607;
   color: #fff;
 }
 
