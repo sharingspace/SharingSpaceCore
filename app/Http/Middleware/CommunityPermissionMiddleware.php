@@ -87,7 +87,7 @@ class CommunityPermissionMiddleware
                         }
                         
                         // lets ask the user whether they would like to join this share
-                        return view('join-open', ['error'=>'You are not a member of ', 'name' => $request->whitelabel_group->name] );
+                        return view('join-open', ['error'=>'you are not a member of ', 'name' => $request->whitelabel_group->name] );
                     }
                 }
             }

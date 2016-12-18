@@ -15,19 +15,19 @@
 
     .btn-colored {
         background-color: $primaryColor !important;
-        border-color: darken($primaryColor, 20%);
+        border-color: darken($primaryColor, 17%);
         color: #fff;
     }
 
     .btn-light-colored {
-        background-color: lighten($primaryColor, 20%);
+        background-color: lighten($primaryColor, 17%);
         border-color: $primaryColor;
         color: #fff;
     }
 
     .btn-dark-colored {
-        background-color: darken($primaryColor, 20%);
-        border-color: darken($primaryColor, 40%);
+        background-color: darken($primaryColor, 17%);
+        border-color: darken($primaryColor, 34%);
         color: #fff;
     }
 
