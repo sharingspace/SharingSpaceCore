@@ -36,8 +36,6 @@ return [
     'flexible_feature' => 'Shares let groups and communities exchange in many ways. This includes gifting, trading, renting, sharing, selling, and more.',
     'customizable' => 'Shares are customizable',
     'customizable_feature' => 'Customize your branding and control the visibility of your Share. Access can be public or private.',
-    'expandable' => 'Shares are expandable',
-    'expandable_feature' => 'View your data how you like. Use your real-time data anywhere using our API.',
     'cta'  => 'Make your Share now!',
 
 ];

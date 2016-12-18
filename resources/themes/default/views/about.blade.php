@@ -19,7 +19,7 @@
         <img src="{{ asset('assets/img/about/orbits.jpg') }}">
         <p class="about_intro">{{trans('about.our_plan_intro')}}</p>
         <h4 class="about_headline">{{trans('about.our_plan_headline')}}</h4>
-        <p>{{trans('about.our_plan_desc')}}</p>
+        <p>{{trans('about.our_plan_desc')}}<a href="http://support.anyshare.coop/support/solutions/articles/17000001406-why-does-anyshare-call-itself-the-first-complete-cooperative-in-the-usa-" target="_blank">{{trans('about.our_plan_desc2')}}</a>{{trans('about.our_plan_desc3')}}</p>
       </div> <!-- col-sm-4 -->
 
       <div class="col-sm-4 col-xs-12">
