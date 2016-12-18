@@ -69,7 +69,6 @@
       </ul>
 
       <!-- left -->
-      @if (config('app.debug'))
       <ul class="top-links list-inline">
         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
         <li class="language_select">
@@ -87,7 +86,6 @@
           </div>
         </li>
       </ul>
-      @endif
     </div>
   </div>
   <!-- /Top Bar -->
