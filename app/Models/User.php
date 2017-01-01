@@ -180,14 +180,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function canSeeCommunity($community)
     {
-        //LOG::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
+        LOG::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
 
         if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type=='O') { 
-            //log::debug("canSeeCommunity: user can see hub");
+            LOG::debug("canSeeCommunity: user can see hub");
             return true;
         }
         else {
-            //log::debug("canSeeCommunity: user cannot see hub");
+            LOG::debug("canSeeCommunity: user cannot see hub");
             return false;
         }
     }
@@ -204,12 +204,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function gravatar_img($size = null)
     {
         if (!empty($this->avatar_img)) {
-            //log::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
+            //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
             return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img;
         } 
         else if (!empty($this->gravatar)) {
             // this can one day be removed or used to store the gravatar email hash
-            //log::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
+            //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
             return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar;
         }
         else {
@@ -325,7 +325,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function isMemberOfCommunity($community)
     {
-        //LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$this->communities()->where('community_id', '=', $community->id)->count());
+        LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$this->communities()->where('community_id', '=', $community->id)->count());
         return $this->communities()->where('community_id', '=', $community->id)->count() > 0;
     }
 
