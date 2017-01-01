@@ -151,7 +151,9 @@ class UserController extends Controller
     {
         if ($user = User::find(Auth::user()->id)) {
             if (Input::hasFile('avatar_img')) {
+                LOG::debug("postUpdateAvatar: have image, preparing to upload");
                 $user->uploadImage($user, Input::file('avatar_img'), 'users');
+                LOG::debug("postUpdateAvatar: upload complete");
                 return redirect()->route('user.settings.view')->with('success', trans('general.user.avatar_success'));
             }
             else if(Input::get('delete_img')) {
@@ -165,6 +167,8 @@ class UserController extends Controller
         }
         else {
             // That user wasn't valid
+            LOG::debug("postUpdateAvatar: invalid user");
+
             return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.avatar_failure'));
         }
     }
