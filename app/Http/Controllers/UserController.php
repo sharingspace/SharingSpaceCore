@@ -342,12 +342,17 @@ class UserController extends Controller
         //LOG::debug('getJoinCommunity: entered');
         if ($request->whitelabel_group->isOpen()) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
+                LOG::debug("getJoinCommunity: joined open share successfully");
+
                 return redirect()->route('browse')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
             } else {
+                LOG::debug("getJoinCommunity: error joining open share");
+
                 return redirect()->route('browse')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
             }
         }
         else {
+            LOG::debug("getJoinCommunity: share is closed");
             return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
         }
     }

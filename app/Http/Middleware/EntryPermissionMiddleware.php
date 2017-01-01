@@ -25,14 +25,13 @@ class EntryPermissionMiddleware
      */
     public function handle($request, Closure $next)
     {
-        //LOG::debug('EntryPermissionMiddleware: middleware');
         // Is user a member of this community, if not they cannot create an entry ?
         if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
-            //LOG::debug('Whitelabel routing: User is allowed to edit and create enties');
+            LOG::debug('EntryPermissionMiddleware: User is allowed to edit and create enties');
             return $next($request);
         }
         else {
-            //LOG::debug('Whitelabel routing: User is not allowed to create enties: '.$request->whitelabel_group->name);
+            LOG::debug('EntryPermissionMiddleware: User is not allowed to create enties: '.$request->whitelabel_group->name);
             return view('request-access')->with('groupName', ucfirst($request->whitelabel_group->name))->withError('You must be a member of this Share to create an entry.');
         }
 
