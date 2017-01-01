@@ -17,6 +17,8 @@ function finish_submit(data=null)
   {
     if (data.success) {
       var exchanges = null;
+      $('#error-list').remove();
+      $('#submission_error').hide();
 
       if( $('#create_table tr').length == 1) {
         $('#create_table').show();
