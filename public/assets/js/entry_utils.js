@@ -96,7 +96,7 @@ function uploadFiles()
 
   $("#progressbar").progressbar({
     value: 0
-  }).append("<div class='percent_caption'>File upload: 0%</span>");
+  }).append("<div class='percent_caption'>File upload: 0%</span>").show();
 
   $.ajax(
   { 
@@ -200,7 +200,7 @@ function progress(e)
           value: 100
         });
         $("#progressbar .percent_caption").html("File upload: 100%");
-        $("#progressbar").delay(1500).fadeOut(400);
+        $("#progressbar").delay(1500).fadeOut(500);
       }
     }
   }  
