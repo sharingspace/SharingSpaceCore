@@ -46,11 +46,19 @@ trait UploadableFileTrait
 
     public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key, $rotation=null)
     {
+        LOG::debug("uploadTmpImage entered");
+
         $path = public_path().'/assets/uploads/'.$layoutType.'/user-'.$user->id.'-tmp';
         return self::moveAndStoreImage($user, $file, $path, null, $layoutType, $rotation, null, $upload_key );
     }
 
-    public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $rotation, $entry_id,  $upload_key = null)
+    /**
+    * moveAndStoreImage
+    *
+    * $id can be community id, entry id or user_id
+    *
+    */
+    public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $rotation, $id=null, $upload_key = null)
     {
         // Make the directory if it doesn't exist
         if (!file_exists($path)) {
@@ -63,21 +71,26 @@ trait UploadableFileTrait
         $img_path = $path.'/'.$filename;
         
         if ($file->move($path, $filename)) { // $destinationPath, $fileName
-            if ($entry_id && $layoutType =='entries') {
 
-                $entry = \App\Entry::find($entry_id);
+            if ($id && $layoutType =='entries') {
+                LOG::debug("moveAndStoreImage moved path = ".$path.", filename = ".$filename.", layoutType = ".$layoutType.',  entry_id = '.$id);
+
+                $entry = \App\Entry::find($id);
                 if (!empty($entry) && $entry->media()->count())
                 {
                     // We already have an image associated with an entry, so delete the existing image first
-                    self::deleteImage($entry_id, $user->id);
-                    self::replaceImageInDB($user->id, $entry_id, $filename);
+                    self::deleteImage($id, $user->id);
+                    self::replaceImageInDB($user->id, $id, $filename);
                 }
                 else {
-                    $res = self::saveImageToDB($entry_id, $filename, $layoutType, $user->id, $upload_key);
+                    $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
+
                 }
             }
             else {
-                $res = self::saveImageToDB($entry_id, $filename, $layoutType, $user->id, $upload_key);
+                // self::saveImageToDB can be Community (banner, logo), User (avatar), Enrty (entries)
+                LOG::debug("moveAndStoreImage moved path = ".$path.", filename = ".$filename.", layoutType = ".$layoutType.',  id = '.$id);
+                $res = self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
             }
 
             if (!Media::is_animated_gif($img_path)) {
@@ -110,6 +123,8 @@ trait UploadableFileTrait
 
             return $filename;
         }
+        LOG::debug("moveAndStoreImage moved filename failed, ".$filename);
+
         return false;
     }
 
@@ -180,17 +195,19 @@ trait UploadableFileTrait
     */
     public static function moveImagesForNewTile(\App\User $user, $entry_id, $upload_key = null)
     {
+        Log::debug("moveImagesForNewTile. ".$entry_id.",  ".$upload_key);
 
         $tmp_images = \DB::table('media')
-        ->where('upload_key', '=', $upload_key)
-        ->where('user_id', '=', $user->id)
-        ->get();
+            ->where('upload_key', '=', $upload_key)
+            ->where('user_id', '=', $user->id)
+            ->get();
 
         $dest_path = public_path().'/assets/uploads/entries/'.$entry_id;
         $src_path = public_path().'/assets/uploads/entries/user-'.$user->id.'-tmp';
 
         foreach ($tmp_images as $tmp_image) {
             $filename = $tmp_image->filename;
+            Log::debug("moveImagesForNewTile. filename = ".$filename);
             $src = $src_path.'/'.$filename;
             $dest = $dest_path.'/'.$filename;
 
@@ -202,11 +219,13 @@ trait UploadableFileTrait
             $success = rename($src, $dest);
 
             if (!$success) {
-                Log::error("Error renaming file from $src to $dest: ".$error);
+                Log::error("moveImagesForNewTile. Error renaming file from $src to $dest: ".$error);
                 return false; // note only processing one image here before returning
             }
 
             // update the media entry
+            Log::error("moveImagesForNewTile. Success renaming file from $src to $dest");
+
             self::updateImageToDB($user->id, $upload_key, $entry_id);
         }
         return true;
