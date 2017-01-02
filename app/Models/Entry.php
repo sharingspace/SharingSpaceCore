@@ -17,6 +17,7 @@ use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Log;
 
 class Entry extends Model
 {
@@ -131,10 +132,12 @@ class Entry extends Model
     * @since  [v1.0]
     * @return mixed
     */
-    public static function saveImageToDB($id, $filename, $type, $user_id = null, $upload_key = null)
+    public static function saveImageToDB($entry_id, $filename, $type, $user_id, $upload_key = null)
     {
+        LOG::debug("Entry::saveImageToDB entry_id = ".$entry_id.", filename = ".$filename.", type = ".$type.", user_id = ".$user_id.", upload_key = ".$upload_key);
+
         $media = new Media();
-        $media->entry_id = $id;
+        $media->entry_id = $entry_id;
         $media->upload_key = $upload_key;
         $media->filename =  $filename;
         $media->filetype = 'image';
@@ -158,10 +161,11 @@ class Entry extends Model
     */
     public static function updateImageToDB($user_id, $upload_key, $entry_id)
     {
+        Log::error("Entry::updateImageToDB user_id = ".$user_id.", upload_key = ".$upload_key.", entry_id = ".$entry_id);
 
         $media = \App\Media::where('upload_key', '=', $upload_key)
-        ->where('user_id', '=', $user_id)
-        ->first();
+            ->where('user_id', '=', $user_id)
+            ->first();
 
         $media->entry_id = $entry_id;
         $media->save();

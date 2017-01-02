@@ -456,9 +456,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * @since  [v1.0]
     * @return boolean
     */
-    public static function saveImageToDB($id, $filename, $type, $upload_key = null)
+    public static function saveImageToDB($user_id, $filename, $type, $id = null, $upload_key = null)
     {
-        if ($user = User::find($id)) {
+        LOG::debug("User::saveImageToDB ".$user_id.", ".$filename.", ".$type);
+
+        if ($user = User::find($user_id)) {
             $user->avatar_img = $filename;
 
             if (!$user->save()) {

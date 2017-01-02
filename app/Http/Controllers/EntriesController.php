@@ -151,7 +151,7 @@ class EntriesController extends Controller
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                Log::debug("We have a file - and, weirdly, kinda shouldn't?");
+                Log::debug("postAjaxCreate: We have a file - and, weirdly, kinda shouldn't?");
                 $rotation=null;
                 if (!empty(Input::get('rotation'))) {
                     $rotation = Input::get('rotation');
@@ -161,6 +161,8 @@ class EntriesController extends Controller
                     return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.rotation_failed')]);
                 }
             } else {
+                Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
+
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
