@@ -73,7 +73,7 @@ class EntriesController extends Controller
               $imageName = $image->filename;
             }
 
-            return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => $entry->tags, 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);
+            return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title' => html_entity_decode($entry->title, ENT_QUOTES), 'description' => html_entity_decode($entry->description, ENT_QUOTES), 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => html_entity_decode($entry->tags, ENT_QUOTES), 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);
 
         }
         else {
