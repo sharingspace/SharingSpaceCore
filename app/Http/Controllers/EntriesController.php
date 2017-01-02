@@ -35,7 +35,7 @@ class EntriesController extends Controller
     {
         if ($entry = \App\Entry::find($entryID)) {
             if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
-                return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
+                return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
             $images = \DB::table('media')
@@ -45,7 +45,7 @@ class EntriesController extends Controller
             return view('entries.view')->with('entry', $entry)->with('images', $images);
 
         } else {
-          return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+          return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -77,7 +77,7 @@ class EntriesController extends Controller
 
         }
         else {
-          redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+          redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -251,7 +251,7 @@ class EntriesController extends Controller
             $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
-                return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
+                return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
             $image = \DB::table('media')
@@ -276,7 +276,7 @@ class EntriesController extends Controller
                                         ->with('image', $imageName);
         }
         else {
-            return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+            return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -409,7 +409,7 @@ class EntriesController extends Controller
             return redirect()->route('entry.view', $entry->id)->with('success', trans('general.entries.messages.save_edits'));
         }
 
-        return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 
 
@@ -455,18 +455,18 @@ class EntriesController extends Controller
             $user = Auth::user();
 
             if (!$entry->checkUserCanEditEntry($user)) {
-                return redirect()->route('browse')->with('error', trans('general.entries.messages.delete_not_allowed'));
+                return redirect()->route('home')->with('error', trans('general.entries.messages.delete_not_allowed'));
             }
             else {
                 if ($entry->delete()) {
                     $entry->exchangeTypes()->detach();
-                    return redirect()->route('browse')->with('success', trans('general.entries.messages.delete_success'));
+                    return redirect()->route('home')->with('success', trans('general.entries.messages.delete_success'));
                 }
                 return redirect()->route('entry.view', $entry->id)->with('error', trans('general.entries.messages.delete_failed'));
             }
 
         }
-        return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 
 
@@ -633,7 +633,7 @@ class EntriesController extends Controller
         if ($entry) {
             $entry->completed_at = date("Y-m-d H:i:s");
             $entry->save();
-            return redirect()->route('browse')->with('success', trans('general.entries.messages.completed'));
+            return redirect()->route('home')->with('success', trans('general.entries.messages.completed'));
         }
     }
 }

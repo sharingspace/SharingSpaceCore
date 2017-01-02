@@ -309,11 +309,11 @@ class UserController extends Controller
                 return response()->json(['success'=>true, 'alert_class' => 'success', 'message'=>e(Input::get('displayName')). ' has joined '.ucfirst($request->whitelabel_group->name).'!', 'user_id'=>Input::get('user_id')]);
             }
             else {
-                return redirect()->route('browse')->withInput()->with('error', 'Unable to join website');
+                return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
             }
         }
         else {
-            return redirect()->route('browse')->withInput()->with('error', 'user not found');
+            return redirect()->route('home')->withInput()->with('error', 'user not found');
         }
     }
 
@@ -348,11 +348,11 @@ class UserController extends Controller
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
                 LOG::debug("getJoinCommunity: joined open share successfully");
 
-                return redirect()->route('browse')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
+                return redirect()->route('home')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
             } else {
                 LOG::debug("getJoinCommunity: error joining open share");
 
-                return redirect()->route('browse')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
+                return redirect()->route('home')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
             }
         }
         else {
@@ -374,9 +374,9 @@ class UserController extends Controller
     public function getLeaveCommunity(Request $request)
     {
         if (Auth::user()->communities()->detach([$request->whitelabel_group->id])) {
-            return redirect()->route('browse')->withInput()->with('success', 'You have left this website!');
+            return redirect()->route('home')->withInput()->with('success', 'You have left this website!');
         } else {
-            return redirect()->route('browse')->withInput()->with('error', 'Unable to leave website');
+            return redirect()->route('home')->withInput()->with('error', 'Unable to leave website');
         }
     }
 
