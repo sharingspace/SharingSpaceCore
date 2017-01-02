@@ -146,7 +146,7 @@ class EntriesController extends Controller
 
             foreach ($entry->exchangeTypes as $et) {
                 array_push($types, $et->name);
-                array_push($typeIds,$et->id);
+                array_push($typeIds, $et->id);
             }
             $uploaded = true;
 
@@ -255,8 +255,8 @@ class EntriesController extends Controller
             }
 
             $image = \DB::table('media')
-            ->where('entry_id', '=', $entryID)
-            ->first();
+                ->where('entry_id', '=', $entryID)
+                ->first();
 
             if ($image) {
                 $imageName = $image->filename;
@@ -265,13 +265,15 @@ class EntriesController extends Controller
                 $imageName = null;
             }
 
-            $selected_exchange_types = $entry->exchangeTypes;
-
-            foreach ($selected_exchange_types as $selected_exchange_type) {
-                $selected_exchanges[$selected_exchange_type->id] = $selected_exchange_type->id;
+            $selected_exchanges=[];
+            foreach ($entry->exchangeTypes as $et) {
+                $selected_exchanges[$et->id] = $et->name;
             }
-            return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types)->with('selected_exchanges', $selected_exchanges)->with('image',$imageName);
 
+            return view('entries.edit')->with('entry', $entry)
+                                        ->with('post_types', $post_types)
+                                        ->with('selected_exchanges', $selected_exchanges)
+                                        ->with('image', $imageName);
         }
         else {
             return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
