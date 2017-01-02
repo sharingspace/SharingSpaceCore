@@ -96,7 +96,7 @@ class CommunitiesController extends Controller
         // find out whether they have already asked to join this share
         $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
-        //LOG::debug("getRequestAccess: ".$request_count);
+        LOG::debug("getRequestAccess: request_count = ".$request_count);
         return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
     }
 
@@ -114,7 +114,7 @@ class CommunitiesController extends Controller
     {
         $user = Auth::user();
         $request_count = $request->whitelabel_group->getRequestCount($user->id);
-        //Log::debug("postRequestAccess. request_count: ".$request_count);
+        LOG::debug("postRequestAccess. request_count: ".$request_count);
 
         if (!$request_count) {
             DB::table('community_join_requests')->insert(
