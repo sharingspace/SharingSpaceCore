@@ -37,7 +37,7 @@
                   @endif
 
                   @if ($user->fb_url)
-                    <li class="margin-bottom-6"><i class="fa fa-facebook-square"></i><a href="{{ $user->facebook }}">Facebook</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-facebook-square"></i><a href="{{ $user->fb_url }}">Facebook</a></li>
                   @endif
 
                   @if ($user->pinterest)
