@@ -96,6 +96,12 @@ return [
       'pink' => 'pink',
       'red' => 'red',
       'gold' => 'gold',
+      'fresh' => 'Fresh',
+      'future' => 'Future',
+      'muted' => 'Muted',
+      'starry_night' => 'Starry night',
+      'organic' => 'Organic',
+      'spring' => 'Spring'
     ],
     'settings' => [
       'personal' => 'Personal Info',
