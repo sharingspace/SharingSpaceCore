@@ -9596,14 +9596,6 @@ Quick add
   display: block;
 }
 
-.want_square {
-  background-color: #EC971F;
-}
-
-.have_square {
-  background-color: #179BD7;
-}
-
 .entry_img_view {
   color: blue;
   font-family: Arial,san-serif;
@@ -30487,7 +30479,6 @@ section.dark .callout-transparent p {
   margin: 0;
   border: 0;
   color: #000;
-  background-color: rgba(0, 0, 0, 0.05);
   padding: 10px 0;
 }
 

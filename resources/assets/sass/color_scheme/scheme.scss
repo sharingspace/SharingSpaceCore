@@ -31,6 +31,22 @@
         color: #fff;
     }
 
+	h1, h2, h3, h4, h5, h6 {
+      color:  $primaryColor;;
+    }
+
+	.info-bar {
+  		background-color: $shadeColor;
+  	}
+
+  	.want_square {
+  		background-color: $primaryColor;
+	}
+
+	.have_square {
+  		background-color: $actionColor;
+	}
+
 	a,
 	a:focus:not(.btn),
 	section.dark a,
@@ -94,7 +110,7 @@
 	.box-icon.box-icon-color i,
 	.switch-primary.switch-round > input:checked + .switch-label:after,
 	section.dark .nav-tabs.nav-clean>li.active>a { 
-		color: $primaryColor; 
+		color: $actionColor; 
 	}
 	
 	#sidepanel.sidepanel-theme-color,

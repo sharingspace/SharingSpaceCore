@@ -18,6 +18,12 @@ elixir(function(mix) {
 });
 
 elixir(function(mix) {
+    mix.sass('color_scheme/spring.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/organic.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/future.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/muted.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/starryNight.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/fresh.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/blue.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/brown.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/darkblue.scss','public/assets/css/color_scheme');
