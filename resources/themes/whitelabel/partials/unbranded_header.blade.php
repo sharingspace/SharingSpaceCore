@@ -8,7 +8,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> Memberships</a></li>
+          <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> {{ trans('general.memberships') }}</a></li>
           <li><a href="{{ route('user.profile', Auth::user()->id) }}"><i class="fa fa-user"></i> {{ trans('general.nav.profile') }}</a></li>
           <li><a href="{{ route('user.settings.view') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
           <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
