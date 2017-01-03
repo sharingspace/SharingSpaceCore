@@ -41,6 +41,27 @@
   color: #fff;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #0e0b16;
+}
+
+.info-bar {
+  background-color: #e7dfdd;
+}
+
+.want_square {
+  background-color: #0e0b16;
+}
+
+.have_square {
+  background-color: #a239ca;
+}
+
 a,
 a:focus:not(.btn),
 section.dark a,
@@ -104,7 +125,7 @@ a.href-reset.active,
 .box-icon.box-icon-color i,
 .switch-primary.switch-round > input:checked + .switch-label:after,
 section.dark .nav-tabs.nav-clean > li.active > a {
-  color: #0e0b16;
+  color: #a239ca;
 }
 
 #sidepanel.sidepanel-theme-color,

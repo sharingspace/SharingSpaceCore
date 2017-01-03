@@ -41,6 +41,27 @@
   color: #fff;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #96858f;
+}
+
+.info-bar {
+  background-color: #d5d5d5;
+}
+
+.want_square {
+  background-color: #96858f;
+}
+
+.have_square {
+  background-color: #6d7993;
+}
+
 a,
 a:focus:not(.btn),
 section.dark a,
@@ -104,7 +125,7 @@ a.href-reset.active,
 .box-icon.box-icon-color i,
 .switch-primary.switch-round > input:checked + .switch-label:after,
 section.dark .nav-tabs.nav-clean > li.active > a {
-  color: #96858f;
+  color: #6d7993;
 }
 
 #sidepanel.sidepanel-theme-color,
