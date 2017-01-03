@@ -28,15 +28,14 @@ class CommunityPermissionMiddleware
     {
         // This is a whitelabel group, otherwise skip it
         if ($request->whitelabel_group) {
-            //LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
+            LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
             if ($request->whitelabel_group->group_type != 'O') {
                 LOG::debug('CommunityPermissionMiddleware: This is a closed or secret group');
 
-                // If the user is logged in, check that they are a member
-                // and are allowed to see this group
+                // If the user is logged in, check that they are a member and are allowed to see this group
                 if (Auth::check())
                 {
-                    //LOG::debug('CommunityPermissionMiddleware: User is logged in');
+                    LOG::debug('CommunityPermissionMiddleware: User is logged in');
                     if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
                         LOG::debug('CommunityPermissionMiddleware: This user is authorized to see this community');
                         return $next($request);
@@ -92,7 +91,6 @@ class CommunityPermissionMiddleware
                 }
             }
         }
-        LOG::debug('CommunityPermissionMiddleware: exit');
 
         return $next($request);
     }

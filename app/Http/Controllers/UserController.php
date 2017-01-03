@@ -371,13 +371,22 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function getLeaveCommunity(Request $request)
+    public function getLeaveCommunity(Request $request, $communityId)
     {
-        if (Auth::user()->communities()->detach([$request->whitelabel_group->id])) {
-            return redirect()->route('home')->withInput()->with('success', 'You have left this website!');
-        } else {
-            return redirect()->route('home')->withInput()->with('error', 'Unable to leave website');
+        if ($communityId) {
+            $community = Auth::user()->communities()->where('community_id', $communityId)->first();
+           
+            if (isset($community)) {
+                if (Auth::user()->communities()->detach($community->id)) {
+                    return redirect()->back()->withInput()->with('success', 'You have left the Share, "'.$community->name.'"');
+                }
+                else {
+                   return redirect()->back()->withInput()->with('error', 'Unable to leave the Share, "'.$community->name.'"');
+                }
+            }
         }
+
+        return redirect()->back()->withInput()->with('error', 'Unable to leave the Share');
     }
 
 
