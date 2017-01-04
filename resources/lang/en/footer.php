@@ -13,5 +13,6 @@ return [
     'support' => 'Support',
     'subscribe' => 'Subscribe',
     'close_modal' => 'Close',
-    'rights_reserved' => 'All Rights Reserved, AnyShare Society.'
+    'rights_reserved' => 'All Rights Reserved, AnyShare Society.',
+    'powered_by' => 'Powered by'
 ];
