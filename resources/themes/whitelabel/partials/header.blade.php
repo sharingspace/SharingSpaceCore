@@ -133,7 +133,7 @@
             @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)) && !$whitelabel_group->getRequestCount(Auth::user()->id))
               <li>
                 <a style="color:white;" href="{{ route('community.request-access.form') }}">
-                  <button type="button" class="btn btn-warning btn-sm">
+                  <button type="button" class="btn btn-colored btn-sm">
                     {{ trans('general.register.join_share') }}
                   </button>
                 </a>
