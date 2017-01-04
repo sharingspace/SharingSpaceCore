@@ -84,7 +84,7 @@ return [
       'view_all' => 'View all messages',
     ],
     'color' => [
-      'color_theme' => 'Choose a color theme',
+      'color_theme' => 'Choose a color palette',
       'blue' => 'blue',
       'brown' => 'brown',
       'darkblue' => 'darkblue',
