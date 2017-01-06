@@ -63,31 +63,31 @@
             <div class="col-md-12">
               @if (Auth::check())
                 @if (Auth::user()->id!=$user->id)
-                    <form id="offerForm" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
-                        {!! csrf_field() !!}
-                      <div>
-                          <!-- alert -->
-                          <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
-                              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                              <i class="fa fa-exclamation-circle"></i>
-                              <strong id="offerStatusText"></strong><span id="offerStatus"></span>
-                          </div>
-                          <!-- alert -->
-                          
-                        <h4 class="uppercase">LEAVE A MESSAGE FOR <strong>{{ strtoupper($user->getDisplayName()) }} </strong></h4>
+                <form id="offerForm" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
+                  {!! csrf_field() !!}
+                  <div>
+                  <!-- alert -->
+                  <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <strong id="offerStatusText"></strong><span id="offerStatus"></span>
+                  </div>
+                  <!-- alert -->
+                      
+                  <p>{{trans('general.email.leave_message')}} <strong>{{ $user->getDisplayName() }} </strong></p>
 
-                        <textarea name="message" required class="form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
-                       <input type="hidden" name="subject" value="Profile Message">
-                        <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
-                          <span>0/100</span> Words
-                        </div>
+                  <textarea name="message" required class="messageText form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
+                   <input type="hidden" name="subject" value="Profile Message">
+                    <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
+                      <span>0/100</span> Words
+                    </div>
 
-                        <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>I'm interested</button>
-                      </div>
-                    </form>
-                 @else
+                    <button type="submit" class="btn btn-primary pull-right">{{trans('general.email.submit')}}</button>
+                  </div>
+                </form>
+                @else
 
-                 @endif
+                @endif
               @endif
             </div> <!-- col 12 -->
           </div> <!-- row -->
@@ -103,11 +103,11 @@
             data-sucess="";
             data-cookie="true"
             data-cookie-id-table="communityListingv1">
-          <caption class="my_exchanges sr-only">Exchanges</caption>
+            <caption class="my_exchanges sr-only">Exchanges</caption>
             <thead>
               <tr>
                 <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
-                <th data-sortable="true" data-field="title">{{ trans('general.entries.title') }}</th>
+                <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
                 <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
                 <th data-sortable="true" data-field="tags">{{ trans('general.entries.keywords') }}</th>
                 <th data-sortable="false" data-field="actions"></th>
@@ -198,20 +198,18 @@ $(document).ready(function () {
       data: $('#offerForm').serialize(),
 
       success: function(data){
+        $('#offerStatusbox').show();
 
-          $('#offerStatusbox').show();
-
-          if (data.success) {
-              $('#offerStatusbox').addClass('alert alert-success');
-              $('#offerStatusText').html('Success!');
-              $('#offerStatus').html(data.success.message);
-
-          } else {
-              $('#offerStatusbox').addClass('alert alert-danger');
-              $('#offerStatusText').html('Error: ');
-              $('#offerStatus').html(data.error.message[0]);
-          }
-
+        if (data.success) {
+          $('.messageText').val('');
+          $('#offerStatusbox').addClass('alert alert-success');
+          $('#offerStatusText').html('Success! '+data.message);
+          $('#offerStatusbox').fadeTo(1000, 500).slideUp(500);
+        }
+        else {
+          $('#offerStatusbox').addClass('alert alert-danger');
+          $('#offerStatusText').html('Error: '+data.message);
+        }
       },
       error: function(data){
           $('#offerStatusbox').addClass('alert alert-danger');
@@ -222,6 +220,4 @@ $(document).ready(function () {
   });
 });
 </script>
-
-
 @stop

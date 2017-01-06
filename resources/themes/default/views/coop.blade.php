@@ -190,6 +190,20 @@
       </div>
     </div>
   </section>
+
+
+  <section class="cta margin-top-30">
+    <div class="container margin-top-20 text-center">
+        <div class="row text-muted">
+            <div class="col-md-9">
+              <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
+            </div>
+            <div class="col-md-3">
+                <a href="{{route('community.create.form')}}" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
+            </div>
+        </div>
+    </div>
+  </section>
 </div>
 
 
@@ -197,7 +211,7 @@
 
 <script type="text/javascript">
 // This identifies your website in the createToken call below
-Stripe.setPublishableKey('pk_test_TVE0hOGlAHi679PKRgU3R3wi');
+Stripe.setPublishableKey('{{ config('services.stripe.key') }}');
 
 $(function(){
   $('#payment-form').submit(function(event) {

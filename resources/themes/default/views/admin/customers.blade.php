@@ -27,10 +27,10 @@
                         <thead>
                         <tr>
                             <th>{{ trans('customers.user') }}</th>
-                            <th>{{ trans('general.email') }}</th>
+                            <th>{{ trans('general.email_address') }}</th>
                             <th>{{ trans('general.share') }}</th>
                             <th>{{ trans('customers.active') }}</th>
-                            <th>{{ trans('customers.type') }}</th>
+                            <th>{{ trans('customers.payment_interval') }}</th>
                             <th>{{ trans('general.date') }}</th>
                             <th>{{ trans('customers.trial_start') }}</th>
                             <th>{{ trans('customers.trial_end') }}</th>

@@ -90,7 +90,7 @@
         margin-top:10px;
         border-radius:5px;
         padding-top:10px;
-        font-size: 30px;
+        font-size: 22px;
         line-height:40px;
         font-weight:bold; 
       }

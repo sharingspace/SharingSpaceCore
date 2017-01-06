@@ -72,13 +72,20 @@
       @if (config('app.debug'))
       <ul class="top-links list-inline">
         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <li>
+        <li class="language_select">
           <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
             <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
-            {{{ $properties['native'] }}}
+            <!-- $properties['native'] -->
           </a>
         </li>
         @endforeach
+        <li class="language_select">
+          <div>
+            <a class="show margin-left-5 margin-top-5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
+              <i class="fa fa-ellipsis-h fa-lg"></i>
+            </a>
+          </div>
+        </li>
       </ul>
       @endif
     </div>
@@ -115,7 +122,7 @@
           <ul class="nav navbar-nav">
             <li class="add_entry_button">
               <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-warning" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
+                <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
               </a>
             </li>
           </ul>

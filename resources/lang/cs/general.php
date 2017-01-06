@@ -313,7 +313,7 @@ return [
       'incoming_hook' => 'Incoming Webhooks are a simple way to post messages from external sources into Slack. They make use of normal HTTP requests with a JSON payload that includes the message text and some options. Message Attachments can also be used in Incoming Webhooks to display richly-formatted messages that stand out from regular chat messages. See ',
 
       'exchange_types' => [
-        'title' => 'Druh výměny | Druhy výměn',
+        'title' => 'Druhy výměn',
         'all_allowed' => 'Všechny druhy výměny jsou vítány',
       ],
 

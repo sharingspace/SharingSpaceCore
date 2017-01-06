@@ -75,9 +75,9 @@
                       <!-- Name -->
                       <label class="input">
                       @if(isset($entry))
-                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.entry_placeholder')}}" value="{{ old('title', $entry->title) }}" autofocus>
+                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entry')}}" value="{{ old('title', $entry->title) }}" autofocus>
                       @else
-                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entries.entry_placeholder')}}" value="" autofocus>
+                        <input type="text" name="title" id="title" required='' class="form-control" placeholder="{{ trans('general.entry')}}" value="" autofocus>
                       @endif
                       </label>
                     </div> <!-- col 6 -->
@@ -88,7 +88,7 @@
                         <i class="fa fa-picture-o"></i>
                         <input id="choose-file" type="file" class="form-control" accept="image/jpg,image/png,image/jpeg,image/gif" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
                         <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
-                        <span class="button">{{ trans('general.uploads.choose_file') }}</span>
+                        <span class="button btn-colored">{{ trans('general.uploads.choose_file') }}</span>
                       </div> <!-- fancy -->
                       <p class="too_large smooth_font margin-bottom-0" style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
                     </div> <!-- col 12-->
@@ -175,13 +175,13 @@
 
                 <div class="col-sm-6 col-xs-12 ">
                   @if(isset($entry))
-                    <button class="btn btn-info pull-right">
+                    <button class="btn btn-dark-colored pull-right">
                   @else
-                    <button class="btn btn-info pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
+                    <button class="btn btn-dark-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
                   @endif
                       {{ trans('general.entries.save_entry') }}
                     </button>
-                  <a class="btn btn-info pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
+                  <a class="btn btn-light-colored pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
                 </div> <!-- col 2 -->
               </div> <!-- row -->
             </div> <!-- col 9 -->

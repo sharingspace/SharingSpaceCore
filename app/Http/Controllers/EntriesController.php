@@ -570,10 +570,10 @@ class EntriesController extends Controller
 
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
-                $actions = '<button class="btn btn-warning btn-sm"><a href="'.route('entry.edit.form', $entry->id).'">
+                $actions = '<button class="btn btn-light-colored btn-sm"><a href="'.route('entry.edit.form', $entry->id).'">
                                 <i class="fa fa-pencil" style="color:white;"></i></a>
                             </button>
-                            <button class="btn btn-danger btn-sm" id="delete_entry_'.$entry->id.'">
+                            <button class="btn btn-dark-colored btn-sm" id="delete_entry_'.$entry->id.'">
                                 <i class="fa fa-trash"></i>
                             </button>';
             }
@@ -593,7 +593,7 @@ class EntriesController extends Controller
                 $imageTag = '<a href="'.route('entry.view', $entry->id).'"><img src="/assets/uploads/entries/'.$entry->id.'/'.$image->filename.'" class="entry_image"></a>';
             }
             else {
-                $imageTag = null;
+                $imageTag = '<a href="'.route('entry.view', $entry->id).'" class="'.$entry->post_type.'_square"></a>';
             }
 
 

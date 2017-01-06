@@ -13,19 +13,18 @@
 <section>
 	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
+    @if($images && $images[0]->filename)
     	<div class="col-lg-4 col-sm-5 col-xs-12 margin-top-20">
         <div id="image_box_container"> 
-          <div id="image_box" 
-            @if($images && $images[0]->filename)
-              style="background-image:url('{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}')">
-            @else
-               style="background-image:url('{{ Helper::cdn('img/default/new-default-'.$entry->post_type.'.jpg') }}')">
-            @endif
+          <div id="image_box" style="background-image:url('{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}')">
           </div>
         </div>
       </div> <!-- col-md-4 -->
-
-			<div class="col-lg-4 col-sm-7 col-xs-12 margin-top-20">
+      
+      <div class="col-lg-4 col-sm-7 col-xs-12 margin-top-20">
+      @else
+      <div class="col-xs-12 margin-top-20">
+      @endif
       	<div class="row">
         	<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10">
          		<h1 class="size-18 margin-bottom-0"><span class="sr-only">{{ trans('general.entries.view') }},</span> {{ strtoupper($entry->post_type) }}: {{ $entry->title }}</h1>
@@ -80,14 +79,14 @@
                 {{ Form::token()}}
 
                 @can('update-entry', $entry)
-                  <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-info tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
+                  <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
                   <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
 
                   @if ($entry->completed_at=='')
-                    <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-success tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
+                    <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
                     <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
                   @endif
-                  <button type="submit" class="btn btn-xs btn-warning"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
+                  <button type="submit" class="btn btn-xs btn-dark-colored"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
                 @endcan
 
               {{ Form::close() }}
@@ -229,7 +228,7 @@
         </div> <!-- tab-pane -->
 
         <div class="tab-pane" id="comments">
-          <p class="help-block">{{ trans('general.entries.public_comments') }}</p>
+          <p class="help-block">{{trans('general.entries.public_comments')}}</p>
           <div class="fb-comments" data-href="{{ URL::to('entry/'.$entry->id.'/view/') }}" data-numposts="5" data-colorscheme="light" data-width="800" style="width: 100%">
           </div>
         </div>  <!-- tab-pane -->

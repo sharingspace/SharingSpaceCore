@@ -65,7 +65,8 @@ class SubdomainMiddleware
             // if someone is registering from a  whitelabel, redirect them to register
             // on the corporate site. 
             $url = str_replace($subdomain.".", '', $request->url());
-            return redirect($url)->with('subdomain',$subdomain);
+
+            return redirect($url)->with('subdomain', $subdomain);
         }
         else if ((strpos($request->path(), 'join') !== FALSE) && $request->subdomain) {
 
