@@ -247,7 +247,7 @@ $( document ).ready(function() {
   $('.export > button').attr('title','Download data as');
 
   $('#entry_browse_table').on('load-success.bs.table', function () {
-    $('.pull-right.search').removeClass('pull-right').addClass('pull-left');
+    $('.pull-right.search').removeClass('pull-right').addClass('center-block');
   });
 
   // we off screen the table headers as they are obvious.
@@ -268,6 +268,25 @@ $( document ).ready(function() {
         //console.error('delete failed');
       }
     });
+  });
+
+  function positionSearch()
+  {
+    var searchHeight;
+    if ($('.info-bar').height() > 0) {
+      searchHeight = $('.wl_usercover').height()/2 + $('.info-bar').height() + $('h2.size-20').height();
+    }
+    else {
+      searchHeight = $('.wl_usercover').height()/2 + $('h2.size-20').height()+90;
+    }
+
+    //console.log( searchHeight+",  "+$('.wl_usercover').height()/2+",  "+$('.info-bar').height()+",  "+$('h2.size-20').height());
+    $('.search').css('top', -searchHeight);
+  }
+  positionSearch();
+
+  $( window ).resize(function() {
+    positionSearch();
   });
 });
 
