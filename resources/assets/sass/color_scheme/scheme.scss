@@ -31,6 +31,18 @@
         color: #fff;
     }
 
+    .primary {
+        color: $primaryColor;
+    }
+
+    .light-primary {
+        color: lighten($primaryColor, 17%);
+    }
+
+    .dark-primary {
+        color: darken($primaryColor, 17%);
+    }
+
 	h1, h2, h3, h4, h5, h6 {
       color:  $primaryColor;;
     }

@@ -155,13 +155,6 @@
               </li>
             @endcan
 
-            @if ((strlen($whitelabel_group->about) && 
-                (($whitelabel_group->group_type!='S') || 
-                (Auth::user()->isMemberOfCommunity($whitelabel_group) || 
-                $user->isSuperAdmin()))))
-              <li><a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a></li>
-            @endif
-
             @can('update-community', $whitelabel_group)
               <li>
                 <a href="{{ route('community.edit.form')}}"><i class="fa fa-lg fa-cog"></i></a>
@@ -184,57 +177,6 @@
 			</div>
 @if ($whitelabel_group->getCover())
   <div class="row wl_usercover" style="position:relative; background-image: url({{ $whitelabel_group->getCover() }});"></div>
-@endif
-
-@if( strlen($whitelabel_group->about))
-<!-- Modals -->
-
-<div id="aboutModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">About {{$whitelabel_group->name}}</h4>
-      </div>
-      <div class="modal-body">
-        <p  class="about_info"><strong>Started:</strong> <span>{{$whitelabel_group->created_at->format('F jS, Y')}}</span>
-        @if (!empty($whitelabel_group->location))
-          <br><strong>Location:</strong> <span class="about_info">{{$whitelabel_group->location}}</span>
-        @endif
-        @if ($whitelabel_group->group_type == 'O')
-          <br><strong>Privacy:</strong> <span class="about_info">Public, Open Membership</span> 
-          <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a></p>
-        @elseif ($whitelabel_group->group_type == 'C')
-          <br><strong>Privacy:</strong> <span class="about_info">Closed, Membership requires approval</span> 
-          <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a></p>
-        @else
-          <br><strong>Privacy:</strong> <span class="about_info">Secret, Membership is by invitation only</span> 
-          <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a></p>
-        @endif
-
-        {!! Markdown::convertToHtml($whitelabel_group->about) !!}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="learnPrivacy" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Learn more about privacy <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035663-privacy-options-for-shares">here</a></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
 @endif
 
 

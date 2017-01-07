@@ -41,6 +41,18 @@
   color: #fff;
 }
 
+.primary {
+  color: #3cc47c;
+}
+
+.light-primary {
+  color: #7fd8a9;
+}
+
+.dark-primary {
+  color: #278252;
+}
+
 h1,
 h2,
 h3,

@@ -15,41 +15,14 @@
 		<div class="row">
       <h1 class="sr-only">{{ $whitelabel_group->name }} {{ trans('home.homepage')}}</h1>
 
-			<div class="col-sm-4">
-				<i class="glyphicon glyphicon-globe"></i>
-          @if ($whitelabel_group->group_type == 'O')
-            <h3 class="uppercase">{{ trans('general.community.open.title') }}</h3>
-            <p>{{ trans('general.community.open.text') }}</p>
-          @elseif ($whitelabel_group->group_type == 'C')
-            <h3 class="uppercase">{{ trans('general.community.closed.title') }}</h3>
-            <p>{{ trans('general.community.closed.text') }}</p>
-          @elseif ($whitelabel_group->group_type == 'S')
-            <h3 class="uppercase">{{ trans('general.community.secret.title') }}</h3>
-            <p>{{ trans('general.community.secret.text') }}</p>
-          @endif
+			<div class="col-xs-6 text-center">
+        <h3 class="uppercase"><a href="" data-toggle="modal" data-target="#aboutModal"><i class="fa fa-lightbulb-o"></i> {{ trans('general.about')}}</a></h3>
+        <p>Story, location, membership &hellip;</p> 
 			</div>
 
-			<div class="col-sm-4">
-				<i class="glyphicon glyphicon-user"></i>
-
-				<h3 class="uppercase">{{ $whitelabel_group->members->count() }} {{ trans_choice('general.our_members', $whitelabel_group->members->count()) }}</h3>
-                @if ($whitelabel_group->created_at)
-				<p>Since {{ $whitelabel_group->created_at->format('M j, Y') }}</p>
-                @endif
-			</div>
-
-			<div class="col-sm-4">
-				<i class="glyphicon glyphicon-flag"></i>
-				<h3 class="uppercase">{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchangeTypes->count()) }}</h3>
-				<ul class="exchange_types">
-          @if ($whitelabel_group->exchangeTypes->count() == 10)
-            <li>{{ trans('general.community.exchange_types.all_allowed') }}</li>
-          @else
-            @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
-              <li>{{ $exchange_type->name }}</li>
-            @endforeach
-          @endif
-        </ul>
+			<div class="col-xs-6 text-center">
+        <h3 class="uppercase"><a href="" data-toggle="modal" data-target="#statsModal"><i class="fa fa-bar-chart-o"></i> {{ trans('general.stats')}}</a></h3>
+        <p>Entries, users &hellip;</p> 
 			</div>
 		</div>
 	</div>
@@ -92,6 +65,116 @@
   </div>
 </section>
 
+
+<!-- Modals -->
+
+<div id="aboutModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">About {{$whitelabel_group->name}}</h4>
+      </div>
+      <div class="modal-body">
+        <p  class="about_info"><strong>Started:</strong> <span>{{$whitelabel_group->created_at->format('F jS, Y')}}</span>
+        @if (!empty($whitelabel_group->location))
+          <br><strong>Location:</strong> <span class="about_info">{{$whitelabel_group->location}}</span>
+        @endif
+        @if ($whitelabel_group->group_type == 'O')
+          <br><strong>Privacy:</strong> <span class="about_info">Open Membership</span> 
+          <a href="#" title="An open Share lets anyone join and exchange. It is the most permissive way to build members.""><i class="fa fa-info-circle"></i></a>
+
+        @elseif ($whitelabel_group->group_type == 'C')
+          <br><strong>Privacy:</strong> <span class="about_info">Closed, Membership requires approval</span> 
+          <a href="#" title="A closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details."><i class="fa fa-info-circle"></i></a>
+        @else
+          <br><strong>Privacy:</strong> <span class="about_info">Secret, Membership is by invitation only</span> 
+          <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a>
+        @endif
+          <br><strong>{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchangeTypes->count()) }}</strong>
+          <span class="about_info">
+            @if ($whitelabel_group->exchangeTypes->count() == 10)
+              {{ trans('general.community.exchange_types.all_allowed') }}
+            @else
+              {{--*/ $exchangeTypes = array() /*--}}
+              @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
+                {{--*/ $exchangeTypes[] = $exchange_type->name /*--}}
+              @endforeach
+              {{ implode(', ', $exchangeTypes)}}
+              <a href="#" title="This shows options for member exchange on this Share"><i class="fa fa-info-circle"></i></a>
+            @endif
+          </span>
+        </p>
+
+        {!! Markdown::convertToHtml($whitelabel_group->about) !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="statsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{$whitelabel_group->name}} Stats</h4>
+      </div>
+      <div class="modal-body">
+        <p><strong>Total members:</strong> {{$whitelabel_group->members()->count()}}<br>
+        <strong>Total entries:</strong> {{$whitelabel_group->entries()->count()}}<br>
+        <span class="margin-left-10"><strong >Wants:</strong></span> {{$whitelabel_group->entries()->where('post_type', 'want')->count()}}
+        <a href="#" title="All the needs of the members"><i class="fa fa-info-circle"></i></a>
+<br>            
+        <span class="margin-left-10"><strong>Haves:</strong></span> {{$whitelabel_group->entries()->where('post_type', 'have')->count()}}
+        <a href="#" title="All the resources of the members"><i class="fa fa-info-circle"></i></a>
+</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="optionsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{$whitelabel_group->name}} {{ trans('general.options')}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchangeTypes->count()) }}</strong>: 
+          <span class="exchange_types">
+
+            @if ($whitelabel_group->exchangeTypes->count() == 10)
+              {{ trans('general.community.exchange_types.all_allowed') }}
+            @else
+              {{--*/ $exchangeTypes = array() /*--}}
+              @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
+                {{--*/ $exchangeTypes[] = $exchange_type->name /*--}}
+              @endforeach
+              {{ implode(', ', $exchangeTypes)}}
+              <a href="#" title="This shows options for member exchange on this Share"><i class="fa fa-info-circle light-primary"></i></a>
+            @endif
+          </span>
+        </p>
+        <div class="keep-open btn-group" title="Columns"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-columns"></i> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li><label><input type="checkbox" data-field="image" value="0" checked="checked"> Image</label></li><li><label><input type="checkbox" data-field="post_type" value="1" checked="checked"> Type</label></li><li><label><input type="checkbox" data-field="title" value="2" checked="checked"> What</label></li><li><label><input type="checkbox" data-field="author" value="3" checked="checked"> Posted by</label></li><li><label><input type="checkbox" data-field="exchangeTypes" value="4" checked="checked"> How</label></li><li><label><input type="checkbox" data-field="location" value="5" checked="checked"> Where</label></li><li><label><input type="checkbox" data-field="created_at" value="6" checked="checked"> Created on</label></li><li><label><input type="checkbox" data-field="tags" value="7"> Keywords</label></li><li><label><input type="checkbox" data-field="actions" value="8"> Actions</label></li></ul></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
@@ -101,6 +184,7 @@
 
 <script type="text/javascript">
 $( document ).ready(function() {
+  $( document ).tooltip();
   // we off screen the table headers as they are obvious.
   $('table').on( "click", '[id^=delete_entry_]', function() {
     var entryID = $(this).attr('id').split('_')[2];
