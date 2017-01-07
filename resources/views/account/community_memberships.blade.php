@@ -29,7 +29,7 @@
               <td class="col-md-2"> {{ $community->location }}</td>
               <td class="col-md-6"> {{ Str::limit($community->about, 200) }}</td>
               <td class="col-md-1 text-center">
-                <a href="/account/leave/{{ $community->id }}" class="btn btn-sm btn-colored">{{ trans('general.community.membership.leave') }}</a>
+                <a href="/account/leave/{{ $community->id }}" class="btn btn-sm btn-warning btn-colored">{{ trans('general.community.membership.leave') }}</a>
               </td>
             </tr>
           @endforeach
