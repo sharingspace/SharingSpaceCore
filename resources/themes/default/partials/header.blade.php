@@ -20,6 +20,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('user.history') }}">{{ trans('general.nav.my_orders') }} </a></li>
+            <li><a href="{{ route('account.memberships.view') }}">{{ trans('general.memberships') }}</a></li>
             <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
           </ul>
         </li>
@@ -119,7 +120,6 @@
                 <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
                   <li><a href="{{ URL::to('features') }}">{{ trans('general.nav.features') }}</a></li>
                   <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
-                  <li><a href="{{ route('account.memberships.view') }}">{{ trans('general.memberships') }}</a></li>
                   <li>
                     <a class="text-white" href="{{ route('community.create.form') }}" >
                       <button class="btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing">
