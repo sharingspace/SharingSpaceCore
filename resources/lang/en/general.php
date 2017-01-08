@@ -17,6 +17,8 @@ return [
     'terms' => 'Terms',
     'create' => 'Create',
     'about' => 'About',
+    'stats' => 'Stats',
+    'options' => 'Options',
     'email_address' => 'Email',
     'admin' => 'Admin',
     'create_acct' => 'create an account with AnyShare.',
