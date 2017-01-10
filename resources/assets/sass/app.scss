@@ -185,7 +185,9 @@ $screen-md-max: ($screen-lg-min - 1);
 /** Globals
  ******************************************************************/
 
-
+html, body {
+    height: 100%;
+}
 
 body {
   color: #666;
@@ -204,6 +206,9 @@ body {
     /* used by RTL*/
     overflow: hidden;
     min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -35px; /* the bottom margin is the negative value of the footer's height */
     /*  because short page hide long menus */
   }
   &.bg-grey {
@@ -2188,6 +2193,7 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
+   
     #mainMenu.sidebar-vertical {
       position: relative;
       width: 100%;
@@ -9045,5 +9051,7 @@ section.TreborScholz {
   }
 }
 
-
+#share_footer, .push {
+  height: 30px;
+}
 /*************** Bootstrap extensions ******************/

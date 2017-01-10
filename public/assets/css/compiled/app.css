@@ -1075,6 +1075,11 @@
 /** Globals
  ******************************************************************/
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   color: #666;
   background-color: #fff;
@@ -1097,6 +1102,10 @@ body #wrapper {
   /* used by RTL*/
   overflow: hidden;
   min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -35px;
+  /* the bottom margin is the negative value of the footer's height */
   /*  because short page hide long menus */
 }
 
@@ -10466,6 +10475,11 @@ section.TreborScholz {
 
 #messages .row.messageRow p {
   margin-bottom: 15px;
+}
+
+#share_footer,
+.push {
+  height: 30px;
 }
 
 /*************** Bootstrap extensions ******************/
