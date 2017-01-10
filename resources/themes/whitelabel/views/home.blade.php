@@ -273,11 +273,19 @@ $( document ).ready(function() {
   function positionSearch()
   {
     var searchHeight;
-    if ($('.info-bar').height() > 0) {
-      searchHeight = $('.wl_usercover').height()/2 + $('.info-bar').height() + $('h2.size-20').height();
+    if ($('.info-bar').height() && $('.wl_usercover').height()) {
+      searchHeight = $('.wl_usercover').height()/2 + $('.info-bar').height() + $('h2.size-20').height() +30;
+    }
+    else if ($('.info-bar').height()) {
+      searchHeight = $('.info-bar').height() + $('h2.size-20').height() + 67;
+
+    }
+    else if ($('.wl_usercover').height()) {
+      searchHeight = $('.wl_usercover').height()/2 + $('h2.size-20').height() + 50;
+
     }
     else {
-      searchHeight = $('.wl_usercover').height()/2 + $('h2.size-20').height()+90;
+      searchHeight = $('h2.size-20').height() + 40;
     }
 
     //console.log( searchHeight+",  "+$('.wl_usercover').height()/2+",  "+$('.info-bar').height()+",  "+$('h2.size-20').height());

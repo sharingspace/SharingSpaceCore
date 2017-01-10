@@ -177,6 +177,8 @@
 			</div>
 @if ($whitelabel_group->getCover())
   <div class="row wl_usercover" style="position:relative; background-image: url({{ $whitelabel_group->getCover() }});"></div>
+@else
+  <div class="margin-y-55"></div>
 @endif
 
 
