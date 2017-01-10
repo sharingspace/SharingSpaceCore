@@ -62,7 +62,7 @@ return [
     'ga' => 'Google Analytics',
     'privacy' => 'Privacy',
     'markdown' => 'markdown allowed',
-
+    'yes' => 'Yes',
 
     'nav'  => [
       'browse' => 'Browse',
@@ -243,7 +243,7 @@ return [
         'chars_remain' => 'characters remaining',
         'hint' => 'Hint:',
         'submit' => 'Submit',
-        'sorry_closed' => 'Sorry, this Share is closed. A closed Share needs to approve members before they join.',
+        'sorry_closed' => 'This is a closed Share. Closed Shares needs to approve members before they join.',
         'hint' => 'Hint: ',
         'still_pending' => 'Your request to become a member of this Share is still pending'
       ],
@@ -268,7 +268,7 @@ return [
     ],
     'community'  => [
       'account_great' => 'Great, you have created an AnyShare account',
-      'share_join' => 'Do you wish to join?',
+      'share_join' => 'Do you wish to join',
       'closed_share' => 'If this is a closed Share, you will need to request to join.',
       'join'  => 'Join',
       'fee' => 'Fee',
