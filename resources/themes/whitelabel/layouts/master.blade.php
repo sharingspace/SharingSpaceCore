@@ -88,11 +88,10 @@
       @endif
 
       <div>@yield('content')</div>
+      <div class="push"></div>
+    </div> <!-- /wrapper -->
 
-      <div>@include('partials.footer')</div>
-
-    </div>
-    <!-- /wrapper -->
+    @include('partials.footer')
 
 @include('partials.geo-lookup')
 
