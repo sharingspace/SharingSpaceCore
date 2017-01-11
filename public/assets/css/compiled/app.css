@@ -9132,14 +9132,6 @@ li.notifications-popdown .notifications-popdown-box {
 
 /********************** Home page ***********************/
 
-.fixed-table-toolbar .search {
-  position: relative;
-  line-height: 34px;
-  width: 30vw;
-  opacity: 0.7;
-  margin: 0 auto !important;
-}
-
 section#about p {
   font-family: Ubuntu,Helvetica,sans-serif;
   color: #5A5A5A;

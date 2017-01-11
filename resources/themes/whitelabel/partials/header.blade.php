@@ -97,9 +97,11 @@
 			<div class="container">
 
 				<!-- Mobile Menu Button -->
-				<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
-					<i class="fa fa-bars"></i>
-				</button>
+        @if (Auth::check())
+        <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+        @endif
 
 				<!-- Logo -->
         <a class="logo pull-left navbar-brand" href="{{ route('home') }}">

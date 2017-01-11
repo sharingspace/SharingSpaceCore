@@ -247,7 +247,7 @@ $( document ).ready(function() {
   $('.export > button').attr('title','Download data as');
 
   $('#entry_browse_table').on('load-success.bs.table', function () {
-    $('.pull-right.search').removeClass('pull-right').addClass('center-block');
+    $('.pull-right.search').removeClass('pull-right').addClass('pull-left'); 
   });
 
   // we off screen the table headers as they are obvious.
@@ -291,11 +291,11 @@ $( document ).ready(function() {
     //console.log( searchHeight+",  "+$('.wl_usercover').height()/2+",  "+$('.info-bar').height()+",  "+$('h2.size-20').height());
     $('.search').css('top', -searchHeight);
   }
-  positionSearch();
+  //positionSearch();
 
-  $( window ).resize(function() {
-    positionSearch();
-  });
+  //$( window ).resize(function() {
+  //  positionSearch();
+  //});
 });
 
 </script>
