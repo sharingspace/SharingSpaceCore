@@ -22,7 +22,7 @@
               {!! csrf_field() !!}
 
             <div class="col-md-12 text-muted">
-              <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+15 days"))}}. {{trans('general.community.p3')}}</p>
+              <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+30 days"))}}. {{trans('general.community.p3')}}</p>
             </div>
 
             <!-- LEFT TEXT -->
