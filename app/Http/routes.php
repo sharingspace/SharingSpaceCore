@@ -173,7 +173,7 @@ Route::group(
                 );
 
                 Route::get(
-                    'leave/{communityId?}',
+                    'leave/{communityId}',
                     array(
                     'middleware' => 'community-auth',
                     'as' => 'leave-community',
@@ -572,6 +572,13 @@ Route::group(
                         'as' => 'admin.index',
                         'uses' => 'AdminController@getCustomerList')
                 );
+
+                Route::get(
+                    'debug',
+                    array(
+                        'as' => 'admin.debug',
+                        'uses' => 'EnvController@test')
+                );
         });
 
         /*
@@ -674,6 +681,22 @@ Route::group(
             'as' => 'home',
             'middleware' => ['community-auth'],
             'uses' => 'PagesController@getHomepage')
+        );
+
+        Route::get(
+            'debug_off',
+            function () {
+                config(['app.debug' => false]);
+                return redirect('/');
+            }
+        );
+
+        Route::get(
+            'debug_on',
+            function () {
+                config(['app.debug' => true]);
+                return redirect('/');
+            }
         );
     }
 );

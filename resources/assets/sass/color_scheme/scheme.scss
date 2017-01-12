@@ -15,21 +15,49 @@
 
     .btn-colored {
         background-color: $primaryColor !important;
-        border-color: darken($primaryColor, 20%);
+        border-color: darken($primaryColor, 17%);
         color: #fff;
     }
 
     .btn-light-colored {
-        background-color: lighten($primaryColor, 20%);
+        background-color: lighten($primaryColor, 17%);
         border-color: $primaryColor;
         color: #fff;
     }
 
     .btn-dark-colored {
-        background-color: darken($primaryColor, 20%);
-        border-color: darken($primaryColor, 40%);
+        background-color: darken($primaryColor, 17%);
+        border-color: darken($primaryColor, 34%);
         color: #fff;
     }
+
+    .primary {
+        color: $primaryColor;
+    }
+
+    .light-primary {
+        color: lighten($primaryColor, 17%);
+    }
+
+    .dark-primary {
+        color: darken($primaryColor, 17%);
+    }
+
+	h1, h2, h3, h4, h5, h6 {
+      color:  $primaryColor;;
+    }
+
+	.info-bar {
+  		background-color: $shadeColor;
+  	}
+
+  	.want_square {
+  		background-color: $primaryColor;
+	}
+
+	.have_square {
+  		background-color: $actionColor;
+	}
 
 	a,
 	a:focus:not(.btn),
@@ -94,7 +122,7 @@
 	.box-icon.box-icon-color i,
 	.switch-primary.switch-round > input:checked + .switch-label:after,
 	section.dark .nav-tabs.nav-clean>li.active>a { 
-		color: $primaryColor; 
+		color: $actionColor; 
 	}
 	
 	#sidepanel.sidepanel-theme-color,

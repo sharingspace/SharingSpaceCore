@@ -112,7 +112,7 @@ class MessagesController extends Controller
         }])->find($conversationId))
         {
             if ($request->user()->cannot('view-conversation', $conversation)) {
-                return redirect()->route('browse')->with('error', trans('general.messages.messages.unauthorized'));
+                return redirect()->route('home')->with('error', trans('general.messages.messages.unauthorized'));
             }
 
             foreach ($conversation->messages as $message) {
@@ -121,7 +121,7 @@ class MessagesController extends Controller
             return view('account/messages')->with('conversation', $conversation);
         }
 
-        return redirect()->to('browse')->with('error', trans('general.messages.messages.not_found'));
+        return redirect()->to('home')->with('error', trans('general.messages.messages.not_found'));
     }
 
     /**

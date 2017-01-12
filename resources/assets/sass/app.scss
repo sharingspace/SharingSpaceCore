@@ -108,7 +108,7 @@ $screen-md-max: ($screen-lg-min - 1);
 @include create_spacing_classes(1, 4, 1);
 
 // coarse spacing. margin-top-0, margin-right-5, margin-left-15, margin-bottom-20, margin-top-25, margin-top-30, padding-top-0 etc
-@include create_spacing_classes(0, 6, 5);
+@include create_spacing_classes(0, 11, 5);
 
 // Create additional bootstrap col class mixin
 @mixin create_bootstrap_cols($name, $width)
@@ -185,7 +185,9 @@ $screen-md-max: ($screen-lg-min - 1);
 /** Globals
  ******************************************************************/
 
-
+html, body {
+    height: 100%;
+}
 
 body {
   color: #666;
@@ -204,6 +206,9 @@ body {
     /* used by RTL*/
     overflow: hidden;
     min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -35px; /* the bottom margin is the negative value of the footer's height */
     /*  because short page hide long menus */
   }
   &.bg-grey {
@@ -2188,6 +2193,7 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
+   
     #mainMenu.sidebar-vertical {
       position: relative;
       width: 100%;
@@ -8489,14 +8495,6 @@ $color-green: #9AE14F;
   display: block;
 }
 
-.want_square {
-  background-color: #EC971F;
-}
-
-.have_square {
-  background-color: #179BD7;
-}
-
 .entry_img_view {
   color: blue;
   font-family:Arial,san-serif;
@@ -9045,5 +9043,7 @@ section.TreborScholz {
   }
 }
 
-
+#share_footer, .push {
+  height: 30px;
+}
 /*************** Bootstrap extensions ******************/

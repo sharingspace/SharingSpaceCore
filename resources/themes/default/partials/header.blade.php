@@ -20,6 +20,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm" style="height:25px;width:25px;margin-right:5px;">{{ Auth::user()->getDisplayName() }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{{ route('user.history') }}">{{ trans('general.nav.my_orders') }} </a></li>
+            <li><a href="{{ route('account.memberships.view') }}">{{ trans('general.memberships') }}</a></li>
             <li><a href="{{ route('logout') }}">{{ trans('general.nav.logout') }} </a></li>
           </ul>
         </li>

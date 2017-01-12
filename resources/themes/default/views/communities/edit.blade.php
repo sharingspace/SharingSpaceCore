@@ -18,11 +18,11 @@
 		<div class="row">
 
             <!-- payment form -->
-            <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
+            <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off" class="clearfix">
               {!! csrf_field() !!}
 
             <div class="col-md-12 text-muted">
-              <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+15 days"))}}. {{trans('general.community.p3')}}</p>
+              <p>{{trans('general.community.p2')}} {{date('jS F, Y', strtotime("+30 days"))}}. {{trans('general.community.p3')}}</p>
             </div>
 
             <!-- LEFT TEXT -->
@@ -59,7 +59,7 @@
                 <div class="form-group col-md-12 col-sm-12">
                    <label for="cvc">{{ trans('general.community.sub_type') }} *</label>
                     <select class="form-control" name="subscription_type">
-                        <option value="MONTHLY-HUB-SUBSCRIPTION">{{ trans('general.community.monthly') }} ($5/{{ trans('general.community.month') }}) {{ trans('general.community.after_trial') }}</option>
+                        <option value="MONTHLY-HUB-SUBSCRIPTION-10">{{ trans('general.community.monthly') }} ($10/{{ trans('general.community.month') }}) {{ trans('general.community.after_trial') }}</option>
                         <option value="ANNUAL-HUB-SUBSCRIPTION">{{ trans('general.community.annual') }} ($100/{{ trans('general.community.year') }})</option>
                     </select>
                 </div>

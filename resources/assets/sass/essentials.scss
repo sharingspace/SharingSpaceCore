@@ -20154,11 +20154,10 @@ section.dark {
   margin: 0;
   border: 0;
   color: #000;
-  background-color: rgba(0, 0, 0, 0.05);
   padding: 10px 0;
   div.row > div {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 5px;
     margin: 0 !important;
     border-right: rgba(0, 0, 0, 0.1) 1px solid;
     &:last-child {
@@ -20169,7 +20168,6 @@ section.dark {
       font-size: 32px;
       line-height: 1.2;
       margin-right: 10px;
-      float: left;
     }
   }
   h1, h2, h3, h4, h5, h6 {

@@ -277,10 +277,11 @@ class Community extends Model
     * @since  [v1.0]
     * @return boolean
     */
-    public static function saveImageToDB($id, $filename, $type, $upload_key = null)
+    public static function saveImageToDB($community_id, $filename, $type, $user_id = null, $upload_key = null)
     {
+        LOG::debug("Community::saveImageToDB ".$community_id.", ".$filename.", ".$type);
 
-        if ($community = Community::find($id)) {
+        if ($community = Community::find($community_id)) {
 
             switch ($type) {
                 case 'community-covers':
@@ -295,6 +296,8 @@ class Community extends Model
             }
 
             if (!$community->save()) {
+                LOG::debug("saveImageToDB: failed");
+
                 return false;
             }
         }

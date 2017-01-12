@@ -22,14 +22,29 @@
                   <div class="exchange_types">
                     <!-- checkboxes for exchange types -->
                     <div class="checkbox">
-                      @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
-                        <div class="col-sm-12 col-xs-6 pull-left margin-bottom-10">
-                          <label class="checkbox col-md-12 pull-left margin-bottom-10">
-                            {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
-                            <i></i> {{ $exchange_types->name }}
-                          </label>
-                        </div>
-                      @endforeach
+                    @if (isset($selected_exchanges))
+                        @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                          <div class="col-sm-12 col-xs-6 pull-left margin-bottom-10">
+                            <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                              @if (isset($selected_exchanges[$exchange_types->id]))
+                                {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
+                              @else
+                                {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, false, ['class' => 'exchanges']) }}
+                              @endif
+                              <i></i> {{ $exchange_types->name }}
+                            </label>
+                          </div>
+                        @endforeach
+                      @else
+                        @foreach ($whitelabel_group->exchangeTypes as $exchange_types)
+                          <div class="col-sm-12 col-xs-6 pull-left margin-bottom-10">
+                            <label class="checkbox col-md-12 pull-left margin-bottom-10">
+                              {{ Form::checkbox('exchange_types['.$exchange_types->id.']', $exchange_types->id, true, ['class' => 'exchanges']) }}
+                              <i></i> {{ $exchange_types->name }}
+                            </label>
+                          </div>
+                        @endforeach
+                      @endif
                       <div class="col-xs-12 pull-left margin-bottom-10">
                         <label class="checkbox col-md-12 pull-left margin-bottom-10">
                           {{ Form::checkbox('select_all', 10, false, ['id' => 'select_all']) }}
@@ -152,9 +167,9 @@
                   <label class="control-label sr-only" for="location">{{ trans('general.location') }}</label>
                   <div class="input-group">
                     @if(isset($entry))
-                      <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">
+                      <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.near')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">
                     @else
-                      <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.entries.location_placeholder')}}" aria-describedby="basic-addon2" value="">
+                      <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.near')}}" aria-describedby="basic-addon2" value="">
                     @endif                   
                     <div class="input-group-addon" id="basic-addon2">
                       <i class="fa fa-location-arrow" id="geolocate"></i>

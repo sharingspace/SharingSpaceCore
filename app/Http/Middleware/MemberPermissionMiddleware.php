@@ -29,11 +29,11 @@ class MemberPermissionMiddleware
     // This is a whitelabel group, otherwise skip it
     if ($request->whitelabel_group) {
       if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
-        //LOG::debug('MemberPermissionMiddleware: This user is authorized to see this open hub');
+        LOG::debug('MemberPermissionMiddleware: This user is authorized to see this Share');
         return $next($request);
       }
       else {
-        //LOG::debug('MemberPermissionMiddleware: Open hub but user is not a member');
+        LOG::debug('MemberPermissionMiddleware: This user is NOT authorized to see this Share');
         if ($request->path() == "users/".Auth::user()->id) {
           // let them see their own profile
           return $next($request);

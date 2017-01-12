@@ -24,7 +24,7 @@
           <caption>{{ trans('general.entries.added') }}</caption>
           <thead>
             <tr>
-              <th>{{ trans('general.entries.post_type') }}</th>
+              <th>{{ trans('general.type') }}</th>
               <th>{{ trans('general.entries.qty') }}</th>
               <th>{{ trans('general.entry') }}</th>
               <th>{{ trans('general.entries.exchange_types') }}</th>

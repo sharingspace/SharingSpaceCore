@@ -151,7 +151,9 @@ class UserController extends Controller
     {
         if ($user = User::find(Auth::user()->id)) {
             if (Input::hasFile('avatar_img')) {
+                LOG::debug("postUpdateAvatar: have image, preparing to upload");
                 $user->uploadImage($user, Input::file('avatar_img'), 'users');
+                LOG::debug("postUpdateAvatar: upload complete");
                 return redirect()->route('user.settings.view')->with('success', trans('general.user.avatar_success'));
             }
             else if(Input::get('delete_img')) {
@@ -165,6 +167,8 @@ class UserController extends Controller
         }
         else {
             // That user wasn't valid
+            LOG::debug("postUpdateAvatar: invalid user");
+
             return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.avatar_failure'));
         }
     }
@@ -305,11 +309,11 @@ class UserController extends Controller
                 return response()->json(['success'=>true, 'alert_class' => 'success', 'message'=>e(Input::get('displayName')). ' has joined '.ucfirst($request->whitelabel_group->name).'!', 'user_id'=>Input::get('user_id')]);
             }
             else {
-                return redirect()->route('browse')->withInput()->with('error', 'Unable to join website');
+                return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
             }
         }
         else {
-            return redirect()->route('browse')->withInput()->with('error', 'user not found');
+            return redirect()->route('home')->withInput()->with('error', 'user not found');
         }
     }
 
@@ -342,12 +346,17 @@ class UserController extends Controller
         //LOG::debug('getJoinCommunity: entered');
         if ($request->whitelabel_group->isOpen()) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-                return redirect()->route('browse')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
+                LOG::debug("getJoinCommunity: joined open share successfully");
+
+                return redirect()->route('home')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
             } else {
-                return redirect()->route('browse')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
+                LOG::debug("getJoinCommunity: error joining open share");
+
+                return redirect()->route('home')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
             }
         }
         else {
+            LOG::debug("getJoinCommunity: share is closed");
             return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
         }
     }
@@ -362,13 +371,22 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function getLeaveCommunity(Request $request)
+    public function getLeaveCommunity(Request $request, $communityId)
     {
-        if (Auth::user()->communities()->detach([$request->whitelabel_group->id])) {
-            return redirect()->route('browse')->withInput()->with('success', 'You have left this website!');
-        } else {
-            return redirect()->route('browse')->withInput()->with('error', 'Unable to leave website');
+        if ($communityId) {
+            $community = Auth::user()->communities()->where('community_id', $communityId)->first();
+           
+            if (isset($community)) {
+                if (Auth::user()->communities()->detach($community->id)) {
+                    return redirect()->back()->withInput()->with('success', 'You have left the Share, "'.$community->name.'"');
+                }
+                else {
+                   return redirect()->back()->withInput()->with('error', 'Unable to leave the Share, "'.$community->name.'"');
+                }
+            }
         }
+
+        return redirect()->back()->withInput()->with('error', 'Unable to leave the Share');
     }
 
 

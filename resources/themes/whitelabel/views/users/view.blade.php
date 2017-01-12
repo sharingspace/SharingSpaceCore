@@ -37,7 +37,7 @@
                   @endif
 
                   @if ($user->fb_url)
-                    <li class="margin-bottom-6"><i class="fa fa-facebook-square"></i><a href="{{ $user->facebook }}">Facebook</a></li>
+                    <li class="margin-bottom-6"><i class="fa fa-facebook-square"></i><a href="{{ $user->fb_url }}">Facebook</a></li>
                   @endif
 
                   @if ($user->pinterest)
@@ -106,7 +106,7 @@
             <caption class="my_exchanges sr-only">Exchanges</caption>
             <thead>
               <tr>
-                <th data-sortable="true" data-field="post_type">{{ trans('general.entries.post_type') }}</th>
+                <th data-sortable="true" data-field="post_type">{{ trans('general.type') }}</th>
                 <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
                 <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
                 <th data-sortable="true" data-field="tags">{{ trans('general.entries.keywords') }}</th>

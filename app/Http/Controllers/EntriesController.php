@@ -35,7 +35,7 @@ class EntriesController extends Controller
     {
         if ($entry = \App\Entry::find($entryID)) {
             if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
-                return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
+                return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
             $images = \DB::table('media')
@@ -45,7 +45,7 @@ class EntriesController extends Controller
             return view('entries.view')->with('entry', $entry)->with('images', $images);
 
         } else {
-          return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+          return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -73,11 +73,11 @@ class EntriesController extends Controller
               $imageName = $image->filename;
             }
 
-            return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => $entry->tags, 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);
+            return response()->json(['success'=>true, 'entry_id'=>$entry->id,'title' => html_entity_decode($entry->title, ENT_QUOTES), 'description' => html_entity_decode($entry->description, ENT_QUOTES), 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'exchange_type_ids' => $typeIds, 'tags' => html_entity_decode($entry->tags, ENT_QUOTES), 'location'=>$entry->location, 'visible'=>$entry->visible, 'image'=>$imageName]);
 
         }
         else {
-          redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+          redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -146,12 +146,12 @@ class EntriesController extends Controller
 
             foreach ($entry->exchangeTypes as $et) {
                 array_push($types, $et->name);
-                array_push($typeIds,$et->id);
+                array_push($typeIds, $et->id);
             }
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                Log::debug("We have a file - and, weirdly, kinda shouldn't?");
+                Log::debug("postAjaxCreate: We have a file - and, weirdly, kinda shouldn't?");
                 $rotation=null;
                 if (!empty(Input::get('rotation'))) {
                     $rotation = Input::get('rotation');
@@ -161,6 +161,8 @@ class EntriesController extends Controller
                     return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.rotation_failed')]);
                 }
             } else {
+                Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
+
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
@@ -249,12 +251,12 @@ class EntriesController extends Controller
             $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
-                return redirect()->route('browse')->with('error', trans('general.entries.messages.not_allowed'));
+                return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
             }
 
             $image = \DB::table('media')
-            ->where('entry_id', '=', $entryID)
-            ->first();
+                ->where('entry_id', '=', $entryID)
+                ->first();
 
             if ($image) {
                 $imageName = $image->filename;
@@ -263,16 +265,18 @@ class EntriesController extends Controller
                 $imageName = null;
             }
 
-            $selected_exchange_types = $entry->exchangeTypes;
-
-            foreach ($selected_exchange_types as $selected_exchange_type) {
-                $selected_exchanges[$selected_exchange_type->id] = $selected_exchange_type->id;
+            $selected_exchanges=[];
+            foreach ($entry->exchangeTypes as $et) {
+                $selected_exchanges[$et->id] = $et->name;
             }
-            return view('entries.edit')->with('entry', $entry)->with('post_types', $post_types)->with('selected_exchanges', $selected_exchanges)->with('image',$imageName);
 
+            return view('entries.edit')->with('entry', $entry)
+                                        ->with('post_types', $post_types)
+                                        ->with('selected_exchanges', $selected_exchanges)
+                                        ->with('image', $imageName);
         }
         else {
-            return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+            return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -405,7 +409,7 @@ class EntriesController extends Controller
             return redirect()->route('entry.view', $entry->id)->with('success', trans('general.entries.messages.save_edits'));
         }
 
-        return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 
 
@@ -451,18 +455,18 @@ class EntriesController extends Controller
             $user = Auth::user();
 
             if (!$entry->checkUserCanEditEntry($user)) {
-                return redirect()->route('browse')->with('error', trans('general.entries.messages.delete_not_allowed'));
+                return redirect()->route('home')->with('error', trans('general.entries.messages.delete_not_allowed'));
             }
             else {
                 if ($entry->delete()) {
                     $entry->exchangeTypes()->detach();
-                    return redirect()->route('browse')->with('success', trans('general.entries.messages.delete_success'));
+                    return redirect()->route('home')->with('success', trans('general.entries.messages.delete_success'));
                 }
                 return redirect()->route('entry.view', $entry->id)->with('error', trans('general.entries.messages.delete_failed'));
             }
 
         }
-        return redirect()->route('browse')->with('error', trans('general.entries.messages.invalid'));
+        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 
 
@@ -629,7 +633,7 @@ class EntriesController extends Controller
         if ($entry) {
             $entry->completed_at = date("Y-m-d H:i:s");
             $entry->save();
-            return redirect()->route('browse')->with('success', trans('general.entries.messages.completed'));
+            return redirect()->route('home')->with('success', trans('general.entries.messages.completed'));
         }
     }
 }

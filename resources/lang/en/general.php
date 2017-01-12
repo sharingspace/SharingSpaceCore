@@ -17,6 +17,8 @@ return [
     'terms' => 'Terms',
     'create' => 'Create',
     'about' => 'About',
+    'stats' => 'Stats',
+    'options' => 'Options',
     'email_address' => 'Email',
     'admin' => 'Admin',
     'create_acct' => 'create an account with AnyShare.',
@@ -60,7 +62,7 @@ return [
     'ga' => 'Google Analytics',
     'privacy' => 'Privacy',
     'markdown' => 'markdown allowed',
-
+    'yes' => 'Yes',
 
     'nav'  => [
       'browse' => 'Browse',
@@ -76,16 +78,15 @@ return [
       'features' => 'Features',
       'settings' => 'Settings',
       'profile' => 'Profile',
-      'create_sharing_hub' => 'Create',
 			'my_orders' => 'My Orders',
       'billing_history' => 'Billing History',
       'tos' => 'Terms and Conditions',
-      'share+' => 'Share +',
+      'share+' => '+ Share',
       'new_messages' => 'new messages',
       'view_all' => 'View all messages',
     ],
     'color' => [
-      'color_theme' => 'Choose a color theme',
+      'color_theme' => 'Choose a color palette',
       'blue' => 'blue',
       'brown' => 'brown',
       'darkblue' => 'darkblue',
@@ -97,6 +98,12 @@ return [
       'pink' => 'pink',
       'red' => 'red',
       'gold' => 'gold',
+      'fresh' => 'Fresh',
+      'future' => 'Future',
+      'muted' => 'Muted',
+      'starry_night' => 'Starry night',
+      'organic' => 'Organic',
+      'spring' => 'Spring'
     ],
     'settings' => [
       'personal' => 'Personal Info',
@@ -105,8 +112,6 @@ return [
       'display_name' => 'Display Name',
       'location_placeholder' => 'Address, City, Country',
       'email_placeholder' => 'you@example.com',
-      'first_name_placeholder' => 'First Name', 
-      'last_name_placeholder' => 'Last Name',
       'about_placeholder' => 'About me...',
       'web_url' => 'Website URL',
       'web_placeholder' => 'http://yourwebsite.com',
@@ -139,8 +144,7 @@ return [
       'have' => 'Have',
       'description_placeholder' => 'Description',
       'tag_placeholder' => 'Keywords, comma-separated',
-      'location_placeholder' => 'Near (optional)',
-      'qty' => 'QTY',
+      'qty' => 'Quantity',
       'author' => 'Author',
       'posted_by' => 'Posted by',
       'created_at' => 'Created on',
@@ -169,7 +173,7 @@ return [
       'more_images' => 'More Images',
       'comments_tab' => 'Comments',
       'only_owner' => 'Only the owner of this entry can see these messages.',
-      'subject_placeholder' => 'Subject&#133;',
+      'subject_placeholder' => 'Subject',
       'i_would_like' => 'I would like to:',
       'offer_amount' => 'Offer an amount',
       'offer' => 'Your offer',
@@ -239,7 +243,7 @@ return [
         'chars_remain' => 'characters remaining',
         'hint' => 'Hint:',
         'submit' => 'Submit',
-        'sorry_closed' => 'Sorry, this Share is closed. A closed Share needs to approve members before they join.',
+        'sorry_closed' => 'This is a closed Share. Closed Shares needs to approve members before they join.',
         'hint' => 'Hint: ',
         'still_pending' => 'Your request to become a member of this Share is still pending'
       ],
@@ -295,10 +299,10 @@ return [
       'slack_channel' => 'Slack channel name',
       'analytics' => 'Google analytics integration',
       'for_example' => 'For example: UA-000000-01',
-      'p1' => 'You can start a Share in under 1 minute and enjoy it free for 15 days.
+      'p1' => 'You can start a Share in under 1 minute and enjoy it free for 30 days.
       We are currently in beta, so keep in mind features are still being added. This
       introductory cost is available for a limited time only. Email us at information
-      info@anysha.re with questions about current features.',
+      info@anyshare.coop with questions about current features.',
       'p2' => 'You will not be charged until your free trial ends on',
       'p3' => 'No commitments, cancel at any time.',
       'save_success' => 'Welcome to your new Share! Get started adding entries now.',
