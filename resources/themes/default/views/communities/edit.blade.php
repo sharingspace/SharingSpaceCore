@@ -18,7 +18,7 @@
 		<div class="row">
 
             <!-- payment form -->
-            <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off">
+            <form method="post" action="#" id="payment-form" enctype="multipart/form-data" autocomplete="off" class="clearfix">
               {!! csrf_field() !!}
 
             <div class="col-md-12 text-muted">
