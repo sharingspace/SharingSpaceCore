@@ -73,10 +73,9 @@
 
 <body class="smoothscrolll enable-animationn">
   <!-- wrapper -->
-		<div id="wrapper">
+		<div id="wrapper" class="share_wrapper">
 
       <div>@include('partials.header')</div>
-
 
       @if (!Route::is('home'))
         <!-- Notifications -->
@@ -87,11 +86,10 @@
         </div>
       @endif
 
-      <div>@yield('content')</div>
-      <div class="push"></div>
+      <div id="share_content">@yield('content')</div>
+      <div>@include('partials.footer')</div>
     </div> <!-- /wrapper -->
 
-    @include('partials.footer')
 
 @include('partials.geo-lookup')
 

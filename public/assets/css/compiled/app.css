@@ -1104,9 +1104,8 @@ body #wrapper {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -35px;
-  /* the bottom margin is the negative value of the footer's height */
-  /*  because short page hide long menus */
+  margin: 0 auto;
+  position: relative;
 }
 
 body.bg-grey {
@@ -8246,11 +8245,32 @@ ul.search-history {
 }
 
 /** Footer
- **************************************************************** **/
+ ******************************************************************/
+
+#content {
+  padding-bottom: 48px;
+}
+
+#share_content {
+  padding-bottom: 35px;
+}
+
+#share_footer {
+  height: 35px;
+}
+
+#footer,
+#share_footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 
 #footer {
   color: rgba(255, 255, 255, 0.6);
   background: #313131;
+  height: 48px;
 }
 
 #footer > .container {
@@ -10029,6 +10049,11 @@ Quick add
   margin-top: -7px;
 }
 
+#share_footer,
+.push {
+  height: 30px;
+}
+
 /**
  * Bootstraps tags input
  *
@@ -10467,11 +10492,6 @@ section.TreborScholz {
 
 #messages .row.messageRow p {
   margin-bottom: 15px;
-}
-
-#share_footer,
-.push {
-  height: 30px;
 }
 
 /*************** Bootstrap extensions ******************/
