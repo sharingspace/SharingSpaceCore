@@ -215,7 +215,7 @@ class MessagesController extends Controller
                 $conversation = $offer->conversation()->associate($conversation);
 
                 $data['email'] = $send_to_email = $recipient->email;
-                $data['name'] = $recipient->getDisplayName();
+                $data['name'] = Auth::user()->getDisplayName();
                 $data['offer'] = $offer->message;
                 $data['community_name'] = $request->whitelabel_group->name;
                 $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
