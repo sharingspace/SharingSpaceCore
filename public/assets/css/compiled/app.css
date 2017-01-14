@@ -2621,7 +2621,6 @@ section.dark.page-header ul.page-options a {
   top: 0;
   right: 0;
   z-index: 1000;
-  background-color: #fff;
   border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.1) !important;
   transition: all .800s;
