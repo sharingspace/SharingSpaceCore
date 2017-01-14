@@ -84,7 +84,7 @@
       @endif
 
       <div id="content">@yield('content')</div>
-      <div>@include('partials.footer')</div>
+      <div id="footer">@include('partials.footer')</div>
     </div>
     <!-- /wrapper -->
 

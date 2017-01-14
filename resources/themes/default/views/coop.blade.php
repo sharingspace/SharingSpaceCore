@@ -135,13 +135,12 @@
   <section class="we_celebrate margin-top-30">
     <div class="container">
       <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 col-xs-12">
-            <div class="quote">
-              "&hellip;[We] celebrate how cooperatives build a better world by advancing sustainable development, social integration and decent work."
-            </div>
-            <div class="quote citation margin-bottom-30">- BAN KI MOON 
-              <br><strong><em class="text-light">SECRETARY GENERAL OF UNITED NATIONS</em></strong>
-            </div>
+        <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+          <div class="quote">
+            "&hellip;[We] celebrate how cooperatives build a better world by advancing sustainable development, social integration and decent work."
+          </div>
+          <div class="quote citation margin-bottom-30">- BAN KI MOON 
+            <br><strong><em class="text-light">SECRETARY GENERAL OF UNITED NATIONS</em></strong>
           </div>
         </div>
       </div>
@@ -194,14 +193,14 @@
 
   <section class="cta margin-top-30">
     <div class="container margin-top-20 text-center">
-        <div class="row text-muted">
-            <div class="col-md-9">
-              <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
-            </div>
-            <div class="col-md-3">
-                <a href="{{route('community.create.form')}}" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
-            </div>
+      <div class="row text-muted">
+        <div class="col-md-9">
+          <h2 class="white-secondary-heading">{{ trans('coop.make')}}</h2>
         </div>
+        <div class="col-md-3">
+          <a href="{{route('community.create.form')}}" class="w-button cta-button contained-button size-20">{{ trans('coop.start')}}</a>
+        </div>
+      </div>
     </div>
   </section>
 </div>

@@ -105,7 +105,7 @@ $screen-md-max: ($screen-lg-min - 1);
 }
 
 // fine spacing. margin-right-1, margin-left-2, margin-bottom-3, margin-top-4 etc
-@include create_spacing_classes(1, 4, 1);
+@include create_spacing_classes(0, 10, 1);
 
 // coarse spacing. margin-top-0, margin-right-5, margin-left-15, margin-bottom-20, margin-top-25, margin-top-30, padding-top-0 etc
 @include create_spacing_classes(0, 11, 5);
@@ -6933,7 +6933,7 @@ ul.search-history {
 
 /** Footer
  ******************************************************************/
-$corpFooter: 48px;
+$corpFooter: 44px;
 $shareFooter: 35px;
 #content {
   padding-bottom: $corpFooter;
