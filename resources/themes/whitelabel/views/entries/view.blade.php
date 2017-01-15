@@ -60,7 +60,7 @@
 
            @if($entry->description)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong>{{ trans('general.entries.description') }}</strong> {{ $entry->description }}
+            <strong>{{ trans('general.entries.description') }}</strong> {!! Markdown::convertToHtml($entry->description) !!}
           </div>
           @endif
 

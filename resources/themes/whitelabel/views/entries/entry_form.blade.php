@@ -142,7 +142,8 @@
 
                 <div class="col-xs-12">
                   <!-- Description -->
-                  <label class="input">
+                  <label class="input"> ({{trans('general.markdown')}} <a href="
+https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )
                     @if(isset($entry))
                       <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
                     @else
