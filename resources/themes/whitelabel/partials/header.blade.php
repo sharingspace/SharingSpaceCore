@@ -69,21 +69,24 @@
       </ul>
 
       <!-- left -->
-      <ul class="top-links list-inline">
-        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <li class="language_select">
-          <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
-            <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
-            <!-- $properties['native'] -->
+      <ul class="top-links"> 
+        <li class="dropdown languages">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {{App::getLocale()}}
+            <span class="caret"></span>
           </a>
-        </li>
-        @endforeach
-        <li class="language_select">
-          <div>
-            <a class="show margin-left-5 margin-top-5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
-              <i class="fa fa-ellipsis-h fa-lg"></i>
-            </a>
-          </div>
+          <ul class="dropdown-menu">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            <li class="language_select">
+              <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode)}}">{{$properties['native']}}</a>
+            </li>
+            @endforeach
+            <li class="language_select">
+              <a class="show5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
+                <i class="fa fa-ellipsis-h"> more</i>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
