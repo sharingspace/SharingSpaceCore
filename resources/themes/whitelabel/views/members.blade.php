@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 {{-- Page title --}}
-@section('title')
-     {{ trans('general.members.members') }} ::
-@parent
+  @section('title')
+    {{ trans('general.members.members') }} ::
+  @parent
 @stop
 
 
@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="row">
-  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members.members')}}</h1>
+    <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members.members')}}</h1>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
@@ -43,7 +43,7 @@
       		</tbody>
       	</table>
       </div>
- 	 </div> <!-- col-lg-10 -->
+ 	  </div> <!-- col-lg-10 -->
 	</div> <!-- row -->
 </div> <!-- #container -->
 

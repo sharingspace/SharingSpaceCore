@@ -65,7 +65,7 @@
 
 <body class="smoothscroll enable-animation">
   <!-- wrapper -->
-		<div id="wrapper">
+		<div id="wrapper" class="default_theme">
 
       @if (Route::is('home'))
         {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}

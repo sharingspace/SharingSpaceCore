@@ -2621,6 +2621,7 @@ section.dark.page-header ul.page-options a {
   top: 0;
   right: 0;
   z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.97);
   border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.1) !important;
   transition: all .800s;
@@ -2634,6 +2635,10 @@ section.dark.page-header ul.page-options a {
 #header a.logo.logo-responsive > img {
   height: 100%;
   /* used on center - example: page-coming-soon-1.html */
+}
+
+#wrapper.default_theme #header {
+  background-color: transparent;
 }
 
 /* force uppercase links , #mainMenu ul li a, #topMain ul li a */
@@ -4250,10 +4255,14 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
   border-top: rgba(0, 0, 0, 0.05) 1px solid;
 }
 
-#topBar .language_select img {
-  width: 16px;
-  height: 11px;
-  margin-top: -2px;
+#topBar ul.dropdown-menu > li.language_select > a {
+  padding: 3px 4px;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+#topBar ul.dropdown-menu > li.language_select > a:hover {
+  background-color: #444;
 }
 
 #topBar.dark {
@@ -4345,18 +4354,6 @@ body.boxed #topBar.dark ul.top-links > li {
   display: block !important;
 }
 
-#topBar ul.top-links > li div {
-  vertical-align: middle;
-}
-
-#topBar ul.top-links > li div a {
-  color: lightgrey;
-}
-
-#topBar ul.top-links > li div a:hover {
-  color: white;
-}
-
 /* Logo */
 
 /* banner */
@@ -4396,11 +4393,26 @@ body.boxed #topBar.dark ul.top-links > li {
   font-size: 12px;
 }
 
+#topBar ul.top-links li.text-welcome > .dropdown.languages > a {
+  padding: 1px 4px;
+  margin-top: 3px;
+  border: solid lightgray 1px;
+}
+
+#topBar ul.top-links li.text-welcome > .dropdown.languages ul.dropdown-menu {
+  border: solid lightgray 1px;
+  background-color: #333;
+  color: #fff;
+}
+
+#topBar ul.top-links li.text-welcome > .dropdown.languages ul.dropdown-menu a {
+  padding: 4px 10px;
+}
+
 #topBar ul.dropdown-menu {
   min-width: 50px;
-  margin: 0;
   padding: 0;
-  margin-left: -1px;
+  margin-top: -1px;
 }
 
 #topBar ul.dropdown-menu > li > a {
@@ -5968,6 +5980,22 @@ section.dark .tab-post a {
 .tab-post small {
   display: block;
   font-size: 12px;
+}
+
+#topBar ul.top-links > .dropdown.languages > a {
+  padding: 1px 4px;
+  margin-top: 3px;
+  border: solid lightgray 1px;
+}
+
+#topBar ul.top-links > .dropdown.languages ul.dropdown-menu {
+  border: solid lightgray 1px;
+  background-color: #333;
+  color: #fff;
+}
+
+#topBar ul.top-links > .dropdown.languages ul.dropdown-menu a {
+  padding: 4px 10px;
 }
 
 /** Aside Navigation
@@ -9917,7 +9945,7 @@ Quick add
 
 .user_profile .thumbnail {
   padding: 0;
-  width: 200px;
+  width: 100%;
   max-height: 300px;
   border: none;
 }

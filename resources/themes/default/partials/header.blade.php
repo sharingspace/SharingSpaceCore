@@ -79,20 +79,21 @@
         </ul>
 
         <!-- left -->
-        <ul class="top-links list-inline">
-          @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-          <li class="language_select">
-            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
-              <img src="/assets/img/flags/{{ $localeCode }}.png" alt="{{$properties['native']}}" />
-            </a>
-          </li>
-          @endforeach
-          <li class="language_select">
-            <div>
-              <a class="show margin-left-5 margin-top-5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
-                <i class="fa fa-ellipsis-h fa-lg"></i>
-              </a>
-            </div>
+        <ul class="top-links"> 
+          <li class="dropdown languages">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{App::getLocale()}}<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+              <li class="language_select">
+                <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode)}}">{{$properties['native']}}</a>
+              </li>
+              @endforeach
+              <li class="language_select">
+                <a class="show5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
+                   <i class="fa fa-ellipsis-h"> more</i>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -100,7 +101,7 @@
     <!-- /Top Bar -->
 
     <div class="w-nav nav-bar">
-      <div id="header" class="header_dropShadow sticky clearfix header-sm" style="background-color:transparent!important;">
+      <div id="header" class="header_dropShadow sticky clearfix header-sm">
         <!-- TOP NAV -->
         <div id="topNav" >
           <div class="container">
@@ -150,7 +151,7 @@
     @elseif (Route::is('login'))
     <h1 class="heading">{{trans('general.nav.login') }}</h1>
     @elseif (Route::is('register'))
-    <h2 class="heading">boo
+    <h2 class="heading">
     {{trans('general.nav.register') }}
     @if (!empty($subdomain))
     <h2 class="subheading size-30 margin-top-20">
