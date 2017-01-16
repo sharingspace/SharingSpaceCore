@@ -10352,6 +10352,11 @@ Quick add
   text-align: center;
 }
 
+#entry_view p,
+#entry_view h2 {
+  margin-bottom: 15px;
+}
+
 #edit_entry .fancy-form-select:before {
   right: 17px;
 }
