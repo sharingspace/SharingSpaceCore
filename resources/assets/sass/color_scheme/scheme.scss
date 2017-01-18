@@ -59,6 +59,12 @@
   		background-color: $actionColor;
 	}
 
+	a {
+	  &:active, &:focus, &:hover, .btn.focus, .btn:focus, .btn:hover  {
+	    color: lighten($primaryColor, 35%);
+	    text-decoration: none;
+	  }
+	}
 	a,
 	a:focus:not(.btn),
 	section.dark a,
