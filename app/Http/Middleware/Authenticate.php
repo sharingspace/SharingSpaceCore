@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Illuminate\Contracts\Auth\Guard;
 use Log;
 
 class Authenticate
