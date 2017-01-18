@@ -74,6 +74,16 @@ h6 {
   background-color: #fc4a1a;
 }
 
+a:active,
+a:focus,
+a:hover,
+a .btn.focus,
+a .btn:focus,
+a .btn:hover {
+  color: #cdedd0;
+  text-decoration: none;
+}
+
 a,
 a:focus:not(.btn),
 section.dark a,
