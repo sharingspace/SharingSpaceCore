@@ -60,6 +60,9 @@
               {!! Markdown::convertToHtml($user->bio) !!}
             </div> <!-- col 12 -->
             @endif
+            <div class="col-xs-12">
+              <a href="{{ route('user.settings.view') }}"><button class="btn btn-sm btn-colored">{{trans('general.settings.edit_profile')}}</button></a>
+            </div>
             <div class="col-md-12">
               @if (Auth::check())
                 @if (Auth::user()->id!=$user->id)
