@@ -158,13 +158,15 @@
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
+            @endcan
+            @if ($whitelabel_group->scopeIsPublic())
               <li{!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="{{ route('about') }}">
                   {{ trans('general.about') }}
                   {!! (Route::is('about') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
-            @endcan
+            @endif
 
             @can('update-community', $whitelabel_group)
               <li>
