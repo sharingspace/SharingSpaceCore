@@ -17,7 +17,7 @@
     data-cookie-id-table="communityListingv1">
       <thead>
           <tr>
-            <th data-sortable="true" data-field="post_type"><span class="sr-onlyy">{{ trans('general.entries.post_type') }}</span></th>
+            <th data-sortable="true" data-field="post_type"><span class="sr-onlyy">{{ trans('general.type') }}</span></th>
             <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
             <th data-sortable="true" data-field="author">{{ trans('general.entries.posted_by') }}</th>
             <th data-sortable="true" data-field="location">{{ trans('general.entries.location') }}</th>

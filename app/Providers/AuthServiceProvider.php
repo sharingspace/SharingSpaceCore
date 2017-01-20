@@ -69,7 +69,7 @@ class AuthServiceProvider extends ServiceProvider
         // Check if the user can see the community about page
         $gate->define('view-about', function ($user, $community) {
           // any one can see the about for an open share, even if not logged in
-          if ($community->group_type=='O') {
+          if ($community->group_type !='S') {
               return true;
           }
 
