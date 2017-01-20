@@ -108,7 +108,7 @@
       </div>
 
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-        <h2 class="feature-heading text-center">{{trans('features.slack_heading')}}</h2>
+        <h2 class="feature-heading text-center">{{trans('general.slack')}}</h2>
         <p class="features-text">{{trans('features.slack_feature')}}</p>
       </div>
     </div>
