@@ -84,6 +84,13 @@ a .btn:hover {
   text-decoration: none;
 }
 
+.btn.focus,
+.btn:focus,
+.btn:hover {
+  color: #F6F20B;
+  text-decoration: none;
+}
+
 a,
 a:focus:not(.btn),
 section.dark a,

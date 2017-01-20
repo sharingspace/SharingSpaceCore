@@ -20,7 +20,7 @@ function finish_submit(data=null)
       $('#error-list').remove();
       $('#submission_error').hide();
 
-      if( $('#create_table tr').length == 1) {
+      if ($('#create_table tr').length == 1) {
         $('#create_table').show();
       }
 
@@ -100,7 +100,7 @@ function uploadFiles()
 
   $.ajax(
   { 
-    url:'/entry/upload',
+    url: 'uploadimage',
     type: 'POST',
     data: data,
     dataType: 'json',

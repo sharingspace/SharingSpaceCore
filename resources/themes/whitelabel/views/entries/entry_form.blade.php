@@ -194,9 +194,9 @@
 
                 <div class="col-sm-6 col-xs-12 ">
                   @if(isset($entry))
-                    <button class="btn btn-dark-colored pull-right">
+                    <button class="btn btn-colored pull-right">
                   @else
-                    <button class="btn btn-dark-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
+                    <button class="btn btn-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
                   @endif
                       {{ trans('general.entries.save_entry') }}
                     </button>
