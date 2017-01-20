@@ -85,7 +85,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                   {!! Form::theme_color('theme_color', Input::old('color', $community->color)) !!}
                   {!! $errors->first('color', '<span class="help-block">:message</span>') !!}
 
-                  <label class="margin-top-15" for="info_bar" style="display: block;">
+                  <!-- <label class="margin-top-15" for="info_bar" style="display: block;">
                     Hide home page information bar?
                     <input name="show_info_bar" type="checkbox" value="0"
                     @if (!$whitelabel_group->show_info_bar)
@@ -95,7 +95,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                     <button type="button" class="" data-toggle="modal" data-target="#infoBarModal">
                       <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
                     </button>
-                  </label>
+                  </label>  -->
                 </div> <!-- col-md-8 -->
 
                 <div class="col-md-4 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">

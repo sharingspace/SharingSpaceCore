@@ -68,15 +68,19 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if the user can see the community about page
         $gate->define('view-about', function ($user, $community) {
-          //Log::debug("view-about ************** entered");
+          // any one can see the about for an open share, even if not logged in
+          if ($community->group_type=='O') {
+              return true;
+          }
 
-          if(($community->group_type=='O') || ($user->isMemberOfCommunity($community) || $user->isSuperAdmin() || $community->group_type!='S')) { 
-            if (strlen($community->about)) {
-              //Log::debug("view-about ************** can view");
+          if (isset($user)) {
+            // user is logged in, is this an open Share or are they a member or superAdmin ?
+            if ($user->isMemberOfCommunity($community) || $user->isSuperAdmin()) {
               return true;
             }
-            //Log::debug("view-about ************** cannot view");
           }
+
+          //if(($community->group_type=='O') || ($user->isMemberOfCommunity($community) || $user->isSuperAdmin() || $community->group_type!='S')) { 
         });
 
         //@elseif (strlen($whitelabel_group->about) && 

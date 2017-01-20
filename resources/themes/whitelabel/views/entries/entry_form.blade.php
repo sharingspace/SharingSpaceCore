@@ -143,6 +143,10 @@
                 <div class="col-xs-12">
                   <!-- Description -->
                   <label class="input">
+                    ({{trans('general.markdown')}}
+                    <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown">
+                      <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
+                    </a> )                    
                     @if(isset($entry))
                       <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
                     @else
@@ -190,9 +194,9 @@
 
                 <div class="col-sm-6 col-xs-12 ">
                   @if(isset($entry))
-                    <button class="btn btn-dark-colored pull-right">
+                    <button class="btn btn-colored pull-right">
                   @else
-                    <button class="btn btn-dark-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
+                    <button class="btn btn-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
                   @endif
                       {{ trans('general.entries.save_entry') }}
                     </button>

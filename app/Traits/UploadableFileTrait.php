@@ -225,7 +225,6 @@ trait UploadableFileTrait
 
             // update the media entry
             Log::error("moveImagesForNewTile. Success renaming file from $src to $dest");
-
             self::updateImageToDB($user->id, $upload_key, $entry_id);
         }
         return true;

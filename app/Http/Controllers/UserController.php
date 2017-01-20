@@ -285,7 +285,7 @@ class UserController extends Controller
 
                 // send an email to the user letting them know
                 $data['uc_subdomain'] = ucfirst($request->whitelabel_group->name);
-                $data['subdomain'] = $request->whitelabel_group->name;
+                $data['subdomain'] = $request->whitelabel_group->subdomain;
                 $data['name'] = $user->display_name;
                 $data['subject'] = 'Welcome to the '.$data['uc_subdomain']. ' Share!';
                 $data['to_email'] = $user->email;

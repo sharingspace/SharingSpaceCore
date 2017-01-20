@@ -73,10 +73,9 @@
 
 <body class="smoothscrolll enable-animationn">
   <!-- wrapper -->
-		<div id="wrapper">
+		<div id="wrapper" class="share_wrapper">
 
       <div>@include('partials.header')</div>
-
 
       @if (!Route::is('home'))
         <!-- Notifications -->
@@ -87,16 +86,14 @@
         </div>
       @endif
 
-      <div>@yield('content')</div>
-      <div class="push"></div>
+      <div id="share_content">@yield('content')</div>
+      <div>@include('partials.footer')</div>
     </div> <!-- /wrapper -->
 
-    @include('partials.footer')
 
 @include('partials.geo-lookup')
 
-
-<script>
+<script type="text/javascript">
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -111,6 +108,5 @@
   ga('send', 'pageview');
 
 </script>
-
 </body>
 </html>

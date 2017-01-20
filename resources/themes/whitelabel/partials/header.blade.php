@@ -69,21 +69,24 @@
       </ul>
 
       <!-- left -->
-      <ul class="top-links list-inline">
-        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <li class="language_select">
-          <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }} ">
-            <img src="/assets/img/flags/{{ $localeCode }}.png" width="16" height="11" alt="lang" />
-            <!-- $properties['native'] -->
+      <ul class="top-links"> 
+        <li class="dropdown languages">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            {{App::getLocale()}}
+            <span class="caret"></span>
           </a>
-        </li>
-        @endforeach
-        <li class="language_select">
-          <div>
-            <a class="show margin-left-5 margin-top-5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
-              <i class="fa fa-ellipsis-h fa-lg"></i>
-            </a>
-          </div>
+          <ul class="dropdown-menu">
+            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            <li class="language_select">
+              <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode)}}">{{$properties['native']}}</a>
+            </li>
+            @endforeach
+            <li class="language_select">
+              <a class="show5" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035900-is-anyshare-available-in-my-language-">
+                <i class="fa fa-ellipsis-h"> more</i>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -97,7 +100,7 @@
 			<div class="container">
 
 				<!-- Mobile Menu Button -->
-        @if (Auth::check())
+        @if (Auth::check() || $whitelabel_group->isOpen())
         <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
@@ -157,6 +160,18 @@
               </li>
             @endcan
 
+            @if ($whitelabel_group->isOpen())
+              <li{!! (Route::is('about') ? ' class="active"' : '') !!}>
+                <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
+              </li>
+            @elseif (Auth::check())
+              @can('view-about', $whitelabel_group)
+                <li{!! (Route::is('about') ? ' class="active"' : '') !!}>
+                  <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
+                </li>
+              @endcan
+            @endif
+
             @can('update-community', $whitelabel_group)
               <li>
                 <a href="{{ route('community.edit.form')}}"><i class="fa fa-lg fa-cog"></i></a>
@@ -183,4 +198,58 @@
   <div class="margin-y-55"></div>
 @endif
 
+
+<div id="aboutModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">About {{$whitelabel_group->name}}</h4>
+      </div>
+      <div class="modal-body">
+      <p  class="about_info"><strong>Started:</strong> <span>{{$whitelabel_group->created_at->format('F jS, Y')}}</span>
+      @if (!empty($whitelabel_group->location))
+        <br><strong>Location:</strong> <span class="about_info">{{$whitelabel_group->location}}</span>
+      @endif
+      @if ($whitelabel_group->group_type == 'O')
+        <br><strong>Privacy:</strong> <span class="about_info">Open Membership</span> 
+        <a href="#" title="An open Share lets anyone join and exchange. It is the most permissive way to build members.""><i class="fa fa-info-circle"></i></a>
+
+      @elseif ($whitelabel_group->group_type == 'C')
+        <br><strong>Privacy:</strong> <span class="about_info">Closed, Membership requires approval</span> 
+        <a href="#" title="A closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details."><i class="fa fa-info-circle"></i></a>
+      @else
+        <br><strong>Privacy:</strong> <span class="about_info">Secret, Membership is by invitation only</span> 
+        <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a>
+      @endif
+        <br><strong>{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchangeTypes->count()) }}</strong>
+        <span class="about_info">
+          @if ($whitelabel_group->exchangeTypes->count() == 10)
+            {{ trans('general.community.exchange_types.all_allowed') }}
+          @else
+            {{--*/ $exchangeTypes = array() /*--}}
+            @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
+              {{--*/ $exchangeTypes[] = $exchange_type->name /*--}}
+            @endforeach
+            {{ implode(', ', $exchangeTypes)}}
+            <a href="#" title="This shows options for member exchange on this Share"><i class="fa fa-info-circle"></i></a>
+          @endif
+        </span>
+        <br><strong>Total members:</strong> {{$whitelabel_group->members()->count()}}<br>
+        <strong>Total entries:</strong> {{$whitelabel_group->entries()->count()}}
+        (wants:</span> {{$whitelabel_group->entries()->where('post_type', 'want')->count()}}
+        <a href="#" title="All the needs of the members"><i class="fa fa-info-circle"></i></a>, 
+        haves:</span> {{$whitelabel_group->entries()->where('post_type', 'have')->count()}}
+        <a href="#" title="All the resources of the members"><i class="fa fa-info-circle"></i></a>)
+        </p>
+
+      {!! Markdown::convertToHtml($whitelabel_group->about) !!} 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
+      </div>
+    </div>
+  </div>
+</div>
 

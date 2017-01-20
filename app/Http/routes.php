@@ -56,10 +56,12 @@ Route::group(
     }
 );
 
-
 Route::group(
     ['prefix' => LaravelLocalization::setLocale()],
-    function () {
+    function() {
+//Route::group(
+//    ['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localize']],
+//    function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -264,7 +266,8 @@ Route::group(
                     'as' => 'user.notifications.save',
                     'uses' => 'UserController@postUpdateNotifications')
                 );
-        });
+            }
+        );
 
 
         Route::group(
@@ -378,10 +381,11 @@ Route::group(
                 );
 
                 Route::post(
-                    'upload',
+                    'uploadimage',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'uses' => 'EntriesController@ajaxUpload')
+                        'middleware' => ['auth','community-auth'],
+                        'uses' => 'EntriesController@ajaxUpload'
+                    )
                 );
 
                 Route::get(
@@ -409,8 +413,6 @@ Route::group(
                 );
             }
         );
-
-
 
 
         /*

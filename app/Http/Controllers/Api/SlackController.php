@@ -86,17 +86,20 @@ class SlackController extends Controller
     */
     public function slackAddEntry($postType = 'want')
     {
-
         $text_pre = explode(' in:', Input::get('text'));
+        // eg. 'text_pre' => ('1 junk', 'testgroup')
         $text = explode(' ', $text_pre[0]);
+        // eg. 'text' => ('1', 'junk'), 
         $community_slug = trim($text_pre[1]);
+        // eg. 'community_slug' => 'testgroup',
 
         if ($community_slug) {
             if (!$community = Community::where('subdomain', '=', e($community_slug))->first()) {
-                $message['text'] = 'The '.e($text[2]).' community is invalid.';
+                $message['text'] = 'The '.e($community_slug).' community is invalid.';
                 return response()->json($message);
             }
-        } else {
+        }
+        else {
             $message['text'] = 'No community given.';
             return response()->json($message);
         }

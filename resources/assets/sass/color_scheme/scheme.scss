@@ -1,17 +1,17 @@
 
-	::selection {
-		background: $primaryColor;
-	}
-	::-moz-selection {
-		background: $primaryColor; /* Firefox */
-	}
-	::-webkit-selection {
-		background: $primaryColor; /* Safari */
-	}
+    ::selection {
+        background: $primaryColor;
+    }
+    ::-moz-selection {
+        background: $primaryColor; /* Firefox */
+    }
+    ::-webkit-selection {
+        background: $primaryColor; /* Safari */
+    }
 
-	.textColor_#{$colorName} {
-		background-color: $primaryColor !important;
-	}
+    .textColor_#{$colorName} {
+        background-color: $primaryColor !important;
+    }
 
     .btn-colored {
         background-color: $primaryColor !important;
@@ -43,21 +43,33 @@
         color: darken($primaryColor, 17%);
     }
 
-	h1, h2, h3, h4, h5, h6 {
-      color:  $primaryColor;;
+    h1, h2, h3, h4, h5, h6 {
+        color:  $primaryColor;;
     }
 
-	.info-bar {
-  		background-color: $shadeColor;
-  	}
+    .info-bar {
+        background-color: $shadeColor;
+    }
 
-  	.want_square {
-  		background-color: $primaryColor;
-	}
+    .want_square {
+        background-color: $primaryColor;
+    }
 
-	.have_square {
-  		background-color: $actionColor;
-	}
+    .have_square {
+        background-color: $actionColor;
+    }
+
+    a {
+        &:active, &:focus, &:hover, .btn.focus, .btn:focus, .btn:hover  {
+            color: lighten($primaryColor, 35%);
+            text-decoration: none;
+        }
+    }
+
+    .btn.focus, .btn:focus, .btn:hover {
+        color: $actionColor;
+        text-decoration: none;
+    }
 
 	a,
 	a:focus:not(.btn),

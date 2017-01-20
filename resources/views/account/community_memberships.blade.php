@@ -25,7 +25,7 @@
             </th>
           @foreach ($communities as $community)
             <tr>
-              <td class="col-md-3"> {{ $community->name }}</td>
+              <td class="col-md-3"> <a href="https://{{ $community->subdomain }}.{{config('app.domain')}}">{{ $community->name }}</td>
               <td class="col-md-2"> {{ $community->location }}</td>
               <td class="col-md-6"> {{ Str::limit($community->about, 200) }}</td>
               <td class="col-md-1 text-center">

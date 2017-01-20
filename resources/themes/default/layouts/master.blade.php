@@ -65,7 +65,7 @@
 
 <body class="smoothscroll enable-animation">
   <!-- wrapper -->
-		<div id="wrapper">
+		<div id="wrapper" class="default_theme">
 
       @if (Route::is('home'))
         {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}
@@ -83,13 +83,10 @@
         </div>
       @endif
 
-      <div>@yield('content')</div>
-
-      <div>@include('partials.footer')</div>
-
+      <div id="content">@yield('content')</div>
+      <div id="footer">@include('partials.footer')</div>
     </div>
     <!-- /wrapper -->
-
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -123,6 +120,16 @@
             $('#header').addClass('header_noDropShadow');
          }
      });
+
+    /* $(".dropdown-menu li a").click(function() {
+      console.log("dropdown clicked "+$(this).text());
+
+      $(this).parent(".dropdown").find('a').text('Boo');
+      console.log("dropdown clicked "+$(this).parent('.dropdown').html());
+
+      //$(this).parent("li.dropdown a").html($(this).text() + ' <span class="caret"></span>');
+      //$(this).parents(".dropdown").find('li').val($(this).data('value'));
+    });*/
   });
 </script>
 

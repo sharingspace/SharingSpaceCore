@@ -129,6 +129,7 @@ return [
       'see_members' => 'Allow my profile to show on member page',
       'contact' => 'Allow members to contact me with offers',
       'contact_form' => 'Allow contact form on profile page',
+      'edit_profile' => 'Edit profile'
     ],
 
     'email' => [

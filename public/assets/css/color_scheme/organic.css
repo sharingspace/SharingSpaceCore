@@ -2,55 +2,55 @@
  ******************************************************************/
 
 ::-moz-selection {
-  background: #3cc47c;
+  background: #675436;
 }
 
 ::selection {
-  background: #3cc47c;
+  background: #675436;
 }
 
 ::-moz-selection {
-  background: #3cc47c;
+  background: #675436;
   /* Firefox */
 }
 
 ::-webkit-selection {
-  background: #3cc47c;
+  background: #675436;
   /* Safari */
 }
 
 .textColor_Organic {
-  background-color: #3cc47c !important;
+  background-color: #675436 !important;
 }
 
 .btn-colored {
-  background-color: #3cc47c !important;
-  border-color: #278252;
+  background-color: #675436 !important;
+  border-color: #2e2618;
   color: #fff;
 }
 
 .btn-light-colored {
-  background-color: #7fd8a9;
-  border-color: #3cc47c;
+  background-color: #a08254;
+  border-color: #675436;
   color: #fff;
 }
 
 .btn-dark-colored {
-  background-color: #278252;
-  border-color: #133f28;
+  background-color: #2e2618;
+  border-color: black;
   color: #fff;
 }
 
 .primary {
-  color: #3cc47c;
+  color: #675436;
 }
 
 .light-primary {
-  color: #7fd8a9;
+  color: #a08254;
 }
 
 .dark-primary {
-  color: #278252;
+  color: #2e2618;
 }
 
 h1,
@@ -59,19 +59,36 @@ h3,
 h4,
 h5,
 h6 {
-  color: #3cc47c;
+  color: #675436;
 }
 
 .info-bar {
-  background-color: #828081;
+  background-color: #A4713A;
 }
 
 .want_square {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 .have_square {
-  background-color: #1e392a;
+  background-color: #21C20B;
+}
+
+a:active,
+a:focus,
+a:hover,
+a .btn.focus,
+a .btn:focus,
+a .btn:hover {
+  color: #c3ae8d;
+  text-decoration: none;
+}
+
+.btn.focus,
+.btn:focus,
+.btn:hover {
+  color: #21C20B;
+  text-decoration: none;
 }
 
 a,
@@ -137,7 +154,7 @@ a.href-reset.active,
 .box-icon.box-icon-color i,
 .switch-primary.switch-round > input:checked + .switch-label:after,
 section.dark .nav-tabs.nav-clean > li.active > a {
-  color: #1e392a;
+  color: #21C20B;
 }
 
 #sidepanel.sidepanel-theme-color,
@@ -182,7 +199,7 @@ i.ico-color,
 #progressBar #bar,
 #page-menu,
 #page-menu ul {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 /* !important required */
@@ -191,7 +208,7 @@ i.ico-color,
 #music-player .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
 section .theme-background,
 .swiper-pagination-bullet-active {
-  background-color: #3cc47c !important;
+  background-color: #675436 !important;
 }
 
 .inews-content-inner h3 > a,
@@ -200,7 +217,7 @@ div.side-nav ul > li.active > a,
 .pagination.pagination-simple > li.active > a,
 div.side-nav ul.list-group-bordered > li > a:hover,
 section .theme-color {
-  color: #3cc47c !important;
+  color: #675436 !important;
 }
 
 .primary-slider .ui-slider .ui-slider-handle,
@@ -213,7 +230,7 @@ a.thumbnail:hover,
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  border-color: #3cc47c;
+  border-color: #675436;
 }
 
 .open > .dropdown-toggle.btn-primary,
@@ -223,43 +240,43 @@ a.thumbnail:hover,
 .btn-primary:hover
 .pagination > .active > a,
 .pagination > .active > a:hover {
-  border-color: #3cc47c;
+  border-color: #675436;
 }
 
 #topNav ul.dropdown-menu {
   /* submenu border top color */
-  border-top-color: #3cc47c;
+  border-top-color: #675436;
 }
 
 section.featured-grid div.row > div .ribbon:before,
 .modal-content {
-  border-top-color: #3cc47c;
+  border-top-color: #675436;
 }
 
 #topNav ul.dropdown-menu {
-  border-color: #3cc47c #fff #fff;
+  border-color: #675436 #fff #fff;
 }
 
 #topNav div.submenu-dark ul.dropdown-menu {
-  border-color: #3cc47c #3F3F3F #3F3F3F;
+  border-color: #675436 #3F3F3F #3F3F3F;
 }
 
 #topNav div.submenu-color ul.dropdown-menu {
-  border-color: #3cc47c #3F3F3F #3F3F3F;
+  border-color: #675436 #3F3F3F #3F3F3F;
 }
 
 #topMain li.search .search-box {
-  border-top: #3cc47c 2px solid;
+  border-top: #675436 2px solid;
 }
 
 /* COLOR DROP DOWN MENU */
 
 #topNav div.submenu-color ul.dropdown-menu {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 #topNav div.submenu-color ul.dropdown-menu {
-  border-color: #888 #3cc47c #3cc47c;
+  border-color: #888 #675436 #675436;
 }
 
 #topNav div.submenu-color ul.dropdown-menu a.dropdown-toggle {
@@ -302,7 +319,7 @@ section.theme-color div.heading-title.heading-dotted h4,
 section.theme-color div.heading-title.heading-dotted h5,
 section.theme-color div.heading-title.heading-dotted h6 {
   color: #fff;
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 section.theme-color div.heading-title h1,
@@ -311,7 +328,7 @@ section.theme-color div.heading-title h3,
 section.theme-color div.heading-title h4,
 section.theme-color div.heading-title h5,
 section.theme-color div.heading-title h6 {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 section.theme-color div.heading-title h1 span,
@@ -349,14 +366,14 @@ body.menu-vertical #mainMenu.sidebar-vertical .dropdown-menu > .active > a:focus
 body.menu-vertical #mainMenu.sidebar-vertical .dropdown-menu > .active > a:hover,
 body.menu-vertical #mainMenu.sidebar-vertical .navbar-default .navbar-nav > .active > a,
 body.menu-vertical #mainMenu.sidebar-vertical .sidebar-nav .navbar li:hover > a {
-  color: #3cc47c !important;
+  color: #675436 !important;
 }
 
 /**	[Shortcode] Buttons
 *************************************************** **/
 
 section.dark .btn-default:hover {
-  color: #3cc47c;
+  color: #675436;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -364,7 +381,7 @@ section.dark .btn-default:hover {
 *************************************************** **/
 
 section.page-header .breadcrumb a:hover {
-  color: #3cc47c !important;
+  color: #675436 !important;
   text-decoration: none;
 }
 
@@ -377,20 +394,20 @@ div.divider.divider-color i {
 
 div.divider.divider-color:before,
 div.divider.divider-color:after {
-  border-top: #3cc47c 1px solid;
+  border-top: #675436 1px solid;
 }
 
 div.divider.divider-color i {
-  color: #3cc47c;
+  color: #675436;
 }
 
 div.divider.divider-circle.divider-color i {
   color: #fff;
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 div.divider.divider-border > a:hover > i {
-  color: #3cc47c;
+  color: #675436;
 }
 
 /**	[Shortcode] Headings
@@ -398,32 +415,32 @@ div.divider.divider-border > a:hover > i {
 
 div.heading-title.heading-line-single.heading-color:before,
 div.heading-title.heading-line-double.heading-color:before {
-  border-color: #3cc47c;
+  border-color: #675436;
 }
 
 div.heading-border-bottom.heading-color {
-  border-bottom-color: #3cc47c;
+  border-bottom-color: #675436;
 }
 
 div.heading-title.heading-border.heading-color,
 div.heading-title.heading-border.heading-inverse.heading-color {
-  border-color: #3cc47c;
+  border-color: #675436;
 }
 
 section.dark div.heading-title.heading-border-bottom {
-  border-bottom-color: #3cc47c;
+  border-bottom-color: #675436;
 }
 
 /**	[Shortcode] Icon Boxes
 *************************************************** **/
 
 .box-icon a.box-icon-title:hover > h2 {
-  color: #3cc47c;
+  color: #675436;
 }
 
 .box-icon a.box-icon-title:hover > i {
   color: #fff;
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 .box-icon a.box-icon-more {
@@ -432,17 +449,17 @@ section.dark div.heading-title.heading-border-bottom {
 
 .box-icon a.box-icon-more:hover,
 section.dark .box-icon a.box-icon-more:hover {
-  color: #3cc47c;
+  color: #675436;
 }
 
 .box-video a.box-video-title:hover h2,
 .box-video a.box-image-title:hover h2 {
-  color: #3cc47c;
+  color: #675436;
 }
 
 .box-flip .box2 {
   color: #fff;
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 .box-flip .box2 h1,
@@ -455,15 +472,15 @@ section.dark .box-icon a.box-icon-more:hover {
 }
 
 .box-static.box-border-top {
-  border-color: #3cc47c;
+  border-color: #675436;
 }
 
 /**	[Shortcode] Navigations
 *************************************************** **/
 
 .navbar-primary {
-  border-color: #3cc47c !important;
-  background-color: #3cc47c !important;
+  border-color: #675436 !important;
+  background-color: #675436 !important;
 }
 
 /**	[Shortcode] Paginations
@@ -471,8 +488,8 @@ section.dark .box-icon a.box-icon-more:hover {
 
 section.dark .pagination > li.active > a,
 .pagination > li.active > a {
-  border-color: #3cc47c;
-  background-color: #3cc47c;
+  border-color: #675436;
+  background-color: #675436;
 }
 
 /** [Shortcode] Process Steps
@@ -480,7 +497,7 @@ section.dark .pagination > li.active > a,
 
 .process-wizard-primary > .process-wizard-step > .process-wizard-dot,
 .process-wizard-primary > .process-wizard-step > .progress > .progress-bar {
-  background: #3cc47c;
+  background: #675436;
 }
 
 .process-wizard-primary > .process-wizard-step > .process-wizard-dot:after {
@@ -490,8 +507,8 @@ section.dark .pagination > li.active > a,
 ul.process-steps li.active a,
 ul.process-steps li.active a:focus,
 ul.process-steps li.active:hover > a {
-  background-color: #3cc47c !important;
-  border-color: #3cc47c !important;
+  background-color: #675436 !important;
+  border-color: #675436 !important;
 }
 
 ul.process-steps li.active h1,
@@ -500,7 +517,7 @@ ul.process-steps li.active h3,
 ul.process-steps li.active h4,
 ul.process-steps li.active h5,
 ul.process-steps li.active h6 {
-  color: #3cc47c;
+  color: #675436;
 }
 
 /** [Shortcode] Process Steps
@@ -509,12 +526,12 @@ ul.process-steps li.active h6 {
 div.mega-price-table .pricing-title,
 div.mega-price-table .pricing-head,
 div.mega-price-table .pricing.popular {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 div.mega-price-table .pricing:hover h4,
 div.mega-price-table .pricing-table i.fa {
-  color: #3cc47c;
+  color: #675436;
 }
 
 /** Styled Icons
@@ -522,8 +539,8 @@ div.mega-price-table .pricing-table i.fa {
 
 section.dark i.ico-hover:hover,
 i.ico-hover:hover {
-  background-color: #3cc47c;
-  border-color: #3cc47c;
+  background-color: #675436;
+  border-color: #675436;
 }
 
 /** [Shortcode] Tabs
@@ -531,20 +548,20 @@ i.ico-hover:hover {
 
 .nav-tabs.nav-top-border > li.active > a,
 .nav-tabs.nav-top-border > li.active > a:hover {
-  border-top-color: #3cc47c !important;
+  border-top-color: #675436 !important;
 }
 
 .nav-tabs.nav-bottom-border > li.active > a,
 .nav-tabs.nav-bottom-border > li.active > a:hover {
-  border-bottom-color: #3cc47c !important;
+  border-bottom-color: #675436 !important;
 }
 
 .nav-tabs.nav-alternate > li.active > a {
-  background-color: #3cc47c !important;
+  background-color: #675436 !important;
 }
 
 .nav-tabs > li.active > a {
-  color: #3cc47c !important;
+  color: #675436 !important;
 }
 
 /** Sky Forms
@@ -557,11 +574,11 @@ i.ico-hover:hover {
 /**/
 
 .sky-form .toggle i:before {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 .sky-form .button {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 /**/
@@ -571,21 +588,21 @@ i.ico-hover:hover {
 /**/
 
 .sky-form .radio input + i:after {
-  background-color: #3cc47c;
+  background-color: #675436;
 }
 
 .sky-form .checkbox input + i:after {
-  color: #3cc47c;
+  color: #675436;
 }
 
 .sky-form .radio input:checked + i,
 .sky-form .checkbox input:checked + i,
 .sky-form .toggle input:checked + i {
-  border-color: #3cc47c;
+  border-color: #675436;
 }
 
 .sky-form .rating input:checked ~ label {
-  color: #3cc47c;
+  color: #675436;
 }
 
 /** Hover Buttons
@@ -594,7 +611,7 @@ i.ico-hover:hover {
 .hvr-border-fade:hover,
 .hvr-border-fade:focus,
 .hvr-border-fade:active {
-  box-shadow: inset 0 0 0 4px #3cc47c, 0 0 1px transparent;
+  box-shadow: inset 0 0 0 4px #675436, 0 0 1px transparent;
 }
 
 .hvr-fade:hover,
@@ -627,5 +644,5 @@ i.ico-hover:hover {
 .hvr-overline-from-right:before,
 .hvr-underline-reveal:before,
 .hvr-overline-reveal:before {
-  background-color: #3cc47c;
+  background-color: #675436;
 }

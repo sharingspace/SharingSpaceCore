@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 {{-- Page title --}}
-@section('title')
-     {{ trans('general.members.members') }} ::
-@parent
+  @section('title')
+    {{ trans('general.members.members') }} ::
+  @parent
 @stop
 
 
@@ -11,7 +11,7 @@
 
 <div class="container">
 	<div class="row">
-  <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members.members')}}</h1>
+    <h1 class="margin-bottom-0  size-24 text-center">{{trans('general.members.members')}}</h1>
 
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
@@ -28,7 +28,11 @@
   				<tbody>
   					@foreach ($members as $member)
   						<tr>
-                <td class="member_thumb"><img src="{{ $member->gravatar_img() }}"></div></td>
+                <td class="member_thumb">
+                  <a href="{{ route('user.profile', [$member->id]) }}">
+                    <img src="{{ $member->gravatar_img() }}">
+                  </a>
+                </td>
                 <td><a href="{{ route('user.profile', [$member->id]) }}">{{ $member->getDisplayName() }}</a>
 
                 @if ($member->canAdmin($whitelabel_group))
@@ -36,14 +40,16 @@
                 @endif
                 </td>
                 <td>{{$member->location}}</td>
-                <td>{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</td>
+                <td>
+                  <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
+                </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>
   					@endforeach
       		</tbody>
       	</table>
       </div>
- 	 </div> <!-- col-lg-10 -->
+ 	  </div> <!-- col-lg-10 -->
 	</div> <!-- row -->
 </div> <!-- #container -->
 
