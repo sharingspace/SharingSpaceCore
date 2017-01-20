@@ -100,7 +100,7 @@
 			<div class="container">
 
 				<!-- Mobile Menu Button -->
-        @if (Auth::check() || $whitelabel_group->isOpen())
+        @if (Auth::check() || $whitelabel_group->scopeIsPublic())
         <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
           <i class="fa fa-bars"></i>
         </button>
@@ -160,7 +160,7 @@
               </li>
             @endcan
 
-            @if ($whitelabel_group->isOpen())
+            @if ($whitelabel_group->scopeIsPublic())
               <li{!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
               </li>
