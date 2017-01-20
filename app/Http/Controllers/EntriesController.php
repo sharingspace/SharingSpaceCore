@@ -44,7 +44,8 @@ class EntriesController extends Controller
 
             return view('entries.view')->with('entry', $entry)->with('images', $images);
 
-        } else {
+        }
+        else {
           return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -77,7 +78,8 @@ class EntriesController extends Controller
 
         }
         else {
-          redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
+            log::error("ajaxGetEntry: invalid entry Id = ".$entryID);
+            redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
 
@@ -161,7 +163,7 @@ class EntriesController extends Controller
                     return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.rotation_failed')]);
                 }
             } else {
-                Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
+                //Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
                 $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
@@ -276,6 +278,7 @@ class EntriesController extends Controller
                                         ->with('image', $imageName);
         }
         else {
+            log::error("getEdit: invalid entry Id = ".$entryID);
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -343,6 +346,7 @@ class EntriesController extends Controller
             return response()->json(['success'=>true, 'create'=>false, 'entry_id'=>$entry->id,'title'=>$entry->title, 'description'=>$entry->description, 'post_type'=>$entry->post_type, 'qty'=>$entry->qty,'exchange_types' =>$types,'typeIds' => $typeIds, 'tags' => $entry->tags]);
         }
 
+        log::error("postAjaxEdit: invalid entry Id = ".$entryID);
         return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.invalid')]);
     }
 
@@ -409,6 +413,7 @@ class EntriesController extends Controller
             return redirect()->route('entry.view', $entry->id)->with('success', trans('general.entries.messages.save_edits'));
         }
 
+        log::error("postEdit: invalid entry Id = ".$entryID);
         return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 
@@ -437,6 +442,7 @@ class EntriesController extends Controller
                 return response()->json(['success'=>false, 'message'=>trans('general.entries.messages.delete_failed')]);
             }
         }
+        log::error("postAjaxDelete: invalid entry Id = ".$entryID);
         return response()->json(['success'=>false, 'message'=>trans('general.entries.messages.invalid')]);
     }
 
@@ -466,6 +472,8 @@ class EntriesController extends Controller
             }
 
         }
+
+        log::error("postDelete: invalid entry Id = ".$entryID);
         return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 

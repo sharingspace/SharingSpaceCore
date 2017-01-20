@@ -28,7 +28,11 @@
   				<tbody>
   					@foreach ($members as $member)
   						<tr>
-                <td class="member_thumb"><img src="{{ $member->gravatar_img() }}"></div></td>
+                <td class="member_thumb">
+                  <a href="{{ route('user.profile', [$member->id]) }}">
+                    <img src="{{ $member->gravatar_img() }}">
+                  </a>
+                </td>
                 <td><a href="{{ route('user.profile', [$member->id]) }}">{{ $member->getDisplayName() }}</a>
 
                 @if ($member->canAdmin($whitelabel_group))
@@ -36,7 +40,9 @@
                 @endif
                 </td>
                 <td>{{$member->location}}</td>
-                <td>{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</td>
+                <td>
+                  <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
+                </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>
   					@endforeach
