@@ -1,0 +1,13 @@
+/** Purple
+ ******************************************************************/
+
+$primaryColor: #673ab7;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$actionColor: #ABB318;
+$accentColor: #00b0ff;
+$shadeColor: #139AF9;
+$colorName: "Purple";
+
+@import 'scheme.scss';

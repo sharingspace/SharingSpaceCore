@@ -78,7 +78,7 @@
 
           <div class="row margin-bottom-20">
             <div class="col-md-12">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.register') }}</button>
+              <button type="submit" class="btn btn-colored"><i class="fa fa-check"></i> {{ trans('general.nav.register') }}</button>
             </div>
           </div>
 
@@ -283,8 +283,8 @@
 						</div>
 
 						<div class="modal-footer hidden">
-							<button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.cancel') }}</button>
-							<button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> {{ trans('general.register.i_agree') }}</button>
+							<button type="button" class="btn btn-light-colored" data-dismiss="modal">{{ trans('general.cancel') }}</button>
+							<button type="button" class="btn btn-colored" id="terms-agree"><i class="fa fa-check"></i> {{ trans('general.register.i_agree') }}</button>
 
 							<a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left"><i class="fa fa-print"></i><span class="hidden-xs"> {{ trans('general.print') }}</span></a>
 						</div>

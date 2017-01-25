@@ -56,7 +56,7 @@
 
             <div class="row margin-bottom-20">
               <div class="col-md-12">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
+                <button type="submit" class="btn btn-colored"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
               </div>
             </div>
           </fieldset>

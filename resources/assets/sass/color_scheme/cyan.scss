@@ -1,0 +1,13 @@
+/** Cyan
+ ******************************************************************/
+
+$primaryColor: #00bcd4;
+$primaryTextColor: #000;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #000;
+$actionColor: #ABB318;
+$accentColor: #ffa000;
+$shadeColor: #139AF9;
+$colorName: "Cyan";
+
+@import 'scheme.scss';

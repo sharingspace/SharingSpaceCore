@@ -178,7 +178,7 @@
               </li>
               @if ($whitelabel_group->requestCount())
               <li id="numberRequests">
-                <a href="{{ route('join-requests')}}"><i class="fa fa-lg text-info fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
+                <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
               </li>
               @endif
             @endcan

@@ -87,7 +87,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div>
 
 						<div class="col-md-12 form-group">
-							<button class="btn btn-primary pull-right">{{trans('general.user.save_personal_info')}}</button>
+							<button class="btn btn-colored pull-right">{{trans('general.user.save_personal_info')}}</button>
 						</div>
           </form>
 				</div> <!-- /PERSONAL INFO TAB -->
@@ -163,7 +163,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div> <!-- col-md-12 -->
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-primary pull-right">{{trans('general.user.save_socials')}}</button>
+							<button class="btn btn-colored pull-right">{{trans('general.user.save_socials')}}</button>
 						</div>
           </form>
   			</div> <!-- /SOCIAL TAB -->
@@ -206,7 +206,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
   					</div> <!-- row -->
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-primary pull-right">
+  						<button class="btn btn-colored pull-right">
                 {{trans('general.user.save_avatar')}}
               </button>
   					</div>
@@ -233,7 +233,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 						</div>
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-primary pull-right">{{trans('general.user.save_password')}}</button>
+							<button class="btn btn-colored pull-right">{{trans('general.user.save_password')}}</button>
 						</div>
           </form>
 				</div>
@@ -269,7 +269,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div>
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-primary pull-right">{{trans('general.user.save_privacy')}}</button>
+  						<button class="btn btn-colored pull-right">{{trans('general.user.save_privacy')}}</button>
   					</div>
           </form>
 

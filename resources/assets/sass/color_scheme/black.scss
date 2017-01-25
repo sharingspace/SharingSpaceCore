@@ -1,0 +1,14 @@
+/** Black
+ ******************************************************************/
+
+$primaryColor: #202020;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$actionColor: #ABB318;
+$accentColor: #90A4AE;
+$shadeColor: #139AF9;
+
+$colorName: "Black";
+
+@import 'scheme.scss';
