@@ -19,10 +19,6 @@
   /* Safari */
 }
 
-.textColor_Spring {
-  background-color: #ffc107 !important;
-}
-
 .primary {
   color: #ffc107;
 }
@@ -58,18 +54,18 @@ td {
   border-bottom-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-.info-bar {
-  background-color: #139AF9;
-}
-
 .want_square {
   background-color: #95d4ce;
-  border: 2px solid #35817a;
+  border: 1px solid #35817a;
 }
 
 .have_square {
   background-color: #35817a;
-  border: 2px solid #95d4ce;
+}
+
+.have_square,
+.want_square {
+  box-shadow: 1px 1px 1px 1px #e2aa00;
 }
 
 a:active,

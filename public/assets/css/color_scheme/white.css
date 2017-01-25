@@ -1,4 +1,4 @@
-/** Browns
+/** White / Gray
  ******************************************************************/
 
 ::-moz-selection {
@@ -17,10 +17,6 @@
 ::-webkit-selection {
   background: #fff;
   /* Safari */
-}
-
-.textColor_Spring {
-  background-color: #fff !important;
 }
 
 .primary {
@@ -58,18 +54,14 @@ td {
   border-bottom-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-.info-bar {
-  background-color: #139AF9;
-}
-
 .want_square {
-  background-color: #f5f968;
-  border: 2px solid #a3a806;
+  background-color: #d1d1d1;
+  border: 2px solid #787878;
 }
 
 .have_square {
-  background-color: #a3a806;
-  border: 2px solid #f5f968;
+  background-color: #787878;
+  border: 2px solid #d1d1d1;
 }
 
 a:active,
@@ -119,53 +111,53 @@ a .btn:hover {
 
 #share_content a,
 #share_content .btn-default {
-  color: #EBF209 !important;
+  color: #9E9E9E !important;
 }
 
 #share_content a:hover,
 #share_content .btn-default:hover {
-  color: #140df6 !important;
+  color: #616161 !important;
 }
 
 #share_content .btn.focus,
 #share_content .btn:focus,
 #share_content .btn:hover {
   background-color: #fff !important;
-  color: #EBF209 !important;
+  color: #9E9E9E !important;
   text-decoration: none;
 }
 
 #share_content .btn-colored {
-  background-color: #EBF209 !important;
-  border-color: #787c05;
+  background-color: #9E9E9E !important;
+  border-color: #616161;
   color: #fff !important;
 }
 
 #share_content .btn-colored:hover {
   background-color: #fff !important;
-  color: #EBF209 !important;
-  border: 1px solid #787c05;
+  color: #9E9E9E !important;
+  border: 1px solid #616161;
   text-decoration: none;
 }
 
 #share_content .btn-light-colored {
-  background-color: #f2f840;
-  border-color: #EBF209;
+  background-color: #bdbdbd;
+  border-color: #9E9E9E;
   color: #fff !important;
 }
 
 #share_content .btn-dark-colored {
-  background-color: #b2b707;
-  border-color: #787c05;
+  background-color: #7f7f7f;
+  border-color: #616161;
   color: #fff !important;
 }
 
 #share_content #entry_view .close {
-  color: #EBF209;
+  color: #9E9E9E;
 }
 
 #share_content .fa-info-circle {
-  color: #EBF209;
+  color: #9E9E9E;
 }
 
 #share_content .pagination > .active > a,
@@ -174,7 +166,7 @@ a .btn:hover {
 #share_content .pagination > .active > span,
 #share_content .pagination > .active > span:focus,
 #share_content .pagination > .active > span:hover {
-  background-color: #EBF209;
-  border-color: #a3a806;
+  background-color: #9E9E9E;
+  border-color: #787878;
   color: #fff !important;
 }

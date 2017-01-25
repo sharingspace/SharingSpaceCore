@@ -5,9 +5,7 @@ $primaryColor: #675436;
 $primaryTextColor: #fff;
 $darkPrimaryColor: darken($primaryColor, 7%);
 $darkPrimaryTextColor: #fff;
-$actionColor: #21C20B;
-$accentColor: #689f38;//#A48A3A;
-$shadeColor: #A4713A;
-$colorName: "Brown";
+$accentColor: #689f38;
+$coloredEntryButton: 0;
 
 @import 'scheme.scss';

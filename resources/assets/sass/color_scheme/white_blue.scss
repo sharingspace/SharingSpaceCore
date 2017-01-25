@@ -1,11 +1,11 @@
-/** Spring
+/** White / Gray
  ******************************************************************/
 
-$primaryColor: #57B318;
+$primaryColor: #fff;
 $primaryTextColor: #000;
 $darkPrimaryColor: darken($primaryColor, 7%);
 $darkPrimaryTextColor: #000;
-$accentColor: #827717;
-$coloredEntryButton: 0;
+$accentColor: #64B5F6;
+$coloredEntryButton: 1;
 
 @import 'scheme.scss';
