@@ -47,7 +47,7 @@
 
           @if($entry->qty)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong class="primaryText">{{ trans('general.entries.quantity') }}:</strong> {{$entry->qty}}
+            <strong class="primaryText">{{ trans('general.entries.qty') }}:</strong> {{$entry->qty}}
           </div>
           @endif
 
@@ -68,6 +68,15 @@
             <strong class="primaryText">{{ trans('general.keywords') }}:</strong> {{ $entry->tags }}
           </div>
           @endif
+
+          <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
+            <strong class="primaryText">{{ trans('general.entries.visibility') }}:</strong>
+            @if($entry->visible)
+              {{ trans('general.entries.visible') }}
+            @else
+              {{ trans('general.entries.not_visible') }}
+            @endif          
+          </div>
 
           <!-- if user is admin or owner -->
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
