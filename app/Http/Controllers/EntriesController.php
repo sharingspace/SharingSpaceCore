@@ -402,9 +402,10 @@ class EntriesController extends Controller
             else if(Input::get('deleteImage')) {
                 \App\Entry::deleteImage($entry->id, $user->id);
                 \App\Entry::deleteImageFromDB($entry->id, $user->id);
-            } else if (Input::get('rotation')) {
+            }
+            else if (Input::get('rotation')) {
               if(!\App\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+                return redirect()->route('home')->with('error', trans('general.entries.messages.save_failed'));
               }
             }
 
