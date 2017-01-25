@@ -4336,6 +4336,7 @@ body.boxed #topBar.dark ul.top-links > li {
 #topBar ul.top-links {
   float: left;
   margin: 0;
+  padding-left: 3px;
 }
 
 #topBar ul.top-links > li {
@@ -9498,7 +9499,7 @@ footer.sticky {
 
 .navbar-brand {
   font-size: 26px;
-  padding: 5px 5px;
+  padding: 5px 5px 5px 0;
 }
 
 .wl_usercover {

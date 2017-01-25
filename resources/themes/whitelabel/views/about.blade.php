@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
   @section('title')
-    {{ trans('general.members.members') }} ::
+    {{ trans('general.about') }} ::
   @parent
 @stop
 
