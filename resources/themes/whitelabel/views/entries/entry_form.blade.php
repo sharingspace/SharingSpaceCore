@@ -188,7 +188,7 @@
                     @else
                       {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
                     @endif
-                    <i></i> {{ trans('general.entries.visible')}}
+                    <i></i> {{ trans('general.entries.not_visible')}}
                   </label>
                 </div> <!-- col 10 -->
 

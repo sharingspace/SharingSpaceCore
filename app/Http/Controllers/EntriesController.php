@@ -535,7 +535,7 @@ class EntriesController extends Controller
             $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
         }
         else {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('visible', 1)->NotCompleted();
         }
 
         if (Input::has('search')) {
