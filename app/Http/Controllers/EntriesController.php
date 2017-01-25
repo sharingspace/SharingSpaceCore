@@ -583,9 +583,11 @@ class EntriesController extends Controller
 
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
-                $actions = '<button class="btn btn-light-colored btn-sm"><a href="'.route('entry.edit.form', $entry->id).'">
-                                <i class="fa fa-pencil" style="color:white;"></i></a>
-                            </button>
+                $actions = '<a href="'.route('entry.edit.form', $entry->id).'">
+                                <button class="btn btn-light-colored btn-sm">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </a>
                             <button class="btn btn-dark-colored btn-sm" id="delete_entry_'.$entry->id.'">
                                 <i class="fa fa-trash"></i>
                             </button>';
