@@ -32,6 +32,11 @@ elixir(function(mix) {
     mix.sass('color_scheme/darkGray.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/black.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/white.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_blue.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_gray.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_green.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_orange.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_pink.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/black_white.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/green.scss','public/assets/css/color_scheme');
 

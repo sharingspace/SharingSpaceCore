@@ -5,9 +5,7 @@ $primaryColor: #707070;
 $primaryTextColor: #fff;
 $darkPrimaryTextColor: #fff;
 $darkPrimaryColor: darken($primaryColor, 7%);
-$actionColor: #ABB318;
 $accentColor: #827717;
-$shadeColor: #139AF9;
-$colorName: "Spring";
+$coloredEntryButton: 0;
 
 @import 'scheme.scss';

@@ -1,13 +1,11 @@
-/** Browns
+/** White / Pink
  ******************************************************************/
 
 $primaryColor: #fff;
 $primaryTextColor: #000;
 $darkPrimaryColor: darken($primaryColor, 7%);
 $darkPrimaryTextColor: #000;
-$actionColor: #ABB318;
-$accentColor: #EBF209;
-$shadeColor: #139AF9;
-$colorName: "Spring";
+$accentColor: #FF4081;
+$coloredEntryButton: 1;
 
 @import 'scheme.scss';
