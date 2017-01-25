@@ -95,8 +95,12 @@ a .btn:hover {
 }
 
 #topNav li > a {
-  color: #000 !important;
+  color: #fff !important;
   opacity: 0.6;
+}
+
+#topNav li > a:hover {
+  opacity: 1;
 }
 
 #topNav li.active > a {
@@ -104,8 +108,13 @@ a .btn:hover {
 }
 
 #topNav button {
-  border-color: #000 !important;
-  color: #000 !important;
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+#topNav .add_entry_button a:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  opacity: 1;
 }
 
 #share_content a,

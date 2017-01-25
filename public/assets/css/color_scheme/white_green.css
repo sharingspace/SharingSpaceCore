@@ -99,6 +99,10 @@ a .btn:hover {
   opacity: 0.6;
 }
 
+#topNav li > a:hover {
+  opacity: 1;
+}
+
 #topNav li.active > a {
   opacity: 1;
 }
@@ -107,6 +111,11 @@ a .btn:hover {
   background-color: #3d8b40;
   color: #fff !important;
   border-color: #275a29 !important;
+}
+
+#topNav .add_entry_button a:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  opacity: 1;
 }
 
 #share_content a,
