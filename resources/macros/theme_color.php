@@ -6,12 +6,22 @@
 Form::macro('theme_color', function ($name = "theme_color", $selected = null) {
 
     $types = array(
-    'fresh' => trans('general.color.fresh'),
-    'starryNight' => trans('general.color.starry_night'),
-    'future' => trans('general.color.future'),
-    'muted' => trans('general.color.muted'),
-    'spring' => trans('general.color.spring'),
-    'organic' => trans('general.color.organic'),
+    'oceanBlue' => 'Ocean blue',
+    'darkBlue' => 'Dark blue',
+    'lightBlue' => 'Light blue',
+    'orange' => 'Orange',
+    'blue' => 'Blue',
+    'purple' => 'Purple',
+    'green' => 'Green',
+    'brown' => 'Brown',
+    'cyan' => 'Cyan',
+    'amber' => 'Amber',
+    'gray' => 'Gray',
+    'lime' => 'Lime',
+    'darkGray' => 'Dark gray',
+    'black' => 'Black',
+    'white' => 'White',
+    'black_white' => 'Black and white'
     );
 
     $select = '<select required name="'.$name.'" class="select" style="width: 100%;">';

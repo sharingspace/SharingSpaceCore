@@ -1,0 +1,14 @@
+/** Dark blue
+ ******************************************************************/
+
+$primaryColor: #303C57;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$actionColor: #5B4066;
+$accentColor: #ff4081;
+$shadeColor: #C1E6DE;
+
+$colorName: "darkBlue";
+
+@import 'scheme.scss';

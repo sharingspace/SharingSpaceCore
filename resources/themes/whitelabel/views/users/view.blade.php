@@ -85,7 +85,7 @@
                       <span>0/100</span> Words
                     </div>
 
-                    <button type="submit" class="btn btn-primary pull-right">{{trans('general.email.submit')}}</button>
+                    <button type="submit" class="btn btn-colored pull-right">{{trans('general.email.submit')}}</button>
                   </div>
                 </form>
                 @else

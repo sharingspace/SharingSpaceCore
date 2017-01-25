@@ -18,12 +18,22 @@ elixir(function(mix) {
 });
 
 elixir(function(mix) {
-    mix.sass('color_scheme/spring.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/organic.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/future.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/muted.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/starryNight.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/fresh.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/darkBlue.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/oceanBlue.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/lightBlue.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/orange.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/blue.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/purple.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/brown.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/cyan.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/amber.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/gray.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/lime.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/darkGray.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/black.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/white.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/black_white.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/green.scss','public/assets/css/color_scheme');
 
     mix.codeception();
 });

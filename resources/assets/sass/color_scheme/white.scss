@@ -1,0 +1,13 @@
+/** Browns
+ ******************************************************************/
+
+$primaryColor: #fff;
+$primaryTextColor: #000;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #000;
+$actionColor: #ABB318;
+$accentColor: #EBF209;
+$shadeColor: #139AF9;
+$colorName: "Spring";
+
+@import 'scheme.scss';

@@ -1,0 +1,180 @@
+/** Spring
+ ******************************************************************/
+
+::-moz-selection {
+  background: #57B318;
+}
+
+::selection {
+  background: #57B318;
+}
+
+::-moz-selection {
+  background: #57B318;
+  /* Firefox */
+}
+
+::-webkit-selection {
+  background: #57B318;
+  /* Safari */
+}
+
+.textColor_Spring {
+  background-color: #57B318 !important;
+}
+
+.primary {
+  color: #57B318;
+}
+
+.primaryText {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.light-primary {
+  color: #81e53d;
+}
+
+.darkPrimaryColor {
+  color: #32670e;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+p,
+td {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.bootstrap-table .table {
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.info-bar {
+  background-color: #139AF9;
+}
+
+.want_square {
+  background-color: #d9c626;
+  border: 2px solid #413c0c;
+}
+
+.have_square {
+  background-color: #413c0c;
+  border: 2px solid #d9c626;
+}
+
+a:active,
+a:focus,
+a:hover,
+a .btn.focus,
+a .btn:focus,
+a .btn:hover {
+  color: #b6f08e;
+  text-decoration: none;
+}
+
+#topBar {
+  background-color: #489414 !important;
+}
+
+#topBar ul.dropdown-menu {
+  /* submenu border top color */
+  border-top-color: #57B318;
+}
+
+#topBar ul.top-links > li > a {
+  color: #000;
+}
+
+#topBar ul.top-links > .dropdown.languages > a {
+  border: solid #000 1px;
+}
+
+#topNav {
+  background-color: #57B318 !important;
+}
+
+#topNav li > a {
+  color: #000 !important;
+  opacity: 0.6;
+}
+
+#topNav li.active > a {
+  opacity: 1;
+}
+
+#topNav button {
+  border-color: #000 !important;
+  color: #000 !important;
+}
+
+#share_content a,
+#share_content .btn-default {
+  color: #827717 !important;
+}
+
+#share_content a:hover,
+#share_content .btn-default:hover {
+  color: #7d88e8 !important;
+}
+
+#share_content .btn.focus,
+#share_content .btn:focus,
+#share_content .btn:hover {
+  background-color: #fff !important;
+  color: #827717 !important;
+  text-decoration: none;
+}
+
+#share_content .btn-colored {
+  background-color: #827717 !important;
+  border-color: #1a1805;
+  color: #fff !important;
+}
+
+#share_content .btn-colored:hover {
+  background-color: #fff !important;
+  color: #827717 !important;
+  border: 1px solid #1a1805;
+  text-decoration: none;
+}
+
+#share_content .btn-light-colored {
+  background-color: #b6a720;
+  border-color: #827717;
+  color: #fff !important;
+}
+
+#share_content .btn-dark-colored {
+  background-color: #4e470e;
+  border-color: #1a1805;
+  color: #fff !important;
+}
+
+#share_content #entry_view .close {
+  color: #827717;
+}
+
+#share_content .fa-info-circle {
+  color: #827717;
+}
+
+#share_content .pagination > .active > a,
+#share_content .pagination > .active > a:focus,
+#share_content .pagination > .active > a:hover,
+#share_content .pagination > .active > span,
+#share_content .pagination > .active > span:focus,
+#share_content .pagination > .active > span:hover {
+  background-color: #827717;
+  border-color: #413c0c;
+  color: #fff !important;
+}
