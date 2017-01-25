@@ -2622,7 +2622,6 @@ section.dark.page-header ul.page-options a {
   right: 0;
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.97);
-  border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.1) !important;
   transition: all .800s;
 }
@@ -4385,8 +4384,6 @@ body.boxed #topBar.dark ul.top-links > li {
 
 #topBar ul.top-links > li > a > i {
   margin-right: 5px;
-  filter: alpha(opacity=30);
-  opacity: 0.3;
 }
 
 #topBar ul.top-links li.text-welcome {
@@ -10344,13 +10341,117 @@ Quick add
  * 
  **/
 
-#entry_view img {
+#entry_view {
+  /* The Modal (background) */
+  /* Modal Content (image) */
+  /* Add Animation */
+  /* The Close Button */
+  /* 100% Image Width on Smaller Screens */
+}
+
+#entry_view #image_box_container img {
   width: 100%;
   max-width: 400px;
   height: auto;
   max-height: 100%;
   display: block;
   text-align: center;
+}
+
+#entry_view #entryImage {
+  cursor: zoom-in;
+  transition: 0.3s;
+}
+
+#entry_view #entryImage:hover {
+  opacity: 0.7;
+}
+
+#entry_view .imageModal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  margin-top: 84px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/ opacity */
+}
+
+#entry_view .modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  border: none;
+  background-color: transparent !important;
+}
+
+#entry_view .modal-content {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  -webkit-animation-name: zoom;
+  animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+#entry_view .close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  font-size: 45px;
+  font-weight: bold;
+  transition: 0.3s;
+  opacity: 1;
+}
+
+#entry_view .close:hover,
+#entry_view .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+  #entry_view .modal-content {
+    width: 100%;
+  }
 }
 
 #entry_view p,
