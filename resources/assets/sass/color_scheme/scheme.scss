@@ -63,19 +63,12 @@ p, td {
 
 .have_square {
   background-color: darken($accentColor, 15%);
-  //border: 1px solid lighten($accentColor, 25%);
-}
-
-.have_square, .want_square {
-  -moz-box-shadow:    1px 1px 1px 1px $darkPrimaryColor;
-  -webkit-box-shadow: 1px 1px 1px 1px $darkPrimaryColor;
-  box-shadow:         1px 1px 1px 1px $darkPrimaryColor;
 }
 
 a {
     &:active, &:focus, &:hover, .btn.focus, .btn:focus, .btn:hover  {
-        color: lighten($primaryColor, 35%);
-        text-decoration: none;
+      color: lighten($primaryColor, 35%);
+      text-decoration: none;
     }
 }
 
@@ -83,7 +76,7 @@ a {
     background-color: $darkPrimaryColor !important;
     ul.dropdown-menu { /* submenu border top color */
     border-top-color: $primaryColor;
-    }
+  }
 }
 
 #topBar ul.top-links {

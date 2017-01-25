@@ -63,11 +63,6 @@ td {
   background-color: #f30053;
 }
 
-.have_square,
-.want_square {
-  box-shadow: 1px 1px 1px 1px #ededed;
-}
-
 a:active,
 a:focus,
 a:hover,
