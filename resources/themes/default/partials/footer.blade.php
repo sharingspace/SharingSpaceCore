@@ -18,8 +18,8 @@
                 <div class="col-md-6 col-sm-9 col-xs-12 center-xs margin-y-10">
                   <ul class="margin-top-1 list-inline mobile-block pull-right-sm">
                     <li><a href="/about">{{ trans('general.about') }}</a></li>
-                    <!-- <li><a href="http://blog.massmosaic.com">{{ trans('footer.blog') }}</a></li>
-                    <li><a href="/coop">{{ trans('footer.coop') }}</a></li>  -->
+                    <!-- <li><a href="http://blog.massmosaic.com">{{ trans('footer.blog') }}</a></li>  -->
+                    <li><a href="/coop">{{ trans('footer.coop') }}</a></li>
                     <li><a href="https://anyshare.freshdesk.com/support/home">{{ trans('footer.support') }}</a></li>
                     <li><a href="/terms">{{ trans('general.terms') }}</a></li>
                     <li><a href="/privacy">{{ trans('general.privacy') }}</a></li>
