@@ -8530,9 +8530,9 @@ $color-green: #9AE14F;
   .imageModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 1001; /* Sit on top, even over top nav */
     padding-top: 100px; /* Location of the box */
-    margin-top: 84px;
+    margin-top: 0;
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -8540,6 +8540,9 @@ $color-green: #9AE14F;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    img {
+      max-height: 600px;
+    }
   }
 
   /* Modal Content (image) */
