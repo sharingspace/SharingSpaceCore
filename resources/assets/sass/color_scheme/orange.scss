@@ -1,0 +1,11 @@
+/** Orange
+ ******************************************************************/
+
+$primaryColor: #ff9800;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$accentColor: #e57373;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';

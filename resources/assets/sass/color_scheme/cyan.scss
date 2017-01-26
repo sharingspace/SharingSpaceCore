@@ -1,0 +1,11 @@
+/** Cyan
+ ******************************************************************/
+
+$primaryColor: #00bcd4;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$accentColor: #ffa000;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';

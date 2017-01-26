@@ -70,7 +70,7 @@ Your request to become a member of this Share is still pending'
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                <button class="btn btn-primary">{{ trans('general.user.request_access.submit')}}</button>
+                <button class="btn btn-colored">{{ trans('general.user.request_access.submit')}}</button>
               </div>
             </div>
           </form>

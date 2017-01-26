@@ -1,0 +1,11 @@
+/** ocean Blue
+ ******************************************************************/
+
+$primaryColor: #052233;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$accentColor: #00796b;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';

@@ -1,0 +1,188 @@
+/** ocean Blue
+ ******************************************************************/
+
+::-moz-selection {
+  background: #052233;
+}
+
+::selection {
+  background: #052233;
+}
+
+::-moz-selection {
+  background: #052233;
+  /* Firefox */
+}
+
+::-webkit-selection {
+  background: #052233;
+  /* Safari */
+}
+
+.primary {
+  color: #052233;
+}
+
+.primaryText {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.light-primary {
+  color: #0d5782;
+}
+
+.darkPrimaryColor {
+  color: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+p,
+td {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.bootstrap-table .table {
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.want_square,
+.have_square {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  display: block;
+}
+
+.want_square {
+  background-color: #00dfc5;
+  border: 1px solid #002d27;
+}
+
+.have_square {
+  background-color: #002d27;
+}
+
+a:active,
+a:focus,
+a:hover,
+a .btn.focus,
+a .btn:focus,
+a .btn:hover {
+  color: #158ed6;
+  text-decoration: none;
+}
+
+#topBar {
+  background-color: #020c12 !important;
+}
+
+#topBar ul.dropdown-menu {
+  /* submenu border top color */
+  border-top-color: #052233;
+}
+
+#topBar ul.top-links > li > a {
+  color: #fff;
+}
+
+#topBar ul.top-links > .dropdown.languages > a {
+  border: solid #fff 1px;
+}
+
+#topNav {
+  background-color: #052233 !important;
+}
+
+#topNav li > a {
+  color: #fff !important;
+  opacity: 0.6;
+}
+
+#topNav li > a:hover {
+  opacity: 1;
+}
+
+#topNav li.active > a {
+  opacity: 1;
+}
+
+#topNav button {
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+#topNav .add_entry_button a:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  opacity: 1;
+}
+
+#share_content a,
+#share_content .btn-default {
+  color: #00796b !important;
+}
+
+#share_content a:hover,
+#share_content .btn-default:hover {
+  color: #ff8694 !important;
+}
+
+#share_content .btn.focus,
+#share_content .btn:focus,
+#share_content .btn:hover {
+  background-color: #fff !important;
+  color: #00796b !important;
+  text-decoration: none;
+}
+
+#share_content .btn-colored {
+  background-color: #00796b !important;
+  border-color: black;
+  color: #fff !important;
+}
+
+#share_content .btn-colored:hover {
+  background-color: #fff !important;
+  color: #00796b !important;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+#share_content .btn-light-colored {
+  background-color: #00b6a1;
+  border-color: #00796b;
+  color: #fff !important;
+}
+
+#share_content .btn-dark-colored {
+  background-color: #003c35;
+  border-color: black;
+  color: #fff !important;
+}
+
+#share_content #entry_view .close {
+  color: #00796b;
+}
+
+#share_content .fa-info-circle {
+  color: #00796b;
+}
+
+#share_content .pagination > .active > a,
+#share_content .pagination > .active > a:focus,
+#share_content .pagination > .active > a:hover,
+#share_content .pagination > .active > span,
+#share_content .pagination > .active > span:focus,
+#share_content .pagination > .active > span:hover {
+  background-color: #00796b;
+  border-color: #002d27;
+  color: #fff !important;
+}

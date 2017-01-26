@@ -123,7 +123,7 @@
         @if (Auth::check() && Auth::user()->canSeeCommunity($whitelabel_group))
         <div class="navbar-header pull-right">
           <ul class="nav navbar-nav">
-            <li class="add_entry_button">
+            <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
               <a href="{{ route('entry.create.form') }}">
                 <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
               </a>
@@ -152,7 +152,7 @@
                   {!! (Route::is('home') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
-              <li{!! (Route::is('members') ? ' class="active"' : '') !!}>
+              <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
                 <a href="{{ route('members') }}">
                   {{ trans('general.our_members') }}
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
@@ -161,7 +161,7 @@
             @endcan
 
             @if ($whitelabel_group->scopeIsPublic())
-              <li{!! (Route::is('about') ? ' class="active"' : '') !!}>
+              <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
               </li>
             @elseif (Auth::check())
@@ -173,12 +173,12 @@
             @endif
 
             @can('update-community', $whitelabel_group)
-              <li>
+              <li{!! (Route::is('community.edit.form') ? ' class="active"' : '') !!}>
                 <a href="{{ route('community.edit.form')}}"><i class="fa fa-lg fa-cog"></i></a>
               </li>
               @if ($whitelabel_group->requestCount())
-              <li id="numberRequests">
-                <a href="{{ route('join-requests')}}"><i class="fa fa-lg text-info fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
+              <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
+                <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
               </li>
               @endif
             @endcan

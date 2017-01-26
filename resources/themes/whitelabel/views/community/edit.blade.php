@@ -55,7 +55,7 @@
                   <!-- Type -->
                   <div class="form-group">
                     <label for="group_type">{{trans('general.community.type')}} *
-                      <button type="button" class="" data-toggle="modal" data-target="#privacyLevelModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
+                      <button type="button" class="" data-toggle="modal" data-target="#privacyLevelModal"><i class='fa fa-info-circle'></i></button>
                     </label>
                     {!! Form::community_types('group_type', Input::old('group_type', $community->group_type)) !!}
                     {!! $errors->first('group_type', '<span class="help-block">:message</span>') !!}
@@ -64,7 +64,7 @@
                   <!-- Description -->
                   <div class="form-group {{ $errors->first('about', 'has-error') }}">
                     <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a target="_blank" href="
-https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )
+https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i class='fa fa-info-circle'></i></a> )
                       <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="{{trans('general.community.detailed_description')}}">{{ Input::old('about', $community->about) }}</textarea>
                     </label>
                   </div> <!-- Description -->
@@ -233,7 +233,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
               <fieldset class="nomargin">
                 <legend>
                   {{ trans('general.community.slackslash_integration')}}
-                  <button type="button" class="" data-toggle="modal" data-target="#slackbotModal"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></button>
+                  <button type="button" class="" data-toggle="modal" data-target="#slackbotModal"><i class='fa fa-info-circle'></i></button>
                 </legend>
 
 
@@ -277,7 +277,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
           </div> <!-- tab-content -->
 
           <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-            <button class="btn btn-primary">{{ trans('general.community.save') }}</button>
+            <button class="btn btn-colored">{{ trans('general.community.save') }}</button>
           </div>
         </form>
       </div> <!-- col-10 -->

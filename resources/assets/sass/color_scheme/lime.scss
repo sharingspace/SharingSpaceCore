@@ -1,0 +1,11 @@
+/** Browns
+ ******************************************************************/
+
+$primaryColor: #cddc39;
+$primaryTextColor: #000;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #000;
+$accentColor: #8d6e63;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';

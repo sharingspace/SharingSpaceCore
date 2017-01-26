@@ -402,9 +402,10 @@ class EntriesController extends Controller
             else if(Input::get('deleteImage')) {
                 \App\Entry::deleteImage($entry->id, $user->id);
                 \App\Entry::deleteImageFromDB($entry->id, $user->id);
-            } else if (Input::get('rotation')) {
+            }
+            else if (Input::get('rotation')) {
               if(!\App\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+                return redirect()->route('home')->with('error', trans('general.entries.messages.save_failed'));
               }
             }
 
@@ -534,7 +535,7 @@ class EntriesController extends Controller
             $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
         }
         else {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('visible', 1)->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -582,9 +583,11 @@ class EntriesController extends Controller
 
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {
-                $actions = '<button class="btn btn-light-colored btn-sm"><a href="'.route('entry.edit.form', $entry->id).'">
-                                <i class="fa fa-pencil" style="color:white;"></i></a>
-                            </button>
+                $actions = '<a href="'.route('entry.edit.form', $entry->id).'">
+                                <button class="btn btn-light-colored btn-sm">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </a>
                             <button class="btn btn-dark-colored btn-sm" id="delete_entry_'.$entry->id.'">
                                 <i class="fa fa-trash"></i>
                             </button>';

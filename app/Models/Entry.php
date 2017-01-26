@@ -59,8 +59,8 @@ class Entry extends Model
     public static $uploadableImgs = [
       'entries' =>
         [
-          'height' => '250',
-          'width' => '250',
+          'height' => '600',
+          'width' => '600',
         ],
     ];
 

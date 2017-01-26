@@ -145,7 +145,7 @@
                   <label class="input">
                     ({{trans('general.markdown')}}
                     <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown">
-                      <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
+                      <i class='fa fa-info-circle'></i>
                     </a> )                    
                     @if(isset($entry))
                       <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
@@ -188,7 +188,7 @@
                     @else
                       {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
                     @endif
-                    <i></i> {{ trans('general.entries.visible')}}
+                    <i></i> {{ trans('general.entries.not_visible')}}
                   </label>
                 </div> <!-- col 10 -->
 

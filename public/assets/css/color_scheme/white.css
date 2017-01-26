@@ -1,0 +1,172 @@
+/** White / Gray
+ ******************************************************************/
+
+::-moz-selection {
+  background: #fff;
+}
+
+::selection {
+  background: #fff;
+}
+
+::-moz-selection {
+  background: #fff;
+  /* Firefox */
+}
+
+::-webkit-selection {
+  background: #fff;
+  /* Safari */
+}
+
+.primary {
+  color: #fff;
+}
+
+.primaryText {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.light-primary {
+  color: white;
+}
+
+.darkPrimaryColor {
+  color: #d4d4d4;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+p,
+td {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.bootstrap-table .table {
+  border-bottom-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.want_square {
+  background-color: #d1d1d1;
+  border: 2px solid #787878;
+}
+
+.have_square {
+  background-color: #787878;
+  border: 2px solid #d1d1d1;
+}
+
+a:active,
+a:focus,
+a:hover,
+a .btn.focus,
+a .btn:focus,
+a .btn:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#topBar {
+  background-color: #ededed !important;
+}
+
+#topBar ul.dropdown-menu {
+  /* submenu border top color */
+  border-top-color: #fff;
+}
+
+#topBar ul.top-links > li > a {
+  color: #000;
+}
+
+#topBar ul.top-links > .dropdown.languages > a {
+  border: solid #000 1px;
+}
+
+#topNav {
+  background-color: #fff !important;
+}
+
+#topNav li > a {
+  color: #000 !important;
+  opacity: 0.6;
+}
+
+#topNav li.active > a {
+  opacity: 1;
+}
+
+#topNav button {
+  border-color: #000 !important;
+  color: #000 !important;
+}
+
+#share_content a,
+#share_content .btn-default {
+  color: #9E9E9E !important;
+}
+
+#share_content a:hover,
+#share_content .btn-default:hover {
+  color: #616161 !important;
+}
+
+#share_content .btn.focus,
+#share_content .btn:focus,
+#share_content .btn:hover {
+  background-color: #fff !important;
+  color: #9E9E9E !important;
+  text-decoration: none;
+}
+
+#share_content .btn-colored {
+  background-color: #9E9E9E !important;
+  border-color: #616161;
+  color: #fff !important;
+}
+
+#share_content .btn-colored:hover {
+  background-color: #fff !important;
+  color: #9E9E9E !important;
+  border: 1px solid #616161;
+  text-decoration: none;
+}
+
+#share_content .btn-light-colored {
+  background-color: #bdbdbd;
+  border-color: #9E9E9E;
+  color: #fff !important;
+}
+
+#share_content .btn-dark-colored {
+  background-color: #7f7f7f;
+  border-color: #616161;
+  color: #fff !important;
+}
+
+#share_content #entry_view .close {
+  color: #9E9E9E;
+}
+
+#share_content .fa-info-circle {
+  color: #9E9E9E;
+}
+
+#share_content .pagination > .active > a,
+#share_content .pagination > .active > a:focus,
+#share_content .pagination > .active > a:hover,
+#share_content .pagination > .active > span,
+#share_content .pagination > .active > span:focus,
+#share_content .pagination > .active > span:hover {
+  background-color: #9E9E9E;
+  border-color: #787878;
+  color: #fff !important;
+}

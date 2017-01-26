@@ -1,0 +1,11 @@
+/** White / Gray
+ ******************************************************************/
+
+$primaryColor: #fff;
+$primaryTextColor: #000;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #000;
+$accentColor: #F9A825;
+$coloredEntryButton: 1;
+
+@import 'scheme.scss';

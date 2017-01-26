@@ -1,0 +1,11 @@
+/** Greens
+ ******************************************************************/
+
+$primaryColor: #edf8fb;
+$primaryTextColor: #000;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #000;
+$accentColor: #66c2a4;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';

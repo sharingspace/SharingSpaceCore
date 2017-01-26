@@ -1,0 +1,11 @@
+/** Dark blue
+ ******************************************************************/
+
+$primaryColor: #303C57;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$accentColor: #ff4081;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';

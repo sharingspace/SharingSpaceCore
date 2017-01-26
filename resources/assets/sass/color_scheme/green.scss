@@ -1,0 +1,11 @@
+/** Spring
+ ******************************************************************/
+
+$primaryColor: #57B318;
+$primaryTextColor: #000;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #000;
+$accentColor: #827717;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';
