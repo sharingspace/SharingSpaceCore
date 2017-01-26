@@ -9604,6 +9604,60 @@ section#about p {
   line-height: 34px;
 }
 
+section#case_studies {
+  background-color: #262626;
+}
+
+section#case_studies h2,
+section#case_studies p {
+  color: white;
+}
+
+section#case_studies .case_study {
+  position: relative;
+}
+
+section#case_studies .case_study h3 {
+  position: absolute;
+  top: 31%;
+  text-transform: capitalize;
+  color: white !important;
+  width: 100%;
+  font-size: 22px;
+}
+
+section#case_studies img {
+  border: white solid 2px;
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+
+#caseStudy1 .modal-dialog,
+#caseStudy2 .modal-dialog,
+#caseStudy3 .modal-dialog {
+  width: 450px;
+}
+
+#caseStudy1 .modal-dialog .modal-body,
+#caseStudy2 .modal-dialog .modal-body,
+#caseStudy3 .modal-dialog .modal-body {
+  background-color: #262626;
+}
+
+#caseStudy1 .modal-dialog img,
+#caseStudy2 .modal-dialog img,
+#caseStudy3 .modal-dialog img {
+  margin: 0 auto;
+  display: block;
+}
+
+#caseStudy1 .modal-dialog p,
+#caseStudy2 .modal-dialog p,
+#caseStudy3 .modal-dialog p {
+  margin-top: 20px;
+  color: white;
+}
+
 .callout h4 {
   font-size: 18px;
 }
