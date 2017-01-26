@@ -93,6 +93,9 @@ a {
   li > a {
     color: $primaryTextColor !important;
     opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
   }
   li.active > a {
     opacity: 1;
@@ -107,6 +110,10 @@ a {
       border-color: $primaryTextColor !important;
       color: $primaryTextColor !important;
     }
+  }
+  .add_entry_button a:hover {
+    background-color: rgba(0,0,0,0.03);
+    opacity: 1;
   }
 }
 
