@@ -7771,6 +7771,44 @@ section {
 			line-height:34px;
 		}
 	}
+  &#case_studies {
+    background-color: #262626;
+    h2, p {
+      color: white;
+    }
+    .case_study {
+      position: relative;
+      h3 {
+        position: absolute;
+        top: 31%;
+        text-transform: capitalize;
+        color: white !important;
+        width: 100%;
+        font-size: 22px;
+      }
+    }
+    img {
+      border: white solid 2px;
+      opacity: 0.4;
+      margin-bottom: 20px;
+    }
+  }
+}
+#caseStudy1, #caseStudy2, #caseStudy3 {
+  .modal-dialog {
+    width: 450px;
+    .modal-body {
+      background-color: #262626;
+    }
+    img {
+      margin: 0 auto;
+      display: block;
+    }
+    p {
+      margin-top: 20px;
+      color: white;
+    }
+  }
 }
 
 .callout {
@@ -7782,7 +7820,7 @@ section {
 		}
 	}
 	.btn {
-    margin-top:10px!important;
+    margin-top: 10px !important;
 	}
 }
 
