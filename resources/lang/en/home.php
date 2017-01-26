@@ -27,7 +27,7 @@ return [
     'case_studies' => 'Case Studies',
     'case_study_title_1' => 'a crowdsourcing city',
     'case_study_title_2' => 'local exchange meetups',
-    'case_study_title_3' => 'scaling co-housing',
+    'case_study_title_3' => 'a cooperative movement',
     'case_study_desc_1' => 'This experimental construction project uses a Share to inventory the needs and resources of its residents.',
     'case_study_desc_2' => 'This Czech town uses a Share to include extra items at their community swap events.',
     'case_study_desc_3' => 'The FairShares Association uses a Share to organize many people looking to use their type of Co-op!',
