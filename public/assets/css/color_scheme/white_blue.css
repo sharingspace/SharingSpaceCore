@@ -54,6 +54,14 @@ td {
   border-bottom-color: rgba(0, 0, 0, 0.12) !important;
 }
 
+.want_square,
+.have_square {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  display: block;
+}
+
 .want_square {
   background-color: #c4e3fc;
   border: 1px solid #1c92f2;

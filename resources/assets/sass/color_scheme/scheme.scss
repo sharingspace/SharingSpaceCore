@@ -56,6 +56,13 @@ p, td {
   border-bottom-color: $dividerColor !important;
 }
 
+.want_square, .have_square {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  display: block;
+}
+
 .want_square {
   background-color: lighten($accentColor, 20%);
   border: 1px solid darken($accentColor, 15%);
