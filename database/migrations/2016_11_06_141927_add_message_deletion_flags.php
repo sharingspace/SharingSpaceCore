@@ -26,7 +26,9 @@ class AddMessageDeletionFlags extends Migration
      */
     public function down()
     {
-        $table->dropColumn('deleted_by_sender');
-        $table->dropColumn('deleted_by_recipient');
+        Schema::table('messages', function(Blueprint $table) {
+            $table->dropColumn('deleted_by_sender');
+            $table->dropColumn('deleted_by_recipient');
+        });
     }
 }

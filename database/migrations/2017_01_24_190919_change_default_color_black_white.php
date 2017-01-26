@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeDefaultColor extends Migration
+class ChangeDefaultColorBlackWhite extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,10 @@ class ChangeDefaultColor extends Migration
      */
     public function up()
     {
-        $table->string('color', 20)->default("black_white")->change();
+        Schema::table('communities', function(Blueprint $table)
+        {
+            $table->string('color', 20)->default("black_white")->change();
+        });
     }
 
     /**

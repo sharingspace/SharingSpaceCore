@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeDefaultColor extends Migration
+class ChangeDefaultColorMuted extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,8 @@ class ChangeDefaultColor extends Migration
      */
     public function up()
     {
-        Schema::table('communities', function ($table) {
+        Schema::table('communities', function(Blueprint $table)
+        {
             $table->string('color', 20)->default("muted")->change();
         });
     }

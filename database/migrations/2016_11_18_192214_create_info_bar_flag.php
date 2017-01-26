@@ -25,6 +25,8 @@ class CreateInfoBarFlag extends Migration
      */
     public function down()
     {
-        $table->dropColumn('show_info_bar');
+        Schema::table('communities', function(Blueprint $table) {
+            $table->dropColumn('show_info_bar');
+        });
     }
 }

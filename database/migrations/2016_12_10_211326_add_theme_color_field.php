@@ -25,6 +25,8 @@ class AddThemeColorField extends Migration
      */
     public function down()
     {
-        $table->dropColumn('color');
+        Schema::table('communities', function(Blueprint $table) {
+            $table->dropColumn('color');
+        });
     }
 }
