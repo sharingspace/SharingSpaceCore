@@ -7784,7 +7784,7 @@ section {
         text-transform: capitalize;
         color: white !important;
         width: 100%;
-        font-size: 22px;
+        font-size: 21px;
       }
     }
     img {
@@ -7799,6 +7799,22 @@ section {
     width: 450px;
     .modal-body {
       background-color: #262626;
+    }
+    .modal-header, .modal-footer  {
+      background-color: #000;
+    }
+    .modal-header {
+      border-bottom: none;
+      h4, button {
+        color: #fff;
+      }
+      button {
+        opacity: .5;
+      }
+    }
+    .modal-footer  {
+      border-top: none;
+      border-bottom: #333 4px solid;
     }
     img {
       margin: 0 auto;
@@ -8168,12 +8184,12 @@ $color-green: #9AE14F;
     border:none;
   }
   .my_exchanges {
-    font-size:larger;
-    font-weight:bold;
+    font-size: larger;
+    font-weight: bold;
   }
 
   .fixed-table-container table {
-    width:99%; // seems to fix the annoying horizontal scroll bar on bootstrap datatables
+    width: 99%; // seems to fix the annoying horizontal scroll bar on bootstrap datatables
   }
 }
 
@@ -8184,14 +8200,17 @@ $color-green: #9AE14F;
   .fixed-table-container table {
     width:99%; // seems to fix the annoying horizontal scroll bar bootstrap datatables
   }
-  img.entry_image {
-    width: auto;
-    max-width: 70px;
-    height: auto;
-    max-height: 70px;
-    margin: 0px 5px 0px 0px;
-    border-radius: 1px;
-    vertical-align:middle!important;
+  .entry_image_box {
+    img.entry_image {
+      width: auto;
+      max-width: 60px;
+      height: auto;
+      max-height: 60px;
+      margin: 0px 5px 0px 0px;
+      border-radius: 1px;
+      vertical-align:middle!important;
+      margin: 0 auto;
+    }
   }
   td {
     vertical-align:middle!important;
@@ -8654,13 +8673,6 @@ $color-green: #9AE14F;
   .checkbox {
     display: block;
   }
-}
-
-.want_square, .have_square {
-  width: 40px;
-  height: 40px;
-  border-radius: 3px;
-  display: block;
 }
 
 .entry_img_view {
