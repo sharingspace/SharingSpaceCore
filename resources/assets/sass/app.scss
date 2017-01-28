@@ -9290,8 +9290,29 @@ section.TreborScholz {
   }
 }
 
-#headerWrapperr { 
+#headerWrapper { 
   position: relative;
-  top: 30%;
+  top: 29%;
+
+  .heading, .hp_subheading, .subheading {
+    margin: 0;
+    text-align: center;
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .hp_subheading, .subheading {
+    font-size: 25px;
+    font-style: italic;
+    font-weight:600;
+    position: relative;
+  }
+
+  .heading {
+    margin-top: 7px;
+    padding-bottom: 15px;
+    font-size: 50px;
+    position: relative;
+  }
 }
 /*************** Bootstrap extensions ******************/
