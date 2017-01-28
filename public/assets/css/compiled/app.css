@@ -10044,6 +10044,18 @@ Quick add
   font-weight: bold;
 }
 
+.user_profile h1 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .user_profile h1 {
+    font-size: 36px;
+  }
+}
+
 .user_profile .fixed-table-container table {
   width: 99%;
 }
