@@ -9223,4 +9223,35 @@ section.TreborScholz {
   }
 }
 
+/******************* Product page */
+
+#featureCarousel {
+  video {
+    max-width: 500px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    sup {
+      font-size: 16px;
+    }
+    span {
+      font-size: 20px;
+      em {
+        font-weight: normal;
+      }
+    }
+  }
+  .carousel-control {
+    top: 240px;
+    color: #333;
+    &.left, &.right {
+      background-image: none;
+    }
+  }
+
+  .carousel-inner {
+    position: relative;
+  }
+}
 /*************** Bootstrap extensions ******************/

@@ -11135,6 +11135,43 @@ section.TreborScholz {
   margin-bottom: 15px;
 }
 
+/******************* Product page */
+
+#featureCarousel video {
+  max-width: 500px;
+}
+
+#featureCarousel h2 {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+#featureCarousel h2 sup {
+  font-size: 16px;
+}
+
+#featureCarousel h2 span {
+  font-size: 20px;
+}
+
+#featureCarousel h2 span em {
+  font-weight: normal;
+}
+
+#featureCarousel .carousel-control {
+  top: 240px;
+  color: #333;
+}
+
+#featureCarousel .carousel-control.left,
+#featureCarousel .carousel-control.right {
+  background-image: none;
+}
+
+#featureCarousel .carousel-inner {
+  position: relative;
+}
+
 /*************** Bootstrap extensions ******************/
 /** ************************************* **
 
@@ -11436,15 +11473,6 @@ h6 {
   font-size: 12px;
   letter-spacing: normal;
   margin: 0 0 20px 0;
-}
-
-h1 > span,
-h2 > span,
-h3 > span,
-h4 > span,
-h5 > span,
-h6 > span {
-  color: #1ABC9C;
 }
 
 /**	03. Placeholder
