@@ -11138,7 +11138,7 @@ section.TreborScholz {
 /******************* Product page */
 
 #featureCarousel video {
-  max-width: 300px;
+  max-width: 250px;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 40px;
@@ -11179,9 +11179,15 @@ section.TreborScholz {
   position: relative;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 550px) {
   #featureCarousel video {
     max-width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  #featureCarousel video {
+    max-width: 500px;
   }
 }
 
@@ -11201,6 +11207,11 @@ section.TreborScholz {
   #featureCarousel .carousel-control .glyphicon-chevron-left {
     left: 0;
   }
+}
+
+#headerWrapperr {
+  position: relative;
+  top: 30%;
 }
 
 /*************** Bootstrap extensions ******************/

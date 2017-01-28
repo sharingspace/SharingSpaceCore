@@ -9260,7 +9260,7 @@ section.TreborScholz {
     position: relative;
   }
 
-  @media (min-width: $screen-xs-min) {
+  @media (min-width: 550px) {
     video {
       max-width: 400px;
     }
@@ -9288,5 +9288,10 @@ section.TreborScholz {
       }
     }
   }
+}
+
+#headerWrapperr { 
+  position: relative;
+  top: 30%;
 }
 /*************** Bootstrap extensions ******************/

@@ -589,10 +589,10 @@ Route::group(
         |--------------------------------------------------------------------------
         */
         Route::get(
-            'features', 
-            array('as' => 'features',
+            'product', 
+            array('as' => 'product',
                 function () {
-                    return view('features');
+                    return view('product');
                 }
             )
         );
