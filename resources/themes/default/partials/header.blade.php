@@ -190,3 +190,8 @@
   </div>
 </div>
 
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $( document ).tooltip();
+  });
+</script>
