@@ -1,6 +1,79 @@
 @extends('layouts.master')
 
 @section('content')
+
+<section>
+  <div class="container">
+    <div id="featureCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+         <h2>share<sup class="smaller">1</sup>&nbsp;&nbsp;&nbsp;&nbsp;<span>SHer/</span></h2>
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <p><em class="smaller">noun</em></p>
+              <ol><li>a part or portion of a larger amount that is divided among a number of people, or to which a number of people contribute.</li></ol>
+              <p><em class="smaller">verb</em></p>
+              <ol><li>have a portion of (something) with another or others."he shared the pie with her" synonyms: split, divide, go halves on.</li></ol>
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <video controls autoplay class="img-responsive">
+                <source src="{{ asset('assets/movies/product_movie1.mp4') }}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2>Simple Entry</h2>
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <p>Members use the simple form to fill out entries. They select many the ways they’re open receive benefits, rather than simply one like money, time, or barter.</p>
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <video controls autoplay class="img-responsive">
+                <source src="{{ asset('assets/movies/product_movie2.mp4') }}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <h2>Grow Your Opportunities</h2>
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <p>The entries of your Share can be distributed in various ways, including through web, email, and physical lists. Learn more below!</p>
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <video controls autoplay class="img-responsive">
+                <source src="{{ asset('assets/movies/product_movie3.mp4') }}" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#featureCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#featureCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="row feature-row">
@@ -125,80 +198,6 @@
     </div>
   </div>
 </div>
-
-
-<section>
-  <div class="container">
-    <div id="featureCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-         <h2>share<sup class="smaller">1</sup>&nbsp;&nbsp;&nbsp;&nbsp;<span>SHer/</span></h2>
-          <div class="row">
-            <div class="col-md-4 col-xs-12">
-              <p><em class="smaller">noun</em></p>
-              <ol><li>a part or portion of a larger amount that is divided among a number of people, or to which a number of people contribute.</li></ol>
-              <p><em class="smaller">verb</em></p>
-              <ol><li>have a portion of (something) with another or others."he shared the pie with her" synonyms: split, divide, go halves on.</li></ol>
-            </div>
-            <div class="col-md-8 col-xs-12">
-              <video controls autoplay class="img-responsive">
-                <source src="{{ asset('assets/movies/product_movie1.mp4') }}" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <h2>Simple Entry</h2>
-          <div class="row">
-            <div class="col-md-4 col-xs-12">
-              <p>Members use the simple form to fill out entries. They select many the ways they’re open receive benefits, rather than simply one like money, time, or barter.</p>
-            </div>
-            <div class="col-md-8 col-xs-12">
-              <video controls autoplay class="img-responsive">
-                <source src="{{ asset('assets/movies/product_movie2.mp4') }}" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <div class="item">
-          <h2>Grow Your Opportunities</h2>
-          <div class="row">
-            <div class="col-md-4 col-xs-12">
-              <p>The entries of your Share can be distributed in various ways, including through web, email, and physical lists. Learn more below!</p>
-            </div>
-            <div class="col-md-8 col-xs-12">
-              <video controls autoplay class="img-responsive">
-                <source src="{{ asset('assets/movies/product_movie3.mp4') }}" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#featureCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#featureCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-</section>
-
 
 <section class="cta">
   <div class="container">
