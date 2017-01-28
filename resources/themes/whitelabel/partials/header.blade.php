@@ -2,10 +2,8 @@
 <!-- Top Bar -->
   <div id="topBar">
     <div class="container">
-
       <!-- right -->
       <ul class="top-links list-inline pull-right">
-
 
         @if (Auth::check())
         <li class="dropdown">
@@ -205,7 +203,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">About {{$whitelabel_group->name}}</h4>
+        <h4 class="modal-title">About the <em>{{$whitelabel_group->name}}</em> Share</h4>
       </div>
       <div class="modal-body">
       <p  class="about_info"><strong>Started:</strong> <span>{{$whitelabel_group->created_at->format('F jS, Y')}}</span>
