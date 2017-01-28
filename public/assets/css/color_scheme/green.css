@@ -125,6 +125,14 @@ a .btn:hover {
   opacity: 1;
 }
 
+#topNav a.logo {
+  color: #827717;
+}
+
+#topNav a.logo:hover {
+  color: #000 !important;
+}
+
 #share_content a,
 #share_content .btn-default,
 #aboutModal a,

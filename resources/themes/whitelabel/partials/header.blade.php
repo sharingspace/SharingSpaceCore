@@ -110,11 +110,6 @@
             <img src="{{ $whitelabel_group->getLogo() }}">
           @else
             {{ $whitelabel_group->name }}
-            @if ($whitelabel_group->location!='')
-              <span class="block-inline pull-right margin-left-10">
-                &ndash; {{ $whitelabel_group->location}}
-              </span>
-            @endif
           @endif
         </a>
 
