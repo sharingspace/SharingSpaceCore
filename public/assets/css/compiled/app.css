@@ -11138,12 +11138,15 @@ section.TreborScholz {
 /******************* Product page */
 
 #featureCarousel video {
-  max-width: 500px;
+  max-width: 250px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 #featureCarousel h2 {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 10px;
 }
 
 #featureCarousel h2 sup {
@@ -11158,6 +11161,10 @@ section.TreborScholz {
   font-weight: normal;
 }
 
+#featureCarousel ol {
+  padding-left: 25px;
+}
+
 #featureCarousel .carousel-control {
   top: 240px;
   color: #333;
@@ -11170,6 +11177,41 @@ section.TreborScholz {
 
 #featureCarousel .carousel-inner {
   position: relative;
+}
+
+@media (min-width: 550px) {
+  #featureCarousel video {
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  #featureCarousel video {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 992px) {
+  #featureCarousel video {
+    max-width: 700px;
+  }
+
+  #featureCarousel h2 {
+    margin-bottom: 35px;
+  }
+
+  #featureCarousel .carousel-control .glyphicon-chevron-right {
+    right: 0;
+  }
+
+  #featureCarousel .carousel-control .glyphicon-chevron-left {
+    left: 0;
+  }
+}
+
+#headerWrapperr {
+  position: relative;
+  top: 30%;
 }
 
 /*************** Bootstrap extensions ******************/

@@ -119,7 +119,7 @@
             <div class="navbar-collapse pull-right nav-main-collapse collapse">
               <nav class="nav-main">
                 <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li><a href="{{ URL::to('features') }}">{{ trans('general.nav.features') }}</a></li>
+                  <li><a href="{{ URL::to('product') }}">{{ trans('general.nav.features') }}</a></li>
                   <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
                   <li>
                     <a class="text-white" href="{{ route('community.create.form') }}" >
@@ -170,8 +170,8 @@
     @elseif (Route::is('about'))
     <h1 class="heading">{{trans('about.headline') }}</h1>
     <h2 class="subheading">{{ trans('about.sub_headline') }}</h2>
-    @elseif (Route::is('features'))
-    <h1 class="heading">Features.</h1>
+    @elseif (Route::is('product'))
+    <h1 class="heading">{{ trans('general.nav.features')}}</h1>
     <h2 class="subheading">"Shares" help a group or community exchange.</h2>
     @elseif (Route::is('auth/register'))
     <h1 class="heading">{{ trans('general.nav.try_now') }}</h1>

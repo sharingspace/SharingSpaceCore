@@ -75,7 +75,7 @@ return [
       'about_mission' => 'Mission',
 			'basics' => 'Basics',
       'examples' => 'Examples',
-      'features' => 'Features',
+      'features' => 'Product',
       'settings' => 'Settings',
       'profile' => 'Profile',
 			'my_orders' => 'My Orders',
