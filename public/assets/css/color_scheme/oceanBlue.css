@@ -126,53 +126,61 @@ a .btn:hover {
 }
 
 #share_content a,
-#share_content .btn-default {
+#share_content .btn-default,
+#aboutModal a,
+#aboutModal .btn-default {
   color: #00796b !important;
 }
 
 #share_content a:hover,
-#share_content .btn-default:hover {
+#share_content .btn-default:hover,
+#aboutModal a:hover,
+#aboutModal .btn-default:hover {
   color: #ff8694 !important;
 }
 
 #share_content .btn.focus,
 #share_content .btn:focus,
-#share_content .btn:hover {
+#share_content .btn:hover,
+#aboutModal .btn.focus,
+#aboutModal .btn:focus,
+#aboutModal .btn:hover {
   background-color: #fff !important;
   color: #00796b !important;
   text-decoration: none;
 }
 
-#share_content .btn-colored {
+#share_content .btn-colored,
+#aboutModal .btn-colored {
   background-color: #00796b !important;
   border-color: black;
   color: #fff !important;
 }
 
-#share_content .btn-colored:hover {
+#share_content .btn-colored:hover,
+#aboutModal .btn-colored:hover {
   background-color: #fff !important;
   color: #00796b !important;
   border: 1px solid black;
   text-decoration: none;
 }
 
-#share_content .btn-light-colored {
+#share_content .btn-light-colored,
+#aboutModal .btn-light-colored {
   background-color: #00b6a1;
   border-color: #00796b;
   color: #fff !important;
 }
 
-#share_content .btn-dark-colored {
+#share_content .btn-dark-colored,
+#aboutModal .btn-dark-colored {
   background-color: #003c35;
   border-color: black;
   color: #fff !important;
 }
 
-#share_content #entry_view .close {
-  color: #00796b;
-}
-
-#share_content .fa-info-circle {
+#share_content #entry_view .close,
+#aboutModal #entry_view .close {
   color: #00796b;
 }
 
@@ -181,7 +189,13 @@ a .btn:hover {
 #share_content .pagination > .active > a:hover,
 #share_content .pagination > .active > span,
 #share_content .pagination > .active > span:focus,
-#share_content .pagination > .active > span:hover {
+#share_content .pagination > .active > span:hover,
+#aboutModal .pagination > .active > a,
+#aboutModal .pagination > .active > a:focus,
+#aboutModal .pagination > .active > a:hover,
+#aboutModal .pagination > .active > span,
+#aboutModal .pagination > .active > span:focus,
+#aboutModal .pagination > .active > span:hover {
   background-color: #00796b;
   border-color: #002d27;
   color: #fff !important;

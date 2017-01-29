@@ -124,7 +124,7 @@ a {
   }
 }
 
-#share_content {
+#share_content, #aboutModal {
   a, .btn-default {
     color: $accentColor !important;
     &:hover {
@@ -168,9 +168,7 @@ a {
     }
   }
 
-  .fa-info-circle {
-    color: $accentColor;
-  }
+
 
   .pagination>.active>a, 
   .pagination>.active>a:focus,
