@@ -122,6 +122,12 @@ a {
     background-color: rgba(0,0,0,0.03);
     opacity: 1;
   }
+  a.logo {
+    color: $accentColor;
+    &:hover {
+      color: $primaryTextColor !important;
+    }
+  }
 }
 
 #share_content, #aboutModal {
