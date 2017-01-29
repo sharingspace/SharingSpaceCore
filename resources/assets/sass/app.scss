@@ -8187,6 +8187,17 @@ $color-green: #9AE14F;
     font-size: larger;
     font-weight: bold;
   }
+  h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    text-align: center;
+  }
+  @media (min-width: $screen-sm-min) {
+    h1 {
+      font-size: 36px;
+    }
+  }
+
 
   .fixed-table-container table {
     width: 99%; // seems to fix the annoying horizontal scroll bar on bootstrap datatables
