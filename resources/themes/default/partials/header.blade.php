@@ -138,55 +138,58 @@
         </div>
       </div>
     </div>
-    @if (Route::is('home'))
-    <h1 class="heading">{{ trans('general.make-share') }}</h1>
-    <h2 class="hp_subheading">
-      {{ trans('home.subhome_headline') }}<br>
-      <div class="header_cta_button">
-        <a class="w-button cta-button contained-button size-20" href="{{ route('community.create.form') }}">
-          {{ trans('general.nav.try_now') }}
-        </a>
-      </div>
-    </h2>
-    @elseif (Route::is('login'))
-    <h1 class="heading">{{trans('general.nav.login') }}</h1>
-    @elseif (Route::is('register'))
-    <h2 class="heading">
-    {{trans('general.nav.register') }}
-    @if (!empty($subdomain))
-    <h2 class="subheading size-30 margin-top-20">
-      To join <em>{{ucfirst($subdomain)}}'s</em> share,<br>create an account with AnyShare</h2>
-    @endif
-    </h2>
-    @elseif (Route::is('community.create.form'))
-    <h1 class="heading">{{trans('general.make-share') }}</h1>
-    @elseif (Route::is('assistance'))
-    <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
-    @elseif (Route::is('coop'))
-    <h1 class="heading">{{ trans('coop.headline') }}</h1>
-    <h2 class="subheading">{{ trans('coop.mission_subheadline') }}</h2>
-    @elseif (Route::is('coop_success'))
-    <h1 class="heading">{{ trans('coop.congrats') }}</h1>
-    @elseif (Route::is('about'))
-    <h1 class="heading">{{trans('about.headline') }}</h1>
-    <h2 class="subheading">{{ trans('about.sub_headline') }}</h2>
-    @elseif (Route::is('product'))
-    <h1 class="heading">{{ trans('general.nav.features')}}</h1>
-    <h2 class="subheading">"Shares" help a group or community exchange.</h2>
-    @elseif (Route::is('auth/register'))
-    <h1 class="heading">{{ trans('general.nav.try_now') }}</h1>
-    <h2 class="subheading">{!! trans('general.nav.join_public_shares_free')!!}</h2>
-    @elseif (Route::is('user.history'))
-    <h1 class="heading">{{ trans('general.nav.my_orders') }}</h1>
-    @elseif (Route::is('user.register'))
-    <h1 class="heading">{{ trans('auth.create_account') }}</h1>
-    <h2 class="subheading">{{ trans('auth.join_public_shares') }}</h2>
-    @elseif (Route::is('pricing_page'))
-    <h1 class="heading">{{ trans('pricing.headline') }}</h1>
-    @else  
-    <!-- using route name as the h1 -->
-    <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
-    @endif
+    <div id="headerWrapper">
+
+      @if (Route::is('home'))
+      <h1 class="heading">{{ trans('general.make-share') }}</h1>
+      <h2 class="hp_subheading">
+        {{ trans('home.subhome_headline') }}<br>
+        <div class="header_cta_button">
+          <a class="w-button cta-button contained-button size-20" href="{{ route('community.create.form') }}">
+            {{ trans('general.nav.try_now') }}
+          </a>
+        </div>
+      </h2>
+      @elseif (Route::is('login'))
+      <h1 class="heading">{{trans('general.nav.login') }}</h1>
+      @elseif (Route::is('register'))
+      <h2 class="heading">
+      {{trans('general.nav.register') }}
+      @if (!empty($subdomain))
+      <h2 class="subheading size-30 margin-top-20">
+        To join <em>{{ucfirst($subdomain)}}'s</em> share,<br>create an account with AnyShare</h2>
+      @endif
+      </h2>
+      @elseif (Route::is('community.create.form'))
+      <h1 class="heading">{{trans('general.make-share') }}</h1>
+      @elseif (Route::is('assistance'))
+      <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
+      @elseif (Route::is('coop'))
+      <h1 class="heading">{{ trans('coop.headline') }}</h1>
+      <h2 class="subheading">{{ trans('coop.mission_subheadline') }}</h2>
+      @elseif (Route::is('coop_success'))
+      <h1 class="heading">{{ trans('coop.congrats') }}</h1>
+      @elseif (Route::is('about'))
+      <h1 class="heading">{{trans('about.headline') }}</h1>
+      <h2 class="subheading">{{ trans('about.sub_headline') }}</h2>
+      @elseif (Route::is('product'))
+      <h1 class="heading">{{ trans('general.nav.features')}}</h1>
+      <h2 class="subheading">"Shares" help a group or community exchange.</h2>
+      @elseif (Route::is('auth/register'))
+      <h1 class="heading">{{ trans('general.nav.try_now') }}</h1>
+      <h2 class="subheading">{!! trans('general.nav.join_public_shares_free')!!}</h2>
+      @elseif (Route::is('user.history'))
+      <h1 class="heading">{{ trans('general.nav.my_orders') }}</h1>
+      @elseif (Route::is('user.register'))
+      <h1 class="heading">{{ trans('auth.create_account') }}</h1>
+      <h2 class="subheading">{{ trans('auth.join_public_shares') }}</h2>
+      @elseif (Route::is('pricing_page'))
+      <h1 class="heading">{{ trans('pricing.headline') }}</h1>
+      @else  
+      <!-- using route name as the h1 -->
+      <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
+      @endif
+    </div>
   </div>
 </div>
 

@@ -11209,9 +11209,33 @@ section.TreborScholz {
   }
 }
 
-#headerWrapperr {
+#headerWrapper {
   position: relative;
-  top: 30%;
+  top: 29%;
+}
+
+#headerWrapper .heading,
+#headerWrapper .hp_subheading,
+#headerWrapper .subheading {
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#headerWrapper .hp_subheading,
+#headerWrapper .subheading {
+  font-size: 25px;
+  font-style: italic;
+  font-weight: 600;
+  position: relative;
+}
+
+#headerWrapper .heading {
+  margin-top: 7px;
+  padding-bottom: 15px;
+  font-size: 50px;
+  position: relative;
 }
 
 /*************** Bootstrap extensions ******************/
@@ -11475,11 +11499,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Raleway','Open Sans',Arial,Helvetica,sans-serif;
-  font-weight: 600;
-  color: #414141;
-  margin: 0 0 30px 0;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
