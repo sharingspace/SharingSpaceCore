@@ -71,26 +71,6 @@ button::-moz-focus-inner, input::-moz-focus-inner {
   padding: 0;
 }
 
-::selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-}
-
-::-moz-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-  /* Firefox */
-}
-
-::-webkit-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-  /* Safari */
-}
-
 button {
   background: none;
   border: 0;

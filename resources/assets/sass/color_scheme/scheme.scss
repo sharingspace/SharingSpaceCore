@@ -3,6 +3,9 @@ $primaryText: rgba(#000, 0.87);
 $secondaryText: rgba(#000, 0.54);
 $dividerColor: rgba(#000, 0.12);
 $white: #fff;
+$selectColor: $white; 
+$selectBackgroundColor: $accentColor;
+
 
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
   @if $inset {
@@ -17,15 +20,18 @@ $white: #fff;
 }
 
 ::selection {
-    background: $primaryColor;
+    color: $selectColor;
+    background-color: $selectBackgroundColor;
 }
 
 ::-moz-selection {
-    background: $primaryColor; /* Firefox */
+    color: $selectColor; /* Firefox */
+    background-color: $selectBackgroundColor;
 }
 
 ::-webkit-selection {
-    background: $primaryColor; /* Safari */
+    color: $selectColor; /* Safari */
+    background-color: $selectBackgroundColor;
 }
 
 .primary {

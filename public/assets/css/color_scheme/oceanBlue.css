@@ -2,21 +2,25 @@
  ******************************************************************/
 
 ::-moz-selection {
-  background: #052233;
+  color: #fff;
+  background-color: #00796b;
 }
 
 ::selection {
-  background: #052233;
+  color: #fff;
+  background-color: #00796b;
 }
 
 ::-moz-selection {
-  background: #052233;
+  color: #fff;
   /* Firefox */
+  background-color: #00796b;
 }
 
 ::-webkit-selection {
-  background: #052233;
+  color: #fff;
   /* Safari */
+  background-color: #00796b;
 }
 
 .primary {
