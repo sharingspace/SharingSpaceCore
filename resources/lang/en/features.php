@@ -37,5 +37,13 @@ return [
     'customizable' => 'Shares are customizable',
     'customizable_feature' => 'Customize your branding and control the visibility of your Share. Access can be public or private.',
     'cta'  => 'Make your Share now!',
+    'noun' => 'noun',
+    'noun_desc' => 'a part or portion of a larger amount that is divided among a number of people, or to which a number of people contribute.',
+    'verb' => 'verb',
+    'verb_desc' => 'have a portion of (something) with another or others."he shared the pie with her" synonyms: split, divide, go halves on.',
+    'simple_entry' => 'Simple Entry',
+    'simple_entry_desc' => 'Members use the simple form to fill out entries. They select many the ways they’re open receive benefits, rather than simply one like money, time, or barter.',
+    'opportunities' => 'Grow Your Opportunities',
+    'opportunities_desc' => 'The entries of your Share can be distributed in various ways, including through web, email, and physical lists. Learn more below!',
 
 ];
