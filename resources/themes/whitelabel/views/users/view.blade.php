@@ -112,7 +112,7 @@
                 <th data-sortable="true" data-field="post_type">{{ trans('general.type') }}</th>
                 <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
                 <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-                <th data-sortable="true" data-field="tags">{{ trans('general.entries.keywords') }}</th>
+                <th data-sortable="true" data-field="tags">{{ trans('general.keywords') }}</th>
                 <th data-sortable="false" data-field="actions"></th>
               </tr>
             </thead>
