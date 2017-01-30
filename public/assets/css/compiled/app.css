@@ -11154,6 +11154,10 @@ section.TreborScholz {
   margin: auto;
   margin-top: 30px;
   margin-bottom: 40px;
+  background-image: url("/assets/movies/movie_background.png");
+  background-repeat: no;
+  background-size: cover;
+  padding: 55px 30px 10px;
 }
 
 #featureCarousel h2 {
@@ -11178,8 +11182,13 @@ section.TreborScholz {
 }
 
 #featureCarousel .carousel-control {
-  top: 240px;
   color: #333;
+  display: none;
+  width: 25px;
+  left: 50%;
+  top: -280px;
+  right: auto;
+  margin-bottom: 10px;
 }
 
 #featureCarousel .carousel-control.left,
@@ -11187,8 +11196,20 @@ section.TreborScholz {
   background-image: none;
 }
 
-#featureCarousel .carousel-inner {
-  position: relative;
+#featureCarousel .carousel-control .glyphicon-chevron-left {
+  margin-left: -40px;
+}
+
+#featureCarousel .carousel-control .glyphicon-chevron-right {
+  margin-right: -40px;
+}
+
+#featureCarousel .videoWrapper {
+  margin-top: 30px;
+}
+
+#featureCarousel .carousel-indicators li {
+  visibility: hidden;
 }
 
 @media (min-width: 550px) {
@@ -11218,6 +11239,22 @@ section.TreborScholz {
 
   #featureCarousel .carousel-control .glyphicon-chevron-left {
     left: 0;
+  }
+
+  #featureCarousel .pagination_arrows {
+    display: block;
+    margin-top: 80px;
+    width: 33% !important;
+    float: left;
+  }
+
+  #featureCarousel .carousel-control {
+    left: 13%;
+    top: -50px;
+  }
+
+  #featureCarousel .videoWrapper {
+    margin-top: 0;
   }
 }
 
