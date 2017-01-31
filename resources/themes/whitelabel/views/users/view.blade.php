@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-xs-5">
   			      <div class="thumbnail">
-                <img src="{{ $user->gravatar_img() }}?s=400" alt="" />
+                <img src="{{ $user->gravatar_img() }}" alt="" />
               </div>
             </div>
             <div class="col-xs-7">
