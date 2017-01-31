@@ -14,62 +14,59 @@
       </ol>
 
       <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-         <h2>{{ trans('general.share') }}<sup class="smaller">1</sup>&nbsp;&nbsp;&nbsp;&nbsp;<span>SHer/</span></h2>
-          <div class="row">
+      <div class="row">
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
             <div class="col-md-4 col-xs-12">
+              <h2>{{ trans('general.share') }}<sup class="smaller">1</sup>&nbsp;&nbsp;&nbsp;&nbsp;<span>SHer/</span></h2>
+
               <p><em class="smaller">{{ trans('features.noun') }}</em></p>
               <ol><li>{{ trans('features.noun_desc') }}</li></ol>
-              <p><em class="smaller">{{ trans('features.verb') }}</em></p>
-              <ol><li>{{ trans('features.verb_desc') }}</li></ol>
             </div>
-            <div class="col-md-8 col-xs-12">
-              <video controls autoplay class="img-responsive">
+            <div class="col-md-8 col-xs-12 videoWrapper">
+              <video autoplay class="img-responsivee">
                 <source src="{{ asset('assets/movies/product_movie1.mp4') }}" type="video/mp4">
               </video>
             </div>
           </div>
-        </div>
 
-        <div class="item">
-          <h2>{{ trans('features.simple_entry') }}</h2>
-          <div class="row">
+          <div class="item">
             <div class="col-md-4 col-xs-12">
+              <h2>{{ trans('features.simple_entry') }}</h2>
               <p>{{ trans('features.simple_entry_desc') }}</p>
             </div>
-            <div class="col-md-8 col-xs-12">
-              <video controls autoplay class="img-responsive">
+            <div class="col-md-8 col-xs-12 videoWrapper">
+              <video autoplay class="img-responsivee">
                 <source src="{{ asset('assets/movies/product_movie2.mp4') }}" type="video/mp4">
               </video>
             </div>
           </div>
-        </div>
 
-        <div class="item">
-          <h2>{{ trans('features.opportunities')}}</h2>
-          <div class="row">
+          <div class="item">
             <div class="col-md-4 col-xs-12">
+              <h2>{{ trans('features.opportunities')}}</h2>
               <p>{{ trans('features.opportunities_desc')}}</p>
             </div>
-            <div class="col-md-8 col-xs-12">
-              <video controls autoplay class="img-responsive">
+            <div class="col-md-8 col-xs-12 videoWrapper">
+              <video autoplay class="img-responsivee">
                 <source src="{{ asset('assets/movies/product_movie3.mp4') }}" type="video/mp4">
               </video>
             </div>
           </div>
+
+          <!-- Left and right controls -->
+          <div class="pagination_arrows">
+            <a class="carousel-control" href="#featureCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control" href="#featureCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
         </div>
       </div>
-
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#featureCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#featureCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
   </div>
 </section>
@@ -216,8 +213,6 @@
   </div>
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 $( document ).ready(function() {
   // Activate Carousel
@@ -232,6 +227,8 @@ $( document ).ready(function() {
   $(".left").click(function(){
       $("#featureCarousel").carousel("prev");
   });
+
+  $('.carousel-control').show();
 });
 </script>
 @stop

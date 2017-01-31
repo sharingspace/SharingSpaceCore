@@ -83,7 +83,7 @@
 </div>
 
 <script>
-$(window).load(function () {
+$(window).on('load', function () {
   // scroll to reply box, this works on firefix and chrome
   window.setTimeout(function() {
     $(window).scrollTop($(document).height()); 

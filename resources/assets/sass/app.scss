@@ -9242,6 +9242,10 @@ section.TreborScholz {
     margin: auto;
     margin-top: 30px;
     margin-bottom: 40px;
+    background-image: url('/assets/movies/movie_background.png');
+    background-repeat: no;
+    background-size: cover;
+    padding: 55px 30px 10px;
   }
   h2 {
     text-align: center;
@@ -9260,15 +9264,30 @@ section.TreborScholz {
     padding-left: 25px;
   }
   .carousel-control {
-    top: 240px;
     color: #333;
+    display: none;
+    width: 25px;
+    left: 50%;
+    top: -280px;
+    right: auto;
+    margin-bottom: 10px;
     &.left, &.right {
       background-image: none;
     }
+    .glyphicon-chevron-left {
+      margin-left: -40px;
+    }
+    .glyphicon-chevron-right {
+      margin-right: -40px;
+    }
   }
 
-  .carousel-inner {
-    position: relative;
+  .videoWrapper {
+    margin-top: 30px;
+  }
+
+  .carousel-indicators li {
+    visibility: hidden;
   }
 
   @media (min-width: 550px) {
@@ -9297,6 +9316,19 @@ section.TreborScholz {
       .glyphicon-chevron-left {
         left: 0;
       }
+    }
+    .pagination_arrows {
+      display: block;
+      margin-top: 80px;
+      width: 33% !important;
+      float: left;
+    }
+    .carousel-control {
+      left: 13%;
+      top: -50px;
+    }
+    .videoWrapper {
+      margin-top: 0;
     }
   }
 }
