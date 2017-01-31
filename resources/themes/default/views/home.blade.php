@@ -138,5 +138,7 @@
     </div>
   </div>
 </div>
+@section('moar_scripts')
+@stop
 
 @stop
