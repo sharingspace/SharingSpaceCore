@@ -224,7 +224,7 @@ class MessagesController extends Controller
                 if (!empty($request->whitelabel_group->logo)) {
                     if( config('app.debug')) {
                         // this is for testing only
-                        $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
+                        $data['logo'] = public_path().'/assets/img/logos/dummy_share_logo.png';
                     }
                     else {
                         $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
