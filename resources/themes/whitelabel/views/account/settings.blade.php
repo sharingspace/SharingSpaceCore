@@ -281,7 +281,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 		<!-- LEFT -->
 		<div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8 margin-top-20">
 			<div class="thumbnail text-center">
-				<img src="{{ Auth::user()->gravatar_img() }}?s=400" alt="" />
+				<img src="{{ Auth::user()->gravatar_img() }}" alt="" />
 				<h2 class="size-18 margin-top-10 margin-bottom-0">{{ Auth::user()->getDisplayName() }}</h2>
 				<h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">{{ Auth::user()->location }}</h3>
 			</div>
