@@ -38,6 +38,7 @@ elixir(function(mix) {
     mix.sass('color_scheme/white_pink.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/black_white.scss','public/assets/css/color_scheme');
     mix.sass('color_scheme/green.scss','public/assets/css/color_scheme');
+    mix.sass('color_scheme/purple_pink.scss','public/assets/css/color_scheme');
 
     mix.codeception();
 });

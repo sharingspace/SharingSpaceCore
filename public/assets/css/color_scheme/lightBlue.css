@@ -75,16 +75,6 @@ td {
   background-color: #3f9d7e;
 }
 
-a:active,
-a:focus,
-a:hover,
-a .btn.focus,
-a .btn:focus,
-a .btn:hover {
-  color: white;
-  text-decoration: none;
-}
-
 #topBar {
   background-color: #d0edf5 !important;
 }
@@ -92,6 +82,14 @@ a .btn:hover {
 #topBar ul.dropdown-menu {
   /* submenu border top color */
   border-top-color: #edf8fb;
+}
+
+#topBar .notifications-popdown-wrapper .unread a {
+  color: #66c2a4 !important;
+}
+
+#topBar .notifications-popdown-wrapper .unread a:hover {
+  color: #993d5b !important;
 }
 
 #topBar ul.top-links > li > a {

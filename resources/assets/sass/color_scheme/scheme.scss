@@ -78,17 +78,18 @@ p, td {
   background-color: darken($accentColor, 15%);
 }
 
-a {
-    &:active, &:focus, &:hover, .btn.focus, .btn:focus, .btn:hover  {
-      color: lighten($primaryColor, 35%);
-      text-decoration: none;
-    }
-}
+
 
 #topBar {
-    background-color: $darkPrimaryColor !important;
-    ul.dropdown-menu { /* submenu border top color */
+  background-color: $darkPrimaryColor !important;
+  ul.dropdown-menu { /* submenu border top color */
     border-top-color: $primaryColor;
+  }
+  .notifications-popdown-wrapper .unread a {
+    color: $accentColor !important;
+    &:hover {
+      color: $inverseAccentColor !important;
+    }
   }
 }
 

@@ -75,16 +75,6 @@ td {
   background-color: #604b43;
 }
 
-a:active,
-a:focus,
-a:hover,
-a .btn.focus,
-a .btn:focus,
-a .btn:hover {
-  color: #f7f7f7;
-  text-decoration: none;
-}
-
 #topBar {
   background-color: #8c8c8c !important;
 }
@@ -92,6 +82,14 @@ a .btn:hover {
 #topBar ul.dropdown-menu {
   /* submenu border top color */
   border-top-color: #9e9e9e;
+}
+
+#topBar .notifications-popdown-wrapper .unread a {
+  color: #8d6e63 !important;
+}
+
+#topBar .notifications-popdown-wrapper .unread a:hover {
+  color: #72919c !important;
 }
 
 #topBar ul.top-links > li > a {
