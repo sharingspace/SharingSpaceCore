@@ -119,8 +119,12 @@
             <div class="navbar-collapse pull-right nav-main-collapse collapse">
               <nav class="nav-main">
                 <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-                  <li><a href="{{ URL::to('product') }}">{{ trans('general.nav.features') }}</a></li>
-                  <li><a href="{{ URL::to('pricing') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a></li>
+                  <li {!! (Route::is('product') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('product') }}">{{ trans('general.nav.features') }}</a>
+                  </li>
+                  <li {!! (Route::is('pricing_page') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('pricing_page') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a>
+                  </li>
                   <li>
                     <a class="text-white" href="{{ route('community.create.form') }}" >
                       <button class="btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing">
