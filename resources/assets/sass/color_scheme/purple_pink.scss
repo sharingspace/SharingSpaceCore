@@ -1,0 +1,11 @@
+/** Purple/Pink
+ ******************************************************************/
+
+$primaryColor: #a64dff;
+$primaryTextColor: #fff;
+$darkPrimaryColor: darken($primaryColor, 7%);
+$darkPrimaryTextColor: #fff;
+$accentColor: #FF4081;
+$coloredEntryButton: 0;
+
+@import 'scheme.scss';
