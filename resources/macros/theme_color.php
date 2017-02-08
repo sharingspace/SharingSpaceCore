@@ -21,6 +21,7 @@ Form::macro('theme_color', function ($name = "theme_color", $selected = null) {
         'oceanBlue' => 'Ocean Blue / Teal',
         'orange' => 'Orange / Red',
         'purple' => 'Purple / Sky Blue',
+        'purple_pink' => 'Purple / Pink',
         'white_blue' => 'White / Blue',
         'white_gray' => 'White / Gray',
         'white_green' => 'White / Green',

@@ -75,16 +75,6 @@ td {
   background-color: #357a38;
 }
 
-a:active,
-a:focus,
-a:hover,
-a .btn.focus,
-a .btn:focus,
-a .btn:hover {
-  color: white;
-  text-decoration: none;
-}
-
 #topBar {
   background-color: #ededed !important;
 }
@@ -92,6 +82,14 @@ a .btn:hover {
 #topBar ul.dropdown-menu {
   /* submenu border top color */
   border-top-color: #fff;
+}
+
+#topBar .notifications-popdown-wrapper .unread a {
+  color: #4CAF50 !important;
+}
+
+#topBar .notifications-popdown-wrapper .unread a:hover {
+  color: #b350af !important;
 }
 
 #topBar ul.top-links > li > a {

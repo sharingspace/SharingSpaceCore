@@ -75,16 +75,6 @@ td {
   background-color: #436624;
 }
 
-a:active,
-a:focus,
-a:hover,
-a .btn.focus,
-a .btn:focus,
-a .btn:hover {
-  color: #c3ae8d;
-  text-decoration: none;
-}
-
 #topBar {
   background-color: #50412a !important;
 }
@@ -92,6 +82,14 @@ a .btn:hover {
 #topBar ul.dropdown-menu {
   /* submenu border top color */
   border-top-color: #675436;
+}
+
+#topBar .notifications-popdown-wrapper .unread a {
+  color: #689f38 !important;
+}
+
+#topBar .notifications-popdown-wrapper .unread a:hover {
+  color: #9760c7 !important;
 }
 
 #topBar ul.top-links > li > a {

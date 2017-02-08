@@ -31,7 +31,7 @@
                   {{ Auth::user()->getUnreadMessagesCount() }} {{ trans('general.nav.new_messages') }}
               </div>
               @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
-                <div class="clearfix margin-bottom-10 member_thumb">
+                <div class="unread clearfix margin-bottom-10 member_thumb">
                   <!-- notification item -->
                   <img src="{{ $unread_messages->sender->gravatar_img() }}" class="pull-left" style="margin-left: 5px; margin-top: 5px;">
                   <span class="text-muted">
