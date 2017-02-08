@@ -128,9 +128,9 @@
           @endif
 
           <!-- <li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li> -->
-          <li>
+          <!-- <li>
             <a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">{{ trans('general.entries.comments_tab') }}</a>
-          </li>
+          </li> -->
         </ul> <!-- nav-tabs -->
 
         <!-- Tab panes -->
