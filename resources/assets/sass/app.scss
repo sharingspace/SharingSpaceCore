@@ -9237,6 +9237,25 @@ section.TreborScholz {
 /******************* Product page */
 
 #featureCarousel {
+  .row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .aligner-item {
+      flex: 1;
+    }
+  }
+
+  .videoWrapper {
+    margin-top: 0x;
+  }
+
   video {
     max-width: 250px;
     margin: auto;
@@ -9268,7 +9287,7 @@ section.TreborScholz {
     display: none;
     width: 25px;
     left: 50%;
-    top: -280px;
+    top: -260px;
     right: auto;
     margin-bottom: 10px;
     &.left, &.right {
@@ -9282,23 +9301,32 @@ section.TreborScholz {
     }
   }
 
-  .videoWrapper {
-    margin-top: 30px;
-  }
-
   .carousel-indicators li {
     visibility: hidden;
   }
 
-  @media (min-width: 550px) {
+  @media (min-width: 450px) {
     video {
       max-width: 400px;
+    }
+  }
+  @media (min-width: 600px) {
+    video {
+      max-width: 500px;
+    }
+  }
+  @media (min-width: 700px) {
+    video {
+      max-width: 600px;
     }
   }
 
   @media (min-width: $screen-sm-min) {
     video {
-      max-width: 500px;
+      max-width: 600px;
+    }
+    .videoWrapper {
+      margin-top: 30px;
     }
   }
 
@@ -9307,7 +9335,8 @@ section.TreborScholz {
       max-width: 700px;
     }
     h2 {
-      margin-bottom: 35px;
+      margin-bottom: 15px;
+      margin-top: 0;
     }
     .carousel-control {
       .glyphicon-chevron-right {
@@ -9325,7 +9354,7 @@ section.TreborScholz {
     }
     .carousel-control {
       left: 13%;
-      top: -50px;
+      top: 150px;
     }
     .videoWrapper {
       margin-top: 0;
