@@ -138,7 +138,7 @@
               </li>
             @endif
 
-            @can('view-browse', $whitelabel_group)
+            @if ($whitelabel_group->viewNavItems())
               <li {!! (Route::is('home') ? ' class="active"' : '') !!}>
                 <a href="{{ route('home') }}">
                   {{ trans('general.nav.browse') }}
@@ -151,9 +151,6 @@
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
-            @endcan
-
-            @if ($whitelabel_group->scopeIsPublic())
               <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
               </li>

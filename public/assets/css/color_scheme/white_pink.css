@@ -143,6 +143,13 @@ td {
   color: #FF4081 !important;
 }
 
+#share_content a.btn-social,
+#share_content .btn-default.btn-social,
+#aboutModal a.btn-social,
+#aboutModal .btn-default.btn-social {
+  color: #fff !important;
+}
+
 #share_content a:hover,
 #share_content .btn-default:hover,
 #aboutModal a:hover,

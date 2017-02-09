@@ -140,6 +140,9 @@ p, td {
 #share_content, #aboutModal {
   a, .btn-default {
     color: $accentColor !important;
+    &.btn-social {
+      color: $white !important;
+    }
     &:hover {
       color: $inverseAccentColor !important;
     }

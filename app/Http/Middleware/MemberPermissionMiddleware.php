@@ -28,9 +28,11 @@ class MemberPermissionMiddleware
   { 
     // This is a whitelabel group, otherwise skip it
     if ($request->whitelabel_group) {
-      if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
-        LOG::debug('MemberPermissionMiddleware: This user is authorized to see this Share');
+      if ($request->whitelabel_group->group_type != 'S') {
         return $next($request);
+      }
+      else if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
+        LOG::debug('MemberPermissionMiddleware: This user is authorized to see this Share');
       }
       else {
         LOG::debug('MemberPermissionMiddleware: This user is NOT authorized to see this Share');

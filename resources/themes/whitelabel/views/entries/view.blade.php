@@ -57,6 +57,15 @@
           </div>
           @endif
 
+          <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
+            <strong class="primaryText">{{ trans('general.entries.visibility') }}:</strong>
+            @if($entry->visible)
+              {{ trans('general.entries.visible') }}
+            @else
+              {{ trans('general.entries.not_visible') }}
+            @endif          
+          </div>
+
            @if($entry->description)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
             <strong class="primaryText">{{ trans('general.entries.description') }}:</strong> {!! Markdown::convertToHtml($entry->description) !!}
@@ -69,24 +78,12 @@
           </div>
           @endif
 
-          <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong class="primaryText">{{ trans('general.entries.visibility') }}:</strong>
-            @if($entry->visible)
-              {{ trans('general.entries.visible') }}
-            @else
-              {{ trans('general.entries.not_visible') }}
-            @endif          
-          </div>
-
           <!-- if user is admin or owner -->
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            @if (Auth::check())
-            <div class="listing-actions" style="padding-top: 10px;">
-
+            @can('update-entry', $entry)
+            <div class="listing-actions" style="padding-top: 10px;"> 
               {{ Form::open(array('route'=>array('entry.delete.save',$entry->id))) }}
                 {{ Form::token()}}
-
-                @can('update-entry', $entry)
                   <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
                   <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
 
@@ -95,11 +92,10 @@
                     <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
                   @endif
                   <button type="submit" class="btn btn-xs btn-dark-colored"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
-                @endcan
 
               {{ Form::close() }}
             </div> <!-- listing-actions -->
-            @endif <!-- endif user is admin or owner -->
+            @endcan <!-- endif user is admin or owner -->
           </div>  <!-- col-md-12 -->
         </div> <!-- col-sm-8 -->
       </div>
@@ -109,15 +105,11 @@
         <ul class="nav nav-tabs" role="tablist">
           <li class="active">
             <a href="#make_offer" role="tab" data-toggle="tab">
-              @if (Auth::check())
-                @if (Auth::user()->id == $entry->created_by)
-                  {{ trans('general.entries.view_offer') }}
-                @else
-                  {{ trans('general.entries.make_offer') }}
-                @endif
-              @else
-                {{ trans('general.entries.make_offer') }}
-              @endif
+            @can('update-entry', $entry)
+              {{ trans('general.entries.view_offer') }}
+            @else
+              {{ trans('general.entries.make_offer') }}
+            @endcan
             </a>
           </li>
 
@@ -207,7 +199,7 @@
                   <p>{{ trans('general.entries.offer_here') }}</p>
                 @endif <!-- user -->
               @else
-                <p>{{ trans('general.entries.please') }} <a class="btn btn-warning btn-xs" href="/auth/signin">{{ trans('general.entries.offer_here') }}{{ trans('general.entries.sign_in') }}</a> {{ trans('general.entries.or') }} <a class="btn btn-info btn-xs" href="/auth/signup">{{ trans('general.entries.sign_up') }}</a> {{ trans('general.entries.to_make_offer') }}</p>
+                <p><a class="btn btn-colored" href="{{ route('login') }}">{{ trans('general.entries.not_signed_in_offer') }}</a></p>
               @endif <!-- logged in -->
 
             </div> <!-- col-xs-12 -->
