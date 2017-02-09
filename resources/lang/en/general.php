@@ -129,7 +129,8 @@ return [
       'see_members' => 'Allow my profile to show on member page',
       'contact' => 'Allow members to contact me with offers',
       'contact_form' => 'Allow contact form on profile page',
-      'edit_profile' => 'Edit profile'
+      'edit_profile' => 'Edit profile',
+      'view_profile' => 'View profile',
     ],
 
     'email' => [
@@ -181,8 +182,7 @@ return [
       'sorry_expired' => 'Sorry, this entry has expired!',
       'completed_interest' => 'This entry has been completed and is no longer available for offers. Still interested?',
       'list' => 'Enter now as something you want or have',
-      'offer_here' => 'Offers on this entry go here.',
-      'please ' => 'Please',
+      'offer_here' => 'There are no offers for this entry',
       'sign_in' => 'Sign in',
       'or' => 'or',
       'sign_up' => 'Sign Up',
@@ -190,6 +190,7 @@ return [
       'no_location' => 'The owner of this tile has not posted any location information yet.',
       'public_comments' => 'Comments posted here are publicly viewable.',
       'added' => 'You added',
+      'not_signed_in_offer' => 'Please sign-in if you want to make an offer',
 
       'messages' => [
         'invalid' => 'That entry is not valid.',
@@ -233,6 +234,7 @@ return [
       'login_by_social' => 'or with a social network',
       'signup_by_email' => 'Sign-up with email',
       'join_requests' => 'Join Requets',
+      'login_to_send_message' => 'Please sign-in if you want to send this person a message',
       'request_access' => [
         'your_request' => 'You have asked to become a member of this Share.',
         'oops' => 'Oops!',

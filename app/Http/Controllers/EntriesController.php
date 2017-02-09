@@ -33,21 +33,29 @@ class EntriesController extends Controller
     */
     public function getEntry(Request $request, $entryID)
     {
-        if ($entry = \App\Entry::find($entryID)) {
-            if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
-                return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
-            }
-
-            $images = \DB::table('media')
-              ->where('entry_id', '=', $entryID)
-              ->get();
-
-            return view('entries.view')->with('entry', $entry)->with('images', $images);
-
+      if ($entry = \App\Entry::find($entryID)) {
+        if ($request->user()) {
+          // user logged in
+          if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
+            return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
+          }
         }
         else {
-          return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
+          // user not logged in
+          if($request->whitelabel_group->isSecret()) {
+            return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
+          }
         }
+            
+        $images = \DB::table('media')
+          ->where('entry_id', '=', $entryID)
+          ->get();
+
+        return view('entries.view')->with('entry', $entry)->with('images', $images);
+      }
+      else {
+        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
+      }
     }
 
     public function ajaxGetEntry(Request $request, $entryID)
@@ -532,7 +540,13 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
+            if (Auth::user() && (Auth::user()->id == $user_id)) {
+                // allow user to their hidden entries
+                $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
+            }
+            else {
+                $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id)->where('visible', 1);
+            }
         }
         else {
             $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('visible', 1)->NotCompleted();
