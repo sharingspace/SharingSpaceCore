@@ -168,7 +168,8 @@ return [
       'by' => 'Who',
       'description' => 'Description',
       'edit_entry' => 'Edit',
-      'completed' => 'Mark Completed',
+      'completed' => 'Completed',
+      'mark_completed' => 'Mark Completed',
       'delete' => 'Delete',
       'view_offer' => 'View Offers',
       'make_offer' => 'Make Offer',
@@ -191,6 +192,7 @@ return [
       'public_comments' => 'Comments posted here are publicly viewable.',
       'added' => 'You added',
       'not_signed_in_offer' => 'Please sign-in if you want to make an offer',
+      'delete_confirmation' => 'Are you sure you want to delete this entry?',
 
       'messages' => [
         'invalid' => 'That entry is not valid.',
@@ -240,13 +242,13 @@ return [
         'oops' => 'Oops!',
         'must_be_member' => 'You must be a member of this Share to view it.',
         'request_access' => 'Request Access to',
-        'admin_msg' => 'Message to Share:',
+        'admin_msg' => 'Message to Share admin:',
         'admin_msg_placeholder' => '',
         'max_140' => 'Max 140 characters',
         'chars_remain' => 'characters remaining',
         'hint' => 'Hint:',
         'submit' => 'Submit',
-        'sorry_closed' => 'This is a closed Share. Closed Shares needs to approve members before they join.',
+        'sorry_closed' => 'This is a closed Share. Closed Shares needs to approve members before they join, so please introduce yourself.',
         'hint' => 'Hint: ',
         'still_pending' => 'Your request to become a member of this Share is still pending'
       ],

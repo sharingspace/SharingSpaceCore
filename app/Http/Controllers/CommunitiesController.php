@@ -92,12 +92,18 @@ class CommunitiesController extends Controller
     public function getRequestAccess(Request $request)
     {
         $user = Auth::user();
+        if ($user) {
+            // find out whether they have already asked to join this share
+            $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
-        // find out whether they have already asked to join this share
-        $request_count = $request->whitelabel_group->getRequestCount($user->id);
-
-        LOG::debug("getRequestAccess: request_count = ".$request_count);
-        return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
+            LOG::debug("getRequestAccess: request_count = ".$request_count);
+            return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
+        }
+        else {
+            // not logged in so send them to the signup page
+            LOG::debug("getRequestAccess: user is not logged in so redirect them");
+            return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
+        }
     }
 
     /**

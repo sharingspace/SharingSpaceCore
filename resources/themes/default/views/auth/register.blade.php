@@ -19,7 +19,7 @@
         <form class="nomargin sky-form boxed" method="post">
           {!! csrf_field() !!}
           <input type="hidden" name="subdomain" id="subdomain" value="{{$subdomain or ''}}" />
-          <input type="hidden" name="shareName" value="{{$shareName  or ''}}" />
+          <input type="hidden" name="shareName" value="{{$share  or ''}}" />
 
           <header>
             <i class="fa fa-envelope"></i> {{ trans('general.user.signup_by_email')}}

@@ -343,12 +343,12 @@ class UserController extends Controller
     */
     public function getJoinCommunity(Request $request)
     {
-        //LOG::debug('getJoinCommunity: entered');
+        LOG::debug('getJoinCommunity: entered');
         if ($request->whitelabel_group->isOpen()) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
                 LOG::debug("getJoinCommunity: joined open share successfully");
 
-                return redirect()->route('home')->withInput()->with('success', 'You have joined '.ucfirst($request->whitelabel_group->name).'!');
+                return redirect()->route('home')->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
             } else {
                 LOG::debug("getJoinCommunity: error joining open share");
 

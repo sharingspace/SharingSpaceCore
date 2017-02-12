@@ -33,6 +33,8 @@ class EntriesController extends Controller
     */
     public function getEntry(Request $request, $entryID)
     {
+      //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
       if ($entry = \App\Entry::find($entryID)) {
         if ($request->user()) {
           // user logged in
@@ -60,6 +62,8 @@ class EntriesController extends Controller
 
     public function ajaxGetEntry(Request $request, $entryID)
     {
+        //log::debug("ajaxGetEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         if ($entry = \App\Entry::find($entryID)) {
             $imageName=null;
 
@@ -102,6 +106,8 @@ class EntriesController extends Controller
     */
     public function getCreate(Request $request)
     {
+        //log::debug("getCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         $post_types = array('want'=>'I want', 'have'=>'I have');
 
         $request->session()->put('upload_key', str_random(15));
@@ -118,6 +124,8 @@ class EntriesController extends Controller
     */
     public function postAjaxCreate(Request $request)
     {
+        //log::debug("postAjaxCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         $entry = new \App\Entry();
 
         $entry->title    = e(Input::get('title'));
@@ -253,6 +261,8 @@ class EntriesController extends Controller
     */
     public function getEdit(Request $request, $entryID)
     {
+        //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         // This should be pulled into a helper or macro
         $post_types = array('want'=>'I want', 'have'=>'I have');
 
@@ -370,6 +380,8 @@ class EntriesController extends Controller
     */
     public function postEdit(Request $request, $entryID)
     {
+        //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         if ($entry = \App\Entry::find($entryID)) {
 
             $user = Auth::user();
@@ -384,6 +396,13 @@ class EntriesController extends Controller
             $entry->qty    = e(Input::get('qty'));
             $entry->tags    = e(Input::get('tags'));
             $entry->visible = e(Input::get('private')) ? 0 : 1;
+
+            if (Input::has('completed') && Input::get('completed')) {
+              $entry->completed_at = date("Y-m-d H:i:s");
+            }
+            else {
+              $entry->completed_at = null;
+            }
 
             if (Input::get('location')) {
                 $entry->location = e(Input::get('location'));
@@ -610,7 +629,14 @@ class EntriesController extends Controller
                 $actions = '';
             }
 
-             // ensure array is empty
+            if ($entry->completed_at) {
+                $completed ="<i class='fa fa-lg fa-check completed' data-toggle='tooltip' data-placement='top' title='Completed'></i>";
+            }
+            else {
+                $completed = null;
+            }
+
+            // ensure array is empty
             $exchangeTypes=[];
             foreach ($entry->exchangeTypes as $et) {
                 $exchangeTypes[] = $et->name;
@@ -628,7 +654,7 @@ class EntriesController extends Controller
 
             $rows[] = array(
               'image' => $imageTag,
-              'post_type' => strtoupper($entry->post_type),
+              'post_type' => strtoupper($entry->post_type).$completed,
               'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
               'author' => '<img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>',
               'location' => $entry->location,

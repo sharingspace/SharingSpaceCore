@@ -8758,9 +8758,6 @@ $color-green: #9AE14F;
       margin:0;
     }
     .percent_caption {
-      //width: 100%;
-      //float: left;
-      //line-height: 200%;
       position:relative;
       top:-23px;
     }
@@ -8781,6 +8778,13 @@ $color-green: #9AE14F;
     font-size:18px;
   }
 }
+
+.completed {
+  color: #5cb85c;
+  display: inline-block;
+  margin-left: 5px;
+}
+
 /**
  * Footer region
  * 
@@ -9257,7 +9261,7 @@ section.TreborScholz {
   }
 
   video {
-    max-width: 250px;
+    width: 80%;
     margin: auto;
     margin-top: 30px;
     margin-bottom: 40px;
@@ -9266,6 +9270,7 @@ section.TreborScholz {
     background-size: cover;
     padding: 55px 30px 10px;
   }
+
   h2 {
     text-align: center;
     margin-bottom: 10px;
@@ -9279,84 +9284,27 @@ section.TreborScholz {
       }
     }
   }
-  ol {
-    padding-left: 25px;
-  }
+
   .carousel-control {
     color: #333;
-    display: none;
-    width: 25px;
-    left: 50%;
-    top: -260px;
-    right: auto;
     margin-bottom: 10px;
     &.left, &.right {
       background-image: none;
     }
     .glyphicon-chevron-left {
-      margin-left: -40px;
+      margin-left: -20px;
     }
     .glyphicon-chevron-right {
-      margin-right: -40px;
-    }
-  }
-
-  .carousel-indicators li {
-    visibility: hidden;
-  }
-
-  @media (min-width: 450px) {
-    video {
-      max-width: 400px;
-    }
-  }
-  @media (min-width: 600px) {
-    video {
-      max-width: 500px;
-    }
-  }
-  @media (min-width: 700px) {
-    video {
-      max-width: 600px;
-    }
-  }
-
-  @media (min-width: $screen-sm-min) {
-    video {
-      max-width: 600px;
-    }
-    .videoWrapper {
-      margin-top: 30px;
+      margin-right: -20px;
     }
   }
 
   @media (min-width: $screen-md-min) {
     video {
-      max-width: 700px;
+      float: left;
     }
     h2 {
       margin-bottom: 15px;
-      margin-top: 0;
-    }
-    .carousel-control {
-      .glyphicon-chevron-right {
-        right: 0;
-      }
-      .glyphicon-chevron-left {
-        left: 0;
-      }
-    }
-    .pagination_arrows {
-      display: block;
-      margin-top: 80px;
-      width: 33% !important;
-      float: left;
-    }
-    .carousel-control {
-      left: 13%;
-      top: 150px;
-    }
-    .videoWrapper {
       margin-top: 0;
     }
   }
