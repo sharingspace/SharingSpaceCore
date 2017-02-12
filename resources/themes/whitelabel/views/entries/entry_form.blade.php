@@ -182,29 +182,38 @@
                 </div>
 
                 <div class="col-sm-6 col-xs-12">
-                  <label class="checkbox pull-left" for="visible_checkbox">
-                    @if(isset($entry))
-                      {{ Form::checkbox('private', 1, !old('visible',$entry->visible), array('id'=>'visible_checkbox')) }}
-                    @else
-                      {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
-                    @endif
-                    <i></i> {{ trans('general.entries.not_visible')}}
-                  </label>
-                </div> <!-- col 10 -->
-
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                      <label class="checkbox pull-left" for="visible_checkbox">
+                        @if(isset($entry))
+                          {{ Form::checkbox('private', 1, !old('visible',$entry->visible), array('id'=>'visible_checkbox')) }}
+                        @else
+                          {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
+                        @endif
+                        <i></i> {{ trans('general.entries.not_visible')}}
+                      </label>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                      <label class="checkbox pull-left" for="completed">
+                        @if(isset($entry))
+                          {{ Form::checkbox('completed', 1, old('completed',$entry->completed_at), array('id'=>'completed')) }}
+                          <i></i> {{ trans('general.entries.mark_completed')}}
+                        @endif
+                      </label>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-sm-6 col-xs-12 ">
-                  @if(isset($entry))
-                    <button class="btn btn-colored pull-right">
-                  @else
-                    <button class="btn btn-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
-                  @endif
-                      {{ trans('general.entries.save_entry') }}
-                    </button>
-                  <a class="btn btn-light-colored pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
-                </div> <!-- col 2 -->
-              </div> <!-- row -->
-            </div> <!-- col 9 -->
-
-
-          </div>  <!-- row -->
-        </form>
+                @if(isset($entry))
+                  <button class="btn btn-colored pull-right">
+                @else
+                  <button class="btn btn-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
+                @endif
+                    {{ trans('general.entries.save_entry') }}
+                  </button>
+                <a class="btn btn-light-colored pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
+              </div> <!-- col 2 -->
+            </div> <!-- row -->
+          </div> <!-- col 9 -->
+        </div>  <!-- row -->
+      </form>

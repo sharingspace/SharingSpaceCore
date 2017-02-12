@@ -167,9 +167,14 @@
    });
 
 $( document ).ready(function() {
+  $( document ).tooltip();
+
   // we off screen the table headers as they are obvious.
   $('table th').addClass('sr-only');
   $('table').on( "click", '[id^=delete_entry_]', function() {
+    if (!confirm('{{trans("general.entries.delete_confirmation")}}')) {
+      return false;
+    }
     var entryID = $(this).attr('id').split('_')[2];
 
     // add a clas to the row so we can remove it on success
