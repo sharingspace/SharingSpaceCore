@@ -55,26 +55,27 @@ class SubdomainMiddleware
    */
     public function handle($request, Closure $next)
     {
-        //LOG::debug('SubdomainMiddleware: entered: path = '.$request->path());
+        LOG::debug('SubdomainMiddleware: entered: path = '.$request->path());
         
         $parsed_url = parse_url($request->url());
         $subdomain = extract_subdomains($parsed_url['host']);
         $now = Carbon::now();
-        
-        if ((strpos($request->path(), 'auth/register') !== FALSE) && $subdomain) {
-            // if someone is registering from a  whitelabel, redirect them to register
-            // on the corporate site. 
-            $url = str_replace($subdomain.".", '', $request->url());
+        if (0) {
+            if ((strpos($request->path(), 'auth/register') !== FALSE) && $subdomain) {
+                // if someone is registering from a  whitelabel, redirect them to register
+                // on the corporate site. 
+                $url = str_replace($subdomain.".", '', $request->url());
 
-            return redirect($url)->with('subdomain', $subdomain);
-        }
-        else if ((strpos($request->path(), 'join') !== FALSE) && $request->subdomain) {
+                return redirect($url)->with('subdomain', $subdomain);
+            }
+            else if ((strpos($request->path(), 'join') !== FALSE) && $request->subdomain) {
 
-            $parsed_url = parse_url($request->url());
-            $url = $parsed_url['scheme'].'://'.$request->subdomain.'.'.$parsed_url['host'].'/join';
-            //LOG::debug('SubdomainMiddleware: scheme ='.$parsed_url['scheme'].'  '.$request->subdomain.'.'.$parsed_url['host'].'   '.$url);
+                $parsed_url = parse_url($request->url());
+                $url = $parsed_url['scheme'].'://'.$request->subdomain.'.'.$parsed_url['host'].'/join';
+                //LOG::debug('SubdomainMiddleware: scheme ='.$parsed_url['scheme'].'  '.$request->subdomain.'.'.$parsed_url['host'].'   '.$url);
 
-            return redirect($url);
+                return redirect($url);
+            }
         }
 
         // FIXME - add   ->where('subdomain_expires_at', '>', $now) back in
