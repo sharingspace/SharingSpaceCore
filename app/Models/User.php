@@ -213,7 +213,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar;
         }
         else {
-            return "http://gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm&s=200";
+            return "https://gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm&s=200";
         }
      }
 
