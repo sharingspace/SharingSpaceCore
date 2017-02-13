@@ -28,7 +28,7 @@ class CommunityPermissionMiddleware
     {
         // This is a whitelabel group, otherwise skip it
         if ($request->whitelabel_group) {
-            LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
+            //LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
             if ($request->whitelabel_group->group_type == 'S') {
                 LOG::debug('CommunityPermissionMiddleware: This is a secret group');
 

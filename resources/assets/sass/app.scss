@@ -8758,9 +8758,6 @@ $color-green: #9AE14F;
       margin:0;
     }
     .percent_caption {
-      //width: 100%;
-      //float: left;
-      //line-height: 200%;
       position:relative;
       top:-23px;
     }
@@ -8781,6 +8778,13 @@ $color-green: #9AE14F;
     font-size:18px;
   }
 }
+
+.completed {
+  color: #5cb85c;
+  display: inline-block;
+  margin-left: 5px;
+}
+
 /**
  * Footer region
  * 

@@ -10688,6 +10688,12 @@ Quick add
   font-size: 18px;
 }
 
+.completed {
+  color: #5cb85c;
+  display: inline-block;
+  margin-left: 5px;
+}
+
 /**
  * Footer region
  * 

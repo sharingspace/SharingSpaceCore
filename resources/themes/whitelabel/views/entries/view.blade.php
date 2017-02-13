@@ -14,13 +14,13 @@
 	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
     @if($images && $images[0]->filename)
-    	<div class="col-lg-4 col-sm-5 col-xs-12 margin-top-20">
+    	<div class="col-md-4 col-sm-5 col-xs-12 margin-top-20">
         <div id="image_box_container"> 
           <img id="entryImage" src="{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}">
         </div>
       </div> <!-- col-md-4 -->
       
-      <div class="col-lg-4 col-sm-7 col-xs-12 margin-top-20">
+      <div class="col-md-8 col-sm-7 col-xs-12 margin-top-20">
       @else
       <div class="col-xs-12 margin-top-20">
       @endif
@@ -59,11 +59,16 @@
 
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
             <strong class="primaryText">{{ trans('general.entries.visibility') }}:</strong>
+            
+            @if ($entry->completed_at)
+              {{ trans('general.entries.not_visible') }} ({{ trans('general.entries.completed') }})
+            @else
             @if($entry->visible)
               {{ trans('general.entries.visible') }}
             @else
               {{ trans('general.entries.not_visible') }}
             @endif          
+            @endif
           </div>
 
            @if($entry->description)
@@ -86,10 +91,11 @@
                 {{ Form::token()}}
                   <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
                   <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
-
+                  @if (0)
                   @if ($entry->completed_at=='')
                     <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
-                    <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
+                      <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.mark_completed') }}</a>
+                  @endif
                   @endif
                   <button type="submit" class="btn btn-xs btn-dark-colored"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
 

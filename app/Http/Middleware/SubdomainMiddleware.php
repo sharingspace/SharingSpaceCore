@@ -55,7 +55,7 @@ class SubdomainMiddleware
    */
     public function handle($request, Closure $next)
     {
-        LOG::debug('SubdomainMiddleware: entered: path = '.$request->path());
+        //LOG::debug('SubdomainMiddleware: entered: path = '.$request->path());
         
         $parsed_url = parse_url($request->url());
         $subdomain = extract_subdomains($parsed_url['host']);

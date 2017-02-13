@@ -57,10 +57,10 @@ class AuthServiceProvider extends ServiceProvider
 
     // Check if the user can see the community entries
     $gate->define('view-browse', function ($user, $community) {
-      Log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
+      //Log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
 
       if ($user->canSeeCommunity($community) || $community->group_type != 'S') {
-        Log::debug("view-browse ************** can view view-browse");
+        //Log::debug("view-browse ************** can view view-browse");
         return true;
       }
     });
@@ -140,7 +140,7 @@ class AuthServiceProvider extends ServiceProvider
 
     // Check whether the user can edit a users profile
     $gate->define('update-profile', function ($user, $profile_id) {
-      Log::debug("update-profile: ".$user->id ."   ". $profile_id);
+      //Log::debug("update-profile: ".$user->id ."   ". $profile_id);
       return $user->id === $profile_id;
     });
 

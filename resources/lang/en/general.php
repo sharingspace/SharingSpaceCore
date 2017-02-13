@@ -168,7 +168,8 @@ return [
       'by' => 'Who',
       'description' => 'Description',
       'edit_entry' => 'Edit',
-      'completed' => 'Mark Completed',
+      'completed' => 'Completed',
+      'mark_completed' => 'Mark Completed',
       'delete' => 'Delete',
       'view_offer' => 'View Offers',
       'make_offer' => 'Make Offer',
@@ -191,6 +192,7 @@ return [
       'public_comments' => 'Comments posted here are publicly viewable.',
       'added' => 'You added',
       'not_signed_in_offer' => 'Please sign-in if you want to make an offer',
+      'delete_confirmation' => 'Are you sure you want to delete this entry?',
 
       'messages' => [
         'invalid' => 'That entry is not valid.',
