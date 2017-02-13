@@ -144,7 +144,7 @@
                   <!-- Description -->
                   <label class="input">
                     ({{trans('general.markdown')}}
-                    <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown">
+                    <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown" target="_blank">
                       <i class='fa fa-info-circle'></i>
                     </a> )                    
                     @if(isset($entry))
