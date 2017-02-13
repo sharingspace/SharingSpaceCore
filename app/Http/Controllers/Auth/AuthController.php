@@ -45,7 +45,7 @@ class AuthController extends Controller
     {
         log::debug("getRegister: entered");
 
-        if ($request->whitelabel_group->subdomain) {
+        if ($request->whitelabel_group && $request->whitelabel_group->subdomain) {
             log::debug("getRegister: subdomain = ".$request->whitelabel_group->subdomain);
 
             return view('auth.register')->with('subdomain', $request->whitelabel_group->subdomain)->with('share', $request->whitelabel_group->name);
@@ -65,7 +65,6 @@ class AuthController extends Controller
       $user = $request->user();
       if ($user) {
         if (Input::get('subdomain')) {
-
           LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain'));
 
           return redirect()->route('join-community', ['subdomain'=>Input::get('subdomain')]);
@@ -101,33 +100,29 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(Request $request, $provider)
     {
+      if ($request->session()->has('auth_subdomain')) {
+          $subdomain = $request->session()->get('auth_subdomain');
+          $request->session()->forget('auth_subdomain');
+          $redirect = 'https://'.$subdomain.'.'.config('app.domain');
+      } else {
+          $redirect = config('app.url');
+      }
+      try {
 
-        if ($request->session()->has('auth_subdomain')) {
-            $subdomain = $request->session()->get('auth_subdomain');
-            $request->session()->forget('auth_subdomain');
-            $redirect = 'https://'.$subdomain.'.'.config('app.domain');
-        } else {
-            $redirect = config('app.url');
-        }
-        try {
+          $user = Socialite::driver($provider)->user();
 
-            $user = Socialite::driver($provider)->user();
+          if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
+              Auth::login($getUser);
+              return redirect($redirect)->with('success', 'You have been logged in!');
+          } else {
+              $newUser = User::saveSocialAccount($user, $provider);
+              Auth::login($newUser);
+              return redirect($redirect)->with('success', 'Welcome aboard!');
+          }
 
-            if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
-                Auth::login($getUser);
-                return redirect($redirect)->with('success', 'You have been logged in!');
-            } else {
-                $newUser = User::saveSocialAccount($user, $provider);
-                Auth::login($newUser);
-                return redirect($redirect)->with('success', 'Welcome aboard!');
-            }
-
-        } catch (Exception $e) {
-            return redirect($redirect)->with('error', 'We couldn\'t log you in :(');
-        }
-
-
-
+      } catch (Exception $e) {
+          return redirect($redirect)->with('error', 'We couldn\'t log you in :(');
+      }
     }
 
     /**
@@ -138,16 +133,16 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make(
-            $data,
-            [
-            'display_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password',
-            'terms_and_conditions' => 'accepted',
-            ]
-        );
+      return Validator::make(
+        $data,
+        [
+        'display_name' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|min:6',
+        'password_confirmation' => 'required|same:password',
+        'terms_and_conditions' => 'accepted',
+        ]
+      );
     }
 
     /**
@@ -158,12 +153,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create(
-            [
-            'display_name' => $data['display_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            ]
-        );
+      return User::create(
+        [
+        'display_name' => $data['display_name'],
+        'email' => $data['email'],
+        'password' => bcrypt($data['password']),
+        ]
+      );
     }
 }

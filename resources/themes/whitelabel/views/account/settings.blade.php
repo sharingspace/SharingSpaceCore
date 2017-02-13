@@ -60,7 +60,7 @@
             <!-- About -->
             <div class="col-md-12 form-group {{ $errors->first('bio', 'has-error') }}">
               <label class="control-label" for="bio">{{trans('general.settings.about_placeholder')}} ({{trans('general.markdown')}} <a href="
-https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )</label>
+https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown" target="_blank"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )</label>
 								<textarea class="form-control" rows="3" placeholder="{{trans('general.settings.about_placeholder')}}" name="bio">{{ Input::old('bio', Auth::user()->bio) }}</textarea>
                 {!! $errors->first('bio', '<span class="help-block">:message</span>') !!}
             </div>
