@@ -72,15 +72,11 @@ Route::group(
         Auth::routes();
 
         Route::group(
-            array('prefix' => 'auth'),
+            array('prefix' => 'login'),
             function () {
-
-
                 // Social
-                Route::get('{provider}', 'Auth\LoginController@redirectToProvider');
+                Route::get('{provider}', 'Auth\LoginController@redirectToSocialProvider');
                 Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
-
             }
         );
 
@@ -509,12 +505,7 @@ Route::group(
                         'uses' => 'AdminController@getCustomerList')
                 );
 
-                Route::get(
-                    'debug',
-                    array(
-                        'as' => 'admin.debug',
-                        'uses' => 'EnvController@test')
-                );
+
         });
 
         /*

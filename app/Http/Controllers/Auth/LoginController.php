@@ -36,10 +36,9 @@ class LoginController extends Controller
 
     public function getRegister(Request $request)
     {
-        //log::debug("getRegister: entered");
 
         if ($request->whitelabel_group && $request->whitelabel_group->subdomain) {
-            log::debug("getRegister: subdomain = ".$request->whitelabel_group->subdomain);
+            // log::debug("getRegister: subdomain = ".$request->whitelabel_group->subdomain);
 
             return view('auth.register')->with('subdomain', $request->whitelabel_group->subdomain)->with('share', $request->whitelabel_group->name);
         }
@@ -49,20 +48,13 @@ class LoginController extends Controller
 
     public function postRegister(Request $request)
     {
-        //log::debug("postRegister: entered");
-
-        // call the RegistersUsers::postRegister method
-        // hold onto the return value for later
         $redirect = $this->register($request);
 
         $user = $request->user();
         if ($user) {
             if (Input::get('subdomain')) {
-                LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain'));
-
                 return redirect()->route('join-community', ['subdomain'=>Input::get('subdomain')]);
             }
-            LOG::debug('postRegister: no subdomain');
 
             return Redirect::back()->with('success', "You have successfully created an Anyshare account");
         }
@@ -77,14 +69,14 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider(Request $request, $provider)
+    public function redirectToSocialProvider(Request $request, $provider)
     {
         if ($request->whitelabel_group) {
             $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
         }
-
         return Socialite::driver($provider)->redirect();
     }
+
 
     /**
      * Obtain the user information from the provider.

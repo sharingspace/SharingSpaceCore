@@ -70,7 +70,7 @@
           <!-- NOTIFICATION BOX -->
           @endif
           @else
-          <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
+          <li><a href="{{ route('register') }}">{{ trans('general.nav.try') }}</a></li>
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
           @endif
           @can('admin')
@@ -133,7 +133,7 @@
                     </a>
                   </li>
 
-                  <!-- <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
+                  <!-- <li><a href="{{ route('register') }}">{{ trans('general.nav.try') }}</a></li>
                   <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li> -->
                 </ul>
               </nav>
