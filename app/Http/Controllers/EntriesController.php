@@ -611,12 +611,21 @@ class EntriesController extends Controller
                 $imageTag = '<a href="'.route('entry.view', $entry->id).'" class="'.$entry->post_type.'_square"></a>';
             }
 
+            if ($entry->author) {
+                $author_info = '<img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>';
 
+                if ($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) {
+                    $author_info .= '<span class="label label-primary">'.$entry->author->getCustomLabelInCommunity($request->whitelabel_group).'</span>';
+                }
+
+            } else {
+                $author_info = 'deleted';
+            }
             $rows[] = array(
               'image' => $imageTag,
               'post_type' => strtoupper($entry->post_type),
               'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
-              'author' => ($entry->author) ? '<img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>'.(($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) ? ' <span class="label label-primary">'.$entry->author->getCustomLabelInCommunity($request->whitelabel_group).'</span>' : 'deleted') : '',
+              'author' => $author_info,
 
               'location' => $entry->location,
               'created_at' => $entry->created_at->format('M jS, Y'),
