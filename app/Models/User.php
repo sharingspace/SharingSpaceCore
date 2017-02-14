@@ -355,7 +355,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getCustomLabelInCommunity($community)
     {
-        return $this->communities()->where('community_id','=',$community->id)->first()->pivot->custom_label;
+        $this_community = $this->communities()->where('community_id','=',$community->id)->first();
+        if ($this_community) {
+            return $this_community->pivot->custom_label;
+        } else {
+            return 'deleted';
+        }
+
     }
 
 
