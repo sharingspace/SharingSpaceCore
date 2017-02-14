@@ -69,82 +69,16 @@ Route::group(
         |--------------------------------------------------------------------------
         */
 
-        // Forgotten password
-        Route::get(
-            'auth/forgot',
-            array(
-                'as' => 'forgot_password.email.form',
-                'uses' => 'Auth\PasswordController@getEmail')
-        );
-
-        // Forgotten password
-        Route::post(
-            'auth/forgot',
-            array(
-                'as' => 'forgot_password.email.send',
-                'uses' => 'Auth\PasswordController@postEmail')
-        );
-
-        // Password Reset Token
-        Route::get(
-            'password/reset/{token?}',
-            array(
-                'as' => 'forgot_password.token',
-                'uses' => 'Auth\PasswordController@showResetForm')
-        );
-
-
-        // Password Reset Token
-        Route::post(
-            'password/reset',
-            array(
-                'as' => 'forgot_password',
-                'uses' => 'Auth\PasswordController@reset')
-        );
-
-        // Password Reset Token
-        Route::get(
-            'password/reset',
-            array(
-                'as' => 'forgot_password',
-                'uses' => 'Auth\PasswordController@reset')
-        );
+        Auth::routes();
 
         Route::group(
             array('prefix' => 'auth'),
             function () {
 
-                // Logout
-                Route::get(
-                    'logout',
-                    array(
-                    'as' => 'logout',
-                    'uses' => 'Auth\AuthController@getLogout')
-                );
-
-                // Login
-                Route::get(
-                    'login',
-                    array(
-                    'as' => 'login',
-                    'uses' => 'Auth\AuthController@getLogin')
-                );
-
-                Route::post('login', 'Auth\AuthController@postLogin');
-
-                // Register
-                Route::get(
-                    'register',
-                    array(
-                    'as' => 'user.register',
-                    'uses' => 'Auth\AuthController@getRegister')
-                );
-
-                Route::post('register', 'Auth\AuthController@postRegister');
 
                 // Social
-                Route::get('{provider}', 'Auth\AuthController@redirectToProvider');
-                Route::get('{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+                Route::get('{provider}', 'Auth\LoginController@redirectToProvider');
+                Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 
             }
