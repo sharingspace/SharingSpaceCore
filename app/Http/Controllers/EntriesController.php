@@ -43,9 +43,9 @@ class EntriesController extends Controller
           }
         }
         else {
-          // user not logged in
-          if($request->whitelabel_group->isSecret()) {
-            return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
+          // user not logged in. Can see entry only if Share is open
+          if(!$request->whitelabel_group->isOpen()) {
+            return redirect()->route('home')->with('error', trans('general.entries.messages.entry_view_not_allowed'));
           }
         }
             
@@ -612,7 +612,6 @@ class EntriesController extends Controller
         else {
             $user = null;
         }
-
 
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at=='') && ($entry->checkUserCanEditEntry($user))) {

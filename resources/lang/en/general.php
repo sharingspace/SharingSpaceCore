@@ -201,6 +201,7 @@ return [
         'save_edits' => 'Your entry has been updated!',
         'upload_fail' => "Your image failed to upload",
         'not_allowed' => 'You are not allowed to edit this entry',
+        'entry_view_not_allowed' => 'Please sign-in to view an entry on a closed Share',
         'delete_success' => 'Your entry has been deleted',
         'delete_failed' => 'Something went wrong. Your entry could not be deleted',
   			'delete_not_allowed' => 'You are not allowed to delete this entry.',
