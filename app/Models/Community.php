@@ -115,7 +115,7 @@ class Community extends Model
     */
     public function members()
     {
-        return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin');
+        return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin','custom_label');
     }
 
    /**

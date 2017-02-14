@@ -33,11 +33,17 @@
                     <img src="{{ $member->gravatar_img() }}">
                   </a>
                 </td>
-                <td><a href="{{ route('user.profile', [$member->id]) }}">{{ $member->getDisplayName() }}</a>
+                <td>
+                    <a href="{{ route('user.profile', [$member->id]) }}">{{ $member->getDisplayName() }}</a>
 
                 @if ($member->canAdmin($whitelabel_group))
                   <i class="fa fa-star text-warning"></i>
                 @endif
+
+                @if ($member->pivot->custom_label!='')
+                    <span class="label label-primary">{{ $member->pivot->custom_label }}</span>
+                @endif
+
                 </td>
                 <td>{{$member->location}}</td>
                 <td>

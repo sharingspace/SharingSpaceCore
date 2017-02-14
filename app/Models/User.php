@@ -298,7 +298,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function communities()
     {
-        return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id');
+        return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id')->withPivot('custom_label');
     }
 
  
@@ -343,6 +343,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getSlackUsername($community)
     {
         return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
+    }
+
+
+    /**
+     * Returns communities by user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
+    public function getCustomLabelInCommunity($community)
+    {
+        return $this->communities()->where('community_id','=',$community->id)->first()->pivot->custom_label;
     }
 
 
