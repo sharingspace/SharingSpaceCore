@@ -612,11 +612,12 @@ class EntriesController extends Controller
             }
 
             if ($entry->author) {
-                $author_info = '<img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>';
+                $author_info = '<nobr><img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs"><a href="'.route('user.profile', $entry->author->id).'">'.$entry->author->getDisplayName().'</a>';
 
                 if ($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) {
-                    $author_info .= '<span class="label label-primary">'.$entry->author->getCustomLabelInCommunity($request->whitelabel_group).'</span>';
+                    $author_info .= ' <span class="label label-primary">'.$entry->author->getCustomLabelInCommunity($request->whitelabel_group).'</span>';
                 }
+                $author_info .= '</nobr>';
 
             } else {
                 $author_info = 'deleted';
