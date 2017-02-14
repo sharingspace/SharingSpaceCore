@@ -222,7 +222,7 @@
             @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
               {{--*/ $exchangeTypes[] = $exchange_type->name /*--}}
             @endforeach
-            {{ implode(', ', $exchangeTypes)}}
+
             <a href="#" title="This shows options for member exchange on this Share"><i class="fa fa-info-circle"></i></a>
           @endif
         </span>
