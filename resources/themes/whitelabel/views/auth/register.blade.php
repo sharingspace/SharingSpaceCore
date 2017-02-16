@@ -72,7 +72,7 @@
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>
 
-            <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
+            <div class="hidden margin-top-30">
               <label class="checkbox nomargin">
                 <input checked type="checkbox" name="join-hub"><i></i><strong>{{$share}}</strong>{{ trans('general.register.i_want_to_join') }}
               </label>

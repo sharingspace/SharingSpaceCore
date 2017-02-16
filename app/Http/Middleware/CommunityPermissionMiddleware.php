@@ -33,8 +33,7 @@ class CommunityPermissionMiddleware
                 LOG::debug('CommunityPermissionMiddleware: This is a secret group');
 
                 // If the user is logged in, check that they are a member and are allowed to see this group
-                if (Auth::check())
-                {
+                if (Auth::check()) {
                     LOG::debug('CommunityPermissionMiddleware: User is logged in');
                     if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
                         LOG::debug('CommunityPermissionMiddleware: This user is authorized to see this community');

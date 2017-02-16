@@ -112,7 +112,8 @@ class AuthServiceProvider extends ServiceProvider
 
     // Check that the user can view an entry
     $gate->define('view-entry', function ($user, $community) {
-      if (($community->group_type!='S') || ($user->isMemberOfCommunity($community))) {
+      log::debug("view-entry");
+      if (($community->group_type == 'O') || ($user->isMemberOfCommunity($community))) {
         return true;
       }
     });
