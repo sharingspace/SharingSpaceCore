@@ -3,6 +3,9 @@ $primaryText: rgba(#000, 0.87);
 $secondaryText: rgba(#000, 0.54);
 $dividerColor: rgba(#000, 0.12);
 $white: #fff;
+$selectColor: $white; 
+$selectBackgroundColor: $accentColor;
+
 
 @mixin box-shadow($top, $left, $blur, $color, $inset: false) {
   @if $inset {
@@ -17,15 +20,18 @@ $white: #fff;
 }
 
 ::selection {
-    background: $primaryColor;
+    color: $selectColor;
+    background-color: $selectBackgroundColor;
 }
 
 ::-moz-selection {
-    background: $primaryColor; /* Firefox */
+    color: $selectColor; /* Firefox */
+    background-color: $selectBackgroundColor;
 }
 
 ::-webkit-selection {
-    background: $primaryColor; /* Safari */
+    color: $selectColor; /* Safari */
+    background-color: $selectBackgroundColor;
 }
 
 .primary {
@@ -72,17 +78,18 @@ p, td {
   background-color: darken($accentColor, 15%);
 }
 
-a {
-    &:active, &:focus, &:hover, .btn.focus, .btn:focus, .btn:hover  {
-      color: lighten($primaryColor, 35%);
-      text-decoration: none;
-    }
-}
+
 
 #topBar {
-    background-color: $darkPrimaryColor !important;
-    ul.dropdown-menu { /* submenu border top color */
+  background-color: $darkPrimaryColor !important;
+  ul.dropdown-menu { /* submenu border top color */
     border-top-color: $primaryColor;
+  }
+  .notifications-popdown-wrapper .unread a {
+    color: $accentColor !important;
+    &:hover {
+      color: $inverseAccentColor !important;
+    }
   }
 }
 
@@ -122,11 +129,20 @@ a {
     background-color: rgba(0,0,0,0.03);
     opacity: 1;
   }
+  a.logo {
+    color: $accentColor;
+    &:hover {
+      color: $primaryTextColor !important;
+    }
+  }
 }
 
-#share_content {
+#share_content, #aboutModal {
   a, .btn-default {
     color: $accentColor !important;
+    &.btn-social {
+      color: $white !important;
+    }
     &:hover {
       color: $inverseAccentColor !important;
     }
@@ -168,9 +184,7 @@ a {
     }
   }
 
-  .fa-info-circle {
-    color: $accentColor;
-  }
+
 
   .pagination>.active>a, 
   .pagination>.active>a:focus,

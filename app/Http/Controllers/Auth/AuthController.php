@@ -43,12 +43,12 @@ class AuthController extends Controller
 
     public function getRegister(Request $request)
     {
-        session('subdomain');
-        if (session()->has('subdomain')) {
-            $group = Community::where('subdomain', '=', session('subdomain'))
-                        ->whereNotNull('subdomain')->first();
+        log::debug("getRegister: entered");
 
-            return view('auth.register')->with('subdomain', session('subdomain'))->with('shareName', $group->name);
+        if ($request->whitelabel_group && $request->whitelabel_group->subdomain) {
+            log::debug("getRegister: subdomain = ".$request->whitelabel_group->subdomain);
+
+            return view('auth.register')->with('subdomain', $request->whitelabel_group->subdomain)->with('share', $request->whitelabel_group->name);
         }
         
         return view('auth.register');
@@ -56,23 +56,20 @@ class AuthController extends Controller
 
     public function postRegister(Request $request)
     {
+      log::debug("postRegister: entered");
+
       // call the RegistersUsers::postRegister method
       // hold onto the return value for later
       $redirect = $this->register($request);
 
       $user = $request->user();
       if ($user) {
-
         if (Input::get('subdomain')) {
+          LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain'));
 
-          $parsed_url = parse_url($request->url());
-
-          LOG::debug('postRegister: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>'. Input::get('subdomain').'  '.Input::get('shareName').'  '.$parsed_url['host']);
-          return view('join_community')->with('subdomain', Input::get('subdomain'))
-                                      ->with('shareName', Input::get('shareName'))
-                                      ->with('host', $parsed_url['host']);
+          return redirect()->route('join-community', ['subdomain'=>Input::get('subdomain')]);
         }
-        //LOG::debug('postRegister: no subdomain');
+        LOG::debug('postRegister: no subdomain');
 
         return Redirect::back()->with('success', "You have successfully created an Anyshare account");
       }
@@ -103,33 +100,29 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(Request $request, $provider)
     {
+      if ($request->session()->has('auth_subdomain')) {
+          $subdomain = $request->session()->get('auth_subdomain');
+          $request->session()->forget('auth_subdomain');
+          $redirect = 'https://'.$subdomain.'.'.config('app.domain');
+      } else {
+          $redirect = config('app.url');
+      }
+      try {
 
-        if ($request->session()->has('auth_subdomain')) {
-            $subdomain = $request->session()->get('auth_subdomain');
-            $request->session()->forget('auth_subdomain');
-            $redirect = 'https://'.$subdomain.'.'.config('app.domain');
-        } else {
-            $redirect = config('app.url');
-        }
-        try {
+          $user = Socialite::driver($provider)->user();
 
-            $user = Socialite::driver($provider)->user();
+          if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
+              Auth::login($getUser);
+              return redirect($redirect)->with('success', 'You have been logged in!');
+          } else {
+              $newUser = User::saveSocialAccount($user, $provider);
+              Auth::login($newUser);
+              return redirect($redirect)->with('success', 'Welcome aboard!');
+          }
 
-            if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
-                Auth::login($getUser);
-                return redirect($redirect)->with('success', 'You have been logged in!');
-            } else {
-                $newUser = User::saveSocialAccount($user, $provider);
-                Auth::login($newUser);
-                return redirect($redirect)->with('success', 'Welcome aboard!');
-            }
-
-        } catch (Exception $e) {
-            return redirect($redirect)->with('error', 'We couldn\'t log you in :(');
-        }
-
-
-
+      } catch (Exception $e) {
+          return redirect($redirect)->with('error', 'We couldn\'t log you in :(');
+      }
     }
 
     /**
@@ -140,16 +133,16 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make(
-            $data,
-            [
-            'display_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password',
-            'terms_and_conditions' => 'accepted',
-            ]
-        );
+      return Validator::make(
+        $data,
+        [
+        'display_name' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|min:6',
+        'password_confirmation' => 'required|same:password',
+        'terms_and_conditions' => 'accepted',
+        ]
+      );
     }
 
     /**
@@ -160,12 +153,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create(
-            [
-            'display_name' => $data['display_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            ]
-        );
+      return User::create(
+        [
+        'display_name' => $data['display_name'],
+        'email' => $data['email'],
+        'password' => bcrypt($data['password']),
+        ]
+      );
     }
 }

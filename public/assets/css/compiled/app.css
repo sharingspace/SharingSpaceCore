@@ -10044,6 +10044,18 @@ Quick add
   font-weight: bold;
 }
 
+.user_profile h1 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .user_profile h1 {
+    font-size: 36px;
+  }
+}
+
 .user_profile .fixed-table-container table {
   width: 99%;
 }
@@ -10529,7 +10541,7 @@ Quick add
 
 #entry_view .close {
   position: absolute;
-  top: 15px;
+  top: 6px;
   right: 35px;
   font-size: 45px;
   font-weight: bold;
@@ -10674,6 +10686,12 @@ Quick add
 
 #dialog-confirm span {
   font-size: 18px;
+}
+
+.completed {
+  color: #5cb85c;
+  display: inline-block;
+  margin-left: 5px;
 }
 
 /**
@@ -11135,6 +11153,122 @@ section.TreborScholz {
   margin-bottom: 15px;
 }
 
+/******************* Product page */
+
+#featureCarousel .row-eq-height {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#featureCarousel .aligner {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+#featureCarousel .aligner .aligner-item {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+#featureCarousel .videoWrapper {
+  margin-top: 0x;
+}
+
+#featureCarousel video {
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  background-image: url("/assets/movies/movie_background.png");
+  background-repeat: no;
+  background-size: cover;
+  padding: 55px 30px 10px;
+}
+
+#featureCarousel h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#featureCarousel h2 sup {
+  font-size: 16px;
+}
+
+#featureCarousel h2 span {
+  font-size: 20px;
+}
+
+#featureCarousel h2 span em {
+  font-weight: normal;
+}
+
+#featureCarousel .carousel-control {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#featureCarousel .carousel-control.left,
+#featureCarousel .carousel-control.right {
+  background-image: none;
+}
+
+#featureCarousel .carousel-control .glyphicon-chevron-left {
+  margin-left: -20px;
+}
+
+#featureCarousel .carousel-control .glyphicon-chevron-right {
+  margin-right: -20px;
+}
+
+@media (min-width: 992px) {
+  #featureCarousel video {
+    float: left;
+  }
+
+  #featureCarousel h2 {
+    margin-bottom: 15px;
+    margin-top: 0;
+  }
+}
+
+#headerWrapper {
+  position: relative;
+  top: 29%;
+}
+
+#headerWrapper .heading,
+#headerWrapper .hp_subheading,
+#headerWrapper .subheading {
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#headerWrapper .hp_subheading,
+#headerWrapper .subheading {
+  font-size: 25px;
+  font-style: italic;
+  font-weight: 600;
+  position: relative;
+}
+
+#headerWrapper .heading {
+  margin-top: 7px;
+  padding-bottom: 15px;
+  font-size: 50px;
+  position: relative;
+}
+
 /*************** Bootstrap extensions ******************/
 /** ************************************* **
 
@@ -11208,32 +11342,6 @@ button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
-}
-
-::-moz-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-}
-
-::selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-}
-
-::-moz-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-  /* Firefox */
-}
-
-::-webkit-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-  /* Safari */
 }
 
 button {
@@ -11396,11 +11504,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Raleway','Open Sans',Arial,Helvetica,sans-serif;
-  font-weight: 600;
-  color: #414141;
-  margin: 0 0 30px 0;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -11436,15 +11539,6 @@ h6 {
   font-size: 12px;
   letter-spacing: normal;
   margin: 0 0 20px 0;
-}
-
-h1 > span,
-h2 > span,
-h3 > span,
-h4 > span,
-h5 > span,
-h6 > span {
-  color: #1ABC9C;
 }
 
 /**	03. Placeholder

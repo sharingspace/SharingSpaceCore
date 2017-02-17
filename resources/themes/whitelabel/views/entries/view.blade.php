@@ -14,13 +14,13 @@
 	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
     @if($images && $images[0]->filename)
-    	<div class="col-lg-4 col-sm-5 col-xs-12 margin-top-20">
+    	<div class="col-md-4 col-sm-5 col-xs-12 margin-top-20">
         <div id="image_box_container"> 
           <img id="entryImage" src="{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}">
         </div>
       </div> <!-- col-md-4 -->
       
-      <div class="col-lg-4 col-sm-7 col-xs-12 margin-top-20">
+      <div class="col-md-8 col-sm-7 col-xs-12 margin-top-20">
       @else
       <div class="col-xs-12 margin-top-20">
       @endif
@@ -63,6 +63,20 @@
           </div>
           @endif
 
+          <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
+            <strong class="primaryText">{{ trans('general.entries.visibility') }}:</strong>
+            
+            @if ($entry->completed_at)
+              {{ trans('general.entries.not_visible') }} ({{ trans('general.entries.completed') }})
+            @else
+            @if($entry->visible)
+              {{ trans('general.entries.visible') }}
+            @else
+              {{ trans('general.entries.not_visible') }}
+            @endif          
+            @endif
+          </div>
+
            @if($entry->description)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
             <strong class="primaryText">{{ trans('general.entries.description') }}:</strong> {!! Markdown::convertToHtml($entry->description) !!}
@@ -75,37 +89,25 @@
           </div>
           @endif
 
-          <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            <strong class="primaryText">{{ trans('general.entries.visibility') }}:</strong>
-            @if($entry->visible)
-              {{ trans('general.entries.visible') }}
-            @else
-              {{ trans('general.entries.not_visible') }}
-            @endif          
-          </div>
-
           <!-- if user is admin or owner -->
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
-            @if (Auth::check())
-            <div class="listing-actions" style="padding-top: 10px;">
-
+            @can('update-entry', $entry)
+            <div class="listing-actions" style="padding-top: 10px;"> 
               {{ Form::open(array('route'=>array('entry.delete.save',$entry->id))) }}
                 {{ Form::token()}}
-
-                @can('update-entry', $entry)
                   <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
                   <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
-
+                  @if (0)
                   @if ($entry->completed_at=='')
                     <a href="{{ route('entry.completed', $entry->id) }}" class="btn btn-xs btn-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom" title="Mark this {{ strtoupper($entry->post_type) }} as completed" data-mm-track-label="Mark as Completed from Tile View">
-                    <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.completed') }}</a>
+                      <i class="glyphicon glyphicon-ok"></i> {{ trans('general.entries.mark_completed') }}</a>
+                  @endif
                   @endif
                   <button type="submit" class="btn btn-xs btn-dark-colored"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
-                @endcan
 
               {{ Form::close() }}
             </div> <!-- listing-actions -->
-            @endif <!-- endif user is admin or owner -->
+            @endcan <!-- endif user is admin or owner -->
           </div>  <!-- col-md-12 -->
         </div> <!-- col-sm-8 -->
       </div>
@@ -115,15 +117,11 @@
         <ul class="nav nav-tabs" role="tablist">
           <li class="active">
             <a href="#make_offer" role="tab" data-toggle="tab">
-              @if (Auth::check())
-                @if (Auth::user()->id == $entry->created_by)
-                  {{ trans('general.entries.view_offer') }}
-                @else
-                  {{ trans('general.entries.make_offer') }}
-                @endif
-              @else
-                {{ trans('general.entries.make_offer') }}
-              @endif
+            @can('update-entry', $entry)
+              {{ trans('general.entries.view_offer') }}
+            @else
+              {{ trans('general.entries.make_offer') }}
+            @endcan
             </a>
           </li>
 
@@ -134,9 +132,9 @@
           @endif
 
           <!-- <li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li> -->
-          <li>
+          <!-- <li>
             <a id="view_comment_tab" href="#comments" role="tab" data-toggle="tab">{{ trans('general.entries.comments_tab') }}</a>
-          </li>
+          </li> -->
         </ul> <!-- nav-tabs -->
 
         <!-- Tab panes -->
@@ -213,7 +211,7 @@
                   <p>{{ trans('general.entries.offer_here') }}</p>
                 @endif <!-- user -->
               @else
-                <p>{{ trans('general.entries.please') }} <a class="btn btn-warning btn-xs" href="/auth/signin">{{ trans('general.entries.offer_here') }}{{ trans('general.entries.sign_in') }}</a> {{ trans('general.entries.or') }} <a class="btn btn-info btn-xs" href="/auth/signup">{{ trans('general.entries.sign_up') }}</a> {{ trans('general.entries.to_make_offer') }}</p>
+                <p><a class="btn btn-colored" href="{{ route('login') }}">{{ trans('general.entries.not_signed_in_offer') }}</a></p>
               @endif <!-- logged in -->
 
             </div> <!-- col-xs-12 -->
@@ -266,11 +264,13 @@ $(document).ready(function () {
   var modal = document.getElementById('myModal');
 
   // Get the image and insert it inside the modal - use its "alt" text as a caption
-  var img = document.getElementById('entryImage');
-  var modalImg = document.getElementById("img01");
-  img.onclick = function(){
+  if ($("#entryImage").length) {
+    var img = document.getElementById('entryImage');
+    var modalImg = document.getElementById("img01");
+    img.onclick = function(){
       modal.style.display = "block";
       modalImg.src = this.src;
+    }
   }
 
 // Get the <span> element that closes the modal

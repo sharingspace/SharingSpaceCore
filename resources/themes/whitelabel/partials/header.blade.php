@@ -2,10 +2,8 @@
 <!-- Top Bar -->
   <div id="topBar">
     <div class="container">
-
       <!-- right -->
       <ul class="top-links list-inline pull-right">
-
 
         @if (Auth::check())
         <li class="dropdown">
@@ -33,7 +31,7 @@
                   {{ Auth::user()->getUnreadMessagesCount() }} {{ trans('general.nav.new_messages') }}
               </div>
               @foreach (Auth::user()->getLimitedUnreadMessages() as $unread_messages)
-                <div class="clearfix margin-bottom-10 member_thumb">
+                <div class="unread clearfix margin-bottom-10 member_thumb">
                   <!-- notification item -->
                   <img src="{{ $unread_messages->sender->gravatar_img() }}" class="pull-left" style="margin-left: 5px; margin-top: 5px;">
                   <span class="text-muted">
@@ -112,11 +110,6 @@
             <img src="{{ $whitelabel_group->getLogo() }}">
           @else
             {{ $whitelabel_group->name }}
-            @if ($whitelabel_group->location!='')
-              <span class="block-inline pull-right margin-left-10">
-                &ndash; {{ $whitelabel_group->location}}
-              </span>
-            @endif
           @endif
         </a>
 
@@ -135,9 +128,9 @@
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-            @if ((Auth::check()) && (!Auth::user()->isMemberOfCommunity($whitelabel_group)) && !$whitelabel_group->getRequestCount(Auth::user()->id))
+            @if ( (Auth::check() && !(Auth::user()->isMemberOfCommunity($whitelabel_group))) && !$whitelabel_group->getRequestCount(Auth::user()->id))
               <li>
-                <a style="color:white;" href="{{ route('community.request-access.form') }}">
+                <a href="{{ route('community.request-access.form') }}">
                   <button type="button" class="btn btn-colored btn-sm">
                     {{ trans('general.register.join_share') }}
                   </button>
@@ -145,7 +138,7 @@
               </li>
             @endif
 
-            @can('view-browse', $whitelabel_group)
+            @if ($whitelabel_group->viewNavItems())
               <li {!! (Route::is('home') ? ' class="active"' : '') !!}>
                 <a href="{{ route('home') }}">
                   {{ trans('general.nav.browse') }}
@@ -158,9 +151,6 @@
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
-            @endcan
-
-            @if ($whitelabel_group->scopeIsPublic())
               <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
               </li>
@@ -205,7 +195,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">About {{$whitelabel_group->name}}</h4>
+        <h4 class="modal-title">About the <em>{{$whitelabel_group->name}}</em> Share</h4>
       </div>
       <div class="modal-body">
       <p  class="about_info"><strong>Started:</strong> <span>{{$whitelabel_group->created_at->format('F jS, Y')}}</span>

@@ -333,6 +333,19 @@ class Community extends Model
         return $this->where('group_type', '!=', 'S');
     }
 
+
+    /**
+    * Query scope to only return publicly viewable communities.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function viewNavItems()
+    {
+        return ((\Auth::check() && \Auth::user()->canSeeCommunity($this)) || $this->group_type != 'S');
+    }
+
     /**
     * Is a community open?
     *
@@ -343,6 +356,18 @@ class Community extends Model
     public function isOpen()
     {
         return ($this->group_type == 'O');
+    }
+
+    /**
+    * Is a community secret?
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */
+    public function isSecret()
+    {
+        return ($this->group_type == 'S');
     }
 
     /**

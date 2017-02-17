@@ -60,10 +60,8 @@
             <!-- About -->
             <div class="col-md-12 form-group {{ $errors->first('bio', 'has-error') }}">
               <label class="control-label" for="bio">{{trans('general.settings.about_placeholder')}} ({{trans('general.markdown')}} <a href="
-https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )</label>
-								<textarea class="form-control" rows="3" placeholder="{{trans('general.settings.about_placeholder')}}" name="bio">
-                  {{ Input::old('bio', Auth::user()->bio) }}
-                </textarea>
+https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown" target="_blank"><i style='color:#5bc0de;' class='fa fa-info-circle'></i></a> )</label>
+								<textarea class="form-control" rows="3" placeholder="{{trans('general.settings.about_placeholder')}}" name="bio">{{ Input::old('bio', Auth::user()->bio) }}</textarea>
                 {!! $errors->first('bio', '<span class="help-block">:message</span>') !!}
             </div>
 
@@ -272,20 +270,22 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
   						<button class="btn btn-colored pull-right">{{trans('general.user.save_privacy')}}</button>
   					</div>
           </form>
-
-				</div> <!-- /PRIVACY TAB -->
+        </div> <!-- /PRIVACY TAB -->
         @endif
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<!-- LEFT -->
-		<div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8 margin-top-20">
-			<div class="thumbnail text-center">
-				<img src="{{ Auth::user()->gravatar_img() }}?s=400" alt="" />
-				<h2 class="size-18 margin-top-10 margin-bottom-0">{{ Auth::user()->getDisplayName() }}</h2>
-				<h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">{{ Auth::user()->location }}</h3>
-			</div>
-		</div>
+    <!-- LEFT -->
+    <div class="col-lg-3 col-md-3 col-sm-4 col-lg-pull-9 col-md-pull-9 col-sm-pull-8 margin-top-20">
+      <div class="thumbnail text-center">
+        <img src="{{ Auth::user()->gravatar_img() }}" alt="" />
+        <h2 class="size-18 margin-top-10 margin-bottom-0">{{ Auth::user()->getDisplayName() }}</h2>
+        <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">{{ Auth::user()->location }}</h3>
+      </div>
+      <a href="{{ route('user.profile', ['userId'=>Auth::user()->id]) }}">
+        <button class="btn btn-sm btn-colored">{{trans('general.settings.view_profile')}}</button>
+      </a>
+    </div>
 	</div> <!-- container -->
 </section>
 <!-- / -->

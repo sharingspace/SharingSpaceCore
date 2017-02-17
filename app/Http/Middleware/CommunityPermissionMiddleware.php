@@ -28,9 +28,9 @@ class CommunityPermissionMiddleware
     {
         // This is a whitelabel group, otherwise skip it
         if ($request->whitelabel_group) {
-            LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
-            if ($request->whitelabel_group->group_type != 'O') {
-                LOG::debug('CommunityPermissionMiddleware: This is a closed or secret group');
+            //LOG::debug('CommunityPermissionMiddleware: This is a valid whitelabel group.');
+            if ($request->whitelabel_group->group_type == 'S') {
+                LOG::debug('CommunityPermissionMiddleware: This is a secret group');
 
                 // If the user is logged in, check that they are a member and are allowed to see this group
                 if (Auth::check())
@@ -71,7 +71,8 @@ class CommunityPermissionMiddleware
                     }
                 }
             }
-            else { // This group is not restricted, ie open
+            else { // This group is not restricted, ie open or closed
+                return $next($request);
                 if (Auth::check()) {
                     if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
                         LOG::debug('CommunityPermissionMiddleware: This user is a member of this open Share');
@@ -89,6 +90,10 @@ class CommunityPermissionMiddleware
                         return view('join-open', ['error'=>'you are not a member of ', 'name' => $request->whitelabel_group->name] );
                     }
                 }
+                else {
+                    LOG::debug('CommunityPermissionMiddleware: open hub and user not logged in');
+                }
+
             }
         }
 

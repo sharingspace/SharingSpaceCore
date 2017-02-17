@@ -71,26 +71,6 @@ button::-moz-focus-inner, input::-moz-focus-inner {
   padding: 0;
 }
 
-::selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-}
-
-::-moz-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-  /* Firefox */
-}
-
-::-webkit-selection {
-  color: #fff;
-  text-shadow: none;
-  background: #333;
-  /* Safari */
-}
-
 button {
   background: none;
   border: 0;
@@ -225,11 +205,6 @@ div.row > div img.img-responsive {
  **************************************************************** **/
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Raleway','Open Sans',Arial,Helvetica,sans-serif;
-  font-weight: 600;
-  color: #414141;
-  margin: 0 0 30px 0;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -267,9 +242,6 @@ h6 {
   margin: 0 0 20px 0;
 }
 
-h1 > span, h2 > span, h3 > span, h4 > span, h5 > span, h6 > span {
-  color: #1ABC9C;
-}
 
 /**	03. Placeholder
 *************************************************** **/

@@ -79,7 +79,7 @@
         padding: 20px;
       }
       .header, .footer {
-        background-color:#222;
+        background-color:#444;
         clear: both;
         text-align: center;
         width: 100%; 
@@ -89,7 +89,7 @@
         margin-bottom:10px;
         margin-top:10px;
         border-radius:5px;
-        padding-top:10px;
+        padding-top:5px;
         font-size: 22px;
         line-height:40px;
         font-weight:bold; 
@@ -97,7 +97,7 @@
       .footer {
         border-radius:5px;
         font-size: 16px;
-        line-height:25px;      
+        line-height:30px;      
       }
       /* -------------------------------------
           TYPOGRAPHY

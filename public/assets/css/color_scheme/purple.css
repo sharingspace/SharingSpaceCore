@@ -2,21 +2,25 @@
  ******************************************************************/
 
 ::-moz-selection {
-  background: #673ab7;
+  color: #fff;
+  background-color: #00b0ff;
 }
 
 ::selection {
-  background: #673ab7;
+  color: #fff;
+  background-color: #00b0ff;
 }
 
 ::-moz-selection {
-  background: #673ab7;
+  color: #fff;
   /* Firefox */
+  background-color: #00b0ff;
 }
 
 ::-webkit-selection {
-  background: #673ab7;
+  color: #fff;
   /* Safari */
+  background-color: #00b0ff;
 }
 
 .primary {
@@ -71,16 +75,6 @@ td {
   background-color: #007bb3;
 }
 
-a:active,
-a:focus,
-a:hover,
-a .btn.focus,
-a .btn:focus,
-a .btn:hover {
-  color: #cbbae9;
-  text-decoration: none;
-}
-
 #topBar {
   background-color: #58319c !important;
 }
@@ -88,6 +82,14 @@ a .btn:hover {
 #topBar ul.dropdown-menu {
   /* submenu border top color */
   border-top-color: #673ab7;
+}
+
+#topBar .notifications-popdown-wrapper .unread a {
+  color: #00b0ff !important;
+}
+
+#topBar .notifications-popdown-wrapper .unread a:hover {
+  color: #ff4f00 !important;
 }
 
 #topBar ul.top-links > li > a {
@@ -125,54 +127,77 @@ a .btn:hover {
   opacity: 1;
 }
 
+#topNav a.logo {
+  color: #00b0ff;
+}
+
+#topNav a.logo:hover {
+  color: #fff !important;
+}
+
 #share_content a,
-#share_content .btn-default {
+#share_content .btn-default,
+#aboutModal a,
+#aboutModal .btn-default {
   color: #00b0ff !important;
 }
 
+#share_content a.btn-social,
+#share_content .btn-default.btn-social,
+#aboutModal a.btn-social,
+#aboutModal .btn-default.btn-social {
+  color: #fff !important;
+}
+
 #share_content a:hover,
-#share_content .btn-default:hover {
+#share_content .btn-default:hover,
+#aboutModal a:hover,
+#aboutModal .btn-default:hover {
   color: #ff4f00 !important;
 }
 
 #share_content .btn.focus,
 #share_content .btn:focus,
-#share_content .btn:hover {
+#share_content .btn:hover,
+#aboutModal .btn.focus,
+#aboutModal .btn:focus,
+#aboutModal .btn:hover {
   background-color: #fff !important;
   color: #00b0ff !important;
   text-decoration: none;
 }
 
-#share_content .btn-colored {
+#share_content .btn-colored,
+#aboutModal .btn-colored {
   background-color: #00b0ff !important;
   border-color: #005c85;
   color: #fff !important;
 }
 
-#share_content .btn-colored:hover {
+#share_content .btn-colored:hover,
+#aboutModal .btn-colored:hover {
   background-color: #fff !important;
   color: #00b0ff !important;
   border: 1px solid #005c85;
   text-decoration: none;
 }
 
-#share_content .btn-light-colored {
+#share_content .btn-light-colored,
+#aboutModal .btn-light-colored {
   background-color: #3dc3ff;
   border-color: #00b0ff;
   color: #fff !important;
 }
 
-#share_content .btn-dark-colored {
+#share_content .btn-dark-colored,
+#aboutModal .btn-dark-colored {
   background-color: #0086c2;
   border-color: #005c85;
   color: #fff !important;
 }
 
-#share_content #entry_view .close {
-  color: #00b0ff;
-}
-
-#share_content .fa-info-circle {
+#share_content #entry_view .close,
+#aboutModal #entry_view .close {
   color: #00b0ff;
 }
 
@@ -181,7 +206,13 @@ a .btn:hover {
 #share_content .pagination > .active > a:hover,
 #share_content .pagination > .active > span,
 #share_content .pagination > .active > span:focus,
-#share_content .pagination > .active > span:hover {
+#share_content .pagination > .active > span:hover,
+#aboutModal .pagination > .active > a,
+#aboutModal .pagination > .active > a:focus,
+#aboutModal .pagination > .active > a:hover,
+#aboutModal .pagination > .active > span,
+#aboutModal .pagination > .active > span:focus,
+#aboutModal .pagination > .active > span:hover {
   background-color: #00b0ff;
   border-color: #007bb3;
   color: #fff !important;

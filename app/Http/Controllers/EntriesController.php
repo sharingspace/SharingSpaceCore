@@ -33,25 +33,37 @@ class EntriesController extends Controller
     */
     public function getEntry(Request $request, $entryID)
     {
-        if ($entry = \App\Entry::find($entryID)) {
-            if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
-                return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
-            }
+      //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-            $images = \DB::table('media')
-              ->where('entry_id', '=', $entryID)
-              ->get();
-
-            return view('entries.view')->with('entry', $entry)->with('images', $images);
-
+      if ($entry = \App\Entry::find($entryID)) {
+        if ($request->user()) {
+          // user logged in
+          if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
+            return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
+          }
         }
         else {
-          return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
+          // user not logged in
+          if($request->whitelabel_group->isSecret()) {
+            return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
+          }
         }
+            
+        $images = \DB::table('media')
+          ->where('entry_id', '=', $entryID)
+          ->get();
+
+        return view('entries.view')->with('entry', $entry)->with('images', $images);
+      }
+      else {
+        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
+      }
     }
 
     public function ajaxGetEntry(Request $request, $entryID)
     {
+        //log::debug("ajaxGetEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         if ($entry = \App\Entry::find($entryID)) {
             $imageName=null;
 
@@ -94,6 +106,8 @@ class EntriesController extends Controller
     */
     public function getCreate(Request $request)
     {
+        //log::debug("getCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         $post_types = array('want'=>'I want', 'have'=>'I have');
 
         $request->session()->put('upload_key', str_random(15));
@@ -110,6 +124,8 @@ class EntriesController extends Controller
     */
     public function postAjaxCreate(Request $request)
     {
+        //log::debug("postAjaxCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         $entry = new \App\Entry();
 
         $entry->title    = e(Input::get('title'));
@@ -245,6 +261,8 @@ class EntriesController extends Controller
     */
     public function getEdit(Request $request, $entryID)
     {
+        //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         // This should be pulled into a helper or macro
         $post_types = array('want'=>'I want', 'have'=>'I have');
 
@@ -362,6 +380,8 @@ class EntriesController extends Controller
     */
     public function postEdit(Request $request, $entryID)
     {
+        //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
         if ($entry = \App\Entry::find($entryID)) {
 
             $user = Auth::user();
@@ -376,6 +396,13 @@ class EntriesController extends Controller
             $entry->qty    = e(Input::get('qty'));
             $entry->tags    = e(Input::get('tags'));
             $entry->visible = e(Input::get('private')) ? 0 : 1;
+
+            if (Input::has('completed') && Input::get('completed')) {
+              $entry->completed_at = date("Y-m-d H:i:s");
+            }
+            else {
+              $entry->completed_at = null;
+            }
 
             if (Input::get('location')) {
                 $entry->location = e(Input::get('location'));
@@ -532,7 +559,13 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         if ($user_id) {
-            $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
+            if (Auth::user() && (Auth::user()->id == $user_id)) {
+                // allow user to their hidden entries
+                $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id);
+            }
+            else {
+                $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('created_by', $user_id)->where('visible', 1);
+            }
         }
         else {
             $entries = $request->whitelabel_group->entries()->with('author','exchangeTypes','media')->where('visible', 1)->NotCompleted();
@@ -596,6 +629,13 @@ class EntriesController extends Controller
                 $actions = '';
             }
 
+            if ($entry->completed_at) {
+                $completed ="<i class='fa fa-lg fa-check completed' data-toggle='tooltip' data-placement='top' title='Completed'></i>";
+            }
+            else {
+                $completed = null;
+            }
+
              // ensure array is empty
             $exchangeTypes=[];
             foreach ($entry->exchangeTypes as $et) {
@@ -624,7 +664,7 @@ class EntriesController extends Controller
             }
             $rows[] = array(
               'image' => $imageTag,
-              'post_type' => strtoupper($entry->post_type),
+              'post_type' => strtoupper($entry->post_type).$completed,
               'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
               'author' => $author_info,
 

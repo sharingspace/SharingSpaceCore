@@ -8187,6 +8187,17 @@ $color-green: #9AE14F;
     font-size: larger;
     font-weight: bold;
   }
+  h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    text-align: center;
+  }
+  @media (min-width: $screen-sm-min) {
+    h1 {
+      font-size: 36px;
+    }
+  }
+
 
   .fixed-table-container table {
     width: 99%; // seems to fix the annoying horizontal scroll bar on bootstrap datatables
@@ -8631,7 +8642,7 @@ $color-green: #9AE14F;
   /* The Close Button */
   .close {
     position: absolute;
-    top: 15px;
+    top: 6px;
     right: 35px;
     font-size: 45px;
     font-weight: bold;
@@ -8747,9 +8758,6 @@ $color-green: #9AE14F;
       margin:0;
     }
     .percent_caption {
-      //width: 100%;
-      //float: left;
-      //line-height: 200%;
       position:relative;
       top:-23px;
     }
@@ -8770,6 +8778,13 @@ $color-green: #9AE14F;
     font-size:18px;
   }
 }
+
+.completed {
+  color: #5cb85c;
+  display: inline-block;
+  margin-left: 5px;
+}
+
 /**
  * Footer region
  * 
@@ -9223,4 +9238,101 @@ section.TreborScholz {
   }
 }
 
+/******************* Product page */
+
+#featureCarousel {
+  .row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .aligner-item {
+      flex: 1;
+    }
+  }
+
+  .videoWrapper {
+    margin-top: 0x;
+  }
+
+  video {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    background-image: url('/assets/movies/movie_background.png');
+    background-repeat: no;
+    background-size: cover;
+    padding: 55px 30px 10px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    sup {
+      font-size: 16px;
+    }
+    span {
+      font-size: 20px;
+      em {
+        font-weight: normal;
+      }
+    }
+  }
+
+  .carousel-control {
+    color: #333;
+    margin-bottom: 10px;
+    &.left, &.right {
+      background-image: none;
+    }
+    .glyphicon-chevron-left {
+      margin-left: -20px;
+    }
+    .glyphicon-chevron-right {
+      margin-right: -20px;
+    }
+  }
+
+  @media (min-width: $screen-md-min) {
+    video {
+      float: left;
+    }
+    h2 {
+      margin-bottom: 15px;
+      margin-top: 0;
+    }
+  }
+}
+
+#headerWrapper { 
+  position: relative;
+  top: 29%;
+
+  .heading, .hp_subheading, .subheading {
+    margin: 0;
+    text-align: center;
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .hp_subheading, .subheading {
+    font-size: 25px;
+    font-style: italic;
+    font-weight:600;
+    position: relative;
+  }
+
+  .heading {
+    margin-top: 7px;
+    padding-bottom: 15px;
+    font-size: 50px;
+    position: relative;
+  }
+}
 /*************** Bootstrap extensions ******************/

@@ -1,30 +1,30 @@
-/** Spring
+/** Purple/Pink
  ******************************************************************/
 
 ::-moz-selection {
   color: #fff;
-  background-color: #827717;
+  background-color: #FF4081;
 }
 
 ::selection {
   color: #fff;
-  background-color: #827717;
+  background-color: #FF4081;
 }
 
 ::-moz-selection {
   color: #fff;
   /* Firefox */
-  background-color: #827717;
+  background-color: #FF4081;
 }
 
 ::-webkit-selection {
   color: #fff;
   /* Safari */
-  background-color: #827717;
+  background-color: #FF4081;
 }
 
 .primary {
-  color: #57B318;
+  color: #a64dff;
 }
 
 .primaryText {
@@ -32,11 +32,11 @@
 }
 
 .light-primary {
-  color: #81e53d;
+  color: #d1a4ff;
 }
 
 .darkPrimaryColor {
-  color: #32670e;
+  color: #7b00f5;
 }
 
 h1,
@@ -67,45 +67,45 @@ td {
 }
 
 .want_square {
-  background-color: #d9c626;
-  border: 1px solid #413c0c;
+  background-color: #ffa6c4;
+  border: 1px solid #f30053;
 }
 
 .have_square {
-  background-color: #413c0c;
+  background-color: #f30053;
 }
 
 #topBar {
-  background-color: #489414 !important;
+  background-color: #9429ff !important;
 }
 
 #topBar ul.dropdown-menu {
   /* submenu border top color */
-  border-top-color: #57B318;
+  border-top-color: #a64dff;
 }
 
 #topBar .notifications-popdown-wrapper .unread a {
-  color: #827717 !important;
+  color: #FF4081 !important;
 }
 
 #topBar .notifications-popdown-wrapper .unread a:hover {
-  color: #7d88e8 !important;
+  color: #00bf7e !important;
 }
 
 #topBar ul.top-links > li > a {
-  color: #000;
+  color: #fff;
 }
 
 #topBar ul.top-links > .dropdown.languages > a {
-  border: solid #000 1px;
+  border: solid #fff 1px;
 }
 
 #topNav {
-  background-color: #57B318 !important;
+  background-color: #a64dff !important;
 }
 
 #topNav li > a {
-  color: #000 !important;
+  color: #fff !important;
   opacity: 0.6;
 }
 
@@ -118,8 +118,8 @@ td {
 }
 
 #topNav button {
-  border-color: #000 !important;
-  color: #000 !important;
+  border-color: #fff !important;
+  color: #fff !important;
 }
 
 #topNav .add_entry_button a:hover {
@@ -128,18 +128,18 @@ td {
 }
 
 #topNav a.logo {
-  color: #827717;
+  color: #FF4081;
 }
 
 #topNav a.logo:hover {
-  color: #000 !important;
+  color: #fff !important;
 }
 
 #share_content a,
 #share_content .btn-default,
 #aboutModal a,
 #aboutModal .btn-default {
-  color: #827717 !important;
+  color: #FF4081 !important;
 }
 
 #share_content a.btn-social,
@@ -153,7 +153,7 @@ td {
 #share_content .btn-default:hover,
 #aboutModal a:hover,
 #aboutModal .btn-default:hover {
-  color: #7d88e8 !important;
+  color: #00bf7e !important;
 }
 
 #share_content .btn.focus,
@@ -163,42 +163,42 @@ td {
 #aboutModal .btn:focus,
 #aboutModal .btn:hover {
   background-color: #fff !important;
-  color: #827717 !important;
+  color: #FF4081 !important;
   text-decoration: none;
 }
 
 #share_content .btn-colored,
 #aboutModal .btn-colored {
-  background-color: #827717 !important;
-  border-color: #1a1805;
+  background-color: #FF4081 !important;
+  border-color: #c50043;
   color: #fff !important;
 }
 
 #share_content .btn-colored:hover,
 #aboutModal .btn-colored:hover {
   background-color: #fff !important;
-  color: #827717 !important;
-  border: 1px solid #1a1805;
+  color: #FF4081 !important;
+  border: 1px solid #c50043;
   text-decoration: none;
 }
 
 #share_content .btn-light-colored,
 #aboutModal .btn-light-colored {
-  background-color: #b6a720;
-  border-color: #827717;
+  background-color: #ff7da9;
+  border-color: #FF4081;
   color: #fff !important;
 }
 
 #share_content .btn-dark-colored,
 #aboutModal .btn-dark-colored {
-  background-color: #4e470e;
-  border-color: #1a1805;
+  background-color: #ff0359;
+  border-color: #c50043;
   color: #fff !important;
 }
 
 #share_content #entry_view .close,
 #aboutModal #entry_view .close {
-  color: #827717;
+  color: #FF4081;
 }
 
 #share_content .pagination > .active > a,
@@ -213,7 +213,7 @@ td {
 #aboutModal .pagination > .active > span,
 #aboutModal .pagination > .active > span:focus,
 #aboutModal .pagination > .active > span:hover {
-  background-color: #827717;
-  border-color: #413c0c;
+  background-color: #FF4081;
+  border-color: #f30053;
   color: #fff !important;
 }

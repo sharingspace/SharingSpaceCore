@@ -29,40 +29,6 @@
   color: #757575;
 }
 
-.heading, .hp_subheading, .subheading {
-  margin:0;
-  text-align: center;
-  color:white;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.hp_subheading, .subheading {
-  font-size: 25px;
-  font-style: italic;
-  font-weight:600;
-  position: relative;
-}
-
-.heading {
-  padding-bottom: 13px;
-  font-size: 50px;
-  position: relative;
-  top: 35%;
-  -ms-transform: translate(0,-30%);
-  transform: translate(0,-30%);
-}
-
-.hp_subheading {
-  top: 37%;
-  -ms-transform: translate(0, -32%);
-  transform: translate(0, -32%);
-}
-
-.subheading {
-  top:30%;
-  -ms-transform: translate(0, -30%);
-  transform: translate(0, -30%);
-}
 
 .cta-button {
   display: block;
