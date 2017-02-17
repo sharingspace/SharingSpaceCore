@@ -107,7 +107,7 @@ function uploadFiles()
     processData: false, // Don't process the files
     contentType: false, // Set content type to false as jQuery will tell the server if it
                         // is a query string request. This is why we can't use $.post here
-    timeout: 15000, // 15 second timeout
+    timeout: 60000, // 15 second timeout
     xhr: function() {
       var myXhr = $.ajaxSettings.xhr();
       if(myXhr.upload) {
