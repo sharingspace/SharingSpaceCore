@@ -67,7 +67,7 @@
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
               <label class="checkbox nomargin">
                 <input class="checked-agree" type="checkbox" name="terms_and_conditions"><i></i> {!! trans('auth.accept_tos') !!}
-                <a href="#" data-toggle="modal" data-target="#termsModal"> {!! trans('auth.accept_tos2') !!}</a>
+                <a href="#" data-toggle="modal" data-target="#termsModal"> {!! trans('general.tos') !!}</a>
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>

@@ -166,8 +166,6 @@
       </h2>
       @elseif (Route::is('community.create.form'))
       <h1 class="heading">{{trans('general.make-share') }}</h1>
-      @elseif (Route::is('assistance'))
-      <h1 class="heading">{{trans('pricing.financial_assist.apply') }}</h1>
       @elseif (Route::is('coop'))
       <h1 class="heading">{{ trans('coop.headline') }}</h1>
       <h2 class="subheading">{{ trans('coop.mission_subheadline') }}</h2>

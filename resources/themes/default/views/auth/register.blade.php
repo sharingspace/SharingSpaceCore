@@ -66,7 +66,7 @@
                 <input class="checked-agree" type="checkbox" name="terms_and_conditions">
                 <i></i>{!! trans('auth.accept_tos') !!} 
                 <a href="#" data-toggle="modal" data-target="#termsModal">
-                  {!! trans('auth.accept_tos2') !!}
+                  {!! trans('general.tos') !!}
                 </a>
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
