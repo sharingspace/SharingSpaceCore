@@ -9,8 +9,6 @@ return [
     */
     'homepage' => 'home page',
     'subhome_headline' => 'An Exchange Platform for Any Group or Community',
-    'callout_headline'  => 'This is a callout headline.',
-    'callout_subheadline'  => 'Slightly less dramatic callout headline',
     'free_trial' => 'Try a Share free for 15 days',
     'our_communities'  => 'Our Communities',
 		'learn_more_p1a' => 'Share',
@@ -23,7 +21,6 @@ return [
     'crowdsource_description'  => 'From art projects to relief efforts, Shares let many people combine their needs and resources.',
     'platform' => 'Sharing Platforms',
     'platform_description'  => 'Want to start the next AirBnB or Uber in 1 minute? Use a Share to launch your very own platform cooperative.',
-    'cta' => 'Make your Share now!',
     'case_studies' => 'Case Studies',
     'case_study_title_1' => 'a crowdsourcing city',
     'case_study_title_2' => 'local exchange meetups',

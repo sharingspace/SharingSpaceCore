@@ -57,7 +57,7 @@
       <div class="col-xs-8 col-xs-offset-2">
         <div class="row">
           <div class="col-sm-9 col-xs-12 margin-bottom-0">
-            <h2 class="white-secondary-heading">{{ trans('home.cta')}}</h2>
+            <h2 class="white-secondary-heading">{{ trans('general.make_share_now')}}</h2>
           </div>
           <div class="col-sm-3 col-xs-12 margin-bottom-0">
             <a href="{{ route('community.create.form') }}" class="btn center-xs pull-right-sm size-18 weight-700 font-smoothing" style="background-color:black;color:white">{{ trans('general.nav.start_now') }}</a>

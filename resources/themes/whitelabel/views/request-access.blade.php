@@ -53,7 +53,7 @@ Your request to become a member of this Share is still pending'
                 <label>{{ trans('general.user.request_access.admin_msg')}}</label>
                 <!-- textarea -->
 
-                <textarea rows="3" class="form-control" data-maxlength="140" data-info="textarea-words-info" name="message" placeholder="{{ trans('general.user.request_access.admin_msg_placeholder')}}"></textarea>
+                <textarea rows="3" class="form-control" data-maxlength="140" data-info="textarea-words-info" name="message"></textarea>
                 <span class="fancy-hint size-11 text-muted">
                   <strong>{{ trans('general.user.request_access.hint')}}</strong>{{ trans('general.user.request_access.max_140')}}
                   <span class="pull-right">

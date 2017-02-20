@@ -26,5 +26,4 @@ return [
     'crowdsource_description'  => 'From art projects to relief efforts, Shares let many people combine their needs and resources.',
     'platform' => 'Sharing Platforms',
     'platform_description'  => 'Want to start the next AirBnB or Uber in 1 minute? Use a Share to launch your very own platform cooperative.',
-    'cta' => 'Make your Share now!',
 ];

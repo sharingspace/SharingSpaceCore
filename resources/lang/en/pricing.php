@@ -23,7 +23,6 @@ return [
     'your_branding' => 'Customize Your Branding',
     'import_export' => 'Dynamic Import/Export options',
     'privacy_level' => 'Choose your Privacy Level',
-    'slack' => 'Slack Integration',
     'price_security' => 'Price Security',
     'feature' => 'Feature',
     'startTrial' => 'Start your free trial',
@@ -32,19 +31,9 @@ return [
     'your_logo' => 'Your logo',
     'api' => 'API',
     'ssl' => 'SSL',
-    'analytics' => 'Google Analytics',
     'email_support' => 'Email support',
     'backups' => 'Automatic backups',
     'upgrades' => 'Automatic upgrades',
     'no_setup_fees' => 'No setup fees, cancel anytime',
     'fees_us_dollars' => 'All fees in US dollars',
-    'for_free' => 'Get AnyShare for Free',
-    'apply_now' => 'Apply Now',
-    
-    'financial_assist' => [
-        'apply' => 'Apply for Financial Assistance',
-      'success' => 'You application for financial assistance has been successfully sent',
-      'error' => 'We seem to be having a problem processing your application'
-    ],
-
 ];

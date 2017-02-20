@@ -12,7 +12,6 @@ return [
     'mission_subheadline' => 'Everybody shares in our success',
     'first_coop' => 'AnyShare is the first and only FairShares Co-op in the United States',
     'all_inclusive' => 'An All-Inclusive Cooperative',
-    'all_inclusive_sub' => 'You can co-own, vote, and get profits from our unique Co-op',
     'signup_success' => 'You have successfully joined the Anyshare Co-op!',
     'congrats' =>'Congratulations you are a Coop Member',
     'you_are_member' => 'Congratulations, you’re the newest AnyShare Coop Member! We’re happy to be working with you now. We’ll email you soon with details about voting, dividends, and other Coop Member-Only privileges.',

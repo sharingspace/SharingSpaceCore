@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.tos') }} ::
+     {{ trans('general.tos') }} ::
 @parent
 @stop
 

@@ -40,7 +40,7 @@
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.email_address') }}" name="email" value="{{ old('email') }}">
-                <b class="tooltip tooltip-bottom-right">{{ trans('general.login.verify') }}</b>
+                <b class="tooltip tooltip-bottom-right">{{ trans('general.verify') }}</b>
               </label>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
