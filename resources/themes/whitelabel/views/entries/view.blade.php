@@ -32,8 +32,14 @@
           @if($entry->author->getDisplayName())
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">
             <strong class="primaryText">{{ trans('general.entries.by') }}:</strong> {{$entry->author->getDisplayName()}}
+              @if ($entry->author->getCustomLabelInCommunity($whitelabel_group))
+                  <span class="label label-primary">{{ $entry->author->getCustomLabelInCommunity($whitelabel_group)  }}</span>
+              @endif
           </div>
           @endif
+
+
+
 
           @if (count($entry->exchangeTypes) > 0)
           <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-3">

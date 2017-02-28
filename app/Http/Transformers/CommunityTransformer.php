@@ -35,7 +35,7 @@ class MemberlistTransformer
           'id' => $members->id,
           'name' => $members->getDisplayName(),
           'admin' => $members->is_admin,
-
+          'custom_label' => $members->custom_label,
         ];
     }
 }
