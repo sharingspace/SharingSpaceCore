@@ -655,14 +655,14 @@ class EntriesController extends Controller
               'image' => $imageTag,
               'post_type' => strtoupper($entry->post_type).$completed,
               'title' => '<a href="'.route('entry.view', $entry->id).'">'.$entry->title.'</a>',
-              'author' => '<img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs">'
-                          .'<a href="'.route('user.profile', $entry->author->id).'">'
-                          .$entry->author->getDisplayName().'</a>'
-                          .(($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) ?
-                                ' <span class="label label-primary">'
-                                .$entry->author->getCustomLabelInCommunity($request->whitelabel_group)
-                                .'</span>' : ''),
-
+//              'author' => '<img src="'.$entry->author->gravatar_img().'" class="avatar-sm hidden-xs">'
+//                          .'<a href="'.route('user.profile', $entry->author->id).'">'
+//                          .$entry->author->getDisplayName().'</a>'
+//                          .(($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) ?
+//                                ' <span class="label label-primary">'
+//                                .$entry->author->getCustomLabelInCommunity($request->whitelabel_group)
+//                                .'</span>' : ''),
+              'author' => $entry->author,
               'location' => $entry->location,
               'created_at' => $entry->created_at->format('M jS, Y'),
               'actions' => $actions,
