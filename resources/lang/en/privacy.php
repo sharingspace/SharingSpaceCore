@@ -7,9 +7,6 @@ return [
     | Privacy Site Language Lines
     |--------------------------------------------------------------------------
     */
-
-    'title'  => 'Privacy',
-
     'intro' => 'This is version 1.0 of the AnyShare privacy policy and was published on the 1st of February 2016. This privacy policy governs your use of the website AnyShare (“Website”) for desktop and mobile devices that was created by AnyShare Society.  The Website is for exchanging wants and haves in a variety of ways including gift, trade, sale, and collaboration.',
     'what_info' => [
       'title' =>'What information does the Website obtain and how is it used?',
@@ -52,7 +49,6 @@ return [
       'p3' => 'We believe in being transparent with the third party tools we use and why we do so. We use the following third party tools:', 
       'tools' => [
         'ga' => [
-          'title' => 'Google Analytics', 
           'p1' => 'We use Google Analytics to monitor and analyze site usage. This data is anonymous data, which means that Google doesn’t have access to any user account information',
         ],
         'crazy_egg' => [

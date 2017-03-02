@@ -262,10 +262,10 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 
 
               <fieldset class="nomargin">
-                <legend>{{ trans('general.community.analytics')}}</legend>
+                <legend>{{ trans('general.analytics')}}</legend>
                 <!-- Google analytics ID -->
                 <div class="form-group{{ $errors->first('ga', ' has-error') }}">
-                  <label for="slack_channel" class="sr-only">{{ trans('general.ga-id') }}</label>
+                  <label for="slack_channel" class="sr-only">{{ trans('general.analytics_id') }}</label>
 
                   <input type="text" name="ga" class="form-control" placeholder="{{ trans('general.community.for_example')}}" value="{{ Input::old('ga', $community->ga) }}">
                   {!! $errors->first('ga', '<span class="help-block">:message</span>') !!}

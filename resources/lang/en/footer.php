@@ -9,10 +9,8 @@ return [
     */
     'coop' => 'Coop',
     'blog' => 'Blog',
-    'privacy' => 'Privacy',
     'support' => 'Support',
     'subscribe' => 'Subscribe',
-    'close_modal' => 'Close',
     'rights_reserved' => 'All Rights Reserved, AnyShare Society.',
     'powered_by' => 'Powered by'
 ];

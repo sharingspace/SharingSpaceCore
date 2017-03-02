@@ -46,7 +46,7 @@
         <p>{{ trans('privacy.third_parties.p2') }}</p>
         <p>{{ trans('privacy.third_parties.p3') }}</p>
 
-        <h4>{{ trans('privacy.third_parties.tools.ga.title') }}</h4>
+        <h4>{{ trans('general.analytics') }}</h4>
         <p>{{ trans('privacy.third_parties.tools.ga.p1') }}</p>
         <h4>{{ trans('privacy.third_parties.tools.crazy_egg.title') }}</h4>
         <p>{{ trans('privacy.third_parties.tools.crazy_egg.p1') }}</p>
