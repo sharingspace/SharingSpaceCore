@@ -62,7 +62,7 @@
 
         @else
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
-          <li><a href="{{ route('user.register') }}">{{ trans('general.nav.register') }} </a></li>
+          <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
         @endif
       </ul>
 
@@ -222,7 +222,7 @@
             @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
               {{--*/ $exchangeTypes[] = $exchange_type->name /*--}}
             @endforeach
-            {{ implode(', ', $exchangeTypes)}}
+
             <a href="#" title="This shows options for member exchange on this Share"><i class="fa fa-info-circle"></i></a>
           @endif
         </span>

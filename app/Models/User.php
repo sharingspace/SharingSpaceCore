@@ -26,6 +26,7 @@ use App\Social;
 use App\Message;
 use App\Conversation;
 use DB;
+use Illuminate\Notifications\Notifiable;
 use Log;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
@@ -34,6 +35,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use SluggableTrait;
     use ValidatingTrait;
     use UploadableFileTrait;
+    use UploadableFileTrait;
+    use Notifiable;
 
     /*
     * Set traits for uploadable image

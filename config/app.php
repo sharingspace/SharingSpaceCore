@@ -157,6 +157,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -244,6 +245,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'ApiGuardAuth' => Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
-        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
     ],
 ];

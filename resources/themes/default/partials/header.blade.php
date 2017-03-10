@@ -1,5 +1,5 @@
 <div class="w-section">
-  <div class="w-background-video background-video {{$bannerClasses}}" style="height:{{$bannerHeight}}">
+  <div class="w-background-video background-video {{ (isset($bannerClasses)) ? $bannerClasses : ''}}" style="height:{{ (isset($bannerHeight)) ? $bannerHeight : '' }}">
     <video autoplay="autoplay" loop="loop" poster='{{ Helper::cdn('img/hp/poster.png') }}'>
       @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
       <source src="{{ Helper::cdn('movies/clothing-transcode.webm') }}" data-wf-ignore="">
@@ -70,7 +70,7 @@
           <!-- NOTIFICATION BOX -->
           @endif
           @else
-          <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
+          <li><a href="{{ route('register') }}">{{ trans('general.nav.try') }}</a></li>
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
           @endif
           @can('admin')
@@ -133,7 +133,7 @@
                     </a>
                   </li>
 
-                  <!-- <li><a href="{{ route('user.register') }}">{{ trans('general.nav.try') }}</a></li>
+                  <!-- <li><a href="{{ route('register') }}">{{ trans('general.nav.try') }}</a></li>
                   <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li> -->
                 </ul>
               </nav>
