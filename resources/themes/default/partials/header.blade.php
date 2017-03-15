@@ -189,7 +189,7 @@
       <h1 class="heading">{{ trans('pricing.headline') }}</h1>
       @else  
       <!-- using route name as the h1 -->
-      <h1 class="heading">{{ucfirst(Route::getCurrentRoute()->getPath())}}</h1>
+      <h1 class="heading">{{ucfirst(Route::getFacadeRoot()->current()->uri())}}</h1>
       @endif
     </div>
   </div>
