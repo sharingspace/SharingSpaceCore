@@ -176,7 +176,7 @@ class CommunitiesController extends Controller
     */
     public function getCreate()
     {
-        $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->lists('name');
+        $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
         return view('communities.edit')->with('themes', $themes);
     }
 
@@ -313,7 +313,7 @@ class CommunitiesController extends Controller
     */
     public function getEdit(Request $request)
     {
-        $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->lists('name');
+        $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
 
         $community = \App\Community::find($request->whitelabel_group->id);
         $exchanges = $community->exchangeTypes;
