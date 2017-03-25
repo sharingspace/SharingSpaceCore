@@ -143,6 +143,15 @@ class EntriesController extends Controller
           return response()->json(['success'=>false, 'errors'=>$validator->messages()]);
         }
 
+        if (Auth::user()->isSuperAdmin() && !Auth::user()->isMemberOfCommunity($request->whitelabel_group, true)) {
+            if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
+                //LOG::debug("postAjaxCreate: joined superAdmin to share successfully");
+            }
+            else {
+                //LOG::error("postAjaxCreate: failed to joined superAdmin to share successfully");
+            }
+        }
+
         if (empty($exchange_types)) {
             return response()->json(['success'=>false, 'error'=>trans("general.entries.messages.no_exchange_types")]);
         }

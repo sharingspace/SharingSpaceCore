@@ -8,6 +8,10 @@
       <div class="col-xs-10 col-xs-offset-1 text-center">
         <h2 class="section-title" style="text-align:center;">{{trans('home.share_heading')}}</h2>
         <div class="row uses-row">
+          <div class="col-md-4"><img src="{{ Helper::cdn('img/hp/earth_between_hands.png') }}" class="use-icon">
+            <h3>{{trans('home.platform')}}</h3>
+            <p>{{trans('home.platform_description')}}</p>
+          </div>
           <div class="col-md-4"><img src="{{ Helper::cdn('img/hp/hands_around_people.png') }}" class="use-icon">
             <h3>{{trans('home.local')}}</h3>
             <p>{{trans('home.local_description')}}</p>
@@ -16,10 +20,7 @@
             <h3>{{trans('home.crowdsource')}}</h3>
             <p>{{trans('home.crowdsource_description')}}</p>
           </div>
-          <div class="col-md-4"><img src="{{ Helper::cdn('img/hp/earth_between_hands.png') }}" class="use-icon">
-            <h3>{{trans('home.platform')}}</h3>
-            <p>{{trans('home.platform_description')}}</p>
-          </div>
+
         </div>
       </div>
     </div>
@@ -35,7 +36,7 @@
           <div class="col-md-4">
             <div class="case_study">
               <a href="" data-toggle="modal" data-target="#caseStudy1">
-                <img src="{{ Helper::cdn('img/hp/arco_case_study_thumb.jpg') }}" class="use-icon">
+                <img src="{{ Helper::cdn('img/hp/fs_case_study_thumb.jpg') }}" class="use-icon">
                 <h3>{{trans('home.case_study_title_1')}}</h3>
               </a>
             </div>
@@ -44,7 +45,7 @@
           <div class="col-md-4">
             <div class="case_study">
               <a href="" data-toggle="modal" data-target="#caseStudy2">
-                <img src="{{ Helper::cdn('img/hp/czech_case_study_thumb.jpg') }}" class="use-icon">
+                <img src="{{ Helper::cdn('img/hp/arco_case_study_thumb.jpg') }}" class="use-icon">
                 <h3>{{trans('home.case_study_title_2')}}</h3>
               </a>
             </div>
@@ -53,7 +54,7 @@
           <div class="col-md-4">
             <div class="case_study">
               <a href="" data-toggle="modal" data-target="#caseStudy3">
-                <img src="{{ Helper::cdn('img/hp/fs_case_study_thumb.jpg') }}" class="use-icon">
+                <img src="{{ Helper::cdn('img/hp/czech_case_study_thumb.jpg') }}" class="use-icon">
                 <h3>{{trans('home.case_study_title_3')}}</h3>
               </a>
             </div>
@@ -82,36 +83,17 @@
   </div>
 </section>
 
-<div id="caseStudy1" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Arcosanti Share</h4>
-      </div>
-      <div class="modal-body">
-      <img src="{{ Helper::cdn('img/hp/arco_case_study_modal.png') }}">
-        <p>Arcosanti is an experimental micro-city built by thousands of volunteers interested in inciting urban evolution through the theory and practice of arcology [architecture + ecology]. Arcosanti uses a Share to list out many usable materials, skills, and needs of the residents.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div id="caseStudy2" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sdílna Share</h4>
+        <h4 class="modal-title">{{ trans('home.case_study_popup_title_2')}}</h4>
       </div>
       <div class="modal-body">
-        <img src="{{ Helper::cdn('img/hp/czech_case_study_modal.png') }}">
-        <p>This town in the Czech Republic is self organizing into a "gifting community" with their Share. The residents come together for gifting swaps and use Share to add additional items for exchange.</p>
+      <img src="{{ Helper::cdn('img/hp/arco_case_study_modal.jpg') }}">
+        <p>{{ trans('home.case_study_popup_2')}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
@@ -126,11 +108,30 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">FairShares Share</h4>
+        <h4 class="modal-title">{{ trans('home.case_study_popup_title_3')}}</h4>
+      </div>
+      <div class="modal-body">
+        <img src="{{ Helper::cdn('img/hp/czech_case_study_modal.png') }}">
+        <p>{{ trans('home.case_study_popup_3')}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="caseStudy1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{ trans('home.case_study_popup_title_1')}}</h4>
       </div>
       <div class="modal-body">
         <img src="{{ Helper::cdn('img/hp/fs_case_study_modal.png') }}">
-        <p>FairShares is an association for multi-stakeholder co-operation in member-owned social enterprises. Their Share lets anyone ask for help with forming this special cooperative and has numerous knowledgeable people able to provide resources to help.</p>
+        <p>{{ trans('home.case_study_popup_1')}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
