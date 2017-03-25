@@ -9632,6 +9632,10 @@ section#case_studies img {
   margin-bottom: 20px;
 }
 
+section#case_studies img:hover {
+  opacity: 0.7;
+}
+
 #caseStudy1 .modal-dialog,
 #caseStudy2 .modal-dialog,
 #caseStudy3 .modal-dialog {

@@ -7791,6 +7791,9 @@ section {
       border: white solid 2px;
       opacity: 0.4;
       margin-bottom: 20px;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 }
