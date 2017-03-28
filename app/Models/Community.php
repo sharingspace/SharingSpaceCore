@@ -359,6 +359,18 @@ class Community extends Model
     }
 
     /**
+    * Is a community closed?
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */
+    public function isClosed()
+    {
+        return ($this->group_type == 'C');
+    }
+
+    /**
     * Is a community secret?
     *
     * @author [D.Linnard] [<dslinnard@yahoo.com>]

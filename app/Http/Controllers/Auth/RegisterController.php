@@ -86,11 +86,26 @@ class RegisterController extends Controller
     // if this is an open share, join them
     if ($request->whitelabel_group->isOpen()) {
       if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-        LOG::debug("getJoinCommunity: joined open share successfully");
+        //LOG::debug("registered: joined open share successfully");
       }
       else {
-        LOG::debug("getJoinCommunity: error joining open share");
+        //LOG::debug("registered: error joining open share");
         return redirect()->route('home')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
+      }
+    }
+    else if ($request->whitelabel_group->isClosed()) {
+      $user = Auth::user();
+      if ($user) {
+          // find out whether they have already asked to join this share
+          $request_count = $request->whitelabel_group->getRequestCount($user->id);
+
+          //LOG::debug("getRequestAccess: request_count = ".$request_count);
+          return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
+      }
+      else {
+          // not logged in so send them to the signup page
+          //LOG::debug("getRequestAccess: user is not logged in so redirect them");
+          return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
       }
     }
   }
