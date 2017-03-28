@@ -13,7 +13,7 @@
 <section>
 	<div id="entry_view" class="container padding-top-0">
 		<div class="row">
-    @if($images && $images[0]->filename)
+      @if(isset($images) && (count($images) > 0) && $images[0]->filename)
     	<div class="col-md-4 col-sm-5 col-xs-12 margin-top-20">
         <div id="image_box_container"> 
           <img id="entryImage" src="{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}">

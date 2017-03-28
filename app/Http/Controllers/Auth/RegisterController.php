@@ -6,6 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Auth;
 use Log;
 
 class RegisterController extends Controller
@@ -66,10 +69,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'display_name' => $data['display_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+      return User::create([
+          'display_name' => $data['display_name'],
+          'email' => $data['email'],
+          'password' => bcrypt($data['password']),
+      ]);
     }
+    
+  public function showRegistrationForm(Request $request)
+  {
+    return view('auth.register')->with('subdomain', $request->whitelabel_group->subdomain)->with('shareName', $request->whitelabel_group->name);;
+  }
+
+  protected function registered(Request $request, $user)
+  {
+    // if this is an open share, join them
+    if ($request->whitelabel_group->isOpen()) {
+      if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
+        LOG::debug("getJoinCommunity: joined open share successfully");
+      }
+      else {
+        LOG::debug("getJoinCommunity: error joining open share");
+        return redirect()->route('home')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
+      }
+    }
+  }
 }
