@@ -24,7 +24,7 @@
 
       @elseif ($whitelabel_group->group_type == 'C')
         <br><strong>Privacy:</strong> <span class="about_info">Closed, Membership requires approval</span> 
-        <a href="#" title="A closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details."><i class="fa fa-info-circle"></i></a>
+        <a href="#" title="{{trans('general.closed.desc')}}"><i class="fa fa-info-circle"></i></a>
       @else
         <br><strong>Privacy:</strong> <span class="about_info">Secret, Membership is by invitation only</span> 
         <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a>

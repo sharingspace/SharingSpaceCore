@@ -325,10 +325,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     * @since  [v1.0]
     * @return collection
     */
-    public function isMemberOfCommunity($community)
+    public function isMemberOfCommunity($community, $ignoreSuperAdminStatus = false)
     {
         $communityCount = $this->communities()->where('community_id', '=', $community->id)->count();
-        $superAdmin =  $this->isSuperAdmin();
+        $superAdmin = $ignoreSuperAdminStatus ? false : $this->isSuperAdmin();
         LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$communityCount.",  super Admin = ".$superAdmin);
 
         return ($communityCount || $superAdmin);

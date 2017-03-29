@@ -69,7 +69,13 @@ Route::group(
         |--------------------------------------------------------------------------
         */
 
+
         Auth::routes();
+        
+        Route::get('logout', function (){
+            Auth::logout();
+            return redirect('/');
+        });
 
         Route::group(
             array('prefix' => 'login'),
@@ -78,6 +84,7 @@ Route::group(
                 Route::get('{provider}', 'Auth\LoginController@redirectToSocialProvider');
                 Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
             }
+
         );
 
 

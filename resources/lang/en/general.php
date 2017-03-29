@@ -63,7 +63,11 @@ return [
     'make_share_now' => 'Make your Share now!',
     'analytics' => 'Google Analytics',
     'tos' => 'Terms and Conditions',
-
+    'total_members' => 'Total members',
+    'total_entries' => 'Total entries',
+    'members_needs' => 'All the needs of the members',
+    'members_resources' => 'All the resources of the members',
+    
     'nav'  => [
       'browse' => 'Browse',
       'try' => 'Try',
@@ -142,6 +146,8 @@ return [
     'entries'  => [
       'want' => 'Want',
       'have' => 'Have',
+      'wants' => 'wants',
+      'haves' => 'haves',
       'description_placeholder' => 'Description',
       'tag_placeholder' => 'Keywords, comma-separated',
       'qty' => 'Quantity',
@@ -328,19 +334,19 @@ return [
         'title'  => 'Open Share',
         'text'  => 'Anyone can join',
         'type' => 'Open',
-        'desc' => 'an open Share lets anyone join and exchange. It is the most permissive way to build members.'
+        'desc' => 'An open Share lets anyone join and exchange. It is the most permissive way to build members.'
       ],
       'closed'  => [
         'title'  => 'Closed Share',
         'text'  => 'Invite-only to join',
         'type' => 'Closed',
-        'desc' => 'a closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details.'
+        'desc' => 'A closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details.'
       ],
       'secret'  => [
         'title'  => 'Secret Share',
         'text'  => 'Only members can view',
         'type' => 'Secret',
-        'desc' => 'a secret Share is hidden from anyone who is not a member. It is the top level of secrecy.'
+        'desc' => 'A secret Share is hidden from anyone who is not a member. It is the top level of secrecy.'
       ],
       'membership' => [
         'leave' => 'leave',
