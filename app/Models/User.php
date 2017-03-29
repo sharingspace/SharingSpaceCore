@@ -35,7 +35,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use SluggableTrait;
     use ValidatingTrait;
     use UploadableFileTrait;
-    use UploadableFileTrait;
     use Notifiable;
 
     /*
