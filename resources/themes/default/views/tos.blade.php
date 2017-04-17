@@ -4,7 +4,7 @@
 @section('title')
      {{ trans('general.tos') }} ::
 @parent
-@stop
+@endsection
 
 {{-- Page content --}}
 @section('content')

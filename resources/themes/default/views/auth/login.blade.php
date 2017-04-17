@@ -54,7 +54,9 @@
               <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.login') }}</button>
             </div>
           </div>
-
+          <footer>
+           Forgot your password? <a href="{{ route('password.request') }}">Click here.</a>
+          </footer>
         </form>
         <!-- /register form -->
       </div>
