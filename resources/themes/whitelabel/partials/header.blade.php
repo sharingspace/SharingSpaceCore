@@ -113,7 +113,7 @@
           @endif
         </a>
 
-        @if (Auth::check() && Auth::user()->canSeeCommunity($whitelabel_group))
+        @if (Auth::check() && Auth::user()->isMemberOfCommunity($whitelabel_group, true))
         <div class="navbar-header pull-right">
           <ul class="nav navbar-nav">
             <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
@@ -130,7 +130,11 @@
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
             @if ( (Auth::check() && !(Auth::user()->isMemberOfCommunity($whitelabel_group))) && !$whitelabel_group->getRequestCount(Auth::user()->id))
               <li>
+              @if ($whitelabel_group->group_type == 'O')
+                <a href="{{ route('join-community') }}">
+              @else 
                 <a href="{{ route('community.request-access.form') }}">
+              @endif
                   <button type="button" class="btn btn-colored btn-sm">
                     {{ trans('general.register.join_share') }}
                   </button>
@@ -139,18 +143,22 @@
             @endif
 
             @if ($whitelabel_group->viewNavItems())
+              @if ($whitelabel_group->viewBrowse())
               <li {!! (Route::is('home') ? ' class="active"' : '') !!}>
                 <a href="{{ route('home') }}">
                   {{ trans('general.nav.browse') }}
                   {!! (Route::is('home') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
+              @endif
+              @if ($whitelabel_group->viewMembers())
               <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
                 <a href="{{ route('members') }}">
                   {{ trans('general.our_members') }}
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
+              @endif
               <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
               </li>

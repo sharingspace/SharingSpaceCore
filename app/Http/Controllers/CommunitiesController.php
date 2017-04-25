@@ -97,7 +97,7 @@ class CommunitiesController extends Controller
             $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
             LOG::debug("getRequestAccess: request_count = ".$request_count);
-            return view('request-access', ['request_count'=>$request_count,'name'=>$request->whitelabel_group->name]);
+            return view('request-access', ['request_count' => $request_count,'name' => $request->whitelabel_group->name]);
         }
         else {
             // not logged in so send them to the signup page
