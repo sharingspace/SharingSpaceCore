@@ -7794,29 +7794,36 @@ section {
 			line-height:34px;
 		}
 	}
+
   &#case_studies {
-    background-color: #262626;
-    h2, p {
-      color: white;
+    background-color: white;
+    h2,h3, p {
+      color: #444;
+      text-align: left;
     }
     .case_study {
       position: relative;
       h3 {
-        position: absolute;
-        top: 31%;
         text-transform: capitalize;
-        color: white !important;
         width: 100%;
         font-size: 21px;
+        margin-top: 0;
       }
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      } 
     }
     img {
       border: white solid 2px;
-      opacity: 0.4;
-      margin-bottom: 20px;
+      cursor: pointer;
       &:hover {
+        transition: opacity 0.3s ease;
         opacity: 0.7;
       }
+    }
+    p {
+      text-align: left;
     }
   }
 }
@@ -9375,3 +9382,18 @@ section.TreborScholz {
   }
 }
 /*************** Bootstrap extensions ******************/
+
+/*************** Flexbox ******************/
+
+.row.is-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.is-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-col-center {
+  flex-direction: column; justify-content: space-around;
+}
