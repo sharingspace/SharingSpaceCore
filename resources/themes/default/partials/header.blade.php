@@ -1,5 +1,5 @@
 <div class="w-section">
-  <div class="w-background-video background-video {{ (isset($bannerClasses)) ? $bannerClasses : ''}}" style="height:{{ (isset($bannerHeight)) ? $bannerHeight : '' }}">
+  <div class="background-video" style="height:{{ $bannerHeight or '' }}">
     <video autoplay="autoplay" loop="loop" poster='{{ Helper::cdn('img/hp/poster.png') }}'>
       @if (Route::is('about') || Route::is('coop') || Route::is('coop_success'))
       <source src="{{ Helper::cdn('movies/clothing-transcode.webm') }}" data-wf-ignore="">
@@ -122,8 +122,8 @@
                   <li {!! (Route::is('product') ? ' class="active"' : '') !!}>
                     <a href="{{ route('product') }}">{{ trans('general.nav.features') }}</a>
                   </li>
-                  <li {!! (Route::is('pricing_page') ? ' class="active"' : '') !!}>
-                    <a href="{{ route('pricing_page') }}">{{ trans('pricing.headline') }} <span class="sr-only">(current)</span></a>
+                  <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('about') }}">{{ trans('about.headline') }} <span class="sr-only">(current)</span></a>
                   </li>
                   <li>
                     <a class="text-white" href="{{ route('community.create.form') }}" >
@@ -142,18 +142,23 @@
         </div>
       </div>
     </div>
-    <div id="headerWrapper">
 
+    <div id="headerWrapper">
       @if (Route::is('home'))
-      <h1 class="heading">{{ trans('general.make-share') }}</h1>
-      <h2 class="hp_subheading">
-        {{ trans('home.subhome_headline') }}<br>
-        <div class="header_cta_button">
-          <a class="w-button cta-button contained-button size-20" href="{{ route('community.create.form') }}">
-            {{ trans('general.nav.try_now') }}
-          </a>
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h1 class="hp_heading">{!! trans('general.make_share') !!}</h1>
+          <h2 class="hp_subheading">{!! trans('home.subhome_headline') !!}</h2>
+          <div class="pull-left margin-top-10">
+            <a class="cta-button contained-button size-20 bg-black border-dkgray" href="{{ route('product') }}">
+              {{ trans('general.learn_more') }}
+            </a>
+            <a class="cta-button contained-button size-20 margin-left-5 bg-red border-crimson" href="{{ route('register') }}">
+              {{ trans('home.free_membership') }}
+            </a>
+          </div>
         </div>
-      </h2>
+      </div>
       @elseif (Route::is('login'))
       <h1 class="heading">{{trans('general.nav.login') }}</h1>
       @elseif (Route::is('register'))

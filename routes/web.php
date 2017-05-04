@@ -460,11 +460,11 @@ Route::group(
 
 
 
-        // Request access to a community
+        // Request access to a community , 'community-auth'
         Route::get(
             'request-access',
             [
-            'middleware' => ['auth', 'community-auth'],
+            'middleware' => ['auth'],
             'as' => 'community.request-access.form',
             'uses' => 'CommunitiesController@getRequestAccess'
             ]

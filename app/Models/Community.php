@@ -347,6 +347,30 @@ class Community extends Model
     }
 
     /**
+    * Can view members page
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */    
+    public function viewMembers()
+    {
+        return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type != 'S'));
+    }
+
+    /**
+    * Can view browse page
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */
+    public function viewBrowse()
+    {
+        return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type == 'O'));
+    }
+
+    /**
     * Is a community open?
     *
     * @author [D.Linnard] [<dslinnard@yahoo.com>]

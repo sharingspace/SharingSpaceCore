@@ -9,32 +9,32 @@
       <h1 class="size-24 text-center">{{ $conversation->subject }}</h1>
 
         @foreach ($conversation->messages as $message)
-          {{--*/
-            $messageId = $message->id;
-            $displayName = $message->sender->getDisplayName();
-            $avatar = $message->sender->gravatar_img();
-            $senderId = $message->sender->id;
-            $createdAt = $message->created_at;
-            $messageText = Helper::parseText($message->message);
-            $readOn = $message->read_on;
-            $community = $message->conversation->community->name;
-          /*--}}
-          @include('./account/message_row')
-      
+          
+          @include('./account/message_row',
+          [
+            'messageId' => $message->id,
+            'displayName' => $message->sender->getDisplayName(),
+            'avatar' => $message->sender->gravatar_img(),
+            'senderId' => $message->sender->id,
+            'createdAt' => $message->created_at,
+            'messageText' => Helper::parseText($message->message),
+            'readOn' => $message->read_on,
+            'community' => $message->conversation->community->name
+          ])
         @endforeach
         
-        {{--*/
-          $rowClass="hidden";
-          $messageId = "id_clone";
-          $displayName = "displayName_clone";
-          $avatar = "avatar_clone";
-          $senderId = "senderId_clone";
-          $createdAt = "createdAt_clone";
-          $messageText = "messageText_clone";
-          $readOn = "";
-          $community = "readOn_clone";
-        /*--}}        
-        @include('./account/message_row') 
+        @include('./account/message_row',
+        [
+          'rowClass' => 'hidden',
+          'messageId' => 'id_clone',
+          'displayName' => 'displayName_clone',
+          'avatar' => 'avatar_clone',
+          'senderId' => 'senderId_clone',
+          'createdAt' => 'createdAt_clone',
+          'messageText' => 'messageText_clone',
+          'readOn' => '',
+          'community' => 'readOn_clone'
+        ]) 
     </div>
 
     <div class="col-xs-12">

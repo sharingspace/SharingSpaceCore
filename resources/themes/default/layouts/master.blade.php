@@ -75,14 +75,9 @@
 		<div id="wrapper" class="default_theme">
 
       @if (Route::is('home'))
-        {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}
-        {{--*/ $bannerHeight = '938px' /*--}}
-        <div>@include('partials.header')</div>
+        <div>@include('partials.header', ['bannerHeight' => '700px'])</div>
       @else
-        {{--*/ $bannerClasses = '' /*--}}
-        {{--*/ $bannerHeight = '350px' /*--}}
-
-        <div>@include('partials.header')</div>
+        <div>@include('partials.header', ['bannerHeight' => '350px'])</div>
         <!-- Notifications -->
 
         <div class="col-md-12 margin-top-0">
@@ -108,36 +103,26 @@
 
 <script type="text/javascript" src="{{ Helper::cdn('js/webflow.js') }}"></script>
 <script type="text/javascript">
-  $(document).ready(function(){ 
-    $('.max_autoplay_movies').css('height', window.innerHeight); 
-      
-     var scroll_start = 30;
-     var startchange = $('#header');
-     var offset = startchange.offset();
-     $(document).scroll(function() { 
-        scroll_start = $(this).scrollTop();
+$(document).ready(function(){ 
+  $('.max_autoplay_movies').css('height', window.innerHeight); 
+    
+   var scroll_start = 30;
+   var startchange = $('#header');
+   var offset = startchange.offset();
+   $(document).scroll(function() { 
+      scroll_start = $(this).scrollTop();
 
-        if(scroll_start > offset.top) {
-            $('#header').css('background-color', 'white');
-            $('#header').removeClass('header_noDropShadow');
-            $('#header').addClass('header_dropShadow');
-         } else {
-            $('#header').css('background-color', 'transparent');
-            $('#header').removeClass('header_dropShadow');
-            $('#header').addClass('header_noDropShadow');
-         }
-     });
-
-    /* $(".dropdown-menu li a").click(function() {
-      console.log("dropdown clicked "+$(this).text());
-
-      $(this).parent(".dropdown").find('a').text('Boo');
-      console.log("dropdown clicked "+$(this).parent('.dropdown').html());
-
-      //$(this).parent("li.dropdown a").html($(this).text() + ' <span class="caret"></span>');
-      //$(this).parents(".dropdown").find('li').val($(this).data('value'));
-    });*/
-  });
+      if(scroll_start > offset.top) {
+          $('#header').css('background-color', 'white');
+          $('#header').removeClass('header_noDropShadow');
+          $('#header').addClass('header_dropShadow');
+       } else {
+          $('#header').css('background-color', 'transparent');
+          $('#header').removeClass('header_dropShadow');
+          $('#header').addClass('header_noDropShadow');
+       }
+   });
+});
 </script>
 
 </body>

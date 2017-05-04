@@ -46,12 +46,12 @@ h4,
 h5,
 h6,
 th {
-  color: rgba(0, 0, 0, 0.87) !important;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 p,
 td {
-  color: rgba(0, 0, 0, 0.54) !important;
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .bootstrap-table .table {
@@ -76,7 +76,7 @@ td {
 }
 
 #topBar {
-  background-color: #d0edf5 !important;
+  background-color: #d0edf5;
 }
 
 #topBar ul.dropdown-menu {
@@ -101,7 +101,7 @@ td {
 }
 
 #topNav {
-  background-color: #edf8fb !important;
+  background-color: #edf8fb;
 }
 
 #topNav li > a {
