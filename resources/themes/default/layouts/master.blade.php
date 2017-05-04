@@ -78,6 +78,7 @@
         <div>@include('partials.header', ['bannerHeight' => '700px'])</div>
       @else
         <div>@include('partials.header', ['bannerHeight' => '350px'])</div>
+
         <!-- Notifications -->
 
         <div class="col-md-12 margin-top-0">
