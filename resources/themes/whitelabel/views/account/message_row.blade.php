@@ -1,7 +1,6 @@
-
        <div class="row messageRow message_{{$messageId or 0}} {{$rowClass or null}}">  
           <div class="col-xs-1">
-            <a class="member_thumb pull-left" href="{{ route('user.profile', $senderId or null) }}">
+            <a class="member_thumb pull-left" href="{{ route('user.profile', $senderId) }}">
               <img class="hidden-xs margin-right-10" src="{{ $avatar or '' }}">
             </a>
           </div>

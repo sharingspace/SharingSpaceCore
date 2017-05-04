@@ -174,6 +174,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     /**
     * Return whether or not the user can view the community.
+    * This is quite simply whether the user can see anything
+    * of the community, home page etc. and not whether the user
+    * can interact with the site.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @param object $community
@@ -184,12 +187,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         LOG::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
 
-        if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type=='O') { 
-            LOG::debug("canSeeCommunity: user can see hub");
+        if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type != 'S') { 
+            LOG::debug("canSeeCommunity: user can see share, because they are either a member, they are super admin, or it is not secret");
             return true;
         }
         else {
-            LOG::debug("canSeeCommunity: user cannot see hub");
+            LOG::debug("canSeeCommunity: user cannot see share, that is it is secret and you are not a member");
             return false;
         }
     }
@@ -329,9 +332,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $communityCount = $this->communities()->where('community_id', '=', $community->id)->count();
         $superAdmin = $ignoreSuperAdminStatus ? false : $this->isSuperAdmin();
-        LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$communityCount.",  super Admin = ".$superAdmin);
+        $retValue = $communityCount || $superAdmin;
+        //$yesNo = $retValue?'yes':'no';
+        //LOG::debug("isMemberOfCommunity: ".$yesNo);
 
-        return ($communityCount || $superAdmin);
+        return $retValue;
     }
 
 

@@ -80,6 +80,16 @@ class AuthServiceProvider extends ServiceProvider
       }
     });
 
+    // Check if the user can see the community members page
+    $gate->define('view-members', function ($user, $community) {
+      //Log::debug("view-members ************** view-members entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
+
+      if ($community->group_type != 'S') {
+        //Log::debug("view-browse ************** can view view-members");
+        return true;
+      }
+    });
+
     // Check if the user can join a community
     // (they are not already a member)
     $gate->define('join-community', function ($user, $community) {
@@ -145,8 +155,13 @@ class AuthServiceProvider extends ServiceProvider
     });
 
     // Check whether the user can make an offer on an entry
-    $gate->define('make-offer', function ($user, $viewer_id) {
-      return $user->id != $viewer_id;
+    $gate->define('make-offer', function ($user, $entry, $community) {
+      return (($entry->created_by != $user->id) && $user->isMemberOfCommunity($community) && (!$entry->expired) && ($entry->completed_at==''));
+    });
+
+    // Check whether the user can send a message to another user
+    $gate->define('send-msg', function ($user, $community) {
+      return $user->isMemberOfCommunity($community);;
     });
   }
 }
