@@ -51,11 +51,11 @@ $selectBackgroundColor: $accentColor;
 }
 
 h1, h2, h3, h4, h5, h6, th {
-    color: $primaryText !important;
+    color: $primaryText;
 }
 
 p, td {
-  color: $secondaryText !important;
+  color: $secondaryText;
 }
 
 .bootstrap-table .table {
@@ -81,7 +81,7 @@ p, td {
 
 
 #topBar {
-  background-color: $darkPrimaryColor !important;
+  background-color: $darkPrimaryColor;
   ul.dropdown-menu { /* submenu border top color */
     border-top-color: $primaryColor;
   }
@@ -103,7 +103,7 @@ p, td {
 }
 
 #topNav {
-  background-color: $primaryColor !important;
+  background-color: $primaryColor;
   li > a {
     color: $primaryTextColor !important;
     opacity: 0.6;

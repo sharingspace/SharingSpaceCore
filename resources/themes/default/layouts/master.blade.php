@@ -75,14 +75,9 @@
 		<div id="wrapper" class="default_theme">
 
       @if (Route::is('home'))
-        {{--*/ $bannerClasses = 'max_autoplay_movies' /*--}}
-        {{--*/ $bannerHeight = '938px' /*--}}
-        <div>@include('partials.header')</div>
+        <div>@include('partials.header', ['bannerHeight' => '938px', 'bannerClasses' => 'max_autoplay_movies'])</div>
       @else
-        {{--*/ $bannerClasses = '' /*--}}
-        {{--*/ $bannerHeight = '350px' /*--}}
-
-        <div>@include('partials.header')</div>
+        <div>@include('partials.header', ['bannerHeight' => '350px', 'bannerClasses' => ''])</div>
         <!-- Notifications -->
 
         <div class="col-md-12 margin-top-0">
