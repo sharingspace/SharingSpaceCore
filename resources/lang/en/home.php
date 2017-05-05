@@ -8,8 +8,9 @@ return [
     |--------------------------------------------------------------------------
     */
     'homepage' => 'home page',
-    'subhome_headline' => 'An Exchange Platform for Any Group or Community',
+    'subhome_headline' => 'AnyShare makes it easy to add, find and use what<br>your community or group needs to thrive',
     'free_trial' => 'Try a Share free for 15 days',
+    'free_membership' => 'Free membership',
     'our_communities'  => 'Our Communities',
 		'learn_more_p1a' => 'Share',
         'learn_more_p1b' => 'from AnyShare is a community tool for transforming isolated people into a united group with shared resources.',
