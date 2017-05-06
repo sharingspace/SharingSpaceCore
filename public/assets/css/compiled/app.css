@@ -9622,35 +9622,44 @@ section#about p {
 }
 
 section#case_studies {
-  background-color: #262626;
+  background-color: white;
 }
 
 section#case_studies h2,
+section#case_studies h3,
 section#case_studies p {
-  color: white;
+  color: #444;
+  text-align: left;
 }
 
 section#case_studies .case_study {
   position: relative;
+  margin-bottom: 20px;
 }
 
 section#case_studies .case_study h3 {
-  position: absolute;
-  top: 31%;
   text-transform: capitalize;
-  color: white !important;
   width: 100%;
   font-size: 21px;
+  margin-top: 0;
+}
+
+section#case_studies .case_study:last-child {
+  margin-bottom: 0;
 }
 
 section#case_studies img {
   border: white solid 2px;
-  opacity: 0.4;
-  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 section#case_studies img:hover {
+  transition: opacity 0.3s ease;
   opacity: 0.7;
+}
+
+section#case_studies p {
+  text-align: left;
 }
 
 #caseStudy1 .modal-dialog,
@@ -11305,6 +11314,35 @@ section.TreborScholz {
 }
 
 /*************** Bootstrap extensions ******************/
+
+/*************** Flexbox ******************/
+
+.row.is-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.row.is-flex > [class*='col-'] {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.flex-col-center {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!
@@ -14244,7 +14282,7 @@ blockquote cite:after {
 }
 
 .border-crimson {
-  border-color: Crimson;
+  border-color: #990000;
 }
 
 .border-fuchsia {
@@ -14268,7 +14306,7 @@ blockquote cite:after {
 }
 
 .border-dkgray {
-  border-color: #4d4d4d !important;
+  border-color: #2d2d2d !important;
 }
 
 .border-silver {
