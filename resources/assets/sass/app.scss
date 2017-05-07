@@ -8359,183 +8359,32 @@ $color-green: #9AE14F;
   * Pricing page
   **/
 #pricing {
-  .table-layout {
-    display:table;
-    width:300px;
-    padding:5px;
-  }
-
-  .table-layout .table-cell {
-      display:table-cell;
-      border:solid 1px #ccc;
-      border-radius:5px;
-      color:white;
-
-      ul {
-        list-style: none;
-      }
-  }
-
-  /* arrow creation .... */
-  .content:after, .content:before,.pricing-footer:before,.pricing-footer:after {
-    //top: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-
-  .pricing-footer:after,.pricing-footer:before{
-      top:0;
-  }
-
-  .content:after,.pricing-footer:after {
-    border-color: rgba(136, 183, 213, 0);   
-    border-width: 5px;
-    margin-left: -5px;
-  }
-
-  .content:after{   
-    border-top-color: #53CFE9;  
-  }
-
-  .pricing-footer:after{
-    border-top-color: #FFFFFF;
-  }
-  /* .... arrow creation*/
-
-  .pricing_header, .pricing-footer {
-    background-color: #53CFE9;
-    text-align:center;
-    position:relative;
-    p.price {
-      position:relative;
-    }
-  }
-
-  .pricing_header {
-    p.price {
-      margin:10px 0;
-      padding-top:20px;
-      span {
-        font-size: 70px;
-        font-weight: bold;
-      }
-      sup {
-        font-size: 14px;
-        position: absolute;
-        top: 10px;
-        left: 100px;
-      }
-      sub {
-        font-size:14px;
-        position: absolute;
-        bottom: 12px;
-        right: 45px;
-      }
-    }
-  }
-
-  .pricing-footer {
-    height:60px;
-    p.price {
-      padding-top:22px;
-      span {
-        font-size: 50px;
-      }
-      sup {
-        font-size: 14px;
-        position: absolute;
-        top: 19px;
-        left: 110px;
-      }
-      sub {
-        font-size:14px;
-        position: absolute;
-        bottom: 10px;
-        right: 54px;
-      }
-    }
-    a button {
-      color:white;
-      font-size:50px;
-      margin-top:-12px;
-    }
-  }
-
-  .pricing_header .content {
-    height:70px;
-    &:after{ 
-      border-top-color: #82DACA;  
-    }
-  }
-
-  .features {
-    background-color: white;
-    background: #FFFFFF;
-    text-align: left;
-    color: #9C9C9C;
-    padding: 10px 0;
-    font-size: 16px;
-    margin-left:40px;
-    li {
-      margin-bottom:10px;
-      &:first-child {
-        margin-top:15px;
-      }
-      &:last-child {
-        margin-bottom:0;
-      }
-      a {
-        color:#9C9C9C;
-      }
-    }
-  }
-
   h2 {
-    background: #3ec6e0 none repeat scroll 0 0;
     margin-top:0;
     text-align:center;
-    color:white;
     padding:4px 0;
   }
-}
 
+  table {
+    margin: 0 auto;
+    width: 70%;
+    min-width: 350px;
+    border: #eee 2px solid;
+    border-radius: 7px;
+    border-collapse: initial !important;
 
-@media (min-width: $screen-sm-min) {
-  #pricing { 
-    .table-layout {
-      width:350px;
+    th {
+      font-size: 22px;
+      border:0px;
     }
-    .pricing_header {
-      p.price {
-        sup {
-          top: 10px;
-          left: 120px;
-        }
-        sub {
-          bottom: 12px;
-          right: 70px;
-        }
-      }
-    }
-    .pricing-footer {
-      p.price {
-        sup {
-          top: 20px;
-          left: 133px;
-        }
-        sub {
-          bottom: 12px;
-          right: 77px;
-        }
-      }
+    td {
+      padding-left: 5px;
+      padding-right: 15px;
+      border:0px;
     }
   }
 }
+
 
 /**
   * Coop page

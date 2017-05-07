@@ -84,7 +84,7 @@
 
         <div class="row margin-top-20">
           <div class="col-md-12">
-            {!! trans('auth.already_have_account') !!} <a href="../auth/login">{!! trans('auth.signin_now') !!}</a>
+            {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
           </div>
         </div>
       </div>

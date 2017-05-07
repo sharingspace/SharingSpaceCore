@@ -50,6 +50,7 @@ return [
   'our_members' => 'Members',
   'name' => 'Name',
   'make_share' => 'Start a Sharing Network<br>Start your future',
+  'start_share' => 'Start a Sharing Network',
   'learn_share' => 'Learn about "Sharing Networks"',
   'learn_more' => 'Learn More',
   'prev' => 'Previous',
