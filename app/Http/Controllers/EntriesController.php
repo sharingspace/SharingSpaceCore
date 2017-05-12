@@ -20,10 +20,10 @@ use Helper;
 use Log;
 use Gate;
 use App\Entry;
+use Illuminate\Support\Facades\Route;
 
 class EntriesController extends Controller
 {
-
     /**
     * Returns a view that displays entry information
     *
@@ -33,7 +33,7 @@ class EntriesController extends Controller
     */
     public function getEntry(Request $request, $entryID)
     {
-      //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
 
       if ($entry = \App\Entry::find($entryID)) {
         if ($request->user()) {
@@ -53,7 +53,23 @@ class EntriesController extends Controller
           ->where('entry_id', '=', $entryID)
           ->get();
 
-        return view('entries.view')->with('entry', $entry)->with('images', $images);
+        if ("kiosk_entry" == Route::currentRouteName()) {
+          $type = ($entry->post_type == 'want') ? 'wants' : 'has';
+
+          $tagArray =  explode (',', $entry->tags);
+          $category = null;
+          foreach($tagArray as $tag) {
+            $tag = trim($tag);
+
+            if (in_array($tag, Entry::$tagList)) {
+              $category = $tag;
+            }
+          }
+          return view('kiosk.entry')->with('entry', $entry)->with('images', $images)->with('natural_type', $type)->with('category', $category);
+        }
+        else {
+          return view('entries.view')->with('entry', $entry)->with('images', $images);
+        }
       }
       else {
         return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
@@ -690,6 +706,96 @@ class EntriesController extends Controller
 
         return $data;
     }
+
+
+    /**
+    * Returns the a list of categories based on tag field,
+    * this is only temopary code and needs to re-written.
+    *
+    * @author [D. Linnard] [<david@linnard.com>]
+    * @since  [v1.0]
+    * @return list of categories
+    */
+    public function getKioskEntries(Request $request, $tagName = null)
+    {
+      $entryList = array();
+      $entries = array();
+      $added = array();
+
+      //$tagList = ["Art", "Ecology", "Skills", "Learning Opportunities", 
+      //  "Community Resources", "Meet a Resident", "Free", "Upcycle Projects", "Dreams"];
+
+      if ($tagName) {
+        $entries = Entry::TagSearch($tagName)->get();
+      }
+      else {
+        $entries = $request->whitelabel_group->entries()->where('visible', 1)->whereNotNull('tags')->where('tags', '!=', '')->NotCompleted()->get();
+        $entries = $entries->unique('tags');
+      }
+
+      $count = $entries->count();
+      $i = 0;
+
+      foreach ($entries as $entry) {
+        // create an array from our comma separated string
+        $tagArray =  explode (',', $entry->tags);
+        foreach($tagArray as $tag) {
+          $tag = trim($tag);
+
+          if (in_array($tag, Entry::$tagList) && ($tagName || !in_array($tag, $added))) {
+            $added[] = $tag;
+
+            $tagparts =  explode (' ', strtolower($tag));
+            $tagImage = '/assets/img/kiosk/'.implode('_', $tagparts).'.jpg';
+
+            if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
+              if ($tagName) {
+                $entryList[] = array(
+                  'image' => $tagImage,
+                  'tag' => $tag,
+                  'entryId' => $entry->id,
+                  'name' => $entry->author->getDisplayName(),
+                  'type' => ($entry->post_type == 'want') ? 'wants' : 'has',
+                  'title' => $entry->title,
+                  'qty' => $entry->qty,
+                  'color' => $entry->post_type,
+                );
+              }
+              else {
+                $entryList[] = array(
+                  'image' => $tagImage,
+                  'tag' => $tag,
+                  'entryId' => $entry->id,
+                  'tint_shade' => 't'.$i
+                );
+              }
+            }
+            else {
+                // we have an entry who doesn't belong to this community - something went very wrong
+                $entryList[] = array('image' => '-', 'tag' => '-', 'tint_shade' => 't0');
+            }
+
+            if ($i++ > 9) {
+              $i = 0;
+            }
+          }
+        }
+      }
+
+      // sort them by tag name
+      usort($entryList, function($a, $b) {
+        return strnatcmp($a['tag'], $b['tag']);
+      });
+
+      if ($tagName) {
+        return view('kiosk.category_entries', ['entryList' => $entryList, 'tag' => $tagName]);
+      }
+      else {
+        $entryList =  $input = array_map("unserialize", array_unique(array_map("serialize", $entryList)));
+        return view('kiosk.categories')->with('entryList', $entryList);
+      }
+    }
+
 
     /**
     * Mark an entry as completed

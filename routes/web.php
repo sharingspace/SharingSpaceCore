@@ -334,6 +334,22 @@ Route::group(
                 );
 
                 Route::get(
+                    'kiosk/{tagName?}',
+                    array(
+                    'middleware' => ['community-auth'],
+                    'as' => 'kiosk.categories',
+                    'uses' => 'EntriesController@getKioskEntries')
+                );
+
+                Route::get(
+                    'kiosk/entry/{entryId}',
+                    array(
+                    'middleware' => ['community-auth'],
+                    'as' => 'kiosk_entry',
+                    'uses' => 'EntriesController@getEntry')
+                );
+
+                Route::get(
                     '{entryID}',
                     array(
                     'middleware' => ['auth','community-auth'],
@@ -364,14 +380,6 @@ Route::group(
             'as' => 'browse',
             'middleware' => 'community-auth',
             'uses' => 'CommunitiesController@getEntriesView')
-        );
-
-        Route::get(
-            'kiosk',
-            array(
-            'as' => 'kiosk',
-            'middleware' => 'community-auth',
-            'uses' => 'CommunitiesController@getKioskEntriesView')
         );
 
         Route::post(
