@@ -122,19 +122,12 @@
                   <li {!! (Route::is('product') ? ' class="active"' : '') !!}>
                     <a href="{{ route('product') }}">{{ trans('general.nav.features') }}</a>
                   </li>
+                  <li {!! (Route::is('memberships') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('memberships') }}">{{ trans('general.memberships') }}</a>
+                  </li>
                   <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                     <a href="{{ route('about') }}">{{ trans('about.headline') }} <span class="sr-only">(current)</span></a>
                   </li>
-                  <li>
-                    <a class="text-white" href="{{ route('community.create.form') }}" >
-                      <button class="btn-warning btn btn-xs contained-button size-18 weight-800 font-smoothing">
-                        {{trans('general.nav.share+')}}
-                      </button>
-                    </a>
-                  </li>
-
-                  <!-- <li><a href="{{ route('register') }}">{{ trans('general.nav.try') }}</a></li>
-                  <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li> -->
                 </ul>
               </nav>
             </div>
