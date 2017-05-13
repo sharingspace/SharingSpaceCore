@@ -11152,7 +11152,8 @@ section.TreborScholz {
 
 /*************** Flexbox ******************/
 
-.row.is-flex {
+
+.is-flex {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -11161,7 +11162,8 @@ section.TreborScholz {
   flex-wrap: wrap;
 }
 
-.row.is-flex > [class*='col-'] {
+
+.is-flex > [class*='col-'] {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -11178,6 +11180,190 @@ section.TreborScholz {
   -ms-flex-pack: distribute;
   justify-content: space-around;
 }
+
+
+.center-img-text .text {
+  position: absolute;
+  left: 50%;
+  /* horizontal alignment */
+  top: 43%;
+  /* vertical alignment */
+  -webkit-transform: translate(-50%, -43%);
+  transform: translate(-50%, -43%);
+  /* horizontal, vertical alignment fine tuning; explanation: http://stackoverflow.com/q/36817249 */
+  font-weight: bold;
+  font-size: 4vw;
+  line-height: 4vw;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+#kiosk .container-fluid {
+  padding: 25px 40px;
+}
+
+#kiosk h1,
+#kiosk h2,
+#kiosk p {
+  color: white;
+}
+
+#kiosk h2,
+#kiosk p,
+#kiosk a.more_info {
+  font-size: 25px;
+  line-height: 30px;
+}
+
+#kiosk .more_info {
+  margin-top: 40px;
+  display: block;
+}
+
+#kiosk .more_info:hover {
+  color: white;
+}
+
+#kiosk .tint {
+  position: relative;
+  float: left;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.2) 3px 5px 5px;
+}
+
+#kiosk .tint:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 255, 255, 0.5);
+  transition: all .3s linear;
+}
+
+#kiosk .tint:hover:before {
+  background: none;
+}
+
+#kiosk .t0:before {
+  background: rgba(255, 0, 0, 0.4);
+}
+
+#kiosk .t1:before {
+  background: rgba(150, 0, 0, 0.4);
+}
+
+#kiosk .t2:before {
+  background: rgba(255, 255, 0, 0.4);
+}
+
+#kiosk .t3:before {
+  background: rgba(80, 80, 0, 0.4);
+}
+
+#kiosk .t4:before {
+  background: rgba(0, 255, 0, 0.4);
+}
+
+#kiosk .t5:before {
+  background: rgba(0, 80, 0, 0.4);
+}
+
+#kiosk .t6:before {
+  background: rgba(0, 255, 255, 0.4);
+}
+
+#kiosk .t7:before {
+  background: rgba(0, 80, 80, 0.4);
+}
+
+#kiosk .t8:before {
+  background: rgba(0, 0, 255, 0.4);
+}
+
+#kiosk .t9:before {
+  background: rgba(0, 0, 80, 0.4);
+}
+
+#kiosk .t10:before {
+  background: rgba(255, 0, 255, 0.4);
+}
+
+#kiosk .t11:before {
+  background: rgba(80, 0, 80, 0.4);
+}
+
+#kiosk .want_color,
+#kiosk .kiosk-category .line-entry.want a:hover {
+  color: #3192A3;
+}
+
+#kiosk .have_color,
+#kiosk .kiosk-category .line-entry.have a:hover {
+  color: limegreen;
+}
+
+#kiosk .kiosk-category h1 {
+  text-align: center;
+  font-size: 60px;
+  margin: 20px auto;
+}
+
+#kiosk .kiosk-category .line-entry {
+  margin: 0;
+  padding: 5px;
+  font-size: 55px;
+  width: 100%;
+}
+
+#kiosk .kiosk-category .line-entry a {
+  cursor: pointer;
+  display: block;
+  font-size: 50px;
+  width: 100%;
+}
+
+#kiosk .kiosk-category .line-entry a:hover {
+  color: inherit;
+}
+
+#kiosk .kiosk-category .line-entry.want a:hover {
+  background-color: rgba(163, 218, 227, 0.2);
+}
+
+#kiosk .kiosk-category .line-entry.have a {
+  color: limegreen;
+}
+
+#kiosk .kiosk-category .line-entry.have a:hover {
+  background-color: rgba(194, 240, 194, 0.2);
+}
+
+#kiosk #kiosk_footer {
+  height: 95px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#kiosk #kiosk_footer a {
+  display: inline-block;
+}
+
+#kiosk #kiosk_footer a:hover {
+  opacity: 0.7;
+}
+
+#kiosk #kiosk_footer p {
+  text-align: center;
+  margin-top: -75px;
+  font-size: 20px;
+}
+
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

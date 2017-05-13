@@ -8373,6 +8373,7 @@ $color-green: #9AE14F;
     border-radius: 7px;
     border-collapse: initial !important;
 
+
     th {
       font-size: 22px;
       border:0px;
@@ -8384,6 +8385,7 @@ $color-green: #9AE14F;
     }
   }
 }
+
 
 
 /**
@@ -9233,15 +9235,159 @@ section.TreborScholz {
 /*************** Bootstrap extensions ******************/
 /*************** Flexbox ******************/
 
-.row.is-flex {
+
+.is-flex {
     display: flex;
     flex-wrap: wrap;
 }
-.row.is-flex > [class*='col-'] {
+
+.is-flex > [class*='col-'] {
     display: flex;
     flex-direction: column;
 }
 
 .flex-col-center {
-  flex-direction: column; justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.center-img-text .text {
+  position: absolute;  
+  left: 50%;                        /* horizontal alignment */
+  top: 43%;                         /* vertical alignment */
+  transform: translate(-50%, -43%); /* horizontal, vertical alignment fine tuning; explanation: http://stackoverflow.com/q/36817249 */
+  font-weight: bold;
+  font-size: 4vw;
+  line-height: 4vw;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
+#kiosk {
+  .container-fluid {
+    padding: 25px 40px;
+  }
+
+  h1, h2, p {
+    color: white;
+  }
+
+  h2, p, a.more_info {
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  .more_info {
+    margin-top: 40px;
+    display: block;
+    &:hover {
+      color: white;
+    }
+  }
+
+  .tint {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    box-shadow: rgba(0,0,0,.2) 3px 5px 5px;
+  }
+
+  .tint:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,255,255, 0.5);
+    transition: all .3s linear;
+  }
+
+  .tint:hover:before { background: none; }
+
+  $opacity:0.4;
+  .t0:before { background: rgba(255,0,0,$opacity); }
+  .t1:before { background: rgba(150,0,0, $opacity); }
+  .t2:before { background: rgba(255,255,0, $opacity); }
+  .t3:before { background: rgba(80,80,0, $opacity); }
+  .t4:before { background: rgba(0,255,0, $opacity); }
+  .t5:before { background: rgba(0,80,0, $opacity); }
+  .t6:before { background: rgba(0,255,255, $opacity); }
+  .t7:before { background: rgba(0,80,80, $opacity); }
+  .t8:before { background: rgba(0,0,255, $opacity); }
+  .t9:before { background: rgba(0,0,80, $opacity); }
+  .t10:before { background: rgba(255,0,255, $opacity); }
+  .t11:before { background: rgba(80,0,80, $opacity); }
+
+  .want_color {
+    color: #3192A3;
+  }
+
+  .have_color {
+    color: limegreen;
+  }
+
+  .kiosk-category {
+    h1 {
+      text-align: center;
+      font-size: 60px;
+      margin: 20px auto;
+    }
+
+    .line-entry {
+      margin: 0;
+      padding: 5px;
+      font-size: 55px;
+      width: 100%;
+
+      a {
+        cursor:pointer;
+        display: block;
+        font-size: 50px;
+        width: 100%;
+
+        &:hover {
+          color: inherit;
+        }
+      }
+      
+      &.want {
+        a {
+          &:hover {
+            @extend .want_color;
+            background-color: rgba(lighten(#3192A3, 35%), 0.2);
+          }
+        }
+      }
+
+      &.have {
+        a {
+          color: limegreen;
+          &:hover {
+            @extend .have_color;
+            background-color: rgba(lighten(limegreen, 35%), 0.2);
+          }
+        }
+      }
+    }
+  }
+  #kiosk_footer {
+    height: 95px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    a {
+      display: inline-block;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    p {
+      text-align: center;
+      margin-top: -75px;
+      font-size: 20px;
+    }
+  }
 }
