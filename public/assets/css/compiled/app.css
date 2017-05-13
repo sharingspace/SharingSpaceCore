@@ -9742,7 +9742,7 @@ h2.white-secondary-heading {
   text-align: center;
   margin-bottom: 10px;
   color: #fff;
-  font-size: 39px;
+  font-size: 36px;
   margin-top: 0;
   line-height: 45px;
 }
@@ -11152,8 +11152,8 @@ section.TreborScholz {
 
 /*************** Flexbox ******************/
 
-
-.is-flex {
+.is-flex,
+.flex-container {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -11161,7 +11161,6 @@ section.TreborScholz {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-
 
 .is-flex > [class*='col-'] {
   display: -webkit-flex;
@@ -11181,6 +11180,20 @@ section.TreborScholz {
   justify-content: space-around;
 }
 
+.flex-row-center {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.space-between {
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
 
 .center-img-text .text {
   position: absolute;
@@ -11363,7 +11376,6 @@ section.TreborScholz {
   margin-top: -75px;
   font-size: 20px;
 }
-
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!
