@@ -11152,6 +11152,7 @@ section.TreborScholz {
 
 /*************** Flexbox ******************/
 
+
 .is-flex {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11160,6 +11161,7 @@ section.TreborScholz {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+
 
 .is-flex > [class*='col-'] {
   display: -webkit-flex;
@@ -11178,6 +11180,7 @@ section.TreborScholz {
   -ms-flex-pack: distribute;
   justify-content: space-around;
 }
+
 
 .center-img-text .text {
   position: absolute;
@@ -11360,6 +11363,7 @@ section.TreborScholz {
   margin-top: -75px;
   font-size: 20px;
 }
+
 /** ************************************* **
 
 	NOTE: 	- Only minifying this file, 10% is reduced!

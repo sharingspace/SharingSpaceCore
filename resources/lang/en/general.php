@@ -11,7 +11,7 @@ return [
   'browse_button' => 'Browse Here',
   'copyright' => 'Copyright',
   'no_about_data'  => 'The owner of this group has not entered any information about it yet.',
-  'seo_title' => 'Make a Share with AnyShare',
+  'seo_title' => 'Make a Sharing Network with AnyShare',
   'token_expired' => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
   'terms' => 'Terms',
   'create' => 'Create',
@@ -50,7 +50,8 @@ return [
   'our_members' => 'Members',
   'name' => 'Name',
   'make_share' => 'Start a Sharing Network<br>Start your future',
-  'learn_share' => 'Learn about "Shares"',
+  'start_share' => 'Start a Sharing Network',
+  'learn_share' => 'Learn about "Sharing Networks"',
   'learn_more' => 'Learn More',
   'prev' => 'Previous',
   'next' => 'Next',
@@ -61,7 +62,7 @@ return [
   'privacy' => 'Privacy',
   'markdown' => 'markdown allowed',
   'yes' => 'Yes',
-  'make_share_now' => 'Make your Share now!',
+  'make_share_now' => 'Make your Sharing Network now!',
   'analytics' => 'Google Analytics',
   'tos' => 'Terms and Conditions',
   'total_members' => 'Total members',
@@ -243,23 +244,23 @@ return [
     'join_requests' => 'Join Requets',
     'login_to_send_message' => 'Please sign-in if you want to send this person a message',
     'login_to_send_offer' => 'Please sign-in if you want to send this person an offer',
-    'join_to_send_message' => 'Please join this Share if you want to send this person a message',
-    'join_to_send_offer' => 'Please join this Share if you want to send this person an offer',
+    'join_to_send_message' => 'Please join this Sharing Network if you want to send this person a message',
+    'join_to_send_offer' => 'Please join this Sharing Network if you want to send this person an offer',
 
     'request_access' => [
-      'your_request' => 'You have asked to become a member of this Share.',
+      'your_request' => 'You have asked to become a member of this Sharing Network.',
       'oops' => 'Oops!',
-      'must_be_member' => 'You must be a member of this Share to view it.',
+      'must_be_member' => 'You must be a member of this Sharing Network to view it.',
       'request_access' => 'Request Access to',
       'access_requested' => 'Access has been Requested to',
-      'admin_msg' => 'Message to Share admin:',
+      'admin_msg' => 'Message to Sharing Network admin:',
       'max_140' => 'Max 140 characters',
       'chars_remain' => 'characters remaining',
       'hint' => 'Hint:',
       'submit' => 'Submit',
-      'sorry_closed' => 'This is a closed Share. Closed Shares needs to approve members before they join, so please introduce yourself.',
+      'sorry_closed' => 'This is a closed Sharing Network. Closed Sharing Networks needs to approve members before they join, so please introduce yourself.',
       'hint' => 'Hint: ',
-      'still_pending' => 'Your request to become a member of this Share is still pending'
+      'still_pending' => 'Your request to become a member of this Sharing Network is still pending'
     ],
 
     'request_access_sent' => [
@@ -269,22 +270,22 @@ return [
   'register' => [
     'introduction' => 'Introduction',
     'i_agree' => 'I agree',
-    'i_want_to_join' => ' - I want to join this Share',
-    'join_share' => 'Join this Share'
+    'i_want_to_join' => ' - I want to join this Sharing Network',
+    'join_share' => 'Join this Sharing Network'
   ],
   'community'  => [
     'account_great' => 'Great, you have created an AnyShare account',
     'share_join' => 'Do you wish to join',
-    'closed_share' => 'If this is a closed Share, you will need to request to join.',
+    'closed_share' => 'If this is a closed Sharing Network, you will need to request to join.',
     'join'  => 'Join',
     'fee' => 'Fee',
     'settings'  => 'Share Settings',
     'save' => 'Update',
-    'name_placeholder' => 'Share Name',
-    'name' => 'Choose a name for your Share',
-    'subdomain' => ' Choose a subdomain (xxx.anyshare.coop) for your Share',
+    'name_placeholder' => 'Sharing Network Name',
+    'name' => 'Choose a name for your Sharing Network',
+    'subdomain' => ' Choose a subdomain (xxx.anyshare.coop) for your Sharing Network',
     'subdomain_placeholder' => 'name.anyshare.coop',
-    'description' => 'Describe your Share',
+    'description' => 'Describe your Sharing Network',
     'detailed_description' => 'Detailed description',
     'exchange_options' => 'Choose the allowed exchange options',
     'all_exchanges' => 'All exchanges',
@@ -302,13 +303,13 @@ return [
     'slack_channel' => 'Slack channel name',
     'analytics' => 'Google analytics integration',
     'for_example' => 'For example: UA-000000-01',
-    'p1' => 'You can start a Share in under 1 minute and enjoy it free for 30 days.
+    'p1' => 'You can start a Sharing Network in under 1 minute and enjoy it free for 30 days.
     We are currently in beta, so keep in mind features are still being added. This
     introductory cost is available for a limited time only. Email us at information
     info@anyshare.coop with questions about current features.',
     'p2' => 'You will not be charged until your free trial ends on',
     'p3' => 'No commitments, cancel at any time.',
-    'save_success' => 'Welcome to your new Share! Get started adding entries now.',
+    'save_success' => 'Welcome to your new Sharing Network! Get started adding entries now.',
     'type' => 'Choose a privacy level',
     'payment_info' => 'credit card information',
     'after_trial' => 'after 30 day free trial',
@@ -340,26 +341,26 @@ return [
       'title'  => 'Open Share',
       'text'  => 'Anyone can join',
       'type' => 'Open',
-      'desc' => 'An open Share lets anyone join and exchange. It is the most permissive way to build members.'
+      'desc' => 'An open Sharing Network lets anyone join and exchange. It is the most permissive way to build members.'
     ],
     'closed'  => [
       'title'  => 'Closed Share',
       'text'  => 'Invite-only to join',
       'type' => 'Closed',
-      'desc' => 'A closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details.'
+      'desc' => 'A closed Sharing Network lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details.'
     ],
     'secret'  => [
       'title'  => 'Secret Share',
       'text'  => 'Only members can view',
       'type' => 'Secret',
-      'desc' => 'A secret Share is hidden from anyone who is not a member. It is the top level of secrecy.'
+      'desc' => 'A secret Sharing Network is hidden from anyone who is not a member. It is the top level of secrecy.'
     ],
     'membership' => [
       'leave' => 'leave',
     ],
     'messages' => [
       'save_edits' => 'Your Share settings have been saved',
-      'save_new' => 'Your new Share has been created!',
+      'save_new' => 'Your new Sharing Network has been created!',
       'save_failed' => 'Something went wrong. Your Share settings have not been saved',
     ],
     'slack_info' => [
@@ -384,7 +385,7 @@ return [
   ],
 
   'login' => [
-    'login' => 'You must be logged in to view this Share.',
+    'login' => 'You must be logged in to view this Sharing Network.',
     'social' => 'Register using your favourite social network',
   ],
   'profile'  => [

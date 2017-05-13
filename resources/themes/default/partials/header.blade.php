@@ -170,7 +170,7 @@
       @endif
       </h2>
       @elseif (Route::is('community.create.form'))
-      <h1 class="heading">{{trans('general.make-share') }}</h1>
+      <h1 class="heading">{!!trans('general.start_share') !!}</h1>
       @elseif (Route::is('coop'))
       <h1 class="heading">{{ trans('coop.headline') }}</h1>
       <h2 class="subheading">{{ trans('coop.mission_subheadline') }}</h2>
@@ -192,6 +192,10 @@
       <h2 class="subheading">{{ trans('auth.join_public_shares') }}</h2>
       @elseif (Route::is('pricing_page'))
       <h1 class="heading">{{ trans('pricing.headline') }}</h1>
+      <h2 class="subheading">{{ trans('pricing.sub_headline') }}</h2>
+      <a class="cta-button contained-button size-20 margin-top-15 bg-blue" href="{{ route('register') }}">
+        {{ trans('home.free_signup') }}
+      </a>
       @else  
       <!-- using route name as the h1 -->
       <h1 class="heading">{{ucfirst(Route::getFacadeRoot()->current()->uri())}}</h1>
