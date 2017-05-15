@@ -594,7 +594,7 @@ Route::group(
         Route::get(
             'pricing',
             array(
-                'as' => 'pricing_page',
+                'as' => 'memberships',
                 function () {
                     return view('pricing');
             })

@@ -63,6 +63,7 @@ return [
   'markdown' => 'markdown allowed',
   'yes' => 'Yes',
   'make_share_now' => 'Make your Sharing Network now!',
+  'make_share_one_minute' => 'Start a Sharing Network in 1 minute',
   'analytics' => 'Google Analytics',
   'tos' => 'Terms and Conditions',
   'total_members' => 'Total members',
