@@ -48,7 +48,7 @@
       </div>
       <div class="col-xs-8 is-flex flex-col-center">
         <div>
-          <h3>{{trans('home.case_study_title_3')}}boo</h3>
+          <h3>{{trans('home.case_study_title_3')}}</h3>
           <p>{{trans('home.case_study_desc_3')}}</p>
           <p><a href="https://fairshares.anyshare.coop/" class="btn btn-default btn-sm" role="button">{{trans('home.view_the')}} {{trans('home.case_study_title_3')}} {{trans('home.sharing_network')}}</a></p>
         </div>
