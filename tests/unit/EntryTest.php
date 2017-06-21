@@ -1,5 +1,5 @@
 <?php
-use App\Entry;
+use App\Models\Entry;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -15,7 +15,7 @@ class EntryTest extends \Codeception\TestCase\Test
 
     public function testNewWantEntry()
     {
-        $entry = factory(App\Entry::class, 'want-entry')->make();
+        $entry = factory(\App\Models\Entry::class, 'want-entry')->make();
         $values = [
           'title' => $entry->title,
           'post_type' => $entry->post_type,
@@ -28,7 +28,7 @@ class EntryTest extends \Codeception\TestCase\Test
 
     public function testNewHaveEntry()
     {
-        $entry = factory(App\Entry::class, 'have-entry')->make();
+        $entry = factory(\App\Models\Entry::class, 'have-entry')->make();
         $values = [
           'title' => $entry->title,
           'post_type' => $entry->post_type,

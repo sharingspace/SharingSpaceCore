@@ -7,27 +7,25 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
+use App\collection;
+use App\Models;
+use App\UploadableFileTrait;
+use Cartalyst\Stripe\Billing\Laravel\Billable;
+use Cartalyst\Stripe\Billing\Laravel\BillableContract;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use DB;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\CommunitySubscription;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Cartalyst\Stripe\Billing\Laravel\Billable;
-use Cartalyst\Stripe\Billing\Laravel\BillableContract;
-use Watson\Validating\ValidatingTrait;
-use App\UploadableFileTrait;
-use App\Social;
-use App\Message;
-use App\Conversation;
-use DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Log;
+use Watson\Validating\ValidatingTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
@@ -103,7 +101,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function subscriptions()
     {
-        return $this->hasMany('App\CommunitySubscription', 'billable_id');
+        return $this->hasMany('App\Models\CommunitySubscription', 'billable_id');
     }
 
 
@@ -116,7 +114,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function social()
     {
-        return $this->hasMany('App\Social', 'user_id');
+        return $this->hasMany('App\Models\Social', 'user_id');
     }
 
 
@@ -303,7 +301,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function communities()
     {
-        return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id')->withPivot('custom_label');
+        return $this->belongsToMany('\App\Models\Community', 'communities_users', 'user_id', 'community_id')->withPivot('custom_label');
     }
 
  
@@ -316,7 +314,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function entries()
     {
-		return $this->hasMany('\App\Entry','created_by');
+		return $this->hasMany('\App\Models\Entry','created_by');
     }
 
 
@@ -349,7 +347,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function getSlackUsername($community)
     {
-        return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
+        return $this->belongsToMany('App\Models\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
     }
 
 
@@ -410,7 +408,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function conversations()
     {
-        return $this->hasMany('\App\Conversation','started_by');
+        return $this->hasMany('\App\Models\Conversation','started_by');
     }
 
 
@@ -423,7 +421,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function messagesTo()
     {
-		return $this->hasMany('\App\Message','sent_to');
+		return $this->hasMany('\App\Models\Message','sent_to');
     }
 
 
@@ -467,7 +465,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($unread_count_cache) {
             return $unread_count_cache;
         } else {
-            $unread_messages_count = Message::with('sender','conversation')
+            $unread_messages_count = Models\Message::with('sender','conversation')
                 ->where('sent_to', '=', $this->id)
                 ->whereNull('read_on')->count();
 

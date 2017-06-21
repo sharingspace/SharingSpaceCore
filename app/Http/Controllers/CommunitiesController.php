@@ -17,7 +17,7 @@ use Input;
 use Validator;
 use Redirect;
 use Config;
-use App\ExchangeType;
+use App\Models\ExchangeType;
 use Pagetheme;
 use Mail;
 use Helper;
@@ -31,7 +31,7 @@ class CommunitiesController extends Controller
 
     protected $community;
 
-    public function __construct(\App\Community $community)
+    public function __construct(\App\Models\Community $community)
     {
         $this->community = $community;
     }
@@ -176,7 +176,7 @@ class CommunitiesController extends Controller
     */
     public function getCreate()
     {
-        $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
+        $themes = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
         return view('communities.edit')->with('themes', $themes);
     }
 
@@ -200,7 +200,7 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->with('error', 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
 
-        $community = new \App\Community();
+        $community = new \App\Models\Community();
 
         $community->name    = e($request->input('name'));
         $community->subdomain    = strtolower(e($request->input('subdomain')));
@@ -283,12 +283,12 @@ class CommunitiesController extends Controller
             //Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
 
             // Save the community_id to the subscriptions table
-            $subscription = \App\CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
+            $subscription = \App\Models\CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
             $subscription->community_id = $community->id;
             $subscription->save();
 
             $community->members()->attach(Auth::user(), ['is_admin' => true]);
-            $community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+            $community->exchangeTypes()->saveMany(\App\Models\ExchangeType::all());
 
             Mail::send(
                 ['text' => 'emails.welcomeText', 'html' => 'emails.welcomeHTML'],
@@ -313,16 +313,16 @@ class CommunitiesController extends Controller
     */
     public function getEdit(Request $request)
     {
-        $themes = \App\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
+        $themes = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
 
-        $community = \App\Community::find($request->whitelabel_group->id);
+        $community = \App\Models\Community::find($request->whitelabel_group->id);
         $exchanges = $community->exchangeTypes;
         $allowed_exchanges=array();
         foreach ($exchanges as $exchange) {
             $allowed_exchanges[$exchange->id] = $exchange->id;
         }
 
-        $all_exchange_types = \App\ExchangeType::all();
+        $all_exchange_types = \App\Models\ExchangeType::all();
         return view('community.edit')->with('community', $community)->with('allowed_exchanges', $allowed_exchanges)->with('all_exchange_types', $all_exchange_types)->with('themes', $themes);
     }
 
@@ -337,7 +337,7 @@ class CommunitiesController extends Controller
     */
     public function postEdit(Request $request)
     {
-        $community = \App\Community::find($request->whitelabel_group->id);
+        $community = \App\Models\Community::find($request->whitelabel_group->id);
 
         $community->name    = e(Input::get('name'));
         $community->subdomain    = e(Input::get('subdomain'));

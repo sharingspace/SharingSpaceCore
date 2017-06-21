@@ -10,6 +10,7 @@
  */
 namespace App;
 
+use App\Models\Media;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Log;
 use Image;
@@ -37,14 +38,14 @@ trait UploadableFileTrait
     * @var boolean
     */
 
-    public function uploadImage(\App\User $user, UploadedFile $file, $layoutType, $rotation=null)
+    public function uploadImage(Models\User $user, UploadedFile $file, $layoutType, $rotation=null)
     {
         $path = public_path().'/assets/uploads/'.$layoutType.'/'.$this->id.'/';
         $aws_path = 'assets/uploads/'.$layoutType.'/'.$this->id;
         return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $rotation, $this->id, null);
     }
 
-    public static function uploadTmpImage(\App\User $user, UploadedFile $file, $layoutType, $upload_key, $rotation=null)
+    public static function uploadTmpImage(Models\User $user, UploadedFile $file, $layoutType, $upload_key, $rotation=null)
     {
         LOG::debug("uploadTmpImage entered");
 
@@ -58,7 +59,7 @@ trait UploadableFileTrait
     * $id can be community id, entry id or user_id
     *
     */
-    public static function moveAndStoreImage(\App\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $rotation, $id=null, $upload_key = null)
+    public static function moveAndStoreImage(Models\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $rotation, $id=null, $upload_key = null)
     {
         // Make the directory if it doesn't exist
         if (!file_exists($path)) {
@@ -75,7 +76,7 @@ trait UploadableFileTrait
             if ($id && $layoutType =='entries') {
                 LOG::debug("moveAndStoreImage moved path = ".$path.", filename = ".$filename.", layoutType = ".$layoutType.',  entry_id = '.$id);
 
-                $entry = \App\Entry::find($id);
+                $entry = Models\Entry::find($id);
                 if (!empty($entry) && $entry->media()->count())
                 {
                     // We already have an image associated with an entry, so delete the existing image first
@@ -193,7 +194,7 @@ trait UploadableFileTrait
     * to the tmp_media table and need to be associated with a
     * tile that's actually been saved.
     */
-    public static function moveImagesForNewTile(\App\User $user, $entry_id, $upload_key = null)
+    public static function moveImagesForNewTile(Models\User $user, $entry_id, $upload_key = null)
     {
         Log::debug("moveImagesForNewTile. ".$entry_id.",  ".$upload_key);
 

@@ -8,11 +8,11 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Config;
-use App\User;
+use App\Models\User;
 use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
@@ -50,7 +50,7 @@ class Conversation extends Model
      */
     public function messages()
     {
-        return $this->hasMany('App\Message', 'thread_id');
+        return $this->hasMany('App\Models\Message', 'thread_id');
     }
 
     /**
@@ -62,7 +62,7 @@ class Conversation extends Model
      */
     public function community()
     {
-        return $this->belongsTo('App\Community', 'community_id');
+        return $this->belongsTo('App\Models\Community', 'community_id');
     }
 
     /**
@@ -74,7 +74,7 @@ class Conversation extends Model
      */
     public function sender()
     {
-        return $this->belongsTo('App\User', 'started_by');
+        return $this->belongsTo('App\Models\User', 'started_by');
     }
 
     /**
@@ -86,7 +86,7 @@ class Conversation extends Model
      */
     public function entry()
     {
-        return $this->belongsTo('App\Entry', 'entry_id');
+        return $this->belongsTo('App\Models\Entry', 'entry_id');
     }
 
 

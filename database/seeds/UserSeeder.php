@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
-use App\User;
+use App\Models\User;
 
 
 class UserSeeder extends Seeder
@@ -8,8 +8,8 @@ class UserSeeder extends Seeder
   public function run()
   {
     factory(User::class, 'user', 5)->create()->each(function($u) {
-        $u->entries()->save(factory(App\Entry::class,'entry')->make());
-        $u->communities()->save(factory(App\Community::class, 'community')->make());
+        $u->entries()->save(factory(\App\Models\Entry::class,'entry')->make());
+        $u->communities()->save(factory(\App\Models\Community::class, 'community')->make());
     });
   }
 

@@ -8,18 +8,17 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Config;
-use App\User;
+use App\collection;
 use App\ExchangeTypes;
-use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Conversation;
+use Config;
 use DateTime;
 use DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
+use Watson\Validating\ValidatingTrait;
 
 class Message extends Model
 {
@@ -51,7 +50,7 @@ class Message extends Model
      * @return \Illuminate\Support\Collection
      */
     public function conversation() {
-        return $this->belongsTo('App\Conversation', 'thread_id');
+        return $this->belongsTo('App\Models\Conversation', 'thread_id');
     }
 
 
@@ -64,7 +63,7 @@ class Message extends Model
     */
     public function sender()
     {
-        return $this->belongsTo('App\User', 'sent_by');
+        return $this->belongsTo('App\Models\User', 'sent_by');
     }
 
     /**
@@ -76,7 +75,7 @@ class Message extends Model
     */
     public function recipient()
     {
-        return $this->belongsTo('App\User', 'sent_to');
+        return $this->belongsTo('App\Models\User', 'sent_to');
     }
 
     /**

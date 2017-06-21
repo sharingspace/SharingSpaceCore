@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\ExchangeType;
+use App\Models\ExchangeType;
 
 class ExchangeTypeSeeder extends Seeder
 {

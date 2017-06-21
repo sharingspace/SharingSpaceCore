@@ -8,11 +8,16 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
+use App\collection;
+use App\Illuminate;
+use App\Models\Media;
+use App\no;
+use App\text;
 use Illuminate\Database\Eloquent\Model;
 use Config;
-use App\User;
+use App\Models\User;
 use App\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
@@ -93,7 +98,7 @@ class Entry extends Model
     */
     public function author()
     {
-        return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo('App\Models\User', 'created_by');
     }
 
     /**
@@ -105,7 +110,7 @@ class Entry extends Model
     */
     public function communities()
     {
-        return $this->belongsToMany('App\Community', 'entries_community_join', 'entry_id', 'community_id');
+        return $this->belongsToMany('App\Models\Community', 'entries_community_join', 'entry_id', 'community_id');
     }
 
     /**
@@ -117,7 +122,7 @@ class Entry extends Model
     */
     public function exchangeTypes()
     {
-        return $this->belongsToMany('App\ExchangeType', 'entries_exchange_types', 'entry_id', 'type_id');
+        return $this->belongsToMany('App\Models\ExchangeType', 'entries_exchange_types', 'entry_id', 'type_id');
     }
 
 
@@ -165,7 +170,7 @@ class Entry extends Model
     {
         Log::error("Entry::updateImageToDB user_id = ".$user_id.", upload_key = ".$upload_key.", entry_id = ".$entry_id);
 
-        $media = \App\Media::where('upload_key', '=', $upload_key)
+        $media = \App\Models\Media::where('upload_key', '=', $upload_key)
             ->where('user_id', '=', $user_id)
             ->first();
 
@@ -186,7 +191,7 @@ class Entry extends Model
     */
     public static function replaceImageInDB($user_id, $entry_id, $filename)
     {
-        $media = \App\Media::where('user_id', '=', $user_id)
+        $media = \App\Models\Media::where('user_id', '=', $user_id)
         ->where('entry_id', '=', $entry_id)
         ->first();
 
@@ -205,7 +210,7 @@ class Entry extends Model
     */
     public static function deleteImageFromDB($entry_id, $user_id)
     {
-        $media = \App\Media::where('entry_id', '=', $entry_id)
+        $media = \App\Models\Media::where('entry_id', '=', $entry_id)
             ->where('user_id', '=', $user_id)
             ->first();
 
@@ -239,7 +244,7 @@ class Entry extends Model
     */
     public function media()
     {
-        return $this->hasMany('App\Media', 'entry_id');
+        return $this->hasMany('App\Models\Media', 'entry_id');
     }
 
     /**

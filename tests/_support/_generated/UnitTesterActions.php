@@ -778,10 +778,10 @@ trait UnitTesterActions
      *
      * ``` php
      * <?php
-     * $I->createModel('App\User');
-     * $I->createModel('App\User', ['name' => 'John Doe']);
-     * $I->createModel('App\User', [], 'admin');
-     * $I->createModel('App\User', [], 'admin', 3);
+     * $I->createModel('App\Models\User');
+     * $I->createModel('App\Models\User', ['name' => 'John Doe']);
+     * $I->createModel('App\Models\User', [], 'admin');
+     * $I->createModel('App\Models\User', [], 'admin', 3);
      * ?>
      * ```
      *
@@ -806,10 +806,10 @@ trait UnitTesterActions
      *
      * ``` php
      * <?php
-     * $I->makeModel('App\User');
-     * $I->makeModel('App\User', ['name' => 'John Doe']);
-     * $I->makeModel('App\User', [], 'admin');
-     * $I->makeModel('App\User', [], 'admin', 3);
+     * $I->makeModel('App\Models\User');
+     * $I->makeModel('App\Models\User', ['name' => 'John Doe']);
+     * $I->makeModel('App\Models\User', [], 'admin');
+     * $I->makeModel('App\Models\User', [], 'admin', 3);
      * ?>
      * ```
      *
