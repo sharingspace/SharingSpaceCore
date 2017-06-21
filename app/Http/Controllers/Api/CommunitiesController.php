@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
-use App\Community;
+use App\Models\Community;
 use App\Http\Transformers\UserTransformer;
 
 class CommunitiesController extends ApiGuardController

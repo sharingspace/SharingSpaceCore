@@ -11,7 +11,7 @@
 |
 */
 
-$factory->defineAs(App\User::class, 'user', function ($faker) {
+$factory->defineAs(\App\Models\User::class, 'user', function ($faker) {
     return [
       'display_name' => $faker->name,
       'first_name' => $faker->firstName,
@@ -23,7 +23,7 @@ $factory->defineAs(App\User::class, 'user', function ($faker) {
 });
 
 
-$factory->defineAs(App\User::class, 'admin', function ($faker) {
+$factory->defineAs(\App\Models\User::class, 'admin', function ($faker) {
     return [
       'display_name' => $faker->name,
       'first_name' => $faker->firstName,
@@ -35,7 +35,7 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
     ];
 });
 
-$factory->defineAs(App\Entry::class, 'entry', function ($faker) {
+$factory->defineAs(\App\Models\Entry::class, 'entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
       'post_type' => $faker->randomElement(['want','have']),
@@ -43,7 +43,7 @@ $factory->defineAs(App\Entry::class, 'entry', function ($faker) {
     ];
 });
 
-$factory->defineAs(App\Entry::class, 'want-entry', function ($faker) {
+$factory->defineAs(\App\Models\Entry::class, 'want-entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
       'post_type' => 'want',
@@ -51,7 +51,7 @@ $factory->defineAs(App\Entry::class, 'want-entry', function ($faker) {
     ];
 });
 
-$factory->defineAs(App\Entry::class, 'have-entry', function ($faker) {
+$factory->defineAs(\App\Models\Entry::class, 'have-entry', function ($faker) {
     return [
       'title' => $faker->catchPhrase,
       'post_type' => 'have',
@@ -60,7 +60,7 @@ $factory->defineAs(App\Entry::class, 'have-entry', function ($faker) {
 });
 
 
-$factory->defineAs(App\Community::class, 'community', function ($faker) {
+$factory->defineAs(\App\Models\Community::class, 'community', function ($faker) {
     return [
       'name' => $faker->catchPhrase,
       'subdomain' => $faker->domainWord,
@@ -68,7 +68,7 @@ $factory->defineAs(App\Community::class, 'community', function ($faker) {
     ];
 });
 
-$factory->defineAs(App\Entry::class, 'exchange-types', function ($faker) {
+$factory->defineAs(\App\Models\Entry::class, 'exchange-types', function ($faker) {
     return [
       'type_id' => $faker->numberBetween(1, 6),
     ];

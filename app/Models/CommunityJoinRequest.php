@@ -7,10 +7,11 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
+use App\collection;
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 
 class CommunityJoinRequest extends Model
 {
@@ -31,13 +32,13 @@ class CommunityJoinRequest extends Model
     public function user()
     {   
         // a request belongs to a user
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function community()
     {   
         // a request belongs to a user
-        return $this->belongsTo('App\Community');
+        return $this->belongsTo('App\Models\Community');
     }
 
  

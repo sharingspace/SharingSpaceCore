@@ -1,5 +1,5 @@
 <?php
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -15,7 +15,7 @@ class UserTest extends \Codeception\TestCase\Test
 
     public function testRegister()
     {
-        $user = factory(App\User::class, 'user')->make();
+        $user = factory(\App\Models\User::class, 'user')->make();
         $values = [
           'display_name' => $user->display_name,
           'email' => $user->email,

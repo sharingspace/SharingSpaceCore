@@ -1,7 +1,10 @@
 {
   "name": "snipe/massmosaic-l5",
   "description": "AnyShare Codebase",
-  "keywords": ["sharing economy", "social network"],
+  "keywords": [
+    "sharing economy",
+    "social network"
+  ],
   "license": "Private",
   "type": "project",
   "require": {
@@ -10,7 +13,7 @@
     "cartalyst/stripe-billing-laravel": "6.0",
     "cviebrock/eloquent-sluggable": "^3.0",
     "graham-campbell/markdown": "^7.0",
-    "laravelcollective/html" : "5.*",
+    "laravelcollective/html": "5.*",
     "intervention/image": "2.*",
     "jenssegers/rollbar": "^1.4",
     "laravel/framework": "5.4.*",
@@ -23,7 +26,10 @@
     "doctrine/dbal": "^2.5"
   },
   "repositories": [
-    { "type": "composer", "url": "https://packages.cartalyst.com" }
+    {
+      "type": "composer",
+      "url": "https://packages.cartalyst.com"
+    }
   ],
   "require-dev": {
     "fzaninotto/faker": "~1.4",
@@ -37,7 +43,6 @@
   "autoload": {
     "classmap": [
       "database",
-      "app/Models",
       "app/Http/Transformers",
       "app/Helpers/Helper.php",
       "app/Traits"

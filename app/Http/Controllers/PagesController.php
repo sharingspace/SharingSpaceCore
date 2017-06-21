@@ -37,7 +37,7 @@ class PagesController extends Controller
             return view('home')->with('entries', $entries);
         }
         else {
-            $communities = \App\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
+            $communities = \App\Models\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
             return view('home')->with('communities', $communities);
         }
     }

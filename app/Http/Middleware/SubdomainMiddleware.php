@@ -18,7 +18,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Config;
-use App\Community;
+use App\Models\Community;
 use Carbon\Carbon;
 use Log;
 use Route;

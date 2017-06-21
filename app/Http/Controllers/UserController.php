@@ -11,12 +11,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use Auth;
 use Input;
 use Redirect;
 use Helper;
-use App\Message;
+use App\Models\Message;
 use Mail;
 use Log;
 

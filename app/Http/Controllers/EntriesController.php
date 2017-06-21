@@ -19,7 +19,7 @@ use Redirect;
 use Helper;
 use Log;
 use Gate;
-use App\Entry;
+use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
 
 class EntriesController extends Controller
@@ -35,7 +35,7 @@ class EntriesController extends Controller
     {
       //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
 
-      if ($entry = \App\Entry::find($entryID)) {
+      if ($entry = \App\Models\Entry::find($entryID)) {
         if ($request->user()) {
           // user logged in
           if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
@@ -80,7 +80,7 @@ class EntriesController extends Controller
     {
         //log::debug("ajaxGetEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        if ($entry = \App\Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
             $imageName=null;
 
             if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
@@ -142,7 +142,7 @@ class EntriesController extends Controller
     {
         //log::debug("postAjaxCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        $entry = new \App\Entry();
+        $entry = new \App\Models\Entry();
 
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
@@ -206,7 +206,7 @@ class EntriesController extends Controller
             } else {
                 //Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
-                $uploaded = \App\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
+                $uploaded = \App\Models\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
             if ($uploaded) {
@@ -291,7 +291,7 @@ class EntriesController extends Controller
         // This should be pulled into a helper or macro
         $post_types = array('want'=>'I want', 'have'=>'I have');
 
-        if ($entry = \App\Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
 
             $user = Auth::user();
 
@@ -336,7 +336,7 @@ class EntriesController extends Controller
     */
     public function postAjaxEdit(Request $request, $entryID)
     {
-        if ($entry = \App\Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
             $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
@@ -368,11 +368,11 @@ class EntriesController extends Controller
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
             }
             else if(Input::has('deleteImage')) {
-                \App\Entry::deleteImage($entry->id, $user->id);
-                \App\Entry::deleteImageFromDB($entry->id, $user->id);
+                \App\Models\Entry::deleteImage($entry->id, $user->id);
+                \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
             }
             else if(Input::has('rotation')) {
-                if(!\App\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                if(!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
                   return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
                 }
             }
@@ -407,7 +407,7 @@ class EntriesController extends Controller
     {
         //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        if ($entry = \App\Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
 
             $user = Auth::user();
 
@@ -452,11 +452,11 @@ class EntriesController extends Controller
                 }
             }
             else if(Input::get('deleteImage')) {
-                \App\Entry::deleteImage($entry->id, $user->id);
-                \App\Entry::deleteImageFromDB($entry->id, $user->id);
+                \App\Models\Entry::deleteImage($entry->id, $user->id);
+                \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
             }
             else if (Input::get('rotation')) {
-              if(!\App\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+              if(!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
                 return redirect()->route('home')->with('error', trans('general.entries.messages.save_failed'));
               }
             }
@@ -481,7 +481,7 @@ class EntriesController extends Controller
     */
     public function postAjaxDelete($entryID)
     {
-        if ($entry = \App\Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
             $user = Auth::user();
 
             if (!$entry->checkUserCanEditEntry($user)) {
@@ -510,7 +510,7 @@ class EntriesController extends Controller
     */
     public function postDelete($entryID)
     {
-        if ($entry = \App\Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
             $user = Auth::user();
 
             if (!$entry->checkUserCanEditEntry($user)) {
@@ -543,7 +543,7 @@ class EntriesController extends Controller
         $entry = null;
         if( Input::has('entry_id')) {
             $entryID = Input::get('entry_id');
-            $entry = \App\Entry::find($entryID);
+            $entry = \App\Models\Entry::find($entryID);
         }
 
         if (Input::hasFile('image')) {
@@ -558,7 +558,7 @@ class EntriesController extends Controller
                 $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries', $rotation);
             }
             else {
-                $uploaded = \App\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'), $rotation);
+                $uploaded = \App\Models\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries', Input::get('upload_key'), $rotation);
             }
             if ($uploaded) {
                 return response()->json(['success'=>true]);

@@ -20,10 +20,10 @@ use Redirect;
 use Helper;
 use Log;
 use Gate;
-use App\Message;
-use App\Conversation;
-use App\Entry;
-use App\User;
+use App\Models\Message;
+use App\Models\Conversation;
+use App\Models\Entry;
+use App\Models\User;
 use Config;
 use Mail;
 
@@ -65,12 +65,12 @@ class MessagesController extends Controller
         if ($user) {
             //log::debug("getMessage: found message ".$messageId); 
 
-            if ($message = \App\Message::find($messageId)) {
+            if ($message = \App\Models\Message::find($messageId)) {
                 if (($message->sent_by == $user->id) || ($message->sent_to == $user->id)) {
                     //log::debug("getMessage: message belongs to us ".$messageId.$message->id);
 
                     if (!$message->messageDeleted($user->id)) {
-                        $conversation = \App\Conversation::find($message->thread_id);
+                        $conversation = \App\Models\Conversation::find($message->thread_id);
 
                         if ($conversation) {
                             //log::debug("getMessage: found conversation ".$conversation->subject);
@@ -136,7 +136,7 @@ class MessagesController extends Controller
     */    
     public function postDeleteMessage(Request $request, $messageId)
     {
-        if ($message = \App\Message::find($messageId)) {
+        if ($message = \App\Models\Message::find($messageId)) {
             if ($message->markMessageDeleted(Auth::user()->id)) {
                 return response()->json(['success'=>true, 'message'=>"Message deleted", 'message_id' => $messageId]);
             }

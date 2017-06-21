@@ -1,5 +1,5 @@
 <?php
-use App\Community;
+use App\Models\Community;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -15,7 +15,7 @@ class CommunityTest extends \Codeception\TestCase\Test
 
     public function testNewCommunity()
     {
-        $community = factory(App\Community::class, 'community')->make();
+        $community = factory(\App\Models\Community::class, 'community')->make();
         $values = [
           'name' => $community->name,
           'subdomain' => $community->subdomain,

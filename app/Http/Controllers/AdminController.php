@@ -12,7 +12,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Gate;
-use \App\CommunitySubscription;
+use App\Models\CommunitySubscription;
 
 
 class AdminController extends Controller

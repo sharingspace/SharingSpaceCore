@@ -7,7 +7,7 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
