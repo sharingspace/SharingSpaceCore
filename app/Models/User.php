@@ -270,7 +270,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return DB::table('social')
          ->where('access_token', '=', $user->token)
          ->where('service', '=', $provider)
-         ->get();
+         ->first();
     }
 
 

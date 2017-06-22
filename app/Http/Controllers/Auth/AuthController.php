@@ -109,13 +109,14 @@ class AuthController extends Controller
       }
       try {
 
-          $user = Socialite::driver($provider)->user();
+          $user_social = Socialite::driver($provider)->user();
 
-          if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
-              Auth::login($getUser);
+          if ($getUser = User::checkForSocialLoginDBRecord($user_social, $provider)) {
+
+              Auth::loginUsingId($getUser->user_id);
               return redirect($redirect)->with('success', 'You have been logged in!');
           } else {
-              $newUser = User::saveSocialAccount($user, $provider);
+              $newUser = User::saveSocialAccount($user_social, $provider);
               Auth::login($newUser);
               return redirect($redirect)->with('success', 'Welcome aboard!');
           }
