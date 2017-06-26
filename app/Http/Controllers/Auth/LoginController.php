@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Socialite;
+Use log;
 // use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
@@ -94,15 +95,21 @@ class LoginController extends Controller
         }
         try {
 
-            $user = Socialite::driver($provider)->user();
+            $user_social = Socialite::driver($provider)->user();
 
-            if ($getUser = User::checkForSocialLoginDBRecord($user, $provider)) {
-                Auth::login($getUser);
-                return redirect($redirect)->with('success', 'You have been logged in!');
-            } else {
-                $newUser = User::saveSocialAccount($user, $provider);
-                Auth::login($newUser);
-                return redirect($redirect)->with('success', 'Welcome aboard!');
+            if ($user_social) {
+                if ($getUser = User::checkForSocialLoginDBRecord($user_social, $provider)) {
+                    Auth::login($getUser);
+                    return redirect($redirect)->with('success', 'You have been logged in!');
+                }
+                else {
+                    $newUser = User::saveSocialAccount($user_social, $provider);
+                    Auth::login($newUser);
+                    return redirect($redirect)->with('success', 'Welcome aboard!');
+                }
+            }
+            else {
+                log::error("handleProviderCallback: Socialite user not found");
             }
 
         } catch (Exception $e) {
