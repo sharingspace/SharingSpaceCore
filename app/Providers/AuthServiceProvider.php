@@ -39,12 +39,12 @@ class AuthServiceProvider extends ServiceProvider
     // --------------------------------
     // If the user is a super admin, let them through no matter what
     Gate::before(function ($user, $ability) {
-        return $user->superadmin;
+        return ($user->superadmin == '1');
     });
 
     // Check if the user can see the community entries
     Gate::define('admin', function ($user) {
-        return $user->superadmin;
+        return ($user->superadmin == '1');
     });
 
 
@@ -54,11 +54,13 @@ class AuthServiceProvider extends ServiceProvider
 
     // Check if the user can see the community entries
     Gate::define('view-browse', function ($user, $community) {
+        //Log::debug("view-browse gate");
         return ($user->canSeeCommunity($community) || $community->group_type != 'S');
     });
 
     // Check if the user can see the community about page
     Gate::define('view-about', function ($user, $community) {
+        //Log::debug("view-about gate");
         // any one can see the about for an open share, even if not logged in
         if ($community->group_type !='S') {
             return true;
@@ -76,18 +78,21 @@ class AuthServiceProvider extends ServiceProvider
 
     // Check if the user can see the community members page
     Gate::define('view-members', function ($user, $community) {
+        //Log::debug("view-members gate");
         return ($community->group_type != 'S');
     });
 
     // Check if the user can join a community
     // (they are not already a member)
     Gate::define('join-community', function ($user, $community) {
+        //Log::debug("join-community gate");
         return !$user->isMemberOfCommunity($community);
     });
 
     // Check if the user can update the community settings
     // (they are an admin)
     Gate::define('update-community', function ($user, $community) {
+        //Log::debug("update-community gate");
         return $user->isAdminOfCommunity($community);
     });
 
@@ -100,17 +105,20 @@ class AuthServiceProvider extends ServiceProvider
     // Check the user is a member of the community and cam therefore post
     // an entry
     Gate::define('post-entry', function ($user, $community) {
+      //Log::debug("post-entry gate");
       return $user->isMemberOfCommunity($community);
     });
 
     // Check that the user can view an entry
     Gate::define('view-entry', function ($user, $community) {
-      return (($community->group_type == 'O') || ($user->isMemberOfCommunity($community)));
+       //Log::debug("view-entry gate");
+        return (($community->group_type == 'O') || ($user->isMemberOfCommunity($community)));
     });
 
 
     // Check if the user can update an entry
     Gate::define('update-entry', function ($user, $entry) {
+        //Log::debug("update-entry gate");
         return ($user->id === $entry->created_by);
     });
 
@@ -129,20 +137,19 @@ class AuthServiceProvider extends ServiceProvider
 
     // Check whether the user can edit a users profile
     Gate::define('update-profile', function ($user, $profile_id) {
-        //log::debug("update-profile **************: ".$user->id ."   ". $profile_id);
+       //log::debug("update-profile gate: ".$user->id ."   ". $profile_id);
         return ($user->id === $profile_id);
     });
 
     // Check whether the user can make an offer on an entry
     Gate::define('make-offer', function ($user, $entry, $community) {
-        //log::debug("make-offer **************: ".$user->id ."   ". $entry->id ."   ". $community->name);
-
+       //log::debug("make-offer gate: ".$user->id ."   ". $entry->id ."   ". $community->name);
         return (($entry->created_by != $user->id) && $user->isMemberOfCommunity($community) && (!$entry->expired) && ($entry->completed_at == ''));
     });
 
     // Check whether the user can send a message to another user
     Gate::define('send-msg', function ($user, $profile_id, $community) {
-        //log::debug("send-msg ************** user profile id ".$profile_id ."   logged in user id ".$user->id);
+        //log::debug("send-msg gate user profile id ".$profile_id ."   logged in user id ".$user->id);
         return ($profile_id != $user->id) && $user->isMemberOfCommunity($community);
     });
   }
