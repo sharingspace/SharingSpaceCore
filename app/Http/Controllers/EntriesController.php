@@ -405,22 +405,13 @@ class EntriesController extends Controller
             if (Input::hasFile('file')) {
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
             }
-            else {
-                if (Input::has('deleteImage')) {
-                    \App\Models\Entry::deleteImage($entry->id, $user->id);
-                    \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
-                }
-                else {
-                    if (Input::has('rotation')) {
-                        if (!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries',
-                            (int)Input::get('rotation'))
-                        ) {
-                            return response()->json([
-                                'success' => false,
-                                'error'   => trans('general.entries.messages.save_failed'),
-                            ]);
-                        }
-                    }
+            else if(Input::has('deleteImage')) {
+                \App\Models\Entry::deleteImage($entry->id, $user->id);
+                \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
+            }
+            else if(Input::has('rotation')) {
+                if(!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                  return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
                 }
             }
 
@@ -508,21 +499,14 @@ class EntriesController extends Controller
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
                 }
             }
-            else {
-                if (Input::get('deleteImage')) {
-                    \App\Models\Entry::deleteImage($entry->id, $user->id);
-                    \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
-                }
-                else {
-                    if (Input::get('rotation')) {
-                        if (!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries',
-                            (int)Input::get('rotation'))
-                        ) {
-                            return redirect()->route('home')->with('error',
-                                trans('general.entries.messages.save_failed'));
-                        }
-                    }
-                }
+            else if(Input::get('deleteImage')) {
+                \App\Models\Entry::deleteImage($entry->id, $user->id);
+                \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
+            }
+            else if (Input::get('rotation')) {
+              if(!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                return redirect()->route('home')->with('error', trans('general.entries.messages.save_failed'));
+              }
             }
 
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
@@ -587,7 +571,7 @@ class EntriesController extends Controller
     public function postDelete($entryID)
     {
         if ($entry = Entry::find($entryID)) {
-            $user = Auth::user();
+          $user = Auth::user();
 
             if (!$entry->checkUserCanEditEntry($user)) {
                 return redirect()->route('home')->with('error', trans('general.entries.messages.delete_not_allowed'));
