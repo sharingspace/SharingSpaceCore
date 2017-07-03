@@ -11,7 +11,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ModelOperationException;
 use App\Jobs\Entry\DeleteEntry;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Auth;
 use Theme;
@@ -539,38 +543,26 @@ class EntriesController extends Controller
      * @todo   Consolidate this and the non-ajax delete.
      * @author [David Linnard] [<dslinnard@gmail.com>]
      * @since  [v1.0]
+     * @param $entryID
      * @return String JSON
      */
     public function postAjaxDelete($entryID)
     {
-        if ($entry = Entry::find($entryID)) {
-            $user = Auth::user();
-
-            if (!$entry->checkUserCanEditEntry($user)) {
-                return response()->json([
-                    'success' => false,
-                    'message' => trans('general.entries.messages.delete_not_allowed'),
-                ]);
-            }
-            else {
-                if ($entry->delete()) {
-                    $entry->exchangeTypes()->detach();
-                    return response()->json([
-                        'success'  => true,
-                        'entry_id' => $entry->id,
-                        'message'  => trans('general.entries.messages.delete_success'),
-                    ]);
-                }
-                return response()->json([
-                    'success' => false,
-                    'message' => trans('general.entries.messages.delete_failed'),
-                ]);
-            }
+        try {
+            $entry = $this->dispatchNow(new DeleteEntry($entryID));
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ]);
         }
-        log::error("postAjaxDelete: invalid entry Id = " . $entryID);
-        return response()->json(['success' => false, 'message' => trans('general.entries.messages.invalid')]);
-    }
 
+        return response()->json([
+            'success'  => true,
+            'entry_id' => $entry->id,
+            'message'  => trans('general.entries.messages.delete_success'),
+        ]);
+    }
 
     /**
      * Delete the entry
@@ -583,13 +575,17 @@ class EntriesController extends Controller
      */
     public function postDelete($entryID)
     {
-        [$result, $routeName, $msg] = $this->dispatchNow(new DeleteEntry($entryID));
-
-        if ($result === false) {
-            return redirect()->route($routeName)->with('error', $msg);
+        try {
+            $this->dispatchNow(new DeleteEntry($entryID));
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('home')->with('error', $exception->getMessage());
+        } catch (AuthorizationException $exception) {
+            return redirect()->route('home')->with('error', $exception->getMessage());
+        } catch (ModelOperationException $exception) {
+            return redirect()->route('entry.view')->with('error', $exception->getMessage());
         }
 
-        return redirect()->route($routeName)->with('success', $msg);
+        return redirect()->route('home')->with('success', trans('general.entries.messages.delete_success'));
     }
 
 
