@@ -20,6 +20,7 @@ use DB;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -27,7 +28,7 @@ use Illuminate\Notifications\Notifiable;
 use Log;
 use Watson\Validating\ValidatingTrait;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface, AuthorizableContract
 {
     use Authenticatable, CanResetPassword, Billable, Authorizable;
     use SluggableTrait;
@@ -273,7 +274,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return DB::table('social')
          ->where('access_token', '=', $user->token)
          ->where('service', '=', $provider)
-         ->get();
+         ->first();
     }
 
 

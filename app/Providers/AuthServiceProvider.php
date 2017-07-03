@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Entry;
 use App\Policies\EntryPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Log;
