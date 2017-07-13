@@ -370,7 +370,7 @@ class Community extends Model
     */
     public function viewBrowse()
     {
-        return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type == 'O'));
+        return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type != 'S'));
     }
 
     /**

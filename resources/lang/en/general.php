@@ -200,15 +200,17 @@ return [
     'added' => 'You added',
     'not_signed_in_offer' => 'Please sign-in if you want to make an offer',
     'delete_confirmation' => 'Are you sure you want to delete this entry?',
+    'sign_in_edit' => 'Please sign in if you wish to edit an entry',
 
     'messages' => [
-      'invalid' => 'That entry is not valid.',
+      'invalid' => 'Invalid entry',
       'no_image' => 'No image was supplied',
       'completed' => 'Completed! ',
       'save_edits' => 'Your entry has been updated!',
       'upload_fail' => "Your image failed to upload",
       'not_allowed' => 'You are not allowed to edit this entry',
-      'entry_view_not_allowed' => 'Please sign-in to view an entry on a closed Share',
+      'view_not_allowed_login' => 'Please sign-in to view an entry on this Share',
+      'view_not_allowed_join' => 'Please join this Share if you want to view an entry',
       'delete_success' => 'Your entry has been deleted',
       'delete_failed' => 'Something went wrong. Your entry could not be deleted',
 			'delete_not_allowed' => 'You are not allowed to delete this entry.',
@@ -247,6 +249,9 @@ return [
     'login_to_send_offer' => 'Please sign-in if you want to send this person an offer',
     'join_to_send_message' => 'Please join this Sharing Network if you want to send this person a message',
     'join_to_send_offer' => 'Please join this Sharing Network if you want to send this person an offer',
+    'login_to_view' => 'Please sign-in if you want to view this person\'s profile',
+    'join_to_view' => 'Please join this Share if you want to view this person\'s profile',
+
 
     'request_access' => [
       'your_request' => 'You have asked to become a member of this Sharing Network.',
@@ -332,6 +337,8 @@ return [
     'sub_type' => 'Subscription Type',
     'logo' => 'Logo image',
     'incoming_hook' => 'Incoming Webhooks are a simple way to post messages from external sources into Slack. They make use of normal HTTP requests with a JSON payload that includes the message text and some options. Message Attachments can also be used in Incoming Webhooks to display richly-formatted messages that stand out from regular chat messages. See ',
+    'sign_in_secret' => 'Please sign-in to view a secret share',
+    'invite_secret' => 'Secret Share. You must be invited to join this Share',
 
     'exchange_types' => [
       'title' => 'Exchange Type|Exchange Types',
