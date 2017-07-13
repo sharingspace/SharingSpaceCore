@@ -76,6 +76,6 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-  $('.fadeOut').delay(4000).fadeOut('slow');
+  $('.alert.alert-success.fade').delay(4000).fadeOut('slow');
 });
 </script>
