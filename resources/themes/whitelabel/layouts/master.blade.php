@@ -77,14 +77,12 @@
 
       <div>@include('partials.header')</div>
 
-      @if (!Route::is('home'))
-        <!-- Notifications -->
-        <div  id="notifications" class="container">
-          <div class="row">
-            @include('notifications')
-          </div>
+      <!-- Notifications -->
+      <div  id="notifications" class="container">
+        <div class="row">
+          @include('notifications')
         </div>
-      @endif
+      </div>
 
       <div id="share_content">@yield('content')</div>
       <div>@include('partials.footer')</div>

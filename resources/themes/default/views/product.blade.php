@@ -209,52 +209,6 @@
 @section('moar_scripts')
 
 <script type="text/javascript">
-$( window ).on( "load", function() {
-  // Activate Carousel
-  $("#featureCarousel").carousel();
-
-  // Enable Carousel Indicators
-  $(".item").click(function(){
-    $("#featureCarousel").carousel(1);
-  });
-
-  // Enable Carousel Controls
-  $(".left").click(function(){
-    $("#featureCarousel").carousel("prev");
-  });
-
-  $('.carousel-control').show();
-
-  function equalHeights()
-  {
-    // Select and loop the container element of the elements you want to equalise
-    $('.container').each(function(){  
-      var highestBox = 0;
-
-      // Select and loop the elements you want to equalise
-      $('.carousel-inner .col-xs-12', this).each(function() {
-        // If this box is higher than the cached highest then store it
-        if($(this).height() > highestBox) {
-          highestBox = $(this).height(); 
-        }
-      });  
-        
-      // Set the height of all those children to whichever was highest 
-      $('.carousel-inner .col-xs-12', this).height(highestBox);
-    });
-  }
-
-  if ($(window).width() >= 990) {
-    //equalHeights();
-  }
-
-  $(window).resize(function() {
-    $('.carousel-inner .col-xs-12').height('auto');
-    if ($(window).width() >= 990) {
-      //equalHeights();
-    }
-  });
-});
 
 </script>
 @stop

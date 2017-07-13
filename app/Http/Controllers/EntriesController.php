@@ -27,21 +27,25 @@ use Log;
 use Gate;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
+//use Session;
 
 class EntriesController extends Controller
 {
     /**
-     * Returns a view that displays entry information
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since  [v1.0]
-     * @return View
-     */
+    * Returns a view that displays entry information
+    * This route involves the viewEntry middleware which
+    * will check whether it is a valid entry, if it's an Open share
+    * and if not open whether they are logged in and a member of Share 
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return View
+    */
     public function getEntry(Request $request, $entryID)
     {
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
 
-        if ($entry = Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
             if ($request->user()) {
                 // user logged in
                 if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
@@ -78,6 +82,7 @@ class EntriesController extends Controller
             else {
                 return view('entries.view')->with('entry', $entry)->with('images', $images);
             }
+
         }
         else {
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
@@ -275,7 +280,7 @@ class EntriesController extends Controller
     /*
     public function postCreate(Request $request)
     {
-        $entry = new \App\Entry();
+        $entry = new \App\Models\Entry();
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
         $entry->created_by    = Auth::user()->id;
@@ -303,7 +308,7 @@ class EntriesController extends Controller
                 // if the file was uploaded correctly
                 if ($entry->uploadImage(Auth::user(), Input::file('file'), 'entries')) {
 
-                    if (!\App\Entry::moveImagesForNewTile(Auth::user(), $request->session()->get('upload_key'))) {
+                    if (!\App\Models\Entry::moveImagesForNewTile(Auth::user(), $request->session()->get('upload_key'))) {
                         return response()->json(['success'=>false]);
                     }
                     return response()->json(['success'=>false]);

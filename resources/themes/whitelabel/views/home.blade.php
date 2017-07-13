@@ -1,4 +1,5 @@
 @extends('layouts/master')
+
 {{-- Page title --}}
 @section('title')
      {{ trans('general.nav.browse') }} ::
@@ -7,11 +8,6 @@
 
 {{-- Page content --}}
 @section('content')
-
-<div class="col-md-12 margin-top-20">
-  <!-- Notifications -->
-  @include('notifications')
-</div>
 
 <section class="container padding-top-0 browse_table">
 <div class="row">
