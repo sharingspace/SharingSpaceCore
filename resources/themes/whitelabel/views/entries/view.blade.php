@@ -189,7 +189,9 @@
             </div>  <!-- col-md-3 -->
           </form>
         </div> <!-- tab-pane -->
-        @else
+        @endcan
+
+        @can('join-community', $whitelabel_group)
           <p><strong>{{ trans('general.user.join_to_send_message') }}.</strong></p>
           <p>
             <a class="btn btn-colored btn-sm" href=

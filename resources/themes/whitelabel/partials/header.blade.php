@@ -113,7 +113,7 @@
           @endif
         </a>
 
-        @if (Auth::check() && Auth::user()->isMemberOfCommunity($whitelabel_group, true))
+        @if (Auth::check() && Auth::user()->isMemberOfCommunity($whitelabel_group, false))
         <div class="navbar-header pull-right">
           <ul class="nav navbar-nav">
             <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
@@ -124,15 +124,15 @@
           </ul>
         </div>
         @endif
-
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-            @if ( (Auth::check() && !(Auth::user()->isMemberOfCommunity($whitelabel_group))) && !$whitelabel_group->getRequestCount(Auth::user()->id))
+            @if ( Auth::check() && !Auth::user()->isMemberOfCommunity($whitelabel_group) )
+              <!-- logged in in but not a member -->
               <li>
               @if ($whitelabel_group->group_type == 'O')
-                <a href="{{ route('join-community') }}">
-              @else 
+               <a href="{{ route('join-community') }}">
+              @else
                 <a href="{{ route('community.request-access.form') }}">
               @endif
                   <button type="button" class="btn btn-colored btn-sm">

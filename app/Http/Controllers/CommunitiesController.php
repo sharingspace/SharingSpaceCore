@@ -138,7 +138,7 @@ class CommunitiesController extends Controller
         }
 
         // redirect them back to same form page, but this time display different content
-        return view('request-access', ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
+        return view('request-access', ['request_count'=>$request_count, 'justSubmitted' => true, 'name'=>$request->whitelabel_group->name]);
     }
 
     /**

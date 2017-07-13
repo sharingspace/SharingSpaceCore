@@ -20,36 +20,31 @@ Your request to become a member of this Share is still pending'
     <div class="row">
       <div class="col-xs-12">
         <h1 class="margin-bottom-20 size-24 text-center">
-        @if (!empty($request_count) && $request_count)
+        @if ($request_count)
           {{ trans('general.user.request_access.access_requested') }}
-
         @else
           {{ trans('general.user.request_access.request_access') }}
         @endif
         {{ucfirst($name)}}</h1>
       </div>
       <div class="col-sm-8 col-md-offset-2 col-xs-12">
-        @if (empty($request_count) || (!empty($request_count) && $request_count==0))
+       
+        @if ($request_count)
+          <div class="alert alert-success margin-bottom-30">
+            @if (isset($justSubmitted))
+              <p class="size-20"><strong>{{ trans('general.headline')}}</strong> {{ trans('general.user.request_access.your_request')}}</p>
+              <p class="size-14">{{ trans('general.notified')}}</p>
+            @else
+              <p class="size-20">{{ trans('general.user.request_access.still_pending')}}</p>
+            @endif
+          </div><!-- /ALERT -->
+          @else
+
         <div class="alert alert-warning">
           <p>{{ trans('general.user.request_access.sorry_closed') }}</p>
         </div>
-        @endif
 
-        @if (!empty($request_count) && $request_count)
-        <!-- ALERT -->
-        <div class="alert alert-mini alert-success margin-bottom-30">
-          <button type="button" class="close" data-dismiss="alert alert-info" aria-hidden="true">&times;</button>
-          @if ($request_count==1)
-            <p class="size-20"><strong>{{ trans('general.headline')}}</strong> {{ trans('general.user.request_access.your_request')}}</p>
-            <p class="size-14">{{ trans('general.notified')}}</p>
-          @else
-            <p class="size-20">{{ trans('general.user.request_access.still_pending')}}</p>
-          @endif
-        </div><!-- /ALERT -->
-        @else
         <div class="box-static box-border-top padding-30">
-          
-
           <form class="nomargin" method="post" autocomplete="off" action="{{ route('community.request-access.save') }}">
             {!! csrf_field() !!}
             <div class="clearfix">

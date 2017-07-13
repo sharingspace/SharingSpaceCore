@@ -8,20 +8,18 @@
 @endif
 
 @if ($message = Session::get('success'))
-  <div class="alert alert-success alert-dismissable">
+  <div class="alert alert-success alert-dismissable fadeOut">
   	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
  	 	<i class="fa fa-check"></i>
   	<strong>Success:</strong> {{ $message }}
   </div> <!-- alert -->
 @endif
 
-
 @if ($message = Session::get('error'))
   <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <i class="fa fa-exclamation-circle"></i>
-    <strong>Error: </strong>
-    {{ $message }}
+    <strong>Error: </strong> {{ $message }}
   </div> <!-- alert -->
 @endif
 
@@ -74,3 +72,8 @@
   </div> <!-- alert -->
 </div> <!-- col-md-12 -->
 
+<script type="text/javascript">
+$(document).ready(function () {
+  $('.alert.alert-success.fade').delay(4000).fadeOut('slow');
+});
+</script>
