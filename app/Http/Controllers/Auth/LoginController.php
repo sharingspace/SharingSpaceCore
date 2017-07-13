@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Socialite;
-Use log;
+Use Log;
 // use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
@@ -72,6 +72,7 @@ class LoginController extends Controller
      */
     public function redirectToSocialProvider(Request $request, $provider)
     {
+        log::debug("redirectToSocialProvider: ".$provider);
         if ($request->whitelabel_group) {
             $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
         }
@@ -86,6 +87,8 @@ class LoginController extends Controller
      */
     public function handleProviderCallback(Request $request, $provider)
     {
+        log::debug("handleProviderCallback: ".$provider);
+
         if ($request->session()->has('auth_subdomain')) {
             $subdomain = $request->session()->get('auth_subdomain');
             $request->session()->forget('auth_subdomain');
@@ -99,7 +102,7 @@ class LoginController extends Controller
 
             if ($user_social) {
                 if ($getUser = User::checkForSocialLoginDBRecord($user_social, $provider)) {
-                    Auth::login($getUser);
+                    Auth::loginUsingId($getUser->user_id);
                     return redirect($redirect)->with('success', 'You have been logged in!');
                 }
                 else {

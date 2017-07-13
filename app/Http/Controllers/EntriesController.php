@@ -22,6 +22,7 @@ use Log;
 use Gate;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
+//use Session;
 
 class EntriesController extends Controller
 {
@@ -270,7 +271,7 @@ class EntriesController extends Controller
     /*
     public function postCreate(Request $request)
     {
-        $entry = new \App\Entry();
+        $entry = new \App\Models\Entry();
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
         $entry->created_by    = Auth::user()->id;
@@ -298,7 +299,7 @@ class EntriesController extends Controller
                 // if the file was uploaded correctly
                 if ($entry->uploadImage(Auth::user(), Input::file('file'), 'entries')) {
 
-                    if (!\App\Entry::moveImagesForNewTile(Auth::user(), $request->session()->get('upload_key'))) {
+                    if (!\App\Models\Entry::moveImagesForNewTile(Auth::user(), $request->session()->get('upload_key'))) {
                         return response()->json(['success'=>false]);
                     }
                     return response()->json(['success'=>false]);
