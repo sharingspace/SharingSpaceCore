@@ -41,10 +41,10 @@ class EntriesController extends Controller
     * @since  [v1.0]
     * @return View
     */
+
     public function getEntry(Request $request, $entryID)
     {
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
-
         if ($entry = \App\Models\Entry::find($entryID)) {
             if ($request->user()) {
                 // user logged in
@@ -82,7 +82,6 @@ class EntriesController extends Controller
             else {
                 return view('entries.view')->with('entry', $entry)->with('images', $images);
             }
-
         }
         else {
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
@@ -93,7 +92,7 @@ class EntriesController extends Controller
     {
         //log::debug("ajaxGetEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        if ($entry = Entry::find($entryID)) {
+        if ($entry = \App\Models\Entry::find($entryID)) {
             $imageName = null;
 
             if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
@@ -621,7 +620,7 @@ class EntriesController extends Controller
                 $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries', $rotation);
             }
             else {
-                $uploaded = Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries',
+                $uploaded = \App\Models\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries',
                     Input::get('upload_key'), $rotation);
             }
             if ($uploaded) {

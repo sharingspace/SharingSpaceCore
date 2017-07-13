@@ -116,7 +116,7 @@ class Message extends Model
     */
     public function markMessageDeleted($user_id)
     {
-        $message = \App\Message::find($this->id);
+        $message = \App\Models\Message::find($this->id);
         if (!empty($message)) {
             //log::debug("markMessageDeleted message found ".$this->id);
 
