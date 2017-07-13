@@ -11,13 +11,17 @@
                   <span class="shareName"> / {{ $community or null }}</span>
               </div>
               <div class="col-xs-12 messageText">
-                @if (isset($messageText) && strlen($messageText) > 100)
+                @if (isset($messageText) && strlen($messageText) > 100 && $count)
                   <a data-toggle="collapse" data-target="#expand_{{$message->id or null}}">
                   @if (empty($readOn or null))
                     <i class="fa fa-eye-slash fa-lg pull-left text-green margin-top-5"></i>
                   @endif
                 @endif
+                @if ($count)
                   {!! Str::limit($messageText, 100) !!}
+                @else
+                  {!! $messageText !!}
+                @endif
                 @if (isset($messageText) && strlen($messageText) > 100)
                   </a>
                 @endif

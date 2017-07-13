@@ -134,11 +134,6 @@
       @else
         @can('make-offer', [$entry, $whitelabel_group])
         <div class="tab-pane active margin-top-6" id="make_offer">
-          <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <i class="fa fa-exclamation-circle"></i>
-            <strong id="offerStatusText"></strong><span id="offerStatus"></span>
-          </div> <!-- alert -->
           <form id="offerForm">
             <p class='margin-bottom-6 pull-right size-11'><i class='fa fa-asterisk'></i> {{ trans('general.entries.only_owner') }}</p>
 
@@ -287,12 +282,7 @@ $(document).ready(function () {
   //$("#messageSubmit").attr('disabled','disabled'); // disable button until message has been types
 
   $("#offerForm").submit(function(){
-    $('#offerStatusbox').hide();
-    $('#offerStatusText').html('');
-    $('#offerStatus').html('');
-    $('#offerStatusbox').removeClass('alert alert-success alert-danger');
-    $('#offerStatusbox').show();
-
+    
     $.ajax({
       type: "POST",
       url: "{{ route('messages.create.save', [$entry->created_by, $entry->id]) }}",
@@ -300,13 +290,13 @@ $(document).ready(function () {
 
       success: function(data, textStatus, xhr){
         if (data.success) {
-          $('#offerStatusbox').addClass('alert alert-success');
-          $('#offerStatusText').html('Success! ');
-          $('#offerStatus').html(data.message);
-        } else {
-          $('#offerStatusbox').addClass('alert alert-danger');
-          $('#offerStatusText').html('Error: ');
-          $('#offerStatus').html(data.message);
+          $('#msgSuccess').html(data.message);
+          $('.ajax_success').removeClass('hidden');
+          $('.alert.alert-success.fade').delay(4000).fadeOut('slow');
+        } 
+        else {
+          $('#msgError').html(data.message);
+          $('.ajax_error').removeClass('hidden');
         }
       },
       error: function(xhr, textStatus, errorThrown) {

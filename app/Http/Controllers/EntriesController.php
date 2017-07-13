@@ -27,12 +27,16 @@ use Illuminate\Support\Facades\Route;
 class EntriesController extends Controller
 {
     /**
-     * Returns a view that displays entry information
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since  [v1.0]
-     * @return View
-     */
+    * Returns a view that displays entry information
+    * This route involves the viewEntry middleware which
+    * will check whether it is a valid entry, if it's an Open share
+    * and if not open whether they are logged in and a member of Share 
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since  [v1.0]
+    * @return View
+    */
+
     public function getEntry(Request $request, $entryID)
     {
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
