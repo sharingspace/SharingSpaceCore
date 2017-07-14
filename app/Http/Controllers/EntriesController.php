@@ -11,6 +11,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ModelOperationException;
+use App\Jobs\Entry\DeleteEntry;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Auth;
 use Theme;
@@ -40,7 +45,6 @@ class EntriesController extends Controller
     public function getEntry(Request $request, $entryID)
     {
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
-
         if ($entry = \App\Models\Entry::find($entryID)) {
             if ($request->user()) {
                 // user logged in
@@ -163,7 +167,7 @@ class EntriesController extends Controller
     {
         //log::debug("postAjaxCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        $entry = new \App\Models\Entry();
+        $entry = new Entry();
 
         $entry->title = e(Input::get('title'));
         $entry->post_type = e(Input::get('post_type'));
@@ -234,7 +238,7 @@ class EntriesController extends Controller
             else {
                 //Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
-                $uploaded = \App\Models\Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
+                $uploaded = Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
 
             if ($uploaded) {
@@ -334,7 +338,7 @@ class EntriesController extends Controller
         // This should be pulled into a helper or macro
         $post_types = array('want' => 'I want', 'have' => 'I have');
 
-        if ($entry = \App\Models\Entry::find($entryID)) {
+        if ($entry = Entry::find($entryID)) {
 
             $user = Auth::user();
 
@@ -379,7 +383,7 @@ class EntriesController extends Controller
      */
     public function postAjaxEdit(Request $request, $entryID)
     {
-        if ($entry = \App\Models\Entry::find($entryID)) {
+        if ($entry = Entry::find($entryID)) {
             $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
@@ -410,13 +414,20 @@ class EntriesController extends Controller
             if (Input::hasFile('file')) {
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
             }
-            else if(Input::has('deleteImage')) {
-                \App\Models\Entry::deleteImage($entry->id, $user->id);
-                \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
-            }
-            else if(Input::has('rotation')) {
-                if(!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                  return response()->json(['success'=>false, 'error'=>trans('general.entries.messages.save_failed')]);
+            else {
+                if (Input::has('deleteImage')) {
+                    Entry::deleteImage($entry->id, $user->id);
+                    Entry::deleteImageFromDB($entry->id, $user->id);
+                }
+                else {
+                    if (Input::has('rotation')) {
+                        if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                            return response()->json([
+                                'success' => false,
+                                'error'   => trans('general.entries.messages.save_failed'),
+                            ]);
+                        }
+                    }
                 }
             }
 
@@ -460,7 +471,7 @@ class EntriesController extends Controller
     {
         //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        if ($entry = \App\Models\Entry::find($entryID)) {
+        if ($entry = Entry::find($entryID)) {
 
             $user = Auth::user();
 
@@ -504,14 +515,19 @@ class EntriesController extends Controller
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
                 }
             }
-            else if(Input::get('deleteImage')) {
-                \App\Models\Entry::deleteImage($entry->id, $user->id);
-                \App\Models\Entry::deleteImageFromDB($entry->id, $user->id);
-            }
-            else if (Input::get('rotation')) {
-              if(!\App\Models\Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                return redirect()->route('home')->with('error', trans('general.entries.messages.save_failed'));
-              }
+            else {
+                if (Input::get('deleteImage')) {
+                    Entry::deleteImage($entry->id, $user->id);
+                    Entry::deleteImageFromDB($entry->id, $user->id);
+                }
+                else {
+                    if (Input::get('rotation')) {
+                        if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
+                            return redirect()->route('home')->with('error',
+                                trans('general.entries.messages.save_failed'));
+                        }
+                    }
+                }
             }
 
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
@@ -531,38 +547,26 @@ class EntriesController extends Controller
      * @todo   Consolidate this and the non-ajax delete.
      * @author [David Linnard] [<dslinnard@gmail.com>]
      * @since  [v1.0]
+     * @param $entryID
      * @return String JSON
      */
     public function postAjaxDelete($entryID)
     {
-        if ($entry = \App\Models\Entry::find($entryID)) {
-            $user = Auth::user();
-
-            if (!$entry->checkUserCanEditEntry($user)) {
-                return response()->json([
-                    'success' => false,
-                    'message' => trans('general.entries.messages.delete_not_allowed'),
-                ]);
-            }
-            else {
-                if ($entry->delete()) {
-                    $entry->exchangeTypes()->detach();
-                    return response()->json([
-                        'success'  => true,
-                        'entry_id' => $entry->id,
-                        'message'  => trans('general.entries.messages.delete_success'),
-                    ]);
-                }
-                return response()->json([
-                    'success' => false,
-                    'message' => trans('general.entries.messages.delete_failed'),
-                ]);
-            }
+        try {
+            $entry = $this->dispatchNow(new DeleteEntry($entryID));
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ]);
         }
-        log::error("postAjaxDelete: invalid entry Id = " . $entryID);
-        return response()->json(['success' => false, 'message' => trans('general.entries.messages.invalid')]);
-    }
 
+        return response()->json([
+            'success'  => true,
+            'entry_id' => $entry->id,
+            'message'  => trans('general.entries.messages.delete_success'),
+        ]);
+    }
 
     /**
      * Delete the entry
@@ -575,25 +579,17 @@ class EntriesController extends Controller
      */
     public function postDelete($entryID)
     {
-        if ($entry = Entry::find($entryID)) {
-          $user = Auth::user();
-
-            if (!$entry->checkUserCanEditEntry($user)) {
-                return redirect()->route('home')->with('error', trans('general.entries.messages.delete_not_allowed'));
-            }
-            else {
-                if ($entry->delete()) {
-                    $entry->exchangeTypes()->detach();
-                    return redirect()->route('home')->with('success', trans('general.entries.messages.delete_success'));
-                }
-                return redirect()->route('entry.view', $entry->id)->with('error',
-                    trans('general.entries.messages.delete_failed'));
-            }
-
+        try {
+            $this->dispatchNow(new DeleteEntry($entryID));
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('home')->with('error', $exception->getMessage());
+        } catch (AuthorizationException $exception) {
+            return redirect()->route('home')->with('error', $exception->getMessage());
+        } catch (ModelOperationException $exception) {
+            return redirect()->route('entry.view')->with('error', $exception->getMessage());
         }
 
-        log::error("postDelete: invalid entry Id = " . $entryID);
-        return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
+        return redirect()->route('home')->with('success', trans('general.entries.messages.delete_success'));
     }
 
 
@@ -609,7 +605,7 @@ class EntriesController extends Controller
         $entry = null;
         if (Input::has('entry_id')) {
             $entryID = Input::get('entry_id');
-            $entry = \App\Models\Entry::find($entryID);
+            $entry = Entry::find($entryID);
         }
 
         if (Input::hasFile('image')) {

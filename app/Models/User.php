@@ -128,11 +128,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function isSuperAdmin()
     {
-        if ($this->superadmin=='1') {
+        if ($this->superadmin === '1') {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
 
