@@ -57,18 +57,20 @@
 </div> <!-- col-md-12 -->
 
 <!-- ajax success -->
-<div class="col-md-12 margin-top-10 ajax_success hidden">
-  <div class="alert alert-success alert-dismissable">
+<div class="col-md-12 margin-top-10 ajax_success hidden fadeOut">
+  <div class="alert alert-success alert-dismissable" id="msgSuccessBox">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <i class="fa fa-check"></i>
+    <strong id="msgSuccessText"></strong><span id="msgSuccess"></span>
   </div> <!-- alert -->
 </div> <!-- col-md-12 -->
 
 <!-- ajax error -->
 <div class="col-md-12 margin-top-10 ajax_error hidden">
-  <div class="alert alert-danger alert-dismissable">
+  <div class="alert alert-danger alert-dismissable" id="msgErrorBox">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <i class="fa fa-exclamation-circle"></i>
+    <strong id="msgErrorText"></strong><span id="msgError"></span>
   </div> <!-- alert -->
 </div> <!-- col-md-12 -->
 

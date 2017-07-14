@@ -78,14 +78,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $rules = [
-        'display_name' => 'required|string|min:2|max:255',
-        'email'        => 'required|email|max:255|unique:users',
-        'website'      => 'nullable|url',
-        'fb_url'       => 'nullable|url',
-        'twitter'      => 'nullable|url',
-        'google'       => 'nullable|url',
-        'pinterest'    => 'nullable|url',
-        'youtube'      => 'nullable|url',
+        'display_name'     => 'required|string|min:2|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'website'           => 'url|nullable',
+        'fb_url'           => 'url|nullable',
+        'twitter'      => 'url|nullable',
+        'google'        => 'url|nullable',
+        'pinterest'    => 'url|nullable',
+        'youtube'      => 'url|nullable',
     ];
 
     protected $sluggable = [
@@ -129,12 +129,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function isSuperAdmin()
     {
-        if ($this->superadmin == '1') {
+
+        if ($this->superadmin === '1') {
             return true;
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 
 

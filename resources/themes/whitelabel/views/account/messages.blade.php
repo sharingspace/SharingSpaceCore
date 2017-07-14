@@ -7,9 +7,8 @@
   <div class="row">
     <div class="col-xs-12">
       <h1 class="size-24 text-center">{{ $conversation->subject }}</h1>
-
+        <?php $count = count($conversation->messages)-1; ?>
         @foreach ($conversation->messages as $message)
-          
           @include('./account/message_row',
           [
             'messageId' => $message->id,
@@ -19,8 +18,11 @@
             'createdAt' => $message->created_at,
             'messageText' => Helper::parseText($message->message),
             'readOn' => $message->read_on,
-            'community' => $message->conversation->community->name
+            'community' => $message->conversation->community->name,
+            'count' => $count
           ])
+        <?php $count--;?>
+
         @endforeach
         
         @include('./account/message_row',
@@ -109,7 +111,7 @@ $(document).ready(function () {
         if (data.success) {
           $('#offerStatusbox').addClass('alert alert-success');
           $('#offerStatusText').html('Success! '+data.message);
-          $('#offerStatusbox').fadeTo(1000, 500).slideUp(500);
+          $('#offerStatusbox').delay(2000).fadeTo(4000, 0);
           $('.messageText').val('');
           var clone = $('.message_id_clone').clone();
           $(clone).clone().insertBefore('.message_id_clone');
@@ -141,14 +143,12 @@ $(document).ready(function () {
   {
     if('success' == status ) {
       messageHTML ='<div class="alert alert-'+status+' margin-top-0 margin-bottom-6 alert_'+data.message_id+'"><i class="fa margin-right-10 fa-check"></i>'+data.message+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>';
-      $('.message_'+data.message_id).before(messageHTML);
-      $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);
     }
     else {
       messageHTML ='<div class="alert alert-'+status+' alert-dismissable margin-top-0 margin-bottom-6 alert_'+data.message_id+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="fa margin-right-10 fa-exclamation"></i>'+data.message+'</div>';
-      $('.message_'+data.message_id).before(messageHTML);
-      $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);
     }
+    $('.message_'+data.message_id).before(messageHTML);
+    $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);      
   }
 
   function deleteMessage(object)
@@ -171,8 +171,7 @@ $(document).ready(function () {
         displayFlashMessage("warning",replyData);
       }
     }).fail(function (jqxhr,errorStatus) {
-      console.log("message error: "+errorStatus); 
-      //parseAndDisplayError(errorStatus);
+      alert("Sorry, something went wrong: "+errorStatus); 
     });
   }
 

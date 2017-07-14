@@ -33,7 +33,7 @@ class Media extends Model
     * Model validation rules
     */
     protected $rules = [
-        'file' => 'image',
+        'file' => 'image|nullable',
     ];
 
 
