@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use Log;
 use App\Models\User;
+use Auth;
 // use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
