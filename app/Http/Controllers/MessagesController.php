@@ -163,7 +163,9 @@ class MessagesController extends Controller
     public function postCreate(Request $request, $userId, $entryId = null)
     {
         $data = array();
+        $entry = null;
         $conversation = null;
+
         if ($recipient = User::find($userId)) {
             if ($entryId) {
                 if ($entry = Entry::find($entryId)) {
@@ -215,16 +217,16 @@ class MessagesController extends Controller
                 $conversation = $offer->conversation()->associate($conversation);
 
                 $data['email'] = $send_to_email = $recipient->email;
-                $data['name'] = Auth::user()->getDisplayName();
+                $data['sent_by'] = Auth::user()->getDisplayName();
+                $data['sent_to'] = $recipient->getDisplayName();
                 $data['offer'] = $offer->message;
                 $data['community_name'] = $request->whitelabel_group->name;
                 $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
-                $data['sent_by_name'] = Auth::user()->getDisplayName();
 
                 if (!empty($request->whitelabel_group->logo)) {
                     if( config('app.debug')) {
                         // this is for testing only
-                        $data['logo'] = public_path().'/assets/img/logos/dummy_share_logo.png';
+                        $data['logo'] = 'https://anyshare.coop/assets/img/logos/dummy_share_logo.png';
                     }
                     else {
                         $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
@@ -232,12 +234,23 @@ class MessagesController extends Controller
                 }
 
                 if ($offer->save()) {
-                    Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
-                        $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
+                    if (isset($entry)) {
+                        if (Input::get('subject')) {
+                            $subject = e(Input::get('subject')) .' / ';
+                        }
+                        $subject .= $entry->title;
+                    }
+                    else {
+                        $subject = "Message from ".Auth::user()->getDisplayName();
+                    }
+                    
+
+                    Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request, $subject) {
+                        $m->to($recipient->email, $recipient->getDisplayName())->subject($subject);
                     });
 
                     $messageData = ['messageId' => $offer->id,
-                                'displayName' => $data['name'],
+                                'displayName' => $data['sent_by'],
                                'avatar' => Auth::user()->gravatar_img(),
                                 'senderId' => $offer->sent_by,
                                 'createdAt' => date('M j, Y g:ia'),
