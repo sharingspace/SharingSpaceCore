@@ -109,8 +109,6 @@
         </a>
       </li>
 
-        
-
       @if ($images && count($images) > 1)
       <li>
         <a href="#view_images_tab" role="tab" data-toggle="tab">{{ trans('general.entries.more_images') }}</a>
@@ -227,24 +225,12 @@
         @endif <!-- latitude, longitude -->
       </div> <!-- tab-pane -->
 
-      @if($entry->description)
-      <div class="margin-bottom-3">
-        <strong class="primaryText">{{ trans('general.entries.description') }}:</strong> {!! Markdown::convertToHtml($entry->description) !!}
-      </div>
-      @endif
-
       <div class="tab-pane" id="comments">
         <p class="help-block">{{trans('general.entries.public_comments')}}</p>
         <div class="fb-comments" data-href="{{ URL::to('entry/'.$entry->id.'/view/') }}" data-numposts="5" data-colorscheme="light" data-width="800" style="width: 100%">
         </div>
       </div>  <!-- tab-pane -->
     </div> <!-- tab-content -->
-
-    @if($entry->tags)
-    <div class="margin-bottom-3">
-      <strong class="primaryText">{{ trans('general.keywords') }}:</strong> {{ $entry->tags }}
-    </div>
-    @endif
 
     <!-- The Modal -->
     <div id="myModal" class="imageModal">
