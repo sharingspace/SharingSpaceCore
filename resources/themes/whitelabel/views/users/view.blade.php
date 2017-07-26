@@ -70,7 +70,7 @@
             </div> 
             @endcan
 
-            @can('send-msg', [$user->id, $whitelabel_group])
+            @can('send-msg', $whitelabel_group)
               <div class="col-xs-12"> 
                 <form id="offerForm" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
                   {!! csrf_field() !!}
