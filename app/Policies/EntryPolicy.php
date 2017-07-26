@@ -5,19 +5,11 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Entry;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Log;
 
 class EntryPolicy
 {
     use HandlesAuthorization;
-
-    public function before($user, $ability)
-    {
-        if ($user->isSuperAdmin()) {
-            return true;
-        }
-
-        return null;
-    }
 
     /**
      * Determine whether the user can view the entry.
@@ -51,7 +43,7 @@ class EntryPolicy
      */
     public function update(User $user, Entry $entry)
     {
-        //
+        return $entry->isOwnedBy($user);
     }
 
     /**
