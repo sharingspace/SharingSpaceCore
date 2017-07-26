@@ -312,6 +312,18 @@ class Entry extends Model
     }
 
     /**
+    * Does the user own this entry?
+    *
+    * @author [D. Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return boolean
+    */    
+    public function isOwnedBy($user)
+    {
+        return $this->created_by === $user->id;
+    }
+
+    /**
     * Query builder scope to search on tag text
     *
     * @author [D. Linnard] [<david@linnard.com>]

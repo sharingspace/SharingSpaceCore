@@ -12,13 +12,13 @@ use Log;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
+     * The policy mappings for the application.         
+
      *
      * @var array
      */
     protected $policies = [
-        'App\Model'  => 'App\Policies\ModelPolicy',
-        Entry::class => EntryPolicy::class,
+        'App\Model\Entry'  => 'App\Policies\EntryPolicy'
     ];
 
     /**
@@ -42,15 +42,15 @@ class AuthServiceProvider extends ServiceProvider
         // isn't a superadmin
         // --------------------------------
         // If the user is a super admin, let them through no matter what
-        $gate->before(function ($user, $ability) {
-            if ($user->superadmin == '1') {
+        $gate->before(function ($user) {
+            if ($user->isSuperAdmin()) {
                 return true;
             }
         });
 
         // Check if the user can see the community entries
         $gate->define('admin', function ($user) {
-            if ($user->superadmin == '1') {
+            if ($user->isSuperAdmin()) {
                 return true;
             }
         });
@@ -115,7 +115,7 @@ class AuthServiceProvider extends ServiceProvider
         // ENTRY GATES
         // --------------------------------
 
-        // Check the user is a member of the community and cam therefore post
+        // Check the user is a member of the community and therefore post
         // an entry
         $gate->define('post-entry', function ($user, $community) {
             if ($user->isMemberOfCommunity($community)) {
@@ -133,6 +133,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if the user can update an entry
         $gate->define('update-entry', function ($user, $entry) {
+            //log::debug("update-entry: ".$user->id ."   ". $entry->id);
             return $user->id === $entry->created_by;
         });
 
