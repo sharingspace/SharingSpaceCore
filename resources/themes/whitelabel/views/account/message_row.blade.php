@@ -33,8 +33,8 @@
           </div>
 
           <div class="col-xs-2">
-            <span class="hidden-sm hidden-xs">{{ date('M j, Y g:ia', strtotime($createdAt)) }}</span>
-            <span class="visible-sm visible-xs">{{ date('M j, Y', strtotime($createdAt)) }}</span>
+            <span class="hidden-sm hidden-xs createdAt">{{ date('M j, Y g:ia', strtotime($createdAt)) }}</span>
+            <span class="visible-sm visible-xs createdAt">{{ date('M j, Y', strtotime($createdAt)) }}</span>
           </div>
 
           <div class="col-xs-1">

@@ -121,6 +121,7 @@ $(document).ready(function () {
           $( message_id +' .sent_by').text(data.messageData['displayName']);
           $( message_id +' .shareName').text(data.messageData['shareName']);
           $( message_id +' .messageText').text(data.messageData['message']);
+          $( message_id +' .createdAt').text(data.messageData['createdAt']);
           $( message_id +' .member_thumb img').attr('src', data.messageData['avatar']);
           $( message_id +' .button_delete').attr('id', 'messageid_'+data.messageData['messageId']);
           $( message_id).removeClass('hidden');
