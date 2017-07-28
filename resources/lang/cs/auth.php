@@ -19,7 +19,7 @@ return [
     'forgot_password' => 'Zapomenuté heslo?',
     'sign_in_with' => 'Přihlásit se pomocí sociální sítě',
     'accept_tos' => 'Souhlasím s <a href="#" data-toggle="modal" data-target="#termsModal">podmínkami používání</a>',
-    'already_have_account' => 'Máte již účet? <a href="../auth/login">Přihlaste se.</a>',
+    'already_have_account' => 'Máte již účet? <a href="../login">Přihlaste se.</a>',
     'no_account' => 'Nemáte účet? <a href="../auth/register"> Zaregistrujte se.</a>',
     'create_account' => 'Vytvořit účet AnyShare',
     'join_public_shares' => 'JPřidejte se k otevřeným skupinám ZDARMA',

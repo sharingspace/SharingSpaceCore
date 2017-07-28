@@ -45,7 +45,7 @@ class Authenticate
                 return $next($request);
             }
             else {
-                return redirect()->guest('auth/login')->with('info', 'You must be logged in to view a Share');
+                return redirect()->guest('login')->with('info', trans('auth.must_login'));
             }
         }
 

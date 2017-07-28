@@ -30,4 +30,5 @@ return [
     'social' => 'Login using a social network',
     'social_signup' => 'Sign up using a social network',
     'agree' => 'I Agree',
+    'must_login' => 'You must be logged in first'
 ];

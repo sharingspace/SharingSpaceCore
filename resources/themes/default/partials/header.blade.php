@@ -176,7 +176,7 @@
         @elseif (Route::is('product'))
         <h1 class="heading">{{ trans('general.nav.features')}}</h1>
         <h2 class="subheading">{{ trans('general.page_about.product')}}</h2>
-        @elseif (Route::is('auth/register'))
+        @elseif (Route::is('register'))
         <h1 class="heading">{{ trans('general.nav.try_now') }}</h1>
         <h2 class="subheading">{!! trans('general.nav.join_public_shares_free')!!}</h2>
         @elseif (Route::is('user.history'))

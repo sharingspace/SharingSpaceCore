@@ -63,7 +63,7 @@ class CommunityPermissionMiddleware
           }
           else {
             //log::debug('CommunityPermissionMiddleware: Hub is secret but user is not a member');
-            return view('auth/login-unbranded')->withError('Secret Hub. You must be invited to join this hub');
+            return view('login-unbranded')->withError('Secret Hub. You must be invited to join this hub');
           }
         }
         else { // User is not logged in

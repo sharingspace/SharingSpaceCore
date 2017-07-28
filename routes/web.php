@@ -450,9 +450,10 @@ Route::group(
                 Route::get(
                     'new',
                     array(
-                    'middleware' => 'auth',
-                    'as' => 'community.create.form',
-                    'uses' => 'CommunitiesController@getCreate')
+                        'middleware' => 'auth',
+                        'as' => 'community.create.form',
+                        'uses' => 'CommunitiesController@getCreate'
+                    )
                 );
 
                 Route::post(
