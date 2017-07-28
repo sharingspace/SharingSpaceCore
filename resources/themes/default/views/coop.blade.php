@@ -116,7 +116,7 @@
             </div>
           </form>
           @else
-            <h3 class="coop-now-heading">To become a Coop Member, please <a href="{{ route('login') }}" class="">{{ trans('general.nav.login') }} </a> or <a href="{{ route('user.register') }}" class="btn btn-primary">{{ trans('general.nav.register') }} </a> and return here to complete your application.</h3>
+            <h3 class="coop-now-heading">To become a Coop Member, please <a href="{{ route('login') }}" class="">{{ trans('general.nav.login') }} </a> or <a href="{{ route('register') }}" class="btn btn-primary">{{ trans('general.nav.register') }} </a> and return here to complete your application.</h3>
           @endif
           <div class="w-form-done">
             Thank you! Your submission has been received!
