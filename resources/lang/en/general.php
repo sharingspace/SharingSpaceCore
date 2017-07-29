@@ -141,7 +141,7 @@ return [
 
   'email' => [
     'today' => 'today',
-    'reply' => 'Leave a Reply',
+    'reply' => 'LEAVE A REPLY',
     'submit' => 'Send',
     'leave_message' => 'Leave a message for',
   ],

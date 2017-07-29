@@ -45,7 +45,7 @@
 
         <div class="border-bottom-1 border-top-1 padding-10">
           <span class="pull-right size-11 margin-top-3 text-muted">today</span>
-          <strong>LEAVE A REPLY</strong></a>
+          <strong>{{ trans('general.email.reply')}}</strong></a>
         </div>
 
         <form id="offerForm" class="block-review-content">
@@ -69,9 +69,9 @@
             <textarea class="messageText form-control" data-height="200" data-lang="en-US" name="message"></textarea>
           </div>
 
-          <button class="btn btn-3d btn-sm btn-reveal btn-teal">
+          <button class="btn btn-3d btn-sm btn-reveal btn-teal pull-right">
             <i class="fa fa-check"></i>
-            <span>SUBMIT POST</span>
+            <span>{{ trans('general.email.submit')}}</span>
           </button>
         </form>
       </div>
