@@ -12,13 +12,13 @@ use Log;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The policy mappings for the application.
+     * The policy mappings for the application.         
+
      *
      * @var array
      */
     protected $policies = [
-        'App\Model'  => 'App\Policies\ModelPolicy',
-        Entry::class => EntryPolicy::class,
+        'App\Model\Entry'  => 'App\Policies\EntryPolicy'
     ];
 
     /**
@@ -42,15 +42,15 @@ class AuthServiceProvider extends ServiceProvider
         // isn't a superadmin
         // --------------------------------
         // If the user is a super admin, let them through no matter what
-        $gate->before(function ($user, $ability) {
-            if ($user->superadmin == '1') {
+        $gate->before(function ($user) {
+            if ($user->isSuperAdmin()) {
                 return true;
             }
         });
 
         // Check if the user can see the community entries
         $gate->define('admin', function ($user) {
-            if ($user->superadmin == '1') {
+            if ($user->isSuperAdmin()) {
                 return true;
             }
         });
@@ -61,10 +61,10 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if the user can see the community entries
         $gate->define('view-browse', function ($user, $community) {
-            //Log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
+            //log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
 
             if ($user->canSeeCommunity($community) || $community->group_type != 'S') {
-                //Log::debug("view-browse ************** can view view-browse");
+                //log::debug("view-browse ************** can view view-browse");
                 return true;
             }
         });
@@ -86,10 +86,10 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if the user can see the community members page
         $gate->define('view-members', function ($user, $community) {
-            //Log::debug("view-members ************** view-members entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
+            //log::debug("view-members ************** view-members entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
 
             if ($community->group_type != 'S') {
-                //Log::debug("view-browse ************** can view view-members");
+                //log::debug("view-browse ************** can view view-members");
                 return true;
             }
         });
@@ -115,7 +115,7 @@ class AuthServiceProvider extends ServiceProvider
         // ENTRY GATES
         // --------------------------------
 
-        // Check the user is a member of the community and cam therefore post
+        // Check the user is a member of the community and therefore post
         // an entry
         $gate->define('post-entry', function ($user, $community) {
             if ($user->isMemberOfCommunity($community)) {
@@ -133,6 +133,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check if the user can update an entry
         $gate->define('update-entry', function ($user, $entry) {
+            //log::debug("update-entry: ".$user->id ."   ". $entry->id);
             return $user->id === $entry->created_by;
         });
 
@@ -153,17 +154,21 @@ class AuthServiceProvider extends ServiceProvider
 
         // Check whether the user can edit a users profile
         $gate->define('update-profile', function ($user, $profile_id) {
-            //Log::debug("update-profile: ".$user->id ."   ". $profile_id);
+            //log::debug("update-profile: ".$user->id ."   ". $profile_id);
             return $user->id === $profile_id;
         });
 
         // Check whether the user can make an offer on an entry
         $gate->define('make-offer', function ($user, $entry, $community) {
+            //log::debug("make-offer: ".$user->id ."   ". $community->name);
+
             return (($entry->created_by != $user->id) && $user->isMemberOfCommunity($community) && (!$entry->expired) && ($entry->completed_at == ''));
         });
 
         // Check whether the user can send a message to another user
         $gate->define('send-msg', function ($user, $community) {
+            //log::debug("send-msg: ".$user->id ."   ". $community->name);
+
             return $user->isMemberOfCommunity($community);;
         });
     }
