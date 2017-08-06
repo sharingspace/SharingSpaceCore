@@ -45,7 +45,7 @@
 
         <div class="border-bottom-1 border-top-1 padding-10">
           <span class="pull-right size-11 margin-top-3 text-muted">today</span>
-          <strong>{{ trans('general.email.reply')}}</strong></a>
+          <strong class="text-uppercase">{{ trans('general.email.reply')}}</strong></a>
         </div>
 
         <form id="offerForm" class="block-review-content">

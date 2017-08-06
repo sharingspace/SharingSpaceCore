@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://anysha.re'),
+    'url' => env('APP_URL', 'https://anyshare.coop'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ return [
     | This is the domain name, without protocol or port numbers.
     |
     */
-    'domain' => env('APP_DOMAIN', 'anysha.re'),
+    'domain' => env('APP_DOMAIN', 'anyshare.coop'),
 
 
 
