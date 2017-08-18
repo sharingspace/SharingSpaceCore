@@ -45,7 +45,7 @@
 
         <div class="border-bottom-1 border-top-1 padding-10">
           <span class="pull-right size-11 margin-top-3 text-muted">today</span>
-          <strong>{{ trans('general.email.reply')}}</strong></a>
+          <strong class="text-uppercase">{{ trans('general.email.reply')}}</strong></a>
         </div>
 
         <form id="offerForm" class="block-review-content">
@@ -121,6 +121,7 @@ $(document).ready(function () {
           $( message_id +' .sent_by').text(data.messageData['displayName']);
           $( message_id +' .shareName').text(data.messageData['shareName']);
           $( message_id +' .messageText').text(data.messageData['message']);
+          $( message_id +' .createdAt').text(data.messageData['createdAt']);
           $( message_id +' .member_thumb img').attr('src', data.messageData['avatar']);
           $( message_id +' .button_delete').attr('id', 'messageid_'+data.messageData['messageId']);
           $( message_id).removeClass('hidden');
