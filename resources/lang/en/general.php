@@ -43,7 +43,7 @@ return [
   'date' => 'Date',
   'action' => 'Action',
   'actions' => 'Actions',
-  'join_headline' => 'Join Share',
+  'join_headline' => 'Join Sharing Network',
   'analytics_id' => 'Google analytics tracking id',
   'close' => 'Close',
   'memberships' => 'Memberships',
@@ -209,8 +209,8 @@ return [
       'save_edits' => 'Your entry has been updated!',
       'upload_fail' => "Your image failed to upload",
       'not_allowed' => 'You are not allowed to edit this entry',
-      'view_not_allowed_login' => 'Please sign-in to view an entry on this Share',
-      'view_not_allowed_join' => 'Please join this Share if you want to view an entry',
+      'view_not_allowed_login' => 'Please sign-in to view an entry on this Sharing Network',
+      'view_not_allowed_join' => 'Please join this Sharing Network if you want to view an entry',
       'delete_success' => 'Your entry has been deleted',
       'delete_failed' => 'Something went wrong. Your entry could not be deleted',
 			'delete_not_allowed' => 'You are not allowed to delete this entry.',
@@ -250,7 +250,7 @@ return [
     'join_to_send_message' => 'Please join this Sharing Network if you want to send this person a message',
     'join_to_send_offer' => 'Please join this Sharing Network if you want to send this person an offer',
     'login_to_view' => 'Please sign-in if you want to view this person\'s profile',
-    'join_to_view' => 'Please join this Share if you want to view this person\'s profile',
+    'join_to_view' => 'Please join this Sharing Network if you want to view this person\'s profile',
 
 
     'request_access' => [
@@ -285,7 +285,7 @@ return [
     'closed_share' => 'If this is a closed Sharing Network, you will need to request to join.',
     'join'  => 'Join',
     'fee' => 'Fee',
-    'settings'  => 'Share Settings',
+    'settings'  => 'Sharing Network Settings',
     'save' => 'Update',
     'name_placeholder' => 'Sharing Network Name',
     'name' => 'Choose a name for your Sharing Network',
@@ -329,7 +329,7 @@ return [
     'coupon' => 'Coupon',
     'have_coupon' => 'I have a coupon code',
     'coupon_code' => 'Coupon Code',
-    'edit_hub' => 'EDIT SHARE',
+    'edit_hub' => 'Edit Sharing Network',
     'basic' => 'Basic',
     'images' => 'Images',
     'advanced' => 'Advanced',
@@ -337,8 +337,8 @@ return [
     'sub_type' => 'Subscription Type',
     'logo' => 'Logo image',
     'incoming_hook' => 'Incoming Webhooks are a simple way to post messages from external sources into Slack. They make use of normal HTTP requests with a JSON payload that includes the message text and some options. Message Attachments can also be used in Incoming Webhooks to display richly-formatted messages that stand out from regular chat messages. See ',
-    'sign_in_secret' => 'Please sign-in to view a secret share',
-    'invite_secret' => 'Secret Share. You must be invited to join this Share',
+    'sign_in_secret' => 'Please sign-in to view a secret sharing network',
+    'invite_secret' => 'Secret Sharing Network. You must be invited to join this Share',
 
     'exchange_types' => [
       'title' => 'Exchange Type|Exchange Types',
@@ -346,19 +346,19 @@ return [
     ],
 
     'open'  => [
-      'title'  => 'Open Share',
+      'title'  => 'Open Sharing Network',
       'text'  => 'Anyone can join',
       'type' => 'Open',
       'desc' => 'An open Sharing Network lets anyone join and exchange. It is the most permissive way to build members.'
     ],
     'closed'  => [
-      'title'  => 'Closed Share',
+      'title'  => 'Closed Sharing Network',
       'text'  => 'Invite-only to join',
       'type' => 'Closed',
       'desc' => 'A closed Sharing Network lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details.'
     ],
     'secret'  => [
-      'title'  => 'Secret Share',
+      'title'  => 'Secret Sharing Network',
       'text'  => 'Only members can view',
       'type' => 'Secret',
       'desc' => 'A secret Sharing Network is hidden from anyone who is not a member. It is the top level of secrecy.'
@@ -367,16 +367,16 @@ return [
       'leave' => 'leave',
     ],
     'messages' => [
-      'save_edits' => 'Your Share settings have been saved',
+      'save_edits' => 'Your Sharing Network settings have been saved',
       'save_new' => 'Your new Sharing Network has been created!',
-      'save_failed' => 'Something went wrong. Your Share settings have not been saved',
+      'save_failed' => 'Something went wrong. Your Sharing Network settings have not been saved',
     ],
     'slack_info' => [
       'p1' => 'Slack is a messaging app for teams (https://slack.com/). AnyShare integrates with slack to allow you to add entries and show members from within the app.',
       'p2' => 'To list members, type: /members <subdomain>',
       'p3' => 'To add an entry, type: /want <qty> <example text> in:<subdomain> and /have <qty> <example text> in:<subdomain>',
       'p4' => 'The <qty> is optional, and if it is missing, it will default to one. For example, /have <example text> in:<subdomain> is the same as /have 1 <example text> in:<subdomain>.',
-      'p5' => 'New entries added through the slash command will have all of the exchange types available for that Share selected.',
+      'p5' => 'New entries added through the slash command will have all of the exchange types available for the Sharing Network selected.',
      ]
   ],
   'members' => [
