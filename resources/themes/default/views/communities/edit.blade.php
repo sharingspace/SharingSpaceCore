@@ -34,9 +34,16 @@
           </div>
 
           <!-- Slug -->
-          <div class="form-group{{ $errors->first('subdomain', ' has-error') }}">
+          <div class="form-group{{ $errors->first('subdomain', ' has-error') }}" id="domain_input">
             <label for="subdomain">{{trans('general.community.subdomain')}} *</label>
-            <input type="text" name="subdomain" class="form-control" placeholder="{{trans('general.community.subdomain_placeholder')}}" required="" value="{{ old('subdomain') }}">
+            <div class="row margin-right-0">
+              <div class="col-xs-8 padding-right-0">
+                <input type="text" size="20" name="subdomain" class="form-control" required="" value="{{ old('subdomain') }}">
+              </div>
+              <div class="col-xs-4 anyshare_url">
+                .anyshare.coop
+              </div>
+            </div>
             {!! $errors->first('subdomain', '<span class="help-block">:message</span>') !!}
           </div>
 
