@@ -147,7 +147,7 @@
               <a class="cta-button contained-button size-20 bg-black border-dkgray" href="{{ route('product') }}">
                 {{ trans('general.learn_more') }}
               </a>
-              <a class="cta-button contained-button size-20 margin-left-5 bg-red border-crimson" href="{{ route('register') }}">
+              <a class="cta-button contained-button size-20 margin-left-5 bg-red border-crimson" href="{{ route('memberships') }}">
                 {{ trans('home.free_membership') }}
               </a>
             </div>
