@@ -16,7 +16,7 @@
       <!-- LOGIN -->
       <div class="col-md-6 col-sm-6">
         @if (isset($shareSignup))
-        <p class="size-20">To join this Share please create an account.<br>{{trans('auth.already_have_account')}} <a href='../auth/login'>{{ trans('auth.signin_now')}}</a></p>
+        <p class="size-20">To join this Share please create an account.<br>{{trans('auth.already_have_account')}} <a href="{{ route('login') }}">{{ trans('auth.signin_now')}}</a></p>
         @endif
         <!-- register form -->
         <form class="nomargin sky-form boxed" method="post">
@@ -84,7 +84,7 @@
 
         <div class="row margin-top-20">
           <div class="col-md-12">
-            {!! trans('auth.already_have_account') !!} <a href="../auth/login">{!! trans('auth.signin_now') !!}</a>
+            {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
           </fieldset>
 
           <footer>
-            {!! trans('auth.already_have_account') !!} <a href="../auth/login">{!! trans('auth.signin_now') !!}</a>
+            {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
           </footer>
 
         </form>

@@ -52,7 +52,7 @@
 
       @else
         <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
-        <li><a href="{{ route('user.register') }}">{{ trans('general.nav.register') }} </a></li>
+        <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
       @endif
     </ul>
 
