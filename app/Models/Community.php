@@ -8,12 +8,15 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
+use App\collection;
+use App\Illuminate;
+use App\View;
 use Illuminate\Database\Eloquent\Model;
 use Config;
-use App\User;
-use App\ExchangeType;
+use App\Models\User;
+use App\Models\ExchangeType;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use Carbon\Carbon;
@@ -89,7 +92,7 @@ class Community extends Model
     */
     public function owner()
     {
-        return $this->belongsTo('App\User', 'created_by');
+        return $this->belongsTo('App\Models\User', 'created_by');
     }
 
     /**
@@ -101,7 +104,7 @@ class Community extends Model
     */
     public function entries()
     {
-        return $this->belongsToMany('App\Entry', 'entries_community_join', 'community_id', 'entry_id');
+        return $this->belongsToMany('App\Models\Entry', 'entries_community_join', 'community_id', 'entry_id');
     }
 
 
@@ -115,7 +118,7 @@ class Community extends Model
     */
     public function members()
     {
-        return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin','custom_label');
+        return $this->belongsToMany('App\Models\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin','custom_label');
     }
 
    /**
@@ -128,7 +131,7 @@ class Community extends Model
     */
     public function requests()
     {
-        return $this->belongsToMany('App\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_by')->whereNull('rejected_by')->withPivot('message');
+        return $this->belongsToMany('App\Models\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_by')->whereNull('rejected_by')->withPivot('message');
     }
 
 
@@ -141,7 +144,7 @@ class Community extends Model
     */
     public function rejectUser($rejected_by, $user_id, $community_id)
     {
-        $user_request = \App\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
+        $user_request = \App\Models\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
         $user_request->rejected_at = Carbon::now();
         $user_request->rejected_by = $rejected_by;
         $user_request->save();
@@ -157,7 +160,7 @@ class Community extends Model
     */
     public function acceptUser($approved_by, $user_id, $community_id)
     {
-        $user_request = \App\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
+        $user_request = \App\Models\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
         $user_request->approved_at = Carbon::now();
         $user_request->approved_by = $approved_by;
         $user_request->save();
@@ -265,7 +268,7 @@ class Community extends Model
     */
     public function subscription()
     {
-        return $this->hasOne('\App\CommunitySubscription', 'id', 'community_id');
+        return $this->hasOne('\App\Models\CommunitySubscription', 'id', 'community_id');
     }
 
 
@@ -315,7 +318,7 @@ class Community extends Model
     */
     public function exchangeTypes()
     {
-        $exchanges = $this->belongsToMany('App\ExchangeType', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
+        $exchanges = $this->belongsToMany('App\Models\ExchangeType', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
 
         return $exchanges;
     }
@@ -347,6 +350,30 @@ class Community extends Model
     }
 
     /**
+    * Can view members page
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */    
+    public function viewMembers()
+    {
+        return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type != 'S'));
+    }
+
+    /**
+    * Can view browse page
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */
+    public function viewBrowse()
+    {
+        return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type != 'S'));
+    }
+
+    /**
     * Is a community open?
     *
     * @author [D.Linnard] [<dslinnard@yahoo.com>]
@@ -356,6 +383,18 @@ class Community extends Model
     public function isOpen()
     {
         return ($this->group_type == 'O');
+    }
+
+    /**
+    * Is a community closed?
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return Boolean
+    */
+    public function isClosed()
+    {
+        return ($this->group_type == 'C');
     }
 
     /**

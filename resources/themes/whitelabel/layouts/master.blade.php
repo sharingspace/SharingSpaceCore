@@ -77,14 +77,12 @@
 
       <div>@include('partials.header')</div>
 
-      @if (!Route::is('home'))
-        <!-- Notifications -->
-        <div  id="notifications" class="container">
-          <div class="row">
-            @include('notifications')
-          </div>
+      <!-- Notifications -->
+      <div  id="notifications" class="container">
+        <div class="row">
+          @include('notifications')
         </div>
-      @endif
+      </div>
 
       <div id="share_content">@yield('content')</div>
       <div>@include('partials.footer')</div>
@@ -92,18 +90,18 @@
 
 
 @include('partials.geo-lookup')
-
 <script type="text/javascript">
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-81177317-1', 'auto');
 
   @if ($whitelabel_group->ga!='')
-  ga('create', '{{ $whitelabel_group->ga }}', 'auto', 'clientTracker');
+    ga('create', '{{ $whitelabel_group->ga }}', 'auto', 'clientTracker');
+    ga('clientTracker.send', 'pageview');
   @endif
   ga('send', 'pageview');
 

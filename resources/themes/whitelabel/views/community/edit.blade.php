@@ -108,7 +108,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                         <div class="checkbox">
                           <div class="row">
                            
-                            @foreach (\App\ExchangeType::all() as $exchange_types)
+                            @foreach (\App\Models\ExchangeType::all() as $exchange_types)
                             <div class="col-xs-12 pull-left margin-bottom-10">
                               <label class="checkbox pull-left margin-bottom-10">
                                 @if (array_key_exists($exchange_types->id, $allowed_exchanges))

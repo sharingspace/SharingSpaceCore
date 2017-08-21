@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Database\Seeder;
-use App\Community;
+use App\Models\Community;
 
 
 class CommunitySeeder extends Seeder

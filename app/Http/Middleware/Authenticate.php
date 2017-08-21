@@ -37,15 +37,15 @@ class Authenticate
     public function handle($request, Closure $next)
     {
         if ($this->auth->guest()) {
-             
+
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            } 
+            }
             else if($request->whitelabel_group && $request->whitelabel_group->group_type != 'S') {
                 return $next($request);
             }
             else {
-                return redirect()->guest('auth/login')->with('info', 'You must be logged in to view a Share');
+                return redirect()->guest('login')->with('info', trans('auth.must_login'));
             }
         }
 

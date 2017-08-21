@@ -8,8 +8,9 @@
  * @package AnyShare
  * @version v1.0
  */
-namespace App;
+namespace App\Models;
 
+use App\collection;
 use Illuminate\Database\Eloquent\Model;
 
 class CommunitySubscription extends Model
@@ -47,7 +48,7 @@ class CommunitySubscription extends Model
     */
     public function user()
     {
-        return $this->belongsTo('\App\User', 'billable_id', 'id');
+        return $this->belongsTo('\App\Models\User', 'billable_id', 'id');
     }
 
     /**
@@ -59,6 +60,6 @@ class CommunitySubscription extends Model
     */
     public function community()
     {
-        return $this->hasOne('\App\Community', 'id', 'community_id');
+        return $this->hasOne('\App\Models\Community', 'id', 'community_id');
     }
 }

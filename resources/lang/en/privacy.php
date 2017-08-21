@@ -15,7 +15,7 @@ return [
         'p1' => 'The Website obtains the information you provide when you sign-up for your account, fill in your profile, and use its features to exchange and create together. Registration with us is optional if you want to browse parts of the website. However, please keep in mind that registration with us is mandatory in order to be able to use the many features of the Website. ',
         'p2' => 'When you become a member of the Website, you  may provide (a) your name, email address, user ID, password and other registration information; (b) transaction-related information, such as when you make purchases, respond to any offers, or download or use applications from us; (c) information you provide us when you contact us for help; (d) credit card information for purchase and use of the paid features, and; (e) information you enter into our system when using the Website, such as contact information and project information.',
         'p3' => 'We may use the information you provided us to contact your from time to time to provide you with important information, required notices and marketing promotions.',
-        'p4' => 'Hub owners of AnyShare can operate their own Share using the AnyShare service. When a user becomes a member of a Share, they are providing their name and email to the owner of the Share as well.',
+        'p4' => 'Owners of AnyShare can operate their own Sharing Network using the AnyShare service. When a user becomes a member of a Share, they are providing their name and email to the owner of the Sharing Network as well.',
       ],
 
       'automatically' => [
@@ -45,7 +45,7 @@ return [
     'third_parties' => [
       'title' => 'Third Parties',
       'p1' => 'We will never sell any personal data for advertising or other purposes.', 
-      'p2' => 'Hub owners of AnyShare can operate their own Share using the AnyShare service. When a user becomes a member of a Share, they are providing their name and email to the owner of the Share as well.',
+      'p2' => 'Owners of AnyShare can operate their own Sharing Network using the AnyShare service. When a user becomes a member of a Sharing Network, they are providing their name and email to the owner of the Sharing Network as well.',
       'p3' => 'We believe in being transparent with the third party tools we use and why we do so. We use the following third party tools:', 
       'tools' => [
         'ga' => [

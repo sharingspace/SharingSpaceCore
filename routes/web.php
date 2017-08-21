@@ -69,85 +69,22 @@ Route::group(
         |--------------------------------------------------------------------------
         */
 
-        // Forgotten password
-        Route::get(
-            'auth/forgot',
-            array(
-                'as' => 'forgot_password.email.form',
-                'uses' => 'Auth\PasswordController@getEmail')
-        );
 
-        // Forgotten password
-        Route::post(
-            'auth/forgot',
-            array(
-                'as' => 'forgot_password.email.send',
-                'uses' => 'Auth\PasswordController@postEmail')
-        );
-
-        // Password Reset Token
-        Route::get(
-            'password/reset/{token?}',
-            array(
-                'as' => 'forgot_password.token',
-                'uses' => 'Auth\PasswordController@showResetForm')
-        );
-
-
-        // Password Reset Token
-        Route::post(
-            'password/reset',
-            array(
-                'as' => 'forgot_password',
-                'uses' => 'Auth\PasswordController@reset')
-        );
-
-        // Password Reset Token
-        Route::get(
-            'password/reset',
-            array(
-                'as' => 'forgot_password',
-                'uses' => 'Auth\PasswordController@reset')
-        );
+        Auth::routes();
+        
+        Route::get('logout', function (){
+            Auth::logout();
+            return redirect('/');
+        });
 
         Route::group(
-            array('prefix' => 'auth'),
+            array('prefix' => 'login'),
             function () {
-
-                // Logout
-                Route::get(
-                    'logout',
-                    array(
-                    'as' => 'logout',
-                    'uses' => 'Auth\AuthController@getLogout')
-                );
-
-                // Login
-                Route::get(
-                    'login',
-                    array(
-                    'as' => 'login',
-                    'uses' => 'Auth\AuthController@getLogin')
-                );
-
-                Route::post('login', 'Auth\AuthController@postLogin');
-
-                // Register
-                Route::get(
-                    'register',
-                    array(
-                    'as' => 'user.register',
-                    'uses' => 'Auth\AuthController@getRegister')
-                );
-
-                Route::post('register', 'Auth\AuthController@postRegister');
-
                 // Social
-                Route::get('{provider}', 'Auth\AuthController@redirectToProvider');
-                Route::get('{provider}/callback', 'Auth\AuthController@handleProviderCallback');
-
-
+                Route::get('{provider}', 'Auth\LoginController@redirectToSocialProvider');
+                Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
             }
+
         );
 
 
@@ -277,9 +214,10 @@ Route::group(
                 Route::get(
                     '{userID}',
                     array(
-                    'middleware' => ['auth','community-auth', 'member-auth'],
-                    'as' => 'user.profile',
-                    'uses' => 'UserController@getProfile')
+                        'middleware' => ['member-auth'],
+                        'as' => 'user.profile',
+                        'uses' => 'UserController@getProfile'
+                    )
                 );
 
                 Route::post(
@@ -300,84 +238,94 @@ Route::group(
         Route::group(
             array('prefix' => 'entry'),
             function () {
-
                 Route::get(
                     'new',
                     array(
-                    'middleware' => ['auth','community-auth','entry-auth'],
-                    'as' => 'entry.create.form',
-                    'uses' => 'EntriesController@getCreate')
+                        'middleware' => ['auth','community-auth','entry-auth'],
+                        'as' => 'entry.create.form',
+                        'uses' => 'EntriesController@getCreate'
+                    )
                 );
 
                 Route::post(
                     'new',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.create.save',
-                    'uses' => 'EntriesController@postCreate')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.create.save',
+                        'uses' => 'EntriesController@postCreate'
+                    )
                 );
 
                 Route::post(
                     'new/ajax',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.create.ajax.save',
-                    'uses' => 'EntriesController@postAjaxCreate')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.create.ajax.save',
+                        'uses' => 'EntriesController@postAjaxCreate'
+                    )
                 );
 
                 Route::post(
                     '{entryID}/delete',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.delete.save',
-                    'uses' => 'EntriesController@postDelete')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.delete.save',
+                        'uses' => 'EntriesController@postDelete'
+                    )
                 );
 
                 Route::post(
                     '{entryID}/delete/ajax',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.delete.ajax.save',
-                    'uses' => 'EntriesController@postAjaxDelete')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.delete.ajax.save',
+                        'uses' => 'EntriesController@postAjaxDelete'
+                    )
                 );
 
                 Route::post(
                     'messages/new/{userId}/{entryId?}',
                     array(
-                    'as' => 'messages.create.save',
-                    'uses' => 'MessagesController@postCreate')
-                );
-
-                Route::get(
-                    '{entryID}/edit',
-                    array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.edit.form',
-                    'uses' => 'EntriesController@getEdit')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'messages.create.save',
+                        'uses' => 'MessagesController@postCreate'
+                    )
                 );
 
                 Route::post(
                     '{entryID}/edit/ajax',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.edit.ajax.save',
-                    'uses' => 'EntriesController@postAjaxEdit')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.edit.ajax.save',
+                        'uses' => 'EntriesController@postAjaxEdit'
+                    )
+                );
+
+                Route::get(
+                    '{entryID}/edit',
+                    array(
+                        'middleware' => ['auth','community-auth','entry-edit'],
+                        'as' => 'entry.edit.form',
+                        'uses' => 'EntriesController@getEdit'
+                    )
                 );
 
                 Route::post(
                     '{entryID}/edit',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.edit.save',
-                    'uses' => 'EntriesController@postEdit')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.edit.save',
+                        'uses' => 'EntriesController@postEdit'
+                    )
                 );
 
                 Route::get(
                     '{entryID}/ajaxgetentry',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.ajax.get',
-                    'uses' => 'EntriesController@ajaxGetEntry')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.ajax.get',
+                        'uses' => 'EntriesController@ajaxGetEntry'
+                    )
                 );
 
                 Route::post(
@@ -391,25 +339,46 @@ Route::group(
                 Route::get(
                     'json.browse/{userId?}',
                     array(
-                    'middleware' => ['community-auth'],
-                    'as' => 'json.browse',
-                    'uses' => 'EntriesController@getEntriesDataView')
+                        'middleware' => ['entry-browse'],
+                        'as' => 'json.browse',
+                        'uses' => 'EntriesController@getEntriesDataView'
+                    )
+                );
+
+                Route::get(
+                    'kiosk/{tagName?}',
+                    array(
+                        'middleware' => ['community-auth'],
+                        'as' => 'kiosk.categories',
+                        'uses' => 'EntriesController@getKioskEntries'
+                    )
+                );
+
+                Route::get(
+                    'kiosk/entry/{entryId}',
+                    array(
+                        'middleware' => ['entry-view'],
+                        'as' => 'kiosk_entry',
+                        'uses' => 'EntriesController@getEntry'
+                    )
                 );
 
                 Route::get(
                     '{entryID}',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.view',
-                    'uses' => 'EntriesController@getEntry')
+                        'middleware' => ['entry-view'],
+                        'as' => 'entry.view',
+                        'uses' => 'EntriesController@getEntry'
+                    )
                 );
 
                 Route::get(
                     '{entryID}/completed',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'entry.completed',
-                    'uses' => 'EntriesController@completeEntry')
+                        'middleware' => ['auth','community-auth'],
+                        'as' => 'entry.completed',
+                        'uses' => 'EntriesController@completeEntry'
+                    )
                 );
             }
         );
@@ -424,17 +393,10 @@ Route::group(
         Route::get(
             'browse',
             array(
-            'as' => 'browse',
-            'middleware' => 'community-auth',
-            'uses' => 'CommunitiesController@getEntriesView')
-        );
-
-        Route::get(
-            'kiosk',
-            array(
-            'as' => 'kiosk',
-            'middleware' => 'community-auth',
-            'uses' => 'CommunitiesController@getKioskEntriesView')
+                'as' => 'browse',
+                'middleware' => ['home-view'],
+                'uses' => 'CommunitiesController@getEntriesView'
+            )
         );
 
         Route::post(
@@ -488,9 +450,10 @@ Route::group(
                 Route::get(
                     'new',
                     array(
-                    'middleware' => 'auth',
-                    'as' => 'community.create.form',
-                    'uses' => 'CommunitiesController@getCreate')
+                        'middleware' => 'auth',
+                        'as' => 'community.create.form',
+                        'uses' => 'CommunitiesController@getCreate'
+                    )
                 );
 
                 Route::post(
@@ -523,13 +486,13 @@ Route::group(
 
 
 
-        // Request access to a community
+        // Request access to a community , 'community-auth'
         Route::get(
             'request-access',
             [
-            'middleware' => ['auth', 'community-auth'],
-            'as' => 'community.request-access.form',
-            'uses' => 'CommunitiesController@getRequestAccess'
+                'middleware' => ['auth'],
+                'as' => 'community.request-access.form',
+                'uses' => 'CommunitiesController@getRequestAccess'
             ]
         );
 
@@ -575,12 +538,7 @@ Route::group(
                         'uses' => 'AdminController@getCustomerList')
                 );
 
-                Route::get(
-                    'debug',
-                    array(
-                        'as' => 'admin.debug',
-                        'uses' => 'EnvController@test')
-                );
+
         });
 
         /*
@@ -654,7 +612,7 @@ Route::group(
         Route::get(
             'pricing',
             array(
-                'as' => 'pricing_page',
+                'as' => 'memberships',
                 function () {
                     return view('pricing');
             })
@@ -680,9 +638,9 @@ Route::group(
         Route::get(
             '/',
             array(
-            'as' => 'home',
-            'middleware' => ['community-auth'],
-            'uses' => 'PagesController@getHomepage')
+                'as' => 'home',
+                'uses' => 'PagesController@getHomepage'
+            )
         );
 
         Route::get(

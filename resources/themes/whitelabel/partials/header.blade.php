@@ -62,7 +62,7 @@
 
         @else
           <li><a href="{{ route('login') }}">{{ trans('general.nav.login') }} </a> </li>
-          <li><a href="{{ route('user.register') }}">{{ trans('general.nav.register') }} </a></li>
+          <li><a href="{{ route('register') }}">{{ trans('general.nav.register') }} </a></li>
         @endif
       </ul>
 
@@ -113,7 +113,7 @@
           @endif
         </a>
 
-        @if (Auth::check() && Auth::user()->canSeeCommunity($whitelabel_group))
+        @if (Auth::check() && Auth::user()->isMemberOfCommunity($whitelabel_group, false))
         <div class="navbar-header pull-right">
           <ul class="nav navbar-nav">
             <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
@@ -124,13 +124,17 @@
           </ul>
         </div>
         @endif
-
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
-            @if ( (Auth::check() && !(Auth::user()->isMemberOfCommunity($whitelabel_group))) && !$whitelabel_group->getRequestCount(Auth::user()->id))
+            @if ( Auth::check() && !Auth::user()->isMemberOfCommunity($whitelabel_group) )
+              <!-- logged in in but not a member -->
               <li>
+              @if ($whitelabel_group->group_type == 'O')
+               <a href="{{ route('join-community') }}">
+              @else
                 <a href="{{ route('community.request-access.form') }}">
+              @endif
                   <button type="button" class="btn btn-colored btn-sm">
                     {{ trans('general.register.join_share') }}
                   </button>
@@ -139,18 +143,22 @@
             @endif
 
             @if ($whitelabel_group->viewNavItems())
+              @if ($whitelabel_group->viewBrowse())
               <li {!! (Route::is('home') ? ' class="active"' : '') !!}>
                 <a href="{{ route('home') }}">
                   {{ trans('general.nav.browse') }}
                   {!! (Route::is('home') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
+              @endif
+              @if ($whitelabel_group->viewMembers())
               <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
                 <a href="{{ route('members') }}">
                   {{ trans('general.our_members') }}
                   {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
                 </a>
               </li>
+              @endif
               <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
               </li>
@@ -203,15 +211,14 @@
         <br><strong>Location:</strong> <span class="about_info">{{$whitelabel_group->location}}</span>
       @endif
       @if ($whitelabel_group->group_type == 'O')
-        <br><strong>Privacy:</strong> <span class="about_info">Open Membership</span> 
-        <a href="#" title="An open Share lets anyone join and exchange. It is the most permissive way to build members.""><i class="fa fa-info-circle"></i></a>
-
+        <br><strong>{{trans('general.privacy')}}:</strong> <span class="about_info">{{trans('general.community.open.title')}}</span> 
+        <a href="#" title="{{trans('general.community.open.desc')}}"><i class="fa fa-info-circle"></i></a>
       @elseif ($whitelabel_group->group_type == 'C')
-        <br><strong>Privacy:</strong> <span class="about_info">Closed, Membership requires approval</span> 
-        <a href="#" title="A closed Share lets you approve members before they join. You can also invite members! Visitors can see basic information in its content, but not the details."><i class="fa fa-info-circle"></i></a>
+        <br><strong>{{trans('general.privacy')}}:</strong> <span class="about_info">{{trans('general.community.closed.title')}}</span> 
+        <a href="#" title="{{trans('general.community.closed.desc')}}"><i class="fa fa-info-circle"></i></a>
       @else
-        <br><strong>Privacy:</strong> <span class="about_info">Secret, Membership is by invitation only</span> 
-        <a href="" data-toggle="modal" data-target="#learnPrivacy"><i class="fa fa-info-circle"></i></a>
+        <br><strong>{{trans('general.privacy')}}:</strong> <span class="about_info">{{trans('general.community.secret.title')}}</span> 
+        <a href="#" title="{{trans('general.community.secret.desc')}}"><i class="fa fa-info-circle"></i></a>
       @endif
         <br><strong>{{ trans_choice('general.community.exchange_types.title', $whitelabel_group->exchangeTypes->count()) }}</strong>
         <span class="about_info">
@@ -222,16 +229,16 @@
             @foreach ($whitelabel_group->exchangeTypes as $exchange_type)
               {{--*/ $exchangeTypes[] = $exchange_type->name /*--}}
             @endforeach
-            {{ implode(', ', $exchangeTypes)}}
+
             <a href="#" title="This shows options for member exchange on this Share"><i class="fa fa-info-circle"></i></a>
           @endif
         </span>
-        <br><strong>Total members:</strong> {{$whitelabel_group->members()->count()}}<br>
-        <strong>Total entries:</strong> {{$whitelabel_group->entries()->count()}}
-        (wants:</span> {{$whitelabel_group->entries()->where('post_type', 'want')->count()}}
-        <a href="#" title="All the needs of the members"><i class="fa fa-info-circle"></i></a>, 
-        haves:</span> {{$whitelabel_group->entries()->where('post_type', 'have')->count()}}
-        <a href="#" title="All the resources of the members"><i class="fa fa-info-circle"></i></a>)
+        <br><strong>{{trans('general.total_members')}}:</strong> {{$whitelabel_group->members()->count()}}<br>
+        <strong>{{trans('general.total_entries')}}:</strong> {{$whitelabel_group->entries()->count()}}
+        ({{trans('general.entries.wants')}}:</span> {{$whitelabel_group->entries()->where('post_type', 'want')->count()}}
+        <a href="#" title="{{trans('general.members_needs')}}"><i class="fa fa-info-circle"></i></a>, 
+        {{trans('general.entries.wants')}}:</span> {{$whitelabel_group->entries()->where('post_type', 'have')->count()}}
+        <a href="#" title="{{trans('general.members_resources')}}"><i class="fa fa-info-circle"></i></a>)
         </p>
 
       {!! Markdown::convertToHtml($whitelabel_group->about) !!} 

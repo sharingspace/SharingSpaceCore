@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://anysha.re'),
+    'url' => env('APP_URL', 'https://anyshare.coop'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +46,7 @@ return [
     | This is the domain name, without protocol or port numbers.
     |
     */
-    'domain' => env('APP_DOMAIN', 'anysha.re'),
+    'domain' => env('APP_DOMAIN', 'anyshare.coop'),
 
 
 
@@ -157,6 +157,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -244,6 +245,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'ApiGuardAuth' => Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
-        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
     ],
 ];

@@ -10,10 +10,10 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
-use App\Community;
+use App\Models\Community;
 use Input;
-use App\Entry;
-use App\User;
+use App\Models\Entry;
+use App\Models\User;
 use DB;
 
 class SlackController extends Controller
@@ -156,7 +156,7 @@ class SlackController extends Controller
         }
 
         if ($community->entries()->save($entry)) {
-            $entry->exchangeTypes()->sync(\App\ExchangeType::all());
+            $entry->exchangeTypes()->sync(\App\Models\ExchangeType::all());
             //$community->exchangeTypes()->saveMany(\App\ExchangeType::all());
             $message['text'] = 'A new '.strtoupper($entry->post_type).' entry for   <https://'.$community->subdomain.'.'.config('app.domain').'/entry/'.$entry->id.'|'.$entry->title.'> was added to '.$community_slug.'!';
         } else {

@@ -62,41 +62,58 @@
           @endif
 
           @if (Auth::check())
-          @can('update-profile', $user->id)
-          <div class="col-xs-12">
-            <a href="{{ route('user.settings.view') }}">
-              <button class="btn btn-sm btn-colored">{{trans('general.settings.edit_profile')}}</button>
-            </a>
-          </div>
-          @endcan
-          @can('make-offer', $user->id)
-          <div class="col-xs-12">
-            <form id="offerForm" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
-              {!! csrf_field() !!}
-              <!-- alert -->
-              <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <i class="fa fa-exclamation-circle"></i>
-                <strong id="offerStatusText"></strong><span id="offerStatus"></span>
-              </div>
-              <!-- alert -->
-                  
-              <p>{{trans('general.email.leave_message')}} <strong>{{ $user->getDisplayName() }} </strong></p>
+            @can('update-profile', $user->id)
+            <div class="col-xs-12">
+              <a href="{{ route('user.settings.view') }}">
+                <button class="btn btn-sm btn-colored">{{trans('general.settings.edit_profile')}}</button>
+              </a>
+            </div> 
+            @endcan
 
-              <textarea name="message" required class="messageText form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
-              <input type="hidden" name="subject" value="Profile Message">
-              <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
-                <span>0/100</span> Words
-              </div>
+            @can('send-msg', $whitelabel_group)
+              <div class="col-xs-12"> 
+                <form id="offerForm" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
+                  {!! csrf_field() !!}
+                  <!-- alert -->
+                  <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="fa fa-exclamation-circle"></i>
+                    <strong id="offerStatusText"></strong><span id="offerStatus"></span>
+                  </div>
+                  <!-- alert -->
+                      
+                  <p>{{trans('general.email.leave_message')}} <strong>{{ $user->getDisplayName() }} </strong></p>
 
-              <button type="submit" class="btn btn-colored pull-right">{{trans('general.email.submit')}}</button>
-            </form>
-          </div> <!-- col 12 -->
-          @endif
+                  <textarea name="message" required class="messageText form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
+                  <input type="hidden" name="subject" value="Profile Message">
+                  <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
+                    <span>0/100</span> Words
+                  </div>
+
+                  <button type="submit" class="btn btn-colored pull-right">{{trans('general.email.submit')}}</button>
+                </form>
+              </div> <!-- col 12 -->
+            @else
+              @cannot('update-profile', $user->id)
+                <div class="col-xs-12">
+                  <p><strong>{{ trans('general.user.join_to_send_message') }}.</strong></p>
+                  <p>
+                    <a class="btn btn-colored btn-sm" href=
+                    @if ($whitelabel_group->group_type == 'O')
+                      "{{ route('join-community') }}">
+                    @else 
+                      "{{ route('community.request-access.form') }}">
+                    @endif 
+                    {{ trans('general.register.join_share') }}</a>
+                  </p>
+                </div>
+              @endcannot
+            @endcan
           @else
-          <div class="col-xs-12">
-            <p><a class="btn btn-colored" href="{{ route('login') }}">{{ trans('general.user.login_to_send_message') }}</a></p>
-          </div>
+            <div class="col-xs-12">
+              <p><strong>{{ trans('general.user.login_to_send_message') }}.</strong></p>
+              <a class="btn btn-colored" href="{{ route('login') }}">{{ trans('general.nav.login') }}</a></p>
+            </div>
           @endif
         </div> <!-- row -->
       </div> <!-- col 6 -->

@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Community;
-use App\User;
+use App\Models\Community;
+use App\Models\User;
 
 class CommunityTransformer
 {

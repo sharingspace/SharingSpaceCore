@@ -16,6 +16,6 @@ return [
     'congrats' =>'Congratulations you are a Coop Member',
     'you_are_member' => 'Congratulations, you’re the newest AnyShare Coop Member! We’re happy to be working with you now. We’ll email you soon with details about voting, dividends, and other Coop Member-Only privileges.',
     'meantime' => 'In the meantime, let your friends on social media know that you’ve taken a big step towards creating a more fair and rewarding economy for all!',
-    'make' => 'Make your own Share',
+    'make' => 'Make your own Sharing Network',
     'start'  => 'Start Now'
 ];

@@ -1,7 +1,6 @@
-
        <div class="row messageRow message_{{$messageId or 0}} {{$rowClass or null}}">  
           <div class="col-xs-1">
-            <a class="member_thumb pull-left" href="{{ route('user.profile', $senderId or null) }}">
+            <a class="member_thumb pull-left" href="{{ route('user.profile', $senderId) }}">
               <img class="hidden-xs margin-right-10" src="{{ $avatar or '' }}">
             </a>
           </div>
@@ -12,13 +11,17 @@
                   <span class="shareName"> / {{ $community or null }}</span>
               </div>
               <div class="col-xs-12 messageText">
-                @if (isset($messageText) && strlen($messageText) > 100)
+                @if (isset($messageText) && strlen($messageText) > 100 && $count)
                   <a data-toggle="collapse" data-target="#expand_{{$message->id or null}}">
                   @if (empty($readOn or null))
                     <i class="fa fa-eye-slash fa-lg pull-left text-green margin-top-5"></i>
                   @endif
                 @endif
+                @if ($count)
                   {!! Str::limit($messageText, 100) !!}
+                @else
+                  {!! $messageText !!}
+                @endif
                 @if (isset($messageText) && strlen($messageText) > 100)
                   </a>
                 @endif
@@ -30,8 +33,8 @@
           </div>
 
           <div class="col-xs-2">
-            <span class="hidden-sm hidden-xs">{{ date('M j, Y g:ia', strtotime($createdAt)) }}</span>
-            <span class="visible-sm visible-xs">{{ date('M j, Y', strtotime($createdAt)) }}</span>
+            <span class="hidden-sm hidden-xs createdAt">{{ date('M j, Y g:ia', strtotime($createdAt)) }}</span>
+            <span class="visible-sm visible-xs createdAt">{{ date('M j, Y', strtotime($createdAt)) }}</span>
           </div>
 
           <div class="col-xs-1">

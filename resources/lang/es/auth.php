@@ -19,6 +19,6 @@ return [
     'forgot_password' => '¿Olvidaste tu contraseña?',
     'sign_in_with' => 'Iniciar sesión con :social_network',
     'accept_tos' => 'Estoy de acuerdo en <a href="#" data-toggle="modal" data-target="#termsModal">los términos del servicio</a>',
-    'already_have_account' => '¿Ya tienes una cuenta? <a href="../auth/login">Inicio de sesión ahora</a>',
+    'already_have_account' => '¿Ya tienes una cuenta? <a href="{{ route(\'login\') }}">Inicio de sesión ahora</a>',
 
 ];

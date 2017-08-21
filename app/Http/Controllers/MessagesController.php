@@ -20,16 +20,15 @@ use Redirect;
 use Helper;
 use Log;
 use Gate;
-use App\Message;
-use App\Conversation;
-use App\Entry;
-use App\User;
+use App\Models\Message;
+use App\Models\Conversation;
+use App\Models\Entry;
+use App\Models\User;
 use Config;
 use Mail;
 
 class MessagesController extends Controller
 {
-
     /**
      * Returns a view that displays a list of messages
      *
@@ -65,12 +64,12 @@ class MessagesController extends Controller
         if ($user) {
             //log::debug("getMessage: found message ".$messageId); 
 
-            if ($message = \App\Message::find($messageId)) {
+            if ($message = \App\Models\Message::find($messageId)) {
                 if (($message->sent_by == $user->id) || ($message->sent_to == $user->id)) {
                     //log::debug("getMessage: message belongs to us ".$messageId.$message->id);
 
                     if (!$message->messageDeleted($user->id)) {
-                        $conversation = \App\Conversation::find($message->thread_id);
+                        $conversation = \App\Models\Conversation::find($message->thread_id);
 
                         if ($conversation) {
                             //log::debug("getMessage: found conversation ".$conversation->subject);
@@ -136,7 +135,7 @@ class MessagesController extends Controller
     */    
     public function postDeleteMessage(Request $request, $messageId)
     {
-        if ($message = \App\Message::find($messageId)) {
+        if ($message = \App\Models\Message::find($messageId)) {
             if ($message->markMessageDeleted(Auth::user()->id)) {
                 return response()->json(['success'=>true, 'message'=>"Message deleted", 'message_id' => $messageId]);
             }
@@ -164,6 +163,9 @@ class MessagesController extends Controller
     {
         $data = array();
         $conversation = null;
+        $entry = null;
+        $subject = null;
+
         if ($recipient = User::find($userId)) {
             if ($entryId) {
                 if ($entry = Entry::find($entryId)) {
@@ -215,16 +217,16 @@ class MessagesController extends Controller
                 $conversation = $offer->conversation()->associate($conversation);
 
                 $data['email'] = $send_to_email = $recipient->email;
-                $data['name'] = Auth::user()->getDisplayName();
+                $data['sent_by'] = Auth::user()->getDisplayName();
+                $data['sent_to'] = $recipient->getDisplayName();
                 $data['offer'] = $offer->message;
                 $data['community_name'] = $request->whitelabel_group->name;
                 $data['community_url'] = 'https://'.$request->whitelabel_group->subdomain.'.'.config('app.domain');
-                $data['sent_by_name'] = Auth::user()->getDisplayName();
 
                 if (!empty($request->whitelabel_group->logo)) {
                     if( config('app.debug')) {
                         // this is for testing only
-                        $data['logo'] = public_path().'/assets/img/logos/dummy_share_logo.png';
+                        $data['logo'] = config('app.url').'/assets/img/logos/dummy_share_logo.png';
                     }
                     else {
                         $data['logo'] = public_path()."/assets/uploads/community-logos/".$request->whitelabel_group->id."/".$request->whitelabel_group->logo;
@@ -232,12 +234,22 @@ class MessagesController extends Controller
                 }
 
                 if ($offer->save()) {
-                    Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request) {
-                        $m->to($recipient->email, $recipient->getDisplayName())->subject('New message from '.e($request->whitelabel_group->name));
+                    if (isset($entry)) {
+                        if (Input::get('subject')) {
+                            $subject = e(Input::get('subject')) .' / ';
+                        }
+                        $subject .= $entry->title;
+                    }
+                    else {
+                        $subject = "Message from ".Auth::user()->getDisplayName();
+                    }
+
+                    Mail::send('emails.email-msg', $data, function ($m) use ($recipient, $request, $subject) {
+                        $m->to($recipient->email, $recipient->getDisplayName())->subject($subject);
                     });
 
                     $messageData = ['messageId' => $offer->id,
-                                'displayName' => $data['name'],
+                                'displayName' => $data['sent_by'],
                                'avatar' => Auth::user()->gravatar_img(),
                                 'senderId' => $offer->sent_by,
                                 'createdAt' => date('M j, Y g:ia'),

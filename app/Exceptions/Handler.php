@@ -16,8 +16,11 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        HttpException::class,
-        ModelNotFoundException::class,
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -30,8 +33,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-      \Log::error($e);
-      return parent::report($e);
+        if ($this->shouldReport($e)) {
+            \Log::error($e);
+            return parent::report($e);
+        }
     }
 
     /**

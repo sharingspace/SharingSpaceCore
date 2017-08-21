@@ -195,16 +195,12 @@
 
 <section class="cta">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
-        <div class="row">
-          <div class="col-sm-9 col-xs-12 margin-bottom-0">
-            <h2 class="white-secondary-heading">{{trans('general.make_share_now')}}</h2>
-          </div>
-          <div class="col-sm-3 col-xs-12 margin-bottom-0">
-            <a href="{{ route('community.create.form') }}" class="btn center-xs pull-right-sm size-18 weight-700 font-smoothing" style="background-color:black;color:white">{{ trans('general.nav.start_now') }}</a>
-          </div>
-        </div>
+    <div class="flex-container space-between">
+      <div>
+        <h2 class="white-secondary-heading">{{trans('general.make_share_one_minute')}}</h2>
+      </div>
+      <div>
+        <a href="{{ route('community.create.form') }}" class="btn center-xs  size-18 weight-700 font-smoothing" style="background-color:black;color:white">{{ trans('coop.start') }}</a>
       </div>
     </div>
   </div>
@@ -213,52 +209,6 @@
 @section('moar_scripts')
 
 <script type="text/javascript">
-$( window ).on( "load", function() {
-  // Activate Carousel
-  $("#featureCarousel").carousel();
-
-  // Enable Carousel Indicators
-  $(".item").click(function(){
-    $("#featureCarousel").carousel(1);
-  });
-
-  // Enable Carousel Controls
-  $(".left").click(function(){
-    $("#featureCarousel").carousel("prev");
-  });
-
-  $('.carousel-control').show();
-
-  function equalHeights()
-  {
-    // Select and loop the container element of the elements you want to equalise
-    $('.container').each(function(){  
-      var highestBox = 0;
-
-      // Select and loop the elements you want to equalise
-      $('.carousel-inner .col-xs-12', this).each(function() {
-        // If this box is higher than the cached highest then store it
-        if($(this).height() > highestBox) {
-          highestBox = $(this).height(); 
-        }
-      });  
-        
-      // Set the height of all those children to whichever was highest 
-      $('.carousel-inner .col-xs-12', this).height(highestBox);
-    });
-  }
-
-  if ($(window).width() >= 990) {
-    //equalHeights();
-  }
-
-  $(window).resize(function() {
-    $('.carousel-inner .col-xs-12').height('auto');
-    if ($(window).width() >= 990) {
-      //equalHeights();
-    }
-  });
-});
 
 </script>
 @stop

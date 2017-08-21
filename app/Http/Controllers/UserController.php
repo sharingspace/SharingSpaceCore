@@ -11,12 +11,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use Auth;
 use Input;
 use Redirect;
 use Helper;
-use App\Message;
+use App\Models\Message;
 use Mail;
 use Log;
 
@@ -258,11 +258,16 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function getProfile($id)
+    public function getProfile(Request $request, $id)
     {
+        $isMember = false;
         if ($user = User::findOrFail($id)) {
-            return view('users.view')->with('user', $user);
-        } else {
+            if (!empty($request) && !empty($request->whitelabel_group)) {
+                $isMember = $user->isMemberOfCommunity($request->whitelabel_group);
+            }
+            return view('users.view')->with('user', $user)->with('isMember', $isMember);
+        }
+        else {
             echo 'Invalid user';
         }
     }
@@ -343,16 +348,16 @@ class UserController extends Controller
     */
     public function getJoinCommunity(Request $request)
     {
-        LOG::debug('getJoinCommunity: entered');
+        //LOG::debug('getJoinCommunity: entered');
         if ($request->whitelabel_group->isOpen()) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
                 LOG::debug("getJoinCommunity: joined open share successfully");
-
-                return redirect()->route('home')->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
-            } else {
+                return back()->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
+            }
+            else {
                 LOG::debug("getJoinCommunity: error joining open share");
 
-                return redirect()->route('home')->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
+                return back()->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
             }
         }
         else {

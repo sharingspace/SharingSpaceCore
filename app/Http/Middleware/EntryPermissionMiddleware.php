@@ -26,13 +26,21 @@ class EntryPermissionMiddleware
     public function handle($request, Closure $next)
     {
         // Is user a member of this community, if not they cannot create an entry ?
-        if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
-            LOG::debug('EntryPermissionMiddleware: User is allowed to edit and create enties');
-            return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
+                //log::debug('EntryPermissionMiddleware: User is allowed to edit and create enties');
+
+                return $next($request);
+            }
+            else {
+                //log::debug('EntryPermissionMiddleware: User is not allowed to create enties: '.$request->whitelabel_group->name);
+                
+                return view('request-access')->with('groupName', ucfirst($request->whitelabel_group->name))->withError('You must be a member of this Share to create an entry.');
+            }
         }
         else {
-            LOG::debug('EntryPermissionMiddleware: User is not allowed to create enties: '.$request->whitelabel_group->name);
-            return view('request-access')->with('groupName', ucfirst($request->whitelabel_group->name))->withError('You must be a member of this Share to create an entry.');
+            //log::debug('EntryPermissionMiddleware: User is not logged in');
+            return back()->with('error', 'Profile updated!');
         }
 
         return $next($request);

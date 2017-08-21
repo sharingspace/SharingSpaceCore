@@ -7,34 +7,36 @@
   <div class="row">
     <div class="col-xs-12">
       <h1 class="size-24 text-center">{{ $conversation->subject }}</h1>
-
+        <?php $count = count($conversation->messages)-1; ?>
         @foreach ($conversation->messages as $message)
-          {{--*/
-            $messageId = $message->id;
-            $displayName = $message->sender->getDisplayName();
-            $avatar = $message->sender->gravatar_img();
-            $senderId = $message->sender->id;
-            $createdAt = $message->created_at;
-            $messageText = Helper::parseText($message->message);
-            $readOn = $message->read_on;
-            $community = $message->conversation->community->name;
-          /*--}}
-          @include('./account/message_row')
-      
+          @include('./account/message_row',
+          [
+            'messageId' => $message->id,
+            'displayName' => $message->sender->getDisplayName(),
+            'avatar' => $message->sender->gravatar_img(),
+            'senderId' => $message->sender->id,
+            'createdAt' => $message->created_at,
+            'messageText' => Helper::parseText($message->message),
+            'readOn' => $message->read_on,
+            'community' => $message->conversation->community->name,
+            'count' => $count
+          ])
+        <?php $count--;?>
+
         @endforeach
         
-        {{--*/
-          $rowClass="hidden";
-          $messageId = "id_clone";
-          $displayName = "displayName_clone";
-          $avatar = "avatar_clone";
-          $senderId = "senderId_clone";
-          $createdAt = "createdAt_clone";
-          $messageText = "messageText_clone";
-          $readOn = "";
-          $community = "readOn_clone";
-        /*--}}        
-        @include('./account/message_row') 
+        @include('./account/message_row',
+        [
+          'rowClass' => 'hidden',
+          'messageId' => 'id_clone',
+          'displayName' => 'displayName_clone',
+          'avatar' => 'avatar_clone',
+          'senderId' => 'senderId_clone',
+          'createdAt' => 'createdAt_clone',
+          'messageText' => 'messageText_clone',
+          'readOn' => '',
+          'community' => 'readOn_clone'
+        ]) 
     </div>
 
     <div class="col-xs-12">
@@ -43,7 +45,7 @@
 
         <div class="border-bottom-1 border-top-1 padding-10">
           <span class="pull-right size-11 margin-top-3 text-muted">today</span>
-          <strong>LEAVE A REPLY</strong></a>
+          <strong class="text-uppercase">{{ trans('general.email.reply')}}</strong></a>
         </div>
 
         <form id="offerForm" class="block-review-content">
@@ -67,9 +69,9 @@
             <textarea class="messageText form-control" data-height="200" data-lang="en-US" name="message"></textarea>
           </div>
 
-          <button class="btn btn-3d btn-sm btn-reveal btn-teal">
+          <button class="btn btn-3d btn-sm btn-reveal btn-teal pull-right">
             <i class="fa fa-check"></i>
-            <span>SUBMIT POST</span>
+            <span>{{ trans('general.email.submit')}}</span>
           </button>
         </form>
       </div>
@@ -109,7 +111,7 @@ $(document).ready(function () {
         if (data.success) {
           $('#offerStatusbox').addClass('alert alert-success');
           $('#offerStatusText').html('Success! '+data.message);
-          $('#offerStatusbox').fadeTo(1000, 500).slideUp(500);
+          $('#offerStatusbox').delay(2000).fadeTo(4000, 0);
           $('.messageText').val('');
           var clone = $('.message_id_clone').clone();
           $(clone).clone().insertBefore('.message_id_clone');
@@ -119,6 +121,7 @@ $(document).ready(function () {
           $( message_id +' .sent_by').text(data.messageData['displayName']);
           $( message_id +' .shareName').text(data.messageData['shareName']);
           $( message_id +' .messageText').text(data.messageData['message']);
+          $( message_id +' .createdAt').text(data.messageData['createdAt']);
           $( message_id +' .member_thumb img').attr('src', data.messageData['avatar']);
           $( message_id +' .button_delete').attr('id', 'messageid_'+data.messageData['messageId']);
           $( message_id).removeClass('hidden');
@@ -141,14 +144,12 @@ $(document).ready(function () {
   {
     if('success' == status ) {
       messageHTML ='<div class="alert alert-'+status+' margin-top-0 margin-bottom-6 alert_'+data.message_id+'"><i class="fa margin-right-10 fa-check"></i>'+data.message+'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>';
-      $('.message_'+data.message_id).before(messageHTML);
-      $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);
     }
     else {
       messageHTML ='<div class="alert alert-'+status+' alert-dismissable margin-top-0 margin-bottom-6 alert_'+data.message_id+'"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="fa margin-right-10 fa-exclamation"></i>'+data.message+'</div>';
-      $('.message_'+data.message_id).before(messageHTML);
-      $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);
     }
+    $('.message_'+data.message_id).before(messageHTML);
+    $('.alert_'+data.message_id).fadeTo(2000, 500).slideUp(500);      
   }
 
   function deleteMessage(object)
@@ -171,8 +172,7 @@ $(document).ready(function () {
         displayFlashMessage("warning",replyData);
       }
     }).fail(function (jqxhr,errorStatus) {
-      console.log("message error: "+errorStatus); 
-      //parseAndDisplayError(errorStatus);
+      alert("Sorry, something went wrong: "+errorStatus); 
     });
   }
 

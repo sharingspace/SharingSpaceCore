@@ -1,0 +1,7 @@
+   public function getKioskEntriesView()
+    {
+        return view('kiosk');
+        LOG::debug("getKioskEntriesView entered");
+
+        //return view('kiosk.categories');
+    }

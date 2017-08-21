@@ -84,7 +84,7 @@
 
         <div class="row margin-top-20">
           <div class="col-md-12">
-            {!! trans('auth.already_have_account') !!} <a href="../auth/login">{!! trans('auth.signin_now') !!}</a>
+            {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
           </div>
         </div>
       </div>
@@ -104,19 +104,19 @@
 
               <div class="col-md-8 col-md-offset-2">
 
-                <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/auth/facebook">
+                <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/login/facebook">
                     <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
                 </a>
 
-                <a class="btn btn-block btn-social btn-twitter margin-bottom-10" href="/auth/twitter">
+                <a class="btn btn-block btn-social btn-twitter margin-bottom-10" href="/login/twitter">
                  <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
                 </a>
 
-                <a class="btn btn-block btn-social btn-google margin-bottom-10" href="/auth/google">
+                <a class="btn btn-block btn-social btn-google margin-bottom-10" href="/login/google">
                   <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
                 </a>
 
-                <a class="btn btn-block btn-social btn-github margin-bottom-10" href="/auth/github">
+                <a class="btn btn-block btn-social btn-github margin-bottom-10" href="/login/github">
                    <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
                 </a>
               </div>

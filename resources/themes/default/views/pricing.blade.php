@@ -4,62 +4,71 @@
 
 <section id="pricing">
   <div class="container">
+    <h2>{{trans('pricing.free_vs_paid')}}</h2>
+
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center margin-bottom-20">
-        <p>{{trans('pricing.intro_p1')}}</p>
-        <p>{{trans('pricing.intro_p2')}}</p>
-        <p>{{trans('pricing.intro_p3')}}</p>
-        <p>{!!trans('pricing.intro_p4')!!} <a href="/coop">{!!trans('pricing.intro_p5')!!}</a></p>
-
+      <div class="col-sm-1">
+      </div>
+      <div class="col-sm-5 col-xs-12 margin-bottom-20">
+        <p>{{trans('pricing.free')}}</p>
+      </div>
+      <div class="col-sm-5 col-xs-12 margin-bottom-20">
+        <p>{{trans('pricing.paid')}}</p>
+      </div>
+      <div class="col-sm-1">
       </div>
     </div>
-    <div class="table-layout center-block">
-      <div class="table-cell fixed-width-200">
-        <!-- PERSONAL -->
-        <div class="pricing_header">
-          <h2 class="title">{{trans('pricing.beta_price')}}</h2>
-          <!-- CONTENT -->
-          <div class="content center-block">
-            <p class="price">
-              <sup>{{trans('pricing.currency')}}</sup>
-              <span>{{trans('pricing.cost')}}</span>
-              <sub>{{trans('general.month')}}</sub>
-            </p>
-          </div>
-        </div>
-        <!-- /CONTENT -->
-        <!-- FEATURES -->
-        <ul class="features">
-          <li><i class="fa fa-group" aria-hidden="true"></i><a href="#" data-toggle="tooltip" data-placement="top" title="The maximum number of people in your Share!">{{trans('pricing.max_users')}}</a></li>
-          <li><i class="fa fa-random" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Gift, buy, trade, rent, collaborate, share and more">{{trans('pricing.ways_to_exchange')}}</a></li>
-          <li><i class="fa fa-cog" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Logo, profile, social networks">{{trans('pricing.your_branding')}}</a></li>
-          <li><i class="fa fa-download" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="From csv to an API, you have options">{{trans('pricing.import_export')}}</a></li>
-          <li><i class="fa fa-user-secret" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Public or Private. Secret coming soon">{{trans('pricing.privacy_level')}}</a></li>
-          <li><i class="fa fa-slack" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Slack API">{{trans('general.slack')}}</a></li>
-          <li><i class="fa fa-money" aria-hidden="true"></i><a href="#" data-toggle="tooltip" title="Guarantee of prices staying $10 for your Share">{{trans('pricing.price_security')}}</a></li>
-        </ul>
-        <!-- /FEATURES -->
 
-        <!-- PT-FOOTER -->
-        <div class="pricing-footer">
-          <p class="price">
-            <sup>{{trans('pricing.currency')}}</sup>
-            <span>{{trans('pricing.cost')}}</span>
-            <sub>{{trans('pricing.pay_period')}}</sub>
-            
-          </p>
-
-        </div>
-        <!-- /PT-FOOTER -->
-      </div>
-    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{trans('pricing.feature')}}</th>
+          <th>{{trans('pricing.free_header')}}</th>
+          <th>{{trans('pricing.paid_header')}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{trans('pricing.join_sharing_networks')}}</td>
+          <td>x</td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td>{{trans('pricing.build')}}</td>
+          <td>x</td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td>{{trans('pricing.start')}}</td>
+          <td>-</td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td>{{trans('pricing.customize')}}</td>
+          <td>-</td>
+          <td>x</td>
+        </tr>
+        <tr>
+          <td>{{trans('pricing.price_security')}}</td>
+          <td>-</td>
+          <td>x</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td>{{trans('pricing.free_header')}}</td>
+          <td>{{trans('pricing.currency')}} {{trans('pricing.cost')}} {{trans('pricing.pay_period')}}</td>
+        </tr>       
+      </tfoot>
+    </table>
   </div>
 </section>
 
 <section class="cta">
   <div class="container">
     <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
+      <div class="col-xs-10 col-xs-offset-1">
         <div class="row">
           <div class="col-sm-9 col-xs-12 margin-bottom-0">
             <h2 class="white-secondary-heading">{{trans('general.make_share_now')}}</h2>

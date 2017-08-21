@@ -76,16 +76,12 @@
 <!-- /BUTTON CALLOUT -->
 <section class="cta about_cta">
   <div class="container">
-    <div class="row">
-       <div class="col-xs-10 col-xs-offset-1">
-        <div class="row">
-          <div class="col-sm-9 col-xs-12 margin-bottom-10">
-            <h2 class="white-secondary-heading pull-left margin-bottom-10">{{trans('about.you_can_own')}}</h2>
-          </div>
-          <div class="col-sm-3 col-xs-12 margin-top-10">
-            <a class="text-white bold btn" style="background-color:black" href="{{ route('coop') }}" style="width:100%">{{ trans('about.lets_go') }}</a>
-          </div>
-        </div>
+    <div class="flex-container space-between">
+      <div>
+        <h2 class="white-secondary-heading pull-left margin-bottom-10">{{trans('about.you_can_own')}}</h2>
+      </div>
+      <div>
+        <a class="text-white bold btn" style="background-color:black" href="{{ route('coop') }}" style="width:100%">{{ trans('about.lets_go') }}</a>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Config;
-use App\Community;
+use App\Models\Community;
 use Carbon\Carbon;
 use Log;
 use Route;
@@ -61,7 +61,7 @@ class SubdomainMiddleware
         $subdomain = extract_subdomains($parsed_url['host']);
         $now = Carbon::now();
         if (0) {
-            if ((strpos($request->path(), 'auth/register') !== FALSE) && $subdomain) {
+            if ((strpos($request->path(), 'register') !== FALSE) && $subdomain) {
                 // if someone is registering from a  whitelabel, redirect them to register
                 // on the corporate site. 
                 $url = str_replace($subdomain.".", '', $request->url());

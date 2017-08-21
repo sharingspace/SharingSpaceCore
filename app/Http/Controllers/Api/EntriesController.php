@@ -3,8 +3,8 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Chrisbjr\ApiGuard\Http\Controllers\ApiGuardController;
-use App\Entry;
-use App\Community;
+use App\Models\Entry;
+use App\Models\Community;
 use \App\Http\Transformers\EntriesTransformer;
 
 class EntriesController extends ApiGuardController

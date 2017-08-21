@@ -30,8 +30,6 @@ class Kernel extends HttpKernel
         'web' => [ // THIS IS THE GROUP WE ARE TALKING ABOUT
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
         ],
         'api' => [
@@ -48,11 +46,14 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'subdomain' => \App\Http\Middleware\SubdomainMiddleware::class,
-        'community-auth'=>\App\Http\Middleware\CommunityPermissionMiddleware::class,
-        'member-auth'=>\App\Http\Middleware\MemberPermissionMiddleware::class,
-        'entry-auth'=>\App\Http\Middleware\EntryPermissionMiddleware::class,
+        'community-auth'=> \App\Http\Middleware\CommunityPermissionMiddleware::class,
+        'member-auth'=> \App\Http\Middleware\MemberPermissionMiddleware::class,
+        'entry-auth'=> \App\Http\Middleware\EntryPermissionMiddleware::class,
         'apiguard' => \Chrisbjr\ApiGuard\Http\Middleware\ApiGuard::class,
         'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        'entry-view' => \App\Http\Middleware\EntryView::class,
+        'entry-edit' => \App\Http\Middleware\EntryEdit::class,
+        'entry-browse' => \App\Http\Middleware\EntryBrowse::class,
         'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class
     ];
 }

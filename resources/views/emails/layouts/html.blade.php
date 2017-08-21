@@ -76,10 +76,9 @@
 
       .wrapper {
         box-sizing: border-box;
-        padding: 20px;
+        padding: 10px 20px 20px;
       }
       .header, .footer {
-        background-color:#444;
         clear: both;
         text-align: center;
         width: 100%; 
@@ -234,9 +233,7 @@
   </head>
   <body class="">
     <table border="0" cellpadding="0" cellspacing="0" class="body">
-     
       <tr>
-        <td>&nbsp;</td>
         <td class="container">
           <div class="content">
             <!-- START CENTERED WHITE CONTAINER -->
@@ -272,7 +269,9 @@
                                     </tr>
                                     <tr>
                                       <td class="footer">
-                                        AnyShare Society
+                                        <a href="https://anyshare.coop">
+                                          <img width="100" alt="AnyShare Society" src="https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png">
+                                        </a>
                                       </td>
                                     </tr>
                                   </tbody>
@@ -292,7 +291,6 @@
 
 <!-- END CENTERED WHITE CONTAINER --></div>
         </td>
-        <td>&nbsp;</td>
       </tr>
     </table>
   </body>

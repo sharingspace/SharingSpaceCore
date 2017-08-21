@@ -26,8 +26,9 @@ return [
     'signup_here' => 'Sign-up here ',
     'signup_first' => 'first.',
     'create_account' => 'Create an AnyShare Account',
-    'join_public_shares' => 'Join public Shares for FREE',
+    'join_public_shares' => 'Join public Sharing Networks for FREE',
     'social' => 'Login using a social network',
     'social_signup' => 'Sign up using a social network',
     'agree' => 'I Agree',
+    'must_login' => 'You must be logged in first'
 ];
