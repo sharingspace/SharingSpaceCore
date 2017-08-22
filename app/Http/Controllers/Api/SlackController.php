@@ -157,7 +157,7 @@ class SlackController extends Controller
 
         if ($community->entries()->save($entry)) {
             $entry->exchangeTypes()->sync(\App\Models\ExchangeType::all());
-            //$community->exchangeTypes()->saveMany(\App\ExchangeType::all());
+            //$community->exchangeTypes()->saveMany(\App\Models\ExchangeType::all());
             $message['text'] = 'A new '.strtoupper($entry->post_type).' entry for   <https://'.$community->subdomain.'.'.config('app.domain').'/entry/'.$entry->id.'|'.$entry->title.'> was added to '.$community_slug.'!';
         } else {
             $message['text'] = 'Error ';

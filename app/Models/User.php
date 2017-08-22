@@ -101,7 +101,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function subscriptions()
     {
-        return $this->hasMany('App\CommunitySubscription', 'billable_id');
+        return $this->hasMany('App\Models\CommunitySubscription', 'billable_id');
     }
 
 
@@ -298,7 +298,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function communities()
     {
-        return $this->belongsToMany('\App\Community', 'communities_users', 'user_id', 'community_id')->withPivot('custom_label');
+        return $this->belongsToMany('\App\Models\Community', 'communities_users', 'user_id', 'community_id')->withPivot('custom_label');
     }
 
  
@@ -311,7 +311,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function entries()
     {
-		return $this->hasMany('\App\Entry','created_by');
+		return $this->hasMany('\App\Models\Entry','created_by');
     }
 
 
@@ -342,7 +342,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function getSlackUsername($community)
     {
-        return $this->belongsToMany('App\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
+        return $this->belongsToMany('App\Models\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
     }
 
 
@@ -368,7 +368,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     // a user has many requests
     public function getRequests($community)
     {
-        return $this->hasMany('App\CommunityJoinRequests', 'communities_users', 'community_id', 'user_id');
+        return $this->hasMany('App\Models\CommunityJoinRequests', 'communities_users', 'community_id', 'user_id');
     }
 
 
@@ -403,7 +403,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function conversations()
     {
-        return $this->hasMany('\App\Conversation','started_by');
+        return $this->hasMany('\App\Models\Conversation','started_by');
     }
 
 

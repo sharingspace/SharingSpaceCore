@@ -1,6 +1,6 @@
 <?php
 // SuperAdminSeeder.php
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;

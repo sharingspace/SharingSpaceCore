@@ -11,7 +11,7 @@
 namespace App\Models;
 
 use App\collection;
-use App\ExchangeTypes;
+use App\Models\ExchangeTypes;
 use Config;
 use DateTime;
 use DB;
@@ -87,8 +87,8 @@ class Message extends Model
      */
     public function community()
     {
-        // return $this->hasManyThrough('App\Community','App\Conversation','community_id','id');
-        // return $this->belongsTo('App\Community', 'conversations', 'thread_id', 'community_id');
+        // return $this->hasManyThrough('App\Models\Community','App\Models\Conversation','community_id','id');
+        // return $this->belongsTo('App\Models\Community', 'conversations', 'thread_id', 'community_id');
     }
 
 

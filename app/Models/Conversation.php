@@ -13,7 +13,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\Models\User;
-use App\ExchangeTypes;
+use App\Models\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
