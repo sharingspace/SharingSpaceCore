@@ -15,16 +15,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\CommunitySubscription;
+use App\Models\CommunitySubscription;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cartalyst\Stripe\Billing\Laravel\Billable;
 use Cartalyst\Stripe\Billing\Laravel\BillableContract;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
-use App\Social;
-use App\Message;
-use App\Conversation;
+use App\Models\Social;
+use App\Models\Message;
+use App\Models\Conversation;
 use DB;
 use Log;
 
@@ -114,7 +114,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function social()
     {
-        return $this->hasMany('App\Social', 'user_id');
+        return $this->hasMany('App\Models\Social', 'user_id');
     }
 
 
@@ -416,7 +416,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function messagesTo()
     {
-		return $this->hasMany('\App\Message','sent_to');
+		return $this->hasMany('\App\Models\Message','sent_to');
     }
 
 

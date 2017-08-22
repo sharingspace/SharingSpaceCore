@@ -10,7 +10,7 @@
  */
 namespace App\Models;
 
-use App\collection;
+use App\Collection;
 use App\Illuminate;
 use App\View;
 use Illuminate\Database\Eloquent\Model;

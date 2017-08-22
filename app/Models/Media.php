@@ -13,7 +13,7 @@ namespace App\Models;
 
 use App\App;
 use App\AWS;
-use App\collection;
+use App\Collection;
 use App\Exception;
 use App\Image;
 use App\Input;

@@ -164,7 +164,7 @@ class Message extends Model
     */
     public function messageDeleted($user_id)
     {
-        $message = \App\Message::find($this->id);
+        $message = \App\Models\Message::find($this->id);
         if (!empty($message)) {
 
             if (($user_id == $message->deleted_by_sender) || 

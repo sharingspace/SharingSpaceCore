@@ -10,7 +10,7 @@
  */
 namespace App\Models;
 
-use App\collection;
+use App\Collection;
 use App\Illuminate;
 use App\Models\Media;
 use App\no;
@@ -18,7 +18,7 @@ use App\text;
 use Illuminate\Database\Eloquent\Model;
 use Config;
 use App\Models\User;
-use App\ExchangeTypes;
+use App\Models\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
