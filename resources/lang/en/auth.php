@@ -22,6 +22,7 @@ return [
     'accept_tos' => 'I accept the ',
     'already_have_account' => 'Already have an account?',
     'signin_now' => 'Sign-in now',
+    'signin_to_use' => 'Sign in to use AnyShare',
     'no_account' => 'Need an account?',
     'signup_here' => 'Sign-up here ',
     'signup_first' => 'first.',
@@ -30,5 +31,5 @@ return [
     'social' => 'Login using a social network',
     'social_signup' => 'Sign up using a social network',
     'agree' => 'I Agree',
-    'must_login' => 'You must be logged in first'
+    'must_login' => 'You must be logged in first',
 ];

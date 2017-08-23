@@ -2,146 +2,71 @@
 
 @section('content')
 
-<section id="case_studies">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <h2 class="section-title">{{trans('home.case_studies')}}</h2>
+   <!-- Main container -->
+    <main class="main-content">
 
-        <p>{{trans('home.anyshare_new')}}</p>
-        <div class="row is-flex case_study">
-          <div class="col-xs-4">
-            <a href="https://arcosanti.anyshare.coop/">
-              <img src="{{ Helper::cdn('img/hp/arco_case_study_thumb.jpg') }}">
-            </a>
+      <!--
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      | Feature 5
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      !-->
+      <section class="section p-0" id="section-intro">
+        <div class="container-wide bg-grey">
+          <div class="row no-gap text-center">
+
+            <div class="col-12 col-md-6 p-70">
+              <div style="position: relative;">
+                <div>
+                  <img src="{{ asset('assets/corporate/img/sn-screenshot-fp.jpg')}}" class="shadow-2 rounded" alt="Sharing Networks">
+                </div>
+                <br /><br />
+                <h3>Sharing Networks</h3>
+                <div class="max-300 mx-auto text-center">
+                  <p>Cloud-based solution for sharing within a community or group.</p>
+                </div>
+                <div class="center-vh"><a class="btn btn-sm btn-malibu" href="{{ route('_sharing_networks') }}">Learn More<i class="fa fa-arrow-right fs-12 ml-8"></i></a></div>
+              </div>
+            </div>
+
+
+            <div class="col-12 col-md-6 p-70">
+              <div style="position: relative;">
+                <div>
+                  <img src="{{ asset('assets/corporate/img/ss-screenshot-fp.jpg')}}" class="shadow-2 rounded" alt="Sharing Spaces">
+                </div>
+                <br /><br />
+                <h3>Sharing Spaces</h3>
+                <div class="max-300 mx-auto text-center">
+                  <p>Enhance sharing in physical spaces with smart displays.</p>
+                </div>
+                <center><a class="btn btn-sm btn-malibu" href="{{ route('_sharing_spaces') }}">Learn More<i class="fa fa-arrow-right fs-12 ml-8"></i></a></center>
+            </div>
           </div>
-          <div class="col-xs-8 is-flex flex-col-center">
-            <div>
-              <h3>{{trans('home.case_study_title_1')}}</h3>
-              <p>{{trans('home.case_study_desc_1')}}</p>
-              <p><a href="https://arcosanti.anyshare.coop/" class="btn btn-default btn-sm" role="button">{{trans('home.view_the')}} {{trans('home.case_study_title_1')}} {{trans('home.sharing_network')}}</a></p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="row is-flex case_study">
-        <div class="col-xs-4">
-          <a href="https://sdilna.anyshare.coop/">
-            <img src="{{ Helper::cdn('img/hp/czech_case_study_thumb.jpg') }}">
-          </a>
-      </div>
+      <!--
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      | CTA 4
+      |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+      !-->
 
-      <div class="col-xs-8 is-flex flex-col-center">
-        <div>
-          <h3>{{trans('home.case_study_title_2')}}</h3>
-          <p>{{trans('home.case_study_desc_2')}}</p>
-          <p><a href="https://sdilna.anyshare.coop/" class="btn btn-default btn-sm" role="button">{{trans('home.view_the')}} {{trans('home.case_study_title_2')}} {{trans('home.sharing_network')}}</a></p>
+      <section class="section section-inverse" style="background-image: url({{ asset('assets/corporate/img/signup.png')}})" data-overlay="7">
+        <div class="container">
+          <div class="row gap-y align-items-center">
+            <div class="col-12 col-md-6 text-center text-md-left">
+              <h4 class="mb-0"><center>Start a Sharing Network free for 30 days!</center></h4>
+            </div>
+
+            <div class="col-12 col-md-6 text-center text-md-right">
+              <div class="center-vh"><a class="btn btn-lg btn-malibu" href="{{ route('register') }}">Get Started<i class="fa fa-arrow-right fs-15 ml-8"></i></a></div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="row is-flex case_study">
-      <div class="col-xs-4">
-        <a href="https://fairshares.anyshare.coop/">
-          <img src="{{ Helper::cdn('img/hp/fs_case_study_thumb.jpg') }}">
-        </a>
-      </div>
-      <div class="col-xs-8 is-flex flex-col-center">
-        <div>
-          <h3>{{trans('home.case_study_title_3')}}</h3>
-          <p>{{trans('home.case_study_desc_3')}}</p>
-          <p><a href="https://fairshares.anyshare.coop/" class="btn btn-default btn-sm" role="button">{{trans('home.view_the')}} {{trans('home.case_study_title_3')}} {{trans('home.sharing_network')}}</a></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row is-flex case_study">
-      <div class="col-xs-4">
-        <a href="https://chn.anyshare.coop/">
-          <img src="{{ Helper::cdn('img/hp/chn.jpg') }}">
-          </a>
-        </div>
-      <div class="col-xs-8 is-flex flex-col-center">
-        <div>
-          <h3>{{trans('home.case_study_title_4')}}</h3>
-          <p>{{trans('home.case_study_desc_4')}}</p>
-          <p><a href="https://chn.anyshare.coop/" class="btn btn-default btn-sm" role="button">{{trans('home.view_the')}} {{trans('home.case_study_title_4')}} {{trans('home.sharing_network')}}</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="cta">
-  <div class="container">
-    <div class="flex-container space-between">
-      <div>
-        <h2 class="white-secondary-heading">{{trans('general.make_share_one_minute')}}</h2>
-      </div>
-      <div>
-        <a href="{{ route('community.create.form') }}" class="btn center-xs  size-18 weight-700 font-smoothing" style="background-color:black;color:white">{{ trans('coop.start') }}</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div id="caseStudy2" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ trans('home.case_study_popup_title_2')}}</h4>
-      </div>
-      <div class="modal-body">
-      <img src="{{ Helper::cdn('img/hp/arco_case_study_modal.jpg') }}">
-        <p>{{ trans('home.case_study_popup_2')}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="caseStudy3" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ trans('home.case_study_popup_title_3')}}</h4>
-      </div>
-      <div class="modal-body">
-        <img src="{{ Helper::cdn('img/hp/czech_case_study_modal.png') }}">
-        <p>{{ trans('home.case_study_popup_3')}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="caseStudy1" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ trans('home.case_study_popup_title_1')}}</h4>
-      </div>
-      <div class="modal-body">
-        <img src="{{ Helper::cdn('img/hp/fs_case_study_modal.png') }}">
-        <p>{{ trans('home.case_study_popup_1')}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('general.close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
+ 
 @section('moar_scripts')
 @stop
 
