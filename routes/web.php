@@ -560,14 +560,58 @@ Route::group(
             function () {
                 return view('tos');
             }
-        );
+        )->name('tos');
 
         Route::get(
             'privacy',
-            function () {
-                return view('privacy');
-            }
+            array('as' => 'privacy',
+                function () {
+                    return view('privacy');
+                }
+            )
         );
+
+        Route::get(
+            'sharing_networks',
+            function () {
+                return view('sharing_networks');
+            }
+        )->name('_sharing_networks');
+        
+        Route::get(
+            'how_it_works',
+            function () {
+                return view('how_it_works');
+            }
+        )->name('_how_it_works');
+
+        Route::get(
+            'sharing_spaces',
+            function () {
+                return view('sharing_spaces');
+            }
+        )->name('_sharing_spaces');
+
+        Route::get(
+            'sharing_examples',
+            function () {
+                return view('sharing_examples');
+            }
+        )->name('_sharing_examples');
+
+       Route::get(
+            'sharing_spaces_waitlist',
+            function () {
+                return view('sharing_spaces_waitlist');
+            }
+        )->name('_sharing_spaces_waitlist');
+
+        Route::get(
+            'sharing_examples',
+            function () {
+                return view('sharing_examples');
+            }
+        )->name('_sharing_examples');
 
         Route::get(
             'home',

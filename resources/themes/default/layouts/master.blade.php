@@ -1,130 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <link rel="dns-prefetch" href="//assets.anyshare.coop">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="AnyShare makes it easy to share skills, things, and ideas within any group or community.">
+    <meta name="keywords" content="anyshare, share, sharing, community, group, communities, groups, skills, things, ideas">
 
     <title>
       @section('title')
         {{ trans('general.seo_title')}}
       @show
     </title>
-    <!-- Mobile Specific Metas-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Template info -->
-    <meta name="author" content="A. Gianotto">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css" integrity="sha256-aNI8KR/Gy4Hb87gooy9+CAjWOeVdSA0S5sd9XMmj4Xo=" crossorigin="anonymous" type="text/css" />
-    <link rel="stylesheet" href="{{ Helper::cdn('css/compiled/app.css?v='.date('U')) }}" type="text/css">
-    <link rel="stylesheet" href="{{ Theme::asset('css/styles.css', null, true) }}" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha256-uKEg9s9/RiqVVOIWQ8vq0IIqdJTdnxDMok9XhiqnApU=" crossorigin="anonymous" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" /> 
-    <!-- PAGE LEVEL SCRIPTS -->
-    <link href="{{ Helper::cdn('css/header-1.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- Bootstrap Table style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css" integrity="sha256-lHY6r+cFHp2F/XXDvi4iczsIj7nl0r+CBVFD8KdtFqc=" crossorigin="anonymous" type="text/css" media="screen" />
-
-    <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
-
-    <!-- jQuery 2.2.4-->
-    <script
-        src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
-
-    <script
-      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" integrity="sha256-tQ3x4V2JW+L0ew/P3v2xzL46XDjEWUExFkCDY0Rflqc=" crossorigin="anonymous"></script>
-    
-    <!-- Bootstrap debug, very handy when working on a responsive layouts -->
-    @if( getenv('APP_DEBUG'))
-			<!-- <script src="{{ asset('assets/js/extensions/debug/bootstrap_debugger.js')}}"></script> -->
-    @endif
-  <link rel="shortcut icon" href="/favicon.ico">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
-  <link rel="stylesheet" type="text/css" href="{{ Helper::cdn('css/hp/webflow.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ Helper::cdn('css/hp/anyshare-corp.webflow.css') }}">
-  <!-- David - webFont would not load when "async" added to it -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.26/webfontloader.js" integrity="sha256-+6jNhQy77vjBVW8D4TAIG0HBtnzN9YreZOvtii8vrAM=" crossorigin="anonymous"></script>
-  <script>
-    WebFont.load({
-      google: {
-        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]
+    <!-- Styles -->
+    <link href="{{ asset('assets/corporate/css/core.min.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/corporate/css/thesaas.min.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/corporate/css/style.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
+    <style>
+      .hidden {
+        display: none;
+        visibility: hidden;
       }
-    });
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+      ul.list-inline {
+        list-style: none;
+        margin: 0;
+        padding-left: 3px;
+        float: left;
+        margin-right: 15px;
+        margin-top: 3px;
+      }
+      ul.list-inline .avatar-sm {
+        height: 25px;
+        width: 25px;
+        margin-right: 5px;
+      }
+      ul.list-inline li {
+        float: left;
+      }
+      .topbar-right {
+        float: right;
+      }
+      ul.list-inline .dropdown-toggle::after {
+        content: "\f0d7";
+        margin-right: 10px;
+      }
+      ul.list-inline .caret-down {
+
+      }
+    </style>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{{ Helper::cdn('img/apple-touch-icon.png') }}">
+    <link rel="icon" href="assets/img/favicon.png">
+
+    <!--  Open Graph Tags -->
+    <meta property="og:title" content="AnyShare | The New Way to Share">
+    <meta property="og:description" content="AnyShare makes it easy to share skills, things, and ideas within any group or community.">
+    <!--
+    <meta property="og:image" content="http://thetheme.io/thesaas/assets/img/og-img.jpg">
+    -->
+    <meta property="og:url" content="https://anyshare.coop">
+    <meta name="twitter:card" content="summary_large_image">
   </head>
 
-<body class="smoothscroll enable-animation">
-  <!-- wrapper -->
-		<div id="wrapper" class="default_theme">
+  <body>
+    <!-- Topbar -->
+    <nav class="topbar topbar-inverse topbar-expand-md topbar-sticky">
+      <div class="container">
 
-      @if (Route::is('home'))
-        <div>@include('partials.header', ['bannerHeight' => '700px'])</div>
-      @else
-        <div>@include('partials.header', ['bannerHeight' => '350px'])</div>
-
-        <!-- Notifications -->
-
-        <div class="col-md-12 margin-top-0">
-          @include('notifications')
+        <div class="topbar-left">
+          <button class="topbar-toggler">&#9776;</button>
+          <a class="topbar-brand" href="{{ route('home') }}">
+            <img class="logo-default" src="{{ asset('assets/corporate/img/anyshare-logo-grey.png')}}" alt="AnyShare - Home">
+            <img class="logo-inverse" src="{{ asset('assets/corporate/img/anyshare-logo-white.png')}}" alt="AnyShare - Home">
+          </a>
         </div>
-      @endif
 
-      <div id="content">@yield('content')</div>
-      <div id="footer">@include('partials.footer')</div>
-    </div>
-    <!-- /wrapper -->
+        <div class="topbar-right">
+        @if (Auth::check())
+        <ul class="list-inline">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret-down"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('account.memberships.view') }}"><i class="fa fa-users"></i> {{ trans('general.memberships') }}</a></li>
+              <li><a href="{{ route('user.settings.view') }}"><i class="fa fa-gears"></i> {{ trans('general.nav.settings') }}</a></li>
+              <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
+            </ul>
+          </li>
+        </ul>
+        
+        <button class="drawer-toggler">&#9776;</button>
+        @else
+          <a class="btn btn-xs btn-malibu-outline mr-4" href="{{ route('login') }}">Sign In</a>
+          <a class="btn btn-xs btn-malibu mr-4" href="{{ route('register') }}">Start</a>
+          <button class="drawer-toggler ml-12">&#9776;</button>
+        @endif
+        <!-- /QUICK SHOP CART -->
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          
+        </div>
 
-  ga('create', 'UA-81177317-1', 'auto');
-  ga('send', 'pageview');
+      </div>
+    </nav>
+    <!-- END Topbar -->
 
-</script>
+   <!-- Header -->
+  @if (Route::is('home'))
+      @include('partials.hp_header')
+  @else
+      @include('partials.header')
 
-<script type="text/javascript" src="{{ Helper::cdn('js/webflow.js') }}"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.max_autoplay_movies').css('height', window.innerHeight); 
-    
-   var scroll_start = 30;
-   var startchange = $('#header');
-   var offset = startchange.offset();
-   $(document).scroll(function() { 
-      scroll_start = $(this).scrollTop();
+      <div class="col-md-12 margin-top-0">
+        @include('notifications')
+      </div>
+  @endif
+  <!-- End Header -->
 
-      if(scroll_start > offset.top) {
-          $('#header').css('background-color', 'white');
-          $('#header').removeClass('header_noDropShadow');
-          $('#header').addClass('header_dropShadow');
-       } else {
-          $('#header').css('background-color', 'transparent');
-          $('#header').removeClass('header_dropShadow');
-          $('#header').addClass('header_noDropShadow');
-       }
-   });
-});
-</script>
+  <!-- Main container -->
+  <main class="main-content">
+    @yield('content')
+  </main>
+  <!-- END Main container -->
+  
+  @include('partials.footer')
 
-</body>
+ 
+
+    <!-- Freshdesk js -->
+    <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
+    <script type="text/javascript">
+FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Support&submitThanks=Thank+you+for+your+feedback.+We'll+be+in+touch+soon.", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Help", "buttonColor": "white", "buttonBg": "#686868", "alignment": "2", "offset": "90%", "submitThanks": "Thank you for your feedback. We'll be in touch soon.", "formHeight": "500px", "url": "https://anyshare.freshdesk.com"} );
+    </script>
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-81177317-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+  </body>
+
 </html>

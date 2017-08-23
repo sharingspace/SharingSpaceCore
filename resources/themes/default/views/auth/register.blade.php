@@ -180,17 +180,17 @@
         </ol>
 
         <h2>General Conditions</h2>
-        <p>You must read, agree with and accept all of the terms and conditions contained in these Terms of Service and the <a href="/privacy">Privacy Policy</a> before you may become a member of AnyShare.</p>
+        <p>You must read, agree with and accept all of the terms and conditions contained in these Terms of Service and the <a href="{{ route('privacy') }}">Privacy Policy</a> before you may become a member of AnyShare.</p>
         <ol>
           <li>Technical support is only provided to paying Account holders and is only available via email.</li>
           <li>The Terms of Service shall be governed by and interpreted in accordance with the laws of the State of Delaware and the laws of USA applicable therein, without regard to principles of conflicts of laws. The parties irrevocably and unconditionally submit to the exclusive jurisdiction of the courts of the State of Delaware with respect to any dispute or claim arising out of or in connection with the Terms of Service. The United Nations Convention on Contracts for the International Sale of Goods will not apply to these Terms of Service and is hereby expressly excluded.</li>
-          <li>You acknowledge and agree that AnyShare may amend these Terms of Service at any time by posting the relevant amended and restated Terms of Service on AnyShare’s website, available at <a href="/terms">terms</a> and such amendments to the Terms of Service are effective as of the date of posting. Your continued use of the Services after the amended Terms of Service are posted to AnyShare’s website constitutes your agreement to, and acceptance of, the amended Terms of Service. If you do not agree to any changes to the Terms of Service, do not continue to use the Service.</li>
+          <li>You acknowledge and agree that AnyShare may amend these Terms of Service at any time by posting the relevant amended and restated Terms of Service on AnyShare’s website, available at <a href="{{ route('tos') }}">terms</a> and such amendments to the Terms of Service are effective as of the date of posting. Your continued use of the Services after the amended Terms of Service are posted to AnyShare’s website constitutes your agreement to, and acceptance of, the amended Terms of Service. If you do not agree to any changes to the Terms of Service, do not continue to use the Service.</li>
           <li>You may not use the AnyShare service for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws), the laws applicable to you in your customer’s jurisdiction, or the laws of USA and the State of Delaware. You will comply with all applicable laws, rules and regulations in your use of the Service.</li>
           <li>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without the express written permission by AnyShare.</li>
           <li>You shall not purchase search engine or other pay per click keywords (such as Google AdWords), or domain names that use AnyShare or AnyShare trademarks and/or variations and misspellings thereof.</li>
           <li>Questions about the Terms of Service should be sent to info@anysha.re</li>
           <li>You understand that your Share Content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit Card information is always encrypted during transfer over networks.</li>
-          <li>You acknowledge and agree that your use of the Service, including information transmitted to or stored by AnyShare, is governed by its privacy policy at <a href="/privacy">privacy</a></li>
+          <li>You acknowledge and agree that your use of the Service, including information transmitted to or stored by AnyShare, is governed by its privacy policy at <a href="{{ route('privacy') }}">privacy</a></li>
           <li>The parties have required that the Terms of Service and all documents relating thereto be drawn up in English.</li>
         </ol>
 
@@ -281,7 +281,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" id="terms-agree"><i class="fa fa-check"></i> I Agree</button>
 
-        <a href="page-print-terms.html" target="_blank" rel="nofollow" class="btn btn-danger pull-left">
+        <a href="{{ route('tos') }}" target="_blank" rel="nofollow" class="btn btn-danger pull-left">
           <i class="fa fa-print"></i><span class="hidden-xs"> Print</span>
         </a>
       </div> <!-- /.modal-footer -->

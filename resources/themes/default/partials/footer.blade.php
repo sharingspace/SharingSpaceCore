@@ -1,91 +1,116 @@
+<!-- Footer -->
+<footer class="site-footer bg-inverse">
+  <div class="container">
+    <div class="row gap-y align-items-center">
+      <div class="col-12 col-lg-3">
+        <p class="text-center text-lg-left">
+          <a href="{{ route('home') }}"><img src="{{ asset('assets/corporate/img/logo-mark-inverse.png')}}" alt="logo-mark"></a>
+        </p>
+      </div>
 
-<!-- FOOTER -->
-<footer>
-	<div class="copyright">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-4 col-sm-1 hidden-xs margin-y-10">
-                  <a href="/" class="w-nav-brand">
-                    <img width="20" src="{{ Helper::cdn('img/hp/anyshare-mark.png') }}" class="footer-mark">
-                  </a>
-                <!-- &copy; {{ date("Y") }} {{ trans('footer.rights_reserved') }} -->
-                </div> <!-- col 3 -->
+      <div class="col-12 col-lg-6">
+        <ul class="nav nav-primary nav-hero">
+          <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('coop')}}">Coop</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://anyshare.freshdesk.com/">Support</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('privacy')}}">Privacy</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('tos')}}">Terms</a></li>
+        </ul>
+      </div>
 
-                <div class="col-md-6 col-sm-9 col-xs-12 center-xs margin-y-10">
-                  <ul class="margin-top-1 list-inline mobile-block pull-right-sm">
-                    <li><a href="/about">{{ trans('general.about') }}</a></li>
-                    <!-- <li><a href="http://blog.massmosaic.com">{{ trans('footer.blog') }}</a></li>  -->
-                    <li><a href="/coop">{{ trans('footer.coop') }}</a></li>
-                    <li><a href="https://anyshare.freshdesk.com/support/home">{{ trans('footer.support') }}</a></li>
-                    <li><a href="/terms">{{ trans('general.terms') }}</a></li>
-                    <li><a href="/privacy">{{ trans('general.privacy') }}</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-2 col-sm-2 col-xs-12 center-xs margin-y-4">
-                  <a href="https://www.facebook.com/anyshare.coop/" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Facebook" >
-                    <i class="fa fa-facebook"></i>
-                    <i class="fa fa-facebook"></i>
-                  </a>
-
-                  <a href="https://twitter.com/anyshare_coop" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Twitter">
-                    <i class="fa fa-twitter"></i>
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </div>
-                
-
-      <!-- 
-                  <a href="https://plus.google.com/+Massmosaic/videos" class="social-icon social-icon-sm social-fa fa-sm social-fa fa-transparent social-grayscale pull-md-right pull-lg-right" data-toggle="tooltip" data-placement="top" title="Google plus">
-                    <i class="fa fa-google"></i>
-                    <i class="fa fa-google"></i>
-                  </a>
-                </div> --><!-- col 2 -->
-
-            	</div>
-            </div>
-          </div>
+      <div class="col-12 col-lg-3">
+        <div class="social text-center text-lg-right">
+          <a class="social-facebook" href="https://www.facebook.com/anyshare.coop"><i class="fa fa-facebook"></i></a>
+          <a class="social-twitter" href="https://twitter.com/anyshare_coop"><i class="fa fa-twitter"></i></a>
+          <a class="social-youtube" href="https://www.youtube.com/user/MassMosaic"><i class="fa fa-youtube"></i></a>
+          <a class="social-github" href="https://github.com/anyshare"><i class="fa fa-github"></i></a>
         </div>
       </div>
     </div>
   </div>
 </footer>
-<!-- /FOOTER -->
+<div class="footer-rainbow"></div>
+<!-- END Footer -->
 
-<div id="subscribe" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+   <!-- Drawer -->
+      <div class="drawer">
+        <div class="drawer-content">
+          <ul class="nav nav-primary nav-hero flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_sharing_networks') }}">Sharing Networks</a>
+            </li>
+          </ul>
+          <ul class="nav nav-primary flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_sharing_networks') }}"><i class="fa fa-caret-right"></i> Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_how_it_works') }}"><i class="fa fa-caret-right"></i> How it works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_sharing_examples') }}"><i class="fa fa-caret-right"></i> Examples</a>
+            </li>
+          </ul>
+          <br />
+          <ul class="nav nav-primary nav-hero flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_sharing_spaces') }}">Sharing Spaces</a>
+            </li>
+          </ul>
+          <ul class="nav nav-primary flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_sharing_spaces') }}"><i class="fa fa-caret-right"></i> Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('_sharing_spaces_waitlist') }}"><i class="fa fa-caret-right"></i> Wait List</a>
+            </li>
+          </ul>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{ trans('footer.subscribe') }}</h4>
-      </div>
-      <div class="modal-body">
-        <form class="validate margin-bottom-10" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-            <input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
-            <span class="input-group-btn">
-              <button class="btn btn-success" type="submit">{{ trans('footer.subscribe') }}</button>
-            </span>
+          <br />
+
+          <ul class="nav nav-primary flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('memberships') }}">Memberships</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('about') }}">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('coop') }}">Coop</a>
+            </li>
+          </ul>
+
+          <hr />
+
+          <div class="social social-boxed social-rounded text-center">
+            <a class="social-facebook" href="https://www.facebook.com/anyshare.coop/"><i class="fa fa-facebook"></i></a>
+            <a class="social-twitter" href="https://twitter.com/anyshare_coop"><i class="fa fa-twitter"></i></a>
+            <a class="social-youtube" href="https://www.youtube.com/user/MassMosaic"><i class="fa fa-youtube"></i></a>
+            <a class="social-github" href="https://github.com/anyshare"><i class="fa fa-github"></i></a>
           </div>
-        </form>      
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('footer.modal_close') }}</button>
-      </div>
-    </div>
 
-  </div>
-</div> <!-- subscribe -->
+          <br />
 
+          <div class="row">
+            <div class="col-6">
+              <a class="btn btn-sm btn-block btn-malibu-outline" href="{{ route('login') }}">Sign In</a>
+            </div>
+
+            <div class="col-6">
+              <a class="btn btn-sm btn-block btn-malibu" href="{{ route('register') }}">Sign Up</a>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="drawer-close"></button>
+        <div class="drawer-backdrop"></div>
+      </div>
+      <!-- END Drawer -->
 <!-- JAVASCRIPT FILES -->
-<script type="text/javascript" src="{{ Helper::cdn('js/scripts.js') }}"></script>
+<script src="{{ asset('assets/corporate/js/core.min.js')}}"></script>
+<script src="{{ asset('assets/corporate/js/thesaas.min.js')}}"></script>
+<script src="{{ asset('assets/corporate/js/script.js')}}"></script>
 <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>
-<script type="text/javascript">
-FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Support&submitThanks=Thank+you+for+your+feedback.+We'll+be+in+touch+soon.", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Help", "buttonColor": "white", "buttonBg": "#686868", "alignment": "2", "offset": "90%", "submitThanks": "Thank you for your feedback. We'll be in touch soon.", "formHeight": "500px", "url": "https://anyshare.freshdesk.com"} ); </script>
+
 @yield('moar_scripts')
