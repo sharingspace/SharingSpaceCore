@@ -131,7 +131,7 @@
 FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Support&submitThanks=Thank+you+for+your+feedback.+We'll+be+in+touch+soon.", "utf8": "✓", "widgetType": "popup", "buttonType": "text", "buttonText": "Help", "buttonColor": "white", "buttonBg": "#686868", "alignment": "2", "offset": "90%", "submitThanks": "Thank you for your feedback. We'll be in touch soon.", "formHeight": "500px", "url": "https://anyshare.freshdesk.com"} );
     </script>
 
-    <script>
+    <script type="text/javascript">
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -140,6 +140,11 @@ FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Suppo
         ga('create', 'UA-81177317-1', 'auto');
         ga('send', 'pageview');
     </script>
-  </body>
 
+    <script type="text/javascript">
+    if (window.location.hash && (window.location.hash == '#=')) {
+        window.location.hash = '';
+    }
+    </script>
+  </body>
 </html>
