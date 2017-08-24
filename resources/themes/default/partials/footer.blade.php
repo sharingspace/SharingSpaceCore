@@ -29,84 +29,83 @@
     </div>
   </div>
 </footer>
-<div class="footer-rainbow"></div>
 <!-- END Footer -->
 
-   <!-- Drawer -->
-      <div class="drawer">
-        <div class="drawer-content">
-          <ul class="nav nav-primary nav-hero flex-column">
+<!-- Drawer -->
+<div class="drawer">
+    <div class="drawer-content">
+        <ul class="nav nav-primary nav-hero flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('_sharing_networks') }}">Sharing Networks</a>
+                <a class="nav-link" href="{{ route('_sharing_networks') }}">Sharing Networks</a>
             </li>
-          </ul>
-          <ul class="nav nav-primary flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('_sharing_networks') }}"><i class="fa fa-caret-right"></i> Overview</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('_how_it_works') }}"><i class="fa fa-caret-right"></i> How it works</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('_sharing_examples') }}"><i class="fa fa-caret-right"></i> Examples</a>
-            </li>
-          </ul>
-          <br />
-          <ul class="nav nav-primary nav-hero flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('_sharing_spaces') }}">Sharing Spaces</a>
-            </li>
-          </ul>
-          <ul class="nav nav-primary flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('_sharing_spaces') }}"><i class="fa fa-caret-right"></i> Overview</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('_sharing_spaces_waitlist') }}"><i class="fa fa-caret-right"></i> Wait List</a>
-            </li>
-          </ul>
+        </ul>
 
-          <br />
-
-          <ul class="nav nav-primary flex-column">
+        <ul class="nav nav-primary flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('memberships') }}">Memberships</a>
+                <a class="nav-link" href="{{ route('_sharing_networks') }}"><i class="fa fa-caret-right"></i> Overview</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                <a class="nav-link" href="{{ route('_how_it_works') }}"><i class="fa fa-caret-right"></i> How it works</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('coop') }}">Coop</a>
+                <a class="nav-link" href="{{ route('_sharing_examples') }}"><i class="fa fa-caret-right"></i> Examples</a>
             </li>
-          </ul>
+        </ul>
+        <br />
 
-          <hr />
+        <ul class="nav nav-primary nav-hero flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('_sharing_spaces') }}">Sharing Spaces</a>
+            </li>
+        </ul>
 
-          <div class="social social-boxed social-rounded text-center">
+        <ul class="nav nav-primary flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('_sharing_spaces') }}"><i class="fa fa-caret-right"></i> Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('_sharing_spaces_waitlist') }}"><i class="fa fa-caret-right"></i> Wait List</a>
+            </li>
+        </ul>
+        <br />
+
+        <ul class="nav nav-primary flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('memberships') }}">Memberships</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('about') }}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('coop') }}">Coop</a>
+            </li>
+        </ul>
+        <hr />
+
+        <div class="social social-boxed social-rounded text-center">
             <a class="social-facebook" href="https://www.facebook.com/anyshare.coop/"><i class="fa fa-facebook"></i></a>
             <a class="social-twitter" href="https://twitter.com/anyshare_coop"><i class="fa fa-twitter"></i></a>
             <a class="social-youtube" href="https://www.youtube.com/user/MassMosaic"><i class="fa fa-youtube"></i></a>
             <a class="social-github" href="https://github.com/anyshare"><i class="fa fa-github"></i></a>
-          </div>
-
-          <br />
-
-          <div class="row">
-            <div class="col-6">
-              <a class="btn btn-sm btn-block btn-malibu-outline" href="{{ route('login') }}">Sign In</a>
-            </div>
-
-            <div class="col-6">
-              <a class="btn btn-sm btn-block btn-malibu" href="{{ route('register') }}">Sign Up</a>
-            </div>
-          </div>
-
         </div>
+        <br />
 
-        <button class="drawer-close"></button>
-        <div class="drawer-backdrop"></div>
-      </div>
-      <!-- END Drawer -->
+        <div class="row">
+            <div class="col-6">
+                <a class="btn btn-sm btn-block btn-malibu-outline" href="{{ route('login') }}">Sign In</a>
+            </div>
+
+            <div class="col-6">
+                <a class="btn btn-sm btn-block btn-malibu" href="{{ route('register') }}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="drawer-close"></button>
+    <div class="drawer-backdrop"></div>
+</div>
+<!-- END Drawer -->
+
 <!-- JAVASCRIPT FILES -->
 <script src="{{ asset('assets/corporate/js/core.min.js')}}"></script>
 <script src="{{ asset('assets/corporate/js/thesaas.min.js')}}"></script>

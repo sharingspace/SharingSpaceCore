@@ -98,18 +98,18 @@ Route::group(
             function () {
 
                 Route::get(
-                    'history',
+                    'orders',
                     array(
-                    'as' => 'user.history',
-                    'uses' => 'UserController@getHistory')
-                );
+                        'uses' => 'UserController@getHistory'
+                    )
+                )->name('_orders');
 
                 Route::get(
                     'memberships',
                     array(
-                    'as' => 'account.memberships.view',
-                    'uses' => 'UserController@getCommunityMemberships')
-                );
+                        'uses' => 'UserController@getCommunityMemberships'
+                    )
+                )->name('_memberships');
 
                 Route::get(
                     'leave/{communityId}',
