@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.register') }} :: 
+     {{ trans('general.nav.register') }} ::
 @parent
 @stop
 
@@ -10,9 +10,14 @@
 @section('content')
 
 <!-- -->
-<section>
-  <div class="container margin-top-40">
-    <div class="row">
+<section class="section">
+    <div class="container">
+        <div class="row gap-y">
+
+          <div class="col-12 feature-1">
+              <p class="lead">{!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a></p>
+          </div>
+
       <!-- LOGIN -->
       <div class="col-sm-6 col-xs-12">
         <!-- register form -->
@@ -22,52 +27,53 @@
           <input type="hidden" name="shareName" value="{{$share  or ''}}" />
 
           <header>
-            <i class="fa fa-envelope"></i> {{ trans('general.user.signup_by_email')}}
+            <h3><i class="fa fa-envelope"></i> {{ trans('general.user.signup_by_email')}}</h3>
           </header>
 
           <fieldset class="nomargin">
 
             <div class=" margin-bottom-10{{ $errors->first('display_name', ' has-error') }}">
-              <label class="input">
-                <input type="text" placeholder="{{ trans('general.name') }}" name="display_name" value="{{ old('display_name') }}">
-              </label>
+              <div class="input-group">
+                <input class="form-control form-control-lg" type="text" placeholder="{{ trans('general.name') }}" name="display_name" value="{{ old('display_name') }}">
+                <span class="input-group-addon fa fa-id-card" id="basic-addon2"></span>
+              </div>
               {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
             </div>
-
+            <br />
             <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">
-              <label class="input">
-                <i class="ico-append fa fa-envelope"></i>
-                <input type="text" placeholder="{{ trans('general.email_address') }}" name="email" value="{{ old('email') }}">
+              <div class="input-group">
+                <input class="form-control form-control-lg" type="text" placeholder="{{ trans('general.email_address') }}" name="email" value="{{ old('email') }}">
+                <span class="input-group-addon fa fa-envelope" id="basic-addon2"></span>
                 <b class="tooltip tooltip-bottom-right">{{ trans('general.verify') }}</b>
-              </label>
+              </div>
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
-
+            <br />
             <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
-              <label class="input">
-                <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.password') }}" name="password">
+              <div class="input-group">
+                <input class="form-control form-control-lg" type="password" placeholder="{{ trans('general.password') }}" name="password">
+                <span class="input-group-addon fa fa-lock" id="basic-addon2"></span>
                 <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
-              </label>
+              </div>
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
-
+            <br />
             <div class=" margin-bottom-10{{ $errors->first('password_confirmation', ' has-error') }}">
-              <label class="input">
-                <i class="ico-append fa fa-lock"></i>
-                <input type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
+              <div class="input-group">
+                <input class="form-control form-control-lg" type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
+                <span class="input-group-addon fa fa-lock" id="basic-addon2"></span>
                 <b class="tooltip tooltip-bottom-right">{{ trans('general.latin_chars') }}</b>
-              </label>
+              </div>
               {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
             </div>
 
             <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
               <label class="checkbox nomargin">
-                <input class="checked-agree" type="checkbox" name="terms_and_conditions">
-                <i></i>{!! trans('auth.accept_tos') !!} 
+                <p class="lead"><input class="checked-agree" type="checkbox" name="terms_and_conditions">
+                {!! trans('auth.accept_tos') !!}
                 <a href="#" data-toggle="modal" data-target="#termsModal">
                   {!! trans('general.tos') !!}
-                </a>
+                </a></p>
               </label>
               {!! $errors->first('terms_and_conditions', '<span class="help-block">:message</span>') !!}
             </div>
@@ -75,18 +81,14 @@
 
           <div class="row margin-bottom-20">
             <div class="col-md-12">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.register') }}</button>
+              <button type="submit" class="btn btn-malibu"><i class="fa fa-check"></i> {{ trans('general.nav.register') }}</button>
             </div>
           </div>
 
         </form>
         <!-- /register form -->
 
-        <div class="row margin-top-20">
-          <div class="col-md-12">
-            {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
-          </div>
-        </div>
+
       </div>
       <!-- /LOGIN -->
 
@@ -95,7 +97,7 @@
         <form action="#" method="post" class="sky-form boxed">
 
           <header class="size-18 margin-bottom-20">
-            <i class="fa fa-users"></i> {{ trans('auth.social_signup') }}
+            <h3><i class="fa fa-users"></i> {{ trans('auth.social_signup') }}</h3>
           </header>
 
           <fieldset class="nomargin">
