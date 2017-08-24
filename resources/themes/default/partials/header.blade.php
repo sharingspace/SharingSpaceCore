@@ -35,6 +35,8 @@
           @elseif (Route::is('_sharing_examples'))
             <h1>{!!trans('general.sharing_spaces') !!}</h1>
             <h2>{!!trans('general.sharing_examples') !!}</h2>
+          @elseif (Route::is('_orders'))
+            <h1>{!! trans('general.nav.billing_history') !!}</h1>
           @elseif (Route::is('coop_success'))
           <h1 class="heading">{{ trans('coop.congrats') }}</h1>
           @elseif (Route::is('about'))
