@@ -22,6 +22,10 @@ a {
   color: #74d0f3;
 }
 
+.malibu {
+  color: #74d0f3;
+}
+
 a:hover, a:focus {
   color: #b3b3c9;
 }
@@ -535,7 +539,7 @@ body {
   padding: 15px;
 }
 .sky-form .btn {
-  margin: 10px 0 0 20px;
+  margin: 10px 0 0 15px;
 }
 
 .sky-form .btn:hover {
@@ -705,6 +709,11 @@ body {
   line-height: 27px;
   color: #404040;
   cursor: pointer;
+}
+
+.sky-form select {
+  font-weight: normal;
+  color: #757575;
 }
 
 .nomargin {
