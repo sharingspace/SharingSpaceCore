@@ -120,73 +120,98 @@
 <section class="section">
     <div class="container">
         <div class="row gap-y align-items-center">
+            <div class="col-sm-10 offset-sm-1 col-12">
+                @if ($signedIn)
+                <form method="post" action="#" id="payment-form" enctype="multipart/form-data" class="sky-form boxed">
+                    {!! csrf_field() !!}
+                    <header>
+                        <h2>AnyShare Coop Registration</h2>
+                    </header>
 
-            <form method="post" action="#" id="payment-form" enctype="multipart/form-data">
-                {!! csrf_field() !!}
+                    <fieldset class="nomargin padding-bottom-0">
+                        <label class="input" for="name">Name:
+                            <input data-name="Name" id="name" maxlength="256" name="name" placeholder="Enter your name" type="text">
+                        </label>
 
-                <label class="field" for="name">Name:</label>
-                <input  data-name="Name" id="name" maxlength="256" name="name" placeholder="Enter your name" type="text">
+                        <label class="input" for="email">Email Address:
+                            <input data-name="Email" id="email" maxlength="256" name="email" placeholder="Enter your email address" required="required" type="email">
+                        </label>
 
-                <label class="field" for="email">Email Address:</label>
-                <input data-name="Email" id="email" maxlength="256" name="email" placeholder="Enter your email address" required="required" type="email">
-
-                <div class="form-group">
-                    <label class="field" for="field">Your Interest:</label>
-                    {{Form::select('interest', ['' => 'Pick an interest...',
-                    'General' => 'General', 
-                    'Supporting a good idea' => 'Supporting a good idea',
-                    'Partnerships' => 'Partnerships',
-                    'Equity' => 'Equity',
-                    'Employment' => 'Employment'], null, ['required', 'class' => 'form-control'])}}
-                </div>
-
-                <label class="checkbox">
-                    {{ Form::checkbox('involved', '1', null) }}
-                    <i></i> I'd like to see how I can get involved
-                </label>
-
-                <!-- Error box for payment errors -->
-                <div class="form-group payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
-                </div>
-
-                <div class="form-group" id="form-card-number">
-                    <label for="card-number">Card Number *
-                        <i class="fa fa-cc-visa help-text"></i>
-                        <i class="fa fa-cc-amex"></i>
-                        <i class="fa fa-cc-mastercard"></i>
-                        <i class="fa fa-cc-diners-club"></i>
-                        <i class="fa fa-cc-jcb"></i>
-                        <i class="fa fa-cc-discover"></i>
-                    </label>
-
-                    <input id="card-number" type="text" class="card-number form-control" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value="4242424242424242"' : '') !!} />
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-3 col-sm-12">
-                        <label for="exp_month">{{trans('general.community.month')}} *</label>
-                        <input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
-                    </div>
-
-                    <div class="form-group col-md-3 col-sm-12">
-                        <label for="exp_year">{{ trans('general.community.year') }} *</label>
-                        <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="2016" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
-                    </div>
-
-                    <div class="form-group col-md-3 col-sm-12">
-                        <label for="cvc">{{ trans('general.community.cvc') }} *</label>
-                        <input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
-                    </div>
-
-                    <div class="form-group col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
-                            {{trans('general.community.wrong')}}
+                        <div class="form-group">
+                            <label class="input" for="field">Your Interest:
+                                {{Form::select('interest', ['' => 'Pick an interest...',
+                                'General' => 'General', 
+                                'Supporting a good idea' => 'Supporting a good idea',
+                                'Partnerships' => 'Partnerships',
+                                'Equity' => 'Equity',
+                                'Employment' => 'Employment'], null, ['required', 'class' => 'form-control'])}}
+                            </label>
                         </div>
-                    </div>
 
-                    <input class="submit" id="coop_signup" data-wait="Please wait..." type="submit" value="Join">
-                </div>
-            </form>
+                        <label class="checkbox input">
+                            {{ Form::checkbox('involved', '1', null) }}
+                            <i></i> I'd like to see how I can get involved
+                        </label>
+                    </fieldset>
+
+                    <fieldset class="nomargin padding-bottom-0">
+                        <!-- Error box for payment errors -->
+                        <div class="form-group payment-errors alert alert-mini alert-danger margin-bottom-10" style="display: none; margin-left: 15px;">
+                        </div>
+
+                        <div class="form-group" id="form-card-number">
+                            <label for="card-number">Card Number *
+                                <i class="fa fa-cc-visa help-text"></i>
+                                <i class="fa fa-cc-amex"></i>
+                                <i class="fa fa-cc-mastercard"></i>
+                                <i class="fa fa-cc-diners-club"></i>
+                                <i class="fa fa-cc-jcb"></i>
+                                <i class="fa fa-cc-discover"></i>
+                            </label>
+
+                            <input id="card-number" type="text" class="card-number form-control input" size="20" data-stripe="number" {!! (!App::environment('production') ? ' value="4242424242424242"' : '') !!} />
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="nomargin padding-top-0">
+                        <div class="row">
+                            <div class="form-group col-md-3 col-sm-12">
+                                <label for="exp_month" class="input">{{trans('general.community.month')}} *
+                                    <input id="exp_month" type="text" class="card-expiry-month form-control" placeholder="01" {!! (!App::environment('production') ? ' value="01"' : '') !!} data-stripe="exp-month">
+                                </label>
+                            </div>
+
+                            <div class="col-md-3 col-12">
+                                <label for="exp_year" class="input">{{ trans('general.community.year') }} *
+                                    <input id="exp_year" type="text" class="card-expiry-year form-control" placeholder="2016" {{ (date('Y') + 3) }}" {!! (!App::environment('production') ? ' value="'.(date('Y') + 3).'"' : '') !!} data-stripe="exp-year">
+                                </label>
+                            </div>
+
+                            <div class="col-md-3 col-12">
+                                <label for="cvc" class="input">{{ trans('general.community.cvc') }} *
+                                    <input id="cvc" type="text" class="card-cvc form-control" placeholder="123" {!! (!App::environment('production') ? ' value="123"' : '') !!} data-stripe="cvc" />
+                                </label>
+                            </div>
+
+                            <div class="fcol-lg-8 col-md-8 col-12">
+                                <div class="payment-errors-generic alert alert-mini alert-danger margin-bottom-30" style="display: none">
+                                    {{trans('general.community.wrong')}}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <input class="btn btn-malibu margin-top-0" id="coop_signup" data-wait="Please wait..." type="submit" value="Join">
+
+                    <footer class="form_note">
+                        Note: This is for joining our cooperative. If you'd like to signup for the website, <a href="{{ route('login') }}" class="link">{{ trans('general.click_here') }}</a>.
+                    </footer>
+                </form>
+
+                @else
+                <h3 class="coop-now-heading">To become a Coop Member, please <a href="{{ route('login') }}"  class="malibu">{{ trans('general.nav.login') }} </a> or <a href="{{ route('register') }}" class="malibu">{{ trans('general.nav.register') }} </a> and return here to complete your application.</h3>
+                @endif
+            </div>
         </div>
     </div>
 </section>
