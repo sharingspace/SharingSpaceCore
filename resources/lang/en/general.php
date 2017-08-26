@@ -423,6 +423,8 @@ return [
     ],
   ],
   'page_about' => [
+    'about_us' => 'About Us',
+    'learn_about' => 'Learn about AnyShare Society',
     'product' => '"Sharing Networks" help a group or community exchange.',
   ],
 ];

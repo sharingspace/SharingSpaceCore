@@ -60,7 +60,9 @@
             </div>
 
             <div class="col-12 col-md-6 text-center text-md-right">
-              <div class="center-vh"><a class="btn btn-lg btn-malibu" href="{{ route('register') }}">Get Started<i class="fa fa-arrow-right fs-15 ml-8"></i></a></div>
+              <div class="center-vh">
+                <a class="btn btn-xs btn-malibu margin-left-15" href="{{ route('community.create.form') }}">Get Started<i class="fa fa-arrow-right fs-15 ml-8"></i></a>
+              </div>
             </div>
           </div>
         </div>
