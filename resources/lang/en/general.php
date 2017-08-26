@@ -77,6 +77,7 @@ return [
   'members_resources' => 'All the resources of the members',
   'sign_up' => 'Sign Up',
   'create_account' => 'Create an AnyShare account',
+  'click_here' => 'Click here',
   
   'nav'  => [
     'browse' => 'Browse',

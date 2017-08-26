@@ -16,7 +16,7 @@
       <!-- LOGIN -->
       <div class="col-sm-6 col-xs-12">
         <!-- register form -->
-        <form class="nomargin sky-form boxed" method="post">
+        <form class="sky-form boxed margin-bottom-15" method="post">
           {!! csrf_field() !!}
           <input type="hidden" name="subdomain" id="subdomain" value="{{$subdomain or ''}}" />
           <input type="hidden" name="shareName" value="{{$share  or ''}}" />
@@ -34,7 +34,7 @@
               {!! $errors->first('display_name', '<span class="help-block">:message</span>') !!}
             </div>
 
-            <div class=" margin-bottom-10{{ $errors->first('email', ' has-error') }}">
+            <div class=" margin-bottom-10 {{ $errors->first('email', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-envelope"></i>
                 <input type="text" placeholder="{{ trans('general.email_address') }}" name="email" value="{{ old('email') }}">
@@ -43,7 +43,7 @@
               {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
             </div>
 
-            <div class=" margin-bottom-10{{ $errors->first('password', ' has-error') }}">
+            <div class=" margin-bottom-10 {{ $errors->first('password', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.password') }}" name="password">
@@ -52,7 +52,7 @@
               {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
             </div>
 
-            <div class=" margin-bottom-10{{ $errors->first('password_confirmation', ' has-error') }}">
+            <div class=" margin-bottom-10 {{ $errors->first('password_confirmation', ' has-error') }}">
               <label class="input">
                 <i class="ico-append fa fa-lock"></i>
                 <input type="password" placeholder="{{ trans('general.user.confirm_password') }}"  name="password_confirmation">
@@ -61,8 +61,8 @@
               {!! $errors->first('password_confirmation', '<span class="help-block">:message</span>') !!}
             </div>
 
-            <div class="margin-top-30{{ $errors->first('terms_and_conditions', ' has-error') }}">
-              <label class="checkbox nomargin">
+            <div class="margin-top-15 {{ $errors->first('terms_and_conditions', ' has-error') }}">
+              <label class="checkbox nomargin input">
                 <input class="checked-agree" type="checkbox" name="terms_and_conditions">
                 <i></i>{!! trans('auth.accept_tos') !!} 
                 <a href="#" data-toggle="modal" data-target="#termsModal">
@@ -73,20 +73,19 @@
             </div>
           </fieldset>
 
-          <div class="row margin-bottom-20">
+          <div class="row margin-bottom-10">
             <div class="col-md-12">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ trans('general.nav.register') }}</button>
+              <button type="submit" class="btn btn-malibu"><i class="fa fa-check"></i> {{ trans('general.nav.register') }}</button>
             </div>
           </div>
 
+          <footer>
+              {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
+          </footer>
         </form>
         <!-- /register form -->
 
-        <div class="row margin-top-20">
-          <div class="col-md-12">
-            {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
-          </div>
-        </div>
+
       </div>
       <!-- /LOGIN -->
 
@@ -94,29 +93,26 @@
       <div class="col-sm-6 col-xs-12">
         <form action="#" method="post" class="sky-form boxed">
 
-          <header class="size-18 margin-bottom-20">
+          <header class="size-18">
             <i class="fa fa-users"></i> {{ trans('auth.social_signup') }}
           </header>
 
           <fieldset class="nomargin">
-
             <div class="row">
-
               <div class="col-md-8 col-md-offset-2">
-
-                <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/login/facebook">
+                <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/auth/facebook">
                     <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
                 </a>
 
-                <a class="btn btn-block btn-social btn-twitter margin-bottom-10" href="/login/twitter">
+                <a class="btn btn-block btn-social btn-twitter margin-bottom-10" href="/auth/twitter">
                  <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
                 </a>
 
-                <a class="btn btn-block btn-social btn-google margin-bottom-10" href="/login/google">
+                <a class="btn btn-block btn-social btn-google margin-bottom-10" href="/auth/google">
                   <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
                 </a>
 
-                <a class="btn btn-block btn-social btn-github margin-bottom-10" href="/login/github">
+                <a class="btn btn-block btn-social btn-github margin-bottom-10" href="/auth/github">
                    <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
                 </a>
               </div>
@@ -125,17 +121,15 @@
           </fieldset>
 
           <footer>
-            <!-- {!! trans('auth.already_have_account') !!} -->
+              {!! trans('auth.already_have_account') !!} <a href="{{ route('login') }}">{!! trans('auth.signin_now') !!}</a>
           </footer>
-
         </form>
-
       </div>
       <!-- /SOCIAL LOGIN -->
-
     </div>
   </div>
 </section>
+<!-- / -->
 <!-- / -->
 
 

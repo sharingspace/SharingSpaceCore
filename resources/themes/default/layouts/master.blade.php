@@ -13,6 +13,7 @@
     </title>
 
     <!-- Styles -->
+    <link href="{{ asset('assets/css/reset.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/corporate/css/core.min.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/corporate/css/thesaas.min.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/corporate/css/style.css?v='.date('U')) }}" rel="stylesheet" type="text/css">
