@@ -71,8 +71,10 @@
         <div class="topbar-left">
           <button class="topbar-toggler">&#9776;</button>
           <a class="topbar-brand" href="{{ route('home') }}">
-            <img class="logo-default" src="{{ asset('assets/corporate/img/anyshare-logo-grey.png')}}" alt="AnyShare - Home">
-            <img class="logo-inverse" src="{{ asset('assets/corporate/img/anyshare-logo-white.png')}}" alt="AnyShare - Home">
+            <img class="logo-default hidden-xs-down" src="{{ asset('assets/corporate/img/anyshare-logo-grey.png')}}" alt="AnyShare - Home">
+            <img class="logo-inverse hidden-xs-down" src="{{ asset('assets/corporate/img/anyshare-logo-white.png')}}" alt="AnyShare - Home">
+            <img class="hidden-sm-up" src="{{ asset('assets/corporate/img/anyshare-logo.png')}}" alt="AnyShare - Home">
+
           </a>
         </div>
 
