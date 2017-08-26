@@ -89,12 +89,15 @@
               <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
             </ul>
           </li>
+          <li>
+            <a class="btn btn-xs btn-malibu-outline margin-left-15" href="{{ route('community.create.form') }}">Start</a>
+          </li>
         </ul>
         
         <button class="drawer-toggler">&#9776;</button>
         @else
           <a class="btn btn-xs btn-malibu-outline mr-4" href="{{ route('login') }}">Sign In</a>
-          <a class="btn btn-xs btn-malibu mr-4" href="{{ route('register') }}">Start</a>
+          <a class="btn btn-xs btn-malibu mr-4" href="{{ route('community.create.form') }}">Start</a>
           <button class="drawer-toggler ml-12">&#9776;</button>
         @endif
         <!-- /QUICK SHOP CART -->
