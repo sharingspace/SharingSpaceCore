@@ -58,5 +58,21 @@
 |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
 !-->
 
+<section class="section section-inverse" style="background-image: url({{ asset('assets/corporate/img/signup.png')}}" data-overlay="7">
+    <div class="container">
+        <div class="row gap-y align-items-center">
+            <div class="col-12 col-md-6 text-center text-md-left">
+                <h4 class="mb-0"><center>Start a Sharing Network free for 30 days!</center></h4>
+            </div>
+
+            <div class="col-12 col-md-6 text-center text-md-right">
+                <div class="center-vh">
+                    <a class="btn btn-lg btn-malibu" href="{{ route('register') }}">Get Started<i class="fa fa-arrow-right fs-15 ml-8"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 @stop

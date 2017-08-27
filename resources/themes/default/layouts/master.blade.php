@@ -67,69 +67,61 @@
     <!-- Topbar -->
     <nav class="topbar topbar-inverse topbar-expand-md topbar-sticky">
       <div class="container">
-
         <div class="topbar-left">
           <button class="topbar-toggler">&#9776;</button>
           <a class="topbar-brand" href="{{ route('home') }}">
             <img class="logo-default hidden-xs-down" src="{{ asset('assets/corporate/img/anyshare-logo-grey.png')}}" alt="AnyShare - Home">
             <img class="logo-inverse hidden-xs-down" src="{{ asset('assets/corporate/img/anyshare-logo-white.png')}}" alt="AnyShare - Home">
             <img class="hidden-sm-up" src="{{ asset('assets/corporate/img/anyshare-logo.png')}}" alt="AnyShare - Home">
-
           </a>
         </div>
 
         <div class="topbar-right">
-        @if (Auth::check())
-        <ul class="list-inline">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret-down"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('_memberships') }}"><i class="fa fa-users"></i> {{ trans('general.memberships') }}</a></li>
-              <li><a href="{{ route('_orders') }}"><i class="fa fa-credit-card"></i> {{ trans('general.nav.my_orders') }}</a></li>
-              <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
-            </ul>
-          </li>
-          <li>
-            <a class="btn btn-xs btn-malibu-outline margin-left-15" href="{{ route('community.create.form') }}">Start</a>
-          </li>
-        </ul>
+          @if (Auth::check())
+          <ul class="list-inline">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ Auth::user()->gravatar_img() }}" class="avatar-sm">{{ Auth::user()->getDisplayName() }} <span class="caret-down"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ route('_memberships') }}"><i class="fa fa-users"></i> {{ trans('general.memberships') }}</a></li>
+                <li><a href="{{ route('_orders') }}"><i class="fa fa-credit-card"></i> {{ trans('general.nav.my_orders') }}</a></li>
+                <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }} </a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="btn btn-xs btn-malibu margin-left-15" href="{{ route('community.create.form') }}">Start</a>
+            </li>
+          </ul>
         
-        <button class="drawer-toggler">&#9776;</button>
-        @else
-          <a class="btn btn-xs btn-malibu-outline mr-4" href="{{ route('login') }}">Sign In</a>
-          <a class="btn btn-xs btn-malibu mr-4" href="{{ route('community.create.form') }}">Start</a>
-          <button class="drawer-toggler ml-12">&#9776;</button>
-        @endif
-        <!-- /QUICK SHOP CART -->
-
-          
+          <button class="drawer-toggler">&#9776;</button>
+          @else
+            <a class="btn btn-xs btn-malibu mr-4" href="{{ route('login') }}">Sign In</a>
+            <a class="btn btn-xs btn-malibu mr-4" href="{{ route('community.create.form') }}">Start</a>
+            <button class="drawer-toggler ml-12">&#9776;</button>
+          @endif
+          <!-- /QUICK SHOP CART -->
         </div>
-
       </div>
     </nav>
     <!-- END Topbar -->
 
-   <!-- Header -->
-  @if (Route::is('home'))
+    <!-- Header -->
+    @if (Route::is('home'))
       @include('partials.hp_header')
-  @else
+    @else
       @include('partials.header')
-
       <div class="col-md-12 margin-top-0">
         @include('notifications')
       </div>
-  @endif
-  <!-- End Header -->
+    @endif
+    <!-- End Header -->
 
-  <!-- Main container -->
-  <main class="main-content">
-    @yield('content')
-  </main>
-  <!-- END Main container -->
+    <!-- Main container -->
+    <main class="main-content">
+      @yield('content')
+    </main>
+    <!-- END Main container -->
   
-  @include('partials.footer')
-
- 
+    @include('partials.footer')
 
     <!-- Freshdesk js -->
     <script type="text/javascript" src="https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js"></script>

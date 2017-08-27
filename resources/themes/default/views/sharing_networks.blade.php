@@ -149,7 +149,7 @@
 |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
 !-->
 
-<section class="section section-inverse" style="background-image: url({{ asset('assets/corporate/img/signup.pn')}}" data-overlay="7">
+<section class="section section-inverse" style="background-image: url({{ asset('assets/corporate/img/signup.png')}}" data-overlay="7">
     <div class="container">
         <div class="row gap-y align-items-center">
             <div class="col-12 col-md-6 text-center text-md-left">
