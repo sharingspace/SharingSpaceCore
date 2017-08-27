@@ -172,46 +172,80 @@
         });
       });
 
+      function reportError(msg)
+      {
+        // Show the error in the form:
+        $('.payment-errors').show().text(msg);
+        $('.payment-errors-generic').show();
+
+        // Re-enable the submit button:
+        $('#create_community').prop('disabled', false);
+
+        return false;
+      }
+
       $(function() {
         $('#payment-form').submit(function(event) {
           var $form = $(this);
+          error = false;
 
           // Disable the submit button to prevent repeated clicks
           $('#create_community').prop('disabled', true);
 
-          Stripe.card.createToken({
-          number: $('.card-number').val(),
-          cvc: $('.card-cvc').val(),
-          exp_month: $('.card-expiry-month').val(),
-          exp_year: $('.card-expiry-year').val()
-        }, stripeResponseHandler);
+          // Get the values:
+          var ccNum = $('.card-number').val();
+          var cvcNum = $('.card-cvc').val();
+          var expMonth = $('.card-expiry-month').val();
+          var expYear = $('.card-expiry-year').val();
+
+          // Validate the number:
+          if (!Stripe.card.validateCardNumber(ccNum)) {
+            error = true;
+            reportError('The credit card number appears to be invalid.');
+          }
+
+          // Validate the CVC:
+          if (!Stripe.card.validateCVC(cvcNum)) {
+            error = true;
+            reportError('The CVC number appears to be invalid.');
+          }
+
+          // Validate the expiration:
+          if (!Stripe.card.validateExpiry(expMonth, expYear)) {
+            error = true;
+            reportError('The expiration date appears to be invalid.');
+          }
+
+          if (!error) {
+            Stripe.card.createToken({
+              number: ccNum,
+              cvc: cvcNum,
+              exp_month: expMonth,
+              exp_year: expYear
+            }, stripeResponseHandler);
+          }
 
           // Prevent the form from submitting with the default action
           return false;
         });
       });
 
-      function stripeResponseHandler(status, response) {
-        var $form = $('#payment-form');
-        //console.dir(response);
-
-        if (response.error) {
-          //alert(response.error.message);
-          console.log("stripeResponseHandler: error = "+response.error.message);
-
+      function stripeResponseHandler(status, response)
+      {
+        if (response.error || (status != 200)) {
           // Show the errors on the form
-          $('.payment-errors').show().text(response.error.message);
-          $('.payment-errors-generic').show();
-          $('#create_community').prop('disabled', false);
+          reportError(response.error.message);
         }
         else {
+          // Get a reference to the form:
+          var f = $('#payment-form');
+
           // response contains id and card, which contains additional card details
           var token = response.id;
-          // Insert the token into the form so it gets submitted to the server
-          $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-          console.log("stripeResponseHandler: token = "+$('<input type="hidden" name="stripeToken" />').val(token));
-          // and submit
-          $form.get(0).submit();
+
+          // Add the token to the form and submit
+          f.append($('<input type="hidden" name="stripeToken" />').val(token));
+          f.get(0).submit();
         }
       };
       </script>

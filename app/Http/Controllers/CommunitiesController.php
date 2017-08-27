@@ -199,16 +199,15 @@ class CommunitiesController extends Controller
     public function postCreate(Request $request)
     {
         $token = $request->input('stripeToken');
-
+        
         // No stripe token - something went wrong :(
         if (!isset($token)) {
             return Redirect::back()->withInput()->with('error',
                 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
         log::debug("postCreate: token = ".$token);
-        
-        $community = new Community();
 
+        $community = new Community();
         $community->name = e($request->input('name'));
         $community->subdomain = strtolower(e($request->input('subdomain')));
         $community->group_type = e($request->input('group_type'));
@@ -220,16 +219,14 @@ class CommunitiesController extends Controller
 
         $customer = Auth::user();
         $metadata = array(
-            //'name' => $customer->name,
-            //'subdomain' => strtolower(e(Input::get('subdomain'))).config('session.domain'),
-            //'email' => $customer->email,
-            //'hub_name' => e(Input::get('name')),
+            'name' => $customer->name,
+            'subdomain' => strtolower(e(Input::get('subdomain'))).config('session.domain'),
+            'email' => $customer->email,
+            'hub_name' => e(Input::get('name')),
         );
-
 
         if ($customer->stripe_id == '') {
             // Create the Stripe customer
-
             $customer->createStripeCustomer(
                 [
                     'email'       => $customer->email,
