@@ -61,6 +61,12 @@
     -->
     <meta property="og:url" content="https://anyshare.coop">
     <meta name="twitter:card" content="summary_large_image">
+
+    <script type="text/javascript">
+    if (window.location.hash && (window.location.hash == '#=')) {
+        window.location.hash = '';
+    }
+    </script>
   </head>
 
   <body>
@@ -145,12 +151,6 @@ FreshWidget.init("", {"queryString": "&widgetType=popup&formTitle=Help+%26+Suppo
 
         ga('create', 'UA-81177317-1', 'auto');
         ga('send', 'pageview');
-    </script>
-
-    <script type="text/javascript">
-    if (window.location.hash && (window.location.hash == '#=')) {
-        window.location.hash = '';
-    }
     </script>
   </body>
 </html>
