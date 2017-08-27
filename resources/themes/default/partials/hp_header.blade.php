@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="center-h">
-                    <a class="btn btn-lg btn-malibu" href="#" data-scrollto="section-intro">Start</a>
+                    <a class="btn btn-xs btn-malibu margin-left-15" href="{{ route('community.create.form') }}">Start</a>
                 </div>
             </div>
 

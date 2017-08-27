@@ -40,8 +40,8 @@
           @elseif (Route::is('coop_success'))
           <h1 class="heading">{{ trans('coop.congrats') }}</h1>
           @elseif (Route::is('about'))
-          <h1>Sign In</h1>
-          <h2>Sign in to use AnyShare</h2><br />
+          <h1>{{ trans('general.page_about.about_us')}}</h1>
+          <h2>{{ trans('general.page_about.learn_about')}}</h2>
           @elseif (Route::is('product'))
           <h1 class="heading">{{ trans('general.nav.features')}}</h1>
           <h2 class="subheading">{{ trans('general.page_about.product')}}</h2>
