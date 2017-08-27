@@ -205,7 +205,8 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->with('error',
                 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
-
+        log::debug("postCreate: token = ".$token);
+        
         $community = new Community();
 
         $community->name = e($request->input('name'));
