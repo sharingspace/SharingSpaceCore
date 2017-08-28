@@ -16,7 +16,7 @@
           <h1>{{trans('general.sign_up') }}</h1>
           <h2>{{trans('general.create_account') }}</h2>
           @elseif (Route::is('community.create.form'))
-            <h1 class="heading">{!!trans('general.start_share') !!}</h1>
+            <h1>{!!trans('general.start_share') !!}</h1>
           @elseif (Route::is('coop'))
             <h1>Our Cooperative</h1>
             <h2>Everyone shares in AnyShare's Success!</h2>
