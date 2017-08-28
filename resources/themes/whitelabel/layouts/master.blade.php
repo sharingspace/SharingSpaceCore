@@ -66,7 +66,11 @@
         }
     });
     </script>
-
+    <script type="text/javascript">
+    if (window.location.hash && (window.location.hash == '#=')) {
+        window.location.hash = '';
+    }
+    </script>
     <!-- Bootstrap 3 Javascript is pulled in through the scripts.js file - no need to include it here -->
     <link rel="shortcut icon" href="/favicon.ico">
   </head>
@@ -104,12 +108,6 @@
   @endif
   ga('send', 'pageview');
 
-</script>
-
-<script type="text/javascript">
-if (window.location.hash && (window.location.hash == '#=')) {
-    window.location.hash = '';
-}
 </script>
 </body>
 </html>
