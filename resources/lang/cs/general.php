@@ -299,7 +299,6 @@ return [
       'card_num' => 'Číslo karty',
       'cvc' => 'CVC',
       'coupon' => 'Kupón',
-      'have_coupon' => 'Mám kód z kupónu',
       'coupon_code' => 'Kód z kupónu',
       'edit_hub' => 'UPRAVIT SKUPINU',
       'basic' => 'Základy',
