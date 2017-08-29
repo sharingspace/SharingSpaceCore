@@ -113,14 +113,9 @@
                   </label>
                 </div>
 
-                <div class="form-group col-md-3 col-sm-6 col-12 margin-bottom-5" id="coupon_question" style="cursor: pointer; ">
-                  <span style="display:block;">{{trans('general.community.coupon')}} <i class="fa fa-ticket"></i></span>
-                </div>
-
-                <!-- Coupon -->
-                <div class="form-group col-md-3 col-sm-6 col-12" id="coupon_field" style="display:none;">
-                  <label for="coupon" class="sr-only">{{trans('general.community.coupon_code')}}
-                    <input type="text" class="form-control col-md-6 col-sm-6" placeholder="" name="coupon"/>
+                <div class="form-group col-md-3 col-sm-6 col-12">
+                  <label for="coupon" class="input">{{trans('general.community.coupon')}} <i class="fa fa-ticket"></i>
+                    <input type="text" class="form-control" placeholder="" name="coupon"/>
                   </label>
                 </div>
 
@@ -130,8 +125,8 @@
                   </div>
                 </div>
 
-                <div class="form-group col-sm-4 col-12 margin-top-10">
-                  <button type="submit" class="btn btn-primary pull-right" id="create_community">{{trans('general.community.start_trial')}}</button>
+                <div class="form-group col-sm-4 col-12">
+                  <button type="submit" class="btn btn-malibu pull-right" id="create_community">{{trans('general.community.start_trial')}}</button>
                 </div>
               </div>
             </div>
@@ -163,13 +158,6 @@
         var subdomain= $('input[name="subdomain"]').val();
         subdomain = subdomain.toLowerCase().replace(/ /g, '-');
         $('input[name="subdomain"]').val(subdomain);
-      });
-
-
-      $(function() {
-        $("#coupon_question").click(function () {
-            $("#coupon_field").animate({opacity: 'toggle'}, 'fast');
-        });
       });
 
       function reportError(msg)

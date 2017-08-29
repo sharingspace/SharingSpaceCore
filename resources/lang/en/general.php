@@ -335,8 +335,6 @@ return [
     'card_num' => 'Card Number',
     'cvc' => 'CVC',
     'coupon' => 'Coupon',
-    'have_coupon' => 'I have a coupon code',
-    'coupon_code' => 'Coupon Code',
     'edit_hub' => 'Edit Sharing Network',
     'basic' => 'Basic',
     'images' => 'Images',
