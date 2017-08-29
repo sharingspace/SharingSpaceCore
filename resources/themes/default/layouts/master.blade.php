@@ -100,7 +100,7 @@
         
           <button class="drawer-toggler">&#9776;</button>
           @else
-            <a class="btn btn-xs btn-malibu mr-4" href="{{ route('login') }}">Sign In</a>
+            <a class="btn btn-xs btn-malibu-outline mr-4" href="{{ route('login') }}">Sign In</a>
             <a class="btn btn-xs btn-malibu mr-4" href="{{ route('community.create.form') }}">Start</a>
             <button class="drawer-toggler ml-12">&#9776;</button>
           @endif
