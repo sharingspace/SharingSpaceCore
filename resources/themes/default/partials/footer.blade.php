@@ -2,13 +2,13 @@
 <footer class="site-footer bg-inverse">
   <div class="container">
     <div class="row gap-y align-items-center">
-      <div class="col-12 col-lg-3">
+      <div class="col-md-2 hidden-sm-down">
         <p class="text-center text-lg-left">
           <a href="{{ route('home') }}"><img src="{{ asset('assets/corporate/img/logo-mark-inverse.png')}}" alt="logo-mark"></a>
         </p>
       </div>
 
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-md-7">
         <ul class="nav nav-primary nav-hero">
           <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('coop')}}">Coop</a></li>
@@ -18,7 +18,7 @@
         </ul>
       </div>
 
-      <div class="col-12 col-lg-3">
+      <div class="col-md-3 hidden-sm-down">
         <div class="social text-center text-lg-right">
           <a class="social-facebook" href="https://www.facebook.com/anyshare.coop"><i class="fa fa-facebook"></i></a>
           <a class="social-twitter" href="https://twitter.com/anyshare_coop"><i class="fa fa-twitter"></i></a>

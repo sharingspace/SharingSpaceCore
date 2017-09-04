@@ -14,7 +14,7 @@
   <div class="container margin-top-40">
     <div class="row">
       <!-- LOGIN -->
-      <div class="col-sm-6 col-xs-12">
+      <div class="col-sm-6 col-12">
         <!-- register form -->
         <form class="sky-form boxed margin-bottom-15" method="post">
           {!! csrf_field() !!}
@@ -84,10 +84,9 @@
           </footer>
         </form>
         <!-- /register form -->
-
-
       </div>
       <!-- /LOGIN -->
+
 
       <!-- SOCIAL LOGIN -->
       <div class="col-sm-6 col-xs-12">
@@ -98,26 +97,21 @@
           </header>
 
           <fieldset class="nomargin">
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2">
-                <a class="btn btn-block btn-social btn-facebook margin-bottom-10" href="/login/facebook">
-                    <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
-                </a>
+            <a class="btn btn-block btn-social btn-facebook margin-bottom-10 margin-left-0" href="/login/facebook">
+                <i class="fa fa-facebook"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Facebook']) }}
+            </a>
 
-                <a class="btn btn-block btn-social btn-twitter margin-bottom-10" href="/login/twitter">
-                 <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
-                </a>
+            <a class="btn btn-block btn-social btn-twitter margin-bottom-10 margin-left-0" href="/login/twitter">
+             <i class="fa fa-twitter"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Twitter']) }}
+            </a>
 
-                <a class="btn btn-block btn-social btn-google margin-bottom-10" href="/login/google">
-                  <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
-                </a>
+            <a class="btn btn-block btn-social btn-google margin-bottom-10 margin-left-0" href="/login/google">
+              <i class="fa fa-google"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Google']) }}
+            </a>
 
-                <a class="btn btn-block btn-social btn-github margin-bottom-10" href="/login/github">
-                   <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
-                </a>
-              </div>
-            </div>
-
+            <a class="btn btn-block btn-social btn-github margin-bottom-10 margin-left-0" href="/login/github">
+               <i class="fa fa-github"></i> {{ trans('auth.sign_in_with',  ['social_network' => 'Github']) }}
+            </a>
           </fieldset>
 
           <footer>
