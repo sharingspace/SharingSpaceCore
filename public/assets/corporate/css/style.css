@@ -2,6 +2,24 @@ body {
   color: #667;
 }
 
+@media (min-width: 650px) {
+  .container {
+    width: 620px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+      width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 960px;
+  }
+}
+
 .text-primary {
   color: #667 !important;
 }
@@ -65,6 +83,17 @@ a:hover, a:focus {
   max-width: 100%;
 }
 
+@media (max-width: 991px) {
+  .site-footer .nav-primary > li.nav-item {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .nav-hero .nav-link {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 768px) {
 
   .thesaas-sections-split .section {
@@ -99,6 +128,10 @@ a:hover, a:focus {
     flex-wrap: wrap;
   }
 
+  .site-footer .nav-primary > li.nav-item {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
 }
 
 @media (max-width: 575px) {
@@ -118,21 +151,23 @@ a:hover, a:focus {
     padding-right: 0px;
   }
 
+  .nav-hero .nav-link {
+    font-size: 12px;
+  }  
+
   .partner-coop {
     display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
-            align-items: center;
+    align-items: center;
     -webkit-box-pack: center;
-            justify-content: center;
+    justify-content: center;
     text-align: center;
     flex-wrap: wrap;
   }
-
 }
 
 @media (max-width: 400px) {
-
   .h1, h1 {
     font-size: 1.8rem;
     font-weight: 350;
@@ -153,20 +188,19 @@ a:hover, a:focus {
   }
 
   .nav-hero .nav-link {
-    font-size: 9px;
-}
+    font-size: 10px;
+  }
 
-.partner-coop {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-          justify-content: center;
-  text-align: center;
-  flex-wrap: wrap;
-}
-
+  .partner-coop {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+  }
 }
 
 
@@ -533,6 +567,36 @@ body {
   padding: 10px 20px;
   font-size: 20px;
   font-weight: 400;
+}
+
+@media (min-width: 576px) {
+  .sky-form header {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 630px) {
+  .sky-form header {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 776px) {
+  .sky-form header {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 776px) {
+  .sky-form header {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .sky-form header {
+    font-size: 1.2rem;
+  }
 }
 
 .sky-form.boxed fieldset {
@@ -2113,7 +2177,7 @@ body {
   font-family: Arial, sans-serif;
   text-transform: none;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .btn-social > :first-child {
@@ -2133,6 +2197,23 @@ body {
   height: 40px;
 }
 
+@media (min-width: 576px) {
+  .btn-social {
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-social {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 991px) {
+  .btn-social {
+    font-size: 14px;
+  }
+}
 
 .btn-github {
   color: #fff;

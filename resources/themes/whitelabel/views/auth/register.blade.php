@@ -14,7 +14,7 @@
   <div class="container margin-top-40">
     <div class="row">
       <!-- LOGIN -->
-      <div class="col-md-6 col-sm-6">
+      <div class="col-xs-12 col-sm-6">
         @if (isset($shareSignup))
         <p class="size-20">To join this Share please create an account.<br>{{trans('auth.already_have_account')}} <a href="{{ route('login') }}">{{ trans('auth.signin_now')}}</a></p>
         @endif
