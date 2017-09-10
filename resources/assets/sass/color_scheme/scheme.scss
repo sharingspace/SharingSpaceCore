@@ -69,16 +69,14 @@ p, td {
   display: block;
 }
 
-.want_square {
+.want_square, .want_color {
   background-color: lighten($accentColor, 20%);
   border: 1px solid darken($accentColor, 15%);
 }
 
-.have_square {
+.have_square, .have_color {
   background-color: darken($accentColor, 15%);
 }
-
-
 
 #topBar {
   background-color: $darkPrimaryColor;
@@ -114,6 +112,7 @@ p, td {
   li.active > a {
     opacity: 1;
   }
+  
   button {
     @if $coloredEntryButton == 1 {
       background-color: darken($accentColor, 10%);

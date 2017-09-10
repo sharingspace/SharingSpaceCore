@@ -4,7 +4,7 @@ Welcome to {{$community_name}}
 
 Hi {{ $name }}!
 
-Your new Share is ready! Use the link below to finalize your Share settings.
+Your new Sharing Network is ready! Click the link below to configure your Sharing Network.
 
 {{ $subdomain }}.{{ config('app.domain') }}
 

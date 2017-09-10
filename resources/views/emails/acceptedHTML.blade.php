@@ -11,7 +11,7 @@
 
 @section('content')
     <p>Hi {{$name}}!</p>
-    <p>You just joined the {{$uc_subdomain}} Share.</p>
+    <p>You just joined the Sharing Network {{$uc_subdomain}}.</p>
     <p>Visit <a class="hub_link" href="https://{{$subdomain}}.{{ config('app.domain') }}">{{$subdomain}}.{{ config('app.domain') }}</a> to get started!</p>
     <p>Sincerely,</p>
     <p>AnyShare Society</p>
