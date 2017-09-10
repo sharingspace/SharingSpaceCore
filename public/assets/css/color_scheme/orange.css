@@ -66,12 +66,14 @@ td {
   display: block;
 }
 
-.want_square {
+.want_square,
+.want_color {
   background-color: #f5c9c9;
   border: 1px solid #d93232;
 }
 
-.have_square {
+.have_square,
+.have_color {
   background-color: #d93232;
 }
 

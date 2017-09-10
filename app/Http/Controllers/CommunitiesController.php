@@ -234,6 +234,12 @@ class CommunitiesController extends Controller
                     'metadata'    => $metadata,
                 ]
             );
+
+            log::debug("postCreate: customer did not exist, new id = ".$customer->stripe_id);
+
+        }
+        else {
+            log::debug("postCreate: customer does exist ".$customer->stripe_id);
         }
 
         $data['name'] = $customer->getDisplayName();
