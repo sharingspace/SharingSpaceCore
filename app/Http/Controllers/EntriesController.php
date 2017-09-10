@@ -646,6 +646,9 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
+        // eventually the default maybe an admin setting 
+        $gridView = true;
+
         if ($user_id) {
             if (Auth::user() && (Auth::user()->id == $user_id)) {
                 // allow user to their hidden entries
@@ -737,51 +740,68 @@ class EntriesController extends Controller
             if ($image) {
                 $imageTag = '<a href="' . route('entry.view',
                         $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
+                $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $image->filename;
+                $url = url('/');
+                $aspect_ratio = 1;
+                $parsed = parse_url($url); // analyse the URL
+                if (isset($parsed['scheme']) && strtolower($parsed['scheme']) == 'https') {
+                    // If it is https, change it to http
+                    $url = 'http://'.substr($url,8);
+                    list($width, $height) = getimagesize($url.$image_url);
+                    $aspect_ratio = round($width/(float)$height,1);
+                }
+
             }
             else {
                 $imageTag = '<a href="' . route('entry.view',
                         $entry->id) . '" class="' . $entry->post_type . '_square"></a>';
+                $image_url = null;
+                $aspect_ratio = 0;
             }
 
             if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
                 $rows[] = array(
                     'image'     => $imageTag,
+                    'image_url' => $image_url,
                     'post_type' => strtoupper($entry->post_type) . $completed,
-                    'title'     => '<a href="' . route('entry.view', $entry->id) . '">' . $entry->title . '</a>',
-                    'author'    => '<img src="' . $entry->author->gravatar_img() . '" class="avatar-sm hidden-xs">'
-                        . '<a href="' . route('user.profile', $entry->author->id) . '">'
-                        . $entry->author->getDisplayName() . '</a>'
-                        . (($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) ?
-                            ' <span class="label label-primary">'
-                            . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
-                            . '</span>' : ''),
-
+                    'title_link'     => '<a href="' . route('entry.view', $entry->id) . '">' . $entry->title . '</a>',
+                    'title' => $entry->title,
+                    'author_image'    => '<img src="' . $entry->author->gravatar_img() . '" class="avatar-sm hidden-xs">',
                     'location'      => $entry->location,
                     'created_at'    => $entry->created_at->format('M jS, Y'),
                     'actions'       => $actions,
                     'tags'          => $entry->tags,
                     'exchangeTypes' => implode(', ', $exchangeTypes),
+                    'display_name' => $entry->author->getDisplayName(),
+                    'natural_post_type'    => ($entry->post_type == 'want') ? 'wants' : 'has',
+                    'aspect_ratio' => $aspect_ratio,
+                    'author_name' => '<a href="' . route('user.profile', $entry->author->id) . '">'
+                        . $entry->author->getDisplayName() . '</a>'
+                        . (($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) ?
+                            ' <span class="label label-primary">'
+                            . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
+                            . '</span>' : '')
                 );
             }
             else {
                 // we have an entry who doesn't belong to this community - something went very wrong
                 $rows[] = array(
                     'image'         => '-',
+                    'image-url'     => '-',
                     'post_type'     => '-',
-                    'title'         => '-',
+                    'title_link'    => $entry->id,
                     'author'        => '-',
                     'location'      => '-',
                     'created_at'    => '-',
                     'actions'       => '-',
                     'tags'          => '-',
                     'exchangeTypes' => '-',
+                    'aspect_ratio' => $aspect_ratio
                 );
             }
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
-
-        return $data;
+        return array('total' => $count, 'rows' => $rows, 'gridView' => $gridView);
     }
 
 
