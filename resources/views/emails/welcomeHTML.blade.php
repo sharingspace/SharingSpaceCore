@@ -11,7 +11,7 @@
     <div class="email_content">
         <p>Hi {{ $name }}!</p>
 
-        <p>Your new Share is ready! Click the link below to finalize your Share settings.</p>
+        <p>Your new Sharing Network is ready! Click the link below to configure your Sharing Network.</p>
 
         <p><a href="https://{{ $subdomain }}.{{ config('app.domain') }}">{{ $subdomain }}.{{ config('app.domain') }}</a></p>
 
