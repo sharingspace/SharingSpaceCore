@@ -11395,25 +11395,6 @@ form #domain_input .anyshare_url {
   padding-left: 5px;
 }
 
-.grid-item {
-  float: left;
-  height: 60px;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-}
-
-/* fluid 5 columns */
-
-.grid-sizer,
-.grid-item {
-  width: 20%;
-}
-
-/* 2 columns */
-
-.grid-item--width2 {
-  width: 40%;
-}
-
 /* ---- grid ---- */
 
 .grid {
@@ -11439,33 +11420,61 @@ form #domain_input .anyshare_url {
   width: 120px;
   height: 120px;
   float: left;
-  background: #eee;
-  border: 1px solid #333;
   border-radius: 7px;
   background-size: cover;
   margin-bottom: 5px;
   position: relative;
 }
 
-#entry_browse_grid .grid-item h3 {
-  font-size: 12px;
+#entry_browse_grid .grid-item:hover {
+  cursor: pointer;
+}
+
+#entry_browse_grid .grid-item div {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+#entry_browse_grid .grid-item div h3 {
+  text-align: center;
+  font-size: 14px;
   font-weight: bold;
   padding: 5px;
   text-align: center;
-  position: absolute;
   width: 100%;
-  bottom: 0;
   margin: 0;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
   border-bottom: none;
   border-left: none;
   border-right: none;
 }
 
-#entry_browse_grid .grid-item h3,
-#entry_browse_grid .grid-item h3 > a {
+#entry_browse_grid .grid-item div h3,
+#entry_browse_grid .grid-item div h3 > a {
   color: #fff !important;
+}
+
+#entry_browse_grid .grid-item div.noImage {
+  height: 100%;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+#entry_browse_grid .grid-item div.noImage > h3 {
+  border: none;
+}
+
+#entry_browse_grid .grid-item div.withImage {
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+#entry_browse_grid .grid-item div.withImage > h3 {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 #entry_browse_grid .grid-item img {
@@ -11498,14 +11507,20 @@ form #domain_input .anyshare_url {
   height: 360px;
 }
 
-#gridView,
-#listView,
 #entry_browse_table {
   display: none;
 }
 
+.fa-list:hover,
+.fa-th:hover {
+  cursor: pointer;
+}
+
 .fa-disabled {
-  opacity: 0.6;
+  opacity: 0.3;
+}
+
+.fa-disabled:hover {
   cursor: not-allowed;
 }
 
@@ -11583,7 +11598,7 @@ form #domain_input .anyshare_url {
 
 #isotope-search {
   display: none;
-  width: 150px;
+  width: 30%;
   border-width: 1px;
   height: 33px;
 }

@@ -69,12 +69,13 @@ td {
 .want_square,
 .want_color {
   background-color: #baa49c;
-  border: 1px solid #604b43;
+  border: 1px solid #af968d;
 }
 
 .have_square,
 .have_color {
-  background-color: #604b43;
+  background-color: #7e6258;
+  border: 1px solid #6f574e;
 }
 
 #topBar {
