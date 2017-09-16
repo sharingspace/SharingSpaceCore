@@ -42,7 +42,7 @@
 </section>
 
 <div id="kiosk_footer">
-  <a href="{{route('kiosk.categories', ['tag' => $category])}}" class="margin-bottom-40 margin-left-30">
+  <a href="{{route('_kiosk_categories', ['tag' => $category])}}" class="margin-bottom-40 margin-left-30">
     <img src="/assets/img/kiosk/back_arrow.png" alt="go up a level">
   </a>
   <p>{{trans('footer.powered_by')}} <a href="{{config('app.url')}}"><img src="{{ Helper::cdn('img/hp/anyshare-logo-web-retina-100.png') }}" class="logo"></a></p>

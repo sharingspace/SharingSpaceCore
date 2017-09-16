@@ -349,19 +349,17 @@ Route::group(
                     'kiosk/{tagName?}',
                     array(
                         'middleware' => ['community-auth'],
-                        'as' => 'kiosk.categories',
                         'uses' => 'EntriesController@getKioskEntries'
                     )
-                );
+                )->name('_kiosk_categories');
 
                 Route::get(
-                    'kiosk/entry/{entryId}',
+                    'kiosk/kiosk_entry/{entryId}',
                     array(
                         'middleware' => ['entry-view'],
-                        'as' => 'kiosk_entry',
                         'uses' => 'EntriesController@getEntry'
                     )
-                );
+                )->name('_kiosk_entry');
 
                 Route::get(
                     '{entryID}',

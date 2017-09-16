@@ -21,10 +21,9 @@ class EntryView
     public function handle($request, Closure $next)
     {
         // check that the entry exists
-        $entry = \App\Models\Entry::find($request->entryID);
+        $entry = \App\Models\Entry::find($request->entryId);
         if (!$entry) {
             $request->session()->flash('error', trans('general.entries.messages.invalid'));
-
             return response(view('home'));
         }
 
@@ -36,19 +35,13 @@ class EntryView
                 return back();
             }
             else if (Auth::user()->isMemberOfCommunity($request->whitelabel_group)) {
-                //log::debug('EntryView: User is logged in and a member');
-
                 return $next($request);
             }
             else {
-                //log::debug('EntryView: User is not logged in and this is not an Open Share');
-
                 $request->session()->flash('error', trans('general.entries.messages.view_not_allowed_join'));
                 return back();
             }
         }                
-
-        //log::debug('EntryView Middleware: entry can be viewed');
 
         return $next($request);
     }
