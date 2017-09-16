@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('general.nav.browse') }} ::
+    {{ trans('general.nav.browse') }} ::
 @parent
 @stop
 
@@ -11,10 +11,10 @@
 
 
 <section class="container padding-top-0">
-    <h1 class="margin-bottom-0 size-20 text-center">{{trans('general.entries.browse_entries')}}</h1>
+    <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
     <div class="pull-left margin-y-0">
-        <i class="fa fa-2x fa-list margin-right-10" aria-hidden="true" title="list view" id="listView"></i>
-        <i class="fa fa-2x fa-th" aria-hidden="true" title="grid view" id="gridView"></i>
+        <i class="fa fa-2x fa-list margin-right-10" title="list view" id="listView"></i>
+        <i class="fa fa-2x fa-th" title="grid view" id="gridView"></i>
     </div>
 </section>
 
@@ -101,13 +101,6 @@ $(document).ready(function() {
 
     function masonryInit()
     {
-        //$('#entry_browse_grid').masonry({
-        //    itemSelector: '.grid-item',
-        //    isAnimated: true,
-        //    columnWidth: 160,
-        //    gutter: 5,
-        //    fitWidth: true
-        //});
         GRID = $('#entry_browse_grid').isotope({
             // options
             itemSelector: '.grid-item',
@@ -186,25 +179,13 @@ $(document).ready(function() {
             author_name = data['rows'][i]['author_name'];
             author_image = data['rows'][i]['author_image'];
             posted_by = " <span class='posted_by'>"+data['rows'][i]['display_name']+"</span> ";
-            post_type = " <span class='post_type'>"+natural_post_type+"</span>:<br> ";
-            title_link = data['rows'][i]['title_link'];
+            post_type = " <span class='post_type'>"+natural_post_type+"</span> ";
+            entry_id = data['rows'][i]['entry_id'];
             title = " <span class='title'>"+data['rows'][i]['title']+"</span> ";
 
-            if( i > 3) {
-                title = " <span class='title'>shit</span>";
-            }
-            else {
-                title = " <span class='title'>crap</span>";
-            }
-
-            contents = "<h3 class='"+postType.toLowerCase()+'_color'+"'> " + posted_by + author_name + post_type + title_link + title +"</h3>";
             if (data['rows'][i]['image_url']) {
                 ratio = data['rows'][i]['aspect_ratio'];
-                if (ratio > 0.5 && ratio < 1.5) {
-                    // image is roughly square, stick it in a 2x2 box
-                    $(item).addClass('grid-item--width2 grid-item--height2');
-                }
-                else if (ratio > 1.5) {
+                if (ratio > 1.5) {
                     // image is roughly landscape, stick it in a 2x1 box
                     $(item).addClass('grid-item--width2');
                 }
@@ -212,9 +193,22 @@ $(document).ready(function() {
                     // image is roughly landscape, stick it in a 2x1 box
                     $(item).addClass('grid-item--height2');
                 }
+                else {
+                    // image is roughly square, stick it in a 2x2 box
+                    $(item).addClass('grid-item--width2 grid-item--height2');
+                }
+                 
                 $(item).css("background-image", 'url('+data['rows'][i]['image_url']+')');
+                imageClass = "withImage";
             }
-            $(item).addClass(postType.toLowerCase());
+            else {
+                imageClass = "noImage";
+            }
+
+            contents = "<div class='"+imageClass+"'><h3  class='"+postType.toLowerCase()+"_color'> " + posted_by + post_type + title +"</h3></div>";
+
+            $(item).addClass(postType.toLowerCase()+'_color');
+            $(item).attr('id', 'entry-'+ entry_id);
             $(item).html(contents);
         }
         masonryInit();
@@ -234,13 +228,14 @@ $(document).ready(function() {
                     masonryLayout(data);
                     $('#isotope-sort').show();
                     $('#isotope-search').show();
-                    $('#listView').show();
+                    $('#gridView').addClass("fa-disabled");
+                    entryClick();
                     GRID_LOADED = true;
                 }
                 else {
                     tableLayout();
                     $('#entry_browse_table').show();
-                    $('#gridView').show();
+                    $('#listView').addClass("fa-disabled");
                     LIST_LOADED = true;
                 }
             },
@@ -315,8 +310,8 @@ $(document).ready(function() {
         $('.bootstrap-table').show();
         $('#entry_browse_table').show();
         $('#entry_browse_grid').hide();
-        $("#listView").hide();
-        $("#gridView").show();
+        $("#listView").addClass("fa-disabled");
+        $("#gridView").removeClass("fa-disabled");
         $('#isotope-sort').hide();
         $('#isotope-search').hide();
     });
@@ -330,8 +325,8 @@ $(document).ready(function() {
         $('#entry_browse_table').hide();
         $('.bootstrap-table').hide();
         $('#entry_browse_grid').show();
-        $("#gridView").hide();
-        $("#listView").show();
+        $("#gridView").addClass("fa-disabled");
+        $("#listView").removeClass("fa-disabled");
         $('#isotope-sort').show();
         $('#isotope-search').show();
     });
@@ -348,7 +343,15 @@ $(document).ready(function() {
         var sortName = $(this).val();
         $('#entry_browse_grid').isotope({ sortBy : sortName });
         return false;
-    }); 
+    });
+
+    function entryClick()
+    {
+        $('.grid-item').on('click', function() {
+            var id = $(this).attr('id').split('-')[1];
+            window.open('/entry/'+id,'_self');
+        });
+    }
 });
 
 </script>
