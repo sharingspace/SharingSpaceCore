@@ -362,7 +362,7 @@ Route::group(
                 )->name('_kiosk_entry');
 
                 Route::get(
-                    '{entryID}',
+                    '{entryId}',
                     array(
                         'middleware' => ['entry-view'],
                         'as' => 'entry.view',
