@@ -44,7 +44,7 @@ class EntriesController extends Controller
 
     public function getEntry(Request $request, $entryID)
     {
-        //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>".Route::currentRouteName());
+        //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>> ".Route::currentRouteName()."  ".$entryID);
         if ($entry = \App\Models\Entry::find($entryID)) {
             if ($request->user()) {
                 // user logged in
@@ -64,7 +64,7 @@ class EntriesController extends Controller
                 ->where('entry_id', '=', $entryID)
                 ->get();
 
-            if ("kiosk_entry" == Route::currentRouteName()) {
+            if ("_kiosk_entry" == Route::currentRouteName()) {
                 $type = ($entry->post_type == 'want') ? 'wants' : 'has';
 
                 $tagArray = explode(',', $entry->tags);
@@ -76,7 +76,7 @@ class EntriesController extends Controller
                         $category = $tag;
                     }
                 }
-                return view('kiosk.entry')->with('entry', $entry)->with('images', $images)->with('natural_type',
+                return view('kiosk.kiosk_entry')->with('entry', $entry)->with('images', $images)->with('natural_type',
                     $type)->with('category', $category);
             }
             else {
@@ -819,11 +819,9 @@ class EntriesController extends Controller
         $entries = array();
         $added = array();
 
-        //$tagList = ["Art", "Ecology", "Skills", "Learning Opportunities",
-        //  "Community Resources", "Meet a Resident", "Free", "Upcycle Projects", "Dreams"];
-
         if ($tagName) {
             $entries = Entry::TagSearch($tagName)->get();
+            $tagArray[] = $tagName;
         }
         else {
             $entries = $request->whitelabel_group->entries()->where('visible', 1)->whereNotNull('tags')->where('tags',
@@ -831,12 +829,13 @@ class EntriesController extends Controller
             $entries = $entries->unique('tags');
         }
 
-        $count = $entries->count();
         $i = 0;
-
         foreach ($entries as $entry) {
             // create an array from our comma separated string
-            $tagArray = explode(',', $entry->tags);
+            if (!$tagName){
+                $tagArray = explode(',', $entry->tags);
+            }
+
             foreach ($tagArray as $tag) {
                 $tag = trim($tag);
 
@@ -878,12 +877,12 @@ class EntriesController extends Controller
                     }
                 }
             }
-        }
 
-        // sort them by tag name
-        usort($entryList, function ($a, $b) {
-            return strnatcmp($a['tag'], $b['tag']);
-        });
+            // sort them by tag name
+            usort($entryList, function ($a, $b) {
+                return strnatcmp($a['tag'], $b['tag']);
+            });
+        }
 
         if ($tagName) {
             return view('kiosk.category_entries', ['entryList' => $entryList, 'tag' => $tagName]);
