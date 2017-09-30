@@ -9,12 +9,17 @@
 {{-- Page content --}}
 @section('content')
 
-
 <section class="container padding-top-0">
     <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
-    <div class="pull-left margin-y-0">
-        <i class="fa fa-2x fa-list margin-right-10" title="list view" id="listView"></i>
-        <i class="fa fa-2x fa-th" title="grid view" id="gridView"></i>
+    <div class="row margin-y-0">
+        <div class="col-sm-10 col-xs-8">
+            <input id="entry-search" class="form-control" type="text" placeholder="&nbsp;&#xF002; Search" onfocus="this.placeholder=''" onblur="this.placeholder='&nbsp;&#xF002; Search'" >
+        </div>
+
+        <div class="col-sm-2 col-xs-4">
+            <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
+            <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
+        </div>
     </div>
 </section>
 
@@ -26,13 +31,12 @@
         data-sort-name="created_at"
         data-sort-order="desc"
         data-cookie="true"
-        data-url="{{ route('json.browse') }}"
         data-cookie-id-table="communityListingv1-{{ $whitelabel_group->id }}">
         <thead>
             <tr>
                 <th data-sortable="false" data-field="image">{{ trans('general.members.image')}}</th>
                 <th data-sortable="true" data-field="post_type">{{ trans('general.type') }}</th>
-                <th data-sortable="true" data-field="title_link">{{ trans('general.entry') }}</th>
+                <th data-sortable="true" data-field="title">{{ trans('general.entry') }}</th>
                 <th class="hidden-xs" data-sortable="true" data-field="display_name">{{ trans('general.entries.posted_by') }}</th>
                 <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
                 <th data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
@@ -46,22 +50,10 @@
 </section>
 
 <section class="container margin-y-0 padding-0">
-    <div class="margin-y-0 clearfix">
-        <ul id="isotope-sort" class="pull-right">
-            <li><a href="#post_type">Post type <i class="fa fa-sort" aria-hidden="true"></i></a></li>
-            <li><a href="#posted_by">Posted by <i class="fa fa-sort" aria-hidden="true"></i></a></li>
-            <li><a href="#title">Title <i class="fa fa-sort" aria-hidden="true"></i></a></li>
-        </ul>
-        <input id="isotope-search" class="form-control pull-left" type="text" placeholder="Search">
-    </div>
-
     <div id="entry_browse_grid" class="grid">
         <div class="grid-item clone hidden"></div>
     </div>
 </section>
-
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
@@ -120,32 +112,54 @@ $(document).ready(function() {
             }
         });
 
+        // unbind any previously attached handlers
+        $("#entry-search").unbind();
+
         // use value of search field to filter
-        var $quicksearch = $('#isotope-search').keyup( debounce( function() {
+        var $quicksearch = $('#entry-search').keyup( debounce( function() {
             qsRegex = new RegExp( $quicksearch.val(), 'gi' );
             GRID.isotope();
         }, 200 ) );
     }
 
-    function tableLayout()
+    function tableSearch()
+    {
+        var filter, td;
+        filter = $('#entry-search').val().toUpperCase();
+        rowCount = $("#entry_browse_table tr").length;
+
+        if (rowCount){
+            // Loop through all table rows, and hide those who don't match the search query
+            $("#entry_browse_table tr td:nth-child(3)").each(function(i, td) {
+                if ($(td).text().toUpperCase().indexOf(filter) > -1) {
+                    $(td).parent().show();
+                }
+                else {
+                    $(td).parent().hide();
+                }
+            });
+        }
+    }
+
+    function tableLayout(data)
     {
         // Note I did have it that this function was being passed in the data so I didn't have to do a seperate
         // ajax call for list and grid, however for sorting this bootstrap library does a fresh ajax call
         // with the serach parameters and I haven't how to work around this yet.
         $('#entry_browse_table').bootstrapTable({
-                //data: data.rows,
+                data: data.rows,
                 classes: 'table table-responsive table-no-bordered',
                 undefinedText: '',
                 iconsPrefix: 'fa',
-                showRefresh: true,
-                search: true,
+                showRefresh: false,
+                search: false,
                 pageSize: 100,
                 pagination: true,
                 sidePagination: 'server',
-                sortable: true,
+                sortable: false,
                 mobileResponsive: true,
-                showExport: true,
-                showColumns: true,
+                showExport: false,
+                showColumns: false,
                 exportDataType: 'all',
                 exportTypes: ['csv', 'txt','json', 'xml'],
                 maintainSelected: true,
@@ -165,6 +179,14 @@ $(document).ready(function() {
                 export: 'fa-download'
             }
         });
+
+        // unbind any previously attached handlers
+        $("#entry-search").unbind();
+
+         // use value of search field to filter
+        $('#entry-search').keyup( debounce( function() {
+            tableSearch();
+        }, 200));
     }
 
     function masonryLayout(data)
@@ -214,6 +236,7 @@ $(document).ready(function() {
         masonryInit();
     }
 
+
     function getEntries(entries)
     {
         $.ajax({
@@ -226,14 +249,12 @@ $(document).ready(function() {
                 entryRows = data;
                 if (data['gridView']) {
                     masonryLayout(data);
-                    $('#isotope-sort').show();
-                    $('#isotope-search').show();
                     $('#gridView').addClass("fa-disabled");
                     entryClick();
                     GRID_LOADED = true;
                 }
                 else {
-                    tableLayout();
+                    tableLayout(entryRows);
                     $('#entry_browse_table').show();
                     $('#listView').addClass("fa-disabled");
                     LIST_LOADED = true;
@@ -264,7 +285,7 @@ $(document).ready(function() {
                 $('.remove_'+entryID).remove();
                 // display error message
                 $('div.ajax_success .fa-check').after('&nbsp;<strong>Success: </strong>'+replyData.message);
-                $('div.ajax_success').removeClass('hidden');//.delay(5000).fadeOut();
+                $('div.ajax_success').removeClass('hidden');
             }
             else {
                 // display error message
@@ -276,10 +297,6 @@ $(document).ready(function() {
 
     // for some reason the columns and refresh have their tooltips added automatically
     $('.export > button').attr('title','Download data as');
-
-    $('#entry_browse_table').on('load-success.bs.table', function () {
-        $('.pull-right.search').removeClass('pull-right').addClass('pull-left'); 
-    });
 
     // we off screen the table headers as they are obvious.
     $('table').on( "click", '[id^=delete_entry_]', function() {
@@ -302,33 +319,48 @@ $(document).ready(function() {
     });
 
     $("#listView").click(function() {
+        $('#entry_browse_table').hide();
         if (!LIST_LOADED) {
             // load up list view if we haven't before
-            tableLayout();
+            tableLayout(entryRows);
             LIST_LOADED = true;
         }
-        $('.bootstrap-table').show();
-        $('#entry_browse_table').show();
-        $('#entry_browse_grid').hide();
+
+        // unbind any previously attached handlers
+        $("#entry-search").unbind();
+
+         // use value of search field to filter
+        $('#entry-search').keyup( debounce( function() {
+            tableSearch();
+        }, 200));
+
+        $('#entry-search').keyup();
         $("#listView").addClass("fa-disabled");
         $("#gridView").removeClass("fa-disabled");
-        $('#isotope-sort').hide();
-        $('#isotope-search').hide();
-    });
+        $('#entry_browse_grid').hide();
+        $('#entry_browse_table').show();
+   });
 
     $("#gridView").click(function() {
         if (!GRID_LOADED) {
             // load up grid view if we haven't before
             masonryLayout(entryRows);
-            GRID_LOADED = true;
         }
-        $('#entry_browse_table').hide();
-        $('.bootstrap-table').hide();
-        $('#entry_browse_grid').show();
+
+        // unbind any previously attached handlers
+        $("#entry-search").unbind();
+
+        // use value of search field to filter
+        var $quicksearch = $('#entry-search').keyup( debounce( function() {
+            qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+            GRID.isotope();
+        }, 200 ) );
+
+        $('#entry-search').keyup();
         $("#gridView").addClass("fa-disabled");
         $("#listView").removeClass("fa-disabled");
-        $('#isotope-sort').show();
-        $('#isotope-search').show();
+        $('#entry_browse_table').hide();
+        $('#entry_browse_grid').show();
     });
 
     $('#isotope-sort a').click(function(){
@@ -355,5 +387,4 @@ $(document).ready(function() {
 });
 
 </script>
-
 @stop

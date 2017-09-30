@@ -3,28 +3,28 @@
 
 ::-moz-selection {
   color: #fff;
-  background-color: #8d6e63;
+  background-color: #6E5747;
 }
 
 ::selection {
   color: #fff;
-  background-color: #8d6e63;
+  background-color: #6E5747;
 }
 
 ::-moz-selection {
   color: #fff;
   /* Firefox */
-  background-color: #8d6e63;
+  background-color: #6E5747;
 }
 
 ::-webkit-selection {
   color: #fff;
   /* Safari */
-  background-color: #8d6e63;
+  background-color: #6E5747;
 }
 
 .primary {
-  color: #9e9e9e;
+  color: #A29B89;
 }
 
 .primaryText {
@@ -32,11 +32,11 @@
 }
 
 .light-primary {
-  color: #c9c9c9;
+  color: #c8c4b9;
 }
 
 .darkPrimaryColor {
-  color: #737373;
+  color: #77705e;
 }
 
 h1,
@@ -68,31 +68,31 @@ td {
 
 .want_square,
 .want_color {
-  background-color: #baa49c;
-  border: 1px solid #af968d;
+  background-color: #a68975;
+  border: 1px solid #9c7c66;
 }
 
 .have_square,
 .have_color {
-  background-color: #7e6258;
-  border: 1px solid #6f574e;
+  background-color: #5f4b3d;
+  border: 1px solid #4f3e33;
 }
 
 #topBar {
-  background-color: #8c8c8c;
+  background-color: #928a75;
 }
 
 #topBar ul.dropdown-menu {
   /* submenu border top color */
-  border-top-color: #9e9e9e;
+  border-top-color: #A29B89;
 }
 
 #topBar .notifications-popdown-wrapper .unread a {
-  color: #8d6e63 !important;
+  color: #6E5747 !important;
 }
 
 #topBar .notifications-popdown-wrapper .unread a:hover {
-  color: #72919c !important;
+  color: #91a8b8 !important;
 }
 
 #topBar ul.top-links > li > a {
@@ -104,7 +104,7 @@ td {
 }
 
 #topNav {
-  background-color: #9e9e9e;
+  background-color: #A29B89;
 }
 
 #topNav li > a {
@@ -131,7 +131,7 @@ td {
 }
 
 #topNav a.logo {
-  color: #8d6e63;
+  color: #6E5747;
 }
 
 #topNav a.logo:hover {
@@ -142,7 +142,7 @@ td {
 #share_content .btn-default,
 #aboutModal a,
 #aboutModal .btn-default {
-  color: #8d6e63 !important;
+  color: #6E5747 !important;
 }
 
 #share_content a.btn-social,
@@ -156,7 +156,7 @@ td {
 #share_content .btn-default:hover,
 #aboutModal a:hover,
 #aboutModal .btn-default:hover {
-  color: #72919c !important;
+  color: #91a8b8 !important;
 }
 
 #share_content .btn.focus,
@@ -166,42 +166,42 @@ td {
 #aboutModal .btn:focus,
 #aboutModal .btn:hover {
   background-color: #fff !important;
-  color: #8d6e63 !important;
+  color: #6E5747 !important;
   text-decoration: none;
 }
 
 #share_content .btn-colored,
 #aboutModal .btn-colored {
-  background-color: #8d6e63 !important;
-  border-color: #453631;
+  background-color: #6E5747 !important;
+  border-color: #241c17;
   color: #fff !important;
 }
 
 #share_content .btn-colored:hover,
 #aboutModal .btn-colored:hover {
   background-color: #fff !important;
-  color: #8d6e63 !important;
-  border: 1px solid #453631;
+  color: #6E5747 !important;
+  border: 1px solid #241c17;
   text-decoration: none;
 }
 
 #share_content .btn-light-colored,
 #aboutModal .btn-light-colored {
-  background-color: #a98e84;
-  border-color: #8d6e63;
+  background-color: #93745f;
+  border-color: #6E5747;
   color: #fff !important;
 }
 
 #share_content .btn-dark-colored,
 #aboutModal .btn-dark-colored {
-  background-color: #69524a;
-  border-color: #453631;
+  background-color: #493a2f;
+  border-color: #241c17;
   color: #fff !important;
 }
 
 #share_content #entry_view .close,
 #aboutModal #entry_view .close {
-  color: #8d6e63;
+  color: #6E5747;
 }
 
 #share_content .pagination > .active > a,
@@ -216,7 +216,18 @@ td {
 #aboutModal .pagination > .active > span,
 #aboutModal .pagination > .active > span:focus,
 #aboutModal .pagination > .active > span:hover {
-  background-color: #8d6e63;
-  border-color: #604b43;
+  background-color: #6E5747;
+  border-color: #403229;
   color: #fff !important;
+}
+
+.sort-icon {
+  color: #6E5747;
+  background-color: #cebeb3;
+  border: 1px solid #a68975;
+}
+
+.sort-icon:hover {
+  background-color: #c2aea0;
+  color: #4f3e33;
 }

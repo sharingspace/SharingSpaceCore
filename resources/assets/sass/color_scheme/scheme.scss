@@ -184,8 +184,6 @@ p, td {
     }
   }
 
-
-
   .pagination>.active>a, 
   .pagination>.active>a:focus,
   .pagination>.active>a:hover,
@@ -195,5 +193,15 @@ p, td {
     background-color: $accentColor;
     border-color: darken($accentColor, 15%);
     color: $white !important;
+  }
+}
+
+.sort-icon {
+  color: $accentColor;
+  background-color: lighten($accentColor, 40%);  
+  border: 1px solid lighten($accentColor, 20%);
+  &:hover {
+    background-color: lighten($accentColor, 34%);
+    color: darken($accentColor, 10%);
   }
 }

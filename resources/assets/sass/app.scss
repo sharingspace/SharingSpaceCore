@@ -9582,9 +9582,28 @@ form {
   }
 }
 
-#isotope-search {
-  display: none;
-  width: 30%;
+#entry-search {
+  display: block;
   border-width: 1px;
-  height: 33px;
+  height: 35px;
+  padding: 0 0 0 5px;
+  display: inline-block;
+  float: left;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: bold;
+  text-decoration: inherit;
+  font-size: 16px;
 }
+
+.sort-icon {
+  padding: 2px 3px;
+  border-radius: 3px;
+  float: left;
+  margin-left: 8px;
+}
+
+input#isotope-search[type="text"] {
+  font-family: FontAwesome;
+}
+

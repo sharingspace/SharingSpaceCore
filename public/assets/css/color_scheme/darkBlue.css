@@ -220,3 +220,14 @@ td {
   border-color: #f30053;
   color: #fff !important;
 }
+
+.sort-icon {
+  color: #ff4081;
+  background-color: white;
+  border: 1px solid #ffa6c4;
+}
+
+.sort-icon:hover {
+  background-color: #ffedf3;
+  color: #ff0d5f;
+}
