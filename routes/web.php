@@ -465,15 +465,14 @@ Route::group(
                 Route::get(
                     'edit',
                     array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'community.edit.form',
+                    'middleware' => ['auth', 'community-edit'],
                     'uses' => 'CommunitiesController@getEdit')
-                );
+                )->name('_edit_share');
 
                 Route::post(
                     'edit',
                     [
-                    'middleware' => ['auth','community-auth'],
+                    'middleware' => ['auth', 'community-edit'],
                     'as' => 'community.edit.save',
                     'uses' => 'CommunitiesController@postEdit'
                     ]
@@ -484,7 +483,7 @@ Route::group(
 
 
 
-        // Request access to a community , 'community-auth'
+        // Request access to a community
         Route::get(
             'request-access',
             [

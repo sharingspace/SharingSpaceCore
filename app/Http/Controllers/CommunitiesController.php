@@ -409,8 +409,7 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->sync(ExchangeType::all());
         }
 
-
-        return redirect()->route('community.edit.form')->with('success',
+        return redirect()->route('_edit_share')->with('success',
             trans('general.community.messages.save_edits'));
     }
 }
