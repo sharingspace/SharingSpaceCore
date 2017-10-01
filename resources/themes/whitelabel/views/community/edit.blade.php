@@ -84,6 +84,11 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                   {!! Form::theme_color('theme_color', Input::old('color', $community->color)) !!}
                   {!! $errors->first('color', '<span class="help-block">:message</span>') !!}
 
+
+                  <label for="entry_layout" class="margin-top-15">{{trans('general.community.entry_layout')}}</label>
+                  {!! Form::entry_layout('entry_layout', Input::old('entry_layout', $community->entry_layout)) !!}
+                  {!! $errors->first('entry_layout', '<span class="help-block">:message</span>') !!}
+
                   <!-- <label class="margin-top-15" for="info_bar" style="display: block;">
                     Hide home page information bar?
                     <input name="show_info_bar" type="checkbox" value="0"

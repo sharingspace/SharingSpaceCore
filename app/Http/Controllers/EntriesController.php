@@ -647,7 +647,7 @@ class EntriesController extends Controller
     public function getEntriesDataView(Request $request, $user_id = null)
     {
         // eventually the default maybe an admin setting 
-        $gridView = true;
+        $gridView = ($request->whitelabel_group->getLayout() === "G");
 
         if ($user_id) {
             if (Auth::user() && (Auth::user()->id == $user_id)) {

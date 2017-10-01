@@ -409,6 +409,19 @@ class Community extends Model
         return ($this->group_type == 'S');
     }
 
+
+    /**
+    * Get entry layout mode, grid or list
+    *
+    * @author [D.Linnard] [<dslinnard@yahoo.com>]
+    * @since  [v1.0]
+    * @return "G" or "L"
+    */
+    public function getLayout()
+    {
+        return $this->entry_layout;
+    }
+
     /**
     * scopeEntriesInCommunity
     * Get all entries that are in the current community
