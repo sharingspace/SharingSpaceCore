@@ -42,8 +42,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static $uploadableImgs = [
       'users' =>
         [
-          'height' => '250',
-          'width' => '250'
+            'height' => '250',
+            'width' => '250'
         ]
     ];
 
@@ -129,7 +129,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         if ($this->superadmin=='1') {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -164,7 +165,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         if (($this->isAdminOfCommunity($community)) ||  ($this->superadmin=='1')) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -180,14 +182,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public function canSeeCommunity($community)
     {
-        LOG::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
+        //log::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
 
         if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type=='O') { 
-            LOG::debug("canSeeCommunity: user can see hub");
+            //log::debug("canSeeCommunity: user can see hub");
             return true;
         }
         else {
-            LOG::debug("canSeeCommunity: user cannot see hub");
+            //log::debug("canSeeCommunity: user cannot see hub");
             return false;
         }
     }
@@ -204,12 +206,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function gravatar_img($size = null)
     {
         if (!empty($this->avatar_img)) {
-            //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
+            //log::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
             return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img;
         } 
         else if (!empty($this->gravatar)) {
             // this can one day be removed or used to store the gravatar email hash
-            //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
+            //log::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
             return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar;
         }
         else {
@@ -268,9 +270,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public static function checkForSocialLoginDBRecord($user, $provider)
     {
         return DB::table('social')
-         ->where('access_token', '=', $user->token)
-         ->where('service', '=', $provider)
-         ->first();
+            ->where('access_token', '=', $user->token)
+            ->where('service', '=', $provider)
+            ->first();
     }
 
 
@@ -327,7 +329,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $communityCount = $this->communities()->where('community_id', '=', $community->id)->count();
         $superAdmin =  $this->isSuperAdmin();
-        LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$communityCount.",  super Admin = ".$superAdmin);
+        //log::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$communityCount.",  super Admin = ".$superAdmin);
 
         return ($communityCount || $superAdmin);
     }
@@ -358,10 +360,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this_community = $this->communities()->where('community_id','=',$community->id)->first();
         if ($this_community) {
             return $this_community->pivot->custom_label;
-        } else {
+        }
+        else {
             return 'deleted';
         }
-
     }
 
 
@@ -383,14 +385,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if ($this->display_name) {
             return ucwords($this->display_name);
-        } elseif (($this->first_name) && ($this->last_name)) {
+        }
+        elseif (($this->first_name) && ($this->last_name)) {
             return "{$this->first_name} {$this->last_name}";
-        } elseif ($this->first_name) {
+        }
+        elseif ($this->first_name) {
             return $this->first_name;
-        } else {
+        }
+        else {
             return "Anonymous";
         }
-
     }
 
 
@@ -433,7 +437,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     	if ($unread_cache) {
     		return $unread_cache;
-    	} else {
+    	}
+        else {
 			$unread_messages = Message::with('sender','conversation')
 			->where('sent_to', '=', $this->id)
 			->whereNull('read_on')
@@ -459,7 +464,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         if ($unread_count_cache) {
             return $unread_count_cache;
-        } else {
+        }
+        else {
             $unread_messages_count = Message::with('sender','conversation')
                 ->where('sent_to', '=', $this->id)
                 ->whereNull('read_on')->count();
@@ -480,7 +486,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
     public static function saveImageToDB($user_id, $filename, $type, $id = null, $upload_key = null)
     {
-        LOG::debug("User::saveImageToDB ".$user_id.", ".$filename.", ".$type);
+        //log::debug("User::saveImageToDB ".$user_id.", ".$filename.", ".$type);
 
         if ($user = User::find($user_id)) {
             $user->avatar_img = $filename;

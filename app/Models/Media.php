@@ -105,7 +105,6 @@ class Media extends Model
                     if (!Media::is_animated_gif($img_path)) {
 
                         try {
-
                             if ($img = Image::make($img_path)) {
                                 if ($type == 'profile') {
                                     $img->fit($width);
@@ -113,19 +112,14 @@ class Media extends Model
                                 else {
                                     $img->fit($width, $height);
                                 }
-
                                 $img->save($img_path, 70);
-
-
                             }
                             else {
                                 echo 'could not make file :(';
                             }
-
                         } catch (Exception $e) {
                             //echo 'Caught exception: ',  $e->getMessage(), "\n";
                         }
-
                     }
 
                     $media = new Media();
@@ -148,26 +142,21 @@ class Media extends Model
                         )
                     );
 
-
                     if (App::environment('staging', 'production')) {
                         unlink($img_path);
                     }
 
                     return true;
-
                 }
                 else {
                     //echo "ERROR MOVING FILE!";
                     return false;
                 } // endif file moved
-
             } // end foreach
-
         }
         else {
             return false;
         }// end if (Input::hasFile('image'))
-
     }
 
 

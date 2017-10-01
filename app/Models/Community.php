@@ -46,9 +46,9 @@ class Community extends Model
     protected $injectUniqueIdentifier = true;
 
     protected $rules = [
-      'name'            => 'required|string|min:2|max:255',
-      'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
-      'group_type'      => 'required',
+        'name'            => 'required|string|min:2|max:255',
+        'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
+        'group_type'      => 'required',
     ];
 
     protected $dates = ['deleted_at', 'subdomain_expires_at', 'limittypes_expires_at'];
@@ -58,21 +58,21 @@ class Community extends Model
     */
 
     public static $uploadableImgs = [
-      'community-covers' =>
-        [
-          'height' => '300',
-          'width' => '1300',
-        ],
-      'community-logos' =>
-        [
-          'height' => '40',
-          'width' => '250',
-        ],
-      'community-profiles' =>
-        [
-          'height' => '250',
-          'width' => '250',
-        ],
+        'community-covers' =>
+            [
+                'height' => '300',
+                'width' => '1300',
+            ],
+        'community-logos' =>
+            [
+                'height' => '40',
+                'width' => '250',
+            ],
+        'community-profiles' =>
+            [
+                'height' => '250',
+                'width' => '250',
+            ],
     ];
 
 
@@ -224,7 +224,8 @@ class Community extends Model
 
         if ($this->logo) {
             return config('services.cdn.default').'/uploads/community-logos/'.$this->id.'/'.$this->logo;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -241,7 +242,8 @@ class Community extends Model
 
         if ($this->profile_img!='') {
             return config('services.cdn.default').'/uploads/community-profiles/'.$this->id.'/'.$this->profile_img;
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -282,7 +284,7 @@ class Community extends Model
     */
     public static function saveImageToDB($community_id, $filename, $type, $user_id = null, $upload_key = null)
     {
-        LOG::debug("Community::saveImageToDB ".$community_id.", ".$filename.", ".$type);
+        //log::debug("Community::saveImageToDB ".$community_id.", ".$filename.", ".$type);
 
         if ($community = Community::find($community_id)) {
 
@@ -299,7 +301,7 @@ class Community extends Model
             }
 
             if (!$community->save()) {
-                LOG::debug("saveImageToDB: failed");
+                log::debug("saveImageToDB: failed");
 
                 return false;
             }

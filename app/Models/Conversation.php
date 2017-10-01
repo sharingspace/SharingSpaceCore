@@ -107,11 +107,12 @@ class Conversation extends Model
     public function findSendToId(User $sender)
     {
         foreach ($this->messages as $message) {
-           if ($message->sent_to != $sender->id) {
-               return $message->sent_to;
-           } else {
-               return $message->sent_by;
-           }
+            if ($message->sent_to != $sender->id) {
+                return $message->sent_to;
+            }
+            else {
+                return $message->sent_by;
+            }
         }
     }
 
@@ -133,6 +134,4 @@ class Conversation extends Model
         }
         return false;
     }
-
-
 }

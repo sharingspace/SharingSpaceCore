@@ -15,11 +15,11 @@ use App\Models\User;
 
 class CommunityJoinRequest extends Model
 {
-  /**
-  * The database table used by the model.
-  *
-  * @var string
-  */
+    /**
+    * The database table used by the model.
+    *
+    * @var string
+    */
     protected $table = 'community_join_requests';
 
     /**
@@ -40,7 +40,4 @@ class CommunityJoinRequest extends Model
         // a request belongs to a user
         return $this->belongsTo('App\Models\Community');
     }
-
- 
-
 }

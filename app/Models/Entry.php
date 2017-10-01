@@ -43,7 +43,6 @@ class Entry extends Model
     */
     protected $injectUniqueIdentifier = true;
 
-
     use ValidatingTrait;
     use UploadableFileTrait;
     use SoftDeletes;
@@ -52,9 +51,9 @@ class Entry extends Model
     * Model validation rules
     */
     protected $rules = [
-      'title'            => 'required|string|min:3|max:255',
-      'post_type'        => 'required',
-      'qty'              => 'required|numeric|min:1',
+        'title'            => 'required|string|min:3|max:255',
+        'post_type'        => 'required',
+        'qty'              => 'required|numeric|min:1',
     ];
 
     /*
@@ -62,11 +61,11 @@ class Entry extends Model
     */
 
     public static $uploadableImgs = [
-      'entries' =>
-        [
-          'height' => '600',
-          'width' => '600',
-        ],
+        'entries' =>
+            [
+                'height' => '600',
+                'width' => '600',
+            ],
     ];
 
     public static $tagList = ["Art", "Ecology", "Skills", "Learning Opportunities", 
@@ -86,7 +85,6 @@ class Entry extends Model
     * @var array
     */
     protected $fillable = ['title','post_type','qty'];
-
 
 
     /**
@@ -141,7 +139,7 @@ class Entry extends Model
     */
     public static function saveImageToDB($entry_id, $filename, $type, $user_id, $upload_key = null)
     {
-        LOG::debug("Entry::saveImageToDB entry_id = ".$entry_id.", filename = ".$filename.", type = ".$type.", user_id = ".$user_id.", upload_key = ".$upload_key);
+        //log::debug("Entry::saveImageToDB entry_id = ".$entry_id.", filename = ".$filename.", type = ".$type.", user_id = ".$user_id.", upload_key = ".$upload_key);
 
         $media = new Media();
         $media->entry_id = $entry_id;
@@ -168,7 +166,7 @@ class Entry extends Model
     */
     public static function updateImageToDB($user_id, $upload_key, $entry_id)
     {
-        Log::error("Entry::updateImageToDB user_id = ".$user_id.", upload_key = ".$upload_key.", entry_id = ".$entry_id);
+        //log::error("Entry::updateImageToDB user_id = ".$user_id.", upload_key = ".$upload_key.", entry_id = ".$entry_id);
 
         $media = \App\Models\Media::where('upload_key', '=', $upload_key)
             ->where('user_id', '=', $user_id)
@@ -192,8 +190,8 @@ class Entry extends Model
     public static function replaceImageInDB($user_id, $entry_id, $filename)
     {
         $media = \App\Models\Media::where('user_id', '=', $user_id)
-        ->where('entry_id', '=', $entry_id)
-        ->first();
+            ->where('entry_id', '=', $entry_id)
+            ->first();
 
         $media->filename = $filename;
         $media->save();
@@ -260,7 +258,8 @@ class Entry extends Model
     {
         if ($user->id == $this->created_by) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
 
@@ -294,7 +293,6 @@ class Entry extends Model
     */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where('title', 'LIKE', "%$search%")
             ->orWhere('location', 'LIKE', "%$search%")
             ->orWhere('description', 'LIKE', "%$search%")

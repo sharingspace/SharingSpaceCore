@@ -27,7 +27,6 @@ class CommunityEditMiddleware
             return redirect('home');
         }
 
-
         return $next($request);
     }
 }

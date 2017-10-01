@@ -36,9 +36,9 @@ class Message extends Model
     * Model validation rules
     */
     protected $rules = [
-      'message'        => 'required|string|min:2',
-      'sent_to'        => 'required',
-      'sent_by'        => 'required',
+        'message'        => 'required|string|min:2',
+        'sent_to'        => 'required',
+        'sent_by'        => 'required',
     ];
 
 
@@ -135,7 +135,6 @@ class Message extends Model
             //log::debug("markMessageDeleted message not found ".$this->id);
         }
         
-
         return false;
     }    
 
