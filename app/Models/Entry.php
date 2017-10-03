@@ -69,8 +69,8 @@ class Entry extends Model
         ],
     ];
 
-    public static $tagList = ["Art", "Ecology", "Skills", "Learning Opportunities", 
-        "Community Resources", "Meet a Resident", "Free", "Upcycle Projects", "Dreams"];
+    public static $tagList = ["art", "ecology", "skills", "learning opportunities", 
+        "community resources", "meet a resident", "free", "upcycle projects", "dreams"];
 
     protected $dates = ['deleted_at', 'expires', 'completed_at'];
 

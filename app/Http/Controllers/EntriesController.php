@@ -70,7 +70,7 @@ class EntriesController extends Controller
                 $tagArray = explode(',', $entry->tags);
                 $category = null;
                 foreach ($tagArray as $tag) {
-                    $tag = trim($tag);
+                    $tag = strtolower(trim($tag));
 
                     if (in_array($tag, Entry::$tagList)) {
                         $category = $tag;
@@ -173,7 +173,7 @@ class EntriesController extends Controller
         $entry->post_type = e(Input::get('post_type'));
         $entry->description = e(Input::get('description'));
         $entry->created_by = Auth::user()->id;
-        $entry->tags = e(Input::get('tags'));
+        $entry->tags = e(strtolower(Input::get('tags')));
         $entry->qty = e(Input::get('qty'));
         $upload_key = e(Input::get('upload_key'));
         $entry->visible = e(Input::get('private')) ? 0 : 1;
@@ -837,7 +837,7 @@ class EntriesController extends Controller
             }
 
             foreach ($tagArray as $tag) {
-                $tag = trim($tag);
+                $tag = strtolower(trim($tag));
 
                 if (in_array($tag, Entry::$tagList) && ($tagName || !in_array($tag, $added))) {
                     $added[] = $tag;
