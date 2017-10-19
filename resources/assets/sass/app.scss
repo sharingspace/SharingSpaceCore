@@ -9441,13 +9441,13 @@ form {
 #entry_browse_grid {
   margin: 0 auto 20px;
   .grid-item {
-    width: 120px;
-    height: 120px;
     float: left;
     border-radius: 7px;
     background-size: cover;
-    margin-bottom: 5px;
-    position: relative;
+    width: 60px; 
+    height: 60px;
+    margin-bottom: 6px;
+    box-sizing: border-box;
     
     &:hover {
       cursor: pointer;
@@ -9458,12 +9458,12 @@ form {
 
       h3 {
         text-align: center;
-        font-size: 14px;
         font-weight: bold;
         padding: 5px;
         text-align: center;
         width: 100%;
         margin: 0;
+        font-size: 9px;
         &, & > a {
           color: #fff !important;
         }
@@ -9493,14 +9493,34 @@ form {
     }
   }
 
-  .grid-item--width2 { width: 245px; }
-  .grid-item--width3 { width: 480px; }
-  .grid-item--width4 { width: 640px; }
+  .grid-item--width2 { width: 126px; }
+  .grid-item--height2 { height: 126px; }
 
-  .grid-item--height2 { height: 244px; }
-  .grid-item--height3 { height: 260px; }
-  .grid-item--height4 { height: 360px; }
-}
+  @media (min-width: $screen-sm-min) {
+    .grid-item {
+      width: 80px; 
+      height: 80px;
+      h3 {
+        font-size: 11px;
+        padding: 5px;
+      }   
+    }
+    .grid-item--width2 { width: 166px; }
+    .grid-item--height2 { height: 166px; }
+  }
+
+  @media (min-width: $screen-md-min) {
+    .grid-item {
+      width: 100px; 
+      height: 100px;
+      h3 {
+        font-size: 13px;
+      }
+    }
+    .grid-item--width2 { width: 206px; }
+    .grid-item--height2 { height: 206px; }
+  }
+}   
 
 #entry_browse_table {
   display: none;
