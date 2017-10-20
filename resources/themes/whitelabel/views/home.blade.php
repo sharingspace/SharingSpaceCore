@@ -72,6 +72,7 @@ $(document).ready(function() {
     var qsRegex;
     var GRID_LOADED = false;
     var LIST_LOADED = false;
+    var GRID_WIDTH = 80;
 
     // debounce so filtering doesn't happen every millisecond
     function debounce(fn, threshold)
@@ -93,6 +94,7 @@ $(document).ready(function() {
 
     function masonryInit()
     {
+        GRID_WIDTH = parseInt($('.grid-item').css('width').replace(/[^-\d\.]/g, ''));
         GRID = $('#entry_browse_grid').isotope({
             // options
             itemSelector: '.grid-item',
@@ -103,8 +105,8 @@ $(document).ready(function() {
                 posted_by: '.posted_by'
             },
             masonry: {
-                gutter: 5,
-                columnWidth: 120,
+                gutter: 6,
+                columnWidth: GRID_WIDTH,
                 isAnimated: true,
             },
             filter: function() {
@@ -211,8 +213,8 @@ $(document).ready(function() {
                     // image is roughly landscape, stick it in a 2x1 box
                     $(item).addClass('grid-item--width2');
                 }
-                else if (ratio < 0.5) {
-                    // image is roughly landscape, stick it in a 2x1 box
+                else if (ratio < 0.75) {
+                    // image is roughly portrait, stick it in a 2x1 box
                     $(item).addClass('grid-item--height2');
                 }
                 else {
@@ -227,7 +229,7 @@ $(document).ready(function() {
                 imageClass = "noImage";
             }
 
-            contents = "<div class='"+imageClass+"'><h3  class='"+postType.toLowerCase()+"_color'> " + posted_by + post_type + title +"</h3></div>";
+            contents = "<div class='"+imageClass+"'><h3  class='"+postType.toLowerCase()+"_color'> "+posted_by + post_type + title +"</h3></div>";
 
             $(item).addClass(postType.toLowerCase()+'_color');
             $(item).attr('id', 'entry-'+ entry_id);
@@ -384,6 +386,22 @@ $(document).ready(function() {
             window.open('/entry/'+id,'_self');
         });
     }
+
+    $( window ).resize(function() {
+        if (GRID_LOADED) {
+            var newWidth= $('.grid-item').css('width').replace(/[^-\d\.]/g, '');
+            if (GRID_WIDTH != parseInt(newWidth)) {
+                GRID_WIDTH = parseInt(newWidth);
+                GRID.isotope({
+                    // update columnWidth to half of container width
+                    masonry: {
+                        gutter: 6,
+                        columnWidth: GRID_WIDTH
+                    }
+                });
+            }
+        }
+    });
 });
 
 </script>
