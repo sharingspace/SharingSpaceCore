@@ -231,3 +231,7 @@ td {
   background-color: #f7f4fb;
   color: #7850bf;
 }
+
+.sort-icon.dim-icon {
+  opacity: 0.3;
+}

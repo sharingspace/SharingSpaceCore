@@ -232,3 +232,7 @@ td {
   background-color: white;
   color: #349ef3;
 }
+
+.sort-icon.dim-icon {
+  opacity: 0.3;
+}
