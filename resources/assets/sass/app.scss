@@ -390,10 +390,6 @@ section {
   }
 }
 
-small {
-  font-family: 'Lato', sans-serif;
-}
-
 label {
   display: block;
 }
@@ -2597,7 +2593,6 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       height: 60px;
       line-height: 40px;
 			color: #8a8a8a;
-    	font-family: Montserrat,sans-serif;
     }
   }
   &.fixed {
@@ -5187,7 +5182,6 @@ section#slider {
   display: inline-block;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.7);
-  font-family: 'Lato',Arial,Helvetica,sans-serif;
   font-weight: 300;
   padding: 6px 15px 8px 15px;
   opacity: 1;
@@ -5238,7 +5232,6 @@ section#slider {
 }
 
 .camera_caption {
-  font-family: 'Lato',Arial,Helvetica,sans-serif;
   font-size: 22px;
   font-weight: 300;
 }
@@ -5271,7 +5264,6 @@ section#slider {
   h3 {
     font-size: 60px;
     line-height: 60px;
-    font-family: 'Open Sans', sans-serif;
     text-transform: uppercase;
     font-weight: 300;
     color: #fff;
@@ -5447,7 +5439,6 @@ section#slider {
       font-size: 60px;
       line-height: 70px;
       margin: 0;
-      font-family: Arial,Helvetica,sans-serif;
     }
     h2 {
       text-shadow: #333 1px 1px 3px;
@@ -5475,7 +5466,6 @@ section#slider {
   }
   h1 {
     color: white;
-		font-family: Montserrat,sans-serif;
 		font-size: 65px!important;
 		font-weight: 400;
 		text-align: center;
@@ -5486,7 +5476,6 @@ section#slider {
   h2 {
     font-size: 18px;
     line-height: 24px;
-		font-family: Montserrat,sans-serif;
     font-style: italic;
 		margin-bottom:0;
   }
@@ -6107,7 +6096,6 @@ section.dark .blog-post-item {
 
 h1.blog-post-title, .blog-post-item h2 {
   letter-spacing: 0;
-  font-family: 'Open Sans',Arial,Helvetica,sans-serif;
   font-size: 22px;
   margin-bottom: 10px;
 }
@@ -6333,7 +6321,6 @@ section.dark .comments span.user-avatar {
 .comments {
   small {
     font-size: 12px;
-    font-family: 'Open Sans',Arial,Helvetica,sans-serif;
     color: #aaa;
   }
   h4 {
@@ -6573,7 +6560,6 @@ section.dark .timeline.timeline-inverse > .timeline-hline {
     line-height: 1;
     color: #ccc;
     font-weight: bold;
-    font-family: 'Lato','Open Sans',Arial,Helvetica,sans-serif;
     > .timeline-vline {
       position: absolute;
       top: 50%;
@@ -6597,7 +6583,6 @@ section.dark .timeline.timeline-inverse > .timeline-hline {
     font-size: 13px;
     text-transform: uppercase;
     font-weight: 300;
-    font-family: 'Open Sans',Arial,Helvetica,sans-serif;
   }
 }
 
@@ -6837,7 +6822,6 @@ section.dark .error-404 {
   padding: 20px;
   margin-top: 10%;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: 'Open Sans';
   font-size: 14px;
   line-height: 23px;
   text-align: center;
@@ -7108,7 +7092,6 @@ $shareFooter: 35px;
         border-bottom: rgba(0, 0, 0, 0.2) 1px solid;
         small {
           display: block;
-          font-family: 'Open Sans',Arial,Helvetica,sans-serif;
           color: #ddd;
         }
       }
@@ -7788,7 +7771,6 @@ li.notifications-popdown .notifications-popdown-box {
 section {
 	&#about {
 		p {
-			font-family: Ubuntu,Helvetica,sans-serif;
 			color: #5A5A5A;
 			font-size: 28px;
 			line-height:34px;
@@ -8570,7 +8552,6 @@ $color-green: #9AE14F;
 
 .entry_img_view {
   color: blue;
-  font-family:Arial,san-serif;
   font-size:15px;
   font-weight:400;
   color:#0066c0;
@@ -8704,7 +8685,6 @@ $color-green: #9AE14F;
 section.bucky, section.BanKiMoon, section.JohnDuda, section.TreborScholz, section.charlieChaplin  {
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
-  font-family: 'Open Sans', sans-serif;
   color: #fff;
   background-attachment:scroll;  
 }
@@ -8759,14 +8739,12 @@ section.TreborScholz {
   padding-right: 0;
   text-align: center;
   color: snow;
-  font-family: "Open Sans",sans-serif;
   font-size: 32px;
   font-weight: 300;
   line-height: 42px;
 }
 
 .citation {
-  font-family: "Open Sans",sans-serif;
   font-size: 21px;
   font-style: normal;
   font-weight: 800;
@@ -8778,7 +8756,6 @@ section.TreborScholz {
 
 .backstory-heading {
   color: #000;
-  font-family: Montserrat,sans-serif;
   font-size: 39px;
   line-height: 40px;
   margin-bottom: 20px;
@@ -8792,7 +8769,6 @@ section.TreborScholz {
 
 .cta {
   background-color: #ffc200;
-  font-family: "Open Sans",sans-serif;
   padding-bottom: 45px;
   padding-top: 45px;
   text-align:center;
@@ -8894,32 +8870,6 @@ section.TreborScholz {
   }
 }
 
-#we-the-people_old
-{ 
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/coop/we-the-people.jpg");
-  background-repeat: repeat, no-repeat;
-  background-size: auto auto, auto auto;
-  min-height: 300px;
-}
-
-#people-power_old { 
-  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/coop/people-power_bg.jpg");
-  background-repeat: repeat, no-repeat;
-  background-size: auto auto, auto auto;
-  min-height: 300px;
-}
-
-#become_member_old {
-  h4 {
-    font-family: Montserrat,sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 24px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-}
-
 .coop-member-now-div {
   background-color: #ffc200;
   border: 1px solid #b4b4b4;
@@ -8928,7 +8878,6 @@ section.TreborScholz {
   padding: 5px 10px;
   overflow: auto;
   h3 {
-    font-family: Montserrat,sans-serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 30px;
@@ -9044,7 +8993,6 @@ section.TreborScholz {
  **/
 .fancy_font {
   font-style: italic;
-  font-family: "Open Sans",sans-serif;
 }
 
 .about_intro {
@@ -9056,7 +9004,6 @@ section.TreborScholz {
 .about_headline {
   font-size:25px;
   font-style: italic;
-  font-family: "Open Sans",sans-serif;
   margin-bottom:15px;
 }
 
@@ -9202,7 +9149,6 @@ section.TreborScholz {
     margin: 0;
     text-align: center;
     color:white;
-    font-family: 'Open Sans', sans-serif;
   }
 
   .hp_heading {
@@ -9221,7 +9167,6 @@ section.TreborScholz {
   
   .hp_heading, .hp_subheading {
     text-align: left;
-    font-family: Montserrat,sans-serif;
     text-shadow: 1px 1px 6px black;
   }
 

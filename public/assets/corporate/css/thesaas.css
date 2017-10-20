@@ -74,7 +74,7 @@ small,
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Dosis", "Open Sans", sans-serif;
+  //font-family: "Dosis", "Open Sans", sans-serif;
   font-weight: 600;
   color: #37404d;
   letter-spacing: 1px;
@@ -139,7 +139,6 @@ h6, .h6 {
   content: '“';
   display: block;
   font-size: 9rem;
-  font-family: Georgia, Verdana, Roboto, Serif;
   line-height: .2;
   font-weight: 600;
   padding-top: 4rem;
@@ -261,7 +260,6 @@ pre {
 }
 
 .typed-cursor {
-  font-family: "Open Sans", sans-serif;
   vertical-align: text-bottom;
   opacity: 1;
   -webkit-animation: blink 0.7s infinite;
@@ -980,7 +978,6 @@ video {
   padding-left: 20px;
   padding-right: 20px;
   background-color: #fcfdfe;
-  font-family: "Open Sans", sans-serif;
   letter-spacing: 0;
 }
 
@@ -4282,7 +4279,6 @@ textarea.form-control-sm {
 }
 
 .shop-item .item-details .item-price {
-  font-family: "Dosis", "Open Sans", sans-serif;
   font-weight: 100;
   font-size: 25px;
   letter-spacing: 1px;
