@@ -251,14 +251,14 @@ $(document).ready(function() {
                 entryRows = data;
                 if (data['gridView']) {
                     masonryLayout(data);
-                    $('#gridView').addClass("fa-disabled");
+                    $('#listView').addClass("dim-icon");
                     entryClick();
                     GRID_LOADED = true;
                 }
                 else {
                     tableLayout(entryRows);
                     $('#entry_browse_table').show();
-                    $('#listView').addClass("fa-disabled");
+                    $('#gridView').addClass("dim-icon");
                     LIST_LOADED = true;
                 }
             },
@@ -337,8 +337,8 @@ $(document).ready(function() {
         }, 200));
 
         $('#entry-search').keyup();
-        $("#listView").addClass("fa-disabled");
-        $("#gridView").removeClass("fa-disabled");
+        $("#gridView").addClass("dim-icon");
+        $("#listView").removeClass("dim-icon");
         $('#entry_browse_grid').hide();
         $('#entry_browse_table').show();
    });
@@ -359,8 +359,8 @@ $(document).ready(function() {
         }, 200 ) );
 
         $('#entry-search').keyup();
-        $("#gridView").addClass("fa-disabled");
-        $("#listView").removeClass("fa-disabled");
+        $("#listView").addClass("dim-icon");
+        $("#gridView").removeClass("dim-icon");
         $('#entry_browse_table').hide();
         $('#entry_browse_grid').show();
     });

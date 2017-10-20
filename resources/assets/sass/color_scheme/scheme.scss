@@ -204,4 +204,7 @@ p, td {
     background-color: lighten($accentColor, 34%);
     color: darken($accentColor, 10%);
   }
+  &.dim-icon {
+    opacity: 0.3;
+  }
 }

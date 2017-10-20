@@ -11497,7 +11497,7 @@ form #domain_input .anyshare_url {
     height: 80px;
   }
 
-  #entry_browse_grid .grid-item h3 {
+  #entry_browse_grid .grid-item div h3 {
     font-size: 11px;
     padding: 5px;
   }
@@ -11517,7 +11517,7 @@ form #domain_input .anyshare_url {
     height: 100px;
   }
 
-  #entry_browse_grid .grid-item h3 {
+  #entry_browse_grid .grid-item div h3 {
     font-size: 13px;
   }
 
