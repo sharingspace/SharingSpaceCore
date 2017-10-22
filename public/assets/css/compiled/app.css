@@ -11580,7 +11580,7 @@ form #domain_input .anyshare_url {
   display: inline-block;
   float: left;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: inherit;
   font-size: 16px;
 }
@@ -11597,7 +11597,6 @@ form #domain_input .anyshare_url {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url("/assets/img/search.png");
   background-repeat: no-repeat;
-  text-indent: 15px;
 }
 
 ::-webkit-input-placeholder:active {
@@ -11609,7 +11608,7 @@ form #domain_input .anyshare_url {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url("/assets/img/search.png");
   background-repeat: no-repeat;
-  text-indent: 15px;
+  background-position: 5px 8px;
 }
 
 ::-moz-placeholder:active {
@@ -11621,7 +11620,7 @@ form #domain_input .anyshare_url {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url("/assets/img/search.png");
   background-repeat: no-repeat;
-  text-indent: 15px;
+  background-position: 5px 8px;
 }
 
 :-ms-input-placeholder:active {
@@ -11633,7 +11632,7 @@ form #domain_input .anyshare_url {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url("/assets/img/search.png");
   background-repeat: no-repeat;
-  text-indent: 15px;
+  background-position: 5px 9px;
 }
 
 :-moz-placeholder:active {

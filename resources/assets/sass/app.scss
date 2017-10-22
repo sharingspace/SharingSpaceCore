@@ -9561,7 +9561,7 @@ form {
   display: inline-block;
   float: left;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: inherit;
   font-size: 16px;
 }
@@ -9573,21 +9573,20 @@ form {
   margin-left: 8px;
 }
 
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url('/assets/img/search.png');
   background-repeat: no-repeat;
-  text-indent: 15px;
   &:active {
     background-image: none;
   }
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url('/assets/img/search.png');
   background-repeat: no-repeat;
-  text-indent: 15px;
+  background-position: 5px 8px;
   &:active {
     background-image: none;
   }
@@ -9597,7 +9596,7 @@ form {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url('/assets/img/search.png');
   background-repeat: no-repeat;
-  text-indent: 15px;
+  background-position: 5px 8px;
   &:active {
     background-image: none;
   }
@@ -9607,7 +9606,7 @@ form {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
   background-image: url('/assets/img/search.png');
   background-repeat: no-repeat;
-  text-indent: 15px;
+  background-position: 5px 9px;
   &:active {
     background-image: none;
   }
