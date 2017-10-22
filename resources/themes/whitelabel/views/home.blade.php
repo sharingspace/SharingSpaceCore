@@ -13,7 +13,7 @@
     <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
     <div class="row margin-y-0">
         <div class="col-sm-10 col-xs-8">
-            <input id="entry-search" class="form-control" type="text" placeholder="&nbsp; Search" onfocus="this.placeholder=''" onblur="this.placeholder=' Search'" >
+            <input id="entry-search" class="form-control" type="text" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search" onfocus="this.placeholder=''" onblur="this.placeholder='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search'" >
         </div>
 
         <div class="col-sm-2 col-xs-4">
