@@ -9387,7 +9387,7 @@ form {
   margin: 0 auto 20px;
   .grid-item {
     float: left;
-    border-radius: 7px;
+    border-radius: 3px;
     background-size: cover;
     width: 60px; 
     height: 60px;
@@ -9426,8 +9426,11 @@ form {
       &.withImage {
         align-items: flex-end;
         & > h3 {
-          border-bottom-right-radius: 6px;
-          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 2px;
+          border-bottom-left-radius: 2px;
+          padding-top: 3px;
+          padding-bottom: 3px;
+          opacity: 0.9;
         }
       }
     }
@@ -9454,21 +9457,24 @@ form {
     .grid-item--height2 { height: 166px; }
   }
 
+  $med_grid_width: 105;
   @media (min-width: $screen-md-min) {
     .grid-item {
-      width: 100px; 
-      height: 100px;
+      width: $med_grid_width + px; 
+      height: $med_grid_width + px;
       div h3 {
         font-size: 13px;
       }
     }
-    .grid-item--width2 { width: 206px; }
-    .grid-item--height2 { height: 206px; }
+    .grid-item--width2 { width: 2*$med_grid_width + 6 + px; }
+    .grid-item--height2 { height: 2*$med_grid_width + 6 + px; }
   }
 }   
 
 #entry_browse_table {
   display: none;
+  margin-bottom: 30px;
+  padding: 0;
 }
 
 .fa-list, .fa-th {
@@ -9554,7 +9560,6 @@ form {
   padding: 0 0 0 5px;
   display: inline-block;
   float: left;
-  font-family: FontAwesome;
   font-style: normal;
   font-weight: bold;
   text-decoration: inherit;
@@ -9568,7 +9573,42 @@ form {
   margin-left: 8px;
 }
 
-input#isotope-search[type="text"] {
-  font-family: FontAwesome;
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+  background-image: url('/assets/img/search.png');
+  background-repeat: no-repeat;
+  text-indent: 15px;
+  &:active {
+    background-image: none;
+  }
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+  background-image: url('/assets/img/search.png');
+  background-repeat: no-repeat;
+  text-indent: 15px;
+  &:active {
+    background-image: none;
+  }
 }
 
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+  background-image: url('/assets/img/search.png');
+  background-repeat: no-repeat;
+  text-indent: 15px;
+  &:active {
+    background-image: none;
+  }
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
+  background-image: url('/assets/img/search.png');
+  background-repeat: no-repeat;
+  text-indent: 15px;
+  &:active {
+    background-image: none;
+  }
+}

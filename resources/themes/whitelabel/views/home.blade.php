@@ -13,7 +13,7 @@
     <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
     <div class="row margin-y-0">
         <div class="col-sm-10 col-xs-8">
-            <input id="entry-search" class="form-control" type="text" placeholder="&nbsp;&#xF002; Search" onfocus="this.placeholder=''" onblur="this.placeholder='&nbsp;&#xF002; Search'" >
+            <input id="entry-search" class="form-control" type="text" placeholder="&nbsp; Search" onfocus="this.placeholder=''" onblur="this.placeholder=' Search'" >
         </div>
 
         <div class="col-sm-2 col-xs-4">
@@ -24,7 +24,7 @@
 </section>
 
 <!-- Begin entries table -->
-<section class="container padding-0 browse_table">
+<section class="container browse_table">
     <table class="table table-condensed"
         name="communityListings"
         id="entry_browse_table"
@@ -49,7 +49,7 @@
     <!-- End entries table -->
 </section>
 
-<section class="container margin-y-0 padding-0">
+<section class="container margin-y-0 padding-y-0">
     <div id="entry_browse_grid" class="grid">
         <div class="grid-item clone hidden"></div>
     </div>
@@ -72,7 +72,7 @@ $(document).ready(function() {
     var qsRegex;
     var GRID_LOADED = false;
     var LIST_LOADED = false;
-    var GRID_WIDTH = 80;
+    var GRID_WIDTH = 100;
 
     // debounce so filtering doesn't happen every millisecond
     function debounce(fn, threshold)
@@ -98,7 +98,6 @@ $(document).ready(function() {
         GRID = $('#entry_browse_grid').isotope({
             // options
             itemSelector: '.grid-item',
-            isFitWidth: true,
             getSortData: {
                 post_type: '.post_type',
                 title: '.title',
@@ -107,7 +106,6 @@ $(document).ready(function() {
             masonry: {
                 gutter: 6,
                 columnWidth: GRID_WIDTH,
-                isAnimated: true,
             },
             filter: function() {
                 return qsRegex ? $(this).text().match( qsRegex ) : true;
@@ -149,29 +147,29 @@ $(document).ready(function() {
         // ajax call for list and grid, however for sorting this bootstrap library does a fresh ajax call
         // with the serach parameters and I haven't how to work around this yet.
         $('#entry_browse_table').bootstrapTable({
-                data: data.rows,
-                classes: 'table table-responsive table-no-bordered',
-                undefinedText: '',
-                iconsPrefix: 'fa',
-                showRefresh: false,
-                search: false,
-                pageSize: 100,
-                pagination: true,
-                sidePagination: 'server',
-                sortable: false,
-                mobileResponsive: true,
-                showExport: false,
-                showColumns: false,
-                exportDataType: 'all',
-                exportTypes: ['csv', 'txt','json', 'xml'],
-                maintainSelected: true,
-                paginationFirstText: "{{ trans('gernal.first') }}",
-                paginationLastText: "{{ trans('general.last') }}",
-                paginationPreText: "{{ trans('general.prev') }}",
-                paginationNextText: "{{ trans('general.next') }}",
-                pageList: ['10','25','50','100','150','200'],
-                formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' entries';
+            data: data.rows,
+            classes: 'table table-responsive table-no-bordered',
+            undefinedText: '',
+            iconsPrefix: 'fa',
+            showRefresh: false,
+            search: false,
+            pageSize: 100,
+            pagination: false,
+            sidePagination: 'server',
+            sortable: false,
+            mobileResponsive: true,
+            showExport: false,
+            showColumns: false,
+            exportDataType: 'all',
+            exportTypes: ['csv', 'txt','json', 'xml'],
+            maintainSelected: true,
+            paginationFirstText: "{{ trans('gernal.first') }}",
+            paginationLastText: "{{ trans('general.last') }}",
+            paginationPreText: "{{ trans('general.prev') }}",
+            paginationNextText: "{{ trans('general.next') }}",
+            pageList: ['10','25','50','100','150','200'],
+            formatShowingRows: function (pageFrom, pageTo, totalRows) {
+            return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' pages';
             },
             icons: {
                 paginationSwitchDown: 'fa-caret-square-o-down',
@@ -212,16 +210,19 @@ $(document).ready(function() {
                 if (ratio > 1.5) {
                     // image is roughly landscape, stick it in a 2x1 box
                     $(item).addClass('grid-item--width2');
+
                 }
                 else if (ratio < 0.75) {
                     // image is roughly portrait, stick it in a 2x1 box
                     $(item).addClass('grid-item--height2');
+                    //$(item).addClass('grid-item--width2 grid-item--height2');
+
                 }
                 else {
                     // image is roughly square, stick it in a 2x2 box
                     $(item).addClass('grid-item--width2 grid-item--height2');
-                }
-                 
+                } 
+ 
                 $(item).css("background-image", 'url('+data['rows'][i]['image_url']+')');
                 imageClass = "withImage";
             }
