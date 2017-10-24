@@ -16,6 +16,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Models\CommunitySubscription;
+use Illuminate\Notifications\Notifiable;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Cartalyst\Stripe\Billing\Laravel\Billable;
@@ -34,6 +35,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use SluggableTrait;
     use ValidatingTrait;
     use UploadableFileTrait;
+    use Notifiable;
 
     /*
     * Set traits for uploadable image
