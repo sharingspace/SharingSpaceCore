@@ -19,7 +19,7 @@
                 <h5>Arcosanti</h5>
                 <p>This experimental micro-city uses its Sharing Network to inventory the needs and resources of its residents. They're exploring revolutionary ways to maximize the sustainability of resources in the community, spaces, and natural environment.</p>
                 <br />
-                <a class="btn btn-malibu" href="https://arcosanti.anyshare.coop">View Now</a>
+                <a class="btn btn-malibu" href="https://arcoop.anyshare.coop/">View Now</a>
             </div>
 
             <div class="col-12 offset-md-1 col-md-4 py-90">
