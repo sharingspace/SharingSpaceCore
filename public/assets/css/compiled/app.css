@@ -11371,7 +11371,6 @@ form #domain_input .anyshare_url {
   width: 60px;
   height: 60px;
   margin-bottom: 6px;
-  box-sizing: border-box;
 }
 
 #entry_browse_grid .grid-item:hover {
@@ -11388,11 +11387,14 @@ form #domain_input .anyshare_url {
 #entry_browse_grid .grid-item div h3 {
   text-align: center;
   font-weight: bold;
-  padding: 5px;
+  padding: 2px;
   text-align: center;
-  width: 100%;
   margin: 0;
-  font-size: 9px;
+  font-size: 8px;
+  line-height: 10px;
+  width: 60px;
+  word-wrap: break-word;
+  overflow: hidden;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -11408,10 +11410,6 @@ form #domain_input .anyshare_url {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-#entry_browse_grid .grid-item div.noImage > h3 {
-  border: none;
 }
 
 #entry_browse_grid .grid-item div.withImage {
@@ -11438,6 +11436,10 @@ form #domain_input .anyshare_url {
   width: 126px;
 }
 
+#entry_browse_grid .grid-item--width2 div h3 {
+  width: 126px;
+}
+
 #entry_browse_grid .grid-item--height2 {
   height: 126px;
 }
@@ -11449,11 +11451,16 @@ form #domain_input .anyshare_url {
   }
 
   #entry_browse_grid .grid-item div h3 {
-    font-size: 11px;
-    padding: 5px;
+    font-size: 10px;
+    line-height: 12px;
+    width: 80px;
   }
 
   #entry_browse_grid .grid-item--width2 {
+    width: 166px;
+  }
+
+  #entry_browse_grid .grid-item--width2 div h3 {
     width: 166px;
   }
 
@@ -11469,15 +11476,21 @@ form #domain_input .anyshare_url {
   }
 
   #entry_browse_grid .grid-item div h3 {
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 15px;
+    width: 107px;
   }
 
   #entry_browse_grid .grid-item--width2 {
     width: 216px;
   }
 
+  #entry_browse_grid .grid-item--width2 div h3 {
+    width: 219px;
+  }
+
   #entry_browse_grid .grid-item--height2 {
-    height: 216px;
+    height: 218px;
   }
 }
 
@@ -11485,6 +11498,7 @@ form #domain_input .anyshare_url {
   display: none;
   margin-bottom: 30px;
   padding: 0;
+  font-size: 13px;
 }
 
 .fa-list:hover,
