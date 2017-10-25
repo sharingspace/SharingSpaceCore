@@ -9392,8 +9392,6 @@ form {
     width: 60px; 
     height: 60px;
     margin-bottom: 6px;
-    box-sizing: border-box;
-    
     &:hover {
       cursor: pointer;
     }
@@ -9404,11 +9402,13 @@ form {
       h3 {
         text-align: center;
         font-weight: bold;
-        padding: 5px;
+        padding: 3px;
         text-align: center;
-        width: 100%;
         margin: 0;
-        font-size: 9px;
+        font-size: 8px;
+        line-height: 10px;
+        width: 60px;
+        word-wrap: break-word;
         &, & > a {
           color: #fff !important;
         }
@@ -9419,9 +9419,6 @@ form {
       &.noImage {
         height: 100%;
         align-items: center;
-        & > h3 {
-          border: none;
-        }
       }
       &.withImage {
         align-items: flex-end;
@@ -9441,7 +9438,12 @@ form {
     }
   }
 
-  .grid-item--width2 { width: 126px; }
+  .grid-item--width2 {
+    width: 126px;
+    div h3 {
+      width: 126px;
+    }   
+  }
   .grid-item--height2 { height: 126px; }
 
   @media (min-width: $screen-sm-min) {
@@ -9450,10 +9452,16 @@ form {
       height: 80px;
       div h3 {
         font-size: 11px;
-        padding: 5px;
+        line-height: 13px;
+        width: 80px;
       }   
     }
-    .grid-item--width2 { width: 166px; }
+    .grid-item--width2 { 
+      width: 166px;
+      div h3 {
+        width: 166px;
+      }  
+    }
     .grid-item--height2 { height: 166px; }
   }
 
@@ -9463,11 +9471,18 @@ form {
       width: $med_grid_width + px; 
       height: $med_grid_width + px;
       div h3 {
-        font-size: 13px;
+        font-size: 14px;
+        line-height: 17px;
+        width: 107px;
       }
     }
-    .grid-item--width2 { width: 2*$med_grid_width + 6 + px; }
-    .grid-item--height2 { height: 2*$med_grid_width + 6 + px; }
+    .grid-item--width2 {
+      width: 2*$med_grid_width + 6 + px;
+      div h3 {
+        width: 2*$med_grid_width + 9 + px;
+      }  
+    }
+    .grid-item--height2 { height: 2*$med_grid_width + 8 + px; }
   }
 }   
 
@@ -9475,6 +9490,7 @@ form {
   display: none;
   margin-bottom: 30px;
   padding: 0;
+  font-size: 13px
 }
 
 .fa-list, .fa-th {
