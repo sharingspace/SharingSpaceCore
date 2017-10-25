@@ -765,7 +765,7 @@ class EntriesController extends Controller
                     'image_url' => $image_url,
                     'post_type' => strtoupper($entry->post_type) . $completed,
                     'entry_id'     => $entry->id,
-                    'title' => (strlen($entry->title) > 30) ? substr($entry->title, 0, 30) . '&hellip;' : $entry->title,
+                    'title' => (strlen($entry->title) + strlen($entry->author->getDisplayName()) > 30) ? substr($entry->title, 0, 27) . '&hellip;' : $entry->title,
                     'author_image'    => '<img src="' . $entry->author->gravatar_img() . '" class="avatar-sm hidden-xs">',
                     'location'      => $entry->location,
                     'created_at'    => $entry->created_at->format('M jS, Y'),

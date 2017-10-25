@@ -9402,13 +9402,14 @@ form {
       h3 {
         text-align: center;
         font-weight: bold;
-        padding: 3px;
+        padding: 2px;
         text-align: center;
         margin: 0;
         font-size: 8px;
         line-height: 10px;
         width: 60px;
         word-wrap: break-word;
+        overflow: hidden;
         &, & > a {
           color: #fff !important;
         }
@@ -9451,8 +9452,8 @@ form {
       width: 80px; 
       height: 80px;
       div h3 {
-        font-size: 11px;
-        line-height: 13px;
+        font-size: 10px;
+        line-height: 12px;
         width: 80px;
       }   
     }
@@ -9471,8 +9472,8 @@ form {
       width: $med_grid_width + px; 
       height: $med_grid_width + px;
       div h3 {
-        font-size: 14px;
-        line-height: 17px;
+        font-size: 12px;
+        line-height: 15px;
         width: 107px;
       }
     }
