@@ -11387,13 +11387,14 @@ form #domain_input .anyshare_url {
 #entry_browse_grid .grid-item div h3 {
   text-align: center;
   font-weight: bold;
-  padding: 3px;
+  padding: 2px;
   text-align: center;
   margin: 0;
   font-size: 8px;
   line-height: 10px;
   width: 60px;
   word-wrap: break-word;
+  overflow: hidden;
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -11450,8 +11451,8 @@ form #domain_input .anyshare_url {
   }
 
   #entry_browse_grid .grid-item div h3 {
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 10px;
+    line-height: 12px;
     width: 80px;
   }
 
@@ -11475,8 +11476,8 @@ form #domain_input .anyshare_url {
   }
 
   #entry_browse_grid .grid-item div h3 {
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 12px;
+    line-height: 15px;
     width: 107px;
   }
 
