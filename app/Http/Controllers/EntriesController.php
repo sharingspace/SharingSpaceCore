@@ -676,12 +676,12 @@ class EntriesController extends Controller
             $offset = 0;
         }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        }
-        else {
-            $limit = 50;
-        }
+        //if (Input::has('limit')) { pagination stuff and we may need it one day - dsl
+        //    $limit = e(Input::get('limit'));
+        //}
+        //else {
+        //    $limit = 50;
+        //}
 
         $allowed_columns =
             [
@@ -695,8 +695,8 @@ class EntriesController extends Controller
         $order = Input::get('order') == 'desc' ? 'desc' : 'asc';
 
         $count = $entries->count();
-        $entries = $entries->orderBy($sort, $order);
-        $entries = $entries->skip($offset)->take($limit)->get();
+        $entries = $entries->orderBy($sort, $order)->get();
+        // $entries = $entries->skip($offset)->take($limit)->get(); pagination stuff and we may need it one day - dsl
 
         $rows = array();
 
