@@ -411,7 +411,7 @@ class CommunitiesController extends Controller
         }
 
 
-        return redirect()->route('community.edit.form')->with('success',
+        return redirect()->route('_edit_share')->with('success',
             trans('general.community.messages.save_edits'));
     }
 }

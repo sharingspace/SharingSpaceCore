@@ -171,8 +171,8 @@
             @endif
 
             @can('update-community', $whitelabel_group)
-              <li{!! (Route::is('community.edit.form') ? ' class="active"' : '') !!}>
-                <a href="{{ route('community.edit.form')}}"><i class="fa fa-lg fa-cog"></i></a>
+              <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
+                <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
               </li>
               @if ($whitelabel_group->requestCount())
               <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
