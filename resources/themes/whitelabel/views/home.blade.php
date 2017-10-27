@@ -9,6 +9,19 @@
 {{-- Page content --}}
 @section('content')
 
+<!-- Progress spinner for when we first load grid, table or map -->
+<div class="sk-cube-grid centered">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+</div>
+
 <section class="container padding-top-0">
     <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
     <div class="row margin-y-0">
@@ -73,6 +86,8 @@ $(document).ready(function() {
     var GRID_LOADED = false;
     var LIST_LOADED = false;
     var GRID_WIDTH = 100;
+    
+    $('.sk-cube-grid').fadeIn('fast');
 
     // debounce so filtering doesn't happen every millisecond
     function debounce(fn, threshold)
@@ -143,6 +158,8 @@ $(document).ready(function() {
 
     function tableLayout(data)
     {
+        $('.sk-cube-grid').fadeOut('slow');
+
         // Note I did have it that this function was being passed in the data so I didn't have to do a seperate
         // ajax call for list and grid, however for sorting this bootstrap library does a fresh ajax call
         // with the serach parameters and I haven't how to work around this yet.
@@ -236,6 +253,8 @@ $(document).ready(function() {
             $(item).attr('id', 'entry-'+ entry_id);
             $(item).html(contents);
         }
+        $('.sk-cube-grid').fadeOut('slow');
+
         masonryInit();
     }
 
