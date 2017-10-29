@@ -36,26 +36,26 @@ return [
     ],
 
     'cdn' => [
-        'secure' => env('CDN_HTTPS', '/assets'),
+        'secure'   => env('CDN_HTTPS', '/assets'),
         'insecure' => env('CDN_HTTP', '/assets'),
-        'default' => env('CDN_DEFAULT', '/assets'),
-	],
+        'default'  => env('CDN_DEFAULT', '/assets'),
+    ],
 
     'cloudflare' => [
-        'email' => env('CLOUDFLARE_EMAIL'),
+        'email'  => env('CLOUDFLARE_EMAIL'),
         'secret' => env('CLOUDFLARE_SECRET'),
     ],
 
     'github' => [
-        'client_id' => env('GITHUB_CLIENT'),
+        'client_id'     => env('GITHUB_CLIENT'),
         'client_secret' => env('GITHUB_SECRET'),
-        'redirect' => env('GITHUB_REDIRECT'),
+        'redirect'      => env('GITHUB_REDIRECT'),
     ],
 
     'google' => [
-        'client_id' => env('GOOGLE_CLIENT'),
+        'client_id'     => env('GOOGLE_CLIENT'),
         'client_secret' => env('GOOGLE_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT'),
+        'redirect'      => env('GOOGLE_REDIRECT'),
     ],
 
     'google_maps' => [
@@ -63,26 +63,30 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT'),
+        'client_id'     => env('FACEBOOK_CLIENT'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => env('FACEBOOK_REDIRECT'),
+        'redirect'      => env('FACEBOOK_REDIRECT'),
     ],
 
     'twitter' => [
-        'client_id' => env('TWITTER_CLIENT'),
+        'client_id'     => env('TWITTER_CLIENT'),
         'client_secret' => env('TWITTER_SECRET'),
-        'redirect' => env('TWITTER_REDIRECT'),
+        'redirect'      => env('TWITTER_REDIRECT'),
     ],
 
     'rollbar' => array(
         'access_token' => env('ROLLBAR_TOKEN'),
-        'level' => env('ROLLBAR_DEBUG_LVL', 'error'),
+        'level'        => env('ROLLBAR_DEBUG_LVL', 'error'),
     ),
 
     'slack' => array(
         'members' => env('SLACK_MEMBERS_TOKEN'),
-        'have' => env('SLACK_HAVE_TOKEN'),
-        'want' => env('SLACK_WANT_TOKEN'),
+        'have'    => env('SLACK_HAVE_TOKEN'),
+        'want'    => env('SLACK_WANT_TOKEN'),
     ),
+
+    'mapbox' => [
+        'access_token' => env('MAPBOX_TOKEN'),
+    ],
 
 ];

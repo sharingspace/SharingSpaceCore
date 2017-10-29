@@ -23,7 +23,9 @@
     "chrisbjr/api-guard": "3.1.*",
     "mcamara/laravel-localization": "1.2.*",
     "watson/validating": "^2.0",
-    "doctrine/dbal": "^2.5"
+    "doctrine/dbal": "^2.5",
+    "harrysbaraini/laravel-docker": "^0.1.0",
+    "laravel/tinker": "^1.0"
 
   },
   "repositories": [

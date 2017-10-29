@@ -186,6 +186,7 @@ return [
         Aws\Laravel\AwsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Harrysbaraini\Docker\DockerServiceProvider::class,
     ],
 
     /*

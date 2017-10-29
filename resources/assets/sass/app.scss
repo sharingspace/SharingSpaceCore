@@ -1339,7 +1339,7 @@ section {
 @media only screen and (min-width: $screen-sm-min) {
   .add_entry_button {
     margin-right:0;
-  } 
+  }
 }
 
 /* shadows */
@@ -2130,7 +2130,7 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
   	width: 170px;
   	z-index: 2;
   } */
-	
+
 	#slider h1 {
 		padding-top:130px;
 	}
@@ -2190,7 +2190,7 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
-   
+
     #mainMenu.sidebar-vertical {
       position: relative;
       width: 100%;
@@ -2210,7 +2210,7 @@ body.menu-vertical.menu-vertical-hide #mainMenu.sidebar-vertical #sidebar_vertic
       width: 100% !important;
     }
   }
-	
+
 	#slider h1 {
 		padding-top:50px;
 	}
@@ -5470,7 +5470,7 @@ section#slider {
 		font-weight: 400;
 		text-align: center;
 		text-shadow: 1px 1px 6px black;
-		line-height:70px!important; 
+		line-height:70px!important;
 		margin-bottom:10px;
   }
   h2 {
@@ -6962,7 +6962,7 @@ $shareFooter: 35px;
 #footer {
   color: rgba(255, 255, 255, 0.6);
   background: #313131;
-  height: $corpFooter; 
+  height: $corpFooter;
   > {
     .container {
       padding-top: 60px;
@@ -7386,7 +7386,7 @@ footer.sticky {
   section {
     div.row {
       > div {
-        margin-bottom:0; 
+        margin-bottom:0;
       }
       &.lightbox > div {
         margin-bottom: 0;
@@ -7657,7 +7657,7 @@ footer.sticky {
   padding: 5px 5px 5px 0;
 }
 
-.wl_usercover { 
+.wl_usercover {
   height: 300px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -7666,7 +7666,7 @@ footer.sticky {
 }
 
 #about_panel, #display_about {
-  text-align: center; 
+  text-align: center;
 }
 
 #about_panel {
@@ -7680,7 +7680,7 @@ footer.sticky {
       text-align:left;
     }
   }
-  
+
 
   .close_about:hover {
     cursor: pointer;
@@ -8099,7 +8099,7 @@ $color-green: #9AE14F;
     color:white;
     text-align:center;
     padding-top:100px;
-    margin-bottom:-5px; 
+    margin-bottom:-5px;
   }
 
   h2 {
@@ -8110,7 +8110,7 @@ $color-green: #9AE14F;
   }
 }
 
-.page_banner.about_banner { 
+.page_banner.about_banner {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('/assets/img/backgrounds/nepal_tech.jpg');
   background-position: 50% 0;
 }
@@ -8142,20 +8142,20 @@ $color-green: #9AE14F;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/tech_design.jpg');
   background-position: 50% 0;
 }
-.page_banner.sharing_fixed_banner { 
+.page_banner.sharing_fixed_banner {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/home_bg.jpg');
   background-position: 50% 0;
 }
-.page_banner.sharing_fixed_banner_3 { 
+.page_banner.sharing_fixed_banner_3 {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/hp_v3.jpg');
   background-position: 50% 0;
 }
-.page_banner.sharing_fixed_banner_2 { 
+.page_banner.sharing_fixed_banner_2 {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/sets.png');
   background-position: 50% 0;
 }
 
-.page_banner.sharing_fixed_banner_5 { 
+.page_banner.sharing_fixed_banner_5 {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1) ), url('/assets/img/backgrounds/hp/hp_5.jpg');
   background-position: 50% 0;
   .subheadline {
@@ -8320,7 +8320,7 @@ $color-green: #9AE14F;
 
 
   .bio {
-    width:40%; 
+    width:40%;
   }
 
   .name {
@@ -8387,7 +8387,7 @@ $color-green: #9AE14F;
     .col-md-4:nth-child(3n+1) {
       clear: none;
     }
-    
+
     .col-sm-6:nth-child(2n+1) {
       clear: left;
     }
@@ -8488,7 +8488,7 @@ $color-green: #9AE14F;
   }
 
   /* Add Animation */
-  .modal-content {    
+  .modal-content {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
@@ -8496,12 +8496,12 @@ $color-green: #9AE14F;
   }
 
   @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
+    from {-webkit-transform:scale(0)}
     to {-webkit-transform:scale(1)}
   }
 
   @keyframes zoom {
-    from {transform:scale(0)} 
+    from {transform:scale(0)}
     to {transform:scale(1)}
   }
 
@@ -8536,7 +8536,7 @@ $color-green: #9AE14F;
   margin-bottom: 15px;
 }
 
-#edit_entry {  
+#edit_entry {
   .fancy-form-select:before {
     right: 17px;
   }
@@ -8562,12 +8562,12 @@ $color-green: #9AE14F;
   height:250px;
   position:relative;
   margin:auto;
- 
+
   #image_box {
     position:absolute;
     top:0;
     width:250px;
-    height:250px; 
+    height:250px;
     background-image: url('');
     background-size: contain;
     background-position: center;
@@ -8686,10 +8686,10 @@ section.bucky, section.BanKiMoon, section.JohnDuda, section.TreborScholz, sectio
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
   color: #fff;
-  background-attachment:scroll;  
+  background-attachment:scroll;
 }
 
-section.charlieChaplin { 
+section.charlieChaplin {
   padding-top: 60px;
   padding-bottom: 60px;
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/about/forest.jpg");
@@ -8859,7 +8859,7 @@ section.TreborScholz {
   }
 
   section.we_celebrate
-  { 
+  {
     padding-top: 180px;
     padding-bottom: 180px;
     background-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .6), rgba(0, 0, 0, .4)), url('/assets/img/coop/iPadArcosanti.jpg');
@@ -8973,7 +8973,7 @@ section.TreborScholz {
  * Authorization
  *
  **/
- 
+
 #notifications {
   i {
     vertical-align:middle;
@@ -9064,7 +9064,7 @@ section.TreborScholz {
     padding: 2px 0;
     background-color: #fafafa;
     p {
-      margin-bottom: 15px; 
+      margin-bottom: 15px;
     }
   }
 }
@@ -9101,7 +9101,7 @@ section.TreborScholz {
     background-size: cover;
     padding: 55px 30px 10px;
   }
-  
+
   h2 {
     text-align: center;
     margin-bottom: 10px;
@@ -9141,7 +9141,7 @@ section.TreborScholz {
   }
 }
 
-#headerWrapper { 
+#headerWrapper {
   position: relative;
   top: 18%;
 
@@ -9164,7 +9164,7 @@ section.TreborScholz {
     font-weight: 600;
     position: relative;
   }
-  
+
   .hp_heading, .hp_subheading {
     text-align: left;
     text-shadow: 1px 1px 6px black;
@@ -9205,7 +9205,7 @@ section.TreborScholz {
 }
 
 .center-img-text .text {
-  position: absolute;  
+  position: absolute;
   left: 50%;                        /* horizontal alignment */
   top: 43%;                         /* vertical alignment */
   transform: translate(-50%, -43%); /* horizontal, vertical alignment fine tuning; explanation: http://stackoverflow.com/q/36817249 */
@@ -9305,7 +9305,7 @@ section.TreborScholz {
           color: inherit;
         }
       }
-      
+
       &.want {
         a {
           &:hover {
@@ -9361,7 +9361,7 @@ form {
       background-color: #eee;
       height: 40px;
       padding-top: 8px;
-      padding-left: 5px; 
+      padding-left: 5px;
     }
   }
 }
@@ -9389,7 +9389,7 @@ form {
     float: left;
     border-radius: 3px;
     background-size: cover;
-    width: 60px; 
+    width: 60px;
     height: 60px;
     margin-bottom: 6px;
     &:hover {
@@ -9443,25 +9443,25 @@ form {
     width: 126px;
     div h3 {
       width: 126px;
-    }   
+    }
   }
   .grid-item--height2 { height: 126px; }
 
   @media (min-width: $screen-sm-min) {
     .grid-item {
-      width: 80px; 
+      width: 80px;
       height: 80px;
       div h3 {
         font-size: 10px;
         line-height: 12px;
         width: 80px;
-      }   
+      }
     }
-    .grid-item--width2 { 
+    .grid-item--width2 {
       width: 166px;
       div h3 {
         width: 166px;
-      }  
+      }
     }
     .grid-item--height2 { height: 166px; }
   }
@@ -9469,7 +9469,7 @@ form {
   $med_grid_width: 105;
   @media (min-width: $screen-md-min) {
     .grid-item {
-      width: $med_grid_width + px; 
+      width: $med_grid_width + px;
       height: $med_grid_width + px;
       div h3 {
         font-size: 12px;
@@ -9481,11 +9481,11 @@ form {
       width: 2*$med_grid_width + 6 + px;
       div h3 {
         width: 2*$med_grid_width + 9 + px;
-      }  
+      }
     }
     .grid-item--height2 { height: 2*$med_grid_width + 8 + px; }
   }
-}   
+}
 
 #entry_browse_table {
   display: none;
