@@ -216,31 +216,7 @@
 
                 var markers = L.markerClusterGroup({});
 
-                for (var n = 1; n < 5; n++) {
-                    var item = JSON.parse(JSON.stringify(data.rows[0]));
-                    item.latitude = parseFloat(item.latitude - n);
-                    item.longitude = parseFloat(item.longitude - n);
-                    data.rows.push(item);
-
-                    item = JSON.parse(JSON.stringify(data.rows[0]));
-                    item.latitude = parseFloat(item.latitude - n);
-                    item.longitude = parseFloat(item.longitude - n);
-                    data.rows.push(item);
-
-                    item = JSON.parse(JSON.stringify(data.rows[0]));
-                    item.latitude = parseFloat(item.latitude + n);
-                    item.longitude = parseFloat(item.longitude + n);
-                    data.rows.push(item);
-
-                    item = JSON.parse(JSON.stringify(data.rows[0]));
-                    item.latitude = parseFloat(item.latitude + n);
-                    item.longitude = parseFloat(item.longitude + n);
-                    data.rows.push(item);
-                }
-
-                var count = data.rows.length;
-
-                for (var i = 0; i < count; i++) {
+                for (var i = 0; i < data.rows.total; i++) {
                     var item = data.rows[i];
                     var latlng = [item.latitude, item.longitude];
 
