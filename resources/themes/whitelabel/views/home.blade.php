@@ -271,17 +271,20 @@ $(document).ready(function() {
             success: function(data, textStatus, jqXHR)
             {
                 entryRows = data;
-                if (data['gridView']) {
+                if ('G' == data['entryLayout']) {
                     masonryLayout(data);
                     $('#listView').addClass("dim-icon");
                     entryClick();
                     GRID_LOADED = true;
                 }
-                else {
+                else if ('L' == data['entryLayout']) {
                     tableLayout(entryRows);
                     $('#entry_browse_table').show();
                     $('#gridView').addClass("dim-icon");
                     LIST_LOADED = true;
+                }
+                else {
+                    // map view
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)
