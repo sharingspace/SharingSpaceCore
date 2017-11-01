@@ -23,7 +23,7 @@
                         <li><a href="#advanced" data-toggle="tab">{{trans('general.community.advanced')}}</a></li>
                     </ul>
 
-                    <form method="post" action="{{ route('community.edit.save') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form method="post" action="{{ route('_edit_share') }}" enctype="multipart/form-data" autocomplete="off">
                         {!! csrf_field() !!}
                         <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000"/>
                         <div class="tab-content margin-top-20">
