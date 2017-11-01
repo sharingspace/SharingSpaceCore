@@ -138,7 +138,7 @@ class CommunitiesController extends Controller
         }
 
         // redirect them back to same form page, but this time display different content
-        return view('request-access', ['request_count'=>$request_count, 'justSubmitted' => true, 'name'=>$request->whitelabel_group->name]);
+        return view('request-access', ['request_count' => $request_count, 'justSubmitted' => true, 'name' => $request->whitelabel_group->name]);
     }
 
     /**
@@ -199,13 +199,13 @@ class CommunitiesController extends Controller
     public function postCreate(Request $request)
     {
         $token = $request->input('stripeToken');
-        
+
         // No stripe token - something went wrong :(
         if (!isset($token)) {
             return Redirect::back()->withInput()->with('error',
                 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
-        log::debug("postCreate: token = ".$token);
+        log::debug("postCreate: token = " . $token);
 
         $community = new Community();
         $community->name = e($request->input('name'));
@@ -219,10 +219,10 @@ class CommunitiesController extends Controller
 
         $customer = Auth::user();
         $metadata = array(
-            'name' => $customer->name,
-            'subdomain' => strtolower(e(Input::get('subdomain'))).config('session.domain'),
-            'email' => $customer->email,
-            'hub_name' => e(Input::get('name')),
+            'name'      => $customer->name,
+            'subdomain' => strtolower(e(Input::get('subdomain'))) . config('session.domain'),
+            'email'     => $customer->email,
+            'hub_name'  => e(Input::get('name')),
         );
 
         if ($customer->stripe_id == '') {
@@ -235,11 +235,11 @@ class CommunitiesController extends Controller
                 ]
             );
 
-            log::debug("postCreate: customer did not exist, new id = ".$customer->stripe_id);
+            log::debug("postCreate: customer did not exist, new id = " . $customer->stripe_id);
 
         }
         else {
-            log::debug("postCreate: customer does exist ".$customer->stripe_id);
+            log::debug("postCreate: customer does exist " . $customer->stripe_id);
         }
 
         $data['name'] = $customer->getDisplayName();
@@ -371,6 +371,7 @@ class CommunitiesController extends Controller
         $community->show_info_bar = e(Input::get('show_info_bar'));
         $community->entry_layout = e(Input::get('entry_layout'));
         $community->color = e(Input::get('theme_color'));
+        $community->wrld3d = e(Input::get('wrld3d'));
 
         if ($community->show_info_bar == null) {
             $community->show_info_bar = 1;
