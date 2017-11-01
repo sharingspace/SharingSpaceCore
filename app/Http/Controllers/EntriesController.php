@@ -647,9 +647,6 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
-        // eventually the default maybe an admin setting 
-        $gridView = ($request->whitelabel_group->getLayout() === "G");
-
         if ($user_id) {
             if (Auth::user() && (Auth::user()->id == $user_id)) {
                 // allow user to their hidden entries
@@ -808,7 +805,10 @@ class EntriesController extends Controller
             }
         }
 
-        return array('total' => $count, 'rows' => $rows, 'gridView' => $gridView);
+        // eventually the default maybe an admin setting
+        $viewType = $request->whitelabel_group->getLayout();
+
+        return array('total' => $count, 'rows' => $rows, 'viewType' => $viewType);
     }
 
 

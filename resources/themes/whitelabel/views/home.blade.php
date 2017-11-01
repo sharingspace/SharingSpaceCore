@@ -76,6 +76,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/export/bootstrap-table-export.min.js" integrity="sha256-Hn0j2CZE8BjcVTBcRLjiSJnLBMEHkdnsfDgYH3EAeVQ=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     <script src="{{ Helper::cdn('js/extensions/export/tableExport.js') }}"></script>
     <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
@@ -85,12 +86,15 @@
         $(document).ready(function () {
             var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
             var entryRows;
-            var GRID
+            var GRID;
             var qsRegex;
             var GRID_LOADED = false;
             var LIST_LOADED = false;
             var MAP_LOADED = false;
             var GRID_WIDTH = 100;
+            var mapMarkers = [];
+            var mapInstance;
+            var WRLD_3D_API_KEY = '{{ $whitelabel_group->wrld3d }}';
 
             // debounce so filtering doesn't happen every millisecond
             function debounce (fn, threshold) {
@@ -128,15 +132,29 @@
                         return qsRegex ? $(this).text().match(qsRegex) : true;
                     }
                 });
+            }
 
-                // unbind any previously attached handlers
-                $("#entry-search").unbind();
+            function gridSearch () {
+                var filter = $('#entry-search').val().toUpperCase();
 
-                // use value of search field to filter
-                var $quicksearch = $('#entry-search').keyup(debounce(function () {
-                    qsRegex = new RegExp($quicksearch.val(), 'gi');
-                    GRID.isotope();
-                }, 200));
+                qsRegex = new RegExp(filter, 'gi');
+                GRID.isotope();
+            }
+
+            function mapSearch () {
+                var filter = $('#entry-search').val().toUpperCase();
+
+                mapMarkers.forEach(function (marker) {
+                    marker.remove()
+                });
+
+                if (entryRows.rows.length) {
+                    for (var i = 0; i < entryRows.rows.length; i++) {
+                        if (entryRows.rows[i].title.toUpperCase().indexOf(filter) > -1) {
+                            addMapMarker(entryRows.rows[i]);
+                        }
+                    }
+                }
             }
 
             function tableSearch () {
@@ -195,51 +213,55 @@
                     }
                 });
 
-                // unbind any previously attached handlers
-                $("#entry-search").unbind();
+                bindSearch(tableSearch);
+            }
 
-                // use value of search field to filter
-                $('#entry-search').keyup(debounce(function () {
-                    tableSearch();
-                }, 200));
+            function addMapMarker (item) {
+                var marker = L.marker([item.latitude, item.longitude]);
+
+                marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
+                    .openTooltip();
+
+                marker.bindPopup(
+                    item.image + '<br>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b><br><br><em>' + item.exchangeTypes + '</em>'
+                );
+
+                console.log(item);
+
+                marker.addTo(mapInstance);
+                mapMarkers.push(marker);
             }
 
             function mapLayout (data) {
-                var map = L.map('entry_browse_map').setView([{{ $whitelabel_group->latitude }}, {{ $whitelabel_group->longitude }}], 13);
+                mapInstance = !!WRLD_3D_API_KEY
+                    ? L.Wrld.map('entry_browse_map', '9eec9549aa081cd21b92342f4dc36ac4')
+                    : L.map('entry_browse_map');
+
+                mapInstance.setView([{{ $whitelabel_group->latitude }}, {{ $whitelabel_group->longitude }}], 13)
 
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18,
                     id: 'mapbox.streets',
                     accessToken: '{{ config('services.mapbox.access_token') }}'
-                }).addTo(map);
+                }).addTo(mapInstance);
 
-                var markers = L.markerClusterGroup({});
+//                var markers = L.markerClusterGroup({});
 
-                for (var i = 0; i < data.rows.total; i++) {
-                    var item = data.rows[i];
-                    var latlng = [item.latitude, item.longitude];
-
-                    var marker = L.marker(latlng);
-
-                    marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
-                        .openTooltip();
-
-                    marker.bindPopup(
-                        item.image + '<br>' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b> at ' + item.location
-                    );
-
-                    markers.addLayer(marker);
+                for (var i = 0; i < data.total; i++) {
+                    addMapMarker(data.rows[i]);
                 }
 
-                map.addLayer(markers);
+//                map.addLayer(markers);
+
+                bindSearch(mapSearch);
             }
 
             function masonryLayout (data) {
                 var count = data['total'];
                 var item, contents, postType;
 
-                for (i = 0; i < count; i++) {
+                for (var i = 0; i < count; i++) {
                     item = $(".clone").clone().appendTo("#entry_browse_grid").removeClass('clone hidden');
                     postType = data['rows'][i]['post_type'];
                     natural_post_type = data['rows'][i]['natural_post_type'];
@@ -281,7 +303,10 @@
                     $(item).attr('id', 'entry-' + entry_id);
                     $(item).html(contents);
                 }
+
                 masonryInit();
+
+                bindSearch(gridSearch);
             }
 
 
@@ -294,34 +319,40 @@
                     success: function (data, textStatus, jqXHR) {
                         entryRows = data;
 
-                        if (data['gridView']) {
+                        if (data['viewType'] === 'G') {
                             masonryLayout(data);
                             $('#listView').addClass("dim-icon");
                             $('#mapView').addClass("dim-icon");
+                            $('#gridView').removeClass("dim-icon");
+                            $('#entry_browse_grid').show();
+                            $('#entry_browse_map').hide();
+                            $('#entry_browse_table').hide();
+
                             entryClick();
                             GRID_LOADED = true;
                             return;
                         }
 
-                        if (data['listView']) {
+                        if (data['viewType'] === 'L') {
                             tableLayout(entryRows);
-                            $('#entry_browse_list').show();
+                            $('#entry_browse_grid').hide();
                             $('#entry_browse_map').hide();
-                            $('#entry_browse_table').hide();
+                            $('#entry_browse_table').show();
                             $('#gridView').addClass("dim-icon");
                             $('#mapView').addClass("dim-icon");
+                            $('#listView').removeClass("dim-icon");
                             LIST_LOADED = true;
                             return;
                         }
 
-                        if (data['mapView']) {
+                        if (data['viewType'] === 'M') {
                             mapLayout(data);
                             $('#listView').addClass('dim-icon');
                             $('#gridView').addClass('dim-icon');
                             $('#entry_browse_table').hide();
-                            $('#entry_browse_list').hide();
+                            $('#entry_browse_grid').hide();
                             $('#entry_browse_map').show();
-                            LIST_LOADED = true;
+                            MAP_LOADED = true;
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
@@ -381,21 +412,28 @@
                 });
             });
 
+            function bindSearch (cb) {
+                // unbind any previously attached handlers
+                $("#entry-search").unbind();
+
+                // use value of search field to filter
+                $('#entry-search').keyup(debounce(function () {
+                    cb();
+                }, 200));
+
+                $('#entry-search').keyup();
+            }
+
             $("#listView").click(function () {
                 $('#entry_browse_table').hide();
+
                 if (!LIST_LOADED) {
                     // load up list view if we haven't before
                     tableLayout(entryRows);
                     LIST_LOADED = true;
                 }
 
-                // unbind any previously attached handlers
-                $("#entry-search").unbind();
-
-                // use value of search field to filter
-                $('#entry-search').keyup(debounce(function () {
-                    tableSearch();
-                }, 200));
+                bindSearch(tableSearch);
 
                 $('#entry-search').keyup();
                 $("#gridView").addClass("dim-icon");
@@ -413,6 +451,8 @@
                     MAP_LOADED = true;
                 }
 
+                bindSearch(mapSearch);
+
                 $('#gridView').addClass('dim-icon');
                 $('#listView').addClass('dim-icon');
                 $('#mapView').removeClass('dim-icon');
@@ -427,19 +467,14 @@
                     masonryLayout(entryRows);
                 }
 
-                // unbind any previously attached handlers
-                $("#entry-search").unbind();
-
-                // use value of search field to filter
-                var $quicksearch = $('#entry-search').keyup(debounce(function () {
-                    qsRegex = new RegExp($quicksearch.val(), 'gi');
-                    GRID.isotope();
-                }, 200));
+                bindSearch(gridSearch);
 
                 $('#entry-search').keyup();
                 $("#listView").addClass("dim-icon");
+                $("#mapView").addClass("dim-icon");
                 $("#gridView").removeClass("dim-icon");
                 $('#entry_browse_table').hide();
+                $('#entry_browse_map').hide();
                 $('#entry_browse_grid').show();
             });
 
