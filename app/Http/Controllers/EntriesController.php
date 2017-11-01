@@ -646,8 +646,7 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
-        // eventually the default maybe an admin setting 
-        $gridView = ($request->whitelabel_group->getLayout() === "G");
+        $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
 
         if ($user_id) {
             if (Auth::user() && (Auth::user()->id == $user_id)) {
@@ -801,7 +800,7 @@ class EntriesController extends Controller
             }
         }
 
-        return array('total' => $count, 'rows' => $rows, 'gridView' => $gridView);
+        return array('total' => $count, 'rows' => $rows, 'entryLayout' => $entryLayout);
     }
 
 
@@ -820,6 +819,7 @@ class EntriesController extends Controller
         $added = array();
 
         if ($tagName) {
+            //log::debug("getKioskEntries:  tagName supplied = ".$tagName .'   ');
             $entries = Entry::TagSearch($tagName)->get();
             $tagArray[] = $tagName;
         }
