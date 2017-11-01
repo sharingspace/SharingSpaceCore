@@ -464,18 +464,17 @@ Route::group(
 
                 Route::get(
                     'edit',
-                    array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'community.edit.form',
-                    'uses' => 'CommunitiesController@getEdit')
-                );
+                    [
+                        'middleware' => ['auth','community-edit'],
+                        'uses' => 'CommunitiesController@getEdit'
+                    ]
+                )->name('_edit_share');
 
                 Route::post(
                     'edit',
                     [
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'community.edit.save',
-                    'uses' => 'CommunitiesController@postEdit'
+                        'middleware' => ['auth','community-edit'],
+                        'uses' => 'CommunitiesController@postEdit'
                     ]
                 );
 

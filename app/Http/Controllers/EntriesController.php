@@ -805,8 +805,8 @@ class EntriesController extends Controller
             }
         }
 
-        // eventually the default maybe an admin setting
-        $viewType = $request->whitelabel_group->getLayout();
+        // get default entry layout. Default to grid
+        $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
 
         return array('total' => $count, 'rows' => $rows, 'viewType' => $viewType);
     }
@@ -827,6 +827,7 @@ class EntriesController extends Controller
         $added = array();
 
         if ($tagName) {
+            //log::debug("getKioskEntries:  tagName supplied = ".$tagName .'   ');
             $entries = Entry::TagSearch($tagName)->get();
             $tagArray[] = $tagName;
         }

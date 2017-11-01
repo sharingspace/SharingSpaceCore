@@ -32,6 +32,21 @@
             </div>
         </div>
     </section>
+    
+<!-- Progress spinner for when we first load grid, table or map -->
+<section class="container padding-top-0" style="position: relative;">
+    <div class="sk-cube-grid centered">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+    </div>
+</section>
 
     <!-- Begin entries table -->
     <section class="container browse_table">
@@ -176,6 +191,8 @@
             }
 
             function tableLayout (data) {
+                $('.sk-cube-grid').fadeOut('slow', 'swing', function(){$('.wl_usercover').css('opacity', 1);});
+
                 // Note I did have it that this function was being passed in the data so I didn't have to do a seperate
                 // ajax call for list and grid, however for sorting this bootstrap library does a fresh ajax call
                 // with the serach parameters and I haven't how to work around this yet.
@@ -429,6 +446,7 @@
 
                 if (!LIST_LOADED) {
                     // load up list view if we haven't before
+
                     tableLayout(entryRows);
                     LIST_LOADED = true;
                 }
