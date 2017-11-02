@@ -11,7 +11,6 @@
 @section('content')
 
     <section class="container">
-
         <div id="edit_wrapper" class="container margin-top-20">
             <div class="row">
                 <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.community.settings') }}</h1>
@@ -64,7 +63,7 @@
                                         <!-- Description -->
                                         <div class="form-group {{ $errors->first('about', 'has-error') }}">
                                             <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a target="_blank" href="
-https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown" target="_blank"><i class='fa fa-info-circle'></i></a> )
+https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i class='fa fa-info-circle'></i></a> )
                                                 <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info"
                                                           placeholder="{{trans('general.community.detailed_description')}}">{{ Input::old('about', $community->about) }}</textarea>
                                             </label>
