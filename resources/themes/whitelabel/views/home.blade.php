@@ -28,7 +28,9 @@
             <div class="col-sm-2 col-xs-4">
                 <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
                 <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
-                <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
+                @if ($whitelabel_group->hasGeolocation())
+                    <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
+                @endif
             </div>
         </div>
     </section>
@@ -226,18 +228,23 @@
                     item.image + '<br>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b><br><br><em>' + item.exchangeTypes + '</em>'
                 );
 
-                console.log(item);
-
                 marker.addTo(mapInstance);
                 mapMarkers.push(marker);
             }
 
             function mapLayout (data) {
+                var lat = parseFloat('{{ $whitelabel_group->latitude ?: '' }}');
+                var lng = parseFloat('{{ $whitelabel_group->longitude ?: '' }}');
+
+                if (!lat || !lng) {
+                    return;
+                }
+
                 mapInstance = !!WRLD_3D_API_KEY
-                    ? L.Wrld.map('entry_browse_map', '9eec9549aa081cd21b92342f4dc36ac4')
+                    ? L.Wrld.map('entry_browse_map', WRLD_3D_API_KEY)
                     : L.map('entry_browse_map');
 
-                mapInstance.setView([{{ $whitelabel_group->latitude }}, {{ $whitelabel_group->longitude }}], 13)
+                mapInstance.setView([lat, lng], 13)
 
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',

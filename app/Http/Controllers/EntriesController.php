@@ -808,6 +808,10 @@ class EntriesController extends Controller
         // eventually the default maybe an admin setting
         $viewType = $request->whitelabel_group->getLayout();
 
+        if ($viewType === 'M' && !$request->whitelabel_group->hasGeolocation()) {
+            $viewType = 'L';
+        }
+
         return array('total' => $count, 'rows' => $rows, 'viewType' => $viewType);
     }
 
