@@ -738,8 +738,7 @@ class EntriesController extends Controller
             $image = $entry->media->first();
 
             if ($image) {
-                $imageTag = '<a href="' . route('entry.view',
-                        $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
+                $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
                 $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $image->filename;
                 $url = url('/');
                 $aspect_ratio = 1;
@@ -808,7 +807,11 @@ class EntriesController extends Controller
         // get default entry layout. Default to grid
         $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
 
-        return array('total' => $count, 'rows' => $rows, 'viewType' => $viewType);
+        if ($entryLayout === 'M' && !$request->whitelabel_group->hasGeolocation()) {
+            $entryLayout = 'L';
+        }
+
+        return array('total' => $count, 'rows' => $rows, 'viewType' => $entryLayout);
     }
 
 

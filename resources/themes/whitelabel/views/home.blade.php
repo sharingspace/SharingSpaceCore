@@ -28,25 +28,27 @@
             <div class="col-sm-2 col-xs-4">
                 <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
                 <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
-                <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
+                @if ($whitelabel_group->hasGeolocation())
+                    <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
+                @endif
             </div>
         </div>
     </section>
-    
-<!-- Progress spinner for when we first load grid, table or map -->
-<section class="container padding-top-0" style="position: relative;">
-    <div class="sk-cube-grid centered">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
-    </div>
-</section>
+
+    <!-- Progress spinner for when we first load grid, table or map -->
+    <section class="container padding-top-0" style="position: relative;">
+        <div class="sk-cube-grid centered">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+        </div>
+    </section>
 
     <!-- Begin entries table -->
     <section class="container browse_table">
@@ -89,12 +91,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/export/bootstrap-table-export.min.js" integrity="sha256-Hn0j2CZE8BjcVTBcRLjiSJnLBMEHkdnsfDgYH3EAeVQ=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>
-    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     <script src="{{ Helper::cdn('js/extensions/export/tableExport.js') }}"></script>
     <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+    @if ($whitelabel_group->hasGeolocation())
+        <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    @else
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+        {{--<script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>--}}
+    @endif
 
     <script type="text/javascript">
 
@@ -191,7 +197,9 @@
             }
 
             function tableLayout (data) {
-                $('.sk-cube-grid').fadeOut('slow', 'swing', function(){$('.wl_usercover').css('opacity', 1);});
+                $('.sk-cube-grid').fadeOut('slow', 'swing', function () {
+                    $('.wl_usercover').css('opacity', 1);
+                });
 
                 // Note I did have it that this function was being passed in the data so I didn't have to do a seperate
                 // ajax call for list and grid, however for sorting this bootstrap library does a fresh ajax call
@@ -234,34 +242,44 @@
             }
 
             function addMapMarker (item) {
+                if (!item.latitude || !item.longitude) {
+                    return
+                }
+
                 var marker = L.marker([item.latitude, item.longitude]);
 
                 marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
                     .openTooltip();
 
-                marker.bindPopup(
-                    item.image + '<br>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b><br><br><em>' + item.exchangeTypes + '</em>'
-                );
+                var popupHtml = item.image + '<p>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></p><p><em>' + item.exchangeTypes + '</em></p>';
 
-                console.log(item);
-
+                marker.bindPopup(popupHtml);
                 marker.addTo(mapInstance);
                 mapMarkers.push(marker);
             }
 
             function mapLayout (data) {
+                var lat = parseFloat('{{ $whitelabel_group->latitude ?: '' }}');
+                var lng = parseFloat('{{ $whitelabel_group->longitude ?: '' }}');
+
+                if (!lat || !lng) {
+                    return;
+                }
+
                 mapInstance = !!WRLD_3D_API_KEY
-                    ? L.Wrld.map('entry_browse_map', '9eec9549aa081cd21b92342f4dc36ac4')
+                    ? L.Wrld.map('entry_browse_map', WRLD_3D_API_KEY)
                     : L.map('entry_browse_map');
 
-                mapInstance.setView([{{ $whitelabel_group->latitude }}, {{ $whitelabel_group->longitude }}], 13)
+                mapInstance.setView([lat, lng], 13)
 
-                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
-                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: '{{ config('services.mapbox.access_token') }}'
-                }).addTo(mapInstance);
+                if (!WRLD_3D_API_KEY) {
+                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                        maxZoom: 18,
+                        id: 'mapbox.streets',
+                        accessToken: '{{ config('services.mapbox.access_token') }}'
+                    }).addTo(mapInstance);
+                }
 
 //                var markers = L.markerClusterGroup({});
 

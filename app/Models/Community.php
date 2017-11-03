@@ -8,6 +8,7 @@
  * @package AnyShare
  * @version v1.0
  */
+
 namespace App\Models;
 
 use App\Collection;
@@ -30,25 +31,25 @@ class Community extends Model
     use UploadableFileTrait;
 
     /**
-    * The database table used by the model.
-    *
-    * @var string
-    */
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'communities';
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var boolean
+     */
     protected $injectUniqueIdentifier = true;
 
     protected $rules = [
-      'name'            => 'required|string|min:2|max:255',
-      'subdomain'       => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
-      'group_type'      => 'required',
+        'name'       => 'required|string|min:2|max:255',
+        'subdomain'  => 'required|alpha_dash|min:2|max:255|unique:communities,subdomain,NULL,deleted_at',
+        'group_type' => 'required',
     ];
 
     protected $dates = ['deleted_at', 'subdomain_expires_at', 'limittypes_expires_at'];
@@ -58,50 +59,50 @@ class Community extends Model
     */
 
     public static $uploadableImgs = [
-      'community-covers' =>
-        [
-          'height' => '300',
-          'width' => '1300',
-        ],
-      'community-logos' =>
-        [
-          'height' => '40',
-          'width' => '250',
-        ],
-      'community-profiles' =>
-        [
-          'height' => '250',
-          'width' => '250',
-        ],
+        'community-covers'   =>
+            [
+                'height' => '300',
+                'width'  => '1300',
+            ],
+        'community-logos'    =>
+            [
+                'height' => '40',
+                'width'  => '250',
+            ],
+        'community-profiles' =>
+            [
+                'height' => '250',
+                'width'  => '250',
+            ],
     ];
 
 
     /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
-    protected $fillable = ['name','subdomain','group_type','cover_img','profile_img','logo'];
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'subdomain', 'group_type', 'cover_img', 'profile_img', 'logo'];
 
     /**
-    * Relationship to get community owner
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Relationship to get community owner
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function owner()
     {
         return $this->belongsTo('App\Models\User', 'created_by');
     }
 
     /**
-    * Relationship for entries and communities
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Relationship for entries and communities
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function entries()
     {
         return $this->belongsToMany('App\Models\Entry', 'entries_community_join', 'community_id', 'entry_id');
@@ -109,26 +110,26 @@ class Community extends Model
 
 
     /**
-    * Get the members of a group.
-    * Groups belong to many users by way of the communities_users table.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Get the members of a group.
+     * Groups belong to many users by way of the communities_users table.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function members()
     {
-        return $this->belongsToMany('App\Models\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin','custom_label');
+        return $this->belongsToMany('App\Models\User', 'communities_users', 'community_id', 'user_id')->withPivot('is_admin', 'custom_label');
     }
 
-   /**
-    * Gets a list of join requests for the community, ignore anyone rejected or approved
-    *
-    * @author [D. Linnard] [<dslinnard@yahoo.com>]
-    * @param $request
-    * @since  [v1.0]
-    * @return View
-    */
+    /**
+     * Gets a list of join requests for the community, ignore anyone rejected or approved
+     *
+     * @author [D. Linnard] [<dslinnard@yahoo.com>]
+     * @param $request
+     * @since  [v1.0]
+     * @return View
+     */
     public function requests()
     {
         return $this->belongsToMany('App\Models\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_by')->whereNull('rejected_by')->withPivot('message');
@@ -136,12 +137,12 @@ class Community extends Model
 
 
     /**
-    * Mark that a user request to a closed hub has been rejected
-    *
-    * @author [D. Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Mark that a user request to a closed hub has been rejected
+     *
+     * @author [D. Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function rejectUser($rejected_by, $user_id, $community_id)
     {
         $user_request = \App\Models\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
@@ -151,13 +152,13 @@ class Community extends Model
     }
 
 
-   /**
-    * Mark that a user request to a closed hub has been accepted
-    *
-    * @author [D. Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return collection
-    */
+    /**
+     * Mark that a user request to a closed hub has been accepted
+     *
+     * @author [D. Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function acceptUser($approved_by, $user_id, $community_id)
     {
         $user_request = \App\Models\CommunityJoinRequest::where('user_id', '=', $user_id)->where('community_id', '=', $community_id)->first();
@@ -167,14 +168,14 @@ class Community extends Model
     }
 
 
-   /**
-    * Get the number of join requests for the community, ignore anyone rejected or approved
-    *
-    * @author [D. Linnard] [<dslinnard@yahoo.com>]
-    * @param $request
-    * @since  [v1.0]
-    * @return View
-    */    
+    /**
+     * Get the number of join requests for the community, ignore anyone rejected or approved
+     *
+     * @author [D. Linnard] [<dslinnard@yahoo.com>]
+     * @param $request
+     * @since  [v1.0]
+     * @return View
+     */
     public function requestCount()
     {
         return count($this->requests()->get());
@@ -182,30 +183,30 @@ class Community extends Model
 
 
     /**
-    * Get the admins of a community.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Get the admins of a community.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function admins()
     {
-        return $this->members()->where('is_admin','=',1);
+        return $this->members()->where('is_admin', '=', 1);
     }
 
     /**
-    * Get the cover image url based on app environment
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return string
-    */
+     * Get the cover image url based on app environment
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return string
+     */
     public function getCover()
     {
         $cover_img = null;
 
-        if ($this->cover_img!='') {
-            $cover_img = config('services.cdn.default').'/uploads/community-covers/'.$this->id.'/'.$this->cover_img;
+        if ($this->cover_img != '') {
+            $cover_img = config('services.cdn.default') . '/uploads/community-covers/' . $this->id . '/' . $this->cover_img;
         }
 
         return $cover_img;
@@ -213,35 +214,37 @@ class Community extends Model
 
 
     /**
-    * Get the logo image url based on app environment
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return string
-    */
+     * Get the logo image url based on app environment
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return string
+     */
     public function getLogo()
     {
 
         if ($this->logo) {
-            return config('services.cdn.default').'/uploads/community-logos/'.$this->id.'/'.$this->logo;
-        } else {
+            return config('services.cdn.default') . '/uploads/community-logos/' . $this->id . '/' . $this->logo;
+        }
+        else {
             return false;
         }
     }
 
     /**
-    * Get the profile image url based on app environment
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return string
-    */
+     * Get the profile image url based on app environment
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return string
+     */
     public function getProfileImg()
     {
 
-        if ($this->profile_img!='') {
-            return config('services.cdn.default').'/uploads/community-profiles/'.$this->id.'/'.$this->profile_img;
-        } else {
+        if ($this->profile_img != '') {
+            return config('services.cdn.default') . '/uploads/community-profiles/' . $this->id . '/' . $this->profile_img;
+        }
+        else {
             return false;
         }
     }
@@ -255,17 +258,17 @@ class Community extends Model
      */
     public function getCommunityUrl()
     {
-        return 'https://'.$this->subdomain.'.'.config('app.domain');
+        return 'https://' . $this->subdomain . '.' . config('app.domain');
     }
 
 
     /**
-    * Relationship for community subscription
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Relationship for community subscription
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function subscription()
     {
         return $this->hasOne('\App\Models\CommunitySubscription', 'id', 'community_id');
@@ -273,16 +276,16 @@ class Community extends Model
 
 
     /**
-    * Save the image to the DB. This method handles cover images, logos and profile images.
-    *
-    * @todo   Remove upload key, since it's not used here.
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return boolean
-    */
+     * Save the image to the DB. This method handles cover images, logos and profile images.
+     *
+     * @todo   Remove upload key, since it's not used here.
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return boolean
+     */
     public static function saveImageToDB($community_id, $filename, $type, $user_id = null, $upload_key = null)
     {
-        LOG::debug("Community::saveImageToDB ".$community_id.", ".$filename.", ".$type);
+        LOG::debug("Community::saveImageToDB " . $community_id . ", " . $filename . ", " . $type);
 
         if ($community = Community::find($community_id)) {
 
@@ -309,13 +312,13 @@ class Community extends Model
     }
 
     /**
-    * Get the exchange types allowed in this community.
-    * ExchangeType Types belong to many communities by way of the group_allowed_types table.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Get the exchange types allowed in this community.
+     * ExchangeType Types belong to many communities by way of the group_allowed_types table.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function exchangeTypes()
     {
         $exchanges = $this->belongsToMany('App\Models\ExchangeType', 'community_allowed_types', 'community_id', 'type_id')->withTimestamps();
@@ -325,12 +328,12 @@ class Community extends Model
 
 
     /**
-    * Query scope to only return publicly viewable communities.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query scope to only return publicly viewable communities.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeIsPublic()
     {
         return $this->where('group_type', '!=', 'S');
@@ -338,72 +341,72 @@ class Community extends Model
 
 
     /**
-    * Query scope to only return publicly viewable communities.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query scope to only return publicly viewable communities.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function viewNavItems()
     {
         return ((\Auth::check() && \Auth::user()->canSeeCommunity($this)) || $this->group_type != 'S');
     }
 
     /**
-    * Can view members page
-    *
-    * @author [D.Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return Boolean
-    */    
+     * Can view members page
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return Boolean
+     */
     public function viewMembers()
     {
         return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type != 'S'));
     }
 
     /**
-    * Can view browse page
-    *
-    * @author [D.Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return Boolean
-    */
+     * Can view browse page
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return Boolean
+     */
     public function viewBrowse()
     {
         return ((\Auth::check() && \Auth::user()->isMemberOfCommunity($this)) || ($this->group_type != 'S'));
     }
 
     /**
-    * Is a community open?
-    *
-    * @author [D.Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return Boolean
-    */
+     * Is a community open?
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return Boolean
+     */
     public function isOpen()
     {
         return ($this->group_type == 'O');
     }
 
     /**
-    * Is a community closed?
-    *
-    * @author [D.Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return Boolean
-    */
+     * Is a community closed?
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return Boolean
+     */
     public function isClosed()
     {
         return ($this->group_type == 'C');
     }
 
     /**
-    * Is a community secret?
-    *
-    * @author [D.Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return Boolean
-    */
+     * Is a community secret?
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return Boolean
+     */
     public function isSecret()
     {
         return ($this->group_type == 'S');
@@ -411,27 +414,27 @@ class Community extends Model
 
 
     /**
-    * Get entry layout mode, grid or list
-    *
-    * @author [D.Linnard] [<dslinnard@yahoo.com>]
-    * @since  [v1.0]
-    * @return "G" or "L"
-    */
+     * Get entry layout mode, grid or list
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return "G" or "L"
+     */
     public function getLayout()
     {
         return $this->entry_layout;
     }
 
     /**
-    * scopeEntriesInCommunity
-    * Get all entries that are in the current community
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @param  $query
-    * @param  array $categoryIdListing
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * scopeEntriesInCommunity
+     * Get all entries that are in the current community
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @param        $query
+     * @param  array $categoryIdListing
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeEntriesInCommunity($query)
     {
         return $query->whereIn('category_id', $categoryIdListing);
@@ -441,9 +444,19 @@ class Community extends Model
     {
         // find out whther they have already asked to join this share
         return $request_count = DB::table('community_join_requests')
-        ->where('user_id', '=', $user_id)
-        ->where('community_id', '=', $this->id)
-        ->whereNull('approved_by')
-        ->count();
+            ->where('user_id', '=', $user_id)
+            ->where('community_id', '=', $this->id)
+            ->whereNull('approved_by')
+            ->count();
+    }
+
+    /**
+     * Return wether the community has geolocation set up.
+     *
+     * @return bool
+     */
+    public function hasGeolocation()
+    {
+        return $this->latitude && $this->longitude;
     }
 }
