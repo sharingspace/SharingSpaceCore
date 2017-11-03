@@ -738,8 +738,7 @@ class EntriesController extends Controller
             $image = $entry->media->first();
 
             if ($image) {
-                $imageTag = '<a href="' . route('entry.view',
-                        $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
+                $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
                 $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $image->filename;
                 $url = url('/');
                 $aspect_ratio = 1;

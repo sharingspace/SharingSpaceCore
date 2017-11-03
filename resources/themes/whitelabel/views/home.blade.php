@@ -91,12 +91,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/export/bootstrap-table-export.min.js" integrity="sha256-Hn0j2CZE8BjcVTBcRLjiSJnLBMEHkdnsfDgYH3EAeVQ=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>
-    <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     <script src="{{ Helper::cdn('js/extensions/export/tableExport.js') }}"></script>
     <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+
+    @if ($whitelabel_group->hasGeolocation())
+        <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    @else
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+        {{--<script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>--}}
+    @endif
 
     <script type="text/javascript">
 
@@ -238,15 +242,18 @@
             }
 
             function addMapMarker (item) {
+                if (!item.latitude || !item.longitude) {
+                    return
+                }
+
                 var marker = L.marker([item.latitude, item.longitude]);
 
                 marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
                     .openTooltip();
 
-                marker.bindPopup(
-                    item.image + '<br>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b><br><br><em>' + item.exchangeTypes + '</em>'
-                );
+                var popupHtml = item.image + '<p>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></p><p><em>' + item.exchangeTypes + '</em></p>';
 
+                marker.bindPopup(popupHtml);
                 marker.addTo(mapInstance);
                 mapMarkers.push(marker);
             }
@@ -265,12 +272,14 @@
 
                 mapInstance.setView([lat, lng], 13)
 
-                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
-                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                    maxZoom: 18,
-                    id: 'mapbox.streets',
-                    accessToken: '{{ config('services.mapbox.access_token') }}'
-                }).addTo(mapInstance);
+                if (!WRLD_3D_API_KEY) {
+                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
+                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                        maxZoom: 18,
+                        id: 'mapbox.streets',
+                        accessToken: '{{ config('services.mapbox.access_token') }}'
+                    }).addTo(mapInstance);
+                }
 
 //                var markers = L.markerClusterGroup({});
 
