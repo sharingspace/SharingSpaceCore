@@ -830,8 +830,7 @@ class EntriesController extends Controller
         $added = array();
 
         if ($tagName) {
-            //log::debug("getKioskEntries:  tagName supplied = ".$tagName .'   ');
-            $entries = Entry::TagSearch($tagName)->get();
+            $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%'.$tagName.'%')->get();
             $tagArray[] = $tagName;
         }
         else {

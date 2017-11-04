@@ -281,8 +281,6 @@ class Entry extends Model
     }
 
 
-
-
     /**
     * Query builder scope to search on text
     *
@@ -294,7 +292,6 @@ class Entry extends Model
     */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where('title', 'LIKE', "%$search%")
             ->orWhere('location', 'LIKE', "%$search%")
             ->orWhere('description', 'LIKE', "%$search%")
@@ -321,19 +318,5 @@ class Entry extends Model
     public function isOwnedBy($user)
     {
         return $this->created_by === $user->id;
-    }
-
-    /**
-    * Query builder scope to search on tag text
-    *
-    * @author [D. Linnard] [<david@linnard.com>]
-    * @since  [v1.0]
-    * @param Illuminate\Database\Query\Builder $query  Query builder instance
-    * @param text                              $search Search term
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public static function scopeTagSearch($query, $search)
-    {
-        return $query->where('tags', 'LIKE', "%$search%")->where('visible', 1)->NotCompleted();
     }
 }
