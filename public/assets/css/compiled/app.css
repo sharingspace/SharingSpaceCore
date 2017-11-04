@@ -10072,11 +10072,21 @@ Quick add
   * Sharing hub browse page
   */
 
-.browse_table .fixed-table-container table {
+#browse_table {
+  display: none;
+}
+
+#browse_table #entry_browse_table {
+  margin-bottom: 30px;
+  padding: 0;
+  font-size: 13px;
+}
+
+#browse_table .fixed-table-container table {
   width: 99%;
 }
 
-.browse_table img.entry_image {
+#browse_table img.entry_image {
   width: auto;
   max-width: 70px;
   height: auto;
@@ -10087,7 +10097,7 @@ Quick add
   margin: 0 auto;
 }
 
-.browse_table td {
+#browse_table td {
   vertical-align: middle !important;
 }
 
@@ -11490,13 +11500,6 @@ form #domain_input .anyshare_url {
   }
 }
 
-#entry_browse_table {
-  display: none;
-  margin-bottom: 30px;
-  padding: 0;
-  font-size: 13px;
-}
-
 .fa-list:hover,
 .fa-th:hover {
   cursor: pointer;
@@ -11595,11 +11598,22 @@ form #domain_input .anyshare_url {
   font-size: 16px;
 }
 
-.sort-icon {
+.sort-icons {
+  float: right;
+}
+
+.sort-icons .sort-icon {
   padding: 2px 3px;
   border-radius: 3px;
   float: left;
-  margin-left: 8px;
+  margin-left: 12px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 992px) {
+  .sort-icons .sort-icon {
+    margin-bottom: 0;
+  }
 }
 
 #entry-search::-webkit-input-placeholder {

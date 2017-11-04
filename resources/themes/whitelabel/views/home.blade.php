@@ -19,24 +19,25 @@
 
 {{-- Page content --}}
 @section('content')
-
-    <section class="container padding-top-0">
+ 
+    <section class="container padding-top-15 padding-bottom-25">
         <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
-        <div class="row margin-y-0">
-            <div class="col-sm-10 col-xs-8">
-                <input id="entry-search" class="form-control" type="text" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search" onfocus="this.placeholder=''" onblur="this.placeholder='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search'">
+        <div class="row">
+            <div class="col-sm-3 col-sm-push-9 col-xs-12">
+                <div class="sort-icons">
+                    <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
+                    <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
+                    <i class="fa fa-2x fa-map-o sort-icon" title="map view" id="mapView"></i>
+                </div>
             </div>
-
-            <div class="col-sm-2 col-xs-4">
-                <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
-                <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
-                <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
+            <div class="col-sm-9 col-sm-pull-3 col-xs-12">
+                <input id="entry-search" class="form-control" type="text" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search" onfocus="this.placeholder=''" onblur="this.placeholder='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search'">
             </div>
         </div>
     </section>
 
     <!-- Begin entries table -->
-    <section class="container browse_table">
+    <section id="browse_table" class="container">
         <table class="table table-condensed"
                name="communityListings"
                id="entry_browse_table"
@@ -386,7 +387,7 @@
                             $('#gridView').removeClass("dim-icon");
                             $('#entry_browse_grid').show();
                             $('#entry_browse_map').hide();
-                            $('#entry_browse_table').hide();
+                            $('#browse_table').hide();
 
                             entryClick();
                             GRID_LOADED = true;
@@ -397,7 +398,7 @@
                             tableLayout(entryRows);
                             $('#entry_browse_grid').hide();
                             $('#entry_browse_map').hide();
-                            $('#entry_browse_table').show();
+                            $('#browse_table').show();
                             $('#gridView').addClass("dim-icon");
                             $('#mapView').addClass("dim-icon");
                             $('#listView').removeClass("dim-icon");
@@ -409,7 +410,7 @@
                             mapLayout(data);
                             $('#listView').addClass('dim-icon');
                             $('#gridView').addClass('dim-icon');
-                            $('#entry_browse_table').hide();
+                            $('#browse_table').hide();
                             $('#entry_browse_grid').hide();
                             $('#entry_browse_map').show();
                             MAP_LOADED = true;
@@ -485,7 +486,7 @@
             }
 
             $("#listView").click(function () {
-                $('#entry_browse_table').hide();
+                $('#browse_table').hide();
 
                 if (!LIST_LOADED) {
                     // load up list view if we haven't before
@@ -502,7 +503,7 @@
                 $("#listView").removeClass("dim-icon");
                 $('#entry_browse_grid').hide();
                 $('#entry_browse_map').hide();
-                $('#entry_browse_table').show();
+                $('#browse_table').show();
             });
 
             $("#mapView").click(function () {
@@ -518,7 +519,7 @@
                 $('#listView').addClass('dim-icon');
                 $('#mapView').removeClass('dim-icon');
                 $('#entry_browse_grid').hide();
-                $('#entry_browse_table').hide();
+                $('#browse_table').hide();
                 $('#entry_browse_map').show();
             });
 
@@ -534,7 +535,7 @@
                 $("#listView").addClass("dim-icon");
                 $("#mapView").addClass("dim-icon");
                 $("#gridView").removeClass("dim-icon");
-                $('#entry_browse_table').hide();
+                $('#browse_table').hide();
                 $('#entry_browse_map').hide();
                 $('#entry_browse_grid').show();
             });
