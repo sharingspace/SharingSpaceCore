@@ -808,9 +808,9 @@ class EntriesController extends Controller
         // get default entry layout. Default to grid
         $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
 
-        if ($entryLayout === 'M' && !$request->whitelabel_group->hasGeolocation()) {
-            $entryLayout = 'L';
-        }
+//        if ($entryLayout === 'M' && !$request->whitelabel_group->hasGeolocation()) {
+//            $entryLayout = 'L';
+//        }
 
         return array('total' => $count, 'rows' => $rows, 'viewType' => $entryLayout);
     }

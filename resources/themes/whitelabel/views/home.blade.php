@@ -255,24 +255,42 @@
                 var popupHtml = '<button class="map-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>';
 
                 marker.bindPopup(popupHtml);
-                marker.addTo(mapInstance);
                 mapMarkers.push(marker);
+                marker.addTo(mapInstance);
+
+                return marker;
             }
 
             function mapLayout (data) {
                 var lat = parseFloat('{{ $whitelabel_group->latitude ?: '' }}');
                 var lng = parseFloat('{{ $whitelabel_group->longitude ?: '' }}');
 
-                if (!lat || !lng) {
-                    return;
-                }
-
                 mapInstance = !!WRLD_3D_API_KEY
                     ? L.Wrld.map('entry_browse_map', WRLD_3D_API_KEY)
                     : L.map('entry_browse_map');
 
-                mapInstance.setView([lat, lng], 13)
+                // Add every entry location to the map
+                for (var i = 0; i < data.total; i++) {
+                    addMapMarker(data.rows[i]);
+                }
 
+                // Check whether latitude and longitude where provided by
+                // Sharing Network. When it does, we use the provived location
+                // to set the map view, otherwise we calculate it based on
+                // a bound of all markers.
+                if (lat && lng) {
+                    mapInstance.setView([lat, lng], 13);
+                } else {
+                    var points = [];
+                    mapMarkers.forEach(function (mk) {
+                        points.push([mk.getLatLng().lat, mk.getLatLng().lng]);
+                    });
+
+                    mapInstance.fitBounds(points);
+                }
+
+                // When map is not set up with WRLD 3D, we add a tile layer to the
+                // leaflet version.
                 if (!WRLD_3D_API_KEY) {
                     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
                         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -283,10 +301,6 @@
                 }
 
 //                var markers = L.markerClusterGroup({});
-
-                for (var i = 0; i < data.total; i++) {
-                    addMapMarker(data.rows[i]);
-                }
 
 //                map.addLayer(markers);
 
