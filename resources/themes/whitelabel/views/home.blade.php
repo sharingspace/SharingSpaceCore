@@ -117,6 +117,7 @@
             var mapInstance;
             var WRLD_3D_API_KEY = '{{ $whitelabel_group->wrld3d }}';
 
+            $('.sk-cube-grid').show();
             // debounce so filtering doesn't happen every millisecond
             function debounce (fn, threshold) {
                 var timeout;
@@ -133,6 +134,13 @@
 
                     timeout = setTimeout(delayed, threshold || 100);
                 }
+            }
+
+            function fadeOutSpinner()
+            {
+                $('.sk-cube-grid').fadeOut('slow', 'swing', function () {
+                    $('.wl_usercover').css('opacity', 1);
+                });
             }
 
             function masonryInit () {
@@ -171,6 +179,9 @@
 
                 if (entryRows.rows.length) {
                     for (var i = 0; i < entryRows.rows.length; i++) {
+                        if (typeof entryRows.rows[i].title === "undefined") {
+                            continue;
+                        }
                         if (entryRows.rows[i].title.toUpperCase().indexOf(filter) > -1) {
                             addMapMarker(entryRows.rows[i]);
                         }
@@ -197,9 +208,7 @@
             }
 
             function tableLayout (data) {
-                $('.sk-cube-grid').fadeOut('slow', 'swing', function () {
-                    $('.wl_usercover').css('opacity', 1);
-                });
+                fadeOutSpinner();
 
                 // Note I did have it that this function was being passed in the data so I didn't have to do a seperate
                 // ajax call for list and grid, however for sorting this bootstrap library does a fresh ajax call
@@ -242,10 +251,10 @@
             }
 
             function addMapMarker (item) {
-                if (!item.latitude || !item.longitude) {
+                if (!$.isNumeric(item.latitude) || !$.isNumeric(item.longitude)) {
                     return
                 }
-
+                //console.log(item.latitude+ '  '+ item.longitude);
                 var marker = L.marker([item.latitude, item.longitude]);
 
                 marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
@@ -290,6 +299,7 @@
 //                map.addLayer(markers);
 
                 bindSearch(mapSearch);
+                fadeOutSpinner();
             }
 
             function masonryLayout (data) {
@@ -338,7 +348,8 @@
                     $(item).attr('id', 'entry-' + entry_id);
                     $(item).html(contents);
                 }
-
+                
+                fadeOutSpinner();
                 masonryInit();
 
                 bindSearch(gridSearch);
