@@ -82,7 +82,7 @@ class Community extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'subdomain', 'group_type', 'cover_img', 'profile_img', 'logo'];
+    protected $fillable = ['name', 'subdomain', 'group_type', 'cover_img', 'profile_img', 'logo', 'wrld3d'];
 
     /**
      * Relationship to get community owner

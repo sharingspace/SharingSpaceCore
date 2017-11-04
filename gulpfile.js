@@ -11,34 +11,35 @@ require('laravel-elixir-codeception');
  |
  */
 
-elixir(function(mix) {
-    mix.sass(['app.scss', 'essentials.scss'],'public/assets/css/compiled');
+elixir(function (mix) {
+    mix.sass(['app.scss', 'essentials.scss'], 'public/assets/css/compiled');
+    mix.sass(['map.scss'], 'public/assets/css/compiled/map.css');
 
     mix.codeception();
 });
 
-elixir(function(mix) {
-    mix.sass('color_scheme/darkBlue.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/oceanBlue.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/lightBlue.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/orange.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/blue.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/purple.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/brown.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/cyan.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/amber.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/gray.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/lime.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/darkGray.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/black.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/white_blue.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/white_gray.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/white_green.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/white_orange.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/white_pink.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/black_white.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/green.scss','public/assets/css/color_scheme');
-    mix.sass('color_scheme/purple_pink.scss','public/assets/css/color_scheme');
+elixir(function (mix) {
+    mix.sass('color_scheme/darkBlue.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/oceanBlue.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/lightBlue.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/orange.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/blue.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/purple.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/brown.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/cyan.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/amber.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/gray.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/lime.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/darkGray.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/black.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_blue.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_gray.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_green.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_orange.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/white_pink.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/black_white.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/green.scss', 'public/assets/css/color_scheme');
+    mix.sass('color_scheme/purple_pink.scss', 'public/assets/css/color_scheme');
 
     mix.codeception();
 });

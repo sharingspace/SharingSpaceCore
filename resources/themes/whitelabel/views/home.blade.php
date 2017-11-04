@@ -11,8 +11,10 @@
           integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
           crossorigin=""/>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.1.0/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.1.0/dist/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="{{ asset('/assets/css/compiled/map.css') }}" type="text/css">
+
+    {{--<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.1.0/dist/MarkerCluster.css">--}}
+    {{--<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.1.0/dist/MarkerCluster.Default.css">--}}
 @endsection
 
 {{-- Page content --}}
@@ -28,9 +30,7 @@
             <div class="col-sm-2 col-xs-4">
                 <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
                 <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
-                @if ($whitelabel_group->hasGeolocation())
-                    <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
-                @endif
+                <i class="fa fa-2x fa-map sort-icon" title="map view" id="mapView"></i>
             </div>
         </div>
     </section>
@@ -95,11 +95,11 @@
     <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 
-    @if ($whitelabel_group->hasGeolocation())
-        <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
-    @else
+    @if (is_null($whitelabel_group->wrld3d))
         <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
         {{--<script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>--}}
+    @else
+        <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     @endif
 
     <script type="text/javascript">
@@ -251,7 +251,8 @@
                 marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
                     .openTooltip();
 
-                var popupHtml = item.image + '<p>' + item.author_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></p><p><em>' + item.exchangeTypes + '</em></p>';
+//                var popupHtml = '<p><a href="' + item.url + '">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a></p><p><em>' + item.exchangeTypes + '</em></p>';
+                var popupHtml = '<button class="map-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>';
 
                 marker.bindPopup(popupHtml);
                 marker.addTo(mapInstance);
