@@ -8224,7 +8224,13 @@ $color-green: #9AE14F;
 /**
   * Sharing hub browse page
   */
-.browse_table {
+#browse_table {
+  display: none;
+  #entry_browse_table {
+    margin-bottom: 30px;
+    padding: 0;
+    font-size: 13px
+  }
   .fixed-table-container table {
     width: 99%; // seems to fix the annoying horizontal scroll bar bootstrap datatables
   }
@@ -9517,13 +9523,6 @@ form {
   }
 }
 
-#entry_browse_table {
-  display: none;
-  margin-bottom: 30px;
-  padding: 0;
-  font-size: 13px
-}
-
 .fa-list, .fa-th {
   &:hover {
     cursor: pointer;
@@ -9613,11 +9612,18 @@ form {
   font-size: 16px;
 }
 
-.sort-icon {
-  padding: 2px 3px;
-  border-radius: 3px;
-  float: left;
-  margin-left: 8px;
+.sort-icons {
+  float: right;
+  .sort-icon {
+    padding: 2px 3px;
+    border-radius: 3px;
+    float: left;
+    margin-left: 12px;
+    margin-bottom: 10px;
+    @media (min-width: $screen-md-min) {
+      margin-bottom: 0;
+    }
+  }
 }
 
 #entry-search {
