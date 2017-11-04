@@ -9665,7 +9665,7 @@ form {
 .sk-cube-grid {
   width: 53px;
   height: 53px;
-  margin: 100px auto;
+  margin: 0 auto;
   display: none;
 }
 
@@ -9756,7 +9756,10 @@ form {
 }
 
 .centered {
-  position: fixed; /* or absolute */
-  top: 40%;
+  position: fixed;
+  top: 50%;
   left: 50%;
+  margin-left: 8px;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

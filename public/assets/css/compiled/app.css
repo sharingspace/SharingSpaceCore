@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/** ************************************************
+/** ************************************************ 
 
 	TABLE CONTENTS
 	-------------------------------
@@ -11652,7 +11652,7 @@ form #domain_input .anyshare_url {
 .sk-cube-grid {
   width: 53px;
   height: 53px;
-  margin: 100px auto;
+  margin: 0 auto;
   display: none;
 }
 
@@ -11746,9 +11746,11 @@ form #domain_input .anyshare_url {
 
 .centered {
   position: fixed;
-  /* or absolute */
-  top: 40%;
+  top: 50%;
   left: 50%;
+  margin-left: 8px;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 /** ************************************* **
 
