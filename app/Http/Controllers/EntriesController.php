@@ -830,7 +830,7 @@ class EntriesController extends Controller
         $added = array();
 
         if ($tagName) {
-            $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%'.$tagName.'%')->get();
+            $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%'.$tagName.'%')->where('visible', 1)->NotCompleted()->get();
             $tagArray[] = $tagName;
         }
         else {
