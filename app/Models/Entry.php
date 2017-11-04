@@ -309,7 +309,6 @@ class Entry extends Model
      */
     public function scopeTextSearch($query, $search)
     {
-
         return $query->where('title', 'LIKE', "%$search%")
             ->orWhere('location', 'LIKE', "%$search%")
             ->orWhere('description', 'LIKE', "%$search%")
