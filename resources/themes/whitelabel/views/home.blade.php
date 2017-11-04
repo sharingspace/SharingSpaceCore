@@ -35,21 +35,6 @@
         </div>
     </section>
 
-    <!-- Progress spinner for when we first load grid, table or map -->
-    <section class="container padding-top-0" style="position: relative;">
-        <div class="sk-cube-grid centered">
-            <div class="sk-cube sk-cube1"></div>
-            <div class="sk-cube sk-cube2"></div>
-            <div class="sk-cube sk-cube3"></div>
-            <div class="sk-cube sk-cube4"></div>
-            <div class="sk-cube sk-cube5"></div>
-            <div class="sk-cube sk-cube6"></div>
-            <div class="sk-cube sk-cube7"></div>
-            <div class="sk-cube sk-cube8"></div>
-            <div class="sk-cube sk-cube9"></div>
-        </div>
-    </section>
-
     <!-- Begin entries table -->
     <section class="container browse_table">
         <table class="table table-condensed"
@@ -87,6 +72,19 @@
         <!-- End entries map -->
     </section>
 
+    <!-- Progress spinner for when we first load grid, table or map -->
+    <div class="sk-cube-grid centered">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+    </div>    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
@@ -118,6 +116,7 @@
             var WRLD_3D_API_KEY = '{{ $whitelabel_group->wrld3d }}';
 
             $('.sk-cube-grid').show();
+
             // debounce so filtering doesn't happen every millisecond
             function debounce (fn, threshold) {
                 var timeout;
@@ -576,6 +575,18 @@
                     }
                 }
             });
+
+            /* Utility routine to place a marker at the center of the page
+            Neds to be called froma  window resize as well */
+            function showPageCenter()
+            {
+                var cX = $('body').width()/2;
+                var cY = $('body').height()/2;
+                if ($('body .centerMarker').length) {
+                    $('body .centerMarker').remove();
+                }
+                $('body').append('<i class="fa fa-bullseye centerMarker" style="color: orange; position: absolute; top:'+cY+'px; left:'+cX+'px;">');
+            }
         });
 
     </script>
