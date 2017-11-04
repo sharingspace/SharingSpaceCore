@@ -762,6 +762,7 @@ class EntriesController extends Controller
                 $rows[] = array(
                     'image'             => $imageTag,
                     'image_url'         => $image_url,
+                    'url'               => $entry->url,
                     'post_type'         => strtoupper($entry->post_type) . $completed,
                     'entry_id'          => $entry->id,
                     'title'             => (strlen($entry->title) + strlen($entry->author->getDisplayName()) > 30) ? substr($entry->title, 0, 27) . '&hellip;' : $entry->title,
@@ -807,9 +808,9 @@ class EntriesController extends Controller
         // get default entry layout. Default to grid
         $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
 
-        if ($entryLayout === 'M' && !$request->whitelabel_group->hasGeolocation()) {
-            $entryLayout = 'L';
-        }
+//        if ($entryLayout === 'M' && !$request->whitelabel_group->hasGeolocation()) {
+//            $entryLayout = 'L';
+//        }
 
         return array('total' => $count, 'rows' => $rows, 'viewType' => $entryLayout);
     }
