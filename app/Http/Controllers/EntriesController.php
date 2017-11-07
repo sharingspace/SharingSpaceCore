@@ -762,7 +762,8 @@ class EntriesController extends Controller
                 $rows[] = array(
                     'image'             => $imageTag,
                     'image_url'         => $image_url,
-                    'url'               => $entry->url,
+                    'title_link'        => '<a href="' . route('entry.view', $entry->id) . '">' . $entry->title . '</>',
+                    'post_type_link'    => '<a href="' . route('entry.view', $entry->id) . '">' . strtoupper($entry->post_type) . $completed . '</>',
                     'post_type'         => strtoupper($entry->post_type) . $completed,
                     'entry_id'          => $entry->id,
                     'title'             => (strlen($entry->title) + strlen($entry->author->getDisplayName()) > 30) ? substr($entry->title, 0, 27) . '&hellip;' : $entry->title,
@@ -790,6 +791,8 @@ class EntriesController extends Controller
                 $rows[] = array(
                     'image'         => '-',
                     'image-url'     => '-',
+                    'title_link'    => '-',
+                    'post_type_link'    => '-',
                     'post_type'     => '-',
                     'entry_id'      => $entry->id,
                     'author'        => '-',
