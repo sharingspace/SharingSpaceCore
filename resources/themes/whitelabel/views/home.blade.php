@@ -143,6 +143,15 @@
                 });
             }
 
+            function bindEntryClick ()
+            {
+                $('.grid-item').on('click', function () {
+                    console.log("entry click");
+                    var id = $(this).attr('id').split('-')[1];
+                    window.open('/entry/' + id, '_self');
+                });
+            }
+
             function masonryInit () {
                 GRID_WIDTH = parseInt($('.grid-item').css('width').replace(/[^-\d\.]/g, ''));
                 GRID = $('#entry_browse_grid').isotope({
@@ -389,7 +398,7 @@
                             $('#entry_browse_map').hide();
                             $('#browse_table').hide();
 
-                            entryClick();
+                            bindEntryClick();
                             GRID_LOADED = true;
                             return;
                         }
@@ -529,6 +538,7 @@
                     masonryLayout(entryRows);
                 }
 
+                bindEntryClick()
                 bindSearch(gridSearch);
 
                 $('#entry-search').keyup();
@@ -553,13 +563,6 @@
                 $('#entry_browse_grid').isotope({ sortBy: sortName });
                 return false;
             });
-
-            function entryClick () {
-                $('.grid-item').on('click', function () {
-                    var id = $(this).attr('id').split('-')[1];
-                    window.open('/entry/' + id, '_self');
-                });
-            }
 
             $(window).resize(function () {
                 if (GRID_LOADED) {
