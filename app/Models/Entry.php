@@ -71,12 +71,12 @@ class Entry extends Model
     ];
 
     public static $tagList = [
-        "art",
+        "art supplies",
         "ecology",
         "skills",
         "learning opportunities",
-        "community resources",
-        "meet a resident",
+        "building resources",
+        "meet a neighbor",
         "free",
         "upcycle projects",
         "dreams",
