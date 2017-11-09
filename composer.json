@@ -25,7 +25,8 @@
     "watson/validating": "^2.0",
     "doctrine/dbal": "^2.5",
     "harrysbaraini/laravel-docker": "^0.1.0",
-    "laravel/tinker": "^1.0"
+    "laravel/tinker": "^1.0",
+    "spatie/laravel-blade-javascript": "1.1.0"
 
   },
   "repositories": [
