@@ -1,11 +1,9 @@
 /** Browns
  ******************************************************************/
-
 ::-moz-selection {
   color: #fff;
   background-color: #4db6ac;
 }
-
 ::selection {
   color: #fff;
   background-color: #4db6ac;
@@ -39,18 +37,11 @@
   color: #af8300;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-th {
+h1, h2, h3, h4, h5, h6, th {
   color: rgba(0, 0, 0, 0.87);
 }
 
-p,
-td {
+p, td {
   color: rgba(0, 0, 0, 0.54);
 }
 
@@ -58,22 +49,19 @@ td {
   border-bottom-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-.want_square,
-.have_square {
+.want_square, .have_square {
   width: 40px;
   height: 40px;
   border-radius: 3px;
   display: block;
 }
 
-.want_square,
-.want_color {
+.want_square, .want_color {
   background-color: #95d4ce;
   border: 1px solid #95d4ce;
 }
 
-.have_square,
-.have_color {
+.have_square, .have_color {
   background-color: #44a69c;
   border: 1px solid #44a69c;
 }
@@ -138,69 +126,50 @@ td {
   color: #000 !important;
 }
 
-#share_content a,
-#share_content .btn-default,
-#aboutModal a,
-#aboutModal .btn-default {
+#share_content a, #share_content .btn-default, #aboutModal a, #aboutModal .btn-default {
   color: #4db6ac !important;
 }
 
-#share_content a.btn-social,
-#share_content .btn-default.btn-social,
-#aboutModal a.btn-social,
-#aboutModal .btn-default.btn-social {
+#share_content a.btn-social, #share_content .btn-default.btn-social, #aboutModal a.btn-social, #aboutModal .btn-default.btn-social {
   color: #fff !important;
 }
 
-#share_content a:hover,
-#share_content .btn-default:hover,
-#aboutModal a:hover,
-#aboutModal .btn-default:hover {
+#share_content a:hover, #share_content .btn-default:hover, #aboutModal a:hover, #aboutModal .btn-default:hover {
   color: #b24953 !important;
 }
 
-#share_content .btn.focus,
-#share_content .btn:focus,
-#share_content .btn:hover,
-#aboutModal .btn.focus,
-#aboutModal .btn:focus,
-#aboutModal .btn:hover {
+#share_content .btn.focus, #share_content .btn:focus, #share_content .btn:hover, #aboutModal .btn.focus, #aboutModal .btn:focus, #aboutModal .btn:hover {
   background-color: #fff !important;
   color: #4db6ac !important;
   text-decoration: none;
 }
 
-#share_content .btn-colored,
-#aboutModal .btn-colored {
+#share_content .btn-colored, #aboutModal .btn-colored {
   background-color: #4db6ac !important;
   border-color: #28615b;
   color: #fff !important;
 }
 
-#share_content .btn-colored:hover,
-#aboutModal .btn-colored:hover {
+#share_content .btn-colored:hover, #aboutModal .btn-colored:hover {
   background-color: #fff !important;
   color: #4db6ac !important;
   border: 1px solid #28615b;
   text-decoration: none;
 }
 
-#share_content .btn-light-colored,
-#aboutModal .btn-light-colored {
+#share_content .btn-light-colored, #aboutModal .btn-light-colored {
   background-color: #78c8c0;
   border-color: #4db6ac;
   color: #fff !important;
 }
 
-#share_content .btn-dark-colored,
-#aboutModal .btn-dark-colored {
+#share_content .btn-dark-colored, #aboutModal .btn-dark-colored {
   background-color: #3a8c84;
   border-color: #28615b;
   color: #fff !important;
 }
 
-#share_content #entry_view .close,
-#aboutModal #entry_view .close {
+#share_content #entry_view .close, #aboutModal #entry_view .close {
   color: #4db6ac;
 }
 
@@ -209,8 +178,7 @@ td {
 #share_content .pagination > .active > a:hover,
 #share_content .pagination > .active > span,
 #share_content .pagination > .active > span:focus,
-#share_content .pagination > .active > span:hover,
-#aboutModal .pagination > .active > a,
+#share_content .pagination > .active > span:hover, #aboutModal .pagination > .active > a,
 #aboutModal .pagination > .active > a:focus,
 #aboutModal .pagination > .active > a:hover,
 #aboutModal .pagination > .active > span,
@@ -235,3 +203,5 @@ td {
 .sort-icon.dim-icon {
   opacity: 0.3;
 }
+
+/*# sourceMappingURL=amber.css.map */

@@ -82,7 +82,7 @@ class Community extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'subdomain', 'group_type', 'cover_img', 'profile_img', 'logo', 'wrld3d'];
+    protected $fillable = ['name', 'subdomain', 'group_type', 'cover_img', 'profile_img', 'logo', 'wrld3d', 'lat', 'lng'];
 
     /**
      * Relationship to get community owner
@@ -135,6 +135,41 @@ class Community extends Model
         return $this->belongsToMany('App\Models\User', 'community_join_requests', 'community_id', 'user_id')->whereNull('approved_by')->whereNull('rejected_by')->withPivot('message');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLatitudeAttribute()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set the lat attribute when code tries to change latitude attribute.
+     *
+     * @param $value
+     */
+    public function setLatitudeAttribute($value)
+    {
+        $this->attributes['lat'] = $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitudeAttribute()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set the lng attribute when code tries to update longitude attribute.
+     *
+     * @param $value
+     */
+    public function setLongitudeAttribute($value)
+    {
+        $this->attributes['lng'] = $value;
+    }
 
     /**
      * Mark that a user request to a closed hub has been rejected

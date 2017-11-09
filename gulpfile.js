@@ -1,5 +1,5 @@
 var elixir = require('laravel-elixir');
-require('laravel-elixir-codeception');
+// require('laravel-elixir-codeception');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -12,13 +12,11 @@ require('laravel-elixir-codeception');
  */
 
 elixir(function (mix) {
+    mix.webpack('maps.js', 'public/assets/js/compiled/maps.js');
+
     mix.sass(['app.scss', 'essentials.scss'], 'public/assets/css/compiled');
     mix.sass(['map.scss'], 'public/assets/css/compiled/map.css');
 
-    mix.codeception();
-});
-
-elixir(function (mix) {
     mix.sass('color_scheme/darkBlue.scss', 'public/assets/css/color_scheme');
     mix.sass('color_scheme/oceanBlue.scss', 'public/assets/css/color_scheme');
     mix.sass('color_scheme/lightBlue.scss', 'public/assets/css/color_scheme');
@@ -41,5 +39,5 @@ elixir(function (mix) {
     mix.sass('color_scheme/green.scss', 'public/assets/css/color_scheme');
     mix.sass('color_scheme/purple_pink.scss', 'public/assets/css/color_scheme');
 
-    mix.codeception();
+    // mix.codeception();
 });
