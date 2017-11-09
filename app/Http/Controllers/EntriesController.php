@@ -206,9 +206,12 @@ class EntriesController extends Controller
             $latlong = Helper::latlong(Input::get('location'));
         }
 
-        if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-            $entry->latitude = $latlong['lat'];
-            $entry->longitude = $latlong['lng'];
+        if (Input::get('latitude')) {
+            $entry->latitude = e(Input::get('latitude'));
+        }
+
+        if (Input::get('longitude')) {
+            $entry->longitude = e(Input::get('longitude'));
         }
 
         if ($request->whitelabel_group->entries()->save($entry)) {
@@ -496,12 +499,14 @@ class EntriesController extends Controller
 
             if (Input::get('location')) {
                 $entry->location = e(Input::get('location'));
-                $latlong = Helper::latlong(Input::get('location'));
             }
 
-            if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-                $entry->latitude = $latlong['lat'];
-                $entry->longitude = $latlong['lng'];
+            if (Input::get('latitude')) {
+                $entry->latitude = e(Input::get('latitude'));
+            }
+
+            if (Input::get('longitude')) {
+                $entry->longitude = e(Input::get('longitude'));
             }
 
             if (!$entry->save()) {

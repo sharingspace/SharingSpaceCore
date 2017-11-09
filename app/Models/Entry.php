@@ -13,6 +13,7 @@ namespace App\Models;
 
 use App\Collection;
 use App\Illuminate;
+use App\Illuminate\Database\Query\Builder;
 use App\Models\Media;
 use App\no;
 use App\text;
@@ -58,6 +59,13 @@ class Entry extends Model
         'qty'       => 'required|numeric|min:1',
     ];
 
+    /**
+     * Append mutated attributes to the Array and JSON casting.
+     *
+     * @var array
+     */
+    protected $appends = ['latitude', 'longitude'];
+
     /*
     * Set traits for uploadable image
     */
@@ -95,7 +103,7 @@ class Entry extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'post_type', 'qty'];
+    protected $fillable = ['title', 'post_type', 'qty', 'lat', 'lng'];
 
 
     /**
@@ -132,6 +140,42 @@ class Entry extends Model
     public function exchangeTypes()
     {
         return $this->belongsToMany('App\Models\ExchangeType', 'entries_exchange_types', 'entry_id', 'type_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitudeAttribute()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set the lat attribute when code tries to change latitude attribute.
+     *
+     * @param $value
+     */
+    public function setLatitudeAttribute($value)
+    {
+        $this->attributes['lat'] = $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitudeAttribute()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set the lng attribute when code tries to update longitude attribute.
+     *
+     * @param $value
+     */
+    public function setLongitudeAttribute($value)
+    {
+        $this->attributes['lng'] = $value;
     }
 
     /**
@@ -288,9 +332,9 @@ class Entry extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
-     * @param Illuminate\Database\Query\Builder $query  Query builder instance
-     * @param text                              $search Search term
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @param Builder $query  Query builder instance
+     * @param text    $search Search term
+     * @return Builder          Modified query builder
      */
     public function scopeNotCompleted($query)
     {
@@ -303,9 +347,9 @@ class Entry extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
-     * @param Illuminate\Database\Query\Builder $query  Query builder instance
-     * @param text                              $search Search term
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @param Builder $query  Query builder instance
+     * @param text    $search Search term
+     * @return Builder          Modified query builder
      */
     public function scopeTextSearch($query, $search)
     {
@@ -342,9 +386,9 @@ class Entry extends Model
      *
      * @author [D. Linnard] [<david@linnard.com>]
      * @since  [v1.0]
-     * @param Illuminate\Database\Query\Builder $query  Query builder instance
-     * @param text                              $search Search term
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @param Builder $query  Query builder instance
+     * @param text    $search Search term
+     * @return Builder          Modified query builder
      */
     public static function scopeTagSearch($query, $search)
     {

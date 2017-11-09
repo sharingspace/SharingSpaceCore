@@ -7,6 +7,7 @@
  * @package AnyShare
  * @version v1.0
  */
+
 namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
@@ -42,11 +43,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     */
 
     public static $uploadableImgs = [
-      'users' =>
-        [
-          'height' => '250',
-          'width' => '250'
-        ]
+        'users' =>
+            [
+                'height' => '250',
+                'width'  => '250',
+            ],
     ];
 
     /**
@@ -62,7 +63,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['first_name', 'last_name', 'email','password','stripe_id','display_name'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'stripe_id', 'display_name', 'lat', 'lng'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -78,12 +79,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $rules = [
-        'display_name'     => 'required|string|min:2|max:255',
-        'email' => 'required|email|max:255|unique:users',
-        'website'           => 'url|nullable',
-        'fb_url'           => 'url|nullable',
+        'display_name' => 'required|string|min:2|max:255',
+        'email'        => 'required|email|max:255|unique:users',
+        'website'      => 'url|nullable',
+        'fb_url'       => 'url|nullable',
         'twitter'      => 'url|nullable',
-        'google'        => 'url|nullable',
+        'google'       => 'url|nullable',
         'pinterest'    => 'url|nullable',
         'youtube'      => 'url|nullable',
     ];
@@ -95,12 +96,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Return a user's subscriptions.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Return a user's subscriptions.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function subscriptions()
     {
         return $this->hasMany('App\Models\CommunitySubscription', 'billable_id');
@@ -108,83 +109,120 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Return a user's social accounts.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Return a user's social accounts.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function social()
     {
         return $this->hasMany('App\Models\Social', 'user_id');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLatitudeAttribute()
+    {
+        return $this->lat;
+    }
 
     /**
-    * Returns whether a user is a superadmin.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return boolean
-    */
+     * Set the lat attribute when code tries to change latitude attribute.
+     *
+     * @param $value
+     */
+    public function setLatitudeAttribute($value)
+    {
+        $this->attributes['lat'] = $value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitudeAttribute()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set the lng attribute when code tries to update longitude attribute.
+     *
+     * @param $value
+     */
+    public function setLongitudeAttribute($value)
+    {
+        $this->attributes['lng'] = $value;
+    }
+
+    /**
+     * Returns whether a user is a superadmin.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return boolean
+     */
     public function isSuperAdmin()
     {
-        if ($this->superadmin=='1') {
+        if ($this->superadmin == '1') {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
 
     /**
-    * Returns whether or not the user is an admin of a community
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param object $community
-    * @since  [v1.0]
-    * @return boolean
-    */
+     * Returns whether or not the user is an admin of a community
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param object $community
+     * @since  [v1.0]
+     * @return boolean
+     */
     public function isAdminOfCommunity($community)
     {
         return $this->communities()
-            ->where('community_id', '=', $community->id)
-            ->where('is_admin', '=', '1')
-            ->count() > 0;
+                ->where('community_id', '=', $community->id)
+                ->where('is_admin', '=', '1')
+                ->count() > 0;
     }
 
 
     /**
-    * Returns whether or not the user can administer a community.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param object $community
-    * @since  [v1.0]
-    * @return boolean
-    */
+     * Returns whether or not the user can administer a community.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param object $community
+     * @since  [v1.0]
+     * @return boolean
+     */
     public function canAdmin($community)
     {
-        if (($this->isAdminOfCommunity($community)) ||  ($this->superadmin=='1')) {
+        if (($this->isAdminOfCommunity($community)) || ($this->superadmin == '1')) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
 
     /**
-    * Return whether or not the user can view the community.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param object $community
-    * @since  [v1.0]
-    * @return boolean
-    */
+     * Return whether or not the user can view the community.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param object $community
+     * @since  [v1.0]
+     * @return boolean
+     */
     public function canSeeCommunity($community)
     {
-        LOG::debug("canSeeCommunity: entered user id = ". $this->id.",  user name = ".$this->display_name. ", community id = ".$community->id.",  community name = ".$community->name);
+        LOG::debug("canSeeCommunity: entered user id = " . $this->id . ",  user name = " . $this->display_name . ", community id = " . $community->id . ",  community name = " . $community->name);
 
-        if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type=='O') { 
+        if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type == 'O') {
             LOG::debug("canSeeCommunity: user can see hub");
             return true;
         }
@@ -196,45 +234,47 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Return the URL of the user's avatar (or gravatar)
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param object $community
-    * @since  [v1.0]
-    * @return string
-    */
+     * Return the URL of the user's avatar (or gravatar)
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param object $community
+     * @since  [v1.0]
+     * @return string
+     */
     public function gravatar_img($size = null)
     {
         if (!empty($this->avatar_img)) {
             //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
-            return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img;
-        } 
-        else if (!empty($this->gravatar)) {
-            // this can one day be removed or used to store the gravatar email hash
-            //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
-            return config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar;
+            return config('services.cdn.default') . "/uploads/users/" . $this->id . "/" . $this->avatar_img;
         }
         else {
-            return "https://gravatar.com/avatar/".md5(strtolower(trim($this->email)))."?d=mm&s=200";
+            if (!empty($this->gravatar)) {
+                // this can one day be removed or used to store the gravatar email hash
+                //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->gravatar);
+                return config('services.cdn.default') . "/uploads/users/" . $this->id . "/" . $this->gravatar;
+            }
+            else {
+                return "https://gravatar.com/avatar/" . md5(strtolower(trim($this->email))) . "?d=mm&s=200";
+            }
         }
-     }
+    }
 
 
     /**
-    * Stores the social accounts associated with a user.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param object $socialUser
-    * @param string $provider
-    * @since  [v1.0]
-    * @return mixed
-    */
+     * Stores the social accounts associated with a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param object $socialUser
+     * @param string $provider
+     * @since  [v1.0]
+     * @return mixed
+     */
     public static function saveSocialAccount($socialUser, $provider)
     {
         // Check to see if a user exists in the users table first
-        $user =  User::where('email', '=', $socialUser->getEmail())->first();
+        $user = User::where('email', '=', $socialUser->getEmail())->first();
 
-         // There is NOT a matching email address in the user table
+        // There is NOT a matching email address in the user table
         if (!$user) {
             $user = new User;
             $user->email = $socialUser->getEmail();
@@ -246,45 +286,46 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         $social = $user->social()->firstOrNew(
-            ['user_id' => $user->id,
-            'service'=>$provider,
-            'uid' => $socialUser->getId()
+            [
+                'user_id' => $user->id,
+                'service' => $provider,
+                'uid'     => $socialUser->getId(),
             ]
         );
 
-          $social->access_token = $socialUser->token;
-          $social->save();
+        $social->access_token = $socialUser->token;
+        $social->save();
 
         return $user;
     }
 
 
     /**
-    * Checks to see if a user's social info has already been saved
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param object $community
-    * @since  [v1.0]
-    * @return User
-    */
+     * Checks to see if a user's social info has already been saved
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param object $community
+     * @since  [v1.0]
+     * @return User
+     */
     public static function checkForSocialLoginDBRecord($user, $provider)
     {
         return DB::table('social')
-         ->where('access_token', '=', $user->token)
-         ->where('service', '=', $provider)
-         ->first();
+            ->where('access_token', '=', $user->token)
+            ->where('service', '=', $provider)
+            ->first();
     }
 
 
     /**
-    * Registers a new user
-    *
-    * @todo More documentation on how this works.
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param array $data
-    * @since  [v1.0]
-    * @return User
-    */
+     * Registers a new user
+     *
+     * @todo   More documentation on how this works.
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param array $data
+     * @since  [v1.0]
+     * @return User
+     */
     public static function register($data = [])
     {
         return static::create($data);
@@ -292,56 +333,56 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Returns communities by user
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Returns communities by user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function communities()
     {
         return $this->belongsToMany('\App\Models\Community', 'communities_users', 'user_id', 'community_id')->withPivot('custom_label');
     }
 
- 
+
     /**
-    * Returns entries by user
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Returns entries by user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function entries()
     {
-		return $this->hasMany('\App\Models\Entry','created_by');
+        return $this->hasMany('\App\Models\Entry', 'created_by');
     }
 
 
     /**
-    * Checks if a user is a member of a community
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param Community $community
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Checks if a user is a member of a community
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Community $community
+     * @since  [v1.0]
+     * @return collection
+     */
     public function isMemberOfCommunity($community)
     {
         $communityCount = $this->communities()->where('community_id', '=', $community->id)->count();
-        $superAdmin =  $this->isSuperAdmin();
-        LOG::debug("isMemberOfCommunity: entered community->id: ".$community->id."  count = ".$communityCount.",  super Admin = ".$superAdmin);
+        $superAdmin = $this->isSuperAdmin();
+        LOG::debug("isMemberOfCommunity: entered community->id: " . $community->id . "  count = " . $communityCount . ",  super Admin = " . $superAdmin);
 
         return ($communityCount || $superAdmin);
     }
 
 
     /**
-    * Returns communities by user
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Returns communities by user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function getSlackUsername($community)
     {
         return $this->belongsToMany('App\Models\User', 'communities_users', 'community_id', 'user_id')->withPivot('slack_name');
@@ -357,10 +398,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getCustomLabelInCommunity($community)
     {
-        $this_community = $this->communities()->where('community_id','=',$community->id)->first();
+        $this_community = $this->communities()->where('community_id', '=', $community->id)->first();
         if ($this_community) {
             return $this_community->pivot->custom_label;
-        } else {
+        }
+        else {
             return 'deleted';
         }
 
@@ -375,21 +417,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Returns the user full name, it simply concatenates
-    * the user first and last name.
-    *
-    * @return string
-    */
+     * Returns the user full name, it simply concatenates
+     * the user first and last name.
+     *
+     * @return string
+     */
     public function getDisplayName()
     {
 
         if ($this->display_name) {
             return ucwords($this->display_name);
-        } elseif (($this->first_name) && ($this->last_name)) {
+        }
+        elseif (($this->first_name) && ($this->last_name)) {
             return "{$this->first_name} {$this->last_name}";
-        } elseif ($this->first_name) {
+        }
+        elseif ($this->first_name) {
             return $this->first_name;
-        } else {
+        }
+        else {
             return "Anonymous";
         }
 
@@ -405,46 +450,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function conversations()
     {
-        return $this->hasMany('\App\Models\Conversation','started_by');
+        return $this->hasMany('\App\Models\Conversation', 'started_by');
     }
 
 
     /**
-    * Gets messages sent to user
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return collection
-    */
+     * Gets messages sent to user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return collection
+     */
     public function messagesTo()
     {
-		return $this->hasMany('\App\Models\Message','sent_to');
-    }
-
-
-    /**
-    * Get the count of unread messages
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-     * @param integer $limit
-    * @return collection
-    */
-    public function getLimitedUnreadMessages() {
-    	static $unread_cache;
-
-    	if ($unread_cache) {
-    		return $unread_cache;
-    	} else {
-			$unread_messages = Message::with('sender','conversation')
-			->where('sent_to', '=', $this->id)
-			->whereNull('read_on')
-            ->orderBy('messages.created_at', 'DESC');
-
-            $unread_messages = $unread_messages->take(5)->get();
-			$unread_cache = $unread_messages;
-			return $unread_messages;
-    	}
+        return $this->hasMany('\App\Models\Message', 'sent_to');
     }
 
 
@@ -456,13 +475,43 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param integer $limit
      * @return collection
      */
-    public function getUnreadMessagesCount() {
+    public function getLimitedUnreadMessages()
+    {
+        static $unread_cache;
+
+        if ($unread_cache) {
+            return $unread_cache;
+        }
+        else {
+            $unread_messages = Message::with('sender', 'conversation')
+                ->where('sent_to', '=', $this->id)
+                ->whereNull('read_on')
+                ->orderBy('messages.created_at', 'DESC');
+
+            $unread_messages = $unread_messages->take(5)->get();
+            $unread_cache = $unread_messages;
+            return $unread_messages;
+        }
+    }
+
+
+    /**
+     * Get the count of unread messages
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @param integer $limit
+     * @return collection
+     */
+    public function getUnreadMessagesCount()
+    {
         static $unread_count_cache;
 
         if ($unread_count_cache) {
             return $unread_count_cache;
-        } else {
-            $unread_messages_count = Message::with('sender','conversation')
+        }
+        else {
+            $unread_messages_count = Message::with('sender', 'conversation')
                 ->where('sent_to', '=', $this->id)
                 ->whereNull('read_on')->count();
 
@@ -473,16 +522,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Save the image to the DB. This method handles cover images, logos and profile images.
-    *
-    * @todo   Remove upload key, since it's not used here.
-    * @author [D. Linnard] [<dslinnard@gmail.com>]
-    * @since  [v1.0]
-    * @return boolean
-    */
+     * Save the image to the DB. This method handles cover images, logos and profile images.
+     *
+     * @todo   Remove upload key, since it's not used here.
+     * @author [D. Linnard] [<dslinnard@gmail.com>]
+     * @since  [v1.0]
+     * @return boolean
+     */
     public static function saveImageToDB($user_id, $filename, $type, $id = null, $upload_key = null)
     {
-        LOG::debug("User::saveImageToDB ".$user_id.", ".$filename.", ".$type);
+        LOG::debug("User::saveImageToDB " . $user_id . ", " . $filename . ", " . $type);
 
         if ($user = User::find($user_id)) {
             $user->avatar_img = $filename;
@@ -497,21 +546,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-    * Deletes a users avatar
-    *
-    * @author [D. Linnard] [<david@linnard.com>]
-    * @since  [v1.0]
-    * @param int $user_id
-    * @return boolean
-    */
+     * Deletes a users avatar
+     *
+     * @author [D. Linnard] [<david@linnard.com>]
+     * @since  [v1.0]
+     * @param int $user_id
+     * @return boolean
+     */
     public static function deleteAvatar($user_id)
     {
         if ($user = User::find($user_id)) {
             if ($user->avatar_img) {
-                $filename = public_path().'/assets/uploads/users'.$user_id.'/'.$user->avatar_img;
+                $filename = public_path() . '/assets/uploads/users' . $user_id . '/' . $user->avatar_img;
                 \File::Delete($filename);
-                if (!\File::exists($filename))
-                {
+                if (!\File::exists($filename)) {
                     $user->avatar_img = null;
                     if ($user->save()) {
                         return true;

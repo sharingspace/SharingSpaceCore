@@ -19,7 +19,7 @@
 
 {{-- Page content --}}
 @section('content')
- 
+
     <section class="container padding-top-15 padding-bottom-25">
         <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
         <div class="row">
@@ -84,7 +84,10 @@
         <div class="sk-cube sk-cube7"></div>
         <div class="sk-cube sk-cube8"></div>
         <div class="sk-cube sk-cube9"></div>
-    </div>    
+    </div>
+@stop
+
+@section('custom_js')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
@@ -93,13 +96,6 @@
     <script src="{{ Helper::cdn('js/extensions/export/tableExport.js') }}"></script>
     <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-
-    @if (is_null($whitelabel_group->wrld3d))
-        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-        {{--<script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>--}}
-    @else
-        <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
-    @endif
 
     <script type="text/javascript">
 
@@ -112,9 +108,8 @@
             var LIST_LOADED = false;
             var MAP_LOADED = false;
             var GRID_WIDTH = 100;
-            var mapMarkers = [];
-            var mapInstance;
-            var WRLD_3D_API_KEY = '{{ $whitelabel_group->wrld3d }}';
+
+            window.map = createMapRenderer('entry_browse_map');
 
             $('.sk-cube-grid').show();
 
@@ -182,20 +177,21 @@
             function mapSearch () {
                 var filter = $('#entry-search').val().toUpperCase();
 
-                mapMarkers.forEach(function (marker) {
-                    marker.remove()
-                });
+                var markers = [];
 
                 if (entryRows.rows.length) {
                     for (var i = 0; i < entryRows.rows.length; i++) {
                         if (typeof entryRows.rows[i].title === "undefined") {
                             continue;
                         }
+
                         if (entryRows.rows[i].title.toUpperCase().indexOf(filter) > -1) {
-                            addMapMarker(entryRows.rows[i]);
+                            markers.push(entryRows.rows[i]);
                         }
                     }
                 }
+
+                window.map.loadMarkers(markers);
             }
 
             function tableSearch () {
@@ -259,68 +255,10 @@
                 bindSearch(tableSearch);
             }
 
-            function addMapMarker (item) {
-                if (!$.isNumeric(item.latitude) || !$.isNumeric(item.longitude)) {
-                    return
-                }
-                //console.log(item.latitude+ '  '+ item.longitude);
-                var marker = L.marker([item.latitude, item.longitude]);
-
-                marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
-                    .openTooltip();
-
-//                var popupHtml = '<p><a href="' + item.url + '">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a></p><p><em>' + item.exchangeTypes + '</em></p>';
-                var popupHtml = '<button class="map-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>';
-
-                marker.bindPopup(popupHtml);
-                mapMarkers.push(marker);
-                marker.addTo(mapInstance);
-
-                return marker;
-            }
-
             function mapLayout (data) {
-                var lat = parseFloat('{{ $whitelabel_group->latitude ?: '' }}');
-                var lng = parseFloat('{{ $whitelabel_group->longitude ?: '' }}');
-
-                mapInstance = !!WRLD_3D_API_KEY
-                    ? L.Wrld.map('entry_browse_map', WRLD_3D_API_KEY)
-                    : L.map('entry_browse_map');
-
-                // Add every entry location to the map
-                for (var i = 0; i < data.total; i++) {
-                    addMapMarker(data.rows[i]);
-                }
-
-                // Check whether latitude and longitude where provided by
-                // Sharing Network. When it does, we use the provived location
-                // to set the map view, otherwise we calculate it based on
-                // a bound of all markers.
-                if (lat && lng) {
-                    mapInstance.setView([lat, lng], 13);
-                } else {
-                    var points = [];
-                    mapMarkers.forEach(function (mk) {
-                        points.push([mk.getLatLng().lat, mk.getLatLng().lng]);
-                    });
-
-                    mapInstance.fitBounds(points);
-                }
-
-                // When map is not set up with WRLD 3D, we add a tile layer to the
-                // leaflet version.
-                if (!WRLD_3D_API_KEY) {
-                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={{ config('services.mapbox.access_token') }}', {
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                        maxZoom: 18,
-                        id: 'mapbox.streets',
-                        accessToken: '{{ config('services.mapbox.access_token') }}'
-                    }).addTo(mapInstance);
-                }
-
-//                var markers = L.markerClusterGroup({});
-
-//                map.addLayer(markers);
+                window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
+                    .loadMarkers(data.rows)
+                    .center();
 
                 bindSearch(mapSearch);
                 fadeOutSpinner();
@@ -372,7 +310,7 @@
                     $(item).attr('id', 'entry-' + entry_id);
                     $(item).html(contents);
                 }
-                
+
                 fadeOutSpinner();
                 masonryInit();
 

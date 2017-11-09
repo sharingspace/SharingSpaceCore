@@ -39,8 +39,14 @@
     <link rel="stylesheet" href="/assets/css/compiled/app.css?v={{ date('U') }}" type="text/css">
     <link href="/assets/css/color_scheme/{{$whitelabel_group->color}}.css" rel="stylesheet" type="text/css"/>
 
-    @yield('custom_css')
+@yield('custom_css')
 
+<!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+          crossorigin=""/>
+
+    <!-- Plugins -->
     <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
 
     <!-- jQuery 2.2.4-->
@@ -96,8 +102,26 @@
     <div>@include('partials.footer')</div>
 </div> <!-- /wrapper -->
 
+@if (isset($whitelabel_group))
+    @if (is_null($whitelabel_group->wrld3d))
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+        {{--<script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>--}}
+    @else
+        <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+    @endif
+
+    @javascript('WRLD_3D_API_KEY', $whitelabel_group->wrld3d ?: '')
+    @javascript('MAPBOX_KEY',config('services.mapbox.access_token'))
+    @javascript('mapLat', $whitelabel_group->latitude ?: '')
+    @javascript('mapLng', $whitelabel_group->longitude ?: '')]
+
+    <script src="{{ Helper::cdn('js/compiled/maps.js') }}"></script>
+@endif
+
+@yield('custom_js')
 
 @include('partials.geo-lookup')
+
 <script type="text/javascript">
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
