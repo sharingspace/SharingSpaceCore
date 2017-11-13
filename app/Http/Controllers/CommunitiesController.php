@@ -14,6 +14,7 @@ namespace App\Http\Controllers;
 use App\Models\Community;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Redis;
 use Theme;
 use Input;
 use Validator;

@@ -692,6 +692,8 @@ class EntriesController extends Controller
                 'location',
                 'latitude',
                 'longitude',
+                'lat',
+                'lng',
                 'tags',
                 'created_at',
             ];
@@ -765,6 +767,7 @@ class EntriesController extends Controller
 
             if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
                 $rows[] = array(
+                    'url'               => route('entry.view', $entry->id),
                     'image'             => $imageTag,
                     'image_url'         => $image_url,
                     'title_link'        => '<a href="' . route('entry.view', $entry->id) . '">' . $entry->title . '</>',
@@ -774,8 +777,8 @@ class EntriesController extends Controller
                     'title'             => (strlen($entry->title) + strlen($entry->author->getDisplayName()) > 30) ? substr($entry->title, 0, 27) . '&hellip;' : $entry->title,
                     'author_image'      => '<img src="' . $entry->author->gravatar_img() . '" class="avatar-sm hidden-xs">',
                     'location'          => $entry->location,
-                    'latitude'          => $entry->latitude,
-                    'longitude'         => $entry->longitude,
+                    'lat'               => $entry->lat,
+                    'lng'               => $entry->lng,
                     'created_at'        => $entry->created_at->format('M jS, Y'),
                     'actions'           => $actions,
                     'tags'              => $entry->tags,
@@ -794,21 +797,21 @@ class EntriesController extends Controller
             else {
                 // we have an entry who doesn't belong to this community - something went very wrong
                 $rows[] = array(
-                    'image'         => '-',
-                    'image-url'     => '-',
-                    'title_link'    => '-',
-                    'post_type_link'    => '-',
-                    'post_type'     => '-',
-                    'entry_id'      => $entry->id,
-                    'author'        => '-',
-                    'location'      => '-',
-                    'latitude'      => '-',
-                    'longitude'     => '-',
-                    'created_at'    => '-',
-                    'actions'       => '-',
-                    'tags'          => '-',
-                    'exchangeTypes' => '-',
-                    'aspect_ratio'  => $aspect_ratio,
+                    'image'          => '-',
+                    'image-url'      => '-',
+                    'title_link'     => '-',
+                    'post_type_link' => '-',
+                    'post_type'      => '-',
+                    'entry_id'       => $entry->id,
+                    'author'         => '-',
+                    'location'       => '-',
+                    'latitude'       => '-',
+                    'longitude'      => '-',
+                    'created_at'     => '-',
+                    'actions'        => '-',
+                    'tags'           => '-',
+                    'exchangeTypes'  => '-',
+                    'aspect_ratio'   => $aspect_ratio,
                 );
             }
         }
@@ -839,7 +842,7 @@ class EntriesController extends Controller
         $added = array();
 
         if ($tagName) {
-            $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%'.$tagName.'%')->where('visible', 1)->NotCompleted()->get();
+            $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%' . $tagName . '%')->where('visible', 1)->NotCompleted()->get();
             $tagArray[] = $tagName;
         }
         else {
