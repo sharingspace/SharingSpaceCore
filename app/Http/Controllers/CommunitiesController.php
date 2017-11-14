@@ -12,20 +12,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
-use Illuminate\Http\Request;
-use Auth;
-use Theme;
-use Input;
-use Validator;
-use Redirect;
-use Config;
 use App\Models\ExchangeType;
-use Pagetheme;
-use Mail;
-use Helper;
-use Carbon\Carbon;
+use Auth;
+use Config;
 use DB;
+use Helper;
+use Illuminate\Http\Request;
+use Input;
 use Log;
+use Mail;
+use Pagetheme;
+use Redirect;
+use Theme;
+use Validator;
 
 
 class CommunitiesController extends Controller

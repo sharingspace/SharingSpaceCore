@@ -265,6 +265,10 @@
                     .center()
             }
 
+            $(document).on('click', '.leaflet-popup-content-wrapper', function () {
+                alert('test')
+            })
+
             // Get the modal
             var modal = document.getElementById('myModal');
 

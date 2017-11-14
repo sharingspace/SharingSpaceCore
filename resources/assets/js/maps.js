@@ -67,16 +67,21 @@ class MapRenderer {
         }
 
         if (options.popup) {
-            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>'
+            var popup = L.DomUtil.create('div', 'map-popup')
+            popup.innerHTML = '<div>' + item.image + '</div><a href="' + item.url + '" class="map-popup-link">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.exchangeTypes + '</em></p>'
+
+            // popup
             marker.bindPopup(popup)
-
-
         }
 
         this.markers.push(marker)
         marker.addTo(this.instance)
 
         return marker
+    }
+
+    goToLinkListener (link) {
+        window.location.href = link
     }
 
     removeMarkers () {
@@ -89,7 +94,7 @@ class MapRenderer {
 
     center () {
         if (this.lat && this.lng) {
-            this.instance.setView(new L.LatLng(this.lat, this.lng), 15)
+            this.instance.setView(new L.LatLng(this.lat, this.lng), 18)
             return this
         }
 
