@@ -69,7 +69,7 @@
         </div>
         <!-- End entries grid -->
         <!-- Begin entries map -->
-        <div id="entry_browse_map" style="height: 720px"></div>
+        <div id="entry_browse_map"></div>
         <!-- End entries map -->
     </section>
 
@@ -98,7 +98,7 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 
     <script type="text/javascript">
-
+ 
         $(document).ready(function () {
             var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
             var entryRows;
@@ -110,6 +110,7 @@
             var GRID_WIDTH = 100;
 
             window.map = createMapRenderer('entry_browse_map');
+            $('#entry_browse_map').hide();
 
             $('.sk-cube-grid').show();
 
