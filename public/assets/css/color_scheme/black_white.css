@@ -205,32 +205,4 @@ p, td {
   opacity: 0.3;
 }
 
-/*
- * MAP
- */
-.map-popup {
-  width: 100%;
-}
-
-.map-popup [class*="_square"] {
-  width: 100%;
-  height: 180px;
-  margin-bottom: 20px;
-}
-
-.map-popup .entry_image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-.map-popup .map-popup-link {
-  color: #000;
-  font-size: 16px;
-}
-
-.map-popup p {
-  color: lightslategray;
-}
-
 /*# sourceMappingURL=black_white.css.map */
