@@ -51,8 +51,7 @@
         <form id="offerForm" class="block-review-content">
           {!! csrf_field() !!}
 
-          <div class="margin-top-30 margin-bottom-20">
-
+          <div class="margin-top-20 margin-bottom-20">
             <!-- alert -->
             <div class="alert alert-dismissable" style="display: none;" id="offerStatusbox">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -69,8 +68,7 @@
             <textarea class="messageText form-control" data-height="200" data-lang="en-US" name="message"></textarea>
           </div>
 
-          <button class="btn btn-3d btn-sm btn-reveal btn-teal pull-right">
-            <i class="fa fa-check"></i>
+          <button class="btn btn-colored pull-right">
             <span>{{ trans('general.email.submit')}}</span>
           </button>
         </form>
@@ -111,7 +109,7 @@ $(document).ready(function () {
         if (data.success) {
           $('#offerStatusbox').addClass('alert alert-success');
           $('#offerStatusText').html('Success! '+data.message);
-          $('#offerStatusbox').delay(2000).fadeTo(4000, 0);
+          $('#offerStatusbox').delay(1500).fadeTo(2000, 0.2, function() {$(this).remove();});
           $('.messageText').val('');
           var clone = $('.message_id_clone').clone();
           $(clone).clone().insertBefore('.message_id_clone');
