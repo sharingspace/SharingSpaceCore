@@ -10,11 +10,15 @@
 
 @section('content')
     <p>Hi {{$sent_to}},</p>
-    <p>Your entry <a href="{{$community_url}}/entry/{{$entry_id}}">{{$entry_name}}</a> has received a new offer.</p>
-    <p>Sent by: {{$sent_by}}
-    @if (!empty($exchanges)) 
-        <p>Exchange types: {{$exchanges}}</p>
-    @endif 
+    @if (isset($entry_id))
+        <p>Your entry <a href="{{$community_url}}/entry/{{$entry_id}}">{{$entry_name}}</a> has received a new offer.</p>
+        <p>Sent by: {{$sent_by}}
+        @if (!empty($exchanges)) 
+            <p>Exchange types: {{$exchanges}}</p>
+        @endif
+    @else
+        <p>{{$sent_by}} has sent you a message.</p>
+    @endif
     
     @if (isset($community_name))
         <p>Sharing network: <a href="{{$community_url}}">{{$community_name}}</a>

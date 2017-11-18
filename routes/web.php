@@ -223,9 +223,18 @@ Route::group(
                 Route::post(
                     '{entryId}/ajaxdelete',
                     array(
-                    'middleware' => 'auth',
-                    'uses' => 'EntriesController@postAjaxDelete')
+                        'middleware' => 'auth',
+                        'uses' => 'EntriesController@postAjaxDelete'
+                    )
                 );
+
+                Route::post(
+                    '{userId}',
+                    array(
+                        'middleware' => ['auth','community-auth'],
+                        'uses' => 'MessagesController@postCreate'
+                    )
+                )->name('_send_profile_message');
             }
         );
 
