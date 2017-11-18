@@ -15,9 +15,9 @@
             <div class="col-12 col-md-6 bg-img" style="background-image: url({{ asset('assets/corporate/img/sn/ex/arco.jpg') }})">
             </div>
             <div class="col-12 offset-md-1 col-md-4 py-90">
-                <p><small>Community</small></p>
-                <h5>Arcosanti</h5>
-                <p>This experimental micro-city uses its Sharing Network to inventory the needs and resources of its residents. They're exploring revolutionary ways to maximize the sustainability of resources in the community, spaces, and natural environment.</p>
+                <p><small>Community Cooperative</small></p>
+                <h5>A Cooperative at Arcosanti</h5>
+                <p>Arcosanti is an experimental micro-city in the Arizona desert. A Sharing Network is used by "Arcoop" members to inventory their needs and resources. They're exploring revolutionary ways to maximize the visibility of the community while protecting the built and natural environment.</p>
                 <br />
                 <a class="btn btn-malibu" href="https://arcoop.anyshare.coop/">View Now</a>
             </div>
