@@ -12462,7 +12462,7 @@ section.dark .border-top-1, section.dark .border-top-2, section.dark .border-top
 hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.2), transparent);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#d6d6d6',GradientType=0 );
   /* IE6-9 */
 }
@@ -12470,7 +12470,7 @@ hr {
 section.dark hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(left, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), transparent);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#d6d6d6',GradientType=0 );
   /* IE6-9 */
 }

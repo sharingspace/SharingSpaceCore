@@ -364,8 +364,12 @@
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        // Handle errors here
-                        alert("danger " + textStatus + errorThrown);
+                        // Note we get an error and status (0) if the ajax call gets cancelled
+                        // due to a page refresh/reload. We don't need to report this as an error
+                        if (jqXHR.status) {
+                            // Handle errors here
+                            alert("Error retreiving entries: " + jqXHR.status +'  '+ textStatus +'  '+ errorThrown);
+                        }
                     }
                 });
             }
