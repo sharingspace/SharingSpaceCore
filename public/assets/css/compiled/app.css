@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/** ************************************************
+/** ************************************************ 
 
 	TABLE CONTENTS
 	-------------------------------
@@ -9311,11 +9311,21 @@ Quick add
 /**
   * Sharing hub browse page
   */
-.browse_table .fixed-table-container table {
+#browse_table {
+  display: none;
+}
+
+#browse_table #entry_browse_table {
+  margin-bottom: 30px;
+  padding: 0;
+  font-size: 13px;
+}
+
+#browse_table .fixed-table-container table {
   width: 99%;
 }
 
-.browse_table img.entry_image {
+#browse_table img.entry_image {
   width: auto;
   max-width: 70px;
   height: auto;
@@ -9326,7 +9336,7 @@ Quick add
   margin: 0 auto;
 }
 
-.browse_table td {
+#browse_table td {
   vertical-align: middle !important;
 }
 
@@ -10629,13 +10639,6 @@ form #domain_input .anyshare_url {
   }
 }
 
-#entry_browse_table {
-  display: none;
-  margin-bottom: 30px;
-  padding: 0;
-  font-size: 13px;
-}
-
 .fa-list:hover, .fa-th:hover {
   cursor: pointer;
 }
@@ -10729,11 +10732,22 @@ form #domain_input .anyshare_url {
   font-size: 16px;
 }
 
-.sort-icon {
+.sort-icons {
+  float: right;
+}
+
+.sort-icons .sort-icon {
   padding: 2px 3px;
   border-radius: 3px;
   float: left;
-  margin-left: 8px;
+  margin-left: 12px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 992px) {
+  .sort-icons .sort-icon {
+    margin-bottom: 0;
+  }
 }
 
 #entry-search::-webkit-input-placeholder {
@@ -10786,7 +10800,7 @@ form #domain_input .anyshare_url {
 .sk-cube-grid {
   width: 53px;
   height: 53px;
-  margin: 100px auto;
+  margin: 0 auto;
   display: none;
 }
 
@@ -10878,9 +10892,11 @@ form #domain_input .anyshare_url {
 
 .centered {
   position: fixed;
-  /* or absolute */
-  top: 40%;
+  top: 50%;
   left: 50%;
+  margin-left: 8px;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 /** ************************************* **

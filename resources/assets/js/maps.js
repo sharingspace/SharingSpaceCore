@@ -56,11 +56,11 @@ class MapRenderer {
     }
 
     addMapMarker (item, options) {
-        if (!item.lat || !item.lng) {
+        if (!item.latitude || !item.longitude) {
             return
         }
 
-        var marker = L.marker([item.lat, item.lng])
+        var marker = L.marker([item.latitude, item.longitude])
 
         if (options.tooltip) {
             marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
@@ -69,8 +69,6 @@ class MapRenderer {
         if (options.popup) {
             var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>'
             marker.bindPopup(popup)
-
-
         }
 
         this.markers.push(marker)
@@ -88,18 +86,26 @@ class MapRenderer {
     }
 
     center () {
-        if (this.lat && this.lng) {
-            this.instance.setView(new L.LatLng(this.lat, this.lng), 15)
+        const ZOOM = 21
+
+        // center the map based on Sharing Network geolocation positions
+        if (this.latitude && this.longitude) {
+            this.instance.setView(new L.LatLng(this.latitude, this.longitude), ZOOM)
             return this
         }
 
+        // When Sharing Network geolocation is not provided, we define
+        // the center of view based on the location of all points.
         var points = []
 
         this.markers.forEach((mk) => {
             points.push([mk.getLatLng().lat, mk.getLatLng().lng])
         })
 
-        this.instance.fitBounds(points)
+        if (points.length > 0) {
+            this.instance.fitBounds(points)
+            // this.instance.setZoom(ZOOM)
+        }
     }
 }
 
