@@ -103,17 +103,16 @@
 </div> <!-- /wrapper -->
 
 @if (isset($whitelabel_group))
-    @if (is_null($whitelabel_group->wrld3d))
-        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
-        {{--<script src="https://unpkg.com/leaflet.markercluster@1.1.0/dist/leaflet.markercluster.js"></script>--}}
-    @else
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+
+    @if (!is_null($whitelabel_group->wrld3d))
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     @endif
 
     @javascript('WRLD_3D_API_KEY', $whitelabel_group->wrld3d ?: '')
     @javascript('MAPBOX_KEY',config('services.mapbox.access_token'))
     @javascript('mapLat', $whitelabel_group->latitude ?: '')
-    @javascript('mapLng', $whitelabel_group->longitude ?: '')]
+    @javascript('mapLng', $whitelabel_group->longitude ?: '')
 
     <script src="{{ Helper::cdn('js/compiled/maps.js') }}"></script>
 @endif

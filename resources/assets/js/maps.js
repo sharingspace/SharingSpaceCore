@@ -56,21 +56,25 @@ class MapRenderer {
     }
 
     addMapMarker (item, options) {
-        if (!item.lat || !item.lng) {
+        if (!item.latitude || !item.longitude) {
             return
         }
 
-        var marker = L.marker([item.lat, item.lng])
+        var marker = L.marker([item.latitude, item.longitude])
 
+        // Add a tooltip to the marker
         if (options.tooltip) {
             marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
         }
 
+        // Add a popup with marker's information
         if (options.popup) {
+            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>'
+            marker.bindPopup(popup)
+
             var popup = L.DomUtil.create('div', 'map-popup')
             popup.innerHTML = '<div>' + item.image + '</div><a href="' + item.url + '" class="map-popup-link">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.exchangeTypes + '</em></p>'
 
-            // popup
             marker.bindPopup(popup)
         }
 
