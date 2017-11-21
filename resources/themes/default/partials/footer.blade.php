@@ -28,7 +28,10 @@
             </div>
         </div>
     </div>
+    <!-- add the coloured bottom band -->
+    <div class="footer-rainbow"></div>
 </footer>
+
 <!-- END Footer -->
 
 <!-- Drawer -->
