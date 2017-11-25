@@ -3,7 +3,6 @@ class MapRenderer {
         this.selector = selector
         this.wrld3dApiKey = window.WRLD_3D_API_KEY
         this.mapboxKey = window.MAPBOX_KEY
-
         this.markers = []
         this.instance = null
         this.lat = null
@@ -56,7 +55,8 @@ class MapRenderer {
     }
 
     addMapMarker (item, options) {
-        if (!item.latitude || !item.longitude) {
+
+        if (!$.isNumeric(item.latitude) || !$.isNumeric(item.longitude)) {
             return
         }
 
@@ -108,7 +108,12 @@ class MapRenderer {
             points.push([mk.getLatLng().lat, mk.getLatLng().lng])
         })
 
+        if (points.length === 0) {
+            return this
+        }
+
         this.instance.fitBounds(points)
+        return this
     }
 }
 
