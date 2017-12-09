@@ -132,7 +132,7 @@ class EntriesController extends Controller
 
         }
         else {
-            log::error("ajaxGetEntry: invalid entry Id = " . $entryID);
+            //log::error("ajaxGetEntry: invalid entry Id = " . $entryID);
             redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -187,10 +187,10 @@ class EntriesController extends Controller
 
         if (Auth::user()->isSuperAdmin() && !Auth::user()->isMemberOfCommunity($request->whitelabel_group, true)) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-                //LOG::debug("postAjaxCreate: joined superAdmin to share successfully");
+                //log::debug("postAjaxCreate: joined superAdmin to share successfully");
             }
             else {
-                //LOG::error("postAjaxCreate: failed to joined superAdmin to share successfully");
+                //log::error("postAjaxCreate: failed to joined superAdmin to share successfully");
             }
         }
 
@@ -226,7 +226,7 @@ class EntriesController extends Controller
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                Log::debug("postAjaxCreate: We have a file - and, weirdly, kinda shouldn't?");
+                //log::debug("postAjaxCreate: We have a file - and, weirdly, kinda shouldn't?");
                 $rotation = null;
                 if (!empty(Input::get('rotation'))) {
                     $rotation = Input::get('rotation');
@@ -240,7 +240,7 @@ class EntriesController extends Controller
                 }
             }
             else {
-                //Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
+                //log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
                 $uploaded = Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
             }
@@ -372,7 +372,7 @@ class EntriesController extends Controller
                 ->with('image', $imageName);
         }
         else {
-            log::error("getEdit: invalid entry Id = " . $entryID);
+            //log::error("getEdit: invalid entry Id = " . $entryID);
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -458,7 +458,7 @@ class EntriesController extends Controller
             ]);
         }
 
-        log::error("postAjaxEdit: invalid entry Id = " . $entryID);
+        //log::error("postAjaxEdit: invalid entry Id = " . $entryID);
         return response()->json(['success' => false, 'error' => trans('general.entries.messages.invalid')]);
     }
 
@@ -522,7 +522,7 @@ class EntriesController extends Controller
                 }
             }
             else {
-                if (Input::get('deleteImage')) {
+                if (Input::get('entry_image_delete')) {
                     Entry::deleteImage($entry->id, $user->id);
                     Entry::deleteImageFromDB($entry->id, $user->id);
                 }
@@ -542,7 +542,7 @@ class EntriesController extends Controller
                 trans('general.entries.messages.save_edits'));
         }
 
-        log::error("postEdit: invalid entry Id = " . $entryID);
+        //log::error("postEdit: invalid entry Id = " . $entryID);
         return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 

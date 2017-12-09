@@ -247,6 +247,20 @@ class Community extends Model
         return $cover_img;
     }
 
+    /**
+     * Deletes cover image.
+     *
+     * @author [D. Linnard] [<david@linnard.com>]
+     * @since  [v1.0]
+     * @return no return
+     */
+    public function deleteCover()
+    {
+        //log::debug("deleteCover: ".$this->cover_img);
+        $file = public_path().'/assets/uploads/community-covers/'.$this->id. '/'.$this->cover_img;
+        unlink($file);
+        $this->cover_img = null;
+    }
 
     /**
      * Get the logo image url based on app environment
@@ -257,7 +271,6 @@ class Community extends Model
      */
     public function getLogo()
     {
-
         if ($this->logo) {
             return config('services.cdn.default') . '/uploads/community-logos/' . $this->id . '/' . $this->logo;
         }
@@ -265,6 +278,20 @@ class Community extends Model
             return false;
         }
     }
+
+     /**
+     * Deletes logo image.
+     *
+     * @author [D. Linnard] [<david@linnard.com>]
+     * @since  [v1.0]
+     * @return no return
+     */
+    public function deleteLogo()
+    {
+        $file = public_path().'/assets/uploads/community-logos/'.$this->id. '/'.$this->logo;
+        unlink($file);
+        $this->logo = null;
+    }   
 
     /**
      * Get the profile image url based on app environment
@@ -320,7 +347,7 @@ class Community extends Model
      */
     public static function saveImageToDB($community_id, $filename, $type, $user_id = null, $upload_key = null)
     {
-        LOG::debug("Community::saveImageToDB " . $community_id . ", " . $filename . ", " . $type);
+        //log::debug("Community::saveImageToDB " . $community_id . ", " . $filename . ", " . $type);
 
         if ($community = Community::find($community_id)) {
 
@@ -337,7 +364,7 @@ class Community extends Model
             }
 
             if (!$community->save()) {
-                LOG::debug("saveImageToDB: failed");
+                log::error("saveImageToDB: failed");
 
                 return false;
             }

@@ -97,13 +97,13 @@ class CommunitiesController extends Controller
             // find out whether they have already asked to join this share
             $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
-            LOG::debug("getRequestAccess: request_count = " . $request_count);
+            //log::debug("getRequestAccess: request_count = " . $request_count);
             return view('request-access',
                 ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
         }
         else {
             // not logged in so send them to the signup page
-            LOG::debug("getRequestAccess: user is not logged in so redirect them");
+            //log::debug("getRequestAccess: user is not logged in so redirect them");
             return view('request-access',
                 ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
         }
@@ -123,7 +123,7 @@ class CommunitiesController extends Controller
     {
         $user = Auth::user();
         $request_count = $request->whitelabel_group->getRequestCount($user->id);
-        LOG::debug("postRequestAccess. request_count: " . $request_count);
+        //log::debug("postRequestAccess. request_count: " . $request_count);
 
         if (!$request_count) {
             DB::table('community_join_requests')->insert(
@@ -204,7 +204,7 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->with('error',
                 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
-        log::debug("postCreate: token = " . $token);
+        //log::debug("postCreate: token = " . $token);
 
         $community = new Community();
         $community->name = e($request->input('name'));
@@ -234,11 +234,11 @@ class CommunitiesController extends Controller
                 ]
             );
 
-            log::debug("postCreate: customer did not exist, new id = " . $customer->stripe_id);
+            //log::debug("postCreate: customer did not exist, new id = " . $customer->stripe_id);
 
         }
         else {
-            log::debug("postCreate: customer does exist " . $customer->stripe_id);
+            //log::debug("postCreate: customer does exist " . $customer->stripe_id);
         }
 
         $data['name'] = $customer->getDisplayName();
@@ -293,7 +293,7 @@ class CommunitiesController extends Controller
         $customer->card()->syncWithStripe();
 
         if ($community->save()) {
-            //Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
+            //log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
 
             // Save the community_id to the subscriptions table
             $subscription = \App\Models\CommunitySubscription::where('stripe_id', '=',
@@ -383,6 +383,16 @@ class CommunitiesController extends Controller
 
         if (Input::hasFile('profile_img')) {
             $community->uploadImage(Auth::user(), Input::file('profile_img'), 'community-profiles');
+        }
+
+        if (Input::has('cover_image_delete')) {
+            //log::debug("postEdit: delete_cover_image: " . $community->cover_img);
+            $community->deleteCover();
+        }
+
+        if (Input::has('logo_image_delete')) {
+            //log::debug("postEdit: delete_logo_image: " . $community->logo);
+            $community->deleteLogo();
         }
 
         if (Input::hasFile('cover_img')) {

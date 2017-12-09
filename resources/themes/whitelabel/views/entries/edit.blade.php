@@ -26,13 +26,17 @@
     <script type="text/javascript">
         $("#ajaxSubmit").attr('disabled', 'disabled'); // disable add button until page has loaded
         $("#create_table").hide(); // hide entry table
-        $('#image_box_container').hide();
+        $('#image_container').hide();
         $('#image_controls').hide();
         $('#cancel_button').show();
         var fileJustChosen = false;
         var reader = new FileReader(); // instance of the FileReader
         var rotationAngle = 0;
         var imageName = "{{$image}}";
+
+        if ($('#entry_image_box').css('background-image') != 'none') {
+            $('#entry_image_container').show();
+        }
     </script>
 
     <script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
@@ -52,7 +56,7 @@
             $("#delete_img_checkbox_label").show();
             var url = "url('/assets/uploads/entries/" + '{{$entry->id}}' + "/" + imageName + "?" + Date.now() + "')";
             $('#image_box').css("background-image", url);
-            $('#image_box_container').show();
+            $('#image_container').show();
         }
     </script>
 

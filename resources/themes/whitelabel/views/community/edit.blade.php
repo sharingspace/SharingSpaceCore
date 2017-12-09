@@ -23,9 +23,12 @@
                         <li><a href="#advanced" data-toggle="tab">{{trans('general.community.advanced')}}</a></li>
                     </ul>
 
-                    <form method="post" action="{{ route('_edit_share') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form method="post" action="{{ route('_edit_share') }}" enctype="multipart/form-data" autocomplete="off" id="edit_share">
                         {!! csrf_field() !!}
-                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="4096000"/>
+                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="6144000"/>
+                        <input type="hidden" id="cover_image_delete" name="cover_image_delete" value=''>
+                        <input type="hidden" id="logo_image_delete" name="logo_image_delete" value=''>
+
                         <div class="tab-content margin-top-20">
                             <!-- PERSONAL INFO TAB -->
                             <div class="tab-pane fade in active" id="info">
@@ -148,33 +151,45 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                             <!-- IMAGES TAB -->
                             <div class="tab-pane fade" id="hub_images">
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-xs-12">
                                         <!-- Cover upload -->
                                         <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                                            <label for="cover_img">{{ trans('general.uploads.cover_image') }}</label>
+                                            <label for="cover_image">{{ trans('general.uploads.cover_image') }}</label>
                                             <div class="fancy-file-upload fancy-file-info">
                                                 <i class="fa fa-picture-o"></i>
-                                                <input type="file" class="form-control" id="cover_img" name="cover_img" onchange="jQuery(this).next('input').val(this.value);"/>
-                                                <input type="text" class="form-control" id="cover_shadow_input" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly=""/>
+                                                <input type="file" class="form-control" id="cover_image" name="cover_img" onchange="jQuery(this).next('input').val(this.value);"/>
+                                                <input type="text" class="form-control" id="cover_image_shadow" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly=""/>
                                                 <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                                             </div>
                                             <p class='too_large_cover smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
                                             <p>{{ trans('general.uploads.banner_tip')}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-30">
-                                        <img src="{{ $whitelabel_group->getCover() }}" style=" width: 100%;height: 100%;object-fit:cover;overflow: hidden;">
+                                    <div class="col-xs-12">
+                                        <div id="cover_image_container">
+                                            <div id="cover_image_box" 
+                                            @if ($whitelabel_group->getCover())
+                                                style="background-image: url({{ $whitelabel_group->getCover() }});"
+                                            @endif
+                                            > <!-- contains background image -->
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xs-12 image_controls">
+                                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="cover_image_delete" title="{{ trans('general.entries.edit.remove_image') }}"  onclick="deleteImgDialog('cover')"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-
+                                    
                                     <!-- Logo upload -->
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group {{ $errors->first('file', 'has-error') }}">
-                                            <label for="cover_img">{{ trans('general.community.logo')}}</label>
+                                            <label for="logo_image">{{ trans('general.community.logo')}}</label>
                                             <div class="fancy-file-upload fancy-file-info">
                                                 <i class="fa fa-picture-o"></i>
-                                                <input type="file" class="form-control" id="logo_img" name="logo" onchange="jQuery(this).next('input').val(this.value);"/>
-                                                <input type="text" class="form-control" id="logo_shadow_input" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly=""/>
+                                                <input type="file" class="form-control" id="logo_image" name="logo" onchange="jQuery(this).next('input').val(this.value);"/>
+                                                <input type="text" class="form-control" id="logo_image_shadow" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly=""/>
                                                 <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                                             </div>
                                             <p class='too_large_logo smooth_font' style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
@@ -182,9 +197,19 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                             <p>{{ trans('general.uploads.logo_tip')}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10" style="background-color:#fff;height:100px">
-                                        <div class="col-md-4 col-md-offset-4" style="position:absolute;top:35%;">
-                                            <img src="{{ $whitelabel_group->getLogo() }}" style="object-fit:cover;overflow: hidden;">
+                                    <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10">
+                                        <div id="logo_image_container">
+                                            <div id="logo_image_box"
+                                            @if ($whitelabel_group->getLogo())
+                                                style="background-image: url({{ $whitelabel_group->getLogo() }});"
+                                            @endif
+                                            > <!-- contains logo image -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 image_controls">
+                                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="logo_image_delete" title="{{ trans('general.entries.edit.remove_image') }}"  onclick="deleteImgDialog('logo')"></i>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div> <!-- row -->
@@ -244,7 +269,6 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                         <button type="button" class="" data-toggle="modal" data-target="#slackbotModal"><i class='fa fa-info-circle'></i></button>
                                     </legend>
 
-
                                     <!-- Want token -->
 
                                     <p>{{ trans('general.community.slackslash_info')}}</p>
@@ -303,6 +327,9 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                 </div> <!-- col-10 -->
             </div> <!-- row -->
         </div> <!-- edit_wrapper -->
+
+    @include('./progress')
+
     </section> <!-- container -->
     <!-- / -->
 
@@ -391,29 +418,25 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 
         </div>
     </div>
-    <script type="text/javascript">
+
+    <div id="dialog-confirm" title="Delete image?">
+        <p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i><span>{{ trans('general.entries.edit.delete_image') }}</span></p>
+    </div>
+@stop
+
+@section('custom_js')
+     <script type="text/javascript">
+        var reader = new FileReader(); // instance of the FileReader
 
         $(document).ready(function () {
-
-            $("#cover_img").change(function () {
-                var maxSize = $('#MAX_FILE_SIZE').val();
-                $('#cover_shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
-
-                if ($("#cover_img")[0].files[0].size > maxSize) {
-                    $("#cover_shadow_input").val("");
-                    $('p.too_large_cover').show().addClass("error_message").fadeOut(5000, "swing");
-                }
-            });
-
-            $("#logo_img").change(function () {
-                var maxSize = $('#MAX_FILE_SIZE').val();
-                $('#logo_shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
-
-                if ($("#logo_img")[0].files[0].size > maxSize) {
-                    $("#logo_shadow_input").val("");
-                    $('p.too_large_logo').show().addClass("error_message").fadeOut(5000, "swing");
-                }
-            });
+            if ($('#cover_image_box').css('background-image') != 'none') {
+                $('#cover_image_container').show();
+                console.log($('#cover_image_box').css('background-image'));
+            }
+            if ($('#logo_image_box').css('background-image') != 'none') {
+                $('#logo_image_container').show();
+                console.log($('#logo_image_box').css('background-image'));
+            }
 
             $(document).on("click", "#select_all", function (e) {
                 $('.exchanges').prop('checked', $(this).prop("checked"));
@@ -425,4 +448,6 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         });
 
     </script>
+    <script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
+
 @stop
