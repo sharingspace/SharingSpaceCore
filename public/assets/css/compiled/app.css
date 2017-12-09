@@ -9529,21 +9529,18 @@ Quick add
   /* 100% Image Width on Smaller Screens */
 }
 
-#entry_view #image_box_container img {
+#entry_view #entry_image_box img {
   width: 100%;
   max-width: 400px;
   height: auto;
   max-height: 100%;
   display: block;
   text-align: center;
-}
-
-#entry_view #entryImage {
   cursor: zoom-in;
   transition: 0.3s;
 }
 
-#entry_view #entryImage:hover {
+#entry_view #entry_image_box img:hover {
   opacity: 0.7;
 }
 
@@ -9658,19 +9655,14 @@ Quick add
   color: #0066c0;
 }
 
-#image_box_container {
-  width: 250px;
-  height: 250px;
+#cover_image_container, #logo_image_container, #entry_image_container {
   position: relative;
   margin: auto;
 }
 
-#image_box_container #image_box {
+#cover_image_container #cover_image_box, #cover_image_container #logo_image_box, #cover_image_container #entry_image_box, #logo_image_container #cover_image_box, #logo_image_container #logo_image_box, #logo_image_container #entry_image_box, #entry_image_container #cover_image_box, #entry_image_container #logo_image_box, #entry_image_container #entry_image_box {
   position: absolute;
   top: 0;
-  width: 250px;
-  height: 250px;
-  background-image: url("");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -9678,8 +9670,50 @@ Quick add
   margin: auto;
 }
 
-#image_box_container #image_box img {
+#cover_image_container #cover_image_box img, #cover_image_container #logo_image_box img, #cover_image_container #entry_image_box img, #logo_image_container #cover_image_box img, #logo_image_container #logo_image_box img, #logo_image_container #entry_image_box img, #entry_image_container #cover_image_box img, #entry_image_container #logo_image_box img, #entry_image_container #entry_image_box img {
   opacity: 0.5;
+}
+
+#entry_form #entry_image_container {
+  width: 250px;
+  height: 250px;
+}
+
+#entry_form #entry_image_container #entry_image_box {
+  width: 250px;
+  height: 250px;
+}
+
+#edit_share #cover_image_container {
+  width: 600px;
+  height: 150px;
+}
+
+#edit_share #cover_image_container #cover_image_box {
+  background-color: #f2f2f2;
+  width: 600px;
+  height: 150px;
+}
+
+#edit_share #cover_image_container #cover_image_box .center_icon .fa-remove {
+  background-color: white;
+  font-size: 115px;
+}
+
+#edit_share #logo_image_container {
+  width: 250px;
+  height: 40px;
+}
+
+#edit_share #logo_image_container #logo_image_box {
+  background-color: #f2f2f2;
+  width: 250px;
+  height: 40px;
+}
+
+#edit_share #logo_image_container #logo_image_box .center_icon .fa-remove {
+  font-size: 50px;
+  background-color: white;
 }
 
 .image_controls {
@@ -9693,10 +9727,10 @@ Quick add
 }
 
 .image_controls i {
-  background-color: black;
+  background-color: gray;
   float: right;
   color: white;
-  padding: 5px;
+  padding: 5px 0 7px 6px;
   min-width: 35px;
   margin-right: 1px;
 }
@@ -9705,32 +9739,54 @@ Quick add
   margin-bottom: 2px;
 }
 
-#entry_form #image_box_container, #edit_entry #image_box_container {
+#cover_image_delete:hover, #logo_image_delete:hover {
+  background-color: darkgray;
+  cursor: pointer;
+}
+
+#cover_image_container, #logo_image_container, #entry_image_container {
   display: none;
-  background-color: #f2f2f2;
   margin-top: 5px;
   margin-bottom: 10px;
 }
 
-#entry_form #image_box_container #image_box, #edit_entry #image_box_container #image_box {
+#cover_image_box, #logo_image_box, #entry_image_box {
+  background-image: none;
   border: #ddd 1px solid;
+  text-align: center;
 }
 
-#entry_form #cancel_button, #edit_entry #cancel_button {
+#cover_image_box .center_icon, #logo_image_box .center_icon, #entry_image_box .center_icon {
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+#cover_image_box .center_icon .fa-remove, #logo_image_box .center_icon .fa-remove, #entry_image_box .center_icon .fa-remove {
+  font-size: 150px;
+  background-color: white;
+  opacity: 0.5;
+}
+
+#entry_form #cancel_button, #edit_entry #cancel_button, #edit_share #cancel_button {
   display: none;
 }
 
-#entry_form #progressbar, #edit_entry #progressbar {
+#entry_form #progressbar, #edit_entry #progressbar, #edit_share #progressbar {
   margin-top: 5px;
   margin-bottom: 5px;
   text-align: center;
 }
 
-#entry_form #progressbar .ui-progressbar-value, #edit_entry #progressbar .ui-progressbar-value {
+#entry_form #progressbar .ui-progressbar-value, #edit_entry #progressbar .ui-progressbar-value, #edit_share #progressbar .ui-progressbar-value {
   margin: 0;
 }
 
-#entry_form #progressbar .percent_caption, #edit_entry #progressbar .percent_caption {
+#entry_form #progressbar .percent_caption, #edit_entry #progressbar .percent_caption, #edit_share #progressbar .percent_caption {
   position: relative;
   top: -23px;
 }
@@ -10929,6 +10985,24 @@ form #domain_input .anyshare_url {
 
 .map-popup p {
   color: lightslategray;
+}
+
+/*
+ * Share edit
+ */
+.banner_box_container {
+  position: relative;
+  margin: auto;
+  background-color: #fbfbfb;
+  margin: 0 15px 30px;
+  border: #f4f4f4 2px solid;
+}
+
+.banner_preview {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 400px;
 }
 
 /** ************************************* **

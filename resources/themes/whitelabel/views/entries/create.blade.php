@@ -61,7 +61,7 @@
     <script type="text/javascript">
         $("#ajaxSubmit").attr('disabled', 'disabled'); // disable add button until page has loaded
         $("#create_table").hide(); // hide entry table
-        $('#image_box_container').hide();
+        $('#image_container').hide();
         $('#image_controls').hide();
         var fileJustChosen = false;
         var reader = new FileReader(); // instance of the FileReader

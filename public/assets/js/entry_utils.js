@@ -1,7 +1,6 @@
 function finish_submit (data=null) {
     var entry_id = isEdit();
     if (entry_id) {
-        if (entry_id.length > 10) alert("bad");
         create = false;
         post_url = entry_id + "/edit/ajax";
     }
@@ -128,30 +127,37 @@ function uploadFiles () {
         });
 }
 
-$("#choose-file").change(function () {
+$("#entry_image, #cover_image, #logo_image").change(function () {
+    var imageId = '#' + $(this).attr('id');
+    var imageShadow = imageId + "_shadow";    
+    var imageBox = imageId + '_box';
+    var imageBoxCotainer = imageId + '_container';
     var maxSize = $('#MAX_FILE_SIZE').val();
-    var imageSize = $("#choose-file")[0].files[0].size;
+    var imageSize = $(this)[0].files[0].size;
+
+    $('.sk-cube-grid').show();
+
     // test for zero length as well as max size
     if (!imageSize || imageSize > maxSize) {
-        $("#shadow_input").val("");
+        $(imageShadow).val("");
         $('p.too_large').show().addClass("error_message").fadeOut(8000, "swing");
     }
     else {
-        $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
+        $(imageShadow).val($(this).val().replace("C:\\fakepath\\", ""));
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
         if (/^image/.test(files[0].type)) { // only image file
-            fileJustChosen = true;
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function () { // set insert image before button
-                $('#image_box').css('background-image', 'url("' + reader.result + '")');
-                $('#image_box_container').show();
+                $(imageBox).css('background-image', 'url("' + reader.result + '")');
+                $(imageBoxCotainer).css('display', 'flex').css('justify-content', 'center');
             }
         }
-        $('#delete_image').addClass('notUploaded');
+        $(imageId + '_delete').addClass('notUploaded');
     }
+    $('.sk-cube-grid').fadeOut('slow', 'swing');
 });
 
 $('#rotate_image').click(function () {
@@ -160,10 +166,6 @@ $('#rotate_image').click(function () {
 
     $('#rotation').val(-rotationAngle);
     setCSSTransform(rotationAngle);
-});
-
-$("#delete_image").on("click", function () {
-    deleteImgDialog();
 });
 
 $(document).on("click", "#select_all", function (e) {
@@ -200,7 +202,7 @@ function progress (e) {
 }
 
 function setCSSTransform (angle) {
-    $('#image_box').css({
+    $('#entry_image_box').css({
         '-webkit-transform': 'rotate(' + angle + 'deg)',
         '-moz-transform': 'rotate(' + angle + 'deg)',
         '-ms-transform': 'rotate(' + angle + 'deg)',
@@ -235,7 +237,7 @@ function editEntry (object) {
                 setCSSTransform(0);
                 $('#image_box').css("background-image",
                     "url('/assets/uploads/entries/" + data.entry_id + "/" + data.image + "?" + Date.now() + "')");
-                $('#image_box_container').show();
+                $('#image_container').show();
             }
         }
         else {
@@ -295,9 +297,10 @@ function resetForm () {
     // reset the form and tagsinput
     $('#entry_form')[0].reset();
     $('#tags').tagsinput('removeAll');
-    $('#delete_image').removeClass('notUploaded');
+    $('#cover_image_delete').removeClass('notUploaded');
+    $('#logo_image_delete').removeClass('notUploaded');
     $('#image_box').attr('style', '').empty();
-    $('#image_box_container').hide();
+    $('#image_container').hide();
     $('.image_controls').show();
     $('#cancel_button').hide();
 
@@ -305,8 +308,6 @@ function resetForm () {
     $('#title').attr('class', 'form-control');
     $('#rotation').val('');
     $('#deleteImage').val('');
-
-    fileJustChosen = false;
     rotationAngle = 0;
 }
 
@@ -366,12 +367,16 @@ function updateTableRow (data, exchanges, exchangeIds) {
     $('tr#tr_' + entry_id + ' .td_tags').html(data.tags);
 }
 
-function isEdit () {
+function isEdit ()
+{
     return $('#entryId').val();
 }
 
-function deleteImgDialog () {
-    if (!$('#delete_image').hasClass('notUploaded')) {
+function deleteImgDialog(imageType)
+{
+    var imageId = '#' + imageType + '_image';
+
+    if (!$(imageId + '_delete').hasClass('notUploaded')) {
         $("#dialog-confirm").dialog({
             resizable: false,
             height: "auto",
@@ -389,11 +394,10 @@ function deleteImgDialog () {
                     text: "Delete",
                     class: 'ui-button ui-corner-all ui-widget',
                     click: function () {
-                        $('#image_box').prepend('<img src="/assets/img/default/deleted_image.png">');
-                        $('.image_controls').hide();
+                        $(imageId + '_box').prepend('<div class="center_icon"><i class="fa fa-remove"></i></div>');
+                        $(imageId + '_container .image_controls').hide();
                         $(this).dialog("close");
-                        fileJustChosen = false;
-                        $('#deleteImage').val(1);
+                        $("#"+imageType+"_image_delete").val(1);
                     }
                 }
             ]
@@ -401,8 +405,11 @@ function deleteImgDialog () {
     }
     else {
         // this isn't a saved image so no need to show a warning dialog, just clear the background-image
-        $('#image_box').css("background-image", "");
-        $('#image_box_container').hide();
-        $("#shadow_input").val("");
+        $(imageId + '_box').css("background-image", 'none');
+        $(imageId + '_container').hide();
+
+        // clear the two input fields
+        $(imageId).val("");
+        $(imageId + '_shadow').val("");
     }
 }

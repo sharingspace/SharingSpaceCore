@@ -11,7 +11,7 @@
     <input type="hidden" name="upload_key" id="upload_key" value=""/>
     <input type="hidden" id="rotation" name="rotation" value=''>
     <input type="hidden" id="entryId" name="entryId" value=''>
-    <input type="hidden" id="deleteImage" name="deleteImage" value=''>
+    <input type="hidden" id="entry_image_delete" name="entry_image_delete" value=''>
 
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
@@ -101,8 +101,8 @@
                             <!-- File upload   -->
                             <div class="fancy-file-upload fancy-file-info">
                                 <i class="fa fa-picture-o"></i>
-                                <input id="choose-file" type="file" class="form-control" accept="image/jpg,image/png,image/jpeg,image/gif" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
-                                <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly=""/>
+                                <input id="entry_image" type="file" class="form-control" accept="image/jpg,image/png,image/jpeg,image/gif" name="file" onchange="jQuery(this).next('input').val(this.value);"/>
+                                <input id="entry_image_shadow" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly=""/>
                                 <span class="button btn-colored">{{ trans('general.uploads.choose_file') }}</span>
                             </div> <!-- fancy -->
                             <p class="too_large smooth_font margin-bottom-0" style="display:none;font-size:30px">{{ trans('general.entries.max_file_size')}}</p>
@@ -111,13 +111,19 @@
                 </div> <!-- col 12-->
 
                 <div id="dialog-confirm" title="Delete image?">
-                    <p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i><span>{{ trans('general.entries.edit.delete_image') }}</span></p>
+                    <p>
+                        <i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>
+                        <span>{{ trans('general.entries.edit.delete_image') }}</span>
+                    </p>
                 </div>
 
                 <div class="pull-right col-xs-12">
-                    <div id="image_box_container">
-                        <div id="image_box">
-                            <!-- contains background image -->
+                    <div id="entry_image_container">
+                        <div id="entry_image_box" 
+                        @if ($image)'
+                            style = "background-image: url('/assets/uploads/entries/{{$entry->id}}/{{$image}}');"
+                        @endif
+                        > <!-- contains entry image -->                       
                         </div>
                         <div class="row">
                             <div class="col-xs-12 image_controls">
@@ -126,7 +132,7 @@
                                         <i class="fa fa-2x fa-rotate-right" aria-hidden="true" id="rotate_image" title="{{ trans('general.entries.edit.rotate_image') }}"></i>
                                     </div>
                                     <div class="col-xs-12">
-                                        <i class="fa fa-2x fa-times" aria-hidden="true" id="delete_image" title="{{ trans('general.entries.edit.remove_image') }}"></i>
+                                        <i class="fa fa-2x fa-times" aria-hidden="true" id="delete_image" title="{{ trans('general.entries.edit.remove_image') }}" onclick="deleteImgDialog('entry')"></i>
                                     </div>
                                 </div>
                             </div>

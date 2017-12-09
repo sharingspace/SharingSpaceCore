@@ -15,7 +15,7 @@
             <div class="row margin-bottom-20">
                 @if(isset($images) && (count($images) > 0) && $images[0]->filename)
                     <div class="col-md-4 col-sm-5 col-xs-12 margin-top-20">
-                        <div id="image_box_container">
+                        <div id="entry_image_box">
                             <img id="entryImage" src="{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}">
                         </div>
                     </div> <!-- col-md-4 -->
@@ -93,7 +93,7 @@
                                                title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
                                                 <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
 
-                                            <button type="submit" class="btn btn-xs btn-dark-colored"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
+                                            <button type="submit" class="btn btn-xs btn-dark-colored margin-left-5"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
                                             {{ Form::close() }}
                                         </div> <!-- listing-actions -->
                                     </div> <!-- if user is admin or owner -->
