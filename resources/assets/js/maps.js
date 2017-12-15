@@ -13,7 +13,11 @@ class MapRenderer {
 
     createInstance () {
         if (this.wrld3dApiKey) {
-            this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey)
+            this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey, {
+                indoorsEnabled: true,
+            })
+
+            this.listenFloorControls()
             return this
         }
 
@@ -27,6 +31,31 @@ class MapRenderer {
         }).addTo(this.instance)
 
         return this
+    }
+
+    listenFloorControls () {
+        $('.map-area__topFloor').on('click', () => {
+            const indoorMap = this.instance.indoors.getActiveIndoorMap()
+            if (indoorMap) {
+                this.instance.indoors.setFloor(indoorMap.getFloorCount() - 1)
+            }
+        })
+
+        $('.map-area__moveUp').on('click', () => {
+            this.instance.indoors.moveUp()
+        })
+
+        $('.map-area__moveDown').on('click', () => {
+            this.instance.indoors.moveDown()
+        })
+
+        $('.map-area__bottomFloor').on('click', () => {
+            this.instance.indoors.setFloor(0)
+        })
+
+        $('.map-area__exitIndoors').on('click', () => {
+            this.instance.indoors.exit()
+        })
     }
 
     setLatLng (lat, lng) {
