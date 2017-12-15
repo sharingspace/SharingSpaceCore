@@ -37,7 +37,7 @@
 
                                 @if (count($entry->exchangeTypes) > 0)
                                     <div class="margin-bottom-3">
-                                        <?php  $exchanges = array(); ?>
+                                        <?php  $exchanges = []; ?>
                                         @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                                             <?php array_push($exchanges, strtolower($entry->exchangeTypes[$i]->name)); ?>
                                         @endfor
@@ -101,7 +101,7 @@
 
                                 @if ($entry->lat && $entry->lng)
                                     <div class="margin-bottom-3 margin-top-10">
-                                        <div id="entry_browse_map" style="height: 320px;"></div>
+                                        @include('partials.map')
                                     </div>
                                 @endif
                             </div> <!-- col-8/12 -->
