@@ -19,9 +19,11 @@
 
                     $('#location_lat').val(lat);
                     $('#location_lng').val(lng);
+                    $('#wrld3d_indoor').val('');
 
                     window.entry.lat = lat;
                     window.entry.lng = lng;
+                    window.entry.wrld3d_indoor = '';
 
                     window.map.setLatLng(lat, lng).loadMarkers([window.entry], { popup: false, tooltip: false }).center();
                 });

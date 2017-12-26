@@ -48,9 +48,43 @@
 
         window.map.setLatLng(parseFloat(mapLat), parseFloat(mapLng));
 
-        if (entry.lat && entry.lng) {
-            window.map.loadMarkers([entry], { popup: false, tooltip: false }).center();
+        if (window.entry.lat && window.entry.lng) {
+            window.map.loadMarkers([window.entry], { popup: false, tooltip: false }).center();
         }
+
+        window.map.instance.on('dblclick', (ev) => {
+            var indoor = window.map.instance.indoors.getActiveIndoorMap()
+            var floor = window.map.instance.indoors.getFloor()
+
+            if (!window.entry.indoors) {
+                window.entry.indoors = {
+                    id: null,
+                    floor: null,
+                }
+            } else {
+                if (!window.entry.indoors.id) {
+                    window.entry.indoors.id = null
+                }
+
+                if (!window.entry.indoors.floor) {
+                    window.entry.indoors.floor = null
+                }
+            }
+
+            window.entry.location = ''
+            window.entry.latitude = ev.latlng.lat
+            window.entry.longitude = ev.latlng.lng
+            window.entry.indoors.id = indoor === null ? '' : indoor.getIndoorMapId()
+            window.entry.indoors.floor = indoor === null ? '' : floor.getFloorIndex()
+
+            $('#location').val(window.entry.location)
+            $('#location_lat').val(window.entry.latitude)
+            $('#location_lng').val(window.entry.longitude)
+            $('#indoors_id').val(window.entry.indoors.id)
+            $('#indoors_floor').val(window.entry.indoors.floor)
+
+            window.map.loadMarkers([window.entry], {popup: false, tooltip: false })
+        })
 
         if (imageName.length > 0) {
             $("#delete_img_checkbox_label").show();

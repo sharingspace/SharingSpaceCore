@@ -509,6 +509,13 @@ class EntriesController extends Controller
                 $entry->longitude = e(Input::get('longitude'));
             }
 
+            if (Input::get('indoors_id')) {
+                $entry->indoors = collect([
+                    'id' => e(Input::get('indoors_id')),
+                    'floor' => e(Input::get('indoors_floor')),
+                ]);
+            }
+
             if (!$entry->save()) {
                 return Redirect::back()->withInput()->withErrors($entry->getErrors());
             }

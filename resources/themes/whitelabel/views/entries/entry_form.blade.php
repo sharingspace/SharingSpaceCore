@@ -224,6 +224,8 @@
 
             <input type="hidden" name="latitude" id="location_lat" value="{{ isset($entry) ? $entry->latitude : '' }}">
             <input type="hidden" name="longitude" id="location_lng" value="{{ isset($entry) ? $entry->longitude : '' }}">
+            <input type="hidden" name="indoors_id" id="indoors_id" value="{{ isset($entry) && isset($entry->indoors) ? $entry->indoors->get('id') : '' }}">
+            <input type="hidden" name="indoors_floor" id="indoors_floor" value="{{ isset($entry) && isset($entry->indoors) ? $entry->indoors->get('floor') : '' }}">
 
             @include('partials.map')
 

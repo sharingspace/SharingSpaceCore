@@ -41,10 +41,9 @@
 
 @yield('custom_css')
 
-<!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-          crossorigin=""/>
+<!-- Leaflet and WRLD Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
 
     <!-- Plugins -->
     <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>
@@ -107,6 +106,7 @@
 
     @if (!is_null($whitelabel_group->wrld3d))
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
+        <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/indoor_control/latest/indoor_control.js"></script>
     @endif
 
     @javascript('WRLD_3D_API_KEY', $whitelabel_group->wrld3d ?: '')

@@ -5,6 +5,7 @@ class MapRenderer {
         this.mapboxKey = window.MAPBOX_KEY
         this.markers = []
         this.instance = null
+        this.indoorControl = null
         this.lat = null
         this.lng = null
 
@@ -17,7 +18,7 @@ class MapRenderer {
                 indoorsEnabled: true,
             })
 
-            this.listenFloorControls()
+            this.indoorControl = new WrldIndoorControl(this.selector + '_widget', this.instance)
             return this
         }
 
@@ -31,31 +32,6 @@ class MapRenderer {
         }).addTo(this.instance)
 
         return this
-    }
-
-    listenFloorControls () {
-        $('.map-area__topFloor').on('click', () => {
-            const indoorMap = this.instance.indoors.getActiveIndoorMap()
-            if (indoorMap) {
-                this.instance.indoors.setFloor(indoorMap.getFloorCount() - 1)
-            }
-        })
-
-        $('.map-area__moveUp').on('click', () => {
-            this.instance.indoors.moveUp()
-        })
-
-        $('.map-area__moveDown').on('click', () => {
-            this.instance.indoors.moveDown()
-        })
-
-        $('.map-area__bottomFloor').on('click', () => {
-            this.instance.indoors.setFloor(0)
-        })
-
-        $('.map-area__exitIndoors').on('click', () => {
-            this.instance.indoors.exit()
-        })
     }
 
     setLatLng (lat, lng) {
@@ -84,12 +60,18 @@ class MapRenderer {
     }
 
     addMapMarker (item, options) {
-
         if (!$.isNumeric(item.latitude) || !$.isNumeric(item.longitude)) {
             return
         }
 
-        var marker = L.marker([item.latitude, item.longitude])
+        var markerOpts = {}
+
+        if (item.indoors && item.indoors.id) {
+            markerOpts.indoorMapId = item.indoors.id
+            markerOpts.indoorMapFloorId = item.indoors.floor
+        }
+
+        var marker = L.marker([item.latitude, item.longitude], markerOpts)
 
         // Add a tooltip to the marker
         if (options.tooltip) {
@@ -149,5 +131,5 @@ class MapRenderer {
 // ---------------------------------------------------------
 
 window.createMapRenderer = function (selector) {
-    return new MapRenderer(selector)
+    return Promise.resolve(new MapRenderer(selector))
 }
