@@ -65,9 +65,9 @@ class Entry extends Model
 
     public static $uploadableImgs = [
         'entries' => [
-                'height' => '600',
-                'width'  => '600',
-            ],
+            'height' => '600',
+            'width'  => '600',
+        ],
     ];
 
     public static $tagList = [
@@ -87,7 +87,7 @@ class Entry extends Model
     protected $casts = [
         'enabled' => 'boolean',
         'visible' => 'boolean',
-        'indoors' => 'collection',
+        'wrld3d'  => 'collection',
     ];
 
     /**
@@ -95,7 +95,7 @@ class Entry extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'post_type', 'qty', 'lat', 'lng', 'indoors'];
+    protected $fillable = ['title', 'post_type', 'qty', 'lat', 'lng', 'wrld3d'];
 
     /**
      * Return the author of an entry
@@ -167,6 +167,11 @@ class Entry extends Model
     public function setLongitudeAttribute($value)
     {
         $this->attributes['lng'] = $value;
+    }
+
+    public function getNaturalPostTypeAttribute()
+    {
+        return ($this->post_type == 'want') ? 'wants' : 'has';
     }
 
     /**
@@ -310,7 +315,8 @@ class Entry extends Model
     {
         if ($user->id == $this->created_by) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

@@ -11,6 +11,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Wrld3D\PoiManager;
 use App\Models\Community;
 use App\Models\ExchangeType;
 use Auth;
@@ -330,16 +331,24 @@ class CommunitiesController extends Controller
     {
         $themes = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
 
-        $community = Community::find($request->whitelabel_group->id);
-        $exchanges = $community->exchangeTypes;
-        $allowed_exchanges = array();
-        foreach ($exchanges as $exchange) {
-            $allowed_exchanges[$exchange->id] = $exchange->id;
-        }
+        $exchanges = $request->whitelabel_group->exchangeTypes;
+
+        $allowed_exchanges = $exchanges->mapWithKeys(function ($exc) {
+            return [$exc->getKey() => $exc->getKey()];
+        })->toArray();
 
         $all_exchange_types = \App\Models\ExchangeType::all();
-        return view('community.edit')->with('community', $community)->with('allowed_exchanges',
-            $allowed_exchanges)->with('all_exchange_types', $all_exchange_types)->with('themes', $themes);
+
+        $poisets = ($request->whitelabel_group->wrld3d && $request->whitelabel_group->wrld3d->get('dev_token'))
+            ? (new PoiManager($request->whitelabel_group))->getPoisets()
+            : collect([]);
+
+        return view('community.edit')
+            ->with('community', $request->whitelabel_group)
+            ->with('poisets', $poisets)
+            ->with('allowed_exchanges', $allowed_exchanges)
+            ->with('all_exchange_types', $all_exchange_types)
+            ->with('themes', $themes);
     }
 
 
@@ -370,7 +379,15 @@ class CommunitiesController extends Controller
         $community->show_info_bar = e(Input::get('show_info_bar'));
         $community->entry_layout = e(Input::get('entry_layout'));
         $community->color = e(Input::get('theme_color'));
-        $community->wrld3d = e(Input::get('wrld3d'));
+
+        // Get the WRLD3D Data
+        $wrld3dApiKey = explode(' - ', e(Input::get('wrld3d.api_key')));
+
+        $community->wrld3d = collect([
+            'dev_token' => e(Input::get('wrld3d.dev_token')),
+            'api_key'   => count($wrld3dApiKey) === 2 ? $wrld3dApiKey[1] : null,
+            'poiset'    => count($wrld3dApiKey) === 2 ? intval($wrld3dApiKey[0]) : null,
+        ]);
 
         if ($community->show_info_bar == null) {
             $community->show_info_bar = 1;
@@ -411,6 +428,11 @@ class CommunitiesController extends Controller
 
         if (!$community->save()) {
             return Redirect::back()->withInput()->withErrors($community->getErrors());
+        }
+
+        if ($community->wrld3d->get('dev_token') && !$community->wrld3d->get('poiset')) {
+            dd('sdsdsd');
+            (new PoiManager($community))->createCommunityPoiset();
         }
 
         if (Input::has('exchange_types')) {

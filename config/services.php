@@ -89,4 +89,8 @@ return [
         'access_token' => env('MAPBOX_TOKEN'),
     ],
 
+    'wrld3d' => [
+        'poi_api' => env('WRLD3D_POI_API', 'https://poi.wrld3d.com/v1.1/poisets/'),
+    ],
+
 ];

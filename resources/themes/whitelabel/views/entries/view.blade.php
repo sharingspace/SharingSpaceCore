@@ -258,11 +258,13 @@
 
             // Show the map when entry has lat and lng
             if (window.entry.lat && window.entry.lng) {
-                window.map = createMapRenderer('entry_browse_map');
+                createMapRenderer('entry_browse_map').then(function (map) {
+                    window.map = map
 
-                window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
-                    .loadMarkers([window.entry], { popup: false, tooltip: false })
-                    .center()
+                    window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
+                        .loadMarkers([window.entry], { popup: false, tooltip: false })
+                        .center()
+                })
             }
 
             // Get the modal

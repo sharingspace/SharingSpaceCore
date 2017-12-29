@@ -130,7 +130,6 @@
 
             function bindEntryClick () {
                 $('.grid-item').on('click', function () {
-                    console.log("entry click");
                     var id = $(this).attr('id').split('-')[1];
                     window.open('/entry/' + id, '_self');
                 });
@@ -452,8 +451,6 @@
                     mapLayout(entryRows);
                     MAP_LOADED = true;
                 }
-
-                bindSearch(mapSearch);
 
                 $('#gridView').addClass('dim-icon');
                 $('#listView').addClass('dim-icon');

@@ -9829,7 +9829,9 @@ form {
 /*
  * MAP
  */
-#entry_browse_map {
+
+.leaflet-popup-pane {
+  margin-top: -60px !important;
 }
 
 .map-popup {

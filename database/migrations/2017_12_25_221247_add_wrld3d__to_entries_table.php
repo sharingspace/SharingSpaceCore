@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIndoorsToEntriesTable extends Migration
+class AddWrld3dToEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddIndoorsToEntriesTable extends Migration
     public function up()
     {
         Schema::table('entries', function (Blueprint $table) {
-            $table->text('indoors')->nullable();
+            $table->text('wrld3d')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddIndoorsToEntriesTable extends Migration
     public function down()
     {
         Schema::table('entries', function (Blueprint $table) {
-            $table->dropColumn('indoors');
+            $table->dropColumn('wrld3d');
         });
     }
 }

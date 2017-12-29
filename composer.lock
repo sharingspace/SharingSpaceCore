@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "31ca0a36fd6c2e8710e9ea4f0243fab0",
+    "content-hash": "69ad7f1409c51ccb7320705b936d5cfb",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1469,49 +1469,6 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
-        },
-        {
-            "name": "harrysbaraini/laravel-docker",
-            "version": "0.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/harrysbaraini/laravel-docker.git",
-                "reference": "e9c200c21134806a8a23d22080e7ef80cf02ca97"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/harrysbaraini/laravel-docker/zipball/e9c200c21134806a8a23d22080e7ef80cf02ca97",
-                "reference": "e9c200c21134806a8a23d22080e7ef80cf02ca97",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Harrysbaraini\\Docker\\DockerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Harrysbaraini\\Docker\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vanderlei Sbaraini Amancio",
-                    "email": "harrysbaraini@gmail.com"
-                }
-            ],
-            "description": "Command to handle Docker containers with docker-compose.yml.",
-            "time": "2017-10-02T14:16:21+00:00"
         },
         {
             "name": "intervention/image",
@@ -4532,6 +4489,49 @@
                 "test"
             ],
             "time": "2015-05-11T14:41:42+00:00"
+        },
+        {
+            "name": "harrysbaraini/laravel-docker",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/harrysbaraini/laravel-docker.git",
+                "reference": "e9c200c21134806a8a23d22080e7ef80cf02ca97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/harrysbaraini/laravel-docker/zipball/e9c200c21134806a8a23d22080e7ef80cf02ca97",
+                "reference": "e9c200c21134806a8a23d22080e7ef80cf02ca97",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Harrysbaraini\\Docker\\DockerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Harrysbaraini\\Docker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vanderlei Sbaraini Amancio",
+                    "email": "harrysbaraini@gmail.com"
+                }
+            ],
+            "description": "Command to handle Docker containers with docker-compose.yml.",
+            "time": "2017-10-02T14:16:21+00:00"
         },
         {
             "name": "mockery/mockery",

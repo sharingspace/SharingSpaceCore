@@ -79,8 +79,13 @@ return [
     'create_account'             => 'Create an AnyShare account',
     'create_account'             => 'Create an AnyShare account',
     'click_here'                 => 'Click here',
-    'wrld3d'                     => 'WRLD3D',
-    'wrld3d_api'                 => 'WRLD3D API KEY',
+    'wrld3d'                     => [
+        'label'          => 'WRLD3D',
+        'info'           => '...',
+        'api_key'        => 'API KEY',
+        'dev_token'      => 'DEVELOPER TOKEN',
+        'api_key_select' => ':: Select a API Key ::',
+    ],
 
     'nav'      => [
         'browse'          => 'Browse',

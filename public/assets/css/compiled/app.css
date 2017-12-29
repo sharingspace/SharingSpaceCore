@@ -10958,6 +10958,10 @@ form #domain_input .anyshare_url {
 /*
  * MAP
  */
+.leaflet-popup-pane {
+  margin-top: -60px !important;
+}
+
 .map-popup {
   width: 100%;
 }

@@ -6,6 +6,8 @@ class MapRenderer {
         this.markers = []
         this.instance = null
         this.indoorControl = null
+        this.poiApi = null
+        this.markerController = null
         this.lat = null
         this.lng = null
 
@@ -16,9 +18,13 @@ class MapRenderer {
         if (this.wrld3dApiKey) {
             this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey, {
                 indoorsEnabled: true,
+                poiEnabled: true,
             })
 
             this.indoorControl = new WrldIndoorControl(this.selector + '_widget', this.instance)
+            this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
+            this.markerController = new WrldMarkerController(this.instance)
+
             return this
         }
 
@@ -52,45 +58,53 @@ class MapRenderer {
             this.removeMarkers()
         }
 
-        markers.forEach((m) => {
-            this.addMapMarker(m, options)
-        })
+        this.poiApi.searchTags(['anyshare_entries'], this.instance.getCenter(), (success, results) => {
+            if (!success || results.length === 0) {
+                return
+            }
+
+            results.forEach((item) => {
+                this.addMapMarker(item, options)
+            })
+        }, { radius: 5000, number: 500 })
 
         return this
     }
 
     addMapMarker (item, options) {
-        if (!$.isNumeric(item.latitude) || !$.isNumeric(item.longitude)) {
-            return
+        console.log(item)
+
+        var markerOpts = {
+            iconKey: 'pin',
         }
 
-        var markerOpts = {}
-
-        if (item.indoors && item.indoors.id) {
-            markerOpts.indoorMapId = item.indoors.id
-            markerOpts.indoorMapFloorId = item.indoors.floor
+        if (item.indoor) {
+            markerOpts.indoorMapId = item.indoor_id
+            markerOpts.indoorMapFloorId = item.floor_id
         }
 
-        var marker = L.marker([item.latitude, item.longitude], markerOpts)
+        var marker = this.markerController.addMarker(item.id, [item.lat, item.lon], markerOpts)
+
+        // var marker = L.marker([item.lat, item.lon], markerOpts)
 
         // Add a tooltip to the marker
         if (options.tooltip) {
-            marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
+            marker.bindTooltip(item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
         }
 
         // Add a popup with marker's information
         if (options.popup) {
-            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>'
+            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.user_data.url + '\'">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.user_data.exchange_types + '</em></p>'
             marker.bindPopup(popup)
 
             var popup = L.DomUtil.create('div', 'map-popup')
-            popup.innerHTML = '<div>' + item.image + '</div><a href="' + item.url + '" class="map-popup-link">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.exchangeTypes + '</em></p>'
+            popup.innerHTML = '<div>' + (item.user_data.hasOwnProperty('image_url') ? item.user_data.image_url : '') + '</div><a href="' + item.user_data.url + '" class="map-popup-link">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.user_data.exchange_types + '</em></p>'
 
             marker.bindPopup(popup)
         }
 
         this.markers.push(marker)
-        marker.addTo(this.instance)
+        // marker.addTo(this.instance)
 
         return marker
     }
