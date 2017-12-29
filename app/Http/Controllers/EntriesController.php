@@ -155,7 +155,9 @@ class EntriesController extends Controller
         $post_types = array('want' => 'I want', 'have' => 'I have');
 
         $request->session()->put('upload_key', str_random(15));
-        return view('entries.create')->with('post_types', $post_types);
+        return view('entries.create')
+            ->with('post_types', $post_types)
+            ->with('entry', new Entry([]));
     }
 
 
@@ -205,18 +207,28 @@ class EntriesController extends Controller
 
         if (Input::get('location')) {
             $entry->location = e(Input::get('location'));
-            $latlong = Helper::latlong(Input::get('location'));
         }
 
-        if (Input::get('latitude')) {
+//        if (!Input::get('latitude') || !Input::get('longitude')) {
+//            $latlong = Helper::latlong(Input::get('location'));
+//        }
+
+        if (Input::get('latitude') && Input::get('longitude')) {
             $entry->latitude = e(Input::get('latitude'));
-        }
-
-        if (Input::get('longitude')) {
             $entry->longitude = e(Input::get('longitude'));
         }
 
-        if ($request->whitelabel_group->entries()->save($entry)) {
+        $entry->wrld3d = [
+            'indoor_id'    => e(Input::get('indoors_id')),
+            'indoor_floor' => e(Input::get('indoors_floor')),
+        ];
+
+        if ($entry = $request->whitelabel_group->entries()->save($entry)) {
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
+            }
+
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             $types = $typeIds = [];
@@ -503,11 +515,8 @@ class EntriesController extends Controller
                 $entry->location = e(Input::get('location'));
             }
 
-            if (Input::get('latitude')) {
+            if (Input::get('latitude') && Input::get('longitude')) {
                 $entry->latitude = e(Input::get('latitude'));
-            }
-
-            if (Input::get('longitude')) {
                 $entry->longitude = e(Input::get('longitude'));
             }
 
@@ -523,7 +532,7 @@ class EntriesController extends Controller
             }
 
             // Save the POI in the Wrld3D
-            if ($entry->lat && $entry->lng) {
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
                 (new PoiManager($request->whitelabel_group))->savePoi($entry);
             }
 

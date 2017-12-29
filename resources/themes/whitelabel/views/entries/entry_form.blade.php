@@ -119,116 +119,116 @@
 
                 <div class="pull-right col-xs-12">
                     <div id="entry_image_container">
-                        <div id="entry_image_box" 
-                        @if ($image)'
-                            style = "background-image: url('/assets/uploads/entries/{{$entry->id}}/{{$image}}');"
+                        <div id="entry_image_box"
+                        @if (isset($image))'
+                        style = "background-image: url('/assets/uploads/entries/{{$entry->id}}/{{$image}}');"
                         @endif
-                        > <!-- contains entry image -->                       
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 image_controls">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <i class="fa fa-2x fa-rotate-right" aria-hidden="true" id="rotate_image" title="{{ trans('general.entries.edit.rotate_image') }}"></i>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <i class="fa fa-2x fa-times" aria-hidden="true" id="delete_image" title="{{ trans('general.entries.edit.remove_image') }}" onclick="deleteImgDialog('entry')"></i>
-                                    </div>
+                        > <!-- contains entry image -->
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 image_controls">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <i class="fa fa-2x fa-rotate-right" aria-hidden="true" id="rotate_image" title="{{ trans('general.entries.edit.rotate_image') }}"></i>
+                                </div>
+                                <div class="col-xs-12">
+                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="delete_image" title="{{ trans('general.entries.edit.remove_image') }}" onclick="deleteImgDialog('entry')"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> <!-- col 12-->
-
-                <div class="col-xs-4 col-xs-offset-4">
-                    <div id="progressbar">
-                        <!-- progress bar -->
-                    </div>
                 </div>
+            </div> <!-- col 12-->
 
-                <div class="col-xs-12">
-                    <!-- Description -->
-                    <label class="input">
-                        ({{trans('general.markdown')}}
-                        <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown" target="_blank">
-                            <i class='fa fa-info-circle'></i>
-                        </a> )
-                        @if(isset($entry))
-                            <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info"
-                                      placeholder="{{ trans('general.entries.description_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
-                        @else
-                            <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}"></textarea>
-                        @endif
-                    </label>
-                </div> <!-- col 12 -->
-
-                <div class="col-xs-12">
-                    <!-- Tags -->
-                    <label class="input">
-                        @if(isset($entry))
-                            <input data-role="tagsinput" type="text" name="tags" id="tags" class="col-md-12 form-control" placeholder="{{ trans('general.entries.tag_placeholder')}}" value="{{ old('tags', $entry->tags) }}">
-                        @else
-                            <input data-role="tagsinput" type="text" name="tags" id="tags" class="col-md-12 form-control" placeholder="{{ trans('general.entries.tag_placeholder')}}" value="">
-                        @endif
-                    </label>
-                </div> <!-- col 12 -->
-
-                <div class="col-xs-12">
-                    <!-- Location -->
-                    <label class="control-label sr-only" for="location">{{ trans('general.location') }}</label>
-                    <div class="input-group">
-                        @if(isset($entry))
-                            <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.near')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">
-                        @else
-                            <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.near')}}" aria-describedby="basic-addon2" value="">
-                        @endif
-                        <div class="input-group-addon" id="basic-addon2">
-                            <i class="fa fa-location-arrow" id="geolocate"></i>
-                        </div>
-                    </div> <!-- input-group -->
+            <div class="col-xs-4 col-xs-offset-4">
+                <div id="progressbar">
+                    <!-- progress bar -->
                 </div>
+            </div>
 
-                <div class="col-sm-6 col-xs-12">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <label class="checkbox pull-left" for="visible_checkbox">
-                                @if(isset($entry))
-                                    {{ Form::checkbox('private', 1, !old('visible',$entry->visible), array('id'=>'visible_checkbox')) }}
-                                @else
-                                    {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
-                                @endif
-                                <i></i> {{ trans('general.entries.not_visible')}}
-                            </label>
-                        </div>
-                        <div class="col-sm-6 col-xs-12 ">
-                            <label class="checkbox pull-left" for="completed">
-                                @if(isset($entry))
-                                    {{ Form::checkbox('completed', 1, old('completed',$entry->completed_at), array('id'=>'completed')) }}
-                                    <i></i> {{ trans('general.entries.mark_completed')}}
-                                @endif
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12 ">
+            <div class="col-xs-12">
+                <!-- Description -->
+                <label class="input">
+                    ({{trans('general.markdown')}}
+                    <a href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown" target="_blank">
+                        <i class='fa fa-info-circle'></i>
+                    </a> )
                     @if(isset($entry))
-                        <button class="btn btn-colored pull-right">
+                        <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info"
+                                  placeholder="{{ trans('general.entries.description_placeholder')}}">{{ old('description', $entry->description) }}</textarea>
+                    @else
+                        <textarea name="description" rows="5" class="form-control" data-maxlength="200" id="description" data-info="textarea-words-info" placeholder="{{ trans('general.entries.description_placeholder')}}"></textarea>
+                    @endif
+                </label>
+            </div> <!-- col 12 -->
+
+            <div class="col-xs-12">
+                <!-- Tags -->
+                <label class="input">
+                    @if(isset($entry))
+                        <input data-role="tagsinput" type="text" name="tags" id="tags" class="col-md-12 form-control" placeholder="{{ trans('general.entries.tag_placeholder')}}" value="{{ old('tags', $entry->tags) }}">
+                    @else
+                        <input data-role="tagsinput" type="text" name="tags" id="tags" class="col-md-12 form-control" placeholder="{{ trans('general.entries.tag_placeholder')}}" value="">
+                    @endif
+                </label>
+            </div> <!-- col 12 -->
+
+            <div class="col-xs-12">
+                <!-- Location -->
+                <label class="control-label sr-only" for="location">{{ trans('general.location') }}</label>
+                <div class="input-group">
+                    @if(isset($entry))
+                        <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.near')}}" aria-describedby="basic-addon2" value="{{{ old('location', $entry->location) }}}">
+                    @else
+                        <input type="text" class="form-control" id="location" name="location" placeholder="{{ trans('general.near')}}" aria-describedby="basic-addon2" value="">
+                    @endif
+                    <div class="input-group-addon" id="basic-addon2">
+                        <i class="fa fa-location-arrow" id="geolocate"></i>
+                    </div>
+                </div> <!-- input-group -->
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <label class="checkbox pull-left" for="visible_checkbox">
+                            @if(isset($entry))
+                                {{ Form::checkbox('private', 1, !old('visible',$entry->visible), array('id'=>'visible_checkbox')) }}
                             @else
-                                <button class="btn btn-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
-                                    @endif
-                                    {{ trans('general.entries.save_entry') }}
-                                </button>
-                                <a class="btn btn-light-colored pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
-                </div> <!-- col 2 -->
-            </div> <!-- row -->
+                                {{ Form::checkbox('private', 1, 0, array('id'=>'visible_checkbox')) }}
+                            @endif
+                            <i></i> {{ trans('general.entries.not_visible')}}
+                        </label>
+                    </div>
+                    <div class="col-sm-6 col-xs-12 ">
+                        <label class="checkbox pull-left" for="completed">
+                            @if(isset($entry))
+                                {{ Form::checkbox('completed', 1, old('completed',$entry->completed_at), array('id'=>'completed')) }}
+                                <i></i> {{ trans('general.entries.mark_completed')}}
+                            @endif
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 ">
+                @if(isset($entry))
+                    <button class="btn btn-colored pull-right">
+                        @else
+                            <button class="btn btn-colored pull-right" id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit">
+                                @endif
+                                {{ trans('general.entries.save_entry') }}
+                            </button>
+                            <a class="btn btn-light-colored pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
+            </div> <!-- col 2 -->
+        </div> <!-- row -->
 
-            <input type="hidden" name="latitude" id="location_lat" value="{{ isset($entry) ? $entry->latitude : '' }}">
-            <input type="hidden" name="longitude" id="location_lng" value="{{ isset($entry) ? $entry->longitude : '' }}">
-            <input type="hidden" name="indoors_id" id="indoors_id" value="{{ isset($entry) && isset($entry->indoors) ? $entry->indoors->get('id') : '' }}">
-            <input type="hidden" name="indoors_floor" id="indoors_floor" value="{{ isset($entry) && isset($entry->indoors) ? $entry->indoors->get('floor') : '' }}">
+        <input type="hidden" name="latitude" id="location_lat" value="{{ isset($entry) ? $entry->latitude : '' }}">
+        <input type="hidden" name="longitude" id="location_lng" value="{{ isset($entry) ? $entry->longitude : '' }}">
+        <input type="hidden" name="indoors_id" id="indoors_id" value="{{ isset($entry) && isset($entry->indoors) ? $entry->indoors->get('id') : '' }}">
+        <input type="hidden" name="indoors_floor" id="indoors_floor" value="{{ isset($entry) && isset($entry->indoors) ? $entry->indoors->get('floor') : '' }}">
 
-            @include('partials.map')
+        @include('partials.map')
 
-        </div> <!-- col 9 -->
+    </div> <!-- col 9 -->
     </div>  <!-- row -->
 </form>

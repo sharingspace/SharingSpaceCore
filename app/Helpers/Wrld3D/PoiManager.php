@@ -149,6 +149,10 @@ class PoiManager
 
     public function savePoi(Entry $entry): Collection
     {
+        if (!$this->community->wrld3d->get('poiset')) {
+            throw new \Exception('Community has not any POI set associated.');
+        }
+
         $userData = [
             'entry_id'          => $entry->getKey(),
             'url'               => route('entry.view', $entry->getKey()),

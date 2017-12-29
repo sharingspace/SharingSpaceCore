@@ -1,5 +1,6 @@
-function finish_submit (data=null) {
+function finish_submit (data = null) {
     var entry_id = isEdit();
+
     if (entry_id) {
         create = false;
         post_url = entry_id + "/edit/ajax";
@@ -12,35 +13,37 @@ function finish_submit (data=null) {
     // start the create or save ajax call off
     $.post(post_url, $('#entry_form').serialize(), function (data) {
         if (data.success) {
-            var exchanges = null;
-            $('#error-list').remove();
-            $('#submission_error').hide();
+            window.location.href = '/entry/' + data.entry_id
 
-            if ($('#create_table tr').length == 1) {
-                $('#create_table').show();
-            }
-
-            resetForm();
-            // clear all checkboxes and then select the ones we want
-            $('input:checkbox[class=exchanges]').prop('checked', false);
-            jQuery.each(data.typeIds, function (index, item) {
-                $('input:checkbox[class=exchanges][value=' + item + ']').prop('checked', true);
-            });
-
-            if (data.exchange_types) {
-                exchanges = data.exchange_types.join(", ");
-            }
-
-            if (data.typeIds.length) {
-                exchangeIds = data.typeIds.join(",");
-            }
-
-            if (data.create) {
-                addTableRow(data, exchanges, exchangeIds);
-            }
-            else {
-                updateTableRow(data, exchanges, exchangeIds)
-            }
+            // var exchanges = null;
+            // $('#error-list').remove();
+            // $('#submission_error').hide();
+            //
+            // if ($('#create_table tr').length == 1) {
+            //     $('#create_table').show();
+            // }
+            //
+            // resetForm();
+            // // clear all checkboxes and then select the ones we want
+            // $('input:checkbox[class=exchanges]').prop('checked', false);
+            // jQuery.each(data.typeIds, function (index, item) {
+            //     $('input:checkbox[class=exchanges][value=' + item + ']').prop('checked', true);
+            // });
+            //
+            // if (data.exchange_types) {
+            //     exchanges = data.exchange_types.join(", ");
+            // }
+            //
+            // if (data.typeIds.length) {
+            //     exchangeIds = data.typeIds.join(",");
+            // }
+            //
+            // if (data.create) {
+            //     addTableRow(data, exchanges, exchangeIds);
+            // }
+            // else {
+            //     updateTableRow(data, exchanges, exchangeIds)
+            // }
         }
         else {
             var errorHtml;
@@ -129,7 +132,7 @@ function uploadFiles () {
 
 $("#entry_image, #cover_image, #logo_image").change(function () {
     var imageId = '#' + $(this).attr('id');
-    var imageShadow = imageId + "_shadow";    
+    var imageShadow = imageId + "_shadow";
     var imageBox = imageId + '_box';
     var imageBoxCotainer = imageId + '_container';
     var maxSize = $('#MAX_FILE_SIZE').val();
@@ -367,13 +370,11 @@ function updateTableRow (data, exchanges, exchangeIds) {
     $('tr#tr_' + entry_id + ' .td_tags').html(data.tags);
 }
 
-function isEdit ()
-{
+function isEdit () {
     return $('#entryId').val();
 }
 
-function deleteImgDialog(imageType)
-{
+function deleteImgDialog (imageType) {
     var imageId = '#' + imageType + '_image';
 
     if (!$(imageId + '_delete').hasClass('notUploaded')) {
@@ -397,7 +398,7 @@ function deleteImgDialog(imageType)
                         $(imageId + '_box').prepend('<div class="center_icon"><i class="fa fa-remove"></i></div>');
                         $(imageId + '_container .image_controls').hide();
                         $(this).dialog("close");
-                        $("#"+imageType+"_image_delete").val(1);
+                        $("#" + imageType + "_image_delete").val(1);
                     }
                 }
             ]

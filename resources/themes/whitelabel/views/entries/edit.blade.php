@@ -50,7 +50,31 @@
                 window.map.setLatLng(parseFloat(mapLat), parseFloat(mapLng));
 
                 if (window.entry.lat && window.entry.lng) {
-                    window.map.loadMarkers([window.entry], { popup: false, tooltip: false }).center();
+                    window.entry.lon = window.entry.lng
+                    window.entry.indoor = (window.entry.wrld3d && window.entry.wrld3d.indoor_id)
+                    window.entry.indoor_id = window.entry.wrld3d ? window.entry.wrld3d.indoor_id : null
+                    window.entry.floor_id = window.entry.wrld3d ? window.entry.wrld3d.indoor_floor : null
+                    window.window.user_data = {
+                        description: window.entry.description,
+                        image_url: window.entry.image_url,
+                        author_name: window.entry.display_name,
+                        natural_post_type: window.entry.natural_post_type,
+                        exchanges_types: window.entry.exchangesTypes,
+                        url: window.entry.url,
+                    };
+
+                    if (window.entry.indoor) {
+                        window.map.instance.indoors.on('indoorentranceadd', function () {
+                            window.map.centerAt(window.entry);
+                            window.map.enterBuilding(window.entry.indoor_id, window.entry.floor_id);
+                        });
+
+                        window.map.instance.indoors.on('indoormapenter', function () {
+                            window.map.addMapMarker(window.entry, { popup: false, tooltip: false });
+                        })
+                    } else {
+                        window.map.addMapMarker(window.entry, { popup: false, tooltip: false });
+                    }
                 }
 
                 window.map.instance.on('dblclick', (ev) => {
@@ -73,18 +97,20 @@
                     }
 
                     window.entry.location = ''
-                    window.entry.latitude = ev.latlng.lat
-                    window.entry.longitude = ev.latlng.lng
-                    window.entry.indoors.id = indoor === null ? '' : indoor.getIndoorMapId()
-                    window.entry.indoors.floor = indoor === null ? '' : floor.getFloorIndex()
+                    window.entry.lat = ev.latlng.lat
+                    window.entry.lon = ev.latlng.lng
+                    window.entry.indoor = indoor
+                    window.entry.indoor_id = indoor === null ? '' : indoor.getIndoorMapId()
+                    window.entry.floor_id = indoor === null ? '' : floor.getFloorIndex()
 
                     $('#location').val(window.entry.location)
-                    $('#location_lat').val(window.entry.latitude)
-                    $('#location_lng').val(window.entry.longitude)
-                    $('#indoors_id').val(window.entry.indoors.id)
-                    $('#indoors_floor').val(window.entry.indoors.floor)
+                    $('#location_lat').val(window.entry.lat)
+                    $('#location_lng').val(window.entry.lon)
+                    $('#indoors_id').val(window.entry.indoor_id)
+                    $('#indoors_floor').val(window.entry.floor_id)
 
-                    window.map.loadMarkers([window.entry], { popup: false, tooltip: false })
+                    window.map.removeMarkers()
+                    window.map.addMapMarker(window.entry, { popup: false, tooltip: false })
                 })
             })
 

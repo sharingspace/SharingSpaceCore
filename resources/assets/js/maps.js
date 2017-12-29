@@ -1,5 +1,5 @@
 class MapRenderer {
-    constructor (selector) {
+    constructor (selector, options) {
         this.selector = selector
         this.wrld3dApiKey = window.WRLD_3D_API_KEY
         this.mapboxKey = window.MAPBOX_KEY
@@ -11,19 +11,21 @@ class MapRenderer {
         this.lat = null
         this.lng = null
 
-        this.createInstance()
+        this.createInstance(options)
     }
 
-    createInstance () {
+    createInstance (options) {
+        Object.assign(options, {}, options)
+
         if (this.wrld3dApiKey) {
             this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey, {
                 indoorsEnabled: true,
-                poiEnabled: true,
             })
 
             this.indoorControl = new WrldIndoorControl(this.selector + '_widget', this.instance)
-            this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
             this.markerController = new WrldMarkerController(this.instance)
+
+            this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
 
             return this
         }
@@ -71,21 +73,39 @@ class MapRenderer {
         return this
     }
 
+    /**
+     * Item properties:
+     *  - id
+     *  - indoor_id
+     *  - floor_id
+     *  - lat
+     *  - lon
+     *  - title
+     *  - subtitle
+     *  - user_data
+     *    - natural_post_type
+     *    - image_url
+     *    - author_name
+     *    - url
+     *    - exchange_types
+     *
+     * @param item
+     * @param options
+     */
     addMapMarker (item, options) {
-        console.log(item)
-
         var markerOpts = {
             iconKey: 'pin',
         }
 
         if (item.indoor) {
-            markerOpts.indoorMapId = item.indoor_id
-            markerOpts.indoorMapFloorId = item.floor_id
+            markerOpts.isIndoor = true
+            markerOpts.indoorId = item.indoor_id
+            markerOpts.floorIndex = parseInt(item.floor_id)
         }
 
-        var marker = this.markerController.addMarker(item.id, [item.lat, item.lon], markerOpts)
+        const id = item.id || (+new Date * Math.random() + 1).toString(36).substring(2, 10)
 
-        // var marker = L.marker([item.lat, item.lon], markerOpts)
+        var marker = this.markerController.addMarker(id, [item.lat, item.lon], markerOpts)
 
         // Add a tooltip to the marker
         if (options.tooltip) {
@@ -104,26 +124,40 @@ class MapRenderer {
         }
 
         this.markers.push(marker)
-        // marker.addTo(this.instance)
-
-        return marker
-    }
-
-    goToLinkListener (link) {
-        window.location.href = link
+        return this
     }
 
     removeMarkers () {
         this.markers.forEach((m) => {
-            m.remove()
+            this.markerController.removeMarker(m.id)
         })
 
         this.markers = []
     }
 
+    precache (location) {
+        this.instance.precache(location, 1000, () => {
+            console.log('Wrld3D caching OK.')
+        })
+    }
+
+    centerAt (entry) {
+        this.instance.setView([entry.lat, entry.lon], 14)
+        this.precache([entry.lat, entry.lon])
+    }
+
+    enterBuilding (indoorId, floor) {
+        if (!indoorId) {
+            return
+        }
+
+        this.instance.indoors.enter(indoorId)
+        this.instance.indoors.setFloor(floor)
+    }
+
     center () {
         if (this.lat && this.lng) {
-            this.instance.setView(new L.LatLng(this.lat, this.lng), 18)
+            this.instance.setView([this.lat, this.lng], 18)
             return this
         }
 
@@ -138,12 +172,13 @@ class MapRenderer {
         }
 
         this.instance.fitBounds(points)
+        this.precache(this.instance.getCenter())
         return this
     }
 }
 
 // ---------------------------------------------------------
 
-window.createMapRenderer = function (selector) {
-    return Promise.resolve(new MapRenderer(selector))
+window.createMapRenderer = function (selector, options) {
+    return Promise.resolve(new MapRenderer(selector, options || {}))
 }
