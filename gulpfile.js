@@ -1,5 +1,8 @@
 var elixir = require('laravel-elixir');
 // require('laravel-elixir-codeception');
+
+process.env.DISABLE_NOTIFIER = true;
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management

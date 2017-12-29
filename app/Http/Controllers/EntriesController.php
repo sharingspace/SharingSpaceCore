@@ -12,8 +12,10 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ModelOperationException;
+use App\Helpers\Wrld3D\PoiManager;
 use App\Jobs\Entry\DeleteEntry;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -153,7 +155,9 @@ class EntriesController extends Controller
         $post_types = array('want' => 'I want', 'have' => 'I have');
 
         $request->session()->put('upload_key', str_random(15));
-        return view('entries.create')->with('post_types', $post_types);
+        return view('entries.create')
+            ->with('post_types', $post_types)
+            ->with('entry', new Entry([]));
     }
 
 
@@ -203,18 +207,28 @@ class EntriesController extends Controller
 
         if (Input::get('location')) {
             $entry->location = e(Input::get('location'));
-            $latlong = Helper::latlong(Input::get('location'));
         }
 
-        if (Input::get('latitude')) {
+//        if (!Input::get('latitude') || !Input::get('longitude')) {
+//            $latlong = Helper::latlong(Input::get('location'));
+//        }
+
+        if (Input::get('latitude') && Input::get('longitude')) {
             $entry->latitude = e(Input::get('latitude'));
-        }
-
-        if (Input::get('longitude')) {
             $entry->longitude = e(Input::get('longitude'));
         }
 
-        if ($request->whitelabel_group->entries()->save($entry)) {
+        $entry->wrld3d = [
+            'indoor_id'    => e(Input::get('indoors_id')),
+            'indoor_floor' => e(Input::get('indoors_floor')),
+        ];
+
+        if ($entry = $request->whitelabel_group->entries()->save($entry)) {
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
+            }
+
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             $types = $typeIds = [];
@@ -501,16 +515,25 @@ class EntriesController extends Controller
                 $entry->location = e(Input::get('location'));
             }
 
-            if (Input::get('latitude')) {
+            if (Input::get('latitude') && Input::get('longitude')) {
                 $entry->latitude = e(Input::get('latitude'));
-            }
-
-            if (Input::get('longitude')) {
                 $entry->longitude = e(Input::get('longitude'));
             }
 
+            $currentWrld3d = $entry->wrld3d ?: collect([]);
+
+            $entry->wrld3d = $currentWrld3d->merge([
+                'indoor_id'    => e(Input::get('indoors_id')),
+                'indoor_floor' => e(Input::get('indoors_floor')),
+            ]);
+
             if (!$entry->save()) {
                 return Redirect::back()->withInput()->withErrors($entry->getErrors());
+            }
+
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
             }
 
             if (Input::hasFile('file')) {
@@ -648,7 +671,7 @@ class EntriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
-     * @return String JSON
+     * @return array
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
@@ -784,7 +807,7 @@ class EntriesController extends Controller
                     'tags'              => $entry->tags,
                     'exchangeTypes'     => implode(', ', $exchangeTypes),
                     'display_name'      => $entry->author->getDisplayName(),
-                    'natural_post_type' => ($entry->post_type == 'want') ? 'wants' : 'has',
+                    'natural_post_type' => $entry->natural_post_type,
                     'aspect_ratio'      => $aspect_ratio,
                     'author_name'       => '<a href="' . route('user.profile', $entry->author->id) . '">'
                         . $entry->author->getDisplayName() . '</a>'
@@ -792,6 +815,7 @@ class EntriesController extends Controller
                             ' <span class="label label-primary">'
                             . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
                             . '</span>' : ''),
+                    'wrl3d'             => $entry->wrld3d->toArray(),
                 );
             }
             else {
@@ -816,14 +840,14 @@ class EntriesController extends Controller
             }
         }
 
-        // get default entry layout. Default to grid
+        // Get default entry layout. Default to grid.
         $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
 
-//        if ($entryLayout === 'M' && !$request->whitelabel_group->hasGeolocation()) {
-//            $entryLayout = 'L';
-//        }
-
-        return array('total' => $count, 'rows' => $rows, 'viewType' => $entryLayout);
+        return [
+            'total'    => $count,
+            'rows'     => $rows,
+            'viewType' => $entryLayout,
+        ];
     }
 
 

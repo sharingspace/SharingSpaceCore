@@ -85,6 +85,13 @@ class Community extends Model
     protected $fillable = ['name', 'subdomain', 'group_type', 'cover_img', 'profile_img', 'logo', 'wrld3d', 'lat', 'lng'];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'wrld3d' => 'collection',
+    ];
+
+    /**
      * Relationship to get community owner
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -257,7 +264,7 @@ class Community extends Model
     public function deleteCover()
     {
         //log::debug("deleteCover: ".$this->cover_img);
-        $file = public_path().'/assets/uploads/community-covers/'.$this->id. '/'.$this->cover_img;
+        $file = public_path() . '/assets/uploads/community-covers/' . $this->id . '/' . $this->cover_img;
         unlink($file);
         $this->cover_img = null;
     }
@@ -279,7 +286,7 @@ class Community extends Model
         }
     }
 
-     /**
+    /**
      * Deletes logo image.
      *
      * @author [D. Linnard] [<david@linnard.com>]
@@ -288,10 +295,10 @@ class Community extends Model
      */
     public function deleteLogo()
     {
-        $file = public_path().'/assets/uploads/community-logos/'.$this->id. '/'.$this->logo;
+        $file = public_path() . '/assets/uploads/community-logos/' . $this->id . '/' . $this->logo;
         unlink($file);
         $this->logo = null;
-    }   
+    }
 
     /**
      * Get the profile image url based on app environment

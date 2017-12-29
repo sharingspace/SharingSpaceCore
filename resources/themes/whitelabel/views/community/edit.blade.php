@@ -167,21 +167,21 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                     </div>
                                     <div class="col-xs-12">
                                         <div id="cover_image_container">
-                                            <div id="cover_image_box" 
-                                            @if ($whitelabel_group->getCover())
-                                                style="background-image: url({{ $whitelabel_group->getCover() }});"
-                                            @endif
+                                            <div id="cover_image_box"
+                                                 @if ($whitelabel_group->getCover())
+                                                 style="background-image: url({{ $whitelabel_group->getCover() }});"
+                                                    @endif
                                             > <!-- contains background image -->
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-xs-12 image_controls">
-                                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="cover_image_delete" title="{{ trans('general.entries.edit.remove_image') }}"  onclick="deleteImgDialog('cover')"></i>
+                                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="cover_image_delete" title="{{ trans('general.entries.edit.remove_image') }}" onclick="deleteImgDialog('cover')"></i>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Logo upload -->
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group {{ $errors->first('file', 'has-error') }}">
@@ -200,14 +200,14 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                     <div class="col-md-10 col-sm-10 col-md-offset-1 col-xs-12 margin-bottom-10">
                                         <div id="logo_image_container">
                                             <div id="logo_image_box"
-                                            @if ($whitelabel_group->getLogo())
-                                                style="background-image: url({{ $whitelabel_group->getLogo() }});"
-                                            @endif
+                                                 @if ($whitelabel_group->getLogo())
+                                                 style="background-image: url({{ $whitelabel_group->getLogo() }});"
+                                                    @endif
                                             > <!-- contains logo image -->
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12 image_controls">
-                                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="logo_image_delete" title="{{ trans('general.entries.edit.remove_image') }}"  onclick="deleteImgDialog('logo')"></i>
+                                                    <i class="fa fa-2x fa-times" aria-hidden="true" id="logo_image_delete" title="{{ trans('general.entries.edit.remove_image') }}" onclick="deleteImgDialog('logo')"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -306,14 +306,30 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                 </fieldset>
 
                                 <fieldset class="nomargin">
-                                    <legend>{{ trans('general.wrld3d')}}</legend>
+                                    <legend>{{ trans('general.wrld3d.label')}}</legend>
                                     <p>{{ trans('general.community.wrld3d_info')}}</p>
-                                    <!-- WRLD3D API KEY -->
-                                    <div class="form-group{{ $errors->first('wrld3d', ' has-error') }}">
-                                        <label for="wrld3d" class="sr-only">{{ trans('general.wrld3d_api') }}</label>
+                                    <!-- DEV TOKEN -->
+                                    <div class="form-group{{ $errors->first('wrld3d.dev_token', ' has-error') }}">
+                                        <label for="wrld3d[dev_token]">{{ trans('general.wrld3d.dev_token') }}</label>
 
-                                        <input type="text" name="wrld3d" class="form-control" value="{{ Input::old('wrld3d', $community->wrld3d) }}">
-                                        {!! $errors->first('wrld3d', '<span class="help-block">:message</span>') !!}
+                                        <input type="text" name="wrld3d[dev_token]" class="form-control" value="{{ Input::old('wrld3d.dev_token', $community->wrld3d ? $community->wrld3d->get('dev_token') : '') }}">
+                                        {!! $errors->first('wrld3d.dev_token', '<span class="help-block">:message</span>') !!}
+                                    </div> <!-- DEV TOKEN -->
+                                    <!-- WRLD3D API KEY -->
+                                    <div class="form-group{{ $errors->first('wrld3d.api_key', ' has-error') }}">
+                                        <label for="wrld3d[api_key]">{{ trans('general.wrld3d.api_key') }}</label>
+
+                                        <select type="text" name="wrld3d[api_key]" class="form-control"
+                                                value="{{ Input::old('wrld3d.api_key', $community->wrld3d ? $community->wrld3d->get('api_key') : '') }}"
+                                                @if (empty($community->wrld3d) || empty($community->wrld3d->get('dev_token'))) disabled @endif>
+                                            <option value="">{{ trans('general.wrld3d.api_key_select') }}</option>
+                                            @foreach ($poisets as $poiset)
+                                                <option value="{{ $poiset->get('code') }}" @if (!empty($community->wrld3d->get('poiset')) && $community->wrld3d->get('poiset') === intval($poiset->get('id'))) selected @endif>
+                                                    {{ $poiset->get('name') }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        {!! $errors->first('wrld3d.api_key', '<span class="help-block">:message</span>') !!}
                                     </div> <!-- WRLD3D API KEY -->
                                 </fieldset>
                             </div> <!-- ADVANCED TAB -->
@@ -328,7 +344,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div> <!-- row -->
         </div> <!-- edit_wrapper -->
 
-    @include('./progress')
+        @include('./progress')
 
     </section> <!-- container -->
     <!-- / -->
@@ -425,7 +441,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 @stop
 
 @section('custom_js')
-     <script type="text/javascript">
+    <script type="text/javascript">
         var reader = new FileReader(); // instance of the FileReader
 
         $(document).ready(function () {

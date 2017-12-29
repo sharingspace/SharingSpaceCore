@@ -7,9 +7,8 @@
 @stop
 
 @section('custom_css')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-          integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-          crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
 
     <link rel="stylesheet" href="{{ asset('/assets/css/compiled/map.css') }}" type="text/css">
 
@@ -50,7 +49,7 @@
                 <th data-sortable="false" data-field="image">{{ trans('general.members.image')}}</th>
                 <th data-sortable="true" data-field="post_type_link">{{ trans('general.type') }}</th>
                 <th data-sortable="true" data-field="title_link" class="title_link">{{ trans('general.entry') }}</th>
-                <th data-sortable="true" data-field="display_name" class="hidden-xs" >{{ trans('general.entries.posted_by') }}</th>
+                <th data-sortable="true" data-field="display_name" class="hidden-xs">{{ trans('general.entries.posted_by') }}</th>
                 <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
                 <th data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
                 <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
@@ -69,8 +68,8 @@
         </div>
         <!-- End entries grid -->
         <!-- Begin entries map -->
-        <div id="entry_browse_map"></div>
-        <!-- End entries map -->
+    @include('partials.map', ['size' => '720'])
+    <!-- End entries map -->
     </section>
 
     @include('./progress')
@@ -87,7 +86,7 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 
     <script type="text/javascript">
- 
+
         $(document).ready(function () {
             var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
             var entryRows;
@@ -98,8 +97,10 @@
             var MAP_LOADED = false;
             var GRID_WIDTH = 100;
 
-            window.map = createMapRenderer('entry_browse_map');
-            $('#entry_browse_map').hide();
+            createMapRenderer('entry_browse_map').then(function (map) {
+                window.map = map
+                $('#entry_browse_map').hide();
+            })
 
             $('.sk-cube-grid').show();
 
@@ -121,17 +122,14 @@
                 }
             }
 
-            function fadeOutSpinner()
-            {
+            function fadeOutSpinner () {
                 $('.sk-cube-grid').fadeOut('slow', 'swing', function () {
                     $('.wl_usercover').css('opacity', 1);
                 });
             }
 
-            function bindEntryClick ()
-            {
+            function bindEntryClick () {
                 $('.grid-item').on('click', function () {
-                    console.log("entry click");
                     var id = $(this).attr('id').split('-')[1];
                     window.open('/entry/' + id, '_self');
                 });
@@ -358,7 +356,7 @@
                         // due to a page refresh/reload. We don't need to report this as an error
                         if (jqXHR.status) {
                             // Handle errors here
-                            alert("Error retreiving entries: " + jqXHR.status +'  '+ textStatus +'  '+ errorThrown);
+                            alert("Error retreiving entries: " + jqXHR.status + '  ' + textStatus + '  ' + errorThrown);
                         }
                     }
                 });
@@ -454,8 +452,6 @@
                     MAP_LOADED = true;
                 }
 
-                bindSearch(mapSearch);
-
                 $('#gridView').addClass('dim-icon');
                 $('#listView').addClass('dim-icon');
                 $('#mapView').removeClass('dim-icon');
@@ -514,14 +510,13 @@
 
             /* Utility routine to place a marker at the center of the page
             Neds to be called froma  window resize as well */
-            function showPageCenter()
-            {
-                var cX = $('body').width()/2;
-                var cY = $('body').height()/2;
+            function showPageCenter () {
+                var cX = $('body').width() / 2;
+                var cY = $('body').height() / 2;
                 if ($('body .centerMarker').length) {
                     $('body .centerMarker').remove();
                 }
-                $('body').append('<i class="fa fa-bullseye centerMarker" style="color: orange; position: absolute; top:'+cY+'px; left:'+cX+'px;">');
+                $('body').append('<i class="fa fa-bullseye centerMarker" style="color: orange; position: absolute; top:' + cY + 'px; left:' + cX + 'px;">');
             }
         });
 

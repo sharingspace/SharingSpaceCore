@@ -8666,7 +8666,7 @@ $color-green: #9AE14F;
   text-align: center;
   .center_icon {
     height: 100%;
-    display: flex; 
+    display: flex;
     justify-content: center;
     align-items: center;
     .fa-remove {
@@ -9829,8 +9829,9 @@ form {
 /*
  * MAP
  */
-#entry_browse_map {
-  height: 720px
+
+.leaflet-popup-pane {
+  margin-top: -60px !important;
 }
 
 .map-popup {
@@ -9871,8 +9872,8 @@ form {
 }
 
 .banner_preview {
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 400px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 400px;
 }

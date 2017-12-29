@@ -1,20 +1,32 @@
 class MapRenderer {
-    constructor (selector) {
+    constructor (selector, options) {
         this.selector = selector
         this.wrld3dApiKey = window.WRLD_3D_API_KEY
         this.mapboxKey = window.MAPBOX_KEY
-
         this.markers = []
         this.instance = null
+        this.indoorControl = null
+        this.poiApi = null
+        this.markerController = null
         this.lat = null
         this.lng = null
 
-        this.createInstance()
+        this.createInstance(options)
     }
 
-    createInstance () {
+    createInstance (options) {
+        Object.assign(options, {}, options)
+
         if (this.wrld3dApiKey) {
-            this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey)
+            this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey, {
+                indoorsEnabled: true,
+            })
+
+            this.indoorControl = new WrldIndoorControl(this.selector + '_widget', this.instance)
+            this.markerController = new WrldMarkerController(this.instance)
+
+            this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
+
             return this
         }
 
@@ -48,57 +60,104 @@ class MapRenderer {
             this.removeMarkers()
         }
 
-        markers.forEach((m) => {
-            this.addMapMarker(m, options)
-        })
+        this.poiApi.searchTags(['anyshare_entries'], this.instance.getCenter(), (success, results) => {
+            if (!success || results.length === 0) {
+                return
+            }
+
+            results.forEach((item) => {
+                this.addMapMarker(item, options)
+            })
+        }, { radius: 5000, number: 500 })
 
         return this
     }
 
+    /**
+     * Item properties:
+     *  - id
+     *  - indoor_id
+     *  - floor_id
+     *  - lat
+     *  - lon
+     *  - title
+     *  - subtitle
+     *  - user_data
+     *    - natural_post_type
+     *    - image_url
+     *    - author_name
+     *    - url
+     *    - exchange_types
+     *
+     * @param item
+     * @param options
+     */
     addMapMarker (item, options) {
-        if (!item.latitude || !item.longitude) {
-            return
+        var markerOpts = {
+            iconKey: 'pin',
         }
 
-        var marker = L.marker([item.latitude, item.longitude])
+        if (item.indoor) {
+            markerOpts.isIndoor = true
+            markerOpts.indoorId = item.indoor_id
+            markerOpts.floorIndex = parseInt(item.floor_id)
+        }
+
+        const id = item.id || (+new Date * Math.random() + 1).toString(36).substring(2, 10)
+
+        var marker = this.markerController.addMarker(id, [item.lat, item.lon], markerOpts)
 
         // Add a tooltip to the marker
         if (options.tooltip) {
-            marker.bindTooltip(item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
+            marker.bindTooltip(item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
         }
 
         // Add a popup with marker's information
         if (options.popup) {
-            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>'
+            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.user_data.url + '\'">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.user_data.exchange_types + '</em></p>'
             marker.bindPopup(popup)
 
             var popup = L.DomUtil.create('div', 'map-popup')
-            popup.innerHTML = '<div>' + item.image + '</div><a href="' + item.url + '" class="map-popup-link">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.exchangeTypes + '</em></p>'
+            popup.innerHTML = '<div>' + (item.user_data.hasOwnProperty('image_url') ? item.user_data.image_url : '') + '</div><a href="' + item.user_data.url + '" class="map-popup-link">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.user_data.exchange_types + '</em></p>'
 
             marker.bindPopup(popup)
         }
 
         this.markers.push(marker)
-        marker.addTo(this.instance)
-
-        return marker
-    }
-
-    goToLinkListener (link) {
-        window.location.href = link
+        return this
     }
 
     removeMarkers () {
         this.markers.forEach((m) => {
-            m.remove()
+            this.markerController.removeMarker(m.id)
         })
 
         this.markers = []
     }
 
+    precache (location) {
+        this.instance.precache(location, 1000, () => {
+            console.log('Wrld3D caching OK.')
+        })
+    }
+
+    centerAt (entry) {
+        this.instance.setView([entry.lat, entry.lon], 14)
+        this.precache([entry.lat, entry.lon])
+    }
+
+    enterBuilding (indoorId, floor) {
+        if (!indoorId) {
+            return
+        }
+
+        this.instance.indoors.enter(indoorId)
+        this.instance.indoors.setFloor(floor)
+    }
+
     center () {
         if (this.lat && this.lng) {
-            this.instance.setView(new L.LatLng(this.lat, this.lng), 18)
+            this.instance.setView([this.lat, this.lng], 18)
             return this
         }
 
@@ -108,12 +167,18 @@ class MapRenderer {
             points.push([mk.getLatLng().lat, mk.getLatLng().lng])
         })
 
+        if (points.length === 0) {
+            return this
+        }
+
         this.instance.fitBounds(points)
+        this.precache(this.instance.getCenter())
+        return this
     }
 }
 
 // ---------------------------------------------------------
 
-window.createMapRenderer = function (selector) {
-    return new MapRenderer(selector)
+window.createMapRenderer = function (selector, options) {
+    return Promise.resolve(new MapRenderer(selector, options || {}))
 }

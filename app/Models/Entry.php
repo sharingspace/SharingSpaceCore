@@ -12,15 +12,10 @@
 namespace App\Models;
 
 use App\Collection;
-use App\Illuminate;
 use App\Illuminate\Database\Query\Builder;
-use App\Models\Media;
 use App\no;
 use App\text;
 use Illuminate\Database\Eloquent\Model;
-use Config;
-use App\Models\User;
-use App\Models\ExchangeTypes;
 use Watson\Validating\ValidatingTrait;
 use App\UploadableFileTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,7 +23,6 @@ use Log;
 
 class Entry extends Model
 {
-
     /**
      * The database table used by the model.
      *
@@ -44,7 +38,6 @@ class Entry extends Model
      * @var boolean
      */
     protected $injectUniqueIdentifier = true;
-
 
     use ValidatingTrait;
     use UploadableFileTrait;
@@ -71,23 +64,22 @@ class Entry extends Model
     */
 
     public static $uploadableImgs = [
-        'entries' =>
-            [
-                'height' => '600',
-                'width'  => '600',
-            ],
+        'entries' => [
+            'height' => '600',
+            'width'  => '600',
+        ],
     ];
 
     public static $tagList = [
-        "art supplies",
-        "ecology",
-        "skills",
-        "learning opportunities",
-        "building resources",
-        "meet a neighbor",
-        "free",
-        "upcycle projects",
-        "dreams",
+        'art supplies',
+        'ecology',
+        'skills',
+        'learning opportunities',
+        'building resources',
+        'meet a neighbor',
+        'free',
+        'upcycle projects',
+        'dreams',
     ];
 
     protected $dates = ['deleted_at', 'expires', 'completed_at'];
@@ -95,16 +87,15 @@ class Entry extends Model
     protected $casts = [
         'enabled' => 'boolean',
         'visible' => 'boolean',
+        'wrld3d'  => 'collection',
     ];
-
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['title', 'post_type', 'qty', 'lat', 'lng'];
-
+    protected $fillable = ['title', 'post_type', 'qty', 'lat', 'lng', 'wrld3d'];
 
     /**
      * Return the author of an entry
@@ -178,6 +169,11 @@ class Entry extends Model
         $this->attributes['lng'] = $value;
     }
 
+    public function getNaturalPostTypeAttribute()
+    {
+        return ($this->post_type == 'want') ? 'wants' : 'has';
+    }
+
     /**
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
@@ -201,7 +197,7 @@ class Entry extends Model
      */
     public static function saveImageToDB($entry_id, $filename, $type, $user_id, $upload_key = null)
     {
-        LOG::debug("Entry::saveImageToDB entry_id = " . $entry_id . ", filename = " . $filename . ", type = " . $type . ", user_id = " . $user_id . ", upload_key = " . $upload_key);
+        LOG::debug('Entry::saveImageToDB entry_id = ' . $entry_id . ', filename = ' . $filename . ', type = ' . $type . ', user_id = ' . $user_id . ', upload_key = ' . $upload_key);
 
         $media = new Media();
         $media->entry_id = $entry_id;
@@ -209,7 +205,7 @@ class Entry extends Model
         $media->filename = $filename;
         $media->filetype = 'image';
         $media->caption = null;
-        $media->created_at = date("Y-m-d H:i:s");
+        $media->created_at = date('Y-m-d H:i:s');
         $media->user_id = $user_id;
         return $media->save();
     }
@@ -228,7 +224,7 @@ class Entry extends Model
      */
     public static function updateImageToDB($user_id, $upload_key, $entry_id)
     {
-        Log::error("Entry::updateImageToDB user_id = " . $user_id . ", upload_key = " . $upload_key . ", entry_id = " . $entry_id);
+        Log::error('Entry::updateImageToDB user_id = ' . $user_id . ', upload_key = ' . $upload_key . ', entry_id = ' . $entry_id);
 
         $media = \App\Models\Media::where('upload_key', '=', $upload_key)
             ->where('user_id', '=', $user_id)
@@ -289,11 +285,10 @@ class Entry extends Model
     public function tagsToArray()
     {
         if ($this->tags != '') {
-            $array = explode(",", $this->tags);
+            $array = explode(',', $this->tags);
             return $array;
         }
     }
-
 
     /**
      * Returns the media associated with an entry.
@@ -324,7 +319,6 @@ class Entry extends Model
         else {
             return false;
         }
-
     }
 
     /**
@@ -340,7 +334,6 @@ class Entry extends Model
     {
         return $query->whereNull('completed_at');
     }
-
 
     /**
      * Query builder scope to search on text

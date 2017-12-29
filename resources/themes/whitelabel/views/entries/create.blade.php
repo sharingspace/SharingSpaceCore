@@ -70,10 +70,55 @@
 
     <script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
 
+    @javascript('entry', $entry->toArray())
+
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $(document).on("click", "#ajaxSubmit", function (e) {
+            createMapRenderer('entry_browse_map', { loadPois: false }).then(function (map) {
+                window.map = map
+                window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng));
+
+                window.map.center();
+
+                window.map.instance.on('dblclick', (ev) => {
+                    var indoor = window.map.instance.indoors.getActiveIndoorMap()
+                    var floor = window.map.instance.indoors.getFloor()
+
+                    if (!window.entry.indoors) {
+                        window.entry.indoors = {
+                            id: null,
+                            floor: null,
+                        }
+                    } else {
+                        if (!window.entry.indoors.id) {
+                            window.entry.indoors.id = null
+                        }
+
+                        if (!window.entry.indoors.floor) {
+                            window.entry.indoors.floor = null
+                        }
+                    }
+
+                    window.entry.location = ''
+                    window.entry.lat = ev.latlng.lat
+                    window.entry.lon = ev.latlng.lng
+                    window.entry.indoor = indoor
+                    window.entry.indoor_id = indoor === null ? '' : indoor.getIndoorMapId()
+                    window.entry.floor_id = indoor === null ? '' : floor.getFloorIndex()
+
+                    $('#location').val(window.entry.location)
+                    $('#location_lat').val(window.entry.lat)
+                    $('#location_lng').val(window.entry.lon)
+                    $('#indoors_id').val(window.entry.indoor_id)
+                    $('#indoors_floor').val(window.entry.floor_id)
+
+                    window.map.removeMarkers()
+                    window.map.addMapMarker(window.entry, { popup: false, tooltip: false })
+                })
+            })
+
+            $(document).on("submit", "#entry_form", function (e) {
                 // finish_submit will get invoked later, after
                 // we handle the file upload.
                 e.preventDefault();

@@ -37,7 +37,7 @@
 
                                 @if (count($entry->exchangeTypes) > 0)
                                     <div class="margin-bottom-3">
-                                        <?php  $exchanges = array(); ?>
+                                        <?php  $exchanges = []; ?>
                                         @for ($i = 0; $i < count($entry->exchangeTypes); $i++)
                                             <?php array_push($exchanges, strtolower($entry->exchangeTypes[$i]->name)); ?>
                                         @endfor
@@ -101,7 +101,7 @@
 
                                 @if ($entry->lat && $entry->lng)
                                     <div class="margin-bottom-3 margin-top-10">
-                                        <div id="entry_browse_map" style="height: 320px;"></div>
+                                        @include('partials.map')
                                     </div>
                                 @endif
                             </div> <!-- col-8/12 -->
@@ -258,11 +258,36 @@
 
             // Show the map when entry has lat and lng
             if (window.entry.lat && window.entry.lng) {
-                window.map = createMapRenderer('entry_browse_map');
+                createMapRenderer('entry_browse_map').then(function (map) {
+                    window.map = map
 
-                window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
-                    .loadMarkers([window.entry], { popup: false, tooltip: false })
-                    .center()
+                    window.entry.lon = window.entry.lng
+                    window.entry.indoor = (window.entry.wrld3d && window.entry.wrld3d.indoor_id)
+                    window.entry.indoor_id = window.entry.wrld3d ? window.entry.wrld3d.indoor_id : null
+                    window.entry.floor_id = window.entry.wrld3d ? window.entry.wrld3d.indoor_floor : null
+                    window.window.user_data = {
+                        description: window.entry.description,
+                        image_url: window.entry.image_url,
+                        author_name: window.entry.display_name,
+                        natural_post_type: window.entry.natural_post_type,
+                        exchanges_types: window.entry.exchangesTypes,
+                        url: window.entry.url,
+                    };
+
+                    if (window.entry.indoor) {
+                        window.map.instance.indoors.on('indoorentranceadd', function () {
+                            window.map.centerAt(window.entry);
+                            window.map.enterBuilding(window.entry.indoor_id, window.entry.floor_id);
+                        });
+
+                        window.map.instance.indoors.on('indoormapenter', function () {
+                            window.map.addMapMarker(window.entry, { popup: false, tooltip: false });
+                        })
+                    } else {
+                        window.map.centerAt(window.entry);
+                        window.map.addMapMarker(window.entry, { popup: false, tooltip: false });
+                    }
+                })
             }
 
             // Get the modal
