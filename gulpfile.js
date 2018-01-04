@@ -15,7 +15,8 @@ process.env.DISABLE_NOTIFIER = true;
  */
 
 elixir(function (mix) {
-    mix.webpack('maps.js', 'public/assets/js/compiled/maps.js');
+    mix.webpack('maps-entry.js', 'public/assets/js/compiled/maps-entry.js');
+    mix.webpack('maps-home.js', 'public/assets/js/compiled/maps-home.js');
 
     mix.sass(['app.scss', 'essentials.scss'], 'public/assets/css/compiled');
     mix.sass(['map.scss'], 'public/assets/css/compiled/map.css');

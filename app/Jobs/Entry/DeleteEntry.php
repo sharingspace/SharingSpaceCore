@@ -60,6 +60,8 @@ class DeleteEntry implements ShouldQueue
 
         $entry->exchangeTypes()->detach();
 
+        // TODO: Remove Wrld3D POI
+
         return $entry;
     }
 }

@@ -431,7 +431,6 @@ class CommunitiesController extends Controller
         }
 
         if ($community->wrld3d->get('dev_token') && !$community->wrld3d->get('poiset')) {
-            dd('sdsdsd');
             (new PoiManager($community))->createCommunityPoiset();
         }
 

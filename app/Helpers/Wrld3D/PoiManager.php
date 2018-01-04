@@ -12,6 +12,7 @@ use App\Models\Community;
 use App\Models\Entry;
 use Exception;
 use GuzzleHttp\Client;
+use Helper;
 use Illuminate\Support\Collection;
 
 class PoiManager
@@ -147,9 +148,24 @@ class PoiManager
         return $this->request('GET', $this->poiset . '/pois/')->get('content');
     }
 
+    public function getPoi(Entry $entry)
+    {
+        if (!$this->community->wrld3d || !$this->community->wrld3d->get('poiset')) {
+            throw new \Exception('Community has not any POI set associated.');
+        }
+
+        if (!$entry->wrld3d || !$entry->wrld3d->get('poi_id')) {
+            return null;
+        }
+
+        $res = $this->request('GET', $this->poiset . '/pois/' . $entry->wrld3d->get('poi_id'));
+
+        return $res->get('content');
+    }
+
     public function savePoi(Entry $entry): Collection
     {
-        if (!$this->community->wrld3d->get('poiset')) {
+        if (!$this->community->wrld3d || !$this->community->wrld3d->get('poiset')) {
             throw new \Exception('Community has not any POI set associated.');
         }
 
@@ -199,6 +215,11 @@ class PoiManager
         $entry->save();
 
         return $res->get('content');
+    }
+
+    public function deletePoi($id)
+    {
+        //
     }
 
     /**

@@ -98,16 +98,16 @@
                                         </div> <!-- listing-actions -->
                                     </div> <!-- if user is admin or owner -->
                                 @endcan
-
-                                @if ($entry->lat && $entry->lng)
-                                    <div class="margin-bottom-3 margin-top-10">
-                                        @include('partials.map')
-                                    </div>
-                                @endif
                             </div> <!-- col-8/12 -->
                     </div> <!-- row -->
 
-                    <!-- Nav tabs -->
+                    @if ($entry->lat && $entry->lng)
+                        <div class="margin-bottom-10 margin-top-4">
+                            @include('partials.map')
+                        </div>
+                    @endif
+
+                <!-- Nav tabs -->
                     @can('make-offer', [$entry, $whitelabel_group])
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active">
@@ -252,43 +252,16 @@
 
 @section('custom_js')
     @javascript('entry', $entry->toArray())
+    @javascript('community', $whitelabel_group->toArray())
+
+    <script src="{{ Helper::cdn('js/compiled/maps-entry.js') }}"></script>
 
     <script>
         $(document).ready(function () {
 
-            // Show the map when entry has lat and lng
-            if (window.entry.lat && window.entry.lng) {
-                createMapRenderer('entry_browse_map').then(function (map) {
-                    window.map = map
-
-                    window.entry.lon = window.entry.lng
-                    window.entry.indoor = (window.entry.wrld3d && window.entry.wrld3d.indoor_id)
-                    window.entry.indoor_id = window.entry.wrld3d ? window.entry.wrld3d.indoor_id : null
-                    window.entry.floor_id = window.entry.wrld3d ? window.entry.wrld3d.indoor_floor : null
-                    window.window.user_data = {
-                        description: window.entry.description,
-                        image_url: window.entry.image_url,
-                        author_name: window.entry.display_name,
-                        natural_post_type: window.entry.natural_post_type,
-                        exchanges_types: window.entry.exchangesTypes,
-                        url: window.entry.url,
-                    };
-
-                    if (window.entry.indoor) {
-                        window.map.instance.indoors.on('indoorentranceadd', function () {
-                            window.map.centerAt(window.entry);
-                            window.map.enterBuilding(window.entry.indoor_id, window.entry.floor_id);
-                        });
-
-                        window.map.instance.indoors.on('indoormapenter', function () {
-                            window.map.addMapMarker(window.entry, { popup: false, tooltip: false });
-                        })
-                    } else {
-                        window.map.centerAt(window.entry);
-                        window.map.addMapMarker(window.entry, { popup: false, tooltip: false });
-                    }
-                })
-            }
+            initializeEntryMap(window.entry, window.community, {
+                editable: false,
+            })
 
             // Get the modal
             var modal = document.getElementById('myModal');

@@ -207,6 +207,7 @@ class Entry extends Model
         $media->caption = null;
         $media->created_at = date('Y-m-d H:i:s');
         $media->user_id = $user_id;
+
         return $media->save();
     }
 

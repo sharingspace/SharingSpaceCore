@@ -117,8 +117,6 @@
     @javascript('MAPBOX_KEY',config('services.mapbox.access_token'))
     @javascript('mapLat', $whitelabel_group->latitude ?: '')
     @javascript('mapLng', $whitelabel_group->longitude ?: '')
-
-    <script src="{{ Helper::cdn('js/compiled/maps.js') }}"></script>
 @endif
 
 @yield('custom_js')

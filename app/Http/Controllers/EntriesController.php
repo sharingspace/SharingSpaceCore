@@ -224,11 +224,6 @@ class EntriesController extends Controller
         ];
 
         if ($entry = $request->whitelabel_group->entries()->save($entry)) {
-            // Save the POI in the Wrld3D
-            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
-                (new PoiManager($request->whitelabel_group))->savePoi($entry);
-            }
-
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             $types = $typeIds = [];
@@ -257,6 +252,11 @@ class EntriesController extends Controller
                 //log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
                 $uploaded = Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
+            }
+
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
             }
 
             if ($uploaded) {
@@ -815,7 +815,8 @@ class EntriesController extends Controller
                             ' <span class="label label-primary">'
                             . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
                             . '</span>' : ''),
-                    'wrl3d'             => $entry->wrld3d->toArray(),
+                    'wrl3d'             => $entry->wrld3d,
+                    'poi'               => (new PoiManager($request->whitelabel_group))->getPoi($entry),
                 );
             }
             else {
