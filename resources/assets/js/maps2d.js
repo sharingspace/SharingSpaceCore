@@ -45,6 +45,8 @@ export class MapRenderer2d {
     }
 
     loadMarkers (markers, options) {
+        console.log('loadMarkers', markers)
+
         options = Object.assign({}, {
             merge: false,
             popup: true,
