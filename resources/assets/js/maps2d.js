@@ -8,12 +8,6 @@ export class MapRenderer2d {
         this.lat = options.lat || null
         this.lng = options.lng || null
 
-        console.log('map2d', {
-            mapbox: this.mapboxKey,
-            lat: this.lat,
-            lng: this.lng,
-        })
-
         if (this.mapboxKey) {
             this.createInstance(options)
         }
