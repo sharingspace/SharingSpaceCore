@@ -43,9 +43,8 @@ function handleViewing (map, entry) {
 
     if (entry.lat && entry.lon) {
         map.centerAt(entry)
+        map.addMapMarker(entry, { popup: false, tooltip: false })
     }
-
-    map.addMapMarker(entry, { popup: false, tooltip: false })
 }
 
 /**
