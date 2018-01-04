@@ -26,7 +26,7 @@
                 <div class="sort-icons">
                     <i class="fa fa-2x fa-list sort-icon" title="list view" id="listView"></i>
                     <i class="fa fa-2x fa-th sort-icon" title="grid view" id="gridView"></i>
-                    @if (!config('services.mapbox.access_token') && (!$whitelabel_group->wrld3d || $whitelabel_group->wrld3d->get('api_key')))
+                    @if (!config('services.mapbox.access_token') && (!$whitelabel_group->wrld3d || !$whitelabel_group->wrld3d->get('api_key')))
                         <i class="fa fa-2x fa-map-o sort-icon" title="map view" id="mapView"></i>
                     @endif
                 </div>
