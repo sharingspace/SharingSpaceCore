@@ -34,6 +34,7 @@ export class MapRenderer2d {
         if (this.lat && this.lng) {
             this.center()
         }
+
         return this
     }
 
@@ -107,10 +108,7 @@ export class MapRenderer2d {
         }
 
         this.markers.push(marker)
-
         marker.addTo(this.instance)
-
-        return this
     }
 
     removeMarkers () {

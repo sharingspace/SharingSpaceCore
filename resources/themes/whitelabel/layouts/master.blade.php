@@ -43,7 +43,7 @@
 
 <!-- Leaflet and WRLD Maps -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
-    @if (!is_null($whitelabel_group->wrld3d))
+    @if ($whitelabel_group->wrld3d && $whitelabel_group->wrld3d->get('api_key'))
         <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
 @endif
 
@@ -106,7 +106,7 @@
 @if (isset($whitelabel_group))
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
 
-    @if (!is_null($whitelabel_group->wrld3d))
+    @if ($whitelabel_group->wrld3d && $whitelabel_group->wrld3d->get('api_key'))
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/indoor_control/latest/indoor_control.js"></script>
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/poi_api/latest/poi_api.js"></script>
