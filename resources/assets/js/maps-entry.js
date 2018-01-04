@@ -105,7 +105,7 @@ function handleEditing (map, entry) {
  * @param community
  */
 window.initializeEntryMap = function (entry, community, options) {
-    if (!community || !community.lat || !community.lng) {
+    if (!community) {
         return
     }
 

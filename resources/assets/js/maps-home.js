@@ -8,8 +8,8 @@ import { MapRenderer2d } from './maps2d'
  * @param community
  */
 window.initializeHomeMap = function (community, options) {
-    if (!community || !community.lat || !community.lng) {
-        return
+    if (!community) {
+        return Promise.reject()
     }
 
     /*
