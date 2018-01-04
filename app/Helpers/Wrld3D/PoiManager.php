@@ -153,7 +153,7 @@ class PoiManager
     public function getPoi(Entry $entry)
     {
         if (!$this->community->wrld3d || !$this->community->wrld3d->get('poiset')) {
-            throw new \Exception('Community has not any POI set associated.');
+            return null;
         }
 
         if (!$entry->wrld3d || !$entry->wrld3d->get('poi_id')) {
