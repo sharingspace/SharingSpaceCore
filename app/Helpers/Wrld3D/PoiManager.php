@@ -48,10 +48,12 @@ class PoiManager
      */
     public function __construct(Community $community)
     {
+        $wrld3d = $community->wrld3d ?? collect([]);
+
         $this->community = $community;
-        $this->dev_token = $community->wrld3d->get('dev_token');
-        $this->api_key = $community->wrld3d->get('api_key');
-        $this->poiset = $community->wrld3d->Get('poiset');
+        $this->dev_token = $wrld3d->get('dev_token');
+        $this->api_key = $wrld3d->get('api_key');
+        $this->poiset = $wrld3d->Get('poiset');
 
         $this->client = new Client([
             'base_uri' => config('services.wrld3d.poi_api'),
