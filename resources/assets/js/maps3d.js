@@ -1,44 +1,49 @@
-class MapRenderer {
+export class MapRenderer3d {
     constructor (selector, options) {
+        this.type = '3d'
         this.selector = selector
         this.wrld3dApiKey = window.WRLD_3D_API_KEY
         this.mapboxKey = window.MAPBOX_KEY
         this.markers = []
         this.instance = null
-        this.indoorControl = null
         this.poiApi = null
         this.markerController = null
-        this.lat = null
-        this.lng = null
+        this.lat = options.lat || null
+        this.lng = options.lng || null
 
-        this.createInstance(options)
+        if (this.lat && this.lng) {
+            this.createInstance(options)
+        }
     }
 
+    /**
+     * Initialize a new instance of the map, be it a default Leaflet map
+     * or a Wrld3D one.
+     *
+     * @param options
+     * @returns {MapRenderer}
+     */
     createInstance (options) {
         Object.assign(options, {}, options)
 
-        if (this.wrld3dApiKey) {
-            this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey, {
-                indoorsEnabled: true,
-            })
+        this.instance = L.Wrld.map(this.selector, this.wrld3dApiKey, {
+            indoorsEnabled: true,
+        })
 
-            this.indoorControl = new WrldIndoorControl(this.selector + '_widget', this.instance)
-            this.markerController = new WrldMarkerController(this.instance)
+        // Add the indoor control widget. It's used to navigate in the
+        // indoor buildings provided by WRLD 3D maps.
+        new WrldIndoorControl(this.selector + '_widget', this.instance)
 
-            this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
+        // Add the marker controller. It's used to show every
+        // Point of Interest on the WRLD 3D map.
+        this.markerController = new WrldMarkerController(this.instance)
 
-            return this
-        }
+        // Initialize the POI API. It's used to create, edit and remove
+        // Points of Interest for every entry marker added in the
+        // entry's editing form.
+        this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
 
-        this.instance = L.map(this.selector)
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + this.mapboxKey, {
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: this.mapboxKey
-        }).addTo(this.instance)
-
+        this.center()
         return this
     }
 
@@ -60,15 +65,11 @@ class MapRenderer {
             this.removeMarkers()
         }
 
-        this.poiApi.searchTags(['anyshare_entries'], this.instance.getCenter(), (success, results) => {
-            if (!success || results.length === 0) {
-                return
+        markers.forEach((mk) => {
+            if (mk.poi) {
+                this.addMapMarker(mk.poi, options)
             }
-
-            results.forEach((item) => {
-                this.addMapMarker(item, options)
-            })
-        }, { radius: 5000, number: 500 })
+        })
 
         return this
     }
@@ -104,8 +105,7 @@ class MapRenderer {
         }
 
         const id = item.id || (+new Date * Math.random() + 1).toString(36).substring(2, 10)
-
-        var marker = this.markerController.addMarker(id, [item.lat, item.lon], markerOpts)
+        const marker = this.markerController.addMarker(id, [item.lat, item.lon], markerOpts)
 
         // Add a tooltip to the marker
         if (options.tooltip) {
@@ -118,6 +118,7 @@ class MapRenderer {
             marker.bindPopup(popup)
 
             var popup = L.DomUtil.create('div', 'map-popup')
+
             popup.innerHTML = '<div>' + (item.user_data.hasOwnProperty('image_url') ? item.user_data.image_url : '') + '</div><a href="' + item.user_data.url + '" class="map-popup-link">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.user_data.exchange_types + '</em></p>'
 
             marker.bindPopup(popup)
@@ -175,10 +176,4 @@ class MapRenderer {
         this.precache(this.instance.getCenter())
         return this
     }
-}
-
-// ---------------------------------------------------------
-
-window.createMapRenderer = function (selector, options) {
-    return Promise.resolve(new MapRenderer(selector, options || {}))
 }

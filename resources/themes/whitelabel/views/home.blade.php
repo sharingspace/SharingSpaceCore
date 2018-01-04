@@ -85,6 +85,10 @@
     <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 
+    @javascript('community', $whitelabel_group->toArray())
+
+    <script src="{{ Helper::cdn('js/compiled/maps-home.js') }}"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -97,8 +101,8 @@
             var MAP_LOADED = false;
             var GRID_WIDTH = 100;
 
-            createMapRenderer('entry_browse_map').then(function (map) {
-                window.map = map
+            initializeHomeMap(window.community, {}).then(function (map) {
+                window.map = map;
                 $('#entry_browse_map').hide();
             })
 
