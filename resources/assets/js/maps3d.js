@@ -11,7 +11,13 @@ export class MapRenderer3d {
         this.lat = options.lat || null
         this.lng = options.lng || null
 
-        if (this.lat && this.lng) {
+        console.log('map3d', {
+            wrld3d: this.wrld3dApiKey,
+            lat: this.lat,
+            lng: this.lng,
+        })
+
+        if (this.wrld3dApiKey) {
             this.createInstance(options)
         }
     }
