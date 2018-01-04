@@ -55,8 +55,8 @@ export class MapRenderer3d {
     }
 
     loadMarkers (markers, options) {
-        console.log('loadMarkers', markers)
-        
+        console.log('load 3d Markers', markers)
+
         options = Object.assign({}, {
             merge: false,
             popup: true,

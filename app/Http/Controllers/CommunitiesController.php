@@ -430,10 +430,6 @@ class CommunitiesController extends Controller
             return Redirect::back()->withInput()->withErrors($community->getErrors());
         }
 
-        if ($community->wrld3d->get('dev_token') && !$community->wrld3d->get('poiset')) {
-            (new PoiManager($community))->createCommunityPoiset();
-        }
-
         if (Input::has('exchange_types')) {
             $community->exchangeTypes()->sync(Input::get('exchange_types'));
         }
