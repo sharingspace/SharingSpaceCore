@@ -96,6 +96,7 @@ function handleEditing (map, entry) {
          * Clean up the existent marker and add up the new one.
          */
         map.removeMarkers()
+
         map.addMapMarker(entry, { popup: false, tooltip: false })
     })
 }
