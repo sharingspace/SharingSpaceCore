@@ -55,8 +55,6 @@ export class MapRenderer3d {
     }
 
     loadMarkers (markers, options) {
-        console.log('load 3d Markers', markers)
-
         options = Object.assign({}, {
             merge: false,
             popup: true,
@@ -116,12 +114,13 @@ export class MapRenderer3d {
 
         // Add a popup with marker's information
         if (options.popup) {
-            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.user_data.url + '\'">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.user_data.exchange_types + '</em></p>'
-            marker.bindPopup(popup)
+            const popup = L.DomUtil.create('div', 'map-popup')
 
-            var popup = L.DomUtil.create('div', 'map-popup')
+            const image = (item.user_data.hasOwnProperty('image_url') && item.user_data.image_url)
+                ? `<a href="${item.user_data.url}"><img src="${item.user_data.image_url}" class="entry_image"></a>`
+                : ''
 
-            popup.innerHTML = '<div>' + (item.user_data.hasOwnProperty('image_url') ? item.user_data.image_url : '') + '</div><a href="' + item.user_data.url + '" class="map-popup-link">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.user_data.exchange_types + '</em></p>'
+            popup.innerHTML = '<div>' + image + '</div><a href="' + item.user_data.url + '" class="map-popup-link">' + item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.user_data.exchange_types + '</em></p>'
 
             marker.bindPopup(popup)
         }
@@ -145,7 +144,7 @@ export class MapRenderer3d {
     }
 
     centerAt (entry) {
-        this.instance.setView([entry.lat, entry.lon], 14)
+        this.instance.setView([entry.lat, entry.lon], 18)
         this.precache([entry.lat, entry.lon])
     }
 

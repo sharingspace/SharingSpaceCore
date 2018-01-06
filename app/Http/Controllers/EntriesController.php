@@ -531,11 +531,6 @@ class EntriesController extends Controller
                 return Redirect::back()->withInput()->withErrors($entry->getErrors());
             }
 
-            // Save the POI in the Wrld3D
-            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
-                (new PoiManager($request->whitelabel_group))->savePoi($entry);
-            }
-
             if (Input::hasFile('file')) {
                 if (!empty(Input::get('rotation') && Input::get('rotation'))) {
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', Input::get('rotation'));
@@ -559,6 +554,12 @@ class EntriesController extends Controller
                 }
             }
 
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
+            }
+
+            // Update exchange types
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             return redirect()->route('entry.view', $entry->id)->with('success',
@@ -687,8 +688,7 @@ class EntriesController extends Controller
             }
         }
         else {
-            $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->where('visible',
-                1)->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->where('visible', 1)->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -789,6 +789,8 @@ class EntriesController extends Controller
             }
 
             if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
+                $poi = (new PoiManager($request->whitelabel_group))->getPoi($entry);
+
                 $rows[] = array(
                     'url'               => route('entry.view', $entry->id),
                     'image'             => $imageTag,
@@ -816,7 +818,7 @@ class EntriesController extends Controller
                             . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
                             . '</span>' : ''),
                     'wrl3d'             => $entry->wrld3d,
-                    'poi'               => (new PoiManager($request->whitelabel_group))->getPoi($entry),
+                    'poi'               => $poi,
                 );
             }
             else {
