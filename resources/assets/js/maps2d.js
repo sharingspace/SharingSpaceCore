@@ -1,5 +1,7 @@
 export class MapRenderer2d {
     constructor (selector, options) {
+        console.log('map-renderer-2d')
+
         this.type = '2d'
         this.selector = selector
         this.mapboxKey = window.MAPBOX_KEY

@@ -1,5 +1,7 @@
 export class MapRenderer3d {
     constructor (selector, options) {
+        console.log('map-renderer-3d')
+
         this.instance = null
         this.type = '3d'
         this.selector = selector
