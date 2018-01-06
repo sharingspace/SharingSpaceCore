@@ -148,7 +148,7 @@ class PoiManager
     public function getPoiList($options = []): Collection
     {
         if (!$this->community->wrld3d || !$this->community->wrld3d->get('poiset')) {
-            return null;
+            return collect([]);
         }
 
         $items = $this->request('GET', $this->poiset . '/pois/')->get('content');
