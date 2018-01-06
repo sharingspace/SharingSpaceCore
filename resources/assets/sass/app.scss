@@ -9831,7 +9831,7 @@ form {
  */
 
 .leaflet-popup-pane {
-  margin-top: -60px !important;
+  //margin-top: -20px !important;
 }
 
 .map-popup {
@@ -9839,7 +9839,7 @@ form {
 
   [class*="_square"] {
     width: 100%;
-    height: 180px;
+    height: 150px;
     margin-bottom: 20px;
   }
 

@@ -167,14 +167,14 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                             <label class="checkbox pull-left" for="visible_checkbox">
-                                {{ Form::checkbox('private', 1, old('visible', $entry->visible ?: 0), array('id'=>'visible_checkbox')) }}
+                                {{ Form::checkbox('private', 1, old('visible') ? !old('visible') : !$entry->visible, array('id'=>'visible_checkbox')) }}
                                 <i></i> {{ trans('general.entries.not_visible')}}
                             </label>
                         </div>
                         <div class="col-sm-6 col-xs-12 ">
                             <label class="checkbox pull-left" for="completed">
                                 @if($entry->getKey())
-                                    {{ Form::checkbox('completed', 1, old('completed',$entry->completed_at), array('id'=>'completed')) }}
+                                    {{ Form::checkbox('completed', 1, old('completed', $entry->completed_at), array('id'=>'completed')) }}
                                     <i></i> {{ trans('general.entries.mark_completed')}}
                                 @endif
                             </label>

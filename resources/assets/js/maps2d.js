@@ -46,8 +46,6 @@ export class MapRenderer2d {
     }
 
     loadMarkers (markers, options) {
-        console.log('load 2d Markers', markers)
-
         options = Object.assign({}, {
             merge: false,
             popup: true,
@@ -85,6 +83,8 @@ export class MapRenderer2d {
      * @param options
      */
     addMapMarker (item, options) {
+        item = this.prepareEntry(item)
+
         if (!$.isNumeric(item.lat) || !$.isNumeric(item.lon)) {
             return
         }
@@ -98,9 +98,6 @@ export class MapRenderer2d {
 
         // Add a popup with marker's information
         if (options.popup) {
-            var popup = '<button class="map-popup-link" onclick="window.location.href=\'' + item.url + '\'">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></button><p><em>' + item.exchangeTypes + '</em></p>'
-            marker.bindPopup(popup)
-
             var popup = L.DomUtil.create('div', 'map-popup')
             popup.innerHTML = '<div>' + item.image + '</div><a href="' + item.url + '" class="map-popup-link">' + item.display_name + ' ' + item.natural_post_type + ' <b>' + item.title + '</b></a><p><em>' + item.exchangeTypes + '</em></p>'
 
@@ -143,5 +140,23 @@ export class MapRenderer2d {
 
         this.instance.fitBounds(points)
         return this
+    }
+
+    prepareEntry (entry) {
+        entry.lon = entry.lng
+        entry.indoor = (entry.wrld3d && entry.wrld3d.indoor_id)
+        entry.indoor_id = entry.wrld3d ? entry.wrld3d.indoor_id : null
+        entry.floor_id = entry.wrld3d ? entry.wrld3d.indoor_floor : null
+
+        entry.user_data = {
+            description: entry.description,
+            image_url: entry.image_url,
+            author_name: entry.display_name,
+            natural_post_type: entry.natural_post_type,
+            exchanges_types: entry.exchangesTypes,
+            url: entry.url,
+        }
+
+        return entry
     }
 }

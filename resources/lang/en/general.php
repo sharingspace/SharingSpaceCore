@@ -81,7 +81,7 @@ return [
     'click_here'                 => 'Click here',
     'wrld3d'                     => [
         'label'          => 'WRLD3D',
-        'info'           => '...',
+        'info'           => '',
         'api_key'        => 'API KEY',
         'dev_token'      => 'DEVELOPER TOKEN',
         'api_key_select' => ':: Select a API Key ::',

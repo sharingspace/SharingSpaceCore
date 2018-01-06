@@ -185,7 +185,7 @@
                     }
                 }
 
-                window.map.loadMarkers(markers);
+                window.map.loadMarkers(markers).loadPois(entryRows.pois);
             }
 
             function tableSearch () {
@@ -252,6 +252,7 @@
             function mapLayout (data) {
                 window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
                     .loadMarkers(data.rows)
+                    .loadPois(data.pois)
                     .center();
 
                 bindSearch(mapSearch);

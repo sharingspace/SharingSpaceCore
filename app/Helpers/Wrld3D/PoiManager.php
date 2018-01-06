@@ -145,9 +145,21 @@ class PoiManager
      *
      * @return Collection
      */
-    public function getPoiList(): Collection
+    public function getPoiList($options = []): Collection
     {
-        return $this->request('GET', $this->poiset . '/pois/')->get('content');
+        if (!$this->community->wrld3d || !$this->community->wrld3d->get('poiset')) {
+            return null;
+        }
+
+        $items = $this->request('GET', $this->poiset . '/pois/')->get('content');
+
+        if (array_get($options, 'ignoreEntries', false)) {
+            $items = $items->filter(function ($item) {
+                return !str_contains($item->get('tags'), 'anyshare_entries');
+            });
+        }
+
+        return $items;
     }
 
     public function getPoi(Entry $entry)
@@ -219,9 +231,15 @@ class PoiManager
         return $res->get('content');
     }
 
+    /**
+     * Delete a specific point of interest.
+     *
+     * @param $id
+     * @return Collection
+     */
     public function deletePoi($id)
     {
-        //
+        return $this->request('DELETE', '/pois/' . $id);
     }
 
     /**
