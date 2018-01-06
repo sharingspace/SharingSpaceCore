@@ -1,7 +1,5 @@
 export class MapRenderer2d {
     constructor (selector, options) {
-        console.log('map-renderer-2d')
-
         this.type = '2d'
         this.selector = selector
         this.mapboxKey = window.MAPBOX_KEY
@@ -9,6 +7,8 @@ export class MapRenderer2d {
         this.instance = null
         this.lat = options.lat || null
         this.lng = options.lng || null
+
+        console.log('map-renderer-2d', window.MAPBOX_KEY)
 
         if (this.mapboxKey) {
             this.createInstance(options)
