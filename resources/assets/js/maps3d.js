@@ -1,13 +1,14 @@
 export class MapRenderer3d {
     constructor (selector, options) {
+        this.instance = null
         this.type = '3d'
         this.selector = selector
         this.wrld3dApiKey = window.WRLD_3D_API_KEY
         this.mapboxKey = window.MAPBOX_KEY
         this.markers = []
-        this.instance = null
-        this.poiApi = null
         this.markerController = null
+        this.pois = []
+        this.poiController = null
         this.lat = options.lat || null
         this.lng = options.lng || null
 
@@ -34,19 +35,22 @@ export class MapRenderer3d {
         // indoor buildings provided by WRLD 3D maps.
         new WrldIndoorControl(this.selector + '_widget', this.instance)
 
-        // Add the marker controller. It's used to show every
-        // Point of Interest on the WRLD 3D map.
+        // Add the marker and POI controllers. They are used to show every
+        // Entry marker and Point of Interest on the WRLD 3D map.
         this.markerController = new WrldMarkerController(this.instance)
-
-        // Initialize the POI API. It's used to create, edit and remove
-        // Points of Interest for every entry marker added in the
-        // entry's editing form.
-        this.poiApi = new WrldPoiApi(this.wrld3dApiKey)
+        this.poiController = new WrldMarkerController(this.instance)
 
         this.center()
         return this
     }
 
+    /**
+     * Set latitude and longitude of the map.
+     *
+     * @param lat
+     * @param lng
+     * @returns {MapRenderer3d}
+     */
     setLatLng (lat, lng) {
         this.lat = parseFloat(lat)
         this.lng = parseFloat(lng)
@@ -54,6 +58,39 @@ export class MapRenderer3d {
         return this
     }
 
+    /**
+     * Load an array of POIs into the 3d map.
+     *
+     * @param pois
+     * @param options
+     */
+    loadPois (pois, options) {
+        options = Object.assign({}, {
+            merge: false,
+            popup: true,
+            tooltip: true,
+        }, options)
+
+        if (!options.merge) {
+            this.removePois()
+        }
+
+        pois.forEach((poi) => {
+            if (poi) {
+                this.addMapPoi(poi, options)
+            }
+        })
+
+        return this
+    }
+
+    /**
+     * Load an array of entry markers into the 3d map.
+     *
+     * @param markers
+     * @param options
+     * @returns {MapRenderer3d}
+     */
     loadMarkers (markers, options) {
         options = Object.assign({}, {
             merge: false,
@@ -129,6 +166,68 @@ export class MapRenderer3d {
         return this
     }
 
+    /**
+     * Add a Point of Interest pin to the map.
+     *
+     * @param item
+     * @param options
+     * @returns {MapRenderer3d}
+     */
+    addMapPoi (item, options) {
+        var poiOpts = {
+            iconKey: item.icon || 'aroundme',
+        }
+
+        if (item.indoor) {
+            poiOpts.isIndoor = true
+            poiOpts.indoorId = item.indoor_id
+            poiOpts.floorIndex = parseInt(item.floor_id)
+        }
+
+        const id = item.id || (+new Date * Math.random() + 1).toString(36).substring(2, 10)
+        const poi = this.poiController.addMarker(id, [item.lat, item.lon], poiOpts)
+
+        // Add a tooltip to the marker
+        if (options.tooltip) {
+            poi.bindTooltip(item.title, { permanent: false })
+        }
+
+        // Add a popup with marker's information
+        if (options.popup) {
+            const popup = L.DomUtil.create('div', 'map-popup')
+
+            const image = (item.user_data.hasOwnProperty('image_url') && item.user_data.image_url)
+                ? `<a href="${item.user_data.url}"><img src="${item.user_data.image_url}" class="entry_image"></a>`
+                : ''
+
+            popup.innerHTML = `
+                <div>${image}</div>
+                <a href="${item.user_data.url || item.user_data.custom_view}" class="map-popup-link">${item.title}</a>
+                <p><em>${item.subtitle || ''}</em></p>
+                <p>${item.user_data.description || ''}</p>
+            `
+
+            poi.bindPopup(popup)
+        }
+
+        this.pois.push(poi)
+        return this
+    }
+
+    /**
+     * Remove all POIs.
+     */
+    removePois () {
+        this.pois.forEach((p) => {
+            this.poiController.removeMarker(p.id)
+        })
+
+        this.pois = []
+    }
+
+    /**
+     * Remove all markers.
+     */
     removeMarkers () {
         this.markers.forEach((m) => {
             this.markerController.removeMarker(m.id)

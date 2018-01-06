@@ -109,7 +109,6 @@
     @if ($whitelabel_group->wrld3d && $whitelabel_group->wrld3d->get('api_key'))
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/indoor_control/latest/indoor_control.js"></script>
-        <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/poi_api/latest/poi_api.js"></script>
         <script src="https://cdn-webgl.wrld3d.com/wrldjs/addons/marker_controller/latest/marker_controller.js"></script>
     @endif
 
