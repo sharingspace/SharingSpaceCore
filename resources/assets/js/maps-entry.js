@@ -59,14 +59,22 @@ function handleEditing (map, entry) {
      *we update the entry's geolocation.
      */
     map.instance.on('dblclick', (ev) => {
+        map.instance.fire('locationUpdated', ev.latlng)
+    })
+
+    /*
+     * The event that updates the entry's marker.
+     */
+    map.instance.on('locationUpdated', (ev) => {
+        entry.lat = ev.lat
+        entry.lng = ev.lng
+        entry.lon = ev.lng
+
+        printAddress(entry.lat, entry.lon)
+
         /*
          * Set some required data for the entry.
          */
-        entry.location = ''
-        entry.lat = ev.latlng.lat
-        entry.lon = ev.latlng.lng
-
-        $('#location').val(entry.location)
         $('#location_lat').val(entry.lat)
         $('#location_lng').val(entry.lon)
 
@@ -97,7 +105,7 @@ function handleEditing (map, entry) {
          */
         map.removeMarkers()
 
-        map.addMapMarker(entry, { popup: false, tooltip: false })
+        map.addMapMarker(entry, { popup: false, tooltip: false }).centerAt(entry)
     })
 }
 
@@ -150,4 +158,6 @@ window.initializeEntryMap = function (entry, community, options) {
     if (options.editable) {
         handleEditing(map, entry)
     }
+
+    window.map = map
 }

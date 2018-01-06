@@ -17,15 +17,12 @@
                     var lat = place.geometry.location.lat();
                     var lng = place.geometry.location.lng();
 
-                    $('#location_lat').val(lat);
-                    $('#location_lng').val(lng);
-                    $('#wrld3d_indoor').val('');
+                    window.map.instance.fire('locationUpdated', {
+                        lat: lat,
+                        lng: lng,
+                    });
 
-                    window.entry.lat = lat;
-                    window.entry.lng = lng;
-                    window.entry.wrld3d_indoor = '';
-
-                    window.map.setLatLng(lat, lng).loadMarkers([window.entry], { popup: false, tooltip: false }).center();
+//                    window.map.setLatLng(lat, lng).loadMarkers([window.entry], { popup: false, tooltip: false }).center();
                 });
 
                 $('#location').on('keyup keypress', function (e) {
@@ -74,6 +71,12 @@
 
     function geo_success (position) {
         // printLatLong(position.coords.latitude, position.coords.longitude);
+
+        window.map.instance.fire('locationUpdated', {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+        });
+
         printAddress(position.coords.latitude, position.coords.longitude);
     }
 
