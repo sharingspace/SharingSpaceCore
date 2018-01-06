@@ -794,6 +794,14 @@ class EntriesController extends Controller
 
             // Process the entry
             if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
+                if ((!$entry->lat || !$entry->lng) || $entry->location) {
+                    $latlong = Helper::latlong($entry->location);
+
+                    $entry->lat = $latlong['lat'];
+                    $entry->lng = $latlong['lng'];
+                    $entry->save();
+                }
+
                 $rows[] = array(
                     'url'               => route('entry.view', $entry->id),
                     'image'             => $imageTag,
