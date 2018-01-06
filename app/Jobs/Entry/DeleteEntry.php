@@ -3,6 +3,7 @@
 namespace App\Jobs\Entry;
 
 use App\Exceptions\ModelOperationException;
+use App\Helpers\Wrld3D\PoiManager;
 use App\Models\Entry;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Bus\Queueable;
@@ -60,7 +61,12 @@ class DeleteEntry implements ShouldQueue
 
         $entry->exchangeTypes()->detach();
 
-        // TODO: Remove Wrld3D POI
+        // Remove Wrld3D POI
+        $community = $entry->communities()->first();
+
+        if ($community->wrld3d && $community->wrld3d->get('api_key') && $entry->wrld3d && $entry->wrld3d->get('poi_id')) {
+            (new PoiManager($community))->deletePoi($entry->wrld3d->get('poi_id'));
+        }
 
         return $entry;
     }

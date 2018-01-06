@@ -231,9 +231,15 @@ class PoiManager
         return $res->get('content');
     }
 
+    /**
+     * Delete a specific point of interest.
+     *
+     * @param $id
+     * @return Collection
+     */
     public function deletePoi($id)
     {
-        //
+        return $this->request('DELETE', '/pois/' . $id);
     }
 
     /**
