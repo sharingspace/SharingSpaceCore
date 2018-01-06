@@ -63,6 +63,10 @@ export class MapRenderer2d {
         return this
     }
 
+    loadPois (pois, options) {
+        return this
+    }
+
     /**
      * Item properties:
      *  - id
