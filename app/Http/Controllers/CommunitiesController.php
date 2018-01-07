@@ -13,6 +13,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Wrld3D\PoiManager;
 use App\Models\Community;
+use App\Models\CommunitySubscription;
 use App\Models\ExchangeType;
 use Auth;
 use Config;
@@ -297,8 +298,7 @@ class CommunitiesController extends Controller
             //log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
 
             // Save the community_id to the subscriptions table
-            $subscription = \App\Models\CommunitySubscription::where('stripe_id', '=',
-                $stripe_subscription->stripe_id)->first();
+            $subscription = CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
             $subscription->community_id = $community->id;
             $subscription->save();
 
@@ -383,6 +383,8 @@ class CommunitiesController extends Controller
         // Get the WRLD3D Data
         $wrld3dApiKey = explode(' - ', e(Input::get('wrld3d.api_key')));
 
+        $lastWrld3dSetup = $community->wrld3d ?? collect([]);
+
         $community->wrld3d = collect([
             'dev_token' => e(Input::get('wrld3d.dev_token')),
             'api_key'   => count($wrld3dApiKey) === 2 ? $wrld3dApiKey[1] : null,
@@ -437,8 +439,19 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->sync(ExchangeType::all());
         }
 
+        // Update entries to have a POI associated to it
+        if (!$lastWrld3dSetup->get('api_key') && $community->wrld3d->get('api_key')) {
+            // Instantiate the Poi Manager
+            $poiManager = new PoiManager($request->whitelabel_group);
 
-        return redirect()->route('_edit_share')->with('success',
-            trans('general.community.messages.save_edits'));
+            $community->entries->each(function ($entry) use ($poiManager) {
+                if (!$entry->hasWrldPoi() && $entry->lat && $entry->lng) {
+                    $poiManager->savePoi($entry);
+                }
+            });
+        }
+
+
+        return redirect()->route('_edit_share')->with('success', trans('general.community.messages.save_edits'));
     }
 }

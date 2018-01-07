@@ -376,6 +376,16 @@ class Entry extends Model
     }
 
     /**
+     * Does it have a WRLD3D POI created?
+     *
+     * @return bool
+     */
+    public function hasWrldPoi()
+    {
+        return $this->wrld3d && $this->wrld3d->get('poi_id');
+    }
+
+    /**
      * Query builder scope to search on tag text
      *
      * @author [D. Linnard] [<david@linnard.com>]
