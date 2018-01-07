@@ -323,7 +323,7 @@ return [
         'slack_setting_up_webhook'  => 'setting up a webhook',
         'slack_bot_name'            => 'Slack bot name (optional)',
         'slack_channel'             => 'Slack channel name',
-        'wrld3d_info'               => '...',
+        'wrld3d_info'               => '',
         'analytics'                 => 'Google analytics integration',
         'for_example'               => 'For example: UA-000000-01',
         'p1'                        => 'You can start a Sharing Network in under 1 minute and enjoy it free for 30 days.

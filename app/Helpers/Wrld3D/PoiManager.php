@@ -172,7 +172,11 @@ class PoiManager
             return null;
         }
 
-        $res = $this->request('GET', $this->poiset . '/pois/' . $entry->wrld3d->get('poi_id'));
+        try {
+            $res = $this->request('GET', $this->poiset . '/pois/' . $entry->wrld3d->get('poi_id'));
+        } catch (\Exception $e) {
+            return null;
+        }
 
         return $res->get('content');
     }

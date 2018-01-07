@@ -440,9 +440,9 @@ class CommunitiesController extends Controller
         }
 
         // Update entries to have a POI associated to it
-        if (!$lastWrld3dSetup->get('api_key') && $community->wrld3d->get('api_key')) {
+        if (!$lastWrld3dSetup->get('poiset') && $community->wrld3d->get('poiset')) {
             // Instantiate the Poi Manager
-            $poiManager = new PoiManager($request->whitelabel_group);
+            $poiManager = new PoiManager($community);
 
             $community->entries->each(function ($entry) use ($poiManager) {
                 if (!$entry->hasWrldPoi() && $entry->lat && $entry->lng) {

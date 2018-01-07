@@ -167,7 +167,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-xs-12">
                             <label class="checkbox pull-left" for="visible_checkbox">
-                                {{ Form::checkbox('private', 1, old('visible') ? !old('visible') : !$entry->visible, array('id'=>'visible_checkbox')) }}
+                                {{ Form::checkbox('private', 1, old('visible') ? old('visible') === 0 : $entry->visible === 0, array('id'=>'visible_checkbox')) }}
                                 <i></i> {{ trans('general.entries.not_visible')}}
                             </label>
                         </div>
