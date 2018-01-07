@@ -216,6 +216,7 @@ a:hover, a:focus {
 }
 
 .footer-rainbow {
+  margin-top: 15px;
   height: 10px;
   background-image: url('../img/anyshare-bottom-color.png');
   background-position: 0px 0px;

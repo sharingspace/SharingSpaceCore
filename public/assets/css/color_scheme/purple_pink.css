@@ -1,11 +1,9 @@
 /** Purple/Pink
  ******************************************************************/
-
 ::-moz-selection {
   color: #fff;
   background-color: #FF4081;
 }
-
 ::selection {
   color: #fff;
   background-color: #FF4081;
@@ -39,18 +37,11 @@
   color: #7b00f5;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-th {
+h1, h2, h3, h4, h5, h6, th {
   color: rgba(0, 0, 0, 0.87);
 }
 
-p,
-td {
+p, td {
   color: rgba(0, 0, 0, 0.54);
 }
 
@@ -58,22 +49,19 @@ td {
   border-bottom-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-.want_square,
-.have_square {
+.want_square, .have_square {
   width: 40px;
   height: 40px;
   border-radius: 3px;
   display: block;
 }
 
-.want_square,
-.want_color {
+.want_square, .want_color {
   background-color: #ffa6c4;
   border: 1px solid #ffa6c4;
 }
 
-.have_square,
-.have_color {
+.have_square, .have_color {
   background-color: #ff2770;
   border: 1px solid #ff2770;
 }
@@ -138,69 +126,50 @@ td {
   color: #fff !important;
 }
 
-#share_content a,
-#share_content .btn-default,
-#aboutModal a,
-#aboutModal .btn-default {
+#share_content a, #share_content .btn-default, #aboutModal a, #aboutModal .btn-default {
   color: #FF4081 !important;
 }
 
-#share_content a.btn-social,
-#share_content .btn-default.btn-social,
-#aboutModal a.btn-social,
-#aboutModal .btn-default.btn-social {
+#share_content a.btn-social, #share_content .btn-default.btn-social, #aboutModal a.btn-social, #aboutModal .btn-default.btn-social {
   color: #fff !important;
 }
 
-#share_content a:hover,
-#share_content .btn-default:hover,
-#aboutModal a:hover,
-#aboutModal .btn-default:hover {
+#share_content a:hover, #share_content .btn-default:hover, #aboutModal a:hover, #aboutModal .btn-default:hover {
   color: #00bf7e !important;
 }
 
-#share_content .btn.focus,
-#share_content .btn:focus,
-#share_content .btn:hover,
-#aboutModal .btn.focus,
-#aboutModal .btn:focus,
-#aboutModal .btn:hover {
+#share_content .btn.focus, #share_content .btn:focus, #share_content .btn:hover, #aboutModal .btn.focus, #aboutModal .btn:focus, #aboutModal .btn:hover {
   background-color: #fff !important;
   color: #FF4081 !important;
   text-decoration: none;
 }
 
-#share_content .btn-colored,
-#aboutModal .btn-colored {
+#share_content .btn-colored, #aboutModal .btn-colored {
   background-color: #FF4081 !important;
   border-color: #c50043;
   color: #fff !important;
 }
 
-#share_content .btn-colored:hover,
-#aboutModal .btn-colored:hover {
+#share_content .btn-colored:hover, #aboutModal .btn-colored:hover {
   background-color: #fff !important;
   color: #FF4081 !important;
   border: 1px solid #c50043;
   text-decoration: none;
 }
 
-#share_content .btn-light-colored,
-#aboutModal .btn-light-colored {
+#share_content .btn-light-colored, #aboutModal .btn-light-colored {
   background-color: #ff7da9;
   border-color: #FF4081;
   color: #fff !important;
 }
 
-#share_content .btn-dark-colored,
-#aboutModal .btn-dark-colored {
+#share_content .btn-dark-colored, #aboutModal .btn-dark-colored {
   background-color: #ff0359;
   border-color: #c50043;
   color: #fff !important;
 }
 
-#share_content #entry_view .close,
-#aboutModal #entry_view .close {
+#share_content #entry_view .close, #aboutModal #entry_view .close {
   color: #FF4081;
 }
 
@@ -209,8 +178,7 @@ td {
 #share_content .pagination > .active > a:hover,
 #share_content .pagination > .active > span,
 #share_content .pagination > .active > span:focus,
-#share_content .pagination > .active > span:hover,
-#aboutModal .pagination > .active > a,
+#share_content .pagination > .active > span:hover, #aboutModal .pagination > .active > a,
 #aboutModal .pagination > .active > a:focus,
 #aboutModal .pagination > .active > a:hover,
 #aboutModal .pagination > .active > span,
@@ -235,3 +203,33 @@ td {
 .sort-icon.dim-icon {
   opacity: 0.3;
 }
+
+/*
+ * MAP
+ */
+.map-popup {
+  width: 100%;
+}
+
+.map-popup [class*="_square"] {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 20px;
+}
+
+.map-popup .entry_image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.map-popup .map-popup-link {
+  color: #000;
+  font-size: 16px;
+}
+
+.map-popup p {
+  color: lightslategray;
+}
+
+/*# sourceMappingURL=purple_pink.css.map */

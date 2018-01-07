@@ -11,21 +11,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Wrld3D\PoiManager;
 use App\Models\Community;
-use Illuminate\Http\Request;
-use Auth;
-use Theme;
-use Input;
-use Validator;
-use Redirect;
-use Config;
+use App\Models\CommunitySubscription;
 use App\Models\ExchangeType;
-use Pagetheme;
-use Mail;
-use Helper;
-use Carbon\Carbon;
+use Auth;
+use Config;
 use DB;
+use Helper;
+use Illuminate\Http\Request;
+use Input;
 use Log;
+use Mail;
+use Pagetheme;
+use Redirect;
+use Theme;
+use Validator;
 
 
 class CommunitiesController extends Controller
@@ -98,13 +99,13 @@ class CommunitiesController extends Controller
             // find out whether they have already asked to join this share
             $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
-            LOG::debug("getRequestAccess: request_count = " . $request_count);
+            //log::debug("getRequestAccess: request_count = " . $request_count);
             return view('request-access',
                 ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
         }
         else {
             // not logged in so send them to the signup page
-            LOG::debug("getRequestAccess: user is not logged in so redirect them");
+            //log::debug("getRequestAccess: user is not logged in so redirect them");
             return view('request-access',
                 ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
         }
@@ -124,7 +125,7 @@ class CommunitiesController extends Controller
     {
         $user = Auth::user();
         $request_count = $request->whitelabel_group->getRequestCount($user->id);
-        LOG::debug("postRequestAccess. request_count: " . $request_count);
+        //log::debug("postRequestAccess. request_count: " . $request_count);
 
         if (!$request_count) {
             DB::table('community_join_requests')->insert(
@@ -138,7 +139,7 @@ class CommunitiesController extends Controller
         }
 
         // redirect them back to same form page, but this time display different content
-        return view('request-access', ['request_count'=>$request_count, 'justSubmitted' => true, 'name'=>$request->whitelabel_group->name]);
+        return view('request-access', ['request_count' => $request_count, 'justSubmitted' => true, 'name' => $request->whitelabel_group->name]);
     }
 
     /**
@@ -199,13 +200,13 @@ class CommunitiesController extends Controller
     public function postCreate(Request $request)
     {
         $token = $request->input('stripeToken');
-        
+
         // No stripe token - something went wrong :(
         if (!isset($token)) {
             return Redirect::back()->withInput()->with('error',
                 'Something went wrong. Please make sure javascript is enabled in your browser.');
         }
-        log::debug("postCreate: token = ".$token);
+        //log::debug("postCreate: token = " . $token);
 
         $community = new Community();
         $community->name = e($request->input('name'));
@@ -219,10 +220,10 @@ class CommunitiesController extends Controller
 
         $customer = Auth::user();
         $metadata = array(
-            'name' => $customer->name,
-            'subdomain' => strtolower(e(Input::get('subdomain'))).config('session.domain'),
-            'email' => $customer->email,
-            'hub_name' => e(Input::get('name')),
+            'name'      => $customer->name,
+            'subdomain' => strtolower(e(Input::get('subdomain'))) . config('session.domain'),
+            'email'     => $customer->email,
+            'hub_name'  => e(Input::get('name')),
         );
 
         if ($customer->stripe_id == '') {
@@ -235,11 +236,11 @@ class CommunitiesController extends Controller
                 ]
             );
 
-            log::debug("postCreate: customer did not exist, new id = ".$customer->stripe_id);
+            //log::debug("postCreate: customer did not exist, new id = " . $customer->stripe_id);
 
         }
         else {
-            log::debug("postCreate: customer does exist ".$customer->stripe_id);
+            //log::debug("postCreate: customer does exist " . $customer->stripe_id);
         }
 
         $data['name'] = $customer->getDisplayName();
@@ -294,11 +295,10 @@ class CommunitiesController extends Controller
         $customer->card()->syncWithStripe();
 
         if ($community->save()) {
-            //Log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
+            //log::debug('New site '.$community->subdomain.' created successfully. Redirecting to https://'.$community->subdomain.'.'.config('app.domain'));
 
             // Save the community_id to the subscriptions table
-            $subscription = \App\Models\CommunitySubscription::where('stripe_id', '=',
-                $stripe_subscription->stripe_id)->first();
+            $subscription = CommunitySubscription::where('stripe_id', '=', $stripe_subscription->stripe_id)->first();
             $subscription->community_id = $community->id;
             $subscription->save();
 
@@ -331,16 +331,24 @@ class CommunitiesController extends Controller
     {
         $themes = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
 
-        $community = Community::find($request->whitelabel_group->id);
-        $exchanges = $community->exchangeTypes;
-        $allowed_exchanges = array();
-        foreach ($exchanges as $exchange) {
-            $allowed_exchanges[$exchange->id] = $exchange->id;
-        }
+        $exchanges = $request->whitelabel_group->exchangeTypes;
+
+        $allowed_exchanges = $exchanges->mapWithKeys(function ($exc) {
+            return [$exc->getKey() => $exc->getKey()];
+        })->toArray();
 
         $all_exchange_types = \App\Models\ExchangeType::all();
-        return view('community.edit')->with('community', $community)->with('allowed_exchanges',
-            $allowed_exchanges)->with('all_exchange_types', $all_exchange_types)->with('themes', $themes);
+
+        $poisets = ($request->whitelabel_group->wrld3d && $request->whitelabel_group->wrld3d->get('dev_token'))
+            ? (new PoiManager($request->whitelabel_group))->getPoisets()
+            : collect([]);
+
+        return view('community.edit')
+            ->with('community', $request->whitelabel_group)
+            ->with('poisets', $poisets)
+            ->with('allowed_exchanges', $allowed_exchanges)
+            ->with('all_exchange_types', $all_exchange_types)
+            ->with('themes', $themes);
     }
 
 
@@ -372,6 +380,17 @@ class CommunitiesController extends Controller
         $community->entry_layout = e(Input::get('entry_layout'));
         $community->color = e(Input::get('theme_color'));
 
+        // Get the WRLD3D Data
+        $wrld3dApiKey = explode(' - ', e(Input::get('wrld3d.api_key')));
+
+        $lastWrld3dSetup = $community->wrld3d ?? collect([]);
+
+        $community->wrld3d = collect([
+            'dev_token' => e(Input::get('wrld3d.dev_token')),
+            'api_key'   => count($wrld3dApiKey) === 2 ? $wrld3dApiKey[1] : null,
+            'poiset'    => count($wrld3dApiKey) === 2 ? intval($wrld3dApiKey[0]) : null,
+        ]);
+
         if ($community->show_info_bar == null) {
             $community->show_info_bar = 1;
         }
@@ -383,6 +402,16 @@ class CommunitiesController extends Controller
 
         if (Input::hasFile('profile_img')) {
             $community->uploadImage(Auth::user(), Input::file('profile_img'), 'community-profiles');
+        }
+
+        if (Input::has('cover_image_delete')) {
+            //log::debug("postEdit: delete_cover_image: " . $community->cover_img);
+            $community->deleteCover();
+        }
+
+        if (Input::has('logo_image_delete')) {
+            //log::debug("postEdit: delete_logo_image: " . $community->logo);
+            $community->deleteLogo();
         }
 
         if (Input::hasFile('cover_img')) {
@@ -410,8 +439,19 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->sync(ExchangeType::all());
         }
 
+        // Update entries to have a POI associated to it
+        if (!$lastWrld3dSetup->get('poiset') && $community->wrld3d->get('poiset')) {
+            // Instantiate the Poi Manager
+            $poiManager = new PoiManager($community);
 
-        return redirect()->route('community.edit.form')->with('success',
-            trans('general.community.messages.save_edits'));
+            $community->entries->each(function ($entry) use ($poiManager) {
+                if (!$entry->hasWrldPoi() && $entry->lat && $entry->lng) {
+                    $poiManager->savePoi($entry);
+                }
+            });
+        }
+
+
+        return redirect()->route('_edit_share')->with('success', trans('general.community.messages.save_edits'));
     }
 }

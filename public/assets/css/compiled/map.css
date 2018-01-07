@@ -1,0 +1,34 @@
+/*
+ * This stylesheet adds styles to the Leaflet and Wrld3D Map.
+ *
+ * TODO: Remove !important flags. It's a bad practice to use them.
+ */
+#share_content .leaflet-popup-content {
+  text-align: center;
+  width: 260px;
+}
+
+#share_content .leaflet-popup-content .entry_image {
+  width: 100%;
+}
+
+#share_content .leaflet-popup-content p {
+  color: #222;
+  font-size: 15px;
+}
+
+#share_content .leaflet-popup-content .map-link {
+  font-size: 15px;
+  text-decoration: underline !important;
+}
+
+#share_content .leaflet-popup-content em {
+  font-size: 12px;
+}
+
+#share_content .leaflet-popup-content [class^="_square"] {
+  width: 100%;
+  height: 260px;
+}
+
+/*# sourceMappingURL=map.css.map */

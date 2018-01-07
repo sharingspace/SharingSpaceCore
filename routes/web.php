@@ -223,9 +223,18 @@ Route::group(
                 Route::post(
                     '{entryId}/ajaxdelete',
                     array(
-                    'middleware' => 'auth',
-                    'uses' => 'EntriesController@postAjaxDelete')
+                        'middleware' => 'auth',
+                        'uses' => 'EntriesController@postAjaxDelete'
+                    )
                 );
+
+                Route::post(
+                    '{userId}',
+                    array(
+                        'middleware' => ['auth','community-auth'],
+                        'uses' => 'MessagesController@postCreate'
+                    )
+                )->name('_send_profile_message');
             }
         );
 
@@ -464,18 +473,17 @@ Route::group(
 
                 Route::get(
                     'edit',
-                    array(
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'community.edit.form',
-                    'uses' => 'CommunitiesController@getEdit')
-                );
+                    [
+                        'middleware' => ['auth','community-edit'],
+                        'uses' => 'CommunitiesController@getEdit'
+                    ]
+                )->name('_edit_share');
 
                 Route::post(
                     'edit',
                     [
-                    'middleware' => ['auth','community-auth'],
-                    'as' => 'community.edit.save',
-                    'uses' => 'CommunitiesController@postEdit'
+                        'middleware' => ['auth','community-edit'],
+                        'uses' => 'CommunitiesController@postEdit'
                     ]
                 );
 

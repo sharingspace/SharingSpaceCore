@@ -15,7 +15,7 @@
     <div class="row margin-bottom-20">
       @if(isset($images) && (count($images) > 0) && $images[0]->filename)
       <div class="col-md-5 col-sm-5 col-xs-12 margin-top-20">
-        <div id="image_box_containerr"> 
+        <div id="image_container"> 
           <img class="img-responsive" src="{{ Helper::cdn('uploads/entries/'.$entry->id.'/'.$images[0]->filename) }}">
         </div>
       </div> <!-- col-md-4 -->

@@ -9,6 +9,7 @@ use Socialite;
 use Log;
 use App\Models\User;
 use Auth;
+
 // use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
@@ -25,6 +26,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
     //use ThrottlesLogins;
 
     /**
@@ -56,13 +58,13 @@ class LoginController extends Controller
         $user = $request->user();
         if ($user) {
             if (Input::get('subdomain')) {
-                return redirect()->route('join-community', ['subdomain'=>Input::get('subdomain')]);
+                return redirect()->route('join-community', ['subdomain' => Input::get('subdomain')]);
             }
 
             return Redirect::back()->with('success', "You have successfully created an Anyshare account");
         }
         else {
-            return Redirect::back()->with('error',  "Sorry, something went wrong creating your Anyshare account");
+            return Redirect::back()->with('error', "Sorry, something went wrong creating your Anyshare account");
         }
     }
 
@@ -74,7 +76,7 @@ class LoginController extends Controller
      */
     public function redirectToSocialProvider(Request $request, $provider)
     {
-        log::debug("redirectToSocialProvider: ".$provider);
+        log::debug("redirectToSocialProvider: " . $provider);
         if ($request->whitelabel_group) {
             $request->session()->put('auth_subdomain', $request->whitelabel_group->subdomain);
         }
@@ -89,13 +91,14 @@ class LoginController extends Controller
      */
     public function handleProviderCallback(Request $request, $provider)
     {
-        log::debug("handleProviderCallback: ".$provider);
+        log::debug("handleProviderCallback: " . $provider);
 
         if ($request->session()->has('auth_subdomain')) {
             $subdomain = $request->session()->get('auth_subdomain');
             $request->session()->forget('auth_subdomain');
-            $redirect = 'https://'.$subdomain.'.'.config('app.domain');
-        } else {
+            $redirect = 'https://' . $subdomain . '.' . config('app.domain');
+        }
+        else {
             $redirect = config('app.url');
         }
         try {
@@ -133,11 +136,11 @@ class LoginController extends Controller
         return Validator::make(
             $data,
             [
-                'display_name' => 'required|max:255',
-                'email' => 'required|email|max:255|unique:users',
-                'password' => 'required|min:6',
+                'display_name'          => 'required|max:255',
+                'email'                 => 'required|email|max:255|unique:users',
+                'password'              => 'required|min:6',
                 'password_confirmation' => 'required|same:password',
-                'terms_and_conditions' => 'accepted',
+                'terms_and_conditions'  => 'accepted',
             ]
         );
     }
@@ -153,8 +156,8 @@ class LoginController extends Controller
         return User::create(
             [
                 'display_name' => $data['display_name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
+                'email'        => $data['email'],
+                'password'     => bcrypt($data['password']),
             ]
         );
     }

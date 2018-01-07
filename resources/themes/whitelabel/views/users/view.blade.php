@@ -224,7 +224,7 @@ $(document).ready(function () {
 
   $.ajax({
       type: "POST",
-      url: "{{ route('messages.create.save', $user->id) }}",
+      url: "{{ route('_send_profile_message', $user->id) }}",
       data: $('#offerForm').serialize(),
 
       success: function(data){
@@ -234,7 +234,7 @@ $(document).ready(function () {
           $('.messageText').val('');
           $('#offerStatusbox').addClass('alert alert-success');
           $('#offerStatusText').html('Success! '+data.message);
-          $('#offerStatusbox').fadeTo(1000, 500).slideUp(500);
+          $('#offerStatusbox').delay(2500).fadeTo(1000, 500).slideUp(500);
         }
         else {
           $('#offerStatusbox').addClass('alert alert-danger');

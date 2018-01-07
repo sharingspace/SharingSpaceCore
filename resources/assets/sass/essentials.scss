@@ -1572,11 +1572,11 @@ section.dark {
 hr {
   border: 0;
   height: 1px;
-  background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
-  background-image: -moz-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
-  background-image: -ms-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
-  background-image: -o-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
-  background-image: linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -webkit-linear-gradient(to left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -moz-linear-gradient(to left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -ms-linear-gradient(to left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -o-linear-gradient(to left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.2), transparent);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#d6d6d6',GradientType=0 );
   /* IE6-9 */
 }
@@ -1584,11 +1584,11 @@ hr {
 section.dark hr {
   border: 0;
   height: 1px;
-  background-image: -webkit-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2), transparent);
-  background-image: -moz-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2), transparent);
-  background-image: -ms-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2), transparent);
-  background-image: -o-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2), transparent);
-  background-image: linear-gradient(left, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-image: -webkit-linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-image: -moz-linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-image: -ms-linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-image: -o-linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.2), transparent);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#d6d6d6',GradientType=0 );
   /* IE6-9 */
 }
@@ -22222,10 +22222,10 @@ input.colorpicker {
 
 .sp-sat {
   background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#FFF), to(rgba(204, 154, 129, 0)));
-  background-image: -webkit-linear-gradient(left, #FFF, rgba(204, 154, 129, 0));
-  background-image: -moz-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
-  background-image: -o-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
-  background-image: -ms-linear-gradient(left, #fff, rgba(204, 154, 129, 0));
+  background-image: -webkit-linear-gradient(to left, #FFF, rgba(204, 154, 129, 0));
+  background-image: -moz-linear-gradient(to left, #fff, rgba(204, 154, 129, 0));
+  background-image: -o-linear-gradient(to left, #fff, rgba(204, 154, 129, 0));
+  background-image: -ms-linear-gradient(to left, #fff, rgba(204, 154, 129, 0));
   background-image: linear-gradient(to right, #fff, rgba(204, 154, 129, 0));
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr=#FFFFFFFF, endColorstr=#00CC9A81)";
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType = 1, startColorstr='#FFFFFFFF', endColorstr='#00CC9A81');

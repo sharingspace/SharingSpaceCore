@@ -1,9 +1,10 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddLayoutModeToCommunityTable extends Migration
+class AddWrld3dToCommunitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +14,7 @@ class AddLayoutModeToCommunityTable extends Migration
     public function up()
     {
         Schema::table('communities', function (Blueprint $table) {
-            $table->enum('entry_layout', ['L', 'G', 'M'])->default('G')->after('show_info_bar');
+            $table->string('wrld3d')->nullable();
         });
     }
 
@@ -25,7 +26,7 @@ class AddLayoutModeToCommunityTable extends Migration
     public function down()
     {
         Schema::table('communities', function (Blueprint $table) {
-            $table->dropColumn('entry_layout');
+            $table->dropColumn('wrld3d');
         });
     }
 }

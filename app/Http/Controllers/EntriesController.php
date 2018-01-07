@@ -12,8 +12,10 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ModelOperationException;
+use App\Helpers\Wrld3D\PoiManager;
 use App\Jobs\Entry\DeleteEntry;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -27,20 +29,21 @@ use Log;
 use Gate;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
+
 //use Session;
 
 class EntriesController extends Controller
 {
     /**
-    * Returns a view that displays entry information
-    * This route involves the viewEntry middleware which
-    * will check whether it is a valid entry, if it's an Open share
-    * and if not open whether they are logged in and a member of Share 
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since  [v1.0]
-    * @return View
-    */
+     * Returns a view that displays entry information
+     * This route involves the viewEntry middleware which
+     * will check whether it is a valid entry, if it's an Open share
+     * and if not open whether they are logged in and a member of Share
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since  [v1.0]
+     * @return View
+     */
 
     public function getEntry(Request $request, $entryID)
     {
@@ -131,7 +134,7 @@ class EntriesController extends Controller
 
         }
         else {
-            log::error("ajaxGetEntry: invalid entry Id = " . $entryID);
+            //log::error("ajaxGetEntry: invalid entry Id = " . $entryID);
             redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -152,7 +155,9 @@ class EntriesController extends Controller
         $post_types = array('want' => 'I want', 'have' => 'I have');
 
         $request->session()->put('upload_key', str_random(15));
-        return view('entries.create')->with('post_types', $post_types);
+        return view('entries.create')
+            ->with('post_types', $post_types)
+            ->with('entry', new Entry([]));
     }
 
 
@@ -186,10 +191,10 @@ class EntriesController extends Controller
 
         if (Auth::user()->isSuperAdmin() && !Auth::user()->isMemberOfCommunity($request->whitelabel_group, true)) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-                //LOG::debug("postAjaxCreate: joined superAdmin to share successfully");
+                //log::debug("postAjaxCreate: joined superAdmin to share successfully");
             }
             else {
-                //LOG::error("postAjaxCreate: failed to joined superAdmin to share successfully");
+                //log::error("postAjaxCreate: failed to joined superAdmin to share successfully");
             }
         }
 
@@ -202,15 +207,23 @@ class EntriesController extends Controller
 
         if (Input::get('location')) {
             $entry->location = e(Input::get('location'));
-            $latlong = Helper::latlong(Input::get('location'));
         }
 
-        if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-            $entry->latitude = $latlong['lat'];
-            $entry->longitude = $latlong['lng'];
+//        if (!Input::get('latitude') || !Input::get('longitude')) {
+//            $latlong = Helper::latlong(Input::get('location'));
+//        }
+
+        if (Input::get('latitude') && Input::get('longitude')) {
+            $entry->latitude = e(Input::get('latitude'));
+            $entry->longitude = e(Input::get('longitude'));
         }
 
-        if ($request->whitelabel_group->entries()->save($entry)) {
+        $entry->wrld3d = [
+            'indoor_id'    => e(Input::get('indoors_id')),
+            'indoor_floor' => e(Input::get('indoors_floor')),
+        ];
+
+        if ($entry = $request->whitelabel_group->entries()->save($entry)) {
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             $types = $typeIds = [];
@@ -222,7 +235,7 @@ class EntriesController extends Controller
             $uploaded = true;
 
             if (Input::hasFile('file')) {
-                Log::debug("postAjaxCreate: We have a file - and, weirdly, kinda shouldn't?");
+                //log::debug("postAjaxCreate: We have a file - and, weirdly, kinda shouldn't?");
                 $rotation = null;
                 if (!empty(Input::get('rotation'))) {
                     $rotation = Input::get('rotation');
@@ -236,9 +249,14 @@ class EntriesController extends Controller
                 }
             }
             else {
-                //Log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
+                //log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
                 $uploaded = Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
+            }
+
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
             }
 
             if ($uploaded) {
@@ -368,7 +386,7 @@ class EntriesController extends Controller
                 ->with('image', $imageName);
         }
         else {
-            log::error("getEdit: invalid entry Id = " . $entryID);
+            //log::error("getEdit: invalid entry Id = " . $entryID);
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -454,7 +472,7 @@ class EntriesController extends Controller
             ]);
         }
 
-        log::error("postAjaxEdit: invalid entry Id = " . $entryID);
+        //log::error("postAjaxEdit: invalid entry Id = " . $entryID);
         return response()->json(['success' => false, 'error' => trans('general.entries.messages.invalid')]);
     }
 
@@ -495,13 +513,19 @@ class EntriesController extends Controller
 
             if (Input::get('location')) {
                 $entry->location = e(Input::get('location'));
-                $latlong = Helper::latlong(Input::get('location'));
             }
 
-            if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-                $entry->latitude = $latlong['lat'];
-                $entry->longitude = $latlong['lng'];
+            if (Input::get('latitude') && Input::get('longitude')) {
+                $entry->latitude = e(Input::get('latitude'));
+                $entry->longitude = e(Input::get('longitude'));
             }
+
+            $currentWrld3d = $entry->wrld3d ?: collect([]);
+
+            $entry->wrld3d = $currentWrld3d->merge([
+                'indoor_id'    => e(Input::get('indoors_id')),
+                'indoor_floor' => e(Input::get('indoors_floor')),
+            ]);
 
             if (!$entry->save()) {
                 return Redirect::back()->withInput()->withErrors($entry->getErrors());
@@ -516,7 +540,7 @@ class EntriesController extends Controller
                 }
             }
             else {
-                if (Input::get('deleteImage')) {
+                if (Input::get('entry_image_delete')) {
                     Entry::deleteImage($entry->id, $user->id);
                     Entry::deleteImageFromDB($entry->id, $user->id);
                 }
@@ -530,13 +554,19 @@ class EntriesController extends Controller
                 }
             }
 
+            // Save the POI in the Wrld3D
+            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+                (new PoiManager($request->whitelabel_group))->savePoi($entry);
+            }
+
+            // Update exchange types
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
             return redirect()->route('entry.view', $entry->id)->with('success',
                 trans('general.entries.messages.save_edits'));
         }
 
-        log::error("postEdit: invalid entry Id = " . $entryID);
+        //log::error("postEdit: invalid entry Id = " . $entryID);
         return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
 
@@ -642,13 +672,10 @@ class EntriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since  [v1.0]
-     * @return String JSON
+     * @return array
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
-        // eventually the default maybe an admin setting 
-        $gridView = ($request->whitelabel_group->getLayout() === "G");
-
         if ($user_id) {
             if (Auth::user() && (Auth::user()->id == $user_id)) {
                 // allow user to their hidden entries
@@ -661,8 +688,7 @@ class EntriesController extends Controller
             }
         }
         else {
-            $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->where('visible',
-                1)->NotCompleted();
+            $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->where('visible', 1)->NotCompleted();
         }
 
         if (Input::has('search')) {
@@ -687,6 +713,10 @@ class EntriesController extends Controller
             [
                 'title',
                 'location',
+                'latitude',
+                'longitude',
+                'lat',
+                'lng',
                 'tags',
                 'created_at',
             ];
@@ -707,6 +737,10 @@ class EntriesController extends Controller
             $user = null;
         }
 
+        // Instantiate the Poi Manager
+        $poiManager = new PoiManager($request->whitelabel_group);
+
+        // Process all entries
         foreach ($entries as $entry) {
             if (($user) && ($entry->deleted_at == '') && ($entry->checkUserCanEditEntry($user))) {
                 $actions = '<a href="' . route('entry.edit.form', $entry->id) . '">
@@ -738,17 +772,16 @@ class EntriesController extends Controller
             $image = $entry->media->first();
 
             if ($image) {
-                $imageTag = '<a href="' . route('entry.view',
-                        $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
+                $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
                 $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $image->filename;
                 $url = url('/');
                 $aspect_ratio = 1;
                 $parsed = parse_url($url); // analyse the URL
                 if (isset($parsed['scheme']) && strtolower($parsed['scheme']) == 'https') {
                     // If it is https, change it to http
-                    $url = 'http://'.substr($url,8);
-                    list($width, $height) = getimagesize($url.$image_url);
-                    $aspect_ratio = round($width/(float)$height,1);
+                    $url = 'http://' . substr($url, 8);
+                    list($width, $height) = getimagesize($url . $image_url);
+                    $aspect_ratio = round($width / (float)$height, 1);
                 }
 
             }
@@ -759,49 +792,80 @@ class EntriesController extends Controller
                 $aspect_ratio = 0;
             }
 
+            // Process the entry
             if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
+                if ((!$entry->lat || !$entry->lng) || $entry->location) {
+                    $latlong = Helper::latlong($entry->location);
+
+                    $entry->lat = $latlong['lat'];
+                    $entry->lng = $latlong['lng'];
+                    $entry->save();
+                }
+
                 $rows[] = array(
-                    'image'     => $imageTag,
-                    'image_url' => $image_url,
-                    'post_type' => strtoupper($entry->post_type) . $completed,
-                    'entry_id'     => $entry->id,
-                    'title' => (strlen($entry->title) + strlen($entry->author->getDisplayName()) > 30) ? substr($entry->title, 0, 27) . '&hellip;' : $entry->title,
-                    'author_image'    => '<img src="' . $entry->author->gravatar_img() . '" class="avatar-sm hidden-xs">',
-                    'location'      => $entry->location,
-                    'created_at'    => $entry->created_at->format('M jS, Y'),
-                    'actions'       => $actions,
-                    'tags'          => $entry->tags,
-                    'exchangeTypes' => implode(', ', $exchangeTypes),
-                    'display_name' => $entry->author->getDisplayName(),
-                    'natural_post_type'    => ($entry->post_type == 'want') ? 'wants' : 'has',
-                    'aspect_ratio' => $aspect_ratio,
-                    'author_name' => '<a href="' . route('user.profile', $entry->author->id) . '">'
+                    'url'               => route('entry.view', $entry->id),
+                    'image'             => $imageTag,
+                    'image_url'         => $image_url,
+                    'title_link'        => '<a href="' . route('entry.view', $entry->id) . '">' . $entry->title . '</>',
+                    'post_type_link'    => '<a href="' . route('entry.view', $entry->id) . '">' . strtoupper($entry->post_type) . $completed . '</>',
+                    'post_type'         => strtoupper($entry->post_type) . $completed,
+                    'entry_id'          => $entry->id,
+                    'title'             => (strlen($entry->title) + strlen($entry->author->getDisplayName()) > 30) ? substr($entry->title, 0, 27) . '&hellip;' : $entry->title,
+                    'author_image'      => '<img src="' . $entry->author->gravatar_img() . '" class="avatar-sm hidden-xs">',
+                    'location'          => $entry->location,
+                    'lat'               => $entry->lat,
+                    'lng'               => $entry->lng,
+                    'created_at'        => $entry->created_at->format('M jS, Y'),
+                    'actions'           => $actions,
+                    'tags'              => $entry->tags,
+                    'exchangeTypes'     => implode(', ', $exchangeTypes),
+                    'display_name'      => $entry->author->getDisplayName(),
+                    'natural_post_type' => $entry->natural_post_type,
+                    'aspect_ratio'      => $aspect_ratio,
+                    'author_name'       => '<a href="' . route('user.profile', $entry->author->id) . '">'
                         . $entry->author->getDisplayName() . '</a>'
                         . (($entry->author->getCustomLabelInCommunity($request->whitelabel_group)) ?
                             ' <span class="label label-primary">'
                             . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
-                            . '</span>' : '')
+                            . '</span>' : ''),
+                    'wrl3d'             => $entry->wrld3d,
+                    'poi'               => $poiManager->getPoi($entry),
                 );
             }
             else {
                 // we have an entry who doesn't belong to this community - something went very wrong
                 $rows[] = array(
-                    'image'         => '-',
-                    'image-url'     => '-',
-                    'post_type'     => '-',
-                    'entry_id'     => $entry->id,
-                    'author'        => '-',
-                    'location'      => '-',
-                    'created_at'    => '-',
-                    'actions'       => '-',
-                    'tags'          => '-',
-                    'exchangeTypes' => '-',
-                    'aspect_ratio' => $aspect_ratio
+                    'image'          => '-',
+                    'image-url'      => '-',
+                    'title_link'     => '-',
+                    'post_type_link' => '-',
+                    'post_type'      => '-',
+                    'entry_id'       => $entry->id,
+                    'author'         => '-',
+                    'location'       => '-',
+                    'latitude'       => '-',
+                    'longitude'      => '-',
+                    'created_at'     => '-',
+                    'actions'        => '-',
+                    'tags'           => '-',
+                    'exchangeTypes'  => '-',
+                    'aspect_ratio'   => $aspect_ratio,
                 );
             }
         }
 
-        return array('total' => $count, 'rows' => $rows, 'gridView' => $gridView);
+        // After loading the entries, we request Points of Interest that was not created on Anyshare.
+        $allPois = $poiManager->getPoiList(['ignoreEntries' => true])->values();
+
+        // Get default entry layout. Default to grid.
+        $entryLayout = $request->whitelabel_group->getLayout() ? $request->whitelabel_group->getLayout() : 'G';
+
+        return [
+            'total'    => $count,
+            'rows'     => $rows,
+            'pois'     => $allPois,
+            'viewType' => $entryLayout,
+        ];
     }
 
 
@@ -820,7 +884,7 @@ class EntriesController extends Controller
         $added = array();
 
         if ($tagName) {
-            $entries = Entry::TagSearch($tagName)->get();
+            $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%' . $tagName . '%')->where('visible', 1)->NotCompleted()->get();
             $tagArray[] = $tagName;
         }
         else {
@@ -832,7 +896,7 @@ class EntriesController extends Controller
         $i = 0;
         foreach ($entries as $entry) {
             // create an array from our comma separated string
-            if (!$tagName){
+            if (!$tagName) {
                 $tagArray = explode(',', $entry->tags);
             }
 
