@@ -112,6 +112,8 @@ export class MapRenderer2d {
 
         this.markers.push(marker)
         marker.addTo(this.instance)
+
+        return this
     }
 
     removeMarkers () {
@@ -126,6 +128,8 @@ export class MapRenderer2d {
         if (entry.lat && entry.lon) {
             this.instance.setView([entry.lat, entry.lon], 14)
         }
+
+        return this
     }
 
     center () {
