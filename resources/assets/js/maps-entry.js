@@ -28,6 +28,10 @@ function prepareEntryIndoors (entry) {
  * @param entry
  */
 function handleViewing (map, entry) {
+    if (!entry.lat || !entry.lon) {
+        return
+    }
+
     if (map.type === '3d' && entry.indoor) {
         map.instance.indoors.on('indoorentranceadd', function () {
             map.centerAt(entry)
@@ -41,10 +45,8 @@ function handleViewing (map, entry) {
         return
     }
 
-    if (entry.lat && entry.lon) {
-        map.centerAt(entry)
-        map.addMapMarker(entry, { popup: false, tooltip: false })
-    }
+    map.centerAt(entry)
+    map.addMapMarker(entry, { popup: false, tooltip: false })
 }
 
 /**
