@@ -444,13 +444,17 @@ class CommunitiesController extends Controller
             // Instantiate the Poi Manager
             $poiManager = new PoiManager($community);
 
-            $community->entries->each(function ($entry) use ($poiManager) {
-                if (!$entry->hasWrldPoi() && $entry->lat && $entry->lng) {
+            $entriesToUpdate = $community->entries()->whereNotNull('lat')->whereNotNull('lng')->get()->filter(function ($i) {
+                return is_null($i->wrld3d->get('poi_id'));
+            });
+
+            $entriesToUpdate->each(function ($entry) use (&$es, $poiManager) {
+                if ($entry->hasGeolocation()) {
+                    $es[] = $entry->getKey();
                     $poiManager->savePoi($entry);
                 }
             });
         }
-
 
         return redirect()->route('_edit_share')->with('success', trans('general.community.messages.save_edits'));
     }

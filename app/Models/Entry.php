@@ -386,6 +386,16 @@ class Entry extends Model
     }
 
     /**
+     * Does it have latitude and longitude?
+     *
+     * @return bool
+     */
+    public function hasGeolocation()
+    {
+        return $this->lat && $this->lng;
+    }
+
+    /**
      * Query builder scope to search on tag text
      *
      * @author [D. Linnard] [<david@linnard.com>]
