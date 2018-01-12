@@ -383,8 +383,6 @@ class CommunitiesController extends Controller
         // Get the WRLD3D Data
         $wrld3dApiKey = explode(' - ', e(Input::get('wrld3d.api_key')));
 
-        $lastWrld3dSetup = $community->wrld3d ?? collect([]);
-
         $community->wrld3d = collect([
             'dev_token' => e(Input::get('wrld3d.dev_token')),
             'api_key'   => count($wrld3dApiKey) === 2 ? $wrld3dApiKey[1] : null,
@@ -454,7 +452,7 @@ class CommunitiesController extends Controller
         //to have a POI associated to it.
         $poiManager = new PoiManager($community);
 
-        $updatedItems = $community->entries()
+        $community->entries()
             ->whereNotNull('lat')
             ->whereNotNull('lng')
             ->get()
