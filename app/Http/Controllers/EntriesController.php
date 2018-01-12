@@ -555,7 +555,7 @@ class EntriesController extends Controller
             }
 
             // Save the POI in the Wrld3D
-            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+            if ($entry->hasGeolocation() && $request->whitelabel_group->hasWrld3dPoiset()) {
                 (new PoiManager($request->whitelabel_group))->savePoi($entry);
             }
 

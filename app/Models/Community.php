@@ -520,12 +520,22 @@ class Community extends Model
     }
 
     /**
-     * Return wether the community has geolocation set up.
+     * Return whether the community has geolocation set up.
      *
      * @return bool
      */
-    public function hasGeolocation()
+    public function hasGeolocation(): bool
     {
         return $this->latitude && $this->longitude;
+    }
+
+    /**
+     * Determine whether the community has an Wrld 3D POI Set.
+     *
+     * @return bool
+     */
+    public function hasWrld3dPoiset(): bool
+    {
+        return $this->wrld3d && $this->wrld3d->get('poiset');
     }
 }
