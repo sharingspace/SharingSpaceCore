@@ -383,8 +383,6 @@ class CommunitiesController extends Controller
         // Get the WRLD3D Data
         $wrld3dApiKey = explode(' - ', e(Input::get('wrld3d.api_key')));
 
-        $lastWrld3dSetup = $community->wrld3d ?? collect([]);
-
         $community->wrld3d = collect([
             'dev_token' => e(Input::get('wrld3d.dev_token')),
             'api_key'   => count($wrld3dApiKey) === 2 ? $wrld3dApiKey[1] : null,
@@ -439,19 +437,37 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->sync(ExchangeType::all());
         }
 
-        // Update entries to have a POI associated to it
-        if (!$lastWrld3dSetup->get('poiset') && $community->wrld3d->get('poiset')) {
-            // Instantiate the Poi Manager
-            $poiManager = new PoiManager($community);
+        return redirect()->route('_edit_share')->with('success', trans('general.community.messages.save_edits'));
+    }
 
-            $community->entries->each(function ($entry) use ($poiManager) {
-                if (!$entry->hasWrldPoi() && $entry->lat && $entry->lng) {
-                    $poiManager->savePoi($entry);
-                }
-            });
+    public function updatePois(Request $request)
+    {
+        $community = $request->whitelabel_group;
+
+        if (!$community->wrld3d || !$community->wrld3d->get('poiset')) {
+            return redirect()->back();
         }
 
+        // Instantiate the Poi Manager and update entries
+        //to have a POI associated to it.
+        $poiManager = new PoiManager($community);
 
-        return redirect()->route('_edit_share')->with('success', trans('general.community.messages.save_edits'));
+        $community->entries()
+            ->whereNotNull('lat')
+            ->whereNotNull('lng')
+            ->get()
+            ->filter(function ($item) {
+                return is_null($item->wrld3d) || is_null($item->wrld3d->get('poi_id'));
+            })
+            ->map(function ($entry) use (&$es, $poiManager) {
+                if (!$entry->hasGeolocation()) {
+                    return null;
+                }
+
+                $poiManager->savePoi($entry);
+            })
+            ->filter();
+
+        return redirect()->route('_edit_share')->with('success', 'Entries updated.');
     }
 }

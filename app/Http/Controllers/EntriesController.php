@@ -555,7 +555,7 @@ class EntriesController extends Controller
             }
 
             // Save the POI in the Wrld3D
-            if ($entry->lat && $entry->lng && $request->whitelabel_group->wrld3d->get('poiset')) {
+            if ($entry->hasGeolocation() && $request->whitelabel_group->hasWrld3dPoiset()) {
                 (new PoiManager($request->whitelabel_group))->savePoi($entry);
             }
 
@@ -724,8 +724,8 @@ class EntriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'desc' ? 'desc' : 'asc';
 
-        $count = $entries->count();
         $entries = $entries->orderBy($sort, $order)->get();
+        $count = $entries->count();
         // $entries = $entries->skip($offset)->take($limit)->get(); pagination stuff and we may need it one day - dsl
 
         $rows = array();
