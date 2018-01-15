@@ -101,7 +101,7 @@
                             </div> <!-- col-8/12 -->
                     </div> <!-- row -->
 
-                    @if ($entry->lat && $entry->lng)
+                    @if ($entry->hasGeolocation())
                         <div class="margin-bottom-10 margin-top-4">
                             @include('partials.map')
                         </div>
