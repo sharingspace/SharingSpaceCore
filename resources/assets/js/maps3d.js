@@ -146,6 +146,12 @@ export class MapRenderer3d {
         const id = item.id || (+new Date * Math.random() + 1).toString(36).substring(2, 10)
         const marker = this.markerController.addMarker(id, [item.lat, item.lon], markerOpts)
 
+        if (!marker) {
+            console.error('Error creating entry: ')
+            console.log(item)
+            return this
+        }
+
         // Add a tooltip to the marker
         if (options.tooltip) {
             marker.bindTooltip(item.user_data.author_name + ' ' + item.user_data.natural_post_type + ' <b>' + item.title + '</b>', { permanent: false })
