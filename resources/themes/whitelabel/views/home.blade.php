@@ -6,16 +6,6 @@
     @parent
 @stop
 
-@section('custom_css')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
-    <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
-
-    <link rel="stylesheet" href="{{ asset('/assets/css/compiled/map.css') }}" type="text/css">
-
-    {{--<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.1.0/dist/MarkerCluster.css">--}}
-    {{--<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.1.0/dist/MarkerCluster.Default.css">--}}
-@endsection
-
 {{-- Page content --}}
 @section('content')
 

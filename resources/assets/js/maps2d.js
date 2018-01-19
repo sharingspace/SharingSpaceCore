@@ -8,7 +8,7 @@ export class MapRenderer2d {
         this.lat = options.lat || null
         this.lng = options.lng || null
 
-        console.log('map-renderer-2d', window.MAPBOX_KEY)
+        console.log('map-renderer-2d')
 
         if (this.mapboxKey) {
             this.createInstance(options)
@@ -33,9 +33,8 @@ export class MapRenderer2d {
             accessToken: this.mapboxKey
         }).addTo(this.instance)
 
-        if (this.lat && this.lng) {
-            this.center()
-        }
+        
+        this.center()
 
         return this
     }
@@ -133,22 +132,22 @@ export class MapRenderer2d {
     }
 
     center () {
-        if (this.lat && this.lng) {
-            this.instance.setView([this.lat, this.lng], 18)
-            return this
-        }
-
         var points = []
 
+        if (this.lat && this.lng) {
+            points.push([this.lat, this.lng])
+        }
+
         this.markers.forEach((mk) => {
-            points.push([mk.getLatLng().lat, mk.getLatLng().lng])
+            points.push(mk.getLatLng())
         })
 
         if (points.length === 0) {
             return this
         }
 
-        this.instance.fitBounds(points)
+        this.instance.fitBounds(new L.LatLngBounds(points))
+
         return this
     }
 
