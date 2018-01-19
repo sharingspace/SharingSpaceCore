@@ -802,7 +802,7 @@ class EntriesController extends Controller
                     $entry->save();
                 }
 
-                $rows[] = array(
+                $entryData = array(
                     'url'               => route('entry.view', $entry->id),
                     'image'             => $imageTag,
                     'image_url'         => $image_url,
@@ -829,8 +829,39 @@ class EntriesController extends Controller
                             . $entry->author->getCustomLabelInCommunity($request->whitelabel_group)
                             . '</span>' : ''),
                     'wrl3d'             => $entry->wrld3d,
-                    'poi'               => $poiManager->getPoi($entry),
+                    //                    'poi'               => $poiManager->getPoi($entry),
                 );
+
+                if ($request->whitelabel_group->hasWrld3dPoiset() && $entry->hasWrldPoi()) {
+                    /*
+                     * It is recreating the POI info without requesting it from Wrld API.
+                     * FIXME: Duplicated code. It's the same stuff as seen in PoiManager->savePoi().
+                     */
+                    $entryData = array_merge($entryData, [
+                        'poi' => [
+                            'id'        => $entry->wrld3d->get('poi_id'),
+                            'title'     => $entry->title,
+                            'subtitle'  => $entry->author->display_name . ' ' . $entry->natural_post_type . ' ' . $entry->title . '.',
+                            'lat'       => (float)$entry->lat,
+                            'lon'       => (float)$entry->lng,
+                            'indoor'    => !is_null($entry->wrld3d->get('indoor_id')),
+                            'indoor_id' => !is_null($entry->wrld3d->get('indoor_id')) ? $entry->wrld3d->get('indoor_id') : null,
+                            'floor_id'  => !is_null($entry->wrld3d->get('indoor_id')) ? $entry->wrld3d->get('indoor_floor') : null,
+                            'user_data' => [
+                                'entry_id'          => $entry->getKey(),
+                                'url'               => route('entry.view', $entry->getKey()),
+                                'natural_post_type' => $entry->natural_post_type,
+                                'author_name'       => $entry->author->display_name,
+                                'exchange_types'    => $entry->exchangeTypes->pluck('name')->implode(', '),
+                                'image_url'         => ($entry->media->count() && $entry->media->first()->filename)
+                                    ? $userData['image_url'] = Helper::cdn('uploads/entries/' . $entry->id . '/' . $entry->media->first()->filename)
+                                    : null,
+                            ],
+                        ],
+                    ]);
+                }
+
+                $rows[] = $entryData;
             }
             else {
                 // we have an entry who doesn't belong to this community - something went very wrong
