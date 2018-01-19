@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
     @if ($whitelabel_group->wrld3d && $whitelabel_group->wrld3d->get('api_key'))
         <link href="https://cdn-webgl.wrld3d.com/wrldjs/addons/resources/latest/css/wrld.css" rel="stylesheet"/>
-@endif
+    @endif
 
 <!-- Plugins -->
     <script type="text/javascript">var plugin_path = '/assets/plugins/';</script>

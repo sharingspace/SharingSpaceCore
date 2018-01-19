@@ -23,22 +23,16 @@ use Illuminate\Http\Request;
 use Input;
 use Log;
 use Mail;
-use Pagetheme;
 use Redirect;
-use Theme;
-use Validator;
-
 
 class CommunitiesController extends Controller
 {
-
     protected $community;
 
     public function __construct(Community $community)
     {
         $this->community = $community;
     }
-
 
     /**
      * Returns the homepage view
@@ -51,7 +45,6 @@ class CommunitiesController extends Controller
     {
         return view('home');
     }
-
 
     /**
      * Returns a view that invokes the ajax tables which actually contains
@@ -100,14 +93,17 @@ class CommunitiesController extends Controller
             $request_count = $request->whitelabel_group->getRequestCount($user->id);
 
             //log::debug("getRequestAccess: request_count = " . $request_count);
-            return view('request-access',
-                ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
-        }
-        else {
+            return view(
+                'request-access',
+                ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]
+            );
+        } else {
             // not logged in so send them to the signup page
             //log::debug("getRequestAccess: user is not logged in so redirect them");
-            return view('request-access',
-                ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]);
+            return view(
+                'request-access',
+                ['request_count' => $request_count, 'name' => $request->whitelabel_group->name]
+            );
         }
     }
 
@@ -185,7 +181,6 @@ class CommunitiesController extends Controller
         return view('communities.edit')->with('themes', $themes);
     }
 
-
     /**
      * Validates and stores the data for a new community. This method also handles
      * creating a subscription in Stripe for the user.
@@ -203,8 +198,10 @@ class CommunitiesController extends Controller
 
         // No stripe token - something went wrong :(
         if (!isset($token)) {
-            return Redirect::back()->withInput()->with('error',
-                'Something went wrong. Please make sure javascript is enabled in your browser.');
+            return Redirect::back()->withInput()->with(
+                'error',
+                'Something went wrong. Please make sure javascript is enabled in your browser.'
+            );
         }
         //log::debug("postCreate: token = " . $token);
 
@@ -219,12 +216,12 @@ class CommunitiesController extends Controller
         }
 
         $customer = Auth::user();
-        $metadata = array(
+        $metadata = [
             'name'      => $customer->name,
             'subdomain' => strtolower(e(Input::get('subdomain'))) . config('session.domain'),
             'email'     => $customer->email,
             'hub_name'  => e(Input::get('name')),
-        );
+        ];
 
         if ($customer->stripe_id == '') {
             // Create the Stripe customer
@@ -237,9 +234,7 @@ class CommunitiesController extends Controller
             );
 
             //log::debug("postCreate: customer did not exist, new id = " . $customer->stripe_id);
-
-        }
-        else {
+        } else {
             //log::debug("postCreate: customer does exist " . $customer->stripe_id);
         }
 
@@ -252,8 +247,7 @@ class CommunitiesController extends Controller
         if (config('app.debug')) {
             // this is for testing only
             $data['logo'] = 'https://anyshare.coop/assets/img/hp/anyshare-logo-web-retina.png';
-        }
-        else {
+        } else {
             $data['logo'] = config('app.url') . '/assets/img/hp/anyshare-logo-web-retina.png';
         }
 
@@ -264,8 +258,10 @@ class CommunitiesController extends Controller
         try {
             $card = $customer->card()->makeDefault()->create($token);
         } catch (\Exception $e) {
-            return Redirect::back()->withInput()->with('error',
-                'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '');
+            return Redirect::back()->withInput()->with(
+                'error',
+                'Something went wrong while trying to authorise your card: ' . $e->getMessage() . ''
+            );
         }
 
         // Create the subscription
@@ -281,14 +277,17 @@ class CommunitiesController extends Controller
                 try {
                     $customer->applyStripeDiscount(e($request->input('coupon')));
                 } catch (\Exception $e) {
-                    return Redirect::back()->withInput()->with('error',
-                        'Something went wrong while trying to process your coupon request: ' . $e->getMessage() . '');
+                    return Redirect::back()->withInput()->with(
+                        'error',
+                        'Something went wrong while trying to process your coupon request: ' . $e->getMessage() . ''
+                    );
                 }
             }
-
         } catch (\Exception $e) {
-            return Redirect::back()->withInput()->with('error',
-                'Something went wrong creating your subscription: ' . $e->getMessage() . '');
+            return Redirect::back()->withInput()->with(
+                'error',
+                'Something went wrong creating your subscription: ' . $e->getMessage() . ''
+            );
         }
 
         $customer->subscription()->syncWithStripe();
@@ -313,11 +312,12 @@ class CommunitiesController extends Controller
                 }
             );
 
-            return redirect('https://' . $community->subdomain . '.' . config('app.domain') . '/share/edit')->with('success',
-                trans('general.community.save_success'));
+            return redirect('https://' . $community->subdomain . '.' . config('app.domain') . '/share/edit')->with(
+                'success',
+                trans('general.community.save_success')
+            );
         }
     }
-
 
     /**
      * Returns a view that makes a form to edit community details.
@@ -350,7 +350,6 @@ class CommunitiesController extends Controller
             ->with('all_exchange_types', $all_exchange_types)
             ->with('themes', $themes);
     }
-
 
     /**
      * Validates and stores the edited community data.
@@ -393,10 +392,10 @@ class CommunitiesController extends Controller
             $community->show_info_bar = 1;
         }
 
-        if (Input::get('location')) {
-            $community->location = e(Input::get('location'));
-            $latlong = Helper::latlong(Input::get('location'));
-        }
+        $community->location = e(Input::get('location'));
+        $latlong = (Input::get('location')) ? collect(Helper::latlong(Input::get('location'))) : collect([]);
+        $community->latitude = $latlong->get('lat');
+        $community->longitude = $latlong->get('lng');
 
         if (Input::hasFile('profile_img')) {
             $community->uploadImage(Auth::user(), Input::file('profile_img'), 'community-profiles');
@@ -420,20 +419,13 @@ class CommunitiesController extends Controller
             $community->uploadImage(Auth::user(), Input::file('logo'), 'community-logos');
         }
 
-
-        if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
-            $community->latitude = $latlong['lat'];
-            $community->longitude = $latlong['lng'];
-        }
-
         if (!$community->save()) {
             return Redirect::back()->withInput()->withErrors($community->getErrors());
         }
 
         if (Input::has('exchange_types')) {
             $community->exchangeTypes()->sync(Input::get('exchange_types'));
-        }
-        else {
+        } else {
             $community->exchangeTypes()->sync(ExchangeType::all());
         }
 

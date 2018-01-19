@@ -333,7 +333,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                     </div> <!-- WRLD3D API KEY -->
                                     @if (!empty($community->wrld3d) && $community->wrld3d->get('poiset'))
                                         <div class="form-group">
-                                            <a href="{{ route('_update_share_pois') }}" class="link">Update POIs of entries</a>
+                                            <a tabindex="-1" href="{{ route('_update_share_pois') }}" class="link">Update POIs of entries</a>
                                         </div>
                                     @endif
                                 </fieldset>
