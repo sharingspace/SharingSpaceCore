@@ -15,20 +15,18 @@ use App\Exceptions\ModelOperationException;
 use App\Helpers\Wrld3D\PoiManager;
 use App\Jobs\Entry\DeleteEntry;
 use Exception;
-use GuzzleHttp\Client;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Auth;
-use Theme;
 use Validator;
 use Input;
 use Redirect;
 use Helper;
 use Log;
-use Gate;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
+use App\Helpers\CommunityEntries;
 
 //use Session;
 
@@ -44,7 +42,6 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return View
      */
-
     public function getEntry(Request $request, $entryID)
     {
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>> ".Route::currentRouteName()."  ".$entryID);
@@ -54,12 +51,13 @@ class EntriesController extends Controller
                 if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
                     return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
                 }
-            }
-            else {
+            } else {
                 // user not logged in. Can see entry only if Share is open
                 if (!$request->whitelabel_group->isOpen()) {
-                    return redirect()->route('home')->with('error',
-                        trans('general.entries.messages.entry_view_not_allowed'));
+                    return redirect()->route('home')->with(
+                        'error',
+                        trans('general.entries.messages.entry_view_not_allowed')
+                    );
                 }
             }
 
@@ -67,7 +65,7 @@ class EntriesController extends Controller
                 ->where('entry_id', '=', $entryID)
                 ->get();
 
-            if ("_kiosk_entry" == Route::currentRouteName()) {
+            if ('_kiosk_entry' == Route::currentRouteName()) {
                 $type = ($entry->post_type == 'want') ? 'wants' : 'has';
 
                 $tagArray = explode(',', $entry->tags);
@@ -79,14 +77,14 @@ class EntriesController extends Controller
                         $category = $tag;
                     }
                 }
-                return view('kiosk.kiosk_entry')->with('entry', $entry)->with('images', $images)->with('natural_type',
-                    $type)->with('category', $category);
-            }
-            else {
+                return view('kiosk.kiosk_entry')->with('entry', $entry)->with('images', $images)->with(
+                    'natural_type',
+                    $type
+                )->with('category', $category);
+            } else {
                 return view('entries.view')->with('entry', $entry)->with('images', $images);
             }
-        }
-        else {
+        } else {
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -131,14 +129,11 @@ class EntriesController extends Controller
                 'visible'           => $entry->visible,
                 'image'             => $imageName,
             ]);
-
-        }
-        else {
+        } else {
             //log::error("ajaxGetEntry: invalid entry Id = " . $entryID);
             redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
-
 
     /**
      * Returns a view that makes a form to create a new entry
@@ -152,14 +147,13 @@ class EntriesController extends Controller
     {
         //log::debug("getCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        $post_types = array('want' => 'I want', 'have' => 'I have');
+        $post_types = ['want' => 'I want', 'have' => 'I have'];
 
         $request->session()->put('upload_key', str_random(15));
         return view('entries.create')
             ->with('post_types', $post_types)
             ->with('entry', new Entry([]));
     }
-
 
     /**
      * Validates and stores the new entry data via AJAX request.
@@ -192,8 +186,7 @@ class EntriesController extends Controller
         if (Auth::user()->isSuperAdmin() && !Auth::user()->isMemberOfCommunity($request->whitelabel_group, true)) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
                 //log::debug("postAjaxCreate: joined superAdmin to share successfully");
-            }
-            else {
+            } else {
                 //log::error("postAjaxCreate: failed to joined superAdmin to share successfully");
             }
         }
@@ -201,7 +194,7 @@ class EntriesController extends Controller
         if (empty($exchange_types)) {
             return response()->json([
                 'success' => false,
-                'error'   => trans("general.entries.messages.no_exchange_types"),
+                'error'   => trans('general.entries.messages.no_exchange_types'),
             ]);
         }
 
@@ -209,9 +202,9 @@ class EntriesController extends Controller
             $entry->location = e(Input::get('location'));
         }
 
-//        if (!Input::get('latitude') || !Input::get('longitude')) {
-//            $latlong = Helper::latlong(Input::get('location'));
-//        }
+        //        if (!Input::get('latitude') || !Input::get('longitude')) {
+        //            $latlong = Helper::latlong(Input::get('location'));
+        //        }
 
         if (Input::get('latitude') && Input::get('longitude')) {
             $entry->latitude = e(Input::get('latitude'));
@@ -247,8 +240,7 @@ class EntriesController extends Controller
                         'error'   => trans('general.entries.messages.rotation_failed'),
                     ]);
                 }
-            }
-            else {
+            } else {
                 //log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
                 $uploaded = Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
@@ -272,8 +264,7 @@ class EntriesController extends Controller
                     'tags'           => $entry->tags,
                     'typeIds'        => $typeIds,
                 ]);
-            }
-            else {
+            } else {
                 return response()->json([
                     'success' => false,
                     'error'   => trans('general.entries.messages.upload_failed'),
@@ -283,8 +274,6 @@ class EntriesController extends Controller
 
         return response()->json(['success' => false, 'error' => trans('general.entries.messages.save_failed')]);
     }
-
-
 
     /**
      * Validates and stores the new entry.
@@ -354,10 +343,9 @@ class EntriesController extends Controller
         //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         // This should be pulled into a helper or macro
-        $post_types = array('want' => 'I want', 'have' => 'I have');
+        $post_types = ['want' => 'I want', 'have' => 'I have'];
 
         if ($entry = Entry::find($entryID)) {
-
             $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
@@ -370,8 +358,7 @@ class EntriesController extends Controller
 
             if ($image) {
                 $imageName = $image->filename;
-            }
-            else {
+            } else {
                 $imageName = null;
             }
 
@@ -384,13 +371,11 @@ class EntriesController extends Controller
                 ->with('post_types', $post_types)
                 ->with('selected_exchanges', $selected_exchanges)
                 ->with('image', $imageName);
-        }
-        else {
+        } else {
             //log::error("getEdit: invalid entry Id = " . $entryID);
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
-
 
     /**
      * Validates and stores the entry edits submitted via AJAX.
@@ -431,13 +416,11 @@ class EntriesController extends Controller
 
             if (Input::hasFile('file')) {
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
-            }
-            else {
+            } else {
                 if (Input::has('deleteImage')) {
                     Entry::deleteImage($entry->id, $user->id);
                     Entry::deleteImageFromDB($entry->id, $user->id);
-                }
-                else {
+                } else {
                     if (Input::has('rotation')) {
                         if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
                             return response()->json([
@@ -476,7 +459,6 @@ class EntriesController extends Controller
         return response()->json(['success' => false, 'error' => trans('general.entries.messages.invalid')]);
     }
 
-
     /**
      * Validates and stores the entry edits.
      *
@@ -490,7 +472,6 @@ class EntriesController extends Controller
         //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         if ($entry = Entry::find($entryID)) {
-
             $user = Auth::user();
 
             if ($request->user()->cannot('update-entry', $entry)) {
@@ -505,9 +486,8 @@ class EntriesController extends Controller
             $entry->visible = e(Input::get('private')) ? 0 : 1;
 
             if (Input::has('completed') && Input::get('completed')) {
-                $entry->completed_at = date("Y-m-d H:i:s");
-            }
-            else {
+                $entry->completed_at = date('Y-m-d H:i:s');
+            } else {
                 $entry->completed_at = null;
             }
 
@@ -534,21 +514,20 @@ class EntriesController extends Controller
             if (Input::hasFile('file')) {
                 if (!empty(Input::get('rotation') && Input::get('rotation'))) {
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', Input::get('rotation'));
-                }
-                else {
+                } else {
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
                 }
-            }
-            else {
+            } else {
                 if (Input::get('entry_image_delete')) {
                     Entry::deleteImage($entry->id, $user->id);
                     Entry::deleteImageFromDB($entry->id, $user->id);
-                }
-                else {
+                } else {
                     if (Input::get('rotation')) {
                         if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                            return redirect()->route('home')->with('error',
-                                trans('general.entries.messages.save_failed'));
+                            return redirect()->route('home')->with(
+                                'error',
+                                trans('general.entries.messages.save_failed')
+                            );
                         }
                     }
                 }
@@ -562,14 +541,15 @@ class EntriesController extends Controller
             // Update exchange types
             $entry->exchangeTypes()->sync(Input::get('exchange_types'));
 
-            return redirect()->route('entry.view', $entry->id)->with('success',
-                trans('general.entries.messages.save_edits'));
+            return redirect()->route('entry.view', $entry->id)->with(
+                'success',
+                trans('general.entries.messages.save_edits')
+            );
         }
 
         //log::error("postEdit: invalid entry Id = " . $entryID);
         return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
     }
-
 
     /**
      * Deletes an entry via AJAX request
@@ -622,7 +602,6 @@ class EntriesController extends Controller
         return redirect()->route('home')->with('success', trans('general.entries.messages.delete_success'));
     }
 
-
     /**
      * Validates and stores an image uploaded via AJAX
      *
@@ -648,23 +627,24 @@ class EntriesController extends Controller
 
             if ($entry) {
                 $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries', $rotation);
-            }
-            else {
-                $uploaded = \App\Models\Entry::uploadTmpImage(Auth::user(), Input::file('image'), 'entries',
-                    Input::get('upload_key'), $rotation);
+            } else {
+                $uploaded = \App\Models\Entry::uploadTmpImage(
+                    Auth::user(),
+                    Input::file('image'),
+                    'entries',
+                    Input::get('upload_key'),
+                    $rotation
+                );
             }
             if ($uploaded) {
                 return response()->json(['success' => true]);
-            }
-            else {
+            } else {
                 return response()->json(['success' => false, 'error' => trans('general.entries.messages.upload_fail')]);
             }
-        }
-        else {
+        } else {
             return response()->json(['success' => false, 'error' => trans('general.entries.messages.no_image')]);
         }
     }
-
 
     /**
      * Returns the JSON response to populate the datatable for browsing
@@ -676,29 +656,27 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
+        $entries = new CommunityEntries($request->whitelabel_group);
+        $user = Auth::check() ? Auth::user() : null;
+
         if ($user_id) {
-            if (Auth::user() && (Auth::user()->id == $user_id)) {
-                // allow user to their hidden entries
-                $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes',
-                    'media')->where('created_by', $user_id);
+            $entries->byUserId($user_id);
+
+            if ($user && $user->id == $user_id) {
+                // allow user to view their hidden entries
+                $entries->visible();
             }
-            else {
-                $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes',
-                    'media')->where('created_by', $user_id)->where('visible', 1);
-            }
-        }
-        else {
-            $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->where('visible', 1)->NotCompleted();
+        } else {
+            $entries->visible()->notCompleted();
         }
 
         if (Input::has('search')) {
-            $entries->TextSearch(e(Input::get('search')));
+            $entries->textSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
             $offset = e(Input::get('offset'));
-        }
-        else {
+        } else {
             $offset = 0;
         }
 
@@ -709,17 +687,16 @@ class EntriesController extends Controller
         //    $limit = 50;
         //}
 
-        $allowed_columns =
-            [
-                'title',
-                'location',
-                'latitude',
-                'longitude',
-                'lat',
-                'lng',
-                'tags',
-                'created_at',
-            ];
+        $allowed_columns = [
+            'title',
+            'location',
+            'latitude',
+            'longitude',
+            'lat',
+            'lng',
+            'tags',
+            'created_at',
+        ];
 
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'desc' ? 'desc' : 'asc';
@@ -728,21 +705,11 @@ class EntriesController extends Controller
         $count = $entries->count();
         // $entries = $entries->skip($offset)->take($limit)->get(); pagination stuff and we may need it one day - dsl
 
-        $rows = array();
-
-        if (Auth::check()) {
-            $user = Auth::user();
-        }
-        else {
-            $user = null;
-        }
-
-        // Instantiate the Poi Manager
-        $poiManager = new PoiManager($request->whitelabel_group);
+        $rows = [];
 
         // Process all entries
         foreach ($entries as $entry) {
-            if (($user) && ($entry->deleted_at == '') && ($entry->checkUserCanEditEntry($user))) {
+            if ($user && $entry->deleted_at == '' && $entry->checkUserCanEditEntry($user)) {
                 $actions = '<a href="' . route('entry.edit.form', $entry->id) . '">
                                 <button class="btn btn-light-colored btn-sm">
                                     <i class="fa fa-pencil"></i>
@@ -751,23 +718,18 @@ class EntriesController extends Controller
                             <button class="btn btn-dark-colored btn-sm" id="delete_entry_' . $entry->id . '">
                                 <i class="fa fa-trash"></i>
                             </button>';
-            }
-            else {
+            } else {
                 $actions = '';
             }
 
-            if ($entry->completed_at) {
-                $completed = "<i class='fa fa-lg fa-check completed' data-toggle='tooltip' data-placement='top' title='Completed'></i>";
-            }
-            else {
-                $completed = null;
-            }
+            $completed = $entry->completed_at
+                ? "<i class='fa fa-lg fa-check completed' data-toggle='tooltip' data-placement='top' title='Completed'></i>"
+                : null;
 
             // ensure array is empty
-            $exchangeTypes = [];
-            foreach ($entry->exchangeTypes as $et) {
-                $exchangeTypes[] = $et->name;
-            }
+            $exchangeTypes = $entry->exchangeTypes->map(function ($et) {
+                return $et->name;
+            })->toArray();
 
             $image = $entry->media->first();
 
@@ -783,18 +745,18 @@ class EntriesController extends Controller
                     list($width, $height) = getimagesize($url . $image_url);
                     $aspect_ratio = round($width / (float)$height, 1);
                 }
-
-            }
-            else {
-                $imageTag = '<a href="' . route('entry.view',
-                        $entry->id) . '" class="' . $entry->post_type . '_square"></a>';
+            } else {
+                $imageTag = '<a href="' . route(
+                    'entry.view',
+                        $entry->id
+                ) . '" class="' . $entry->post_type . '_square"></a>';
                 $image_url = null;
                 $aspect_ratio = 0;
             }
 
             // Process the entry
             if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
-                if ((!$entry->lat || !$entry->lng) || $entry->location) {
+                if ((!$entry->lat || !$entry->lng) && $entry->location) {
                     $latlong = Helper::latlong($entry->location);
 
                     $entry->lat = $latlong['lat'];
@@ -802,7 +764,7 @@ class EntriesController extends Controller
                     $entry->save();
                 }
 
-                $entryData = array(
+                $entryData = [
                     'url'               => route('entry.view', $entry->id),
                     'image'             => $imageTag,
                     'image_url'         => $image_url,
@@ -830,7 +792,7 @@ class EntriesController extends Controller
                             . '</span>' : ''),
                     'wrl3d'             => $entry->wrld3d,
                     //                    'poi'               => $poiManager->getPoi($entry),
-                );
+                ];
 
                 if ($request->whitelabel_group->hasWrld3dPoiset() && $entry->hasWrldPoi()) {
                     /*
@@ -842,8 +804,8 @@ class EntriesController extends Controller
                             'id'        => $entry->wrld3d->get('poi_id'),
                             'title'     => $entry->title,
                             'subtitle'  => $entry->author->display_name . ' ' . $entry->natural_post_type . ' ' . $entry->title . '.',
-                            'lat'       => (float)$entry->lat,
-                            'lon'       => (float)$entry->lng,
+                            'lat'       => $entry->lat,
+                            'lon'       => $entry->lng,
                             'indoor'    => !is_null($entry->wrld3d->get('indoor_id')),
                             'indoor_id' => !is_null($entry->wrld3d->get('indoor_id')) ? $entry->wrld3d->get('indoor_id') : null,
                             'floor_id'  => !is_null($entry->wrld3d->get('indoor_id')) ? $entry->wrld3d->get('indoor_floor') : null,
@@ -862,10 +824,9 @@ class EntriesController extends Controller
                 }
 
                 $rows[] = $entryData;
-            }
-            else {
+            } else {
                 // we have an entry who doesn't belong to this community - something went very wrong
-                $rows[] = array(
+                $rows[] = [
                     'image'          => '-',
                     'image-url'      => '-',
                     'title_link'     => '-',
@@ -881,11 +842,13 @@ class EntriesController extends Controller
                     'tags'           => '-',
                     'exchangeTypes'  => '-',
                     'aspect_ratio'   => $aspect_ratio,
-                );
+                ];
             }
         }
 
         // After loading the entries, we request Points of Interest that was not created on Anyshare.
+        $poiManager = new PoiManager($request->whitelabel_group);
+
         $allPois = $poiManager->getPoiList(['ignoreEntries' => true])->values();
 
         // Get default entry layout. Default to grid.
@@ -899,7 +862,6 @@ class EntriesController extends Controller
         ];
     }
 
-
     /**
      * Returns the a list of categories based on tag field,
      * this is only temopary code and needs to re-written.
@@ -910,17 +872,19 @@ class EntriesController extends Controller
      */
     public function getKioskEntries(Request $request, $tagName = null)
     {
-        $entryList = array();
-        $entries = array();
-        $added = array();
+        $entryList = [];
+        $entries = [];
+        $added = [];
 
         if ($tagName) {
             $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%' . $tagName . '%')->where('visible', 1)->NotCompleted()->get();
             $tagArray[] = $tagName;
-        }
-        else {
-            $entries = $request->whitelabel_group->entries()->where('visible', 1)->whereNotNull('tags')->where('tags',
-                '!=', '')->NotCompleted()->get();
+        } else {
+            $entries = $request->whitelabel_group->entries()->where('visible', 1)->whereNotNull('tags')->where(
+                'tags',
+                '!=',
+                ''
+            )->NotCompleted()->get();
             $entries = $entries->unique('tags');
         }
 
@@ -942,7 +906,7 @@ class EntriesController extends Controller
 
                     if ($entry->author->isMemberOfCommunity($request->whitelabel_group)) {
                         if ($tagName) {
-                            $entryList[] = array(
+                            $entryList[] = [
                                 'image'   => $tagImage,
                                 'tag'     => $tag,
                                 'entryId' => $entry->id,
@@ -951,20 +915,18 @@ class EntriesController extends Controller
                                 'title'   => $entry->title,
                                 'qty'     => $entry->qty,
                                 'color'   => $entry->post_type,
-                            );
-                        }
-                        else {
-                            $entryList[] = array(
+                            ];
+                        } else {
+                            $entryList[] = [
                                 'image'      => $tagImage,
                                 'tag'        => $tag,
                                 'entryId'    => $entry->id,
                                 'tint_shade' => 't' . $i,
-                            );
+                            ];
                         }
-                    }
-                    else {
+                    } else {
                         // we have an entry who doesn't belong to this community - something went very wrong
-                        $entryList[] = array('image' => '-', 'tag' => '-', 'tint_shade' => 't0');
+                        $entryList[] = ['image' => '-', 'tag' => '-', 'tint_shade' => 't0'];
                     }
 
                     if ($i++ > 9) {
@@ -981,13 +943,11 @@ class EntriesController extends Controller
 
         if ($tagName) {
             return view('kiosk.category_entries', ['entryList' => $entryList, 'tag' => $tagName]);
-        }
-        else {
-            $entryList = $input = array_map("unserialize", array_unique(array_map("serialize", $entryList)));
+        } else {
+            $entryList = $input = array_map('unserialize', array_unique(array_map('serialize', $entryList)));
             return view('kiosk.categories')->with('entryList', $entryList);
         }
     }
-
 
     /**
      * Mark an entry as completed
@@ -1001,7 +961,7 @@ class EntriesController extends Controller
         // Needs auth stuff here
         $entry = Entry::find($entryID);
         if ($entry) {
-            $entry->completed_at = date("Y-m-d H:i:s");
+            $entry->completed_at = date('Y-m-d H:i:s');
             $entry->save();
             return redirect()->route('home')->with('success', trans('general.entries.messages.completed'));
         }
