@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12 ">
-                    <button class="btn btn-colored pull-right" @if ($entry->getKey()) id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit" @endif>
+                    <button class="btn btn-colored pull-right" @if ($entry->getKey()) id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit" @endif mixpanel.track("New Entry");>
                         {{ trans('general.entries.save_entry') }}
                     </button>
                     <a class="btn btn-light-colored pull-right" id="cancel_button" href="">{{ trans('general.cancel') }}</a>
