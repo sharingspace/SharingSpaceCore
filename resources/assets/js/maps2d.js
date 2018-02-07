@@ -146,7 +146,9 @@ export class MapRenderer2d {
             return this
         }
 
-        this.instance.fitBounds(new L.LatLngBounds(points))
+        setTimeout(() => {
+            this.instance.fitBounds(new L.LatLngBounds(points))
+        }, 100)
 
         return this
     }
