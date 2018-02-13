@@ -721,7 +721,7 @@ class EntriesController extends Controller
         ];
 
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
-        $order = Input::get('order') == 'desc' ? 'desc' : 'asc';
+        $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
 
         $entries = $entries->orderBy($sort, $order)->get();
         $count = $entries->count();
