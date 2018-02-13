@@ -67,6 +67,8 @@ class Entry extends Model
         'entries' => [
             'height' => '600',
             'width'  => '600',
+            'thumb-height' => '200',
+            'thumb-width'  => '200',
         ],
     ];
 

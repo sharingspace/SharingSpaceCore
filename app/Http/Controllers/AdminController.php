@@ -13,6 +13,8 @@ namespace App\Http\Controllers;
 use Auth;
 use Gate;
 use App\Models\CommunitySubscription;
+use App\Models\Community;
+use log;
 
 
 class AdminController extends Controller
@@ -36,6 +38,30 @@ class AdminController extends Controller
 
     }
 
+   /**
+     * Create thumbnails for all entries across all communities
+     * Usage: https://openshare.anyshare.app/admin/create_thumbnails
+     *
+     * @author [D. Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return None
+     */
+    public function createThumbnails()
+    {
+        $communities = Community::communities();
+        echo count($communities)."<br>";;
+        foreach ($communities as $communitiy) {
+            $entries = $communitiy->entries()->get();
 
+            foreach ($entries as $entry) {
+                $image = $entry->media->first();
 
+                if ($image) {
+                    echo 'Converting image for entry id ' . $entry->id . ' on share ' . $communitiy->name . '<br>';
+                    $path_parts = pathinfo('/assets/uploads/entries/' . $entry->id . '/' . $image->filename);
+                    $entry->createThumbnailImage($path_parts['filename'], $path_parts['extension'], public_path().'/assets/uploads/entries/' . $entry->id . '/', 'entries', $entry->id);
+                }
+            }
+        }
+    }
 }
