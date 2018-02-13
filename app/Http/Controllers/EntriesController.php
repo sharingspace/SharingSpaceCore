@@ -42,6 +42,7 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return View
      */
+
     public function getEntry(Request $request, $entryID)
     {
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>> ".Route::currentRouteName()."  ".$entryID);
@@ -51,7 +52,8 @@ class EntriesController extends Controller
                 if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
                     return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
                 }
-            } else {
+            }
+            else {
                 // user not logged in. Can see entry only if Share is open
                 if (!$request->whitelabel_group->isOpen()) {
                     return redirect()->route('home')->with(
@@ -81,10 +83,12 @@ class EntriesController extends Controller
                     'natural_type',
                     $type
                 )->with('category', $category);
-            } else {
+            }
+            else {
                 return view('entries.view')->with('entry', $entry)->with('images', $images);
             }
-        } else {
+        }
+        else {
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
     }
@@ -129,7 +133,9 @@ class EntriesController extends Controller
                 'visible'           => $entry->visible,
                 'image'             => $imageName,
             ]);
-        } else {
+
+        }
+        else {
             //log::error("ajaxGetEntry: invalid entry Id = " . $entryID);
             redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
@@ -186,7 +192,8 @@ class EntriesController extends Controller
         if (Auth::user()->isSuperAdmin() && !Auth::user()->isMemberOfCommunity($request->whitelabel_group, true)) {
             if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
                 //log::debug("postAjaxCreate: joined superAdmin to share successfully");
-            } else {
+            }
+            else {
                 //log::error("postAjaxCreate: failed to joined superAdmin to share successfully");
             }
         }
@@ -240,7 +247,8 @@ class EntriesController extends Controller
                         'error'   => trans('general.entries.messages.rotation_failed'),
                     ]);
                 }
-            } else {
+            }
+            else {
                 //log::debug("postAjaxCreate: moving tmp image, entry_id = ".$entry->id.", upload_key = ".$upload_key);
 
                 $uploaded = Entry::moveImagesForNewTile(Auth::user(), $entry->id, $upload_key);
@@ -264,7 +272,8 @@ class EntriesController extends Controller
                     'tags'           => $entry->tags,
                     'typeIds'        => $typeIds,
                 ]);
-            } else {
+            }
+            else {
                 return response()->json([
                     'success' => false,
                     'error'   => trans('general.entries.messages.upload_failed'),
@@ -358,7 +367,8 @@ class EntriesController extends Controller
 
             if ($image) {
                 $imageName = $image->filename;
-            } else {
+            }
+            else {
                 $imageName = null;
             }
 
@@ -371,7 +381,8 @@ class EntriesController extends Controller
                 ->with('post_types', $post_types)
                 ->with('selected_exchanges', $selected_exchanges)
                 ->with('image', $imageName);
-        } else {
+        }
+        else {
             //log::error("getEdit: invalid entry Id = " . $entryID);
             return redirect()->route('home')->with('error', trans('general.entries.messages.invalid'));
         }
@@ -416,11 +427,13 @@ class EntriesController extends Controller
 
             if (Input::hasFile('file')) {
                 $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
-            } else {
+            }
+            else {
                 if (Input::has('deleteImage')) {
                     Entry::deleteImage($entry->id, $user->id);
                     Entry::deleteImageFromDB($entry->id, $user->id);
-                } else {
+                }
+                else {
                     if (Input::has('rotation')) {
                         if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
                             return response()->json([
@@ -487,7 +500,8 @@ class EntriesController extends Controller
 
             if (Input::has('completed') && Input::get('completed')) {
                 $entry->completed_at = date('Y-m-d H:i:s');
-            } else {
+            }
+            else {
                 $entry->completed_at = null;
             }
 
@@ -514,14 +528,17 @@ class EntriesController extends Controller
             if (Input::hasFile('file')) {
                 if (!empty(Input::get('rotation') && Input::get('rotation'))) {
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', Input::get('rotation'));
-                } else {
+                }
+                else {
                     $entry->uploadImage(Auth::user(), Input::file('file'), 'entries');
                 }
-            } else {
+            }
+            else {
                 if (Input::get('entry_image_delete')) {
                     Entry::deleteImage($entry->id, $user->id);
                     Entry::deleteImageFromDB($entry->id, $user->id);
-                } else {
+                }
+                else {
                     if (Input::get('rotation')) {
                         if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
                             return redirect()->route('home')->with(
@@ -627,7 +644,8 @@ class EntriesController extends Controller
 
             if ($entry) {
                 $uploaded = $entry->uploadImage(Auth::user(), Input::file('image'), 'entries', $rotation);
-            } else {
+            }
+            else {
                 $uploaded = \App\Models\Entry::uploadTmpImage(
                     Auth::user(),
                     Input::file('image'),
@@ -638,10 +656,12 @@ class EntriesController extends Controller
             }
             if ($uploaded) {
                 return response()->json(['success' => true]);
-            } else {
+            }
+            else {
                 return response()->json(['success' => false, 'error' => trans('general.entries.messages.upload_fail')]);
             }
-        } else {
+        }
+        else {
             return response()->json(['success' => false, 'error' => trans('general.entries.messages.no_image')]);
         }
     }
@@ -666,7 +686,8 @@ class EntriesController extends Controller
                 // allow user to view their hidden entries
                 $entries->visible();
             }
-        } else {
+        }
+        else {
             $entries->visible()->notCompleted();
         }
 
@@ -676,7 +697,8 @@ class EntriesController extends Controller
 
         if (Input::has('offset')) {
             $offset = e(Input::get('offset'));
-        } else {
+        }
+        else {
             $offset = 0;
         }
 
@@ -718,7 +740,8 @@ class EntriesController extends Controller
                             <button class="btn btn-dark-colored btn-sm" id="delete_entry_' . $entry->id . '">
                                 <i class="fa fa-trash"></i>
                             </button>';
-            } else {
+            }
+            else {
                 $actions = '';
             }
 
@@ -734,8 +757,19 @@ class EntriesController extends Controller
             $image = $entry->media->first();
 
             if ($image) {
-                $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $image->filename . '" class="entry_image"></a>';
-                $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $image->filename;
+                $pathInfo = pathinfo('/assets/uploads/entries/' . $entry->id . '/' . $image->filename);
+                $ext = $pathInfo['extension'];
+                $thumb = $pathInfo['filename'] . '_thumb.' . $ext;
+
+                if (is_file(public_path().'/assets/uploads/entries/' . $entry->id . '/' . $thumb)) {
+                    $imageName = $thumb;
+                }
+                else {
+                    $imageName = $image->filename;
+                }
+
+                $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $imageName . '" class="entry_image"></a>';
+                $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $imageName;
                 $url = url('/');
                 $aspect_ratio = 1;
                 $parsed = parse_url($url); // analyse the URL
@@ -745,7 +779,8 @@ class EntriesController extends Controller
                     list($width, $height) = getimagesize($url . $image_url);
                     $aspect_ratio = round($width / (float)$height, 1);
                 }
-            } else {
+            } 
+            else {
                 $imageTag = '<a href="' . route(
                     'entry.view',
                         $entry->id
@@ -824,7 +859,8 @@ class EntriesController extends Controller
                 }
 
                 $rows[] = $entryData;
-            } else {
+            }
+            else {
                 // we have an entry who doesn't belong to this community - something went very wrong
                 $rows[] = [
                     'image'          => '-',
@@ -879,7 +915,8 @@ class EntriesController extends Controller
         if ($tagName) {
             $entries = $request->whitelabel_group->entries()->where('tags', 'like', '%' . $tagName . '%')->where('visible', 1)->NotCompleted()->get();
             $tagArray[] = $tagName;
-        } else {
+        }
+        else {
             $entries = $request->whitelabel_group->entries()->where('visible', 1)->whereNotNull('tags')->where(
                 'tags',
                 '!=',
@@ -916,7 +953,8 @@ class EntriesController extends Controller
                                 'qty'     => $entry->qty,
                                 'color'   => $entry->post_type,
                             ];
-                        } else {
+                        }
+                        else {
                             $entryList[] = [
                                 'image'      => $tagImage,
                                 'tag'        => $tag,
@@ -924,7 +962,8 @@ class EntriesController extends Controller
                                 'tint_shade' => 't' . $i,
                             ];
                         }
-                    } else {
+                    }
+                    else {
                         // we have an entry who doesn't belong to this community - something went very wrong
                         $entryList[] = ['image' => '-', 'tag' => '-', 'tint_shade' => 't0'];
                     }
@@ -943,7 +982,8 @@ class EntriesController extends Controller
 
         if ($tagName) {
             return view('kiosk.category_entries', ['entryList' => $entryList, 'tag' => $tagName]);
-        } else {
+        } 
+        else {
             $entryList = $input = array_map('unserialize', array_unique(array_map('serialize', $entryList)));
             return view('kiosk.categories')->with('entryList', $entryList);
         }
