@@ -103,6 +103,19 @@ class Community extends Model
         return $this->belongsTo('App\Models\User', 'created_by');
     }
 
+   /**
+     * Get a list of all communities.
+     *
+     * @author [D.Linnard] [<dslinnard@yahoo.com>]
+     * @since  [v1.0]
+     * @return collection
+     */
+    public static function communities()
+    {
+        return self::all();
+    }
+
+
     /**
      * Relationship for entries and communities
      *
