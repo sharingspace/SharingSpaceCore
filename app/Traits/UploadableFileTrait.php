@@ -217,10 +217,15 @@ trait UploadableFileTrait
             $file = public_path() . '/assets/uploads/entries/' . $entry_id . '/' . $image->filename;
             unlink($file);
 
+            $path_parts = pathinfo('/assets/uploads/entries/' . $entry_id . '/' . $image->filename);
+            $thumb = public_path().'/assets/uploads/entries/' . $entry_id . '/' . $path_parts['filename'] . '_thumb.' . $path_parts['extension'];
+
+            if (is_file($thumb)) {
+                unlink($thumb);
+            }
         }
         return false;
     }
-
 
     /**
      * This function does the cleanup after images have been uploaded
