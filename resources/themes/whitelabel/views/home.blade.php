@@ -93,6 +93,14 @@
             var MAP_LOADED = false;
             var GRID_WIDTH = 100;
 
+            @if (Auth::check())
+                mixpanel.identify('{{Auth::user()->id}}');
+                mixpanel.people.set({
+                    "$email": '{{Auth::user()->email}}',    // only special properties need the $
+                    "$last_login": new Date(),         // properties can be dates...
+                });
+            @endif
+            
             initializeHomeMap(window.community, {}).then(function (map) {
                 window.map = map;
                 $('#entry_browse_map').hide();
