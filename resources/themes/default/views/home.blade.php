@@ -67,6 +67,16 @@
 
  
 @section('moar_scripts')
+  <script type="text/javascript">
+    @if (Auth::check())
+      mixpanel.identify('{{Auth::user()->id}}');
+      mixpanel.people.set({
+        "$email": '{{Auth::user()->email}}',    // only special properties need the $
+        "$last_login": new Date(),         // properties can be dates...
+      });
+  </script>
+@endif
+
 @stop
 
 @stop
