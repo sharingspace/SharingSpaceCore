@@ -573,8 +573,13 @@ Route::group(
                         'uses' => 'AdminController@getCustomerList',
                     )
                 );
-
-
+                Route::get(
+                    'create_thumbnails',
+                    array(
+                        'middleware' => ['auth', 'community-auth'],
+                        'uses'       => 'AdminController@createThumbnails',
+                    )
+                );
             });
 
         /*

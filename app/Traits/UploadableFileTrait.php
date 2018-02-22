@@ -55,6 +55,37 @@ trait UploadableFileTrait
     }
 
     /**
+     * createThumbnailImage
+     * Make a thumbnail version of this image
+     *
+     * @param string $img_path 
+     *
+     */
+
+    public static function createThumbnailImage($rand_filename, $ext, $path, $layoutType, $id)
+    {
+        $filename = $rand_filename . '.' . $ext;
+        $thumb = $rand_filename . '_thumb.' . $ext;
+        $img_path = $path . '/' . $filename;
+        $thumb_path = $path . '/' . $thumb;
+
+        // Only create the thumbnail once
+        if (is_file(public_path().'/assets/uploads/' . $layoutType .'/' . $id . '/' . $thumb)) {
+            return;
+        }
+
+        // make a new image from the current image
+        if ($thumb = \Image::make($img_path)) {
+            // resize image
+            $thumb->resize(self::$uploadableImgs[$layoutType]['thumb-width'], self::$uploadableImgs[$layoutType]['thumb-height'], function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            $thumb->save($thumb_path);
+            echo "&nbsp;&nbsp;&nbsp;&nbsp;Entry " . $id . " has new thumbnail at " . $thumb_path . "<br><br>";
+        }
+    }
+
+    /**
      * moveAndStoreImage
      *
      * $id can be community id, entry id or user_id
@@ -68,14 +99,15 @@ trait UploadableFileTrait
         }
 
         $rand_filename = str_random(10);
-        $filename = $rand_filename . '.' . $file->getClientOriginalExtension();
-
+        $ext = $file->getClientOriginalExtension();
+        $filename = $rand_filename . '.' . $ext;
         $img_path = $path . '/' . $filename;
 
-        if ($file->move($path, $filename)) { // $destinationPath, $fileName
+        // move file to specified path and rename it to specified file name
+        if ($file->move($path, $filename)) { 
 
             if ($id && $layoutType == 'entries') {
-                LOG::debug("moveAndStoreImage moved path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  entry_id = ' . $id);
+                log::debug("moveAndStoreImage moved path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  entry_id = ' . $id);
 
                 $entry = Models\Entry::find($id);
                 if (!empty($entry) && $entry->media()->count()) {
@@ -89,13 +121,12 @@ trait UploadableFileTrait
             }
             else {
                 // self::saveImageToDB can be Community (banner, logo), User (avatar), Enrty (entries)
-                LOG::debug("moveAndStoreImage moved path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  id = ' . $id);
+                log::debug("moveAndStoreImage moved path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  id = ' . $id);
                 self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
             }
 
             if (!Media::is_animated_gif($img_path)) {
                 try {
-
                     if ($img = \Image::make($img_path)) {
                         if ($rotation) {
                             if (is_numeric($rotation)) {
@@ -106,6 +137,11 @@ trait UploadableFileTrait
                             }
                         }
 
+                        if ('entries' == $layoutType) {
+                            // if it's an entry image then create a thumbnail
+                            self::createThumbnailImage($rand_filename, $ext, $path, $layoutType, $id);
+                        }
+                        
                         // finally we save the image as a new file
                         $img->resize(self::$uploadableImgs[$layoutType]['width'], self::$uploadableImgs[$layoutType]['height'], function ($constraint) {
                             $constraint->aspectRatio();
@@ -114,7 +150,7 @@ trait UploadableFileTrait
                         $img->save($img_path, 100);
                     }
                 } catch (Exception $e) {
-                    Log::error("Exception caught in moveAndStore Trait, in resize section: " . $e->getMessage());
+                    log::error("Exception caught in moveAndStore Trait, in resize section: " . $e->getMessage());
                     echo 'Caught exception: ', $e->getMessage(), "\n";
                     return false;
                 }
@@ -122,7 +158,7 @@ trait UploadableFileTrait
 
             return $filename;
         }
-        LOG::debug("moveAndStoreImage moved filename failed, " . $filename);
+        log::debug("moveAndStoreImage moved filename failed, " . $filename);
 
         return false;
     }
@@ -181,10 +217,15 @@ trait UploadableFileTrait
             $file = public_path() . '/assets/uploads/entries/' . $entry_id . '/' . $image->filename;
             unlink($file);
 
+            $path_parts = pathinfo('/assets/uploads/entries/' . $entry_id . '/' . $image->filename);
+            $thumb = public_path().'/assets/uploads/entries/' . $entry_id . '/' . $path_parts['filename'] . '_thumb.' . $path_parts['extension'];
+
+            if (is_file($thumb)) {
+                unlink($thumb);
+            }
         }
         return false;
     }
-
 
     /**
      * This function does the cleanup after images have been uploaded
