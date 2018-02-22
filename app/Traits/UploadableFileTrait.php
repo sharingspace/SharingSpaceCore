@@ -62,12 +62,12 @@ trait UploadableFileTrait
      *
      */
 
-    public static function createThumbnailImage($rand_filename, $ext, $path, $layoutType, $id)
+    public static function createThumbnailImage($name, $ext, $path, $layoutType, $id)
     {
-        $filename = $rand_filename . '.' . $ext;
-        $thumb = $rand_filename . '_thumb.' . $ext;
-        $img_path = $path . '/' . $filename;
-        $thumb_path = $path . '/' . $thumb;
+        $filename = $name . '.' . $ext;
+        $thumb = $name . '_thumb.' . $ext;
+        $img_path = $path . $filename;
+        $thumb_path = $path . $thumb;
 
         // Only create the thumbnail once
         if (is_file(public_path().'/assets/uploads/' . $layoutType .'/' . $id . '/' . $thumb)) {
