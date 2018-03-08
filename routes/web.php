@@ -737,6 +737,13 @@ Route::group(
         );
 
         Route::get(
+            'fs/{layout}',
+            function($layout) {
+                return view('full_screen', ['entry_layout' => $layout]);
+            }
+        );
+
+        Route::get(
             'debug_off',
             function () {
                 config(['app.debug' => false]);
