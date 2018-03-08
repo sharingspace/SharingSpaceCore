@@ -60,6 +60,11 @@
     <script src="{{ Helper::cdn('js/compiled/maps-home.js') }}"></script>
 
     <script type="text/javascript">
+        function setMapHeight()
+        {
+            // set height of map container based on current view port
+            $('#entry_browse_map').css('height', $(window).height());
+        }
 
         $(document).ready(function () {
             var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
@@ -72,6 +77,11 @@
             var GRID_WIDTH = 100;
             var entry_layout = "{{$entry_layout}}";
 
+            setMapHeight();
+            $(window).resize(function() {
+                setMapHeight();
+            });
+            
             @if (Auth::check())
                 mixpanel.identify('{{Auth::user()->id}}');
                 mixpanel.people.set({
@@ -292,7 +302,7 @@
 
             function getEntries() {
                 var entry_layout = "{{$entry_layout}}";
-                console.log(entry_layout);
+
                 $.ajax({
                     type: "GET",
                     _token: CSRF_TOKEN,
