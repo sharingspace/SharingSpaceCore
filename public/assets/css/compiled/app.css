@@ -10565,6 +10565,10 @@ form #domain_input .anyshare_url {
   max-width: 1200px;
 }
 
+.full-screen .grid {
+  max-width: none;
+}
+
 /* clearfix */
 .grid:after {
   content: '';
