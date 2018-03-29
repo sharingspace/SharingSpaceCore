@@ -128,6 +128,11 @@
                 });
             }
 
+            // update columnWidth on window resize
+            $(window).resize(function() {
+                resizeMasonryGrid();
+            });
+
             function masonryInit () {
                 GRID_WIDTH = parseInt($('.grid-item').css('width').replace(/[^-\d\.]/g, ''));
                 GRID = $('#entry_browse_grid').isotope({
@@ -246,6 +251,15 @@
                 fadeOutSpinner();
             }
 
+            function resizeMasonryGrid()
+            {
+                // resize entry_browse_grid div so the contents exactly fit
+                var item_width = $('.grid-item').width() + 6;
+                var grid_width = $('#entry_browse_grid').css('width', 'auto').width();
+                var new_grid_width = Math.floor(grid_width/item_width)*item_width + 6;
+                $('#entry_browse_grid').css('width', new_grid_width);
+            }
+
             function masonryLayout (data) {
                 var count = data['total'];
                 var item, contents, postType;
@@ -294,8 +308,8 @@
                 }
 
                 fadeOutSpinner();
+                resizeMasonryGrid();
                 masonryInit();
-
                 bindSearch(gridSearch);
             }
 

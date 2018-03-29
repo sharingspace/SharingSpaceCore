@@ -10579,6 +10579,7 @@ form #domain_input .anyshare_url {
 /* ---- grid-item ---- */
 #entry_browse_grid {
   margin: 0 auto 20px;
+  padding: 6px;
 }
 
 #entry_browse_grid .grid-item {
@@ -10608,7 +10609,7 @@ form #domain_input .anyshare_url {
   margin: 0;
   font-size: 8px;
   line-height: 10px;
-  width: 60px;
+  width: 100%;
   word-wrap: break-word;
   overflow: hidden;
   border-bottom: none;
@@ -10624,6 +10625,10 @@ form #domain_input .anyshare_url {
   height: 100%;
   -webkit-box-align: center;
   align-items: center;
+}
+
+#entry_browse_grid .grid-item div.noImage h3 {
+  border: none;
 }
 
 #entry_browse_grid .grid-item div.withImage {
@@ -10649,10 +10654,6 @@ form #domain_input .anyshare_url {
   width: 126px;
 }
 
-#entry_browse_grid .grid-item--width2 div h3 {
-  width: 126px;
-}
-
 #entry_browse_grid .grid-item--height2 {
   height: 126px;
 }
@@ -10665,12 +10666,8 @@ form #domain_input .anyshare_url {
   #entry_browse_grid .grid-item div h3 {
     font-size: 10px;
     line-height: 12px;
-    width: 80px;
   }
   #entry_browse_grid .grid-item--width2 {
-    width: 166px;
-  }
-  #entry_browse_grid .grid-item--width2 div h3 {
     width: 166px;
   }
   #entry_browse_grid .grid-item--height2 {
@@ -10686,16 +10683,12 @@ form #domain_input .anyshare_url {
   #entry_browse_grid .grid-item div h3 {
     font-size: 12px;
     line-height: 15px;
-    width: 107px;
   }
   #entry_browse_grid .grid-item--width2 {
     width: 216px;
   }
-  #entry_browse_grid .grid-item--width2 div h3 {
-    width: 219px;
-  }
   #entry_browse_grid .grid-item--height2 {
-    height: 218px;
+    height: 216px;
   }
 }
 
