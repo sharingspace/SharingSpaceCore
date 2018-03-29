@@ -70,12 +70,12 @@ p, td {
 
 .want_square, .want_color {
   background-color: lighten($accentColor, 20%);
-  border: 1px solid lighten($accentColor, 20%);
+  border: 1px solid lighten($accentColor, 10%);
 }
 
 .have_square, .have_color {
   background-color: darken($accentColor, 5%);
-  border: 1px solid darken($accentColor, 5%);
+  border: 1px solid darken($accentColor, 10%);
 }
 
 #topBar {
