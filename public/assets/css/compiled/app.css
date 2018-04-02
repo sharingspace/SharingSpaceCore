@@ -10589,6 +10589,7 @@ form #domain_input .anyshare_url {
   width: 60px;
   height: 60px;
   margin-bottom: 6px;
+  overflow: hidden;
 }
 
 #entry_browse_grid .grid-item:hover {
