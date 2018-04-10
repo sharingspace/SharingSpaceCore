@@ -58,12 +58,12 @@ p, td {
 
 .want_square, .want_color {
   background-color: #c4e3fc;
-  border: 1px solid #c4e3fc;
+  border: 1px solid #94ccf9;
 }
 
 .have_square, .have_color {
   background-color: #4ca9f5;
-  border: 1px solid #4ca9f5;
+  border: 1px solid #349ef3;
 }
 
 #topBar {

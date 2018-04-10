@@ -101,11 +101,6 @@
                 });
             @endif
             
-            initializeHomeMap(window.community, {}).then(function (map) {
-                window.map = map;
-                $('#entry_browse_map').hide();
-            })
-
             $('.sk-cube-grid').show();
 
             // debounce so filtering doesn't happen every millisecond
@@ -247,14 +242,21 @@
                 bindSearch(tableSearch);
             }
 
-            function mapLayout (data) {
-                window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
+            function mapLayout(data)
+            {
+
+                window.initializeHomeMap(window.community, {}).then(function (map) {
+                    window.map = map;
+                    $('.sk-cube-grid').show();
+
+                    window.map.setLatLng(parseFloat(window.mapLat), parseFloat(window.mapLng))
                     .loadMarkers(data.rows)
                     .loadPois(data.pois)
                     .center();
 
-                bindSearch(mapSearch);
-                fadeOutSpinner();
+                    bindSearch(mapSearch);
+                    fadeOutSpinner();
+                });
             }
 
             function masonryLayout (data) {

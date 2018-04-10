@@ -9477,6 +9477,7 @@ form {
 
 #entry_browse_grid {
   margin: 0 auto 20px;
+  padding: 6px;
   .grid-item {
     float: left;
     border-radius: 3px;
@@ -9484,13 +9485,13 @@ form {
     width: 60px;
     height: 60px;
     margin-bottom: 6px;
+    overflow: hidden;
     &:hover {
       cursor: pointer;
     }
     div {
       display: flex;
       height: 100%;
-
       h3 {
         text-align: center;
         font-weight: bold;
@@ -9499,7 +9500,7 @@ form {
         margin: 0;
         font-size: 8px;
         line-height: 10px;
-        width: 60px;
+        width: 100%;
         word-wrap: break-word;
         overflow: hidden;
         &, & > a {
@@ -9512,6 +9513,9 @@ form {
       &.noImage {
         height: 100%;
         align-items: center;
+        h3 {
+          border: none;
+        }
       }
       &.withImage {
         align-items: flex-end;
@@ -9533,9 +9537,6 @@ form {
 
   .grid-item--width2 {
     width: 126px;
-    div h3 {
-      width: 126px;
-    }
   }
   .grid-item--height2 {
     height: 126px;
@@ -9548,14 +9549,10 @@ form {
       div h3 {
         font-size: 10px;
         line-height: 12px;
-        width: 80px;
       }
     }
     .grid-item--width2 {
       width: 166px;
-      div h3 {
-        width: 166px;
-      }
     }
     .grid-item--height2 {
       height: 166px;
@@ -9570,17 +9567,13 @@ form {
       div h3 {
         font-size: 12px;
         line-height: 15px;
-        width: 107px;
       }
     }
     .grid-item--width2 {
       width: 2*$med_grid_width + 6 + px;
-      div h3 {
-        width: 2*$med_grid_width + 9 + px;
-      }
     }
     .grid-item--height2 {
-      height: 2*$med_grid_width + 8 + px;
+      height: 2*$med_grid_width + 6 + px;
     }
   }
 }
