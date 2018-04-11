@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
 class Kernel extends HttpKernel
 {
@@ -55,6 +56,8 @@ class Kernel extends HttpKernel
         'entry-view' => \App\Http\Middleware\EntryView::class,
         'entry-edit' => \App\Http\Middleware\EntryEdit::class,
         'entry-browse' => \App\Http\Middleware\EntryBrowse::class,
-        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class
+        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        'client' => CheckClientCredentials::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

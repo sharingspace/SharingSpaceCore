@@ -26,7 +26,8 @@
     "doctrine/dbal": "^2.5",
     "laravel/tinker": "^1.0",
     "spatie/laravel-blade-javascript": "1.1.0",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "laravel/passport": "4.0.3"
 
   },
   "repositories": [

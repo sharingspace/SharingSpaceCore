@@ -186,6 +186,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         \Spatie\BladeJavaScript\BladeJavaScriptServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*
