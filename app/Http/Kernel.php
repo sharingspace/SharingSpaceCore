@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         // Anything that requires we have knowledge of the current community
         // goes here, since we get that info above in SubdomainMiddleware
         \App\Http\Middleware\ThemeMiddleware::class,
+		\Barryvdh\Cors\HandleCors::class,
     ];
 
 
@@ -35,6 +36,8 @@ class Kernel extends HttpKernel
         ],
         'api' => [
             'throttle:60,1',
+            'cors',
+			\Barryvdh\Cors\HandleCors::class,
         ],
     ];
     
@@ -59,5 +62,6 @@ class Kernel extends HttpKernel
         'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         'client' => CheckClientCredentials::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 }

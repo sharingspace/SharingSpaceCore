@@ -187,6 +187,7 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         \Spatie\BladeJavaScript\BladeJavaScriptServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+		Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*
