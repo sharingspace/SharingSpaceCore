@@ -15,6 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
       'webhook/stripe',
       'api/v1/slack/members',
       'api/v1/slack/entry/*',
-      'api/test'
+      'api/test',
+      'oauth/token',
     ];
 }

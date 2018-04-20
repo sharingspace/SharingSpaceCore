@@ -18,18 +18,19 @@
 		
 	    $guzzle = new GuzzleHttp\Client;
 		
-		$response = $guzzle->request('POST','https://anyshare.test/oauth/token',['verify' => false], 
+		$response = $guzzle->post(url('oauth/token'), 
+			
 			[
 				'json' => [
 					'grant_type' => 'client_credentials',
 					'client_id' => '1',
-					'client_secret' => '5ptpjiE1qed0BrpC8FZ3Q403uPGCX4woDYM5IkVb',
-					'scope' => 'your-scope',
+					'client_secret' => 'VyKxL4nctfS34XquLyk8hgZVK1khm1xBM2azxNwK',
 		    ],
 		]);
 		
-		return json_decode((string) $response->getBody(), true);
+		return json_decode((string)$response->getBody(), true);
 	});
+
 
 	// Route::get('/user', function (Request $request) {
 	//     return $request->user();
