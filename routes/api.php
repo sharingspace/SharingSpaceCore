@@ -19,7 +19,7 @@
 	    $guzzle = new GuzzleHttp\Client;
 		
 		$response = $guzzle->post(url('oauth/token'), 
-			
+
 			[
 				'json' => [
 					'grant_type' => 'client_credentials',
@@ -30,6 +30,21 @@
 		
 		return json_decode((string)$response->getBody(), true);
 	});
+
+
+	Route::get('/user', function(Request $request) {
+		return response()->json(App\Models\User::all());
+		
+	})->middleware('client');
+
+
+				
+
+
+Route::group(['namespace' => 'V1','prefix' => 'v1', 'middleware' => 'client'], function () {
+				Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
+                Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');
+});
 
 
 	// Route::get('/user', function (Request $request) {
