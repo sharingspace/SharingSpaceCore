@@ -29,11 +29,12 @@ class EntriesController extends Controller
 
 
         try {
-            $entries = Community::findOrFail($request->whitelabel_group->id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
-            return $this->response->withItem($entries, new EntriesTransformer);
-
+            $entries = Community::findOrFail($request->id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
+                $trnsform = new EntriesTransformer;
+           // return $this->response->withItem($entries, new EntriesTransformer);
+            return response()->json($trnsform->transform($entries));     
         } catch (ModelNotFoundException $e) {
-            return $this->response->errorNotFound();
+           // return $this->response->errorNotFound();
 
         }
     }
@@ -55,10 +56,12 @@ class EntriesController extends Controller
         try {
 
             $entry = Entry::findOrFail($id)->paginate(1);
-            return $this->response->withItem($entry, new EntriesTransformer);
+            $trnsform = new EntriesTransformer;
+            return response()->json($trnsform->transform($entry));
+            //return $this->response->withItem($entry, new EntriesTransformer);
 
         } catch (ModelNotFoundException $e) {
-            return $this->response->errorNotFound();
+            //return $this->response->errorNotFound();
 
         }
 

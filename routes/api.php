@@ -14,36 +14,23 @@
 	*/
 
 
-	Route::get('/test', function (Request $request) {
-		
-	    $guzzle = new GuzzleHttp\Client;
-		
-		$response = $guzzle->post(url('oauth/token'), 
-
-			[
-				'json' => [
-					'grant_type' => 'client_credentials',
-					'client_id' => '1',
-					'client_secret' => 'VyKxL4nctfS34XquLyk8hgZVK1khm1xBM2azxNwK',
-		    ],
-		]);
-		
-		return json_decode((string)$response->getBody(), true);
-	});
-
-
-	Route::get('/user', function(Request $request) {
-		return response()->json(App\Models\User::all());
-		
-	})->middleware('client');
+Route::get('/user', function(Request $request) {
+	return response()->json(App\Models\User::all());
+	
+})->middleware('client');
 
 
 				
 
 
-Route::group(['namespace' => 'V1','prefix' => 'v1', 'middleware' => 'client'], function () {
-				Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
-                Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');
+Route::group(['namespace' => 'V1','prefix' => 'v1/entries', 'middleware' => 'client'], function () {
+	Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
+    Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');
+});
+
+Route::group(['namespace' => 'V1','prefix' => 'v1/members', 'middleware' => 'client'], function () {
+	Route::get('{id}', '\App\Http\Controllers\Api\V1\UsersController@show');
+    Route::get('/', '\App\Http\Controllers\Api\V1\UsersController@all');
 });
 
 
