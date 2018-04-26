@@ -260,6 +260,7 @@ class EntriesController extends Controller
             }
 
             if ($uploaded) {
+                //log::debug("postAjaxCreate: image uploaded successfully, returning success");
                 return response()->json([
                     'success'        => true,
                     'create'         => true,
@@ -628,6 +629,7 @@ class EntriesController extends Controller
      */
     public function ajaxUpload()
     {
+        //log::debug("ajaxUpload: uploading image");
         $entry = null;
         if (Input::has('entry_id')) {
             $entryID = Input::get('entry_id');
@@ -653,15 +655,18 @@ class EntriesController extends Controller
                     Input::get('upload_key'),
                     $rotation
                 );
+                //log::debug("ajaxUpload: no existing entry, save it as a temp image, filename is ".$uploaded);
             }
             if ($uploaded) {
                 return response()->json(['success' => true]);
             }
             else {
+                //log::error("ajaxUpload: upload_fail");
                 return response()->json(['success' => false, 'error' => trans('general.entries.messages.upload_fail')]);
             }
         }
         else {
+            //log::error("ajaxUpload: no image");
             return response()->json(['success' => false, 'error' => trans('general.entries.messages.no_image')]);
         }
     }
