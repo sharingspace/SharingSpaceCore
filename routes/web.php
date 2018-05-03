@@ -31,26 +31,26 @@ Route::group(
         | API Member Routes
         |--------------------------------------------------------------------------
         */
-        Route::group(
-            array('prefix' => 'members'),
-            function () {
-                Route::get('{id}', '\App\Http\Controllers\Api\UsersController@show');
-                Route::get('/', '\App\Http\Controllers\Api\UsersController@all');
-            }
-        );
+        // Route::group(
+        //     array('prefix' => 'members'),
+        //     function () {
+        //         Route::get('{id}', '\App\Http\Controllers\Api\UsersController@show');
+        //         Route::get('/', '\App\Http\Controllers\Api\UsersController@all');
+        //     }
+        // );
 
         /*
         |--------------------------------------------------------------------------
         | API Entry Routes
         |--------------------------------------------------------------------------
         */
-        Route::group(
-            array('prefix' => 'entries'),
-            function () {
-                Route::get('{id}', '\App\Http\Controllers\Api\EntriesController@show');
-                Route::get('/', '\App\Http\Controllers\Api\EntriesController@all');
-            }
-        );
+        // Route::group(
+        //     array('prefix' => 'entries'),
+        //     function () {
+        //         Route::get('{id}', '\App\Http\Controllers\Api\EntriesController@show');
+        //         Route::get('/', '\App\Http\Controllers\Api\EntriesController@all');
+        //     }
+        // );
 
 
     }
@@ -760,4 +760,8 @@ Route::group(
         );
     }
 );
+
+
+
+
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Laravel\Passport\Passport;
 use App\Models\Entry;
 use App\Policies\EntryPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -30,6 +31,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(GateContract $gate)
     {
         $this->registerPolicies($gate);
+
+        
+        \Route::group(['middleware' => 'cors'], function() {
+			Passport::routes();
+		});
 
 
         // --------------------------------

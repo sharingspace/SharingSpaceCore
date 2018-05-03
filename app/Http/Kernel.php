@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
 class Kernel extends HttpKernel
 {
@@ -23,6 +24,7 @@ class Kernel extends HttpKernel
         // Anything that requires we have knowledge of the current community
         // goes here, since we get that info above in SubdomainMiddleware
         \App\Http\Middleware\ThemeMiddleware::class,
+		\Barryvdh\Cors\HandleCors::class,
     ];
 
 
@@ -31,9 +33,13 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
         'api' => [
             'throttle:60,1',
+            'bindings',
+            'cors',
+			\Barryvdh\Cors\HandleCors::class,
         ],
     ];
     
@@ -44,6 +50,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'subdomain' => \App\Http\Middleware\SubdomainMiddleware::class,
         'community-auth'=> \App\Http\Middleware\CommunityPermissionMiddleware::class,
@@ -55,6 +62,9 @@ class Kernel extends HttpKernel
         'entry-view' => \App\Http\Middleware\EntryView::class,
         'entry-edit' => \App\Http\Middleware\EntryEdit::class,
         'entry-browse' => \App\Http\Middleware\EntryBrowse::class,
-        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class
+        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        'client' => CheckClientCredentials::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 }
