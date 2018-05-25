@@ -22,9 +22,9 @@ Route::group(
 );
 
 
-Route::group(
-    array('prefix' => 'api/v1', 'middleware' => 'apiguard'),
-    function () {
+// Route::group(
+//     array('prefix' => 'api/v1', 'middleware' => 'apiguard'),
+//     function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -53,8 +53,8 @@ Route::group(
         // );
 
 
-    }
-);
+    // }
+// );
 
 Route::group(
     ['prefix' => LaravelLocalization::setLocale()],
