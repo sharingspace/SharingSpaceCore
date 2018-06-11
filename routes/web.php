@@ -558,6 +558,17 @@ Route::group(
         );
 
         /*
+         *  Roles Module for Community
+         */
+
+        Route::group(['prefix' => 'admin', 'middleware' => 'community-auth'], function(){
+            Route::get('/role/create', 'RolesController@getRoleCreate')->name('admin.role.create');
+
+            Route::post('/role/post', 'RolesController@postRoleCreate')->name('admin.role.store');
+
+        });
+
+        /*
         |--------------------------------------------------------------------------
         | Admin routes
         |--------------------------------------------------------------------------
@@ -580,6 +591,8 @@ Route::group(
                         'uses'       => 'AdminController@createThumbnails',
                     )
                 );
+
+                
             });
 
         /*

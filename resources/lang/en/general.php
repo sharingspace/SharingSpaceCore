@@ -439,4 +439,10 @@ return [
         'learn_about' => 'Learn about AnyShare Society',
         'product'     => '"Sharing Networks" help a group or community exchange.',
     ],
+
+    'role' => [
+        'create' => 'Role Create',
+        'name'   => 'Role Name',
+        'name_placeholder' => 'Enter Role Name'
+    ]
 ];

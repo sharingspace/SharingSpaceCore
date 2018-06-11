@@ -20,6 +20,9 @@ Route::get('/user', function(Request $request) {
 })->middleware('client');
 
 
+				
+
+
 Route::group(['namespace' => 'V1','prefix' => 'v1/entries', 'middleware' => 'client'], function () {
 	Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
     Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');

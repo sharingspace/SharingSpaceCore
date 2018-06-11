@@ -163,6 +163,7 @@ class CommunitiesController extends Controller
      */
     public function getMembers(Request $request)
     {
+
         $members = $request->whitelabel_group->members()->get();
         return view('members')->with('members', $members);
     }
@@ -462,4 +463,6 @@ class CommunitiesController extends Controller
 
         return redirect()->route('_edit_share')->with('success', 'Entries updated.');
     }
+
+    
 }
