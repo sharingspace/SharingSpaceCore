@@ -562,9 +562,18 @@ Route::group(
          */
 
         Route::group(['prefix' => 'admin', 'middleware' => 'community-auth'], function(){
+
+            Route::get('/roles', 'RolesController@getAllRoles')->name('admin.roles');
+
             Route::get('/role/create', 'RolesController@getRoleCreate')->name('admin.role.create');
 
             Route::post('/role/post', 'RolesController@postRoleCreate')->name('admin.role.store');
+
+            Route::get('/role/edit/{id}', 'RolesController@getEditRole')->name('admin.role.edit');
+
+            Route::post('/role/update', 'RolesController@postEditRole')->name('admin.role.update');
+
+            
 
         });
 

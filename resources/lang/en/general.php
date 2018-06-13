@@ -15,6 +15,7 @@ return [
     'token_expired'              => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
     'terms'                      => 'Terms',
     'create'                     => 'Create',
+    'edit'                       => 'Edit',
     'about'                      => 'About',
     'stats'                      => 'Stats',
     'options'                    => 'Options',
@@ -441,8 +442,12 @@ return [
     ],
 
     'role' => [
+        'roles' => 'Roles',
         'create' => 'Role Create',
+        'edit' => 'Role Edit',
         'name'   => 'Role Name',
-        'name_placeholder' => 'Enter Role Name'
+        'name_placeholder' => 'Enter Role Name',
+        'name' => 'Name',
+        'permission' => 'Total Permission'
     ]
 ];
