@@ -20,23 +20,15 @@ Route::get('/user', function(Request $request) {
 })->middleware('client');
 
 
+				
+
+
 Route::group(['namespace' => 'V1','prefix' => 'v1/entries', 'middleware' => 'client'], function () {
-	Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
-    Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');
+	Route::get('{community_id}/{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
+    Route::get('{community_id}', '\App\Http\Controllers\Api\V1\EntriesController@all');
 });
 
 Route::group(['namespace' => 'V1','prefix' => 'v1/members', 'middleware' => 'client'], function () {
-	Route::get('{id}', '\App\Http\Controllers\Api\V1\UsersController@show');
-    Route::get('/', '\App\Http\Controllers\Api\V1\UsersController@all');
+	Route::get('{community_id}/{member_id}', '\App\Http\Controllers\Api\V1\MemberController@show');
+    Route::get('{community_id}', '\App\Http\Controllers\Api\V1\MemberController@all');
 });
-
-
-	// Route::get('/user', function (Request $request) {
-	//     return $request->user();
-	// })->middleware('auth:api');
-
-	// Route::group(['middleware' => ['auth:api']], function () {
-	//     Route::get('/test', function (Request $request) {
-	//         return response()->json(['name' => 'test']);
-	//     });
-	// });

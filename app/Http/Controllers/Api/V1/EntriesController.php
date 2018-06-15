@@ -19,7 +19,7 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return String JSON
      */
-    public function all(Request $request)
+    public function all(Request $request, $community_id)
     {
         if ($request->has('per_page')) {
             $per_page = $request->input('per_page');
@@ -29,13 +29,12 @@ class EntriesController extends Controller
 
 
         try {
-            $entries = Community::findOrFail($request->id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
-                $trnsform = new EntriesTransformer;
-           // return $this->response->withItem($entries, new EntriesTransformer);
-            return response()->json($trnsform->transform($entries));     
-        } catch (ModelNotFoundException $e) {
-           // return $this->response->errorNotFound();
+            $entries = Community::findOrFail($community_id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
 
+                $trnsform = new EntriesTransformer;
+            return response()->json($trnsform->transform($entries));     
+        } catch (Exception $e) {
+                
         }
     }
 
@@ -51,23 +50,24 @@ class EntriesController extends Controller
      * @param $id The ID of the entry
      * @return String JSON
      */
-    public function show($id)
+    public function show($community_id, $entry_id)
     {
+
+
         try {
-
-            $entry = Entry::findOrFail($id)->paginate(1);
-            $trnsform = new EntriesTransformer;
-            return response()->json($trnsform->transform($entry));
-            //return $this->response->withItem($entry, new EntriesTransformer);
-
-        } catch (ModelNotFoundException $e) {
-            //return $this->response->errorNotFound();
-
+            $entry = Community::findOrFail($community_id)
+                        
+                        ->entries()
+                        ->where('entry_id', $entry_id)
+                        ->with('author')->notCompleted()
+                        ->orderBy('created_at','desc')
+                        ->paginate(1);
+                       
+                $trnsform = new EntriesTransformer;
+            return response()->json($trnsform->transform($entry));     
+        } catch (Exception $e) {
+                
         }
 
     }
-
-
-
-
 }

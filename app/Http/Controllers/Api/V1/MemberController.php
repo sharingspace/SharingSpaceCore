@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Transformers\UserTransformer;
 
 
-class UsersController extends Controller
+class MemberController extends Controller
 {
 
 
-    public function show(Request $request, $id)
+    public function show($community_id, $member_id)
     {
 
         try {
-            $member = Community::findOrFail($request->id)->members()->where('users.id','=',$id)->paginate(1);
+            $member = Community::findOrFail($community_id)->members()->where('users.id','=',$member_id)->paginate(1);
             $trnsform = new UserTransformer;
             return response()->json($trnsform->transform($member));
           //  return $this->response->withItem($member, new UserTransformer);
@@ -26,8 +26,11 @@ class UsersController extends Controller
     }
 
 
-    public function all(Request $request)
+
+
+    public function all(Request $request, $community_id)
     {
+
         if ($request->has('per_page')) {
             $per_page = $request->input('per_page');
         } else {
@@ -36,13 +39,11 @@ class UsersController extends Controller
 
         try {
 
-            $members = Community::findOrFail($request->id)->members()->orderBy('created_at','desc')->paginate($per_page);
-            //return $this->response->withItem($members, new UserTransformer);
+            $members = Community::findOrFail($community_id)->members()->orderBy('created_at','desc')->paginate($per_page);
             $trnsform = new UserTransformer;
             return response()->json($trnsform->transform($members));
 
-        } catch (ModelNotFoundException $e) {
-           //return $this->response->errorNotFound();
+        } catch (Exception $e) {
 
         }
     }
