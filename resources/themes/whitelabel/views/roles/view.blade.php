@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-{{-- Page title --}}
 @section('title')
     {{ trans('general.create') }} ::
     @parent

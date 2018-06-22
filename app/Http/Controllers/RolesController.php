@@ -14,6 +14,9 @@ namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
+use App\Models\Community;
+use Auth;
+use App\Http\Requests\ViewSharingNetworkRequest;
 
 class RolesController extends Controller
 { 
@@ -27,7 +30,8 @@ class RolesController extends Controller
      * @since  [v1.0]
      * @return View
      */
-    public function getAllRoles() {
+    public function getAllRoles(ViewSharingNetworkRequest $request) {
+
         $data['roles'] = Role::all();
         return view('roles.list',$data);
     }
@@ -41,10 +45,8 @@ class RolesController extends Controller
      * @return View
      */
     public function getRoleCreate() {
-        $data['permissions'] = Permission::all();
         
-
-
+        $data['permissions'] = Permission::all();
         return view('roles.view', $data);
     }
 
@@ -62,17 +64,38 @@ class RolesController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:255'
         ]);
-            
-        $role = Role::create(['name' => $request->name ]);
         
-        if($request->permissions != '') {
-            foreach ($request->permissions as $key => $permission) {
-                $role->givePermissionTo($permission);
-            }
+        $unique = Role::where('community_id', $request->whitelabel_group->id)
+                        ->where('name', $request->name)
+                        ->first();
+        
+        if($unique) {
+            return redirect()->back()->with('error', trans('general.role.error.unique'));
         }
 
-        $message = 'Role successfully created';
-        return redirect()->back()->with('success',$message);
+        \DB::beginTransaction();
+        try { 
+            $role = Role::create(['name' => $request->name,
+                            'community_id' =>  $request->whitelabel_group->id]);
+
+           
+            if($request->permissions != '') {
+
+                foreach ($request->permissions as $key => $permission) {
+                        
+                    $role->givePermissionTo($permission);
+                }
+            } 
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.role.created');
+            return redirect()->back()->with('success',$message);
+        }
+        
     }
 
     /**
@@ -85,7 +108,7 @@ class RolesController extends Controller
      */
     public function getEditRole(Request $request, $id) {
         $data['id'] = $id;
-        $data['model'] = Role::find($id);
+        $data['model'] = Role::findorfail($id);
         $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
         $data['permissions'] = Permission::get();
 
@@ -101,20 +124,84 @@ class RolesController extends Controller
      * @return Redirect
      */
     public function postEditRole(Request $request) {
-        Role::find($request->id)->update([
-            'name' => $request->name
-        ]);
 
-        $role = Role::find($request->id);        
-        \DB::table('role_has_permissions')->where('role_id',$request->id)->delete();
+
+        $this->validate($request,[
+            'name' => 'required|string|max:255'
+        ]);
         
-        if($request->permissions != '') {
-            foreach ($request->permissions as $key => $permission) {
-                $role->givePermissionTo($permission);
-            }
+        $unique = Role::where('community_id', $request->whitelabel_group->id)
+                        ->where('id', '!=', $request->id)
+                        ->where('name', $request->name)
+                        ->first();
+        
+        if($unique) {
+            return redirect()->back()->with('error', trans('general.role.error.unique'));
         }
 
-        $message = 'Role successfully updated';
-        return redirect()->back()->with('success',$message);
+        \DB::beginTransaction();
+        try { 
+            $role = Role::where('community_id', $request->whitelabel_group->id)
+                                ->findorfail($request->id);
+
+            \DB::table('role_has_permissions')->where('role_id',$request->id)->delete();
+
+            if($request->permissions != '') {
+                foreach ($request->permissions as $key => $permission) {
+                    $role->givePermissionTo($permission);
+                }
+            } 
+
+            $role->update([
+                'name' => $request->name
+            ]); 
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.role.updated');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
+    /**
+     * Deletes a role 
+     * @author [Dhaval Mesavaniya] [<dhaval48@gmail.com>]
+     * @since  [v1.0]
+     * @param $roleID
+     * @return Redirect
+     */
+    public function getDeleteRole(Request $request, $id)
+    {
+        
+        \DB::beginTransaction();
+        try { 
+
+            $role = Role::where('community_id', $request->whitelabel_group->id)
+                        ->findorfail($id);
+            
+
+            \DB::table('role_has_permissions')->where('role_id',$id)->delete();
+
+            if($request->permissions != '') {
+                foreach ($request->permissions as $key => $permission) {
+                    $role->givePermissionTo($permission);
+                }
+            } 
+
+            $role->delete();
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.role.deleted');
+            return redirect()->back()->with('success',$message);
+        }
     }
 }

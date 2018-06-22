@@ -573,6 +573,9 @@ Route::group(
 
             Route::post('/role/update', 'RolesController@postEditRole')->name('admin.role.update');
 
+            Route::get('/role/delete/{id}', 'RolesController@getDeleteRole')
+                        ->name('admin.role.delete');
+
             
 
         });

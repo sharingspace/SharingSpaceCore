@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\Community;
 /**
  * This contains some static helpers for
  * the AnyShare application.

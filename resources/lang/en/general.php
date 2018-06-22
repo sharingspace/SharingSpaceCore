@@ -80,6 +80,7 @@ return [
     'create_account'             => 'Create an AnyShare account',
     'create_account'             => 'Create an AnyShare account',
     'click_here'                 => 'Click here',
+    'delete'                     => 'Delete',
     'wrld3d'                     => [
         'label'          => 'WRLD3D',
         'info'           => '',
@@ -87,6 +88,7 @@ return [
         'dev_token'      => 'DEVELOPER TOKEN',
         'api_key_select' => ':: Select a API Key ::',
     ],
+
 
     'nav'      => [
         'browse'          => 'Browse',
@@ -443,11 +445,20 @@ return [
 
     'role' => [
         'roles' => 'Roles',
-        'create' => 'Role Create',
+        'create' => 'Create Role',
         'edit' => 'Role Edit',
         'name'   => 'Role Name',
         'name_placeholder' => 'Enter Role Name',
         'name' => 'Name',
-        'permission' => 'Total Permission'
+        'permission' => 'Total Permission',
+        'created'   => 'Role successfully created',
+        'updated'   => 'Role successfully updated',
+        'deleted'   => 'Role successfully deleted',
+
+        'list'  =>'Role List',
+
+        'error' => [
+            'unique'  => 'Role name already exsist, Please use unique role name'
+        ]
     ]
 ];
