@@ -19,11 +19,14 @@ use Auth;
 use Config;
 use DB;
 use Helper;
+
 use Illuminate\Http\Request;
 use Input;
 use Log;
 use Mail;
+use App\Helpers\Permission;
 use Redirect;
+
 
 class CommunitiesController extends Controller
 {
@@ -150,6 +153,10 @@ class CommunitiesController extends Controller
      */
     public function getJoinRequests(Request $request)
     {
+        if(!Permission::checkPermission('approve-new-member-permission')) {
+            return view('errors.403');       
+        }
+        
         $join_requests = $request->whitelabel_group->requests()->get();
         return view('join_requests')->with('join_requests', $join_requests);
     }
@@ -165,7 +172,9 @@ class CommunitiesController extends Controller
      */
     public function getMembers(Request $request)
     {
-
+        if(!Permission::checkPermission('view-members-permission')) {
+            return view('errors.403');       
+        }
         $members = $request->whitelabel_group->members()->get();
         return view('members')->with('members', $members);
     }
@@ -332,6 +341,11 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
+
+        if(!Permission::checkPermission('edit-sharing-network-permission')) {
+            return view('errors.403');       
+        }
+
         $themes = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
 
         $exchanges = $request->whitelabel_group->exchangeTypes;

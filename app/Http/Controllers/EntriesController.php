@@ -27,6 +27,7 @@ use Log;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
 use App\Helpers\CommunityEntries;
+use App\Helpers\Permission;
 
 //use Session;
 
@@ -45,6 +46,10 @@ class EntriesController extends Controller
 
     public function getEntry(Request $request, $entryID)
     {
+        if(!Permission::checkPermission('view-entry-permission')) {
+            return view('errors.403');       
+        }
+            
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>> ".Route::currentRouteName()."  ".$entryID);
         if ($entry = \App\Models\Entry::find($entryID)) {
             if ($request->user()) {
@@ -151,6 +156,9 @@ class EntriesController extends Controller
      */
     public function getCreate(Request $request)
     {
+        if(!Permission::checkPermission('post-entry-permission')) {
+            return view('errors.403');       
+        }
         //log::debug("getCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         $post_types = ['want' => 'I want', 'have' => 'I have'];
@@ -293,9 +301,13 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return Redirect
      */
-    /*
+
     public function postCreate(Request $request)
     {
+        if(!Permission::checkPermission('post-entry-permission')) {
+            return view('errors.403');       
+        }
+        
         $entry = new \App\Models\Entry();
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
@@ -338,7 +350,7 @@ class EntriesController extends Controller
         }
         return redirect()->back()->with('error', trans('general.entries.messages.save_failed'));
 
-    }*/
+    }
 
     /**
      * Returns a form view to edit an entry
@@ -350,6 +362,10 @@ class EntriesController extends Controller
      */
     public function getEdit(Request $request, $entryID)
     {
+        if(!Permission::checkPermission('update-entry-permission')) {
+            return view('errors.403');       
+        }
+
         //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         // This should be pulled into a helper or macro
@@ -483,6 +499,10 @@ class EntriesController extends Controller
      */
     public function postEdit(Request $request, $entryID)
     {
+        if(!Permission::checkPermission('update-entry-permission')) {
+            return view('errors.403');       
+        }
+
         //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         if ($entry = Entry::find($entryID)) {

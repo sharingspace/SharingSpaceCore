@@ -16,7 +16,6 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use App\Models\Community;
 use Auth;
-use App\Http\Requests\ViewSharingNetworkRequest;
 use App\Models\User;
 
 class RolesController extends Controller
@@ -31,7 +30,7 @@ class RolesController extends Controller
      * @since  [v1.0]
      * @return View
      */
-    public function getAllRoles(ViewSharingNetworkRequest $request) {
+    public function getAllRoles(Request $request) {
 
         $data['roles'] = Role::all();
         return view('roles.list',$data);
@@ -162,7 +161,7 @@ class RolesController extends Controller
         
         } finally { 
             \DB::commit();
-
+            
             $message = trans('general.role.updated');
             return redirect()->back()->with('success',$message);
         }

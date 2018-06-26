@@ -183,11 +183,4 @@ class Helper
             return date('F Y', $ts);
         }
     }
-
-    public static function canAccess($permission) {
-        if(\Auth::user()->role_assigned == 1) {
-            return \Auth::user()->can($permission);    
-        }
-        return true;
-    }
 }

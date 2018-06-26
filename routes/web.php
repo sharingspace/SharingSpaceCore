@@ -591,10 +591,6 @@ Route::group(
 
             Route::get('assign-role/delete/{id}','RolesController@getAssignRoleDelete')->name('admin.assign-role.delete');
 
-
-
-            
-
         });
 
         /*
