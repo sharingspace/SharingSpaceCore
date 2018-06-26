@@ -12,26 +12,27 @@
   <div class="row">
     <h1 class="margin-bottom-0  size-24 text-center">{{ trans('general.role.roles') }}</h1>
     <a href="{{ route('admin.role.create') }}">
-                <button type="button" class="btn btn-sm btn-colored" title="{{ trans('general.role.create') }}"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.assign_role.create') }}</span></button>
+                <button type="button" class="btn btn-sm btn-colored" title="{{ trans('general.role.create') }}"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.role.create') }}</span></button>
               </a>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
         <table class="table table-condensed" id="members">
           <tbody>
             <tr>
-              <th class="col-md-3">{{ trans('general.assign_role.name') }}</th>
-              <th class="col-md-2">{{ trans('general.assign_role.permission') }}</th>
+              <th class="col-md-3">{{ trans('general.role.name') }}</th>
+              <th class="col-md-2">{{ trans('general.role.permission') }}</th>
               <th class="col-md-2">{{ trans('general.action') }}</th>
 
               
             </th>
-          @foreach ($roles as $role)
+          @foreach ($users as $user)
+          
             <tr>
-              <td class="col-md-3"> <a href="/admin/role/edit/{{$role->id}}">{{ $role->name }}</td>
-              <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
+              <td class="col-md-3"> <a href="/admin/role/edit/{{$user->id}}">{{ $user->email }}</td>
+              <td class="col-md-2"> {{ $user->getRoleNames() }}</td>
               <td class="col-md-1"> 
                 
-                <a href="{{ route('admin.role.delete', $role->id) }}">
+                <a href="{{ route('admin.role.delete', $user->id) }}">
                   {{ trans('general.delete') }}
                 </a>
               </td>

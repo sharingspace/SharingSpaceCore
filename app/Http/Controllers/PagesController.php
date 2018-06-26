@@ -17,6 +17,7 @@ use Log;
 use Input;
 use Mail;
 use Redirect;
+use App\Http\Requests\ViewBrowseRequest;
 
 class PagesController extends Controller
 {
@@ -30,7 +31,7 @@ class PagesController extends Controller
     * @since  [v1.0]
     * @return View
     */
-    public function getHomepage(Request $request)
+    public function getHomepage(ViewBrowseRequest $request)
     {
         if ($request->whitelabel_group) {
             $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->orderBy('created_at', 'desc')->get();

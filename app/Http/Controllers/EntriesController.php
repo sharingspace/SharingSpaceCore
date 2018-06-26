@@ -681,6 +681,7 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
+        
         $entries = new CommunityEntries($request->whitelabel_group);
         $user = Auth::check() ? Auth::user() : null;
 

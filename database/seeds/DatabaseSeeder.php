@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CommunitySeeder::class);
         $this->call(EntrySeeder::class);
         $this->call(ExchangeTypeSeeder::class);
-        //$this->call(SuperAdminSeeder::class);
+        $this->call(SuperAdminSeeder::class);
         Model::reguard();
     }
 }

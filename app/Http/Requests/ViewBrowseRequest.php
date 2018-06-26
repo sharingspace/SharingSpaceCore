@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Helper;
 
-class ViewSharingNetworkRequest extends FormRequest
+class ViewBrowseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,8 @@ class ViewSharingNetworkRequest extends FormRequest
      */
     public function authorize()
     {       
-        return \Auth::user()->can('view-sharing-network');
+        return  Helper::canAccess('view-browse-permission')
+    
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Community;
+use Illuminate\Http\Request;
 /**
  * This contains some static helpers for
  * the AnyShare application.
@@ -181,5 +182,12 @@ class Helper
             }
             return date('F Y', $ts);
         }
+    }
+
+    public static function canAccess($permission) {
+        if(\Auth::user()->role_assigned == 1) {
+            return \Auth::user()->can($permission);    
+        }
+        return true;
     }
 }

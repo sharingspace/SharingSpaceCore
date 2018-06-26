@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Models\Community;
 use Auth;
 use App\Http\Requests\ViewSharingNetworkRequest;
+use App\Models\User;
 
 class RolesController extends Controller
 { 
@@ -204,4 +205,106 @@ class RolesController extends Controller
             return redirect()->back()->with('success',$message);
         }
     }
+
+
+    public function getListAssignedRole(Request $request)
+    {
+
+        $data['users'] = Community::find($request->whitelabel_group->id)
+                            ->members()
+                            ->get();
+
+        
+        return view('assigned-roles.list',$data);
+    }
+    //Assigned Role (list)
+
+    //Assign Role (form)
+    public function getAssignRoleCreate(Request $request)
+    {   
+        $user = Community::find($request->whitelabel_group->id)
+                            ->members()
+                            ->get()->pluck('email','id');
+        
+        
+        $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+
+        return view('assigned-roles.view',compact('user' ,'data'));
+    }
+
+    //Assign Role (post)
+    public function postAssignRoleCreate(Request $request)
+    {
+
+        $this->validate($request,[
+            'user_id' => 'required|string|max:255',
+            'role_id' => 'required|string|max:255'
+        ]);
+            
+            
+
+    
+        \DB::beginTransaction();
+        try { 
+
+            $user = User::find($request->user_id);
+            $user->assignRole($request->role_id);
+
+            $message = 'Role assigned to user successfully';
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.assign_role.created');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
+    //Assign Role Edit (form)
+    public function getAssignRoleEdit(Request $request,$id)
+    {
+        $data['id'] = $id;
+        $data['model'] = \DB::table('model_has_roles')->findOrFail($id);
+        // $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
+        // $data['permissions'] = Permission::get();
+
+        return view('assigned-roles.view',$data);   
+    }
+
+    //Assign Role Update (post)
+    public function postAssignRoleEdit(Request $request)
+    {        
+        $this->validate($request,[
+            'user_id' => 'required|string|max:255',
+            'role_id' => 'required|string|max:255'
+        ]);
+            
+    
+        \DB::beginTransaction();
+        try { 
+
+            $user = User::find($request->user_id);
+            $user->update($request->role_id);
+
+            $message = 'Role assigned to user successfully updated';
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.assign_role.updated');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+    //Assign Role Delete (get)
+    public function getAssignRoleDelete()
+    {
+        # code...
+    }
+
 }

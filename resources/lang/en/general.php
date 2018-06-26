@@ -460,5 +460,20 @@ return [
         'error' => [
             'unique'  => 'Role name already exsist, Please use unique role name'
         ]
+    ],
+
+    'assign_role' => [
+        'assigned-roles' => 'Assigned Roles',
+        'create' => 'Create Assign Role',
+        'edit' => 'Assign Role Edit',
+        'role-name'   => 'Assign Role Name',
+        'name_placeholder' => 'Enter Assign Role Name',
+        'user-name' => 'User Name',
+        'permission' => 'Total Permission',
+        'created'   => 'Assign role successfully created',
+        'updated'   => 'Assign role successfully updated',
+        'deleted'   => 'Assign role successfully deleted',
+
+        'list'  =>'Assigned Role List',
     ]
 ];

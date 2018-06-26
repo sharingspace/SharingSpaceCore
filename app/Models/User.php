@@ -222,6 +222,7 @@ class User extends Authenticatable implements AuthenticatableContract, CanResetP
      */
     public function canSeeCommunity($community)
     {
+        
         LOG::debug("canSeeCommunity: entered user id = " . $this->id . ",  user name = " . $this->display_name . ", community id = " . $community->id . ",  community name = " . $community->name);
 
         if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type == 'O') {

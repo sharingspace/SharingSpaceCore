@@ -31,6 +31,7 @@ class CommunitiesController extends Controller
 
     public function __construct(Community $community)
     {
+        
         $this->community = $community;
     }
 
@@ -58,6 +59,7 @@ class CommunitiesController extends Controller
      */
     public function getEntriesView()
     {
+        
         return view('browse');
     }
 

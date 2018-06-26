@@ -20,53 +20,66 @@ class AddDefaultPermissions extends Migration
         DB::table('permissions')->insert([
             // Sharing Network
             [
-                'name' => 'view-sharing-network',
+                'name' => 'view-browse-permission',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'edit-sharing-network',
+                'name' => 'edit-sharing-network-permission',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'view-about',
+                'name' => 'view-about-permission',
                 'guard_name' => 'web',
             ],
 
             // Members
 
             [
-                'name' => 'view-members',
+                'name' => 'view-members-permission',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'request-membership',
+                'name' => 'request-membership-permission',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'approve-new-member',
+                'name' => 'approve-new-member-permission',
                 'guard_name' => 'web',
             ],
 
             // Entries
 
             [
-                'name' => 'view-entry-detail',
+                'name' => 'view-entry-permission',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'add-entry',
+                'name' => 'post-entry-permission',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'edit-entry',
+                'name' => 'update-entry-permission',
                 'guard_name' => 'web',
             ],
+
+            //Community
+
+            [
+                'name' => 'join-community-permission',
+                'guard_name' => 'web',
+            ],
+
+            [
+                'name' => 'update-community-permission',
+                'guard_name' => 'web',
+            ],
+
         ]);
     }
 
