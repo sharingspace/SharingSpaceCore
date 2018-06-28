@@ -175,8 +175,11 @@ class CommunitiesController extends Controller
         if(!Permission::checkPermission('view-members-permission')) {
             return view('errors.403');       
         }
-        $members = $request->whitelabel_group->members()->get();
-        return view('members')->with('members', $members);
+        $data['members'] = $request->whitelabel_group->members()->get();
+        $data['new_role_url'] = route('admin.assign-role.create');
+
+
+        return view('members',$data);
     }
 
     /**

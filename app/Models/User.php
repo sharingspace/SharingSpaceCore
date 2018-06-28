@@ -572,4 +572,6 @@ class User extends Authenticatable implements AuthenticatableContract, CanResetP
         }
         return false;
     }
+
+    
 }

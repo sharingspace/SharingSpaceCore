@@ -405,6 +405,7 @@ return [
     'members'   => [
         'image'        => 'Image',
         'bio'          => 'Bio',
+        'assigned-role'=> 'Assigned Role',
         'member_since' => 'Joined',
     ],
 
@@ -472,8 +473,11 @@ return [
         'permission' => 'Total Permission',
         'created'   => 'Assign role successfully created',
         'updated'   => 'Assign role successfully updated',
-        'deleted'   => 'Assign role successfully deleted',
+        'deleted'   => 'Role has been successfully removed from the user',
 
         'list'  =>'Assigned Role List',
+        'error' => [
+            'oneroleallowed' => 'You can assign only one role to one user',
+        ]
     ]
 ];

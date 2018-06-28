@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Models\Community;
 use Auth;
 use App\Models\User;
+use App\Exceptions\GeneralException;
 
 class RolesController extends Controller
 { 
@@ -221,14 +222,14 @@ class RolesController extends Controller
     //Assign Role (form)
     public function getAssignRoleCreate(Request $request)
     {   
-        $user = Community::find($request->whitelabel_group->id)
+        $data['user'] = Community::find($request->whitelabel_group->id)
                             ->members()
                             ->get()->pluck('email','id');
         
         
         $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
 
-        return view('assigned-roles.view',compact('user' ,'data'));
+        return view('assigned-roles.view',$data);
     }
 
     //Assign Role (post)
@@ -240,18 +241,23 @@ class RolesController extends Controller
             'role_id' => 'required|string|max:255'
         ]);
             
-            
 
-    
         \DB::beginTransaction();
+        $user = User::find($request->user_id);
+
+        if($user->hasAnyRole(Role::all())) {
+            throw new GeneralException(trans('general.assign_role.error.oneroleallowed'));
+        }
+
         try { 
 
-            $user = User::find($request->user_id);
+            
             $user->assignRole($request->role_id);
 
             $message = 'Role assigned to user successfully';
 
-        } catch (\Exception $e) {                
+        } catch (\Exception $e) {
+                        
             \DB::rollback();  
         
         } finally { 
@@ -263,12 +269,23 @@ class RolesController extends Controller
     }
 
     //Assign Role Edit (form)
-    public function getAssignRoleEdit(Request $request,$id)
+    public function getAssignRoleEdit(Request $request, $id)
     {
+        $data['user'] = Community::find($request->whitelabel_group->id)
+                            ->members()
+                            ->get()->pluck('email','id');
+        $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+
+        $user = User::find($id);
+        $data['model'] = $user;
         $data['id'] = $id;
-        $data['model'] = \DB::table('model_has_roles')->findOrFail($id);
-        // $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
-        // $data['permissions'] = Permission::get();
+        $data['user_id']= $user->id;
+        $role_id = '';    
+        if(count($user->roles) > 0) {
+            $role_id = $user->roles()->first()->id;
+        }
+
+        $data['role_id'] = $role_id;
 
         return view('assigned-roles.view',$data);   
     }
@@ -280,15 +297,20 @@ class RolesController extends Controller
             'user_id' => 'required|string|max:255',
             'role_id' => 'required|string|max:255'
         ]);
-            
     
         \DB::beginTransaction();
         try { 
 
             $user = User::find($request->user_id);
-            $user->update($request->role_id);
 
-            $message = 'Role assigned to user successfully updated';
+            if(count($user->roles) > 0) {
+                $role_id = $user->roles()->first()->id;
+                $user->removeRole($role_id);
+            }
+            
+            $user->assignRole($request->role_id);
+
+            $message = 'Role assigned to user successfully';
 
         } catch (\Exception $e) {                
             \DB::rollback();  
@@ -300,10 +322,16 @@ class RolesController extends Controller
             return redirect()->back()->with('success',$message);
         }
     }
-    //Assign Role Delete (get)
-    public function getAssignRoleDelete()
+    
+    public function getAssignRoleDelete($id)
     {
-        # code...
+        dd('here');
+        $user = User::find($request->user_id);
+        $role_id = $user->roles()->first()->id;
+        $user->removeRole($role_id);
+
+        $message = trans('general.assign_role.deleted');
+            return redirect()->back()->with('success',$message);
     }
 
 }

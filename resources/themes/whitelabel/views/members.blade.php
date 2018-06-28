@@ -22,6 +22,7 @@
               <th data-sortable="true" class="name">{{trans('general.name')}}</th>
               <th data-sortable="true" class="location">{{trans('general.location')}}</th>
               <th data-sortable="false" class="bio">{{trans('general.members.bio')}}</th>
+              <th data-sortable="true" class="assigned-role">{{trans('general.members.assigned-role')}}</th>
               <th data-sortable="true">{{trans('general.members.member_since')}}</th>
             </tr>
           </thead>
@@ -48,6 +49,14 @@
                 <td>{{$member->location}}</td>
                 <td>
                   <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
+                </td>
+                <td>
+                  
+                  @if(count($member->getRoleNames()) == 0) 
+                    <a href="{{ route('admin.assign-role.edit', $member->id) }}">Assign Role</a>
+                  @else 
+                    <a href="{{ route('admin.assign-role.edit', $member->id) }}">{{ $member->getRoleNames()->first() }}</a>
+                  @endif
                 </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>

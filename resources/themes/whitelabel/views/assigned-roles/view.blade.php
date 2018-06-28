@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ trans('general.create') }} ::
-    @parent
+
+    {{ trans('general.create') }} :: @parent
+
 @stop
+
 @if($errors->any())
     <ul class="alert alert-danger">
         @foreach($errors->any() as $error)

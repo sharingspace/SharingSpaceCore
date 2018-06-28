@@ -587,7 +587,7 @@ Route::group(
 
             Route::get('assign-role/edit/{id}','RolesController@getAssignRoleEdit')->name('admin.assign-role.edit');
 
-            Route::get('assign-role/update/{id}','RolesController@postAssignRoleEdit')->name('admin.assign-role.update');
+            Route::post('assign-role/update','RolesController@postAssignRoleEdit')->name('admin.assign-role.update');
 
             Route::get('assign-role/delete/{id}','RolesController@getAssignRoleDelete')->name('admin.assign-role.delete');
 
