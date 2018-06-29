@@ -464,6 +464,7 @@ return [
     ],
 
     'assign_role' => [
+        'assign-role' => 'Assign Role',
         'assigned-roles' => 'Assigned Roles',
         'create' => 'Create Assign Role',
         'edit' => 'Assign Role Edit',
@@ -479,5 +480,12 @@ return [
         'error' => [
             'oneroleallowed' => 'You can assign only one role to one user',
         ]
+    ],
+
+
+    'ask_permission' => [
+        'permissions' => 'Permissions',
+        'permission-text' => 'Choose a level of access when using this Sharing Network.',
+        'created' =>'Your request has been sent to admin.',
     ]
 ];

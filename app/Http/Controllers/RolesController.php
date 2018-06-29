@@ -274,7 +274,8 @@ class RolesController extends Controller
         $data['user'] = Community::find($request->whitelabel_group->id)
                             ->members()
                             ->get()->pluck('email','id');
-        $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+        $roles = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+        $data['roles'] = \Helper::injectselect($roles,'None');
 
         $user = User::find($id);
         $data['model'] = $user;
@@ -307,10 +308,11 @@ class RolesController extends Controller
                 $role_id = $user->roles()->first()->id;
                 $user->removeRole($role_id);
             }
-            
-            $user->assignRole($request->role_id);
 
-            $message = 'Role assigned to user successfully';
+            if($request->role_id != 0){
+                $user->assignRole($request->role_id);
+            }
+
 
         } catch (\Exception $e) {                
             \DB::rollback();  

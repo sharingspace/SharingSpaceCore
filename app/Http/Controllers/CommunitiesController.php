@@ -19,13 +19,14 @@ use Auth;
 use Config;
 use DB;
 use Helper;
-
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Input;
 use Log;
 use Mail;
 use App\Helpers\Permission;
 use Redirect;
+use App\Models\AskPermission;
 
 
 class CommunitiesController extends Controller
@@ -481,6 +482,70 @@ class CommunitiesController extends Controller
             ->filter();
 
         return redirect()->route('_edit_share')->with('success', 'Entries updated.');
+    }
+
+    public function getAskPermission()
+    {
+        $data['roles'] = Role::all();
+
+        return view('askpermission.view', $data);
+    }
+
+    public function postAskPermission(Request $request)
+    {
+        $role_id = 0;
+        // dd($request->selected->);
+        if(!empty($request->selected)){
+            $role_id = array_keys($request->selected)[0];
+            Role::findorfail($role_id);
+        }
+
+
+        if($role_id == 0 && $request->message == ""){
+            return redirect()->back();
+        }
+        // $this->validate($request,[
+        //     'user_id' => 'required|string|max:255',
+        //     'role_id' => 'required|string|max:255'
+        // ]);
+
+        \DB::beginTransaction();
+        
+        try { 
+
+            
+            AskPermission::create([
+                'request_type' => 'Role',
+                'community_id' => $request->whitelabel_group->id,
+                'user_id' => \Auth::user()->id,
+                'role_id' => $role_id,
+                'is_accepted' => 0,
+                'is_rejected' => 0,
+                'custom_text' => $request->message,
+            ]);
+
+
+            
+        } catch (\Exception $e) {
+                        dd($e);
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.ask_permission.created');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
+
+    public function getAskPermissionList(Request $request)
+    {
+        $data['ask'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->first();
+        // dd($ask);
+        // dd($ask->role);
+        return view('askpermission.list', $data);
+
     }
 
     

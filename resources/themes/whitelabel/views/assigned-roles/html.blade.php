@@ -10,7 +10,7 @@
                         <div class="col-sm-6 col-sm-offset-3 text-muted">
                             <h2>
                                 @if(isset($id))
-                                    {!!trans('general.assign_role.edit') !!}
+                                    {!!trans('general.assign_role.assign-role') !!}
                                 @else
                                     {!!trans('general.assign_role.create') !!}
                                 @endif
@@ -24,7 +24,7 @@
                         <!-- Name -->
                         <div class="form-group {{ $errors->first('name', ' has-error') }}">
                             <label for="user_id" class="input">{{trans('general.assign_role.user-name')}} *
-                                {{ Form::select('user_id', $user, isset($user_id) ? $user_id : '' ,['class' => 'form-control']) }}
+                                {{ Form::select('user_id', $user, isset($user_id) ? $user_id : '' ,['readonly', 'class' => 'form-control']) }}
                                 {!! $errors->first('user', '<span class="help-block">:message</span>') !!}
                             </label>
                         </div>
@@ -34,7 +34,7 @@
                         <!-- Name -->
                         <div class="form-group {{ $errors->first('name', ' has-error') }}">
                             <label for="name" class="input">{{trans('general.assign_role.role-name')}} *
-                                {{ Form::select('role_id', $roles, isset($role_id) ? $role_id : '' ,['class' => 'form-control']) }}
+                                {{ Form::select('role_id', $roles, !empty($role_id) ? $role_id : '0' ,['class' => 'form-control']) }}
                                 {!! $errors->first('role', '<span class="help-block">:message</span>') !!}
                             </label>
                         </div>

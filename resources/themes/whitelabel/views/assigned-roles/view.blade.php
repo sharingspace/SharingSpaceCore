@@ -2,7 +2,7 @@
 
 @section('title')
 
-    {{ trans('general.create') }} :: @parent
+    {{ trans('general.assign_role.assign-role') }} :: @parent
 
 @stop
 

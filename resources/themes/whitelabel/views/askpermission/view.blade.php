@@ -1,18 +1,8 @@
 @extends('layouts.master')
 
 @section('title')
-    @if(isset($model))
-
-      {{ trans('general.role.edit') }}
-
-    @else
-
-      {{ trans('general.role.create') }}
-
-    @endif
-
-    :: @parent
-
+    {{ trans('general.create') }} ::
+    @parent
 @stop
 @if($errors->any())
     <ul class="alert alert-danger">
@@ -27,9 +17,9 @@
       {!! Form::model($model,['route' => 'admin.role.update' , 'method' => 'post','id'=>'form','files'=>true]) !!}
       {!! Form::hidden('id', $model->id) !!}
     @else    
-      {!! Form::open(['route' => 'admin.role.store', 'method' => 'post', 'role'=>'form','id'=>'form','files'=>true]) !!}
+      {!! Form::open(['route' => 'ask.permission.post', 'method' => 'post', 'role'=>'form','id'=>'form','files'=>true]) !!}
     @endif
-      @include("roles.html")
+      @include("askpermission.html")
     {{ Form::close() }}
 @stop
 

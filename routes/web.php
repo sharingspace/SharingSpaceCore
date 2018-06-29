@@ -515,6 +515,11 @@ Route::group(
                     ]
                 )->name('_update_share_pois');
 
+                Route::get('ask-permission','CommunitiesController@getAskPermission')->name('ask.permission');
+
+                Route::post('ask-permission/post','CommunitiesController@postAskPermission')->name('ask.permission.post');
+
+
             }
         );
 
@@ -581,15 +586,18 @@ Route::group(
 
             Route::get('assigned-role','RolesController@getListAssignedRole')->name('admin.assigned-role');
 
-            Route::get('assign-role','RolesController@getAssignRoleCreate')->name('admin.assign-role.create');
-
             Route::post('assign-role/store','RolesController@postAssignRoleCreate')->name('admin.assign-role.store');
 
-            Route::get('assign-role/edit/{id}','RolesController@getAssignRoleEdit')->name('admin.assign-role.edit');
+            Route::get('assign-role/{id}','RolesController@getAssignRoleEdit')->name('admin.assign-role.edit');
 
             Route::post('assign-role/update','RolesController@postAssignRoleEdit')->name('admin.assign-role.update');
 
             Route::get('assign-role/delete/{id}','RolesController@getAssignRoleDelete')->name('admin.assign-role.delete');
+
+
+
+            Route::get('member/requests','CommunitiesController@getAskPermissionList')->name('admin.member.requests');
+
 
         });
 
