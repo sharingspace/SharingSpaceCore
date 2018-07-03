@@ -598,6 +598,9 @@ Route::group(
 
             Route::get('member/requests','CommunitiesController@getAskPermissionList')->name('admin.member.requests');
 
+            Route::get('member/request/{id}','CommunitiesController@getAskPermissionView')->name('admin.member.request.view');
+
+            Route::post('member/requests/granted','CommunitiesController@postAskPermissionGranted')->name('admin.member.request.granted');
 
         });
 

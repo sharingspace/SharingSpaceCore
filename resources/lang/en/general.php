@@ -15,6 +15,7 @@ return [
     'token_expired'              => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
     'terms'                      => 'Terms',
     'create'                     => 'Create',
+    'view'                       => 'View',
     'edit'                       => 'Edit',
     'about'                      => 'About',
     'stats'                      => 'Stats',
@@ -459,7 +460,7 @@ return [
         'list'  =>'Role List',
 
         'error' => [
-            'unique'  => 'Role name already exsist, Please use unique role name'
+            'unique'  => 'Role name already exsist, Please use unique role name',
         ]
     ],
 
@@ -484,8 +485,21 @@ return [
 
 
     'ask_permission' => [
+        'list' => 'Ask Permissions List',
+        'view-request' => 'View Request',
+        'create' => 'Create Ask Permission',
         'permissions' => 'Permissions',
         'permission-text' => 'Choose a level of access when using this Sharing Network.',
         'created' =>'Your request has been sent to admin.',
+        'update_accepted' => 'Request permission successfully Accepted.',
+        'update_reject' => 'Request permission successfully Rejected.',
+        'request_type' => 'Request Type',
+        'requested_by' => 'Requested By',
+        'requested_role' => 'Requested Role',
+        'accepted' => 'Accept',
+        'rejected' => 'Reject',
+        'message' => 'Message',
+
+
     ]
 ];

@@ -177,7 +177,8 @@ class CommunitiesController extends Controller
             return view('errors.403');       
         }
         $data['members'] = $request->whitelabel_group->members()->get();
-        $data['new_role_url'] = route('admin.assign-role.create');
+       
+       // $data['new_role_url'] = route('admin.assign-role.create');
 
 
         return view('members',$data);
@@ -541,11 +542,52 @@ class CommunitiesController extends Controller
 
     public function getAskPermissionList(Request $request)
     {
-        $data['ask'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->first();
-        // dd($ask);
+        $data['ask'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->where('is_accepted','0')->where('is_rejected','0')->first();
+        
+        $data['role'] = Role::findorfail($data['ask']->role_id);
+
+        //dd($ask);
         // dd($ask->role);
         return view('askpermission.list', $data);
 
+    }
+    public function getAskPermissionView($id)
+    {
+        $data['ask'] = AskPermission::findorfail($id);
+        
+        $data['role'] = Role::findorfail($data['ask']->role_id);
+
+        return view('askpermission.member-view',$data);
+    }
+
+    public function postAskPermissionGranted(Request $request)
+    {
+        // dd($request->all());
+        $data = AskPermission::find($request->id)->where('is_accepted','0')->where('is_rejected','0');
+        if(count($data) > 0)
+        {
+            if($request->accept == 1)
+            {
+                $data->update([
+                    'is_accepted' => $request->accept,
+                ]);
+                $message = trans('general.ask_permission.update_accepted');
+                return redirect("admin/member/requests")->with('success',$message);
+            }
+            else
+            {
+                $data->update([
+                    'is_rejected' => $request->reject,
+                ]);    
+                $message = trans('general.ask_permission.update_rejected');
+                return redirect("admin/member/requests")->with('success',$message);
+            }
+                
+        }
+        else
+        {
+            return "You have alredy done for this request";
+        }
     }
 
     
