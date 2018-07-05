@@ -11,9 +11,11 @@
   <div class="row">
     
 
-    <form method="post" action="{{route('admin.member.request.granted')}}" id="payment-form" enctype="multipart/form-data" autocomplete="off" class="sky-form boxed clearfix">
+    <form method="post" action="{{route('admin.member.request.granted')}}" autocomplete="off">
 
     <input type="hidden" name="id" value="{{$ask->id}}">
+    <input type="hidden" name="role_id" value="{{$role->id}}">
+    <input type="hidden" name="user_id" value="{{ Auth::user()->id}}">
     {!! csrf_field() !!}
 
 
@@ -81,11 +83,11 @@
     
       <div class="row">
           <div class="col-sm-9 col-sm-offset-3">
-            <div class="col-sm-1 col-sm-offset-3">
+            <div class="col-sm-3">
               <button type="submit" class="btn btn-success" name="accept" value="1">
                   Accept
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-3">
               <button type="submit" class="btn btn-danger" name="reject" value="1">
                   Reject
               </button>

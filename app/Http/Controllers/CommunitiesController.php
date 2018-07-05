@@ -27,6 +27,8 @@ use Mail;
 use App\Helpers\Permission;
 use Redirect;
 use App\Models\AskPermission;
+use App\Models\User;
+
 
 
 class CommunitiesController extends Controller
@@ -542,11 +544,11 @@ class CommunitiesController extends Controller
 
     public function getAskPermissionList(Request $request)
     {
-        $data['ask'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->where('is_accepted','0')->where('is_rejected','0')->first();
+        $data['asks'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->get();
         
-        $data['role'] = Role::findorfail($data['ask']->role_id);
+        // $data['role'] = Role::findorfail($data['ask'] ? $data['ask']->role_id : "");
 
-        //dd($ask);
+        // dd($data['asks']);
         // dd($ask->role);
         return view('askpermission.list', $data);
 
@@ -562,31 +564,59 @@ class CommunitiesController extends Controller
 
     public function postAskPermissionGranted(Request $request)
     {
+        $message = '';
         // dd($request->all());
         $data = AskPermission::find($request->id)->where('is_accepted','0')->where('is_rejected','0');
+        
+
         if(count($data) > 0)
         {
-            if($request->accept == 1)
-            {
-                $data->update([
-                    'is_accepted' => $request->accept,
-                ]);
-                $message = trans('general.ask_permission.update_accepted');
-                return redirect("admin/member/requests")->with('success',$message);
-            }
-            else
-            {
-                $data->update([
-                    'is_rejected' => $request->reject,
-                ]);    
-                $message = trans('general.ask_permission.update_rejected');
+            \DB::beginTransaction();
+            try { 
+
+                $user = User::findorfail($request->user_id);
+
+                if($request->accept == 1)
+                {
+                    if(count($user->roles) > 0) {
+                        $role_id = $user->roles()->first()->id;
+                        $user->removeRole($role_id);
+                    }
+
+                    if($request->role_id != 0){
+                        $user->assignRole($request->role_id);
+                    }
+                    
+                    $data->update([
+                        'is_accepted' => $request->accept,
+                    ]);
+                    $message = trans('general.ask_permission.update_accepted');
+                    
+                }
+                else
+                {
+                    $data->update([
+                        'is_rejected' => $request->reject,
+                    ]);    
+                    $message = trans('general.ask_permission.update_rejected');
+                   // return redirect("admin/member/requests")->with('success',$message);
+                }
+
+            } catch (\Exception $e) {                
+                \DB::rollback();  
+            
+            } finally { 
+                \DB::commit();
+                // dd($message);
+                //$message = trans('general.assign_role.updated');
                 return redirect("admin/member/requests")->with('success',$message);
             }
                 
         }
         else
         {
-            return "You have alredy done for this request";
+            $message = trans('general.ask_permission.already_done');       
+            return redirect("admin/member/requests")->with('success',$message);
         }
     }
 

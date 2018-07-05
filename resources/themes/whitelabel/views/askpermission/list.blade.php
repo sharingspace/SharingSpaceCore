@@ -10,7 +10,6 @@
 <div class="container">
   <div class="row">
     <h1 class="margin-bottom-0  size-24 text-center">{{ trans('general.ask_permission.list') }}</h1>
-
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
         <table class="table table-condensed" id="members">
@@ -23,10 +22,12 @@
             </tr>
           </thead>
           <tbody>
+            @forelse($asks as $ask)
             <tr>
+
               <td class="col-md-3"> {{ $ask->request_type }}</td>
               <td class="col-md-2"> {{ Auth::user()->email}}</td>
-              <td class="col-md-2"> {{ $role->name}}</td>
+              <td class="col-md-2"> {{ $ask->role ? $ask->role->name : ""}}</td>
 
               <td class="col-md-1"> 
                 
@@ -35,6 +36,12 @@
                 </a>
               </td>
             </tr>
+            @empty
+              <tr colspan = "4">
+                No Data Found.....! 
+              </tr>
+
+            @endforelse
           </tbody>
         </table>
       </div> <!-- table responsive -->

@@ -492,13 +492,15 @@ return [
         'permission-text' => 'Choose a level of access when using this Sharing Network.',
         'created' =>'Your request has been sent to admin.',
         'update_accepted' => 'Request permission successfully Accepted.',
-        'update_reject' => 'Request permission successfully Rejected.',
+        'update_rejected' => 'Request permission successfully Rejected.',
         'request_type' => 'Request Type',
         'requested_by' => 'Requested By',
         'requested_role' => 'Requested Role',
         'accepted' => 'Accept',
         'rejected' => 'Reject',
         'message' => 'Message',
+        'already_done' => 'You have alredy done for this request',
+
 
 
     ]
