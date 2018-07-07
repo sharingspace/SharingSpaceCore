@@ -600,6 +600,10 @@ Route::group(
 
             Route::post('member/requests/granted','CommunitiesController@postAskPermissionGranted')->name('admin.member.request.granted');
 
+
+
+            // Route::get('member/request/oauth','CommunitiesController@getAskOauthList')->name('admin.member.oauth');
+
         });
 
         /*

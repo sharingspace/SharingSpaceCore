@@ -10,7 +10,6 @@ use App\Http\Transformers\UserTransformer;
 class MemberController extends Controller
 {
 
-
     public function show($community_id, $member_id)
     {
 
@@ -24,9 +23,6 @@ class MemberController extends Controller
             //return $this->response->errorNotFound();
         }
     }
-
-
-
 
     public function all(Request $request, $community_id)
     {

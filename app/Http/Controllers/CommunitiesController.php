@@ -636,5 +636,12 @@ class CommunitiesController extends Controller
         }
     }
 
+
+    // public function getAskOauthList()
+    // {
+    //     dd('hello');
+    //     $list = Community::with('oauth_community_id','oauth_clients_id')->get();
+    //     dd($list);
+    // }
     
 }
