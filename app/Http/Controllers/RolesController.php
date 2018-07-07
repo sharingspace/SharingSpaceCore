@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Models\Community;
 use Auth;
 use App\Models\User;
+use Permission as P;
 use App\Exceptions\GeneralException;
 
 class RolesController extends Controller
@@ -33,6 +34,10 @@ class RolesController extends Controller
      */
     public function getAllRoles(Request $request) {
 
+        if(!P::checkPermission('view-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['roles'] = Role::all();
         return view('roles.list',$data);
     }
@@ -46,6 +51,10 @@ class RolesController extends Controller
      * @return View
      */
     public function getRoleCreate() {
+
+        if(!P::checkPermission('create-role-permission')) {
+            return view('errors.403');       
+        }
         
         $data['permissions'] = Permission::all();
         return view('roles.view', $data);
@@ -62,6 +71,10 @@ class RolesController extends Controller
      */
     public function postRoleCreate(Request $request)
     {
+        if(!P::checkPermission('create-role-permission')) {
+            return view('errors.403');       
+        }
+
         $this->validate($request,[
             'name' => 'required|string|max:255'
         ]);
@@ -108,6 +121,11 @@ class RolesController extends Controller
      * @return View
      */
     public function getEditRole(Request $request, $id) {
+
+        if(!P::checkPermission('edit-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['id'] = $id;
         $data['model'] = Role::findorfail($id);
         $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
@@ -126,6 +144,9 @@ class RolesController extends Controller
      */
     public function postEditRole(Request $request) {
 
+        if(!P::checkPermission('edit-role-permission')) {
+            return view('errors.403');       
+        }
 
         $this->validate($request,[
             'name' => 'required|string|max:255'
@@ -177,6 +198,10 @@ class RolesController extends Controller
      */
     public function getDeleteRole(Request $request, $id)
     {
+
+        if(!P::checkPermission('delete-role-permission')) {
+            return view('errors.403');       
+        }
         
         \DB::beginTransaction();
         try { 
@@ -210,6 +235,10 @@ class RolesController extends Controller
     public function getListAssignedRole(Request $request)
     {
 
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['users'] = Community::find($request->whitelabel_group->id)
                             ->members()
                             ->get();
@@ -222,6 +251,11 @@ class RolesController extends Controller
     //Assign Role (form)
     public function getAssignRoleCreate(Request $request)
     {   
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['user'] = Community::find($request->whitelabel_group->id)
                             ->members()
                             ->get()->pluck('email','id');
@@ -235,6 +269,10 @@ class RolesController extends Controller
     //Assign Role (post)
     public function postAssignRoleCreate(Request $request)
     {
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
 
         $this->validate($request,[
             'user_id' => 'required|string|max:255',
@@ -271,6 +309,11 @@ class RolesController extends Controller
     //Assign Role Edit (form)
     public function getAssignRoleEdit(Request $request, $id)
     {
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['user'] = Community::find($request->whitelabel_group->id)
                             ->members()
                             ->get()->pluck('email','id');
@@ -294,6 +337,11 @@ class RolesController extends Controller
     //Assign Role Update (post)
     public function postAssignRoleEdit(Request $request)
     {        
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
         $this->validate($request,[
             'user_id' => 'required|string|max:255',
             'role_id' => 'required|string|max:255'
@@ -323,17 +371,6 @@ class RolesController extends Controller
             $message = trans('general.assign_role.updated');
             return redirect()->back()->with('success',$message);
         }
-    }
-    
-    public function getAssignRoleDelete($id)
-    {
-        dd('here');
-        $user = User::find($request->user_id);
-        $role_id = $user->roles()->first()->id;
-        $user->removeRole($role_id);
-
-        $message = trans('general.assign_role.deleted');
-            return redirect()->back()->with('success',$message);
     }
 
 }

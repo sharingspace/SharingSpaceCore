@@ -592,8 +592,6 @@ Route::group(
 
             Route::post('assign-role/update','RolesController@postAssignRoleEdit')->name('admin.assign-role.update');
 
-            Route::get('assign-role/delete/{id}','RolesController@getAssignRoleDelete')->name('admin.assign-role.delete');
-
 
 
             Route::get('member/requests','CommunitiesController@getAskPermissionList')->name('admin.member.requests');

@@ -37,10 +37,7 @@
               </td>
             </tr>
             @empty
-              <tr colspan = "4">
-                No Data Found.....! 
-              </tr>
-
+             
             @endforelse
           </tbody>
         </table>

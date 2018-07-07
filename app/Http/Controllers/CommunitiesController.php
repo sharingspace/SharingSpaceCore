@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
 use Input;
 use Log;
 use Mail;
-use App\Helpers\Permission;
+use Permission;
 use Redirect;
 use App\Models\AskPermission;
 use App\Models\User;
@@ -348,7 +348,6 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
-
         if(!Permission::checkPermission('edit-sharing-network-permission')) {
             return view('errors.403');       
         }
@@ -489,6 +488,7 @@ class CommunitiesController extends Controller
 
     public function getAskPermission()
     {
+
         $data['roles'] = Role::all();
 
         return view('askpermission.view', $data);
@@ -496,6 +496,7 @@ class CommunitiesController extends Controller
 
     public function postAskPermission(Request $request)
     {
+
         $role_id = 0;
         // dd($request->selected->);
         if(!empty($request->selected)){
@@ -544,6 +545,11 @@ class CommunitiesController extends Controller
 
     public function getAskPermissionList(Request $request)
     {
+
+        if(!Permission::checkPermission('access-user-request-permission')) {
+            return view('errors.403');       
+        }
+
         $data['asks'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->get();
         
         // $data['role'] = Role::findorfail($data['ask'] ? $data['ask']->role_id : "");
@@ -555,6 +561,11 @@ class CommunitiesController extends Controller
     }
     public function getAskPermissionView($id)
     {
+
+        if(!Permission::checkPermission('access-user-request-permission')) {
+            return view('errors.403');       
+        }
+
         $data['ask'] = AskPermission::findorfail($id);
         
         $data['role'] = Role::findorfail($data['ask']->role_id);
@@ -564,6 +575,11 @@ class CommunitiesController extends Controller
 
     public function postAskPermissionGranted(Request $request)
     {
+
+        if(!Permission::checkPermission('access-user-request-permission')) {
+            return view('errors.403');       
+        }
+
         $message = '';
         // dd($request->all());
         $data = AskPermission::find($request->id)->where('is_accepted','0')->where('is_rejected','0');

@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Helpers;
 /**
  * This contains some static helpers for
  * the AnyShare application.
@@ -14,10 +13,6 @@ namespace App\Helpers;
 class Permission
 {
 	public static function checkPermission($permission) {
-		
-        if(\Auth::user()->role_assigned == 1) {
-            return \Auth::user()->can($permission);    
-        }
-        return  true;
+        return \Auth::user()->can($permission);
 	}
 }

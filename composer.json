@@ -52,6 +52,7 @@
       "database",
       "app/Http/Transformers",
       "app/Helpers/Helper.php",
+      "app/Helpers/Permission.php",
       "app/Traits"
     ],
     "psr-4": {

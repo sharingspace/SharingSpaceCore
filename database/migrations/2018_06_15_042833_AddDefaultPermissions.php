@@ -18,19 +18,11 @@ class AddDefaultPermissions extends Migration
          */
     
         DB::table('permissions')->insert([
-            // Sharing Network
-            [
-                'name' => 'view-browse-permission',
-                'guard_name' => 'web',
-            ],
+            
 
             [
                 'name' => 'edit-sharing-network-permission',
-                'guard_name' => 'web',
-            ],
-
-            [
-                'name' => 'view-about-permission',
+                'display_name' => 'Edit Sharing Network',
                 'guard_name' => 'web',
             ],
 
@@ -38,48 +30,83 @@ class AddDefaultPermissions extends Migration
 
             [
                 'name' => 'view-members-permission',
+                'display_name' => 'View Members',
                 'guard_name' => 'web',
             ],
 
             [
                 'name' => 'request-membership-permission',
+                'display_name' => 'Request Membership',
                 'guard_name' => 'web',
             ],
 
             [
                 'name' => 'approve-new-member-permission',
+                'display_name' => 'Approve new member',
                 'guard_name' => 'web',
             ],
 
-            // Entries
+            //Entries
 
             [
-                'name' => 'view-entry-permission',
-                'guard_name' => 'web',
-            ],
-
-            [
-                'name' => 'post-entry-permission',
+                'name' => 'edit-any-entry-permission',
+                'display_name' => 'Edit any entry',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'update-entry-permission',
+                'name' => 'delete-any-entry-permission',
+                'display_name' => 'Delete any entry',
                 'guard_name' => 'web',
             ],
+
 
             //Community
 
             [
-                'name' => 'join-community-permission',
+                'name' => 'edit-community-permission',
+                'display_name' => 'Edit community',
+                'guard_name' => 'web',
+            ],
+
+            //Roles
+
+            [
+                'name' => 'create-role-permission',
+                'display_name' => 'Create role',
                 'guard_name' => 'web',
             ],
 
             [
-                'name' => 'update-community-permission',
+                'name' => 'edit-role-permission',
+                'display_name' => 'Edit role',
                 'guard_name' => 'web',
             ],
 
+            [
+                'name' => 'delete-role-permission',
+                'display_name' => 'Delete role',
+                'guard_name' => 'web',
+            ],
+
+            [
+                'name' => 'view-role-permission',
+                'display_name' => 'View role permission',
+                'guard_name' => 'web',
+            ],
+
+            [
+                'name' => 'assign-role-permission',
+                'display_name' => 'Assign role permission',
+                'guard_name' => 'web',
+            ],
+
+            [
+                'name' => 'access-user-request-permission',
+                'display_name' => 'Access user request permission',
+                'guard_name' => 'web',
+            ],
+            
         ]);
     }
 

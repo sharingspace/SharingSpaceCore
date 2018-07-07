@@ -36,10 +36,6 @@ class PagesController extends Controller
     {
 
         if ($request->whitelabel_group) {
-
-            if(!Permission::checkPermission('view-browse-permission')) {
-                return view('errors.403');       
-            }
             
             $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->orderBy('created_at', 'desc')->get();
             return view('home')->with('entries', $entries);

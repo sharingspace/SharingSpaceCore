@@ -20,6 +20,8 @@ class CreatePermissionTables extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
+            $table->string('display_name');
+            $table->text('description')->nullable();
             $table->string('guard_name');
             $table->timestamps();
         });
