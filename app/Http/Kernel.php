@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
         'web' => [ // THIS IS THE GROUP WE ARE TALKING ABOUT
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
@@ -52,8 +53,10 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'subdomain' => \App\Http\Middleware\SubdomainMiddleware::class,
+        
         'community-auth'=> \App\Http\Middleware\CommunityPermissionMiddleware::class,
         'community-edit'=> \App\Http\Middleware\CommunityEditMiddleware::class, 
         'member-auth'=> \App\Http\Middleware\MemberPermissionMiddleware::class,
@@ -67,5 +70,7 @@ class Kernel extends HttpKernel
         'client' => CheckClientCredentials::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'cors' => \App\Http\Middleware\Cors::class,
+
+        
     ];
 }

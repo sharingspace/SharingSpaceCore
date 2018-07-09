@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Community;
+use Illuminate\Http\Request;
 /**
  * This contains some static helpers for
  * the AnyShare application.
@@ -63,6 +66,23 @@ class Helper
     }
 
 
+    /**
+    * Returns injected element of select
+    *
+    * @author [Dhaval] [<dhaval48@gmail.com>]
+    * @since  [v1.0]
+    * @return Array
+    */
+
+    public static function injectselect($data,$element = false) { 
+        
+        if($element == '') {
+            $data['0'] = 'Select Item';
+        } else {
+            $data['0'] = $element;
+        }       
+        return $data;
+    }
 
     /**
     * Returns the latitude and longitude of an address

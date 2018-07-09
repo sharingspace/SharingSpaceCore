@@ -17,6 +17,8 @@ use Log;
 use Input;
 use Mail;
 use Redirect;
+use App\Helpers\Permission;
+
 
 class PagesController extends Controller
 {
@@ -32,10 +34,13 @@ class PagesController extends Controller
     */
     public function getHomepage(Request $request)
     {
+
         if ($request->whitelabel_group) {
+            
             $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->orderBy('created_at', 'desc')->get();
             return view('home')->with('entries', $entries);
         } else {
+
             $communities = \App\Models\Community::orderBy('created_at', 'DESC')->IsPublic()->take(20)->get();
             return view('home')->with('communities', $communities);
         }

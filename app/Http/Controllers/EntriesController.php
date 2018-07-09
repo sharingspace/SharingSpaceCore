@@ -27,6 +27,7 @@ use Log;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
 use App\Helpers\CommunityEntries;
+use App\Helpers\Permission;
 
 //use Session;
 
@@ -45,8 +46,10 @@ class EntriesController extends Controller
 
     public function getEntry(Request $request, $entryID)
     {
+           
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>> ".Route::currentRouteName()."  ".$entryID);
         if ($entry = \App\Models\Entry::find($entryID)) {
+            
             if ($request->user()) {
                 // user logged in
                 if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
@@ -293,9 +296,10 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return Redirect
      */
-    /*
+
     public function postCreate(Request $request)
     {
+               
         $entry = new \App\Models\Entry();
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
@@ -338,7 +342,7 @@ class EntriesController extends Controller
         }
         return redirect()->back()->with('error', trans('general.entries.messages.save_failed'));
 
-    }*/
+    }
 
     /**
      * Returns a form view to edit an entry
@@ -350,6 +354,7 @@ class EntriesController extends Controller
      */
     public function getEdit(Request $request, $entryID)
     {
+
         //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         // This should be pulled into a helper or macro
@@ -681,6 +686,7 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
+        
         $entries = new CommunityEntries($request->whitelabel_group);
         $user = Auth::check() ? Auth::user() : null;
 

@@ -11,7 +11,7 @@
 namespace App\Models;
 
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -30,10 +30,11 @@ use App\Models\Message;
 use App\Models\Conversation;
 use DB;
 use Log;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
+class User extends Authenticatable implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
-    use HasApiTokens, Authenticatable, CanResetPassword, Billable, Authorizable;
+    use HasApiTokens, CanResetPassword, Billable, Authorizable, HasRoles;
     use SluggableTrait;
     use ValidatingTrait;
     use UploadableFileTrait;
@@ -221,6 +222,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function canSeeCommunity($community)
     {
+        
         LOG::debug("canSeeCommunity: entered user id = " . $this->id . ",  user name = " . $this->display_name . ", community id = " . $community->id . ",  community name = " . $community->name);
 
         if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type == 'O') {
@@ -570,4 +572,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return false;
     }
+
+    
 }

@@ -47,7 +47,7 @@
                                             <label class="checkbox col-md-12 margin-bottom-10">
                                                 {{ Form::checkbox('permissions['.$permission->id.']', $permission->id, 
                                                 isset($role_permissions) && in_array($permission->id,$role_permissions)?true:false, ['class' => 'exchanges checkall']) }}
-                                                    <i></i> {{ $permission->name }}
+                                                    <i></i> {{ $permission->display_name }}
                                             </label>
                                         </div>
                                     </div>        

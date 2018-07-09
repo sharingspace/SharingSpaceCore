@@ -19,11 +19,17 @@ use Auth;
 use Config;
 use DB;
 use Helper;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Input;
 use Log;
 use Mail;
+use Permission;
 use Redirect;
+use App\Models\AskPermission;
+use App\Models\User;
+
+
 
 class CommunitiesController extends Controller
 {
@@ -31,6 +37,7 @@ class CommunitiesController extends Controller
 
     public function __construct(Community $community)
     {
+        
         $this->community = $community;
     }
 
@@ -58,6 +65,7 @@ class CommunitiesController extends Controller
      */
     public function getEntriesView()
     {
+        
         return view('browse');
     }
 
@@ -148,6 +156,10 @@ class CommunitiesController extends Controller
      */
     public function getJoinRequests(Request $request)
     {
+        if(!Permission::checkPermission('approve-new-member-permission')) {
+            return view('errors.403');       
+        }
+        
         $join_requests = $request->whitelabel_group->requests()->get();
         return view('join_requests')->with('join_requests', $join_requests);
     }
@@ -163,9 +175,15 @@ class CommunitiesController extends Controller
      */
     public function getMembers(Request $request)
     {
+        if(!Permission::checkPermission('view-members-permission')) {
+            return view('errors.403');       
+        }
+        $data['members'] = $request->whitelabel_group->members()->get();
+       
+       // $data['new_role_url'] = route('admin.assign-role.create');
 
-        $members = $request->whitelabel_group->members()->get();
-        return view('members')->with('members', $members);
+
+        return view('members',$data);
     }
 
     /**
@@ -330,6 +348,10 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
+        if(!Permission::checkPermission('edit-sharing-network-permission')) {
+            return view('errors.403');       
+        }
+
         $themes = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
 
         $exchanges = $request->whitelabel_group->exchangeTypes;
@@ -464,5 +486,162 @@ class CommunitiesController extends Controller
         return redirect()->route('_edit_share')->with('success', 'Entries updated.');
     }
 
+    public function getAskPermission()
+    {
+
+        $data['roles'] = Role::all();
+
+        return view('askpermission.view', $data);
+    }
+
+    public function postAskPermission(Request $request)
+    {
+
+        $role_id = 0;
+        // dd($request->selected->);
+        if(!empty($request->selected)){
+            $role_id = array_keys($request->selected)[0];
+            Role::findorfail($role_id);
+        }
+
+
+        if($role_id == 0 && $request->message == ""){
+            return redirect()->back();
+        }
+        // $this->validate($request,[
+        //     'user_id' => 'required|string|max:255',
+        //     'role_id' => 'required|string|max:255'
+        // ]);
+
+        \DB::beginTransaction();
+        
+        try { 
+
+            
+            AskPermission::create([
+                'request_type' => 'Role',
+                'community_id' => $request->whitelabel_group->id,
+                'user_id' => \Auth::user()->id,
+                'role_id' => $role_id,
+                'is_accepted' => 0,
+                'is_rejected' => 0,
+                'custom_text' => $request->message,
+            ]);
+
+
+            
+        } catch (\Exception $e) {
+                        dd($e);
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.ask_permission.created');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
+
+    public function getAskPermissionList(Request $request)
+    {
+
+        if(!Permission::checkPermission('access-user-request-permission')) {
+            return view('errors.403');       
+        }
+
+        $data['asks'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->get();
+        
+        // $data['role'] = Role::findorfail($data['ask'] ? $data['ask']->role_id : "");
+
+        // dd($data['asks']);
+        // dd($ask->role);
+        return view('askpermission.list', $data);
+
+    }
+    public function getAskPermissionView($id)
+    {
+
+        if(!Permission::checkPermission('access-user-request-permission')) {
+            return view('errors.403');       
+        }
+
+        $data['ask'] = AskPermission::findorfail($id);
+        
+        $data['role'] = Role::findorfail($data['ask']->role_id);
+
+        return view('askpermission.member-view',$data);
+    }
+
+    public function postAskPermissionGranted(Request $request)
+    {
+
+        if(!Permission::checkPermission('access-user-request-permission')) {
+            return view('errors.403');       
+        }
+
+        $message = '';
+        // dd($request->all());
+        $data = AskPermission::find($request->id)->where('is_accepted','0')->where('is_rejected','0');
+        
+
+        if(count($data) > 0)
+        {
+            \DB::beginTransaction();
+            try { 
+
+                $user = User::findorfail($request->user_id);
+
+                if($request->accept == 1)
+                {
+                    if(count($user->roles) > 0) {
+                        $role_id = $user->roles()->first()->id;
+                        $user->removeRole($role_id);
+                    }
+
+                    if($request->role_id != 0){
+                        $user->assignRole($request->role_id);
+                    }
+                    
+                    $data->update([
+                        'is_accepted' => $request->accept,
+                    ]);
+                    $message = trans('general.ask_permission.update_accepted');
+                    
+                }
+                else
+                {
+                    $data->update([
+                        'is_rejected' => $request->reject,
+                    ]);    
+                    $message = trans('general.ask_permission.update_rejected');
+                   // return redirect("admin/member/requests")->with('success',$message);
+                }
+
+            } catch (\Exception $e) {                
+                \DB::rollback();  
+            
+            } finally { 
+                \DB::commit();
+                // dd($message);
+                //$message = trans('general.assign_role.updated');
+                return redirect("admin/member/requests")->with('success',$message);
+            }
+                
+        }
+        else
+        {
+            $message = trans('general.ask_permission.already_done');       
+            return redirect("admin/member/requests")->with('success',$message);
+        }
+    }
+
+
+    // public function getAskOauthList()
+    // {
+    //     dd('hello');
+    //     $list = Community::with('oauth_community_id','oauth_clients_id')->get();
+    //     dd($list);
+    // }
     
 }

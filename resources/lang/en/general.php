@@ -15,6 +15,7 @@ return [
     'token_expired'              => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
     'terms'                      => 'Terms',
     'create'                     => 'Create',
+    'view'                       => 'View',
     'edit'                       => 'Edit',
     'about'                      => 'About',
     'stats'                      => 'Stats',
@@ -80,6 +81,7 @@ return [
     'create_account'             => 'Create an AnyShare account',
     'create_account'             => 'Create an AnyShare account',
     'click_here'                 => 'Click here',
+    'delete'                     => 'Delete',
     'wrld3d'                     => [
         'label'          => 'WRLD3D',
         'info'           => '',
@@ -87,6 +89,7 @@ return [
         'dev_token'      => 'DEVELOPER TOKEN',
         'api_key_select' => ':: Select a API Key ::',
     ],
+
 
     'nav'      => [
         'browse'          => 'Browse',
@@ -403,6 +406,7 @@ return [
     'members'   => [
         'image'        => 'Image',
         'bio'          => 'Bio',
+        'assigned-role'=> 'Assigned Role',
         'member_since' => 'Joined',
     ],
 
@@ -443,11 +447,61 @@ return [
 
     'role' => [
         'roles' => 'Roles',
-        'create' => 'Role Create',
+        'create' => 'Create Role',
         'edit' => 'Role Edit',
         'name'   => 'Role Name',
         'name_placeholder' => 'Enter Role Name',
         'name' => 'Name',
-        'permission' => 'Total Permission'
+        'permission' => 'Total Permission',
+        'created'   => 'Role successfully created',
+        'updated'   => 'Role successfully updated',
+        'deleted'   => 'Role successfully deleted',
+
+        'list'  =>'Role List',
+
+        'error' => [
+            'unique'  => 'Role name already exsist, Please use unique role name',
+        ]
+    ],
+
+    'assign_role' => [
+        'assign-role' => 'Assign Role',
+        'assigned-roles' => 'Assigned Roles',
+        'create' => 'Create Assign Role',
+        'edit' => 'Assign Role Edit',
+        'role-name'   => 'Assign Role Name',
+        'name_placeholder' => 'Enter Assign Role Name',
+        'user-name' => 'User Name',
+        'permission' => 'Total Permission',
+        'created'   => 'Assign role successfully created',
+        'updated'   => 'Assign role successfully updated',
+        'deleted'   => 'Role has been successfully removed from the user',
+
+        'list'  =>'Assigned Role List',
+        'error' => [
+            'oneroleallowed' => 'You can assign only one role to one user',
+        ]
+    ],
+
+
+    'ask_permission' => [
+        'list' => 'Ask Permissions List',
+        'view-request' => 'View Request',
+        'create' => 'Create Ask Permission',
+        'permissions' => 'Permissions',
+        'permission-text' => 'Choose a level of access when using this Sharing Network.',
+        'created' =>'Your request has been sent to admin.',
+        'update_accepted' => 'Request permission successfully Accepted.',
+        'update_rejected' => 'Request permission successfully Rejected.',
+        'request_type' => 'Request Type',
+        'requested_by' => 'Requested By',
+        'requested_role' => 'Requested Role',
+        'accepted' => 'Accept',
+        'rejected' => 'Reject',
+        'message' => 'Message',
+        'already_done' => 'You have alredy done for this request',
+
+
+
     ]
 ];

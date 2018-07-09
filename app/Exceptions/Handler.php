@@ -66,6 +66,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+       if ($e instanceof GeneralException)
+        {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
           return redirect()->back()->with('error', trans('general.token_expired'));
         }

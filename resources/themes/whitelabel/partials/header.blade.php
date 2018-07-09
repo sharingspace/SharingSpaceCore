@@ -171,15 +171,19 @@
             @endif
 
             @can('update-community', $whitelabel_group)
-              <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
-                <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
-              </li>
+              @if(Permission::checkPermission('edit-community-permission'))
+                <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
+                </li>
+              @endif
               @if ($whitelabel_group->requestCount())
               <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
                 <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
               </li>
               @endif
+            
             @endcan
+
 					</ul>
 
 					</nav>

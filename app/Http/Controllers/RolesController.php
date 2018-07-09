@@ -14,6 +14,11 @@ namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
+use App\Models\Community;
+use Auth;
+use App\Models\User;
+use Permission as P;
+use App\Exceptions\GeneralException;
 
 class RolesController extends Controller
 { 
@@ -27,7 +32,12 @@ class RolesController extends Controller
      * @since  [v1.0]
      * @return View
      */
-    public function getAllRoles() {
+    public function getAllRoles(Request $request) {
+
+        if(!P::checkPermission('view-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['roles'] = Role::all();
         return view('roles.list',$data);
     }
@@ -41,10 +51,12 @@ class RolesController extends Controller
      * @return View
      */
     public function getRoleCreate() {
-        $data['permissions'] = Permission::all();
+
+        if(!P::checkPermission('create-role-permission')) {
+            return view('errors.403');       
+        }
         
-
-
+        $data['permissions'] = Permission::all();
         return view('roles.view', $data);
     }
 
@@ -59,20 +71,45 @@ class RolesController extends Controller
      */
     public function postRoleCreate(Request $request)
     {
+        if(!P::checkPermission('create-role-permission')) {
+            return view('errors.403');       
+        }
+
         $this->validate($request,[
             'name' => 'required|string|max:255'
         ]);
-            
-        $role = Role::create(['name' => $request->name ]);
         
-        if($request->permissions != '') {
-            foreach ($request->permissions as $key => $permission) {
-                $role->givePermissionTo($permission);
-            }
+        $unique = Role::where('community_id', $request->whitelabel_group->id)
+                        ->where('name', $request->name)
+                        ->first();
+        
+        if($unique) {
+            return redirect()->back()->with('error', trans('general.role.error.unique'));
         }
 
-        $message = 'Role successfully created';
-        return redirect()->back()->with('success',$message);
+        \DB::beginTransaction();
+        try { 
+            $role = Role::create(['name' => $request->name,
+                            'community_id' =>  $request->whitelabel_group->id]);
+
+           
+            if($request->permissions != '') {
+
+                foreach ($request->permissions as $key => $permission) {
+                        
+                    $role->givePermissionTo($permission);
+                }
+            } 
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.role.created');
+            return redirect()->back()->with('success',$message);
+        }
+        
     }
 
     /**
@@ -84,8 +121,13 @@ class RolesController extends Controller
      * @return View
      */
     public function getEditRole(Request $request, $id) {
+
+        if(!P::checkPermission('edit-role-permission')) {
+            return view('errors.403');       
+        }
+
         $data['id'] = $id;
-        $data['model'] = Role::find($id);
+        $data['model'] = Role::findorfail($id);
         $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
         $data['permissions'] = Permission::get();
 
@@ -101,20 +143,234 @@ class RolesController extends Controller
      * @return Redirect
      */
     public function postEditRole(Request $request) {
-        Role::find($request->id)->update([
-            'name' => $request->name
-        ]);
 
-        $role = Role::find($request->id);        
-        \DB::table('role_has_permissions')->where('role_id',$request->id)->delete();
-        
-        if($request->permissions != '') {
-            foreach ($request->permissions as $key => $permission) {
-                $role->givePermissionTo($permission);
-            }
+        if(!P::checkPermission('edit-role-permission')) {
+            return view('errors.403');       
         }
 
-        $message = 'Role successfully updated';
-        return redirect()->back()->with('success',$message);
+        $this->validate($request,[
+            'name' => 'required|string|max:255'
+        ]);
+        
+        $unique = Role::where('community_id', $request->whitelabel_group->id)
+                        ->where('id', '!=', $request->id)
+                        ->where('name', $request->name)
+                        ->first();
+        
+        if($unique) {
+            return redirect()->back()->with('error', trans('general.role.error.unique'));
+        }
+
+        \DB::beginTransaction();
+        try { 
+            $role = Role::where('community_id', $request->whitelabel_group->id)
+                                ->findorfail($request->id);
+
+            \DB::table('role_has_permissions')->where('role_id',$request->id)->delete();
+
+            if($request->permissions != '') {
+                foreach ($request->permissions as $key => $permission) {
+                    $role->givePermissionTo($permission);
+                }
+            } 
+
+            $role->update([
+                'name' => $request->name
+            ]); 
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+            
+            $message = trans('general.role.updated');
+            return redirect()->back()->with('success',$message);
+        }
     }
+
+    /**
+     * Deletes a role 
+     * @author [Dhaval Mesavaniya] [<dhaval48@gmail.com>]
+     * @since  [v1.0]
+     * @param $roleID
+     * @return Redirect
+     */
+    public function getDeleteRole(Request $request, $id)
+    {
+
+        if(!P::checkPermission('delete-role-permission')) {
+            return view('errors.403');       
+        }
+        
+        \DB::beginTransaction();
+        try { 
+
+            $role = Role::where('community_id', $request->whitelabel_group->id)
+                        ->findorfail($id);
+            
+
+            \DB::table('role_has_permissions')->where('role_id',$id)->delete();
+
+            if($request->permissions != '') {
+                foreach ($request->permissions as $key => $permission) {
+                    $role->givePermissionTo($permission);
+                }
+            } 
+
+            $role->delete();
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.role.deleted');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
+
+    public function getListAssignedRole(Request $request)
+    {
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
+        $data['users'] = Community::find($request->whitelabel_group->id)
+                            ->members()
+                            ->get();
+
+        
+        return view('assigned-roles.list',$data);
+    }
+    //Assigned Role (list)
+
+    //Assign Role (form)
+    public function getAssignRoleCreate(Request $request)
+    {   
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
+        $data['user'] = Community::find($request->whitelabel_group->id)
+                            ->members()
+                            ->get()->pluck('email','id');
+        
+        
+        $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+
+        return view('assigned-roles.view',$data);
+    }
+
+    //Assign Role (post)
+    public function postAssignRoleCreate(Request $request)
+    {
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
+        $this->validate($request,[
+            'user_id' => 'required|string|max:255',
+            'role_id' => 'required|string|max:255'
+        ]);
+            
+
+        \DB::beginTransaction();
+        $user = User::find($request->user_id);
+
+        if($user->hasAnyRole(Role::all())) {
+            throw new GeneralException(trans('general.assign_role.error.oneroleallowed'));
+        }
+
+        try { 
+
+            
+            $user->assignRole($request->role_id);
+
+            $message = 'Role assigned to user successfully';
+
+        } catch (\Exception $e) {
+                        
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.assign_role.created');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
+    //Assign Role Edit (form)
+    public function getAssignRoleEdit(Request $request, $id)
+    {
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
+        $data['user'] = Community::find($request->whitelabel_group->id)
+                            ->members()
+                            ->get()->pluck('email','id');
+        $roles = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+        $data['roles'] = \Helper::injectselect($roles,'None');
+
+        $user = User::find($id);
+        $data['model'] = $user;
+        $data['id'] = $id;
+        $data['user_id']= $user->id;
+        $role_id = '';    
+        if(count($user->roles) > 0) {
+            $role_id = $user->roles()->first()->id;
+        }
+
+        $data['role_id'] = $role_id;
+
+        return view('assigned-roles.view',$data);   
+    }
+
+    //Assign Role Update (post)
+    public function postAssignRoleEdit(Request $request)
+    {        
+
+        if(!P::checkPermission('assign-role-permission')) {
+            return view('errors.403');       
+        }
+
+        $this->validate($request,[
+            'user_id' => 'required|string|max:255',
+            'role_id' => 'required|string|max:255'
+        ]);
+    
+        \DB::beginTransaction();
+        try { 
+
+            $user = User::find($request->user_id);
+
+            if(count($user->roles) > 0) {
+                $role_id = $user->roles()->first()->id;
+                $user->removeRole($role_id);
+            }
+
+            if($request->role_id != 0){
+                $user->assignRole($request->role_id);
+            }
+
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+
+            $message = trans('general.assign_role.updated');
+            return redirect()->back()->with('success',$message);
+        }
+    }
+
 }
