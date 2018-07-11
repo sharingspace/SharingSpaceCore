@@ -573,5 +573,9 @@ class User extends Authenticatable implements AuthenticatableContract, CanResetP
         return false;
     }
 
+    public static function get_oauth_client(){
+      return $this->accessToken->client;
+    }
+
     
 }

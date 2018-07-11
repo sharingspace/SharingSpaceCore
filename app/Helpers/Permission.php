@@ -14,7 +14,7 @@ class Permission
 {
 	public static function checkPermission($permission, $community) {
 		$user = \Auth::user();
-		
+
 		if ($user->isAdminOfCommunity($community)) {
                 return true;
         }

@@ -28,6 +28,7 @@ use Permission;
 use Redirect;
 use App\Models\AskPermission;
 use App\Models\User;
+use App\Models\oAuthClient;
 
 
 
@@ -643,5 +644,47 @@ class CommunitiesController extends Controller
     //     $list = Community::with('oauth_community_id','oauth_clients_id')->get();
     //     dd($list);
     // }
+
+
+    public function getApiDetail(Request $request)
+    {
+        // dd(Community::find($request->whitelabel_group->id)->community_apis->first());
+        $data['oauth_client'] = Community::find($request->whitelabel_group->id)->community_apis->first();
+        if($data > 0)
+        {
+            return view('apis.view',$data);
+        }
+        else
+        {
+            return view('apis.view');        
+        }
+    }
+
+    public function postApiDetail(Request $request)
+    {
+
+        \DB::beginTransaction();
+        try { 
+
+            $oauth_client=new oAuthClient();
+            $oauth_client->user_id=\Auth::user()->id;
+            $oauth_client->name=$request->whitelabel_group->name;
+            $oauth_client->secret=base64_encode(hash_hmac('sha256',$request->whitelabel_group->name, 'secret', true));
+            $oauth_client->redirect='';
+            $oauth_client->revoked=0;
+            $oauth_client->save();
+
+            $oauth_client->community_apis()->attach($request->whitelabel_group->id);
+            
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+            // dd($message);
+            $message = trans('general.apis.created');
+            return back()->with('success',$message,$oauth_client);
+        }      
+    }
     
 }
