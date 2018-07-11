@@ -503,7 +503,7 @@ return [
 
     'apis' => [
         'list' => 'Apis',
-        'create' => 'Create Apis',
+        'create' => 'Access Apis',
         'apis-text' => 'Now, you can access your community over API, let get started',
         'enable-api' => 'Enable API',
         'created' =>'Your API detail has been done successfully.',
