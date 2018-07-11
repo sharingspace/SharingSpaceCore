@@ -12,7 +12,7 @@
   <div class="row">
     <h1 class="margin-bottom-0  size-24 text-center">{{ trans('general.role.roles') }}</h1>
 
-    @if(Permission::checkPermission('create-role-permission'))
+    @if(Permission::checkPermission('create-role-permission', $whitelabel_group))
       <a href="{{ route('admin.role.create') }}">
         <button type="button" class="btn btn-sm btn-colored" title="{{ trans('general.role.create') }}"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.role.create') }}</span></button>
       </a>

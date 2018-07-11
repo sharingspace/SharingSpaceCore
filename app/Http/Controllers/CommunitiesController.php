@@ -156,7 +156,7 @@ class CommunitiesController extends Controller
      */
     public function getJoinRequests(Request $request)
     {
-        if(!Permission::checkPermission('approve-new-member-permission')) {
+        if(!Permission::checkPermission('approve-new-member-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
@@ -175,7 +175,7 @@ class CommunitiesController extends Controller
      */
     public function getMembers(Request $request)
     {
-        if(!Permission::checkPermission('view-members-permission')) {
+        if(!Permission::checkPermission('view-members-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         $data['members'] = $request->whitelabel_group->members()->get();
@@ -348,7 +348,7 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
-        if(!Permission::checkPermission('edit-sharing-network-permission')) {
+        if(!Permission::checkPermission('edit-sharing-network-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -546,7 +546,7 @@ class CommunitiesController extends Controller
     public function getAskPermissionList(Request $request)
     {
 
-        if(!Permission::checkPermission('access-user-request-permission')) {
+        if(!Permission::checkPermission('access-user-request-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -562,7 +562,7 @@ class CommunitiesController extends Controller
     public function getAskPermissionView($id)
     {
 
-        if(!Permission::checkPermission('access-user-request-permission')) {
+        if(!Permission::checkPermission('access-user-request-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -576,7 +576,7 @@ class CommunitiesController extends Controller
     public function postAskPermissionGranted(Request $request)
     {
 
-        if(!Permission::checkPermission('access-user-request-permission')) {
+        if(!Permission::checkPermission('access-user-request-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 

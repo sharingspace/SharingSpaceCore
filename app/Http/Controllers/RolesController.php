@@ -34,7 +34,7 @@ class RolesController extends Controller
      */
     public function getAllRoles(Request $request) {
 
-        if(!P::checkPermission('view-role-permission')) {
+        if(!P::checkPermission('view-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -50,9 +50,9 @@ class RolesController extends Controller
      * @since  [v1.0]
      * @return View
      */
-    public function getRoleCreate() {
+    public function getRoleCreate(Request $request) {
 
-        if(!P::checkPermission('create-role-permission')) {
+        if(!P::checkPermission('create-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
@@ -71,7 +71,7 @@ class RolesController extends Controller
      */
     public function postRoleCreate(Request $request)
     {
-        if(!P::checkPermission('create-role-permission')) {
+        if(!P::checkPermission('create-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -122,7 +122,7 @@ class RolesController extends Controller
      */
     public function getEditRole(Request $request, $id) {
 
-        if(!P::checkPermission('edit-role-permission')) {
+        if(!P::checkPermission('edit-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -144,7 +144,7 @@ class RolesController extends Controller
      */
     public function postEditRole(Request $request) {
 
-        if(!P::checkPermission('edit-role-permission')) {
+        if(!P::checkPermission('edit-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -199,7 +199,7 @@ class RolesController extends Controller
     public function getDeleteRole(Request $request, $id)
     {
 
-        if(!P::checkPermission('delete-role-permission')) {
+        if(!P::checkPermission('delete-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
@@ -235,7 +235,7 @@ class RolesController extends Controller
     public function getListAssignedRole(Request $request)
     {
 
-        if(!P::checkPermission('assign-role-permission')) {
+        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -252,7 +252,7 @@ class RolesController extends Controller
     public function getAssignRoleCreate(Request $request)
     {   
 
-        if(!P::checkPermission('assign-role-permission')) {
+        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -270,7 +270,7 @@ class RolesController extends Controller
     public function postAssignRoleCreate(Request $request)
     {
 
-        if(!P::checkPermission('assign-role-permission')) {
+        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -310,7 +310,7 @@ class RolesController extends Controller
     public function getAssignRoleEdit(Request $request, $id)
     {
 
-        if(!P::checkPermission('assign-role-permission')) {
+        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -338,7 +338,7 @@ class RolesController extends Controller
     public function postAssignRoleEdit(Request $request)
     {        
 
-        if(!P::checkPermission('assign-role-permission')) {
+        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
