@@ -86,14 +86,14 @@
                             <!-- if user is admin or owner -->
                                 @can('update-entry', $entry)
                                     <div class="margin-bottom-3">
-                                        @if($entry->created_by == Auth::user()->id || Permission::checkPermission('edit-any-entry-permission'))
+                                        @if($entry->created_by == Auth::user()->id || Permission::checkPermission('edit-any-entry-permission', $whitelabel_group))
                                             <div class="margin-top-10 listing-actions">
                                                 {{ Form::open(array('route'=>array('entry.delete.save',$entry->id))) }}
                                                 {{ Form::token()}}
                                                 <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom"
                                                    title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
                                                     <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
-                                                @if($entry->created_by == Auth::user()->id || Permission::checkPermission('delete-any-entry-permission'))     
+                                                @if($entry->created_by == Auth::user()->id || Permission::checkPermission('delete-any-entry-permission', $whitelabel_group))     
                                                     <button type="submit" class="btn btn-xs btn-dark-colored margin-left-5"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
                                                 @endif
 

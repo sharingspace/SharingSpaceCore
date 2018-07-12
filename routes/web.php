@@ -13,6 +13,7 @@
 | As such, it shouldn't use the apiguard middleware.
 |--------------------------------------------------------------------------
 */
+
 Route::group(
     array('prefix' => 'api/v1/slack'),
     function () {
@@ -600,6 +601,8 @@ Route::group(
 
             Route::post('member/requests/granted','CommunitiesController@postAskPermissionGranted')->name('admin.member.request.granted');
 
+            Route::get('apis','CommunitiesController@getApiDetail')->name('admin.apis');
+            Route::post('apis/store','CommunitiesController@postApiDetail')->name('admin.apis.store');
 
 
             // Route::get('member/request/oauth','CommunitiesController@getAskOauthList')->name('admin.member.oauth');

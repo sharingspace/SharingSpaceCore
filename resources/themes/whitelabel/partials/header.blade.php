@@ -152,12 +152,14 @@
               </li>
               @endif
               @if ($whitelabel_group->viewMembers())
-              <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
-                <a href="{{ route('members') }}">
-                  {{ trans('general.our_members') }}
-                  {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
-                </a>
-              </li>
+                @if(Permission::checkPermission('delete-any-entry-permission', $whitelabel_group)) 
+                  <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('members') }}">
+                      {{ trans('general.our_members') }}
+                      {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
+                @endif
               @endif
               <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
@@ -171,7 +173,7 @@
             @endif
 
             @can('update-community', $whitelabel_group)
-              @if(Permission::checkPermission('edit-community-permission'))
+              @if(Permission::checkPermission('edit-community-permission', $whitelabel_group))
                 <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
                   <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
                 </li>

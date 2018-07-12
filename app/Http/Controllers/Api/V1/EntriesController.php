@@ -21,6 +21,8 @@ class EntriesController extends Controller
      */
     public function all(Request $request, $community_id)
     {
+
+        // dd(\Auth::guard('api')->user());
         if ($request->has('per_page')) {
             $per_page = $request->input('per_page');
         } else {

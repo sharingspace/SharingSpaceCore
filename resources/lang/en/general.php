@@ -483,7 +483,6 @@ return [
         ]
     ],
 
-
     'ask_permission' => [
         'list' => 'Ask Permissions List',
         'view-request' => 'View Request',
@@ -500,8 +499,14 @@ return [
         'rejected' => 'Reject',
         'message' => 'Message',
         'already_done' => 'You have alredy done for this request',
+    ],
 
+    'apis' => [
+        'list' => 'Apis',
+        'create' => 'Access Apis',
+        'apis-text' => 'Now, you can access your community over API, let get started',
+        'enable-api' => 'Enable API',
+        'created' =>'Your API detail has been done successfully.',
 
-
-    ]
+    ],
 ];

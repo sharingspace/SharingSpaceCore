@@ -28,6 +28,7 @@ use Permission;
 use Redirect;
 use App\Models\AskPermission;
 use App\Models\User;
+use App\Models\oAuthClient;
 
 
 
@@ -156,7 +157,7 @@ class CommunitiesController extends Controller
      */
     public function getJoinRequests(Request $request)
     {
-        if(!Permission::checkPermission('approve-new-member-permission')) {
+        if(!Permission::checkPermission('approve-new-member-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
@@ -175,7 +176,7 @@ class CommunitiesController extends Controller
      */
     public function getMembers(Request $request)
     {
-        if(!Permission::checkPermission('view-members-permission')) {
+        if(!Permission::checkPermission('view-members-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         $data['members'] = $request->whitelabel_group->members()->get();
@@ -348,7 +349,7 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
-        if(!Permission::checkPermission('edit-sharing-network-permission')) {
+        if(!Permission::checkPermission('edit-sharing-network-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -546,7 +547,7 @@ class CommunitiesController extends Controller
     public function getAskPermissionList(Request $request)
     {
 
-        if(!Permission::checkPermission('access-user-request-permission')) {
+        if(!Permission::checkPermission('access-user-request-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -562,7 +563,7 @@ class CommunitiesController extends Controller
     public function getAskPermissionView($id)
     {
 
-        if(!Permission::checkPermission('access-user-request-permission')) {
+        if(!Permission::checkPermission('access-user-request-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -576,7 +577,7 @@ class CommunitiesController extends Controller
     public function postAskPermissionGranted(Request $request)
     {
 
-        if(!Permission::checkPermission('access-user-request-permission')) {
+        if(!Permission::checkPermission('access-user-request-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -643,5 +644,47 @@ class CommunitiesController extends Controller
     //     $list = Community::with('oauth_community_id','oauth_clients_id')->get();
     //     dd($list);
     // }
+
+
+    public function getApiDetail(Request $request)
+    {
+        // dd(Community::find($request->whitelabel_group->id)->community_apis->first());
+        $data['oauth_client'] = Community::find($request->whitelabel_group->id)->community_apis->first();
+        if($data > 0)
+        {
+            return view('apis.view',$data);
+        }
+        else
+        {
+            return view('apis.view');        
+        }
+    }
+
+    public function postApiDetail(Request $request)
+    {
+
+        \DB::beginTransaction();
+        try { 
+
+            $oauth_client=new oAuthClient();
+            $oauth_client->user_id=\Auth::user()->id;
+            $oauth_client->name=$request->whitelabel_group->name;
+            $oauth_client->secret=base64_encode(hash_hmac('sha256',$request->whitelabel_group->name, 'secret', true));
+            $oauth_client->redirect='';
+            $oauth_client->revoked=0;
+            $oauth_client->save();
+
+            $oauth_client->community_apis()->attach($request->whitelabel_group->id);
+            
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+        
+        } finally { 
+            \DB::commit();
+            // dd($message);
+            $message = trans('general.apis.created');
+            return back()->with('success',$message,$oauth_client);
+        }      
+    }
     
 }
