@@ -113,12 +113,18 @@
     </script>
     <!-- Bootstrap 3 Javascript is pulled in through the scripts.js file - no need to include it here -->
     <link rel="shortcut icon" href="/favicon.ico">
+    <style type="text/css">
+        main {
+          min-height: 95vh
+        }
+
+    </style>
 </head>
 
 <body class="smoothscrolll enable-animationn">
 <!-- wrapper -->
 <div id="wrapper" class="share_wrapper">
-
+<main>
     <div>@include('partials.header')</div>
 
     <!-- Notifications -->
@@ -129,7 +135,9 @@
     </div>
 
     <div id="share_content">@yield('content')</div>
-    <div>@include('partials.footer')</div>
+</main>
+    <footer>@include('partials.footer')</footer>
+
 </div> <!-- /wrapper -->
 
 @if (isset($whitelabel_group))

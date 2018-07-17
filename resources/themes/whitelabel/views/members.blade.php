@@ -51,12 +51,15 @@
                   <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
                 </td>
                 <td>
-                  
+                @if ($admin)
+                  <p align="center"> <strong> ---- </strong></p>
+                @else
                   @if(count($member->getRoleNames()) == 0) 
                     <a href="{{ route('admin.assign-role.edit', $member->id) }}">Assign Role</a>
                   @else 
                     <a href="{{ route('admin.assign-role.edit', $member->id) }}">{{ $member->getRoleNames()->first() }}</a>
                   @endif
+                @endif
                 </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>

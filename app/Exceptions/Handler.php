@@ -51,6 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
+        
         if ($this->shouldReport($e)) {
             \Log::error($e);
             return parent::report($e);

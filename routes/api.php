@@ -20,15 +20,14 @@ Route::get('/user', function(Request $request) {
 })->middleware('client');
 
 
-				
-
-
 Route::group(['namespace' => 'V1','prefix' => 'v1/entries', 'middleware' => 'client'], function () {
-	Route::get('{community_id}/{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
-    Route::get('{community_id}', '\App\Http\Controllers\Api\V1\EntriesController@all');
+	
+    Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');
+    Route::post('/create','\App\Http\Controllers\Api\V1\EntriesController@create');
+    Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
 });
 
 Route::group(['namespace' => 'V1','prefix' => 'v1/members', 'middleware' => 'client'], function () {
-	Route::get('{community_id}/{member_id}', '\App\Http\Controllers\Api\V1\MemberController@show');
-    Route::get('{community_id}', '\App\Http\Controllers\Api\V1\MemberController@all');
+	Route::get('{member_id}', '\App\Http\Controllers\Api\V1\MemberController@show');
+    Route::get('/', '\App\Http\Controllers\Api\V1\MemberController@all');
 });
