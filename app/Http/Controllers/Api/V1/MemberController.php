@@ -10,8 +10,10 @@ use App\Http\Transformers\UserTransformer;
 class MemberController extends Controller
 {
 
-    public function show($community_id, $member_id)
+    public function show(Request $request, $member_id)
     {
+        $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
+        $community_id = $jwt->getClaim('community')->id;
 
         try {
             $member = Community::findOrFail($community_id)->members()->where('users.id','=',$member_id)->paginate(1);
@@ -24,8 +26,10 @@ class MemberController extends Controller
         }
     }
 
-    public function all(Request $request, $community_id)
+    public function all(Request $request)
     {
+        $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
+        $community_id = $jwt->getClaim('community')->id;
 
         if ($request->has('per_page')) {
             $per_page = $request->input('per_page');

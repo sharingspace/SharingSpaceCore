@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\Client;
 
-class oAuthClient extends Model
+class oAuthClient extends Client
 {
-    protected $table = 'oauth_clients';
-
 
 	public function community_apis()
 	{	    

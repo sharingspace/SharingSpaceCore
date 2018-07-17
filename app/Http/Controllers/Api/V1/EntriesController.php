@@ -19,10 +19,11 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return String JSON
      */
-    public function all(Request $request, $community_id)
+    public function all(Request $request)
     {
-
-        // dd(\Auth::guard('api')->user());
+        $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
+        $community_id = $jwt->getClaim('community')->id;
+        
         if ($request->has('per_page')) {
             $per_page = $request->input('per_page');
         } else {
@@ -52,11 +53,13 @@ class EntriesController extends Controller
      * @param $id The ID of the entry
      * @return String JSON
      */
-    public function show($community_id, $entry_id)
+    public function show(Request $request,$entry_id)
     {
-
-
+        $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
+        $community_id = $jwt->getClaim('community')->id;
+    
         try {
+
             $entry = Community::findOrFail($community_id)
                         
                         ->entries()
@@ -65,7 +68,8 @@ class EntriesController extends Controller
                         ->orderBy('created_at','desc')
                         ->paginate(1);
                        
-                $trnsform = new EntriesTransformer;
+            $trnsform = new EntriesTransformer;
+
             return response()->json($trnsform->transform($entry));     
         } catch (Exception $e) {
                 

@@ -12,12 +12,15 @@
 
 class Permission
 {
-	public static function checkPermission($permission, $community) {
+	public static function checkPermission($permission, $community = "") {
 		$user = \Auth::user();
-
-		if ($user->isAdminOfCommunity($community)) {
+		if($user) {
+			if ($user->isAdminOfCommunity($community)) {
                 return true;
-        }
-        return $user->can($permission);
+        	}	
+        	return $user->can($permission);
+		}
+		
+        
 	}
 }
