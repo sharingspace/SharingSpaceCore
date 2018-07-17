@@ -310,14 +310,16 @@ class RolesController extends Controller
     public function getAssignRoleEdit(Request $request, $id)
     {
 
-        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $data['user'] = Community::find($request->whitelabel_group->id)
-                            ->members()
+                            ->members()->where('is_admin',0)
                             ->get()->pluck('email','id');
+                           
         $roles = Role::where('community_id', $request->whitelabel_group->id)                    ->pluck('name','id')->toArray();
+
         $data['roles'] = \Helper::injectselect($roles,'None');
 
         $user = User::find($id);

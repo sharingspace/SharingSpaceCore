@@ -20,7 +20,16 @@ class Permission
         	}	
         	return $user->can($permission);
 		}
-		
-        
+	}
+
+	public static function adminRole($permission, $community = ""){
+		$user = \Auth::user();
+		if($user) {
+			if ($user->isAdminOfCommunity($community)) {
+                return true;
+        	}	
+        	return false;
+        }
+
 	}
 }

@@ -48,7 +48,7 @@
             
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
-                    <button class="btn btn-colored pull-right">
+                    <button class="btn btn-colored pull-right" {{ (count($user) > 0) ? '' : 'disabled' }}>
                         Save
                     </button>
                 </div>
