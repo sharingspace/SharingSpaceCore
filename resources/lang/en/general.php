@@ -110,6 +110,7 @@ return [
         'share+'          => '+ Share',
         'new_messages'    => 'new messages',
         'view_all'        => 'View all messages',
+        'roles'           => 'Roles',
     ],
     'color'    => [
         'color_theme'  => 'Choose a color palette',
