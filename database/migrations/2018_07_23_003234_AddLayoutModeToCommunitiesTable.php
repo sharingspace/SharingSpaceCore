@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDefaultPermissions extends Migration
+class AddLayoutModeToCommunitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,12 @@ class AddDefaultPermissions extends Migration
      */
     public function up()
     {
+        Schema::table('permissions', function (Blueprint $table) {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            DB::table('permissions')->truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        });
+
         /*
          * Insert Default Permissions
          */
@@ -108,6 +114,10 @@ class AddDefaultPermissions extends Migration
             ],
             
         ]);
+
+        Schema::table('communities', function (Blueprint $table) {
+            $table->enum('entry_layout', ['L', 'G', 'M'])->default('G')->after('show_info_bar');
+        });
     }
 
     /**
@@ -117,6 +127,8 @@ class AddDefaultPermissions extends Migration
      */
     public function down()
     {
-        
+        Schema::table('communities', function (Blueprint $table) {
+            $table->dropColumn('entry_layout');
+        });
     }
 }

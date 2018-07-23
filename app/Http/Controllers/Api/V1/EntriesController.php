@@ -60,7 +60,8 @@ class EntriesController extends Controller
     public function show(Request $request,$entry_id)
     {
         $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
-        $community_id = $jwt->getClaim('community')->id;
+        
+        $community_id = $jwt->getClaim('community')->community_id;
     
         try {
 
@@ -84,10 +85,10 @@ class EntriesController extends Controller
     public function create(Request $request)
     {
         $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
-        $community_id = $jwt->getClaim('community')->id;
-    
+        $community_id = $jwt->getClaim('community')->community_id;
+        $user_id = $jwt->getClaim('community')->user_id;
 
-        $user = User::findOrFail(6);
+        $user = User::findOrFail($user_id);
         $entry = new Entry();
 
         $entry->title = e(Input::get('title'));
