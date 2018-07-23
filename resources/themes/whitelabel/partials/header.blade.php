@@ -127,11 +127,13 @@
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+
             @if ( Auth::check() && !Auth::user()->isMemberOfCommunity($whitelabel_group) )
               <!-- logged in in but not a member -->
               <li>
               @if ($whitelabel_group->group_type == 'O')
                <a href="{{ route('join-community') }}">
+              
               @else
                 <a href="{{ route('community.request-access.form') }}">
               @endif
@@ -151,6 +153,16 @@
                 </a>
               </li>
               @endif
+
+              @if(Permission::checkPermission('view-role-permission',$whitelabel_group))
+              <li {!! (Route::is('admin.roles') ? ' class="active"' : '') !!}>
+                <a href="{{ route('admin.roles') }}">
+                  {{ trans('general.nav.roles') }}
+                  {!! (Route::is('admin.roles') ? '<span class="sr-only">(current)</span>' : '') !!}
+                </a>
+              </li>
+              @endif
+              
               @if ($whitelabel_group->viewMembers())
                 @if(Permission::checkPermission('delete-any-entry-permission', $whitelabel_group)) 
                   <li {!! (Route::is('members') ? ' class="active"' : '') !!}>

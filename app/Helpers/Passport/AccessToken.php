@@ -30,10 +30,13 @@ class AccessToken extends PassportAccessToken {
     // my custom claims for roles
     // Just an example.
     public function getCommunity() {
-        $request = oAuthClient::find($this->getClient()->getIdentifier())->community_apis->first()->id;
+        $user = oAuthClient::find($this->getClient()->getIdentifier());
+
+        $community_id = $user->community_apis->first()->id;
 
         return [
-            'id' => $request,
+            'community_id' => $community_id,
+            'user_id'      => $user->id
         ];
     }
 }
