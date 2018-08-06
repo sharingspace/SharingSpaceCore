@@ -13,6 +13,10 @@ class AddDefaultPermissions extends Migration
      */
     public function up()
     {
+
+        Schema::table($tableNames['permissions'], function (Blueprint $table) {
+            $table->string('display_name')->after('name');
+        });
         /*
          * Insert Default Permissions
          */
