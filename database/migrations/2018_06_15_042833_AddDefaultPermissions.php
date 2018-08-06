@@ -117,7 +117,7 @@ class AddDefaultPermissions extends Migration
      * @return void
      */
     public function down()
-    {
-        
+    {   
+        DB::table('permissions')->truncate();
     }
 }
