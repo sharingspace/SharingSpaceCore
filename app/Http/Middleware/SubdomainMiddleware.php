@@ -81,7 +81,9 @@ class SubdomainMiddleware
         }
 
         // FIXME - add   ->where('subdomain_expires_at', '>', $now) back in
-        if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='beta') && ($subdomain!='api')) {
+
+        if (($subdomain!='') && ($subdomain!=env('SITE_ON')) && ($subdomain!='api')) {
+
             $group = Community::where('subdomain', '=', $subdomain)
             ->whereNotNull('subdomain')->first();
 
