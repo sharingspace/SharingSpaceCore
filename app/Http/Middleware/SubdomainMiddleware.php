@@ -60,7 +60,9 @@ class SubdomainMiddleware
         $parsed_url = parse_url($request->url());
         $subdomain = extract_subdomains($parsed_url['host']);
         $now = Carbon::now();
+
         if (0) {
+
             if ((strpos($request->path(), 'register') !== FALSE) && $subdomain) {
                 // if someone is registering from a  whitelabel, redirect them to register
                 // on the corporate site. 
@@ -79,7 +81,7 @@ class SubdomainMiddleware
         }
 
         // FIXME - add   ->where('subdomain_expires_at', '>', $now) back in
-        if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api')) {
+        if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='beta') && ($subdomain!='api')) {
             $group = Community::where('subdomain', '=', $subdomain)
             ->whereNotNull('subdomain')->first();
 
