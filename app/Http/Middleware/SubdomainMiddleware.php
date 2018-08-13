@@ -97,7 +97,6 @@ class SubdomainMiddleware
             } else {
                 $request->valid_whitelabel = false;
                 $request->corporate_default = false;
-                dd(config('app.url'));
                 return redirect(config('app.url'));
             }
 
