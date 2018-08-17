@@ -51,14 +51,16 @@
                   <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
                 </td>
                 <td>
-                @if ($admin)
+
+                @if (Permission::adminRole($member, $whitelabel_group))
                   <p align="center"> <strong> ---- </strong></p>
                 @else
-                  @if(count($member->getRoleNames()) == 0) 
-                    <a href="{{ route('admin.assign-role.edit', $member->id) }}">Assign Role</a>
-                  @else 
-                    <a href="{{ route('admin.assign-role.edit', $member->id) }}">{{ $member->getRoleNames()->first() }}</a>
-                  @endif
+
+                  {!! Form::open(['route' => 'admin.assign-role.update', 'method' => 'post', 'role'=>'form','id'=>'role_form']) !!}
+
+                  {{ Form::select('role_id', $roles, !empty($member->getRoleNames()->first()) ? $member->getRoleNames()->first() : '0' ,['class' => 'form-control assignRole']) }}
+                  <input type="hidden" name="user_id" value="{{$member->id}}">
+                  {{ Form::close() }}
                 @endif
                 </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
@@ -100,6 +102,12 @@ $(document).ready(function() {
           refresh: 'fa-refresh'
       }
     });
+
+});
+
+$(document).on("change",".assignRole",function(){
+  
+  $("#role_form").submit();
 
 });
 

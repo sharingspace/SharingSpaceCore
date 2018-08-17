@@ -22,14 +22,12 @@ class Permission
 		}
 	}
 
-	public static function adminRole($permission, $community = ""){
-		$user = \Auth::user();
-		if($user) {
-			if ($user->isAdminOfCommunity($community)) {
-                return true;
-        	}	
-        	return false;
-        }
+	public static function adminRole($user, $community = ""){
+		
+		if ($user->isAdminOfCommunity($community)) {
+	        return true;
+		}	
+        return false;
 
 	}
 }

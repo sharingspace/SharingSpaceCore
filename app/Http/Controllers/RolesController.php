@@ -38,7 +38,7 @@ class RolesController extends Controller
             return view('errors.403');       
         }
 
-        $data['roles'] = Role::all();
+        $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)->get();
         return view('roles.list',$data);
     }
 

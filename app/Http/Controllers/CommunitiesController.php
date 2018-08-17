@@ -181,11 +181,12 @@ class CommunitiesController extends Controller
             return view('errors.403');       
         }
 
-        $data['admin'] = Permission::adminRole('view-members-permission',$request->whitelabel_group);
+        //$data['admin'] = Permission::adminRole('view-members-permission',$request->whitelabel_group);
+
 
         $data['members'] = $request->whitelabel_group->members()->get();
 
-        
+        $data['roles'] = Helper::injectselect(Role::where('community_id', $request->whitelabel_group->id)->pluck('name','id')->toArray(),'Assign Role');
 
         // dd($data['admin']);
        

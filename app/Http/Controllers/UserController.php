@@ -348,22 +348,53 @@ class UserController extends Controller
     */
     public function getJoinCommunity(Request $request)
     {
-        //LOG::debug('getJoinCommunity: entered');
-        if ($request->whitelabel_group->isOpen()) {
-            if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-                LOG::debug("getJoinCommunity: joined open share successfully");
-                return back()->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
+
+
+        \DB::beginTransaction();
+        try { 
+
+            if ($request->whitelabel_group->isOpen()) {
+                Auth::user()->communities()->attach([$request->whitelabel_group->id]);
+
             }
             else {
-                LOG::debug("getJoinCommunity: error joining open share");
+                LOG::debug("getJoinCommunity: share is closed");
+                return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
+            }
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+            LOG::debug("getJoinCommunity: error joining open share");
 
                 return back()->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
-            }
+        
+        } finally { 
+            \DB::commit();
+
+            LOG::debug("getJoinCommunity: joined open share successfully");
+                return back()->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
         }
-        else {
-            LOG::debug("getJoinCommunity: share is closed");
-            return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //LOG::debug('getJoinCommunity: entered');
+        
     }
 
 
