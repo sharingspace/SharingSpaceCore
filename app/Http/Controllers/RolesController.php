@@ -134,6 +134,15 @@ class RolesController extends Controller
         return view('roles.view',$data);
     }
 
+    public function getEditRoleData($id) {
+
+        $data['id'] = $id;
+        $data['model'] = Role::findorfail($id);
+        $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
+
+        return $data;
+    }
+
     /**
      * Validates and stores the role edits.
      *

@@ -453,7 +453,7 @@ return [
         'name'   => 'Role Name',
         'name_placeholder' => 'Enter Role Name',
         'name' => 'Name',
-        'permission' => 'Total Permission',
+        'permission' => 'Permission',
         'created'   => 'Role successfully created',
         'updated'   => 'Role successfully updated',
         'deleted'   => 'Role successfully deleted',
@@ -462,6 +462,7 @@ return [
 
         'error' => [
             'unique'  => 'Role name already exsist, Please use unique role name',
+            'role-select' => 'Please select atleast One Role...',
         ]
     ],
 

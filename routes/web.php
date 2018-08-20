@@ -577,6 +577,8 @@ Route::group(
 
             Route::get('/role/edit/{id}', 'RolesController@getEditRole')->name('admin.role.edit');
 
+            Route::get('/role/get-role-data/{id}', 'RolesController@getEditRoleData')->name('admin.role.edit');
+
             Route::post('/role/update', 'RolesController@postEditRole')->name('admin.role.update');
 
             Route::get('/role/delete/{id}', 'RolesController@getDeleteRole')
