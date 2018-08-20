@@ -384,7 +384,7 @@ class CommunitiesController extends Controller
         $data['permissions'] = P::all();
 
         $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)->get();
-        $data['session'] = \Session::get('_old_input');
+        // $data['session'] = \Session::get('_old_input');
 
         return view('community.edit',$data)
             ->with('community', $request->whitelabel_group)
@@ -487,7 +487,7 @@ class CommunitiesController extends Controller
             \DB::beginTransaction();
             try {
 
-                if($request->permissions != '') {
+                if(count($request->permissions) > 0) {
                     
                     if($request->role_id !='') {
                         $role = Role::where('community_id', $request->whitelabel_group->id)->findorfail($request->role_id);
