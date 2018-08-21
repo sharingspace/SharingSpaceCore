@@ -154,15 +154,7 @@
               </li>
               @endif
 
-              @if(Permission::checkPermission('view-role-permission',$whitelabel_group))
-              <li {!! (Route::is('admin.roles') ? ' class="active"' : '') !!}>
-                <a href="{{ route('admin.roles') }}">
-                  {{ trans('general.nav.roles') }}
-                  {!! (Route::is('admin.roles') ? '<span class="sr-only">(current)</span>' : '') !!}
-                </a>
-              </li>
-              @endif
-              
+             
               @if ($whitelabel_group->viewMembers())
                 @if(Permission::checkPermission('delete-any-entry-permission', $whitelabel_group)) 
                   <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
