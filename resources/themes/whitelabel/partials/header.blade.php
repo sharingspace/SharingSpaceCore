@@ -156,7 +156,7 @@
 
              
               @if ($whitelabel_group->viewMembers())
-                @if(Permission::checkPermission('delete-any-entry-permission', $whitelabel_group)) 
+                @if(Permission::checkPermission('view-members-permission', $whitelabel_group)) 
                   <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
                     <a href="{{ route('members') }}">
                       {{ trans('general.our_members') }}
@@ -177,7 +177,7 @@
             @endif
 
             @can('update-community', $whitelabel_group)
-              @if(Permission::checkPermission('edit-community-permission', $whitelabel_group))
+              @if(Permission::checkPermission('edit-sharing-network-permission', $whitelabel_group))
                 <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
                   <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
                 </li>

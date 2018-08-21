@@ -377,7 +377,7 @@ class CommunitiesController extends Controller
             ? (new PoiManager($request->whitelabel_group))->getPoisets()
             : collect([]);
 
-        if(!Permission::checkPermission('create-role-permission', $request->whitelabel_group)) {
+        if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
@@ -472,7 +472,7 @@ class CommunitiesController extends Controller
             $community->exchangeTypes()->sync(ExchangeType::all());
         }
 
-        if(!Permission::checkPermission('edit-role-permission', $request->whitelabel_group)) {
+        if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         if($request->rolename != ""){

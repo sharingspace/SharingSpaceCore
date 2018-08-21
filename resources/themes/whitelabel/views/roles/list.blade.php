@@ -26,7 +26,7 @@
               <th class="col-md-3">{{ trans('general.role.name') }}</th>
               <th class="col-md-2">{{ trans('general.role.permission') }}</th>
               <th class="col-md-2">{{ trans('general.action') }}</th>
-            </th>
+            </tr>
           @foreach ($roles as $role)
             <tr>
               <td class="col-md-3"> <a href="/admin/role/edit/{{$role->id}}">{{ $role->name }}</td>

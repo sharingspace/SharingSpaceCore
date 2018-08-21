@@ -23,6 +23,7 @@ class CreatePermissionTables extends Migration
             $table->string('display_name');
             $table->text('description')->nullable();
             $table->string('guard_name');
+            $table->integer('order');
             $table->timestamps();
         });
 

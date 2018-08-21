@@ -22,7 +22,11 @@
                             <li class="active"><a href="#info" data-toggle="tab" aria-expanded="true"> {{trans('general.community.basic')}} </a></li>
                             <li><a href="#hub_images" data-toggle="tab">{{trans('general.community.images')}}</a></li>
                             <li><a href="#advanced" data-toggle="tab">{{trans('general.community.advanced')}}</a></li>
-                            <li><a href="#roles" data-toggle="tab" aria-expanded="false">{{trans('general.role.roles')}}</a></li>
+                            <li>
+                                @if(Permission::checkPermission('manage-role', $whitelabel_group))
+                                <a href="#roles" data-toggle="tab" aria-expanded="false">{{trans('general.role.roles')}}</a>
+                                @endif
+                            </li>
                         </ul>
 
                         <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="6144000"/>
@@ -339,6 +343,7 @@
                             </div> <!-- ADVANCED TAB -->
 
                             <!-- ROLES TAB -->
+                            @if(Permission::checkPermission('manage-role', $whitelabel_group))
                             <div class="tab tab-pane fade" id="roles">
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -390,33 +395,36 @@
                                         <div class="col-xs-4">
                                             <h2 class="margin-bottom-0  size-24 text-center">{{ trans('general.role.roles') }}</h2>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
-                                                <div class="table-responsive">
-                                                    <table class="table table-condensed" id="members">
-                                                        <tbody>
-                                                            <tr>
-                                                              <th class="col-md-3">{{ trans('general.role.name') }}</th>
-                                                              <th class="col-md-2">{{ trans('general.role.permission') }}</th>
-                                                              <th class="col-md-2">{{ trans('general.action') }}</th>
-                                                            </tr>
-                                                        @foreach ($roles as $role)
-                                                            <tr>
-                                                                <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->name }}</a></td>
-                                                                <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
-                                                                <td class="col-md-1">
-                                                                    <a href="{{ route('admin.role.delete', $role->id) }}">
-                                                                  {{ trans('general.delete') }}
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div> <!-- table responsive -->
+                                                @if(isset($roles) && count($roles) > 0)
+                                                    <div class="table-responsive">
+                                                        <table class="table table-condensed" id="members">
+                                                            <tbody>
+                                                                <tr>
+                                                                  <th class="col-md-3">{{ trans('general.role.name') }}</th>
+                                                                  <th class="col-md-2">{{ trans('general.role.permission') }}</th>
+                                                                  <th class="col-md-2">{{ trans('general.action') }}</th>
+                                                                </tr>
+                                                            @foreach ($roles as $role)
+                                                                <tr>
+                                                                    <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->name }}</a></td>
+                                                                    <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
+                                                                    <td class="col-md-1">
+                                                                        <a href="{{ route('admin.role.delete', $role->id) }}">
+                                                                      {{ trans('general.delete') }}
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- table responsive -->
+                                                @endif
                                             </div> <!-- col-lg-12 -->
                                         </div>
                                     </div>
                                 </div> <!-- row -->
                             </div> <!-- ROLES TAB -->
+                            @endif
 
                         </div> <!-- tab-content -->
 
