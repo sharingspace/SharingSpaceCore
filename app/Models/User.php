@@ -10,7 +10,6 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +33,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
-    use HasApiTokens, CanResetPassword, Billable, Authorizable, HasRoles;
+    use CanResetPassword, Billable, Authorizable, HasRoles;
     use SluggableTrait;
     use ValidatingTrait;
     use UploadableFileTrait;

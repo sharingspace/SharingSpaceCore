@@ -165,8 +165,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\PassportServiceProvider::class,
-
+        App\Providers\GuardProvider::class,
         /*
          * Custom service provider
          */
@@ -187,7 +186,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         \Spatie\BladeJavaScript\BladeJavaScriptServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
 		Barryvdh\Cors\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
     ],
