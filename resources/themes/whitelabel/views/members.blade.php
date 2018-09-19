@@ -56,10 +56,10 @@
                   <p align="center"> <strong> ---- </strong></p>
                 @else
                   @if(Permission::checkPermission('assign-role-permission', $whitelabel_group))
-                    {!! Form::open(['route' => 'admin.assign-role.update', 'method' => 'post', 'role'=>'form','id'=>'role_form']) !!}
+                    {!! Form::open(['route' => 'admin.assign-role.update', 'method' => 'post', 'role'=>'form','class'=>'role_form']) !!}
                     
-                    {{ Form::select('role_id', $roles, Permission::getSelectedRole($member, $whitelabel_group) ,['class' => 'form-control assignRole']) }}
-                    <input type="hidden" name="user_id" value="{{$member->id}}">
+                      {{ Form::select('role_id', $roles, Permission::getSelectedRole($member, $whitelabel_group) ,['class' => 'form-control assignRole']) }}
+                      <input type="hidden" name="user_id" value="{{$member->id}}">
                     {{ Form::close() }}
                     @else
                       <p align="center"> <strong> ---- </strong></p>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 
 $(document).on("change",".assignRole",function(){
   
-  $("#role_form").submit();
+  $(this).parent(".role_form").submit();
 
 });
 

@@ -276,7 +276,6 @@ class RolesController extends Controller
     public function postAssignRoleCreate(Request $request)
     {
 
-
         if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
@@ -347,7 +346,7 @@ class RolesController extends Controller
 
     //Assign Role Update (post)
     public function postAssignRoleEdit(Request $request)
-    {        
+    {  
         $user = $request->whitelabel_group->members()->findorfail($request->user_id);
 
         if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
