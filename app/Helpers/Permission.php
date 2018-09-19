@@ -18,8 +18,19 @@ class Permission
 			if ($user->isAdminOfCommunity($community)) {
                 return true;
         	}	
-        	return $user->can($permission);
+
+        	$role = $user->roles()->where('community_id', $community->id)->first();
+        	if($role) {
+        		$permission = $role->permissions()->where('name', $permission)->first();
+        
+				if($permission) {
+					return true;
+				}
+        	}
+        	
+        	
 		}
+		return false;
 	}
 
 	public static function adminRole($user, $community = ""){
@@ -30,4 +41,17 @@ class Permission
         return false;
 
 	}
+
+	public static function getSelectedRole($user , $community){
+		$role = $user->roles()->where('community_id', $community->id)->first();
+		
+		if($role) {
+			return $role->id;
+		}
+		
+		return 0;
+	}
+
+
+	
 }

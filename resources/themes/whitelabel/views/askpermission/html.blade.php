@@ -12,25 +12,25 @@
                     <tbody>
                         @forelse($roles as $role)
                             <tr>
-                            <td class="col-sm-2"> 
-                                <strong>{{ $role->name }}</strong>
-                            </td>
-                            <td class="col-sm-8">
-                                <ul style="margin-bottom: 0px;">
-                                    @forelse($role->permissions as $permission)
-                                    
-                                        <li>
-                                            {{$permission->name}}
-                                        </li>
-                                    @empty
-                                        No Data Found....!
-                                    @endforelse
-                                </ul>
-                            </td>
-                            <td class="col-sm-2" style="vertical-align: middle;text-align: center;">
-                                <input type="radio" name="selected[{{$role->id}}]" style="text-align: center;">
-                            </td>
-                        </tr>
+                                <td class="col-sm-2"> 
+                                    <strong>{{ $role->name }}</strong>
+                                </td>
+                                <td class="col-sm-8">
+                                    <ul style="margin-bottom: 0px;">
+                                        @forelse($role->permissions as $permission)
+                                        
+                                            <li>
+                                                {{$permission->name}}
+                                            </li>
+                                        @empty
+                                            No Data Found....!
+                                        @endforelse
+                                    </ul>
+                                </td>
+                                <td class="col-sm-2" style="vertical-align: middle;text-align: center;">
+                                    <input type="radio" name="selected[{{$role->id}}]" style="text-align: center;">
+                                </td>
+                            </tr>
                         @empty
                             <tr colspan='3'>
 

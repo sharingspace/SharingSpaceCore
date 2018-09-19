@@ -156,7 +156,9 @@
 
              
               @if ($whitelabel_group->viewMembers())
+
                 @if(Permission::checkPermission('view-members-permission', $whitelabel_group)) 
+                
                   <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
                     <a href="{{ route('members') }}">
                       {{ trans('general.our_members') }}
@@ -176,19 +178,21 @@
               @endcan
             @endif
 
-            @can('update-community', $whitelabel_group)
+            {{-- @can('update-community', $whitelabel_group) --}}
               @if(Permission::checkPermission('edit-sharing-network-permission', $whitelabel_group))
                 <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
                   <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
                 </li>
               @endif
-              @if ($whitelabel_group->requestCount())
-              <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
-                <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
-              </li>
+              @if(Permission::checkPermission('approve-new-member-permission', $whitelabel_group))
+                @if ($whitelabel_group->requestCount())
+                <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
+                </li>
+                @endif
               @endif
             
-            @endcan
+            {{-- @endcan --}}
 
 					</ul>
 

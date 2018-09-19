@@ -34,7 +34,7 @@ class RolesController extends Controller
      */
     public function getAllRoles(Request $request) {
 
-        if(!P::checkPermission('view-role-permission', $request->whitelabel_group)) {
+        if(!P::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -52,7 +52,7 @@ class RolesController extends Controller
      */
     public function getRoleCreate(Request $request) {
 
-        if(!P::checkPermission('create-role-permission', $request->whitelabel_group)) {
+        if(!P::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
@@ -71,7 +71,7 @@ class RolesController extends Controller
      */
     public function postRoleCreate(Request $request)
     {
-        if(!P::checkPermission('create-role-permission', $request->whitelabel_group)) {
+        if(!P::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -79,9 +79,8 @@ class RolesController extends Controller
             'name' => 'required|string|max:255'
         ]);
         
-        $unique = Role::where('community_id', $request->whitelabel_group->id)
-                        ->where('name', $request->name)
-                        ->first();
+        $unique = Role::where('community_id', $request->whitelabel_group->id)->where('name', $request->name)
+                ->first();
         
         if($unique) {
             return redirect()->back()->with('error', trans('general.role.error.unique'));
@@ -122,22 +121,22 @@ class RolesController extends Controller
      */
     public function getEditRole(Request $request, $id) {
 
-        if(!P::checkPermission('edit-role-permission', $request->whitelabel_group)) {
+        if(!P::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
         $data['id'] = $id;
-        $data['model'] = Role::findorfail($id);
+        $data['model'] = Role::where('community_id', $request->whitelabel_group->id)->findorfail($id);
         $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
         $data['permissions'] = Permission::get();
 
         return view('roles.view',$data);
     }
 
-    public function getEditRoleData($id) {
+    public function getEditRoleData($id, Request $request) {
 
         $data['id'] = $id;
-        $data['model'] = Role::findorfail($id);
+        $data['model'] = Role::where('community_id', $request->whitelabel_group->id)->findorfail($id);
         $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();
 
         return $data;
@@ -153,7 +152,7 @@ class RolesController extends Controller
      */
     public function postEditRole(Request $request) {
 
-        if(!P::checkPermission('edit-role-permission', $request->whitelabel_group)) {
+        if(!P::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
 
@@ -172,8 +171,7 @@ class RolesController extends Controller
 
         \DB::beginTransaction();
         try { 
-            $role = Role::where('community_id', $request->whitelabel_group->id)
-                                ->findorfail($request->id);
+            $role = Role::where('community_id', $request->whitelabel_group->id)->findorfail($request->id);
 
             \DB::table('role_has_permissions')->where('role_id',$request->id)->delete();
 
@@ -208,15 +206,14 @@ class RolesController extends Controller
     public function getDeleteRole(Request $request, $id)
     {
 
-        if(!P::checkPermission('delete-role-permission', $request->whitelabel_group)) {
+        if(!P::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
         
         \DB::beginTransaction();
         try { 
 
-            $role = Role::where('community_id', $request->whitelabel_group->id)
-                        ->findorfail($id);
+            $role = Role::where('community_id', $request->whitelabel_group->id)->findorfail($id);
             
 
             \DB::table('role_has_permissions')->where('role_id',$id)->delete();
@@ -279,6 +276,7 @@ class RolesController extends Controller
     public function postAssignRoleCreate(Request $request)
     {
 
+
         if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
@@ -290,6 +288,8 @@ class RolesController extends Controller
             
 
         \DB::beginTransaction();
+
+
         $user = User::find($request->user_id);
 
         if($user->hasAnyRole(Role::all())) {
@@ -319,9 +319,9 @@ class RolesController extends Controller
     public function getAssignRoleEdit(Request $request, $id)
     {
 
-        // if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
-        //     return view('errors.403');       
-        // }
+        if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
+            return view('errors.403');       
+        }
 
         $data['user'] = Community::find($request->whitelabel_group->id)
                             ->members()->where('is_admin',0)
@@ -348,6 +348,7 @@ class RolesController extends Controller
     //Assign Role Update (post)
     public function postAssignRoleEdit(Request $request)
     {        
+        $user = $request->whitelabel_group->members()->findorfail($request->user_id);
 
         if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
@@ -360,10 +361,8 @@ class RolesController extends Controller
     
         \DB::beginTransaction();
         try { 
-
-            $user = User::find($request->user_id);
-
-            if(count($user->roles) > 0) {
+            $roles = $user->roles()->where('community_id', $request->whitelabel_group->id)->get();
+            if(count($roles) > 0) {
                 $role_id = $user->roles()->first()->id;
                 $user->removeRole($role_id);
             }

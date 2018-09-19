@@ -66,7 +66,7 @@
                                         @if($entry->visible)
                                             {{ trans('general.entries.visible') }}
                                         @else
-                                            {{ trans('general.entries.not_visible') }}
+                                            {{trans('general.entries.not_visible') }}
                                         @endif
                                     @endif
                                 </div>
