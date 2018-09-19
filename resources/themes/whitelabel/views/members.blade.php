@@ -109,9 +109,7 @@ $(document).ready(function() {
 });
 
 $(document).on("change",".assignRole",function(){
-  
   $(this).parent(".role_form").submit();
-
 });
 
 </script>

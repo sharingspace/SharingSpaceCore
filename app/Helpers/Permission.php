@@ -50,8 +50,5 @@ class Permission
 		}
 		
 		return 0;
-	}
-
-
-	
+	}	
 }

@@ -317,7 +317,6 @@ class RolesController extends Controller
     //Assign Role Edit (form)
     public function getAssignRoleEdit(Request $request, $id)
     {
-
         if(!P::checkPermission('assign-role-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
@@ -360,19 +359,22 @@ class RolesController extends Controller
     
         \DB::beginTransaction();
         try { 
+
             $roles = $user->roles()->where('community_id', $request->whitelabel_group->id)->get();
+
             if(count($roles) > 0) {
                 $role_id = $user->roles()->first()->id;
                 $user->removeRole($role_id);
             }
 
             if($request->role_id != 0){
-                $user->assignRole($request->role_id);
+                $role = Role::findorfail($request->role_id);
+                $user->assignRole($role);                
             }
-
-
+            
         } catch (\Exception $e) {                
             \DB::rollback();  
+            dd($e);
         
         } finally { 
             \DB::commit();

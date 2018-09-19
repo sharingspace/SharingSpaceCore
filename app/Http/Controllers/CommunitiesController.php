@@ -188,7 +188,7 @@ class CommunitiesController extends Controller
 
         $data['members'] = $request->whitelabel_group->members()->get();
 
-        $data['roles'] = Helper::injectselect(Role::where('community_id', $request->whitelabel_group->id)->pluck('name','id')->toArray(),'Assign Role');
+        $data['roles'] = Helper::injectselect(Role::where('community_id', $request->whitelabel_group->id)->pluck('display_name','id')->toArray(),'Assign Role');
 
         // dd($data['admin']);
        
@@ -382,11 +382,10 @@ class CommunitiesController extends Controller
             return view('errors.403');       
         }
         
+        
         $data['permissions'] = P::all();
-
         $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)->get();
         // $data['session'] = \Session::get('_old_input');
-
         return view('community.edit',$data)
             ->with('community', $request->whitelabel_group)
             ->with('poisets', $poisets)
@@ -477,11 +476,13 @@ class CommunitiesController extends Controller
             return view('errors.403');       
         }
         if($request->rolename != ""){
+            $role_name = $request->whitelabel_group->name.'_'.$request->rolename;
             
             $unique = Role::where('community_id', $request->whitelabel_group->id)
                             ->where('id', '!=', $request->role_id)
-                            ->where('name', $request->rolename)
+                            ->where('name', $role_name)
                             ->first();
+            
             if($unique) {
                 return redirect()->back()->with('error', trans('general.role.error.unique'));
             }
@@ -489,32 +490,37 @@ class CommunitiesController extends Controller
             try {
 
                 if(count($request->permissions) > 0) {
-                    
                     if($request->role_id !='') {
                         $role = Role::where('community_id', $request->whitelabel_group->id)->findorfail($request->role_id);
 
                         $role->update([
-                            'name' => $request->rolename
+                            'name' => $role_name,
+                            'display_name' =>$request->rolename,
                         ]);
                     
                     } else {
+                        
+
                         $role =  Role::create([
-                                        'name' => $request->rolename,
+                                        'name' => $role_name,
+                                        'display_name' =>$request->rolename,
                                         'community_id' =>  $request->whitelabel_group->id,
                                     ]);
                     }
 
                     \DB::table('role_has_permissions')->where('role_id',$request->role_id)->delete();
-
                     foreach ($request->permissions as $key => $permission) {
                         $role->givePermissionTo($permission);
                     }
+
                 } else {
                     return redirect()->back()->with('error', trans('general.role.error.role-select'));
                 }  
 
-            } catch (\Exception $e) {                
+            } catch (\Exception $e) {    
+
                 \DB::rollback();  
+                dd($e);  
             
             } finally { 
                 \DB::commit();

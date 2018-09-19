@@ -406,7 +406,7 @@
                                                                 </tr>
                                                             @foreach ($roles as $role)
                                                                 <tr>
-                                                                    <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->name }}</a></td>
+                                                                    <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->display_name }}</a></td>
                                                                     <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
                                                                     <td class="col-md-1">
                                                                         <a href="{{ route('admin.role.delete', $role->id) }}">
@@ -592,6 +592,7 @@
         });
         
         $(document).on("click", ".role", function (e) {
+
             var id = $(this).attr('role-id');
             $('#role-id').val(id);
             $.ajax({
@@ -599,7 +600,7 @@
                 method: 'GET',
                 dataType: "json",
                 success: function (result) {
-                    $('#name').val(result.model.name);
+                    $('#name').val(result.model.display_name);
                     $.each($('.checkall'), function(key, val) {
 
                         $(val).prop('checked', false);
