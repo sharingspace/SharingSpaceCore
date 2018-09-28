@@ -771,11 +771,13 @@ class EntriesController extends Controller
                 $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $imageName . '" class="entry_image"></a>';
                 $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $imageName;
                 $url = url('/');
+
                 $aspect_ratio = 1;
                 $parsed = parse_url($url); // analyse the URL
+
                 if (isset($parsed['scheme']) && strtolower($parsed['scheme']) == 'https') {
                     // If it is https, change it to http
-                    $url = 'http://' . substr($url, 8);
+                   // $url = 'http://' . substr($url, 8);
                     list($width, $height) = getimagesize($url . $image_url);
                     $aspect_ratio = round($width / (float)$height, 1);
                 }
