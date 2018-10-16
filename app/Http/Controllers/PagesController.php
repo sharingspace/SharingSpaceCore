@@ -32,9 +32,6 @@ class PagesController extends Controller
     */
     public function getHomepage(Request $request)
     {
-        if(!Auth::check()) {
-            return redirect('/login');
-        }
         if ($request->whitelabel_group) {
             $entries = $request->whitelabel_group->entries()->with('author', 'exchangeTypes', 'media')->orderBy('created_at', 'desc')->get();
             return view('home')->with('entries', $entries);
