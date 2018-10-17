@@ -28,7 +28,8 @@
                                 @endif
                             </li>
                         </ul>
-
+                        {{-- {{dump($role_tab)}} --}}
+                        {{-- {{dump($role)}}  --}}
                         <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="6144000"/>
                         <input type="hidden" id="cover_image_delete" name="cover_image_delete" value=''>
                         <input type="hidden" id="logo_image_delete" name="logo_image_delete" value=''>
@@ -542,7 +543,10 @@
         var reader = new FileReader(); // instance of the FileReader
 
         $(document).ready(function () {
-
+            if(window.location.search.substring(1) == 'role_tab=role'){
+                // $('#info').hide();
+                $('#roles').click();
+            }
             $('#permissions').change(function() {
                 if($(this).is(':checked')) {
                     $('.checkall').prop("checked", true);
@@ -602,9 +606,7 @@
                 success: function (result) {
                     $('#name').val(result.model.display_name);
                     $.each($('.checkall'), function(key, val) {
-
                         $(val).prop('checked', false);
-                        
                         $.each(result.role_permissions, function(key, value) {
                             if($(val).val() == value) {
                                 $(val).prop('checked', true);
@@ -612,8 +614,19 @@
                         });
                     });
                 }
-              });
+            });
         });
+
+        $(document).on("click", ".checkall", function (e) {
+            var status = $(".checkall").length;
+            var check = $(".checkall:checked").length;
+            if(status == check){
+                $('input[id=permissions]').prop('checked',true);
+            } else {
+                $('input[id=permissions]').prop('checked',false);
+            }
+        });
+
 
     </script>
     <script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
