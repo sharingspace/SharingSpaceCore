@@ -126,6 +126,7 @@ class SubdomainMiddleware
                     }
                 }
             } else {
+                
                 if (($subdomain =='') || ($subdomain =='www')) {
                     $domain = 'app.'.extract_domain($parsed_url['host']);
                     $url = $parsed_url['scheme'].'://'.$domain;
@@ -134,7 +135,9 @@ class SubdomainMiddleware
                         $url = $parsed_url['scheme'].'://'.$domain.$parsed_url['path'];
                     }
                     
-                    return redirect($url);
+                     if($url != $request->url()) {
+                        return redirect($url);
+                    }
                 }
                 
             }
