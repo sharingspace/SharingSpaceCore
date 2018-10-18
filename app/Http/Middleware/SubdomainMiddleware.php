@@ -110,21 +110,34 @@ class SubdomainMiddleware
         }
 
             if(!\Auth::check()) {
-                if (($subdomain =='') || ($subdomain =='www') || ($subdomain =='app')) {$domain = extract_domain($parsed_url['host']);      
-                    $app_url  = $parsed_url['scheme'].'://'.'app.'.$domain.'/login';
+                if (($subdomain =='') || ($subdomain =='www') || ($subdomain =='app')) {
+
+                    $domain = extract_domain($parsed_url['host']); 
+
+                    if(isset($parsed_url['path'])) {
+                        
+                        $app_url = $parsed_url['scheme'].'://'.'app.'.$domain.$parsed_url['path'];
+                    } else {
+                        $app_url  = $parsed_url['scheme'].'://'.'app.'.$domain.'/login';
+                    }
+                    
                     if($app_url != $request->url()) {
                         return redirect($app_url);
                     }
                 }
             } else {
+                
                 if (($subdomain =='') || ($subdomain =='www')) {
                     $domain = 'app.'.extract_domain($parsed_url['host']);
                     $url = $parsed_url['scheme'].'://'.$domain;
+
                     if(isset($parsed_url['path'])) {
                         $url = $parsed_url['scheme'].'://'.$domain.$parsed_url['path'];
                     }
                     
-                    return redirect($url);
+                     if($url != $request->url()) {
+                        return redirect($url);
+                    }
                 }
                 
             }
