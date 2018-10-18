@@ -22,6 +22,7 @@
               <th data-sortable="true" class="name">{{trans('general.name')}}</th>
               <th data-sortable="true" class="location">{{trans('general.location')}}</th>
               <th data-sortable="false" class="bio">{{trans('general.members.bio')}}</th>
+              <th data-sortable="true" class="assigned-role">{{trans('general.members.assigned-role')}}</th>
               <th data-sortable="true">{{trans('general.members.member_since')}}</th>
             </tr>
           </thead>
@@ -48,6 +49,22 @@
                 <td>{{$member->location}}</td>
                 <td>
                   <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
+                </td>
+                <td>
+
+                @if (Permission::adminRole($member, $whitelabel_group))
+                  <p align="center"> <strong> ---- </strong></p>
+                @else
+                  @if(Permission::checkPermission('assign-role-permission', $whitelabel_group))
+                    {!! Form::open(['route' => 'admin.assign-role.update', 'method' => 'post', 'role'=>'form','class'=>'role_form']) !!}
+                    
+                      {{ Form::select('role_id', $roles, Permission::getSelectedRole($member, $whitelabel_group) ,['class' => 'form-control assignRole']) }}
+                      <input type="hidden" name="user_id" value="{{$member->id}}">
+                    {{ Form::close() }}
+                    @else
+                      <p align="center"> <strong> ---- </strong></p>
+                    @endif
+                @endif
                 </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>
@@ -89,6 +106,10 @@ $(document).ready(function() {
       }
     });
 
+});
+
+$(document).on("change",".assignRole",function(){
+  $(this).parent(".role_form").submit();
 });
 
 </script>

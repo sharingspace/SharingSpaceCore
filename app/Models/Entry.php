@@ -197,12 +197,16 @@ class Entry extends Model
      * @since  [v1.0]
      * @return mixed
      */
-    public static function saveImageToDB($entry_id, $filename, $type, $user_id, $upload_key = null)
+    public static function saveImageToDB($entry_id = null, $filename, $type, $user_id, $upload_key = null)
     {
+        
+
         LOG::debug('Entry::saveImageToDB entry_id = ' . $entry_id . ', filename = ' . $filename . ', type = ' . $type . ', user_id = ' . $user_id . ', upload_key = ' . $upload_key);
 
         $media = new Media();
-        $media->entry_id = $entry_id;
+        if ($entry_id) {
+            $media->entry_id = $entry_id;
+        }
         $media->upload_key = $upload_key;
         $media->filename = $filename;
         $media->filetype = 'image';
