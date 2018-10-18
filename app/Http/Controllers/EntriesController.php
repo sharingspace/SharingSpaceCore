@@ -788,7 +788,7 @@ class EntriesController extends Controller
 
                 if (isset($parsed['scheme']) && strtolower($parsed['scheme']) == 'https') {
                     // If it is https, change it to http
-                   // $url = 'http://' . substr($url, 8);
+                    $url = 'http://' . substr($url, 8);
                     list($width, $height) = getimagesize($url . $image_url);
                     $aspect_ratio = round($width / (float)$height, 1);
                 }
