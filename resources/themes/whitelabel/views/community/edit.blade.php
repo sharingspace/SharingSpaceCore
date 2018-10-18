@@ -6,25 +6,29 @@
     @parent
 @stop
 
-
 {{-- Page content --}}
 @section('content')
-
     <section class="container">
         <div id="edit_wrapper" class="container margin-top-20">
             <div class="row">
                 <h1 class="margin-bottom-0 size-24 text-center">{{ trans('general.community.settings') }}</h1>
 
-                <!-- Entry -->
-                <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
-                    <ul class="nav nav-tabs nav-top-border">
-                        <li class="active"><a href="#info" data-toggle="tab">{{trans('general.community.basic')}}</a></li>
-                        <li><a href="#hub_images" data-toggle="tab">{{trans('general.community.images')}}</a></li>
-                        <li><a href="#advanced" data-toggle="tab">{{trans('general.community.advanced')}}</a></li>
-                    </ul>
+                <form method="post" action="{{ route('_edit_share') }}" enctype="multipart/form-data" id="edit_share" role="form">
+                {!! csrf_field() !!}
 
-                    <form method="post" action="{{ route('_edit_share') }}" enctype="multipart/form-data" autocomplete="off" id="edit_share">
-                        {!! csrf_field() !!}
+                    <!-- Entry -->
+                    <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
+                        <ul class="nav nav-tabs nav-top-border">
+                            <li class="active"><a href="#info" data-toggle="tab" aria-expanded="true"> {{trans('general.community.basic')}} </a></li>
+                            <li><a href="#hub_images" data-toggle="tab">{{trans('general.community.images')}}</a></li>
+                            <li><a href="#advanced" data-toggle="tab">{{trans('general.community.advanced')}}</a></li>
+                            <li>
+                                @if(Permission::checkPermission('manage-role', $whitelabel_group))
+                                <a href="#roles" data-toggle="tab" aria-expanded="false">{{trans('general.role.roles')}}</a>
+                                @endif
+                            </li>
+                        </ul>
+
                         <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="6144000"/>
                         <input type="hidden" id="cover_image_delete" name="cover_image_delete" value=''>
                         <input type="hidden" id="logo_image_delete" name="logo_image_delete" value=''>
@@ -65,10 +69,10 @@
 
                                         <!-- Description -->
                                         <div class="form-group {{ $errors->first('about', 'has-error') }}">
-                                            <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a target="_blank" href="
-https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i class='fa fa-info-circle'></i></a> )
-                                                <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info"
-                                                          placeholder="{{trans('general.community.detailed_description')}}">{{ Input::old('about', $community->about) }}</textarea>
+                                            <label class="input">{{trans('general.community.description')}} ({{trans('general.markdown')}} <a target="_blank" href="https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-markdown"><i class='fa fa-info-circle'></i></a> )
+                                                <textarea name="about" rows="5" class="form-control" data-maxlength="200" id="about" data-info="textarea-words-info" placeholder="{{trans('general.community.detailed_description')}}">
+                                                    {{ Input::old('about', $community->about) }}
+                                                </textarea>
                                             </label>
                                         </div> <!-- Description -->
 
@@ -91,20 +95,20 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 
 
                                         <label for="entry_layout" class="margin-top-15">{{trans('general.community.entry_layout')}}</label>
-                                    {!! Form::entry_layout('entry_layout', Input::old('entry_layout', $community->entry_layout)) !!}
-                                    {!! $errors->first('entry_layout', '<span class="help-block">:message</span>') !!}
+                                        {!! Form::entry_layout('entry_layout', Input::old('entry_layout', $community->entry_layout)) !!}
+                                        {!! $errors->first('entry_layout', '<span class="help-block">:message</span>') !!}
 
-                                    <!-- <label class="margin-top-15" for="info_bar" style="display: block;">
-                    Hide home page information bar?
-                    <input name="show_info_bar" type="checkbox" value="0"
-                    @if (!$whitelabel_group->show_info_bar)
-                                        checked
-@endif
-                                            >
-                                            <button type="button" class="" data-toggle="modal" data-target="#infoBarModal">
-                                              <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
-                                            </button>
-                                          </label>  -->
+                                        {{-- <label class="margin-top-15" for="info_bar" style="display: block;">
+                                        Hide home page information bar?
+                                        <input name="show_info_bar" type="checkbox" value="0"
+                                        @if (!$whitelabel_group->show_info_bar)
+                                                            checked
+                                        @endif
+                                                >
+                                                <button type="button" class="" data-toggle="modal" data-target="#infoBarModal">
+                                                  <i style='color:#5bc0de;' class='fa fa-info-circle'></i>
+                                                </button>
+                                              </label>  --}}
                                     </div> <!-- col-md-8 -->
 
                                     <div class="col-md-4 col-sm-4 col-xs-12" style="border-right:#CCC thin solid;">
@@ -215,9 +219,8 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                 </div> <!-- row -->
                             </div> <!-- IMAGES TAB -->
 
-
                             <!-- ADVANCED TAB -->
-                            <div class="tab-pane fade" id="advanced">
+                            <div class="tab tab-pane fade" id="advanced">
 
                                 <!-- Theme -->
                                 <div class="form-group">
@@ -339,21 +342,103 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                                 </fieldset>
                             </div> <!-- ADVANCED TAB -->
 
+                            <!-- ROLES TAB -->
+                            @if(Permission::checkPermission('manage-role', $whitelabel_group))
+                            <div class="tab tab-pane fade" id="roles">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-8">
+                                            {!! Form::hidden('role_id',null,['id' => 'role-id']) !!}
+                                                                        
+                                            <h2 class="margin-bottom-0  size-24 text-center">
+                                                {!!trans('general.role.create') !!}
+                                            </h2>
+
+                                            <section>
+                                                <div class="row">
+                                                    <!-- Name -->
+                                                    <div class="form-group {{ $errors->first('rolename', ' has-error') }}">
+                                                        <label for="name" class="input">{{trans('general.role.name')}} *
+                                                            <input id="name" type="text" name="rolename" class="form-control" placeholder="{{trans('general.role.name_placeholder')}}" value="">
+                                                            {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">   
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> 
+                                                            <label class="checkbox">
+                                                            {{ Form::checkbox('checkall', '', false, ['class' => 'exchanges', 'id' => 'permissions']) }}
+                                                            <i></i>Permissions
+                                                            </label>
+                                                        </div>
+                                                        <div class="panel-body">
+
+                                                        @foreach($permissions as  $permission)
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label class="checkbox col-md-12 margin-bottom-10">
+                                                                        {{ Form::checkbox('permissions['.$permission->id.']', $permission->id, 
+                                                                        isset($role_permissions) && in_array($permission->id,$role_permissions) ? true : false, ['class' => 'exchanges checkall']) }}
+                                                                            <i></i> {{ $permission->display_name }}
+                                                                    </label>
+                                                                </div>
+                                                            </div>        
+                                                        @endforeach
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+
+                                        <div class="col-xs-4">
+                                            <h2 class="margin-bottom-0  size-24 text-center">{{ trans('general.role.roles') }}</h2>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
+                                                @if(isset($roles) && count($roles) > 0)
+                                                    <div class="table-responsive">
+                                                        <table class="table table-condensed" id="members">
+                                                            <tbody>
+                                                                <tr>
+                                                                  <th class="col-md-3">{{ trans('general.role.name') }}</th>
+                                                                  <th class="col-md-2">{{ trans('general.role.permission') }}</th>
+                                                                  <th class="col-md-2">{{ trans('general.action') }}</th>
+                                                                </tr>
+                                                            @foreach ($roles as $role)
+                                                                <tr>
+                                                                    <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->display_name }}</a></td>
+                                                                    <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
+                                                                    <td class="col-md-1">
+                                                                        <a href="{{ route('admin.role.delete', $role->id) }}">
+                                                                      {{ trans('general.delete') }}
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- table responsive -->
+                                                @endif
+                                            </div> <!-- col-lg-12 -->
+                                        </div>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- ROLES TAB -->
+                            @endif
+
                         </div> <!-- tab-content -->
 
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                             <button class="btn btn-colored">{{ trans('general.community.save') }}</button>
                         </div>
-                    </form>
-                </div> <!-- col-10 -->
+                    </div> <!-- col-10 -->
+                </form>
             </div> <!-- row -->
         </div> <!-- edit_wrapper -->
-
         @include('./progress')
 
     </section> <!-- container -->
     <!-- / -->
-
 
     <!-- Modals -->
 
@@ -446,10 +531,48 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 @stop
 
 @section('custom_js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js" integrity="sha256-OOtvdnMykxjRaxLUcjV2WjcyuFITO+y7Lv+3wtGibNA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/cookie/bootstrap-table-cookie.min.js" integrity="sha256-w/PfNZrLr3ZTIA39D8KQymSlThKrM6qPvWA6TYcWrX0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/mobile/bootstrap-table-mobile.min.js" integrity="sha256-+G625AaRHZS3EzbW/2aCeoTykr39OFPJFfDdB8s0WHI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/extensions/export/bootstrap-table-export.min.js" integrity="sha256-Hn0j2CZE8BjcVTBcRLjiSJnLBMEHkdnsfDgYH3EAeVQ=" crossorigin="anonymous"></script>
+    <script src="{{ Helper::cdn('js/extensions/export/tableExport.js') }}"></script>
+    <script src="{{ Helper::cdn('js/extensions/export/jquery.base64.js') }}"></script>
+
     <script type="text/javascript">
         var reader = new FileReader(); // instance of the FileReader
 
         $(document).ready(function () {
+
+            $('#permissions').change(function() {
+                if($(this).is(':checked')) {
+                    $('.checkall').prop("checked", true);
+                }else {
+                    $('.checkall').prop("checked", false);
+                }
+            });
+
+            $('#members').bootstrapTable({
+                classes: 'table table-responsive table-no-bordered',
+                undefinedText: '',
+                iconsPrefix: 'fa',
+                showRefresh: false,
+                search: true,
+                pageSize: 20,
+                pagination: true,
+                sortable: true,
+                mobileResponsive: true,
+                formatShowingRows: function (pageFrom, pageTo, totalRows) {
+                    return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' members';
+                },
+                icons: {
+                    paginationSwitchDown: 'fa-caret-square-o-down',
+                    paginationSwitchUp: 'fa-caret-square-o-up',
+                    columns: 'fa-columns',
+                    refresh: 'fa-refresh'
+                }
+            });
+
+
             if ($('#cover_image_box').css('background-image') != 'none') {
                 $('#cover_image_container').show();
                 console.log($('#cover_image_box').css('background-image'));
@@ -467,8 +590,32 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
                 $('#select_all').prop('checked', false);
             });
         });
+        
+        $(document).on("click", ".role", function (e) {
+
+            var id = $(this).attr('role-id');
+            $('#role-id').val(id);
+            $.ajax({
+                url: '/admin/role/get-role-data/'+id,
+                method: 'GET',
+                dataType: "json",
+                success: function (result) {
+                    $('#name').val(result.model.display_name);
+                    $.each($('.checkall'), function(key, val) {
+
+                        $(val).prop('checked', false);
+                        
+                        $.each(result.role_permissions, function(key, value) {
+                            if($(val).val() == value) {
+                                $(val).prop('checked', true);
+                            }
+                        });
+                    });
+                }
+              });
+        });
 
     </script>
     <script src="{{ Helper::cdn('js/entry_utils.js')}}"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @stop

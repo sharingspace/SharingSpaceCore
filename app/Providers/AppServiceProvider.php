@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($this->app->environment('production') && !empty(env('ROLLBAR_TOKEN'))) {
+           $this->app->register(RollbarServiceProvider::class);
+        }
+    
     }
 
     /**

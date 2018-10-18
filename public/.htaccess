@@ -4,7 +4,11 @@
     </IfModule>
 
     RewriteEngine On
-
+   
+    # For Passport Authentication
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+    
     # Redirect Trailing Slashes If Not A Folder...
 
     RewriteCond %{HTTP:X-Forwarded-Proto} !https

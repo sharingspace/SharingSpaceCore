@@ -87,9 +87,9 @@
                 e.preventDefault();
                 var newUpload_key = Math.random().toString(36).substring(7);
                 $('#upload_key').val(newUpload_key);
-
+                
                 // do what you like with the input, if we have an image, handle that separately
-                if ($('#choose-file').val()) {
+                if ($('#entry_image').val()) {
                     // note. After uploadFiles completes it calls finish_submit()
                     uploadFiles();
                 }

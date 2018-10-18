@@ -66,7 +66,7 @@
                                         @if($entry->visible)
                                             {{ trans('general.entries.visible') }}
                                         @else
-                                            {{ trans('general.entries.not_visible') }}
+                                            {{trans('general.entries.not_visible') }}
                                         @endif
                                     @endif
                                 </div>
@@ -86,16 +86,20 @@
                             <!-- if user is admin or owner -->
                                 @can('update-entry', $entry)
                                     <div class="margin-bottom-3">
-                                        <div class="margin-top-10 listing-actions">
-                                            {{ Form::open(array('route'=>array('entry.delete.save',$entry->id))) }}
-                                            {{ Form::token()}}
-                                            <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom"
-                                               title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
-                                                <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
+                                        @if($entry->created_by == Auth::user()->id || Permission::checkPermission('edit-any-entry-permission', $whitelabel_group))
+                                            <div class="margin-top-10 listing-actions">
+                                                {{ Form::open(array('route'=>array('entry.delete.save',$entry->id))) }}
+                                                {{ Form::token()}}
+                                                <a href="{{ route('entry.edit.form', $entry->id) }}" class="btn btn-xs btn-light-colored tooltipEnable" data-container="body" data-toggle="tooltip" data-placement="bottom"
+                                                   title="Edit This {{ strtoupper($entry->post_type) }}" data-mm-track-label="Edit from Tile View">
+                                                    <i class="fa fa-pencil"></i> {{trans('general.entries.edit_entry')}}</a>
+                                                @if($entry->created_by == Auth::user()->id || Permission::checkPermission('delete-any-entry-permission', $whitelabel_group))     
+                                                    <button type="submit" class="btn btn-xs btn-dark-colored margin-left-5"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
+                                                @endif
 
-                                            <button type="submit" class="btn btn-xs btn-dark-colored margin-left-5"><i class='fa fa-trash'></i> {{trans('general.entries.delete')}}</button>
-                                            {{ Form::close() }}
-                                        </div> <!-- listing-actions -->
+                                                {{ Form::close() }}
+                                            </div> <!-- listing-actions -->
+                                        @endif
                                     </div> <!-- if user is admin or owner -->
                                 @endcan
                             </div> <!-- col-8/12 -->
@@ -120,7 +124,7 @@
                                 <li>
                                     <a href="#view_images_tab" role="tab" data-toggle="tab">{{ trans('general.entries.more_images') }}</a>
                                 </li>
-                        @endif
+                            @endif 
 
                         <!-- <li><a id="view_map_tab" href="#view_map" role="tab" data-toggle="tab">View Map</a></li> -->
                         <!-- <li>
