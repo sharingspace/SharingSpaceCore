@@ -23,10 +23,13 @@
     "chrisbjr/api-guard": "3.1.*",
     "mcamara/laravel-localization": "1.2.*",
     "watson/validating": "^2.0",
-    "doctrine/dbal": "^2.5",
+    "doctrine/dbal": "2.6.3",
     "laravel/tinker": "^1.0",
     "spatie/laravel-blade-javascript": "1.1.0",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "laravel/passport": "4.0.3",
+    "barryvdh/laravel-cors": "^0.11.0",
+    "spatie/laravel-permission": "^2.12"
 
   },
   "repositories": [
@@ -49,6 +52,7 @@
       "database",
       "app/Http/Transformers",
       "app/Helpers/Helper.php",
+      "app/Helpers/Permission.php",
       "app/Traits"
     ],
     "psr-4": {

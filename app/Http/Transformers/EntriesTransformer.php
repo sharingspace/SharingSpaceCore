@@ -10,7 +10,11 @@ class EntriesTransformer
     {
         $entries_array = array();
         foreach ($entries as $entry) {
-
+            if(is_null($entry->author)) {
+                $author = '';
+            } else {
+                $author = e($entry->author->getDisplayName());
+            }
             $entries_array[] = [
                 'id' => e($entry->id),
                 'title' => e($entry->title),
@@ -22,7 +26,7 @@ class EntriesTransformer
                         'latitude' => e($entry->latitude),
                         'longitude' => e($entry->longitude),
                     ],
-                'author' => e($entry->author->getDisplayName()),
+                'author' => $author,
                 'created_at' => e($entry->created_at),
                 'tags' => e($entry->tags),
                 'expires' => e($entry->expires),
