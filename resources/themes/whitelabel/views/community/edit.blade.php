@@ -544,8 +544,7 @@
 
         $(document).ready(function () {
             if(window.location.search.substring(1) == 'role_tab=role'){
-                // $('#info').hide();
-                $('#roles').click();
+                $('a[href="#roles"]').click();
             }
             $('#permissions').change(function() {
                 if($(this).is(':checked')) {
