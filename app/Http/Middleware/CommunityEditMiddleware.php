@@ -14,12 +14,22 @@ class CommunityEditMiddleware
      */
     public function handle($request, Closure $next)
     {
+
         log::debug('CommunityEditMiddleware: entered');
+        
+        if($request->whitelabel_group == null) {
+            abort(404);
+        }
+        
         if (!Auth::user()) {
+
+
             //log::debug('CommunityEditMiddleware: not logged in');
             return redirect('home');
         }
+
         else if (!(Auth::user()->isSuperAdmin() || Auth::user()->isAdminOfCommunity($request->whitelabel_group))) {
+
             //log::debug('CommunityEditMiddleware: user is login in but not an admin (share or super)');
             return redirect('home');
         }

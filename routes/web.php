@@ -13,7 +13,6 @@
 | As such, it shouldn't use the apiguard middleware.
 |--------------------------------------------------------------------------
 */
-
 Route::group(
     array('prefix' => 'api/v1/slack'),
     function () {
