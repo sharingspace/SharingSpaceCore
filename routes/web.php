@@ -16,8 +16,8 @@
 
 Route::any('github-webhook', function(){
     
-    $event = Event::fire('github.webhook');
-     Log::info($event);
+    $event = \Event::fire('github.webhook');
+    return $event;
 
 
     
