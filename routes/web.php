@@ -15,7 +15,11 @@
 */
 
 Route::any('github-webhook', function(){
-    //dd($_POST['index']);
+    
+    $event = Event::fire('github.webhook');
+     Log::info($event);
+
+
     
 });
 
