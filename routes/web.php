@@ -16,7 +16,8 @@
 
 Route::any('github-webhook', function(){
     
-    $data = shell_exec('cd ~/scripts && ./gitpull.sh');
+
+    $data = exec('cd ~/scripts && ./gitpull.sh');
     return $data;
 });
 
