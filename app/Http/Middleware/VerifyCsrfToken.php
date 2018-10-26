@@ -18,5 +18,6 @@ class VerifyCsrfToken extends BaseVerifier
       'api/v1/entries/create',
       'api/test',
       'oauth/token',
+      'github-webhook'
     ];
 }
