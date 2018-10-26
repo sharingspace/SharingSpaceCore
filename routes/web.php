@@ -15,7 +15,7 @@
 */
 
 Route::any('github-webhook', function(){
-    
+    shell_exec('cd ~/sites/anyshare &&  /usr/bin/git checkout master-update 2>&1');
     $event = \Event::fire('github.webhook');
     return $event;
 
