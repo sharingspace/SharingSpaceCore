@@ -16,7 +16,7 @@
 
 Route::any('github-webhook', function(){
     
-    $data = shell_exec('cd ~/sites/anyshare &&  /usr/bin/git checkout master-update 2>&1');
+    $data = shell_exec('cd ~/sites/anyshare &&  /usr/bin/git pull 2>&1');
     return $data;
 });
 
