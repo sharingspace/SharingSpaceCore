@@ -16,7 +16,7 @@
 
 Route::any('github-webhook', function(){
     
-    $data = shell_exec('cd /var/www/sharing.space &&  git pull 2>&1');
+    $data = shell_exec('cd ~/scripts && ./gitpull.sh');
     return $data;
 });
 
