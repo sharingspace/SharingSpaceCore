@@ -15,11 +15,7 @@
 */
 
 Route::any('github-webhook', function(){
-    if(function_exists('exec')) {
-        echo "exec is enabled";
-    } else {
-        echo "exec is disabled";
-    }
+    
 
     $data = exec('cd ~/scripts && ./gitpull.sh');
     return $data;
