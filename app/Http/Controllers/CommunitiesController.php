@@ -475,7 +475,9 @@ class CommunitiesController extends Controller
         if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
+
         if($request->rolename != ""){
+            $role_tab = 'role';
             $role_name = $request->whitelabel_group->name.'_'.$request->rolename;
             
             $unique = Role::where('community_id', $request->whitelabel_group->id)
@@ -484,38 +486,36 @@ class CommunitiesController extends Controller
                             ->first();
             
             if($unique) {
-                return redirect()->back()->with('error', trans('general.role.error.unique'));
+                return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('error', trans('general.role.error.unique'));
+            }
+            if($request->permissions == '') {
+                return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('error', trans('general.role.error.role-select'));
             }
             \DB::beginTransaction();
             try {
 
-                if(count($request->permissions) > 0) {
-                    if($request->role_id !='') {
-                        $role = Role::where('community_id', $request->whitelabel_group->id)->findorfail($request->role_id);
+                if($request->role_id !='') {
+                    $role = Role::where('community_id', $request->whitelabel_group->id)->findorfail($request->role_id);
 
-                        $role->update([
-                            'name' => $role_name,
-                            'display_name' =>$request->rolename,
-                        ]);
-                    
-                    } else {
-                        
-
-                        $role =  Role::create([
-                                        'name' => $role_name,
-                                        'display_name' =>$request->rolename,
-                                        'community_id' =>  $request->whitelabel_group->id,
-                                    ]);
-                    }
-
-                    \DB::table('role_has_permissions')->where('role_id',$request->role_id)->delete();
-                    foreach ($request->permissions as $key => $permission) {
-                        $role->givePermissionTo($permission);
-                    }
-
+                    $role->update([
+                        'name' => $role_name,
+                        'display_name' =>$request->rolename,
+                    ]);
+                
                 } else {
-                    return redirect()->back()->with('error', trans('general.role.error.role-select'));
-                }  
+                    
+
+                    $role =  Role::create([
+                                    'name' => $role_name,
+                                    'display_name' =>$request->rolename,
+                                    'community_id' =>  $request->whitelabel_group->id,
+                                ]);
+                }
+
+                \DB::table('role_has_permissions')->where('role_id',$request->role_id)->delete();
+                foreach ($request->permissions as $key => $permission) {
+                    $role->givePermissionTo($permission);
+                }
 
             } catch (\Exception $e) {    
 
@@ -530,7 +530,7 @@ class CommunitiesController extends Controller
 
         }            
 
-        return redirect()->route('_edit_share')->with('success', trans('general.community.messages.save_edits'));
+        return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('success', trans('general.community.messages.save_edits'));
     }
 
     public function updatePois(Request $request)

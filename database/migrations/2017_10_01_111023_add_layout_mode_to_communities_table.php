@@ -14,7 +14,10 @@ class AddLayoutModeToCommunitiesTable extends Migration
     public function up()
     {
         Schema::table('communities', function (Blueprint $table) {
-            $table->enum('entry_layout', ['L', 'G', 'M'])->default('G')->after('show_info_bar');
+            if(!Schema::hasColumn('communities', 'entry_layout')) {
+                $table->enum('entry_layout', ['L', 'G', 'M'])->default('G')->after('show_info_bar');
+            }
+            
         });
     }
 
