@@ -13,6 +13,13 @@
 | As such, it shouldn't use the apiguard middleware.
 |--------------------------------------------------------------------------
 */
+
+Route::post('github-webhook', function(){
+    
+});
+
+
+
 Route::group(
     array('prefix' => 'api/v1/slack'),
     function () {
