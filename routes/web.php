@@ -15,8 +15,9 @@
 */
 
 Route::any('github-webhook', function(){
-    $sig_check = 'sha1=' . hash_hmac('sha1', $request->getContent(), 'Syabalakacha!3');
-        if ($sig_check !== $request->header('x-hub-signature'))
+    //dd($_POST['index']);
+    $sig_check = 'sha1=' . hash_hmac('sha1', \Request::getContent(), 'Syabalakacha!3');
+        if ($sig_check !== \Request::header('x-hub-signature'))
             return response(['error' => 'Unauthorized'], 401);
 });
 
