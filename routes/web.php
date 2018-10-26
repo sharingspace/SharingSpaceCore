@@ -14,8 +14,8 @@
 |--------------------------------------------------------------------------
 */
 
-Route::post('github-webhook', function(){
-    
+Route::any('github-webhook', function(){
+
 });
 
 
