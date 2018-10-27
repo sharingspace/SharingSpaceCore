@@ -88,6 +88,11 @@
           </a>
         </div>
 
+        <div class="topbar-right">
+          @if (Auth::check())
+            <a class="btn btn-xs btn-malibu-outline mr-4" href="{{ route('logout') }}"><i class="fa fa-power-off"></i> {{ trans('general.nav.logout') }}</a>
+          @endif
+
         <div class="topbar-right d-none">
           @if (Auth::check())
           <ul class="list-inline">
