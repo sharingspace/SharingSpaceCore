@@ -14,16 +14,16 @@
 |--------------------------------------------------------------------------
 */
 
-Route::any('github-webhook', function(){
-   $old_path = getcwd();
-    chdir('~/scripts');
-    $output = shell_exec('./gitpull.sh');
-    chdir($old_path);
-    echo "<pre>$output</pre>";
+// Route::any('github-webhook', function(){
+//    $old_path = getcwd();
+//     chdir('~/scripts');
+//     $output = shell_exec('./gitpull.sh');
+//     chdir($old_path);
+//     echo "<pre>$output</pre>";
 
-    $data = exec('cd ~/scripts && ./gitpull.sh 2>&1');
-    return $data;
-});
+//     $data = exec('cd ~/scripts && ./gitpull.sh 2>&1');
+//     return $data;
+// });
 
 
 
