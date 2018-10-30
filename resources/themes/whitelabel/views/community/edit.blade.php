@@ -590,6 +590,7 @@
                         $('a[href="#roles"]').click();
                       }
                     }
+                closeLoader();
                 },
                 error: function (error) {
                   var a = '';

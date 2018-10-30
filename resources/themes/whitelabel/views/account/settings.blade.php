@@ -296,6 +296,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 $( document ).ready(function() {
   $(document).on("click",".submit", function (e) {
     e.preventDefault();
+    startLoader();
     data = $(this).parents('form').serialize();
     callUrl = $(this).parents('form').attr('action');
    
@@ -331,6 +332,7 @@ $( document ).ready(function() {
             $('html,body').scrollTop(0);
 
           }
+      closeLoader();
       },
       error: function (error) {
         var a = '';
@@ -351,6 +353,7 @@ $( document ).ready(function() {
         
       }
     });
+    closeLoader();
   });
 
 

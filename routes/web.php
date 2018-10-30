@@ -532,8 +532,6 @@ Route::group(
                 Route::get('ask-permission','CommunitiesController@getAskPermission')->name('ask.permission');
 
                 Route::post('ask-permission/post','CommunitiesController@postAskPermission')->name('ask.permission.post');
-
-
             }
         );
 
