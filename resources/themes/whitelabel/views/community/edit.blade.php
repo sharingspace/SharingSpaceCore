@@ -572,8 +572,12 @@
                       $('html,body').scrollTop(0);
                     } else {
                       var a = '';
+                      var i = 0;
                       for(key in result.data){
-                        a += result.data[key][0] + '</br>';
+                        if(i == 0){
+                            a = result.data[key][0] + '</br>';
+                        }
+                        i++;
                       }
                       $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
                             <button type="button" class="close" data-dismiss="alert">×</button>\n\
@@ -589,8 +593,12 @@
                 },
                 error: function (error) {
                   var a = '';
+                  var i = 0;
                   for(key in error.responseJSON){
-                    a += error.responseJSON[key][0] + '</br>';
+                    if(i == 0){
+                        a = error.responseJSON[key][0] + '</br>';                   
+                    }
+                    i++;
                   }
                   $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
                             <button type="button" class="close" data-dismiss="alert">×</button>\n\

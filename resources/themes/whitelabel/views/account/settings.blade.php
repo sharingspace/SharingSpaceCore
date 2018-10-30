@@ -315,8 +315,12 @@ $( document ).ready(function() {
             $('html,body').scrollTop(0);
           } else {
             var a = '';
+            var i = 0;
             for(key in result){
-              a += result[key][0] + '</br>';
+              if(i == 0){
+                a = result[key][0] + '</br>';
+              }
+              i++;
             }
             $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
                             <button type="button" class="close" data-dismiss="alert">×</button>\n\
@@ -330,8 +334,12 @@ $( document ).ready(function() {
       },
       error: function (error) {
         var a = '';
+        var i = 0;
         for(key in error.responseJSON){
-          a += error.responseJSON[key][0] + '</br>';
+          if(i == 0){
+            a = error.responseJSON[key][0] + '</br>';
+          }
+          i++;
         }
         $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
                             <button type="button" class="close" data-dismiss="alert">×</button>\n\
