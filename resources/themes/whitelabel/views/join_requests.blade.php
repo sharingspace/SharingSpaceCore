@@ -12,10 +12,11 @@
 
 <div class="container">
 	<div class="row">
+    <div class="message1"></div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
         <div id="submission_error" style="display:none" >
 
-      </div>
+        </div>
     </div> <!-- col 10 -->
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <h1 class="margin-bottom-20  size-24 text-center">{{trans('general.user.join_requests')}}</h1>
@@ -91,7 +92,13 @@ $(document).ready(function() {
     $.get("accept", data, function (replyData)
     {
       if (replyData.success) {
-        displayFlashMessage('success', replyData);
+        $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
+                                <i class="fa fa-check"></i>\n\
+                            <strong>Success:</strong> '+replyData.message+'\n\
+                          </div>');
+        $(".message1").show();
+        // displayFlashMessage('success', replyData);
 
         // now remove this request entry from our table
         $('#request_'+replyData.user_id).fadeOut(600, function() {
@@ -107,10 +114,18 @@ $(document).ready(function() {
         }
       } 
       else {
-        console.log("accept: fail");
+        $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+replyData.message+'\n\
+                          </div>');
+        $(".message1").show();
+        $('html,body').scrollTop(0);
+        // displayFlashMessage('danger', replyData);
+        // console.log("accept: fail");
       }
     }).fail(function (jqxhr,errorStatus) {
-      console.log("accept: fail");
+      console.log("fail");
     }).always(function() {
     });
   }

@@ -1,4 +1,4 @@
-@extends('layouts/master')
+@extends('layouts.master')
 
 {{-- Page title --}}
 @section('title')
@@ -262,7 +262,6 @@
 
     <script>
         $(document).ready(function () {
-
             initializeEntryMap(window.entry, window.community, {
                 editable: false,
             })

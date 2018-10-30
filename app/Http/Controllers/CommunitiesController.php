@@ -461,8 +461,10 @@ class CommunitiesController extends Controller
         if (Input::hasFile('logo')) {
             $community->uploadImage(Auth::user(), Input::file('logo'), 'community-logos');
         }
-
         if (!$community->save()) {
+            if($request->ajax()){
+                return Helper::ajaxresponse(false, 'Failed', $community->getErrors());
+            }
             return Redirect::back()->withInput()->withErrors($community->getErrors());
         }
 
@@ -475,7 +477,8 @@ class CommunitiesController extends Controller
         if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
-
+        
+        $role_tab = '';
         if($request->rolename != ""){
             $role_tab = 'role';
             $role_name = $request->whitelabel_group->name.'_'.$request->rolename;
@@ -486,9 +489,17 @@ class CommunitiesController extends Controller
                             ->first();
             
             if($unique) {
+                if($request->ajax()){
+                    $error[][] = trans('general.role.error.unique');
+                    return Helper::ajaxresponse(false, $role_tab, $error);
+                }
                 return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('error', trans('general.role.error.unique'));
             }
             if($request->permissions == '') {
+                if($request->ajax()){
+                    $error[][] = trans('general.role.error.role-select');
+                    return Helper::ajaxresponse(false, $role_tab, $error);
+                }
                 return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('error', trans('general.role.error.role-select'));
             }
             \DB::beginTransaction();
@@ -520,14 +531,20 @@ class CommunitiesController extends Controller
             } catch (\Exception $e) {    
 
                 \DB::rollback();  
-                dd($e);  
-            
+                // dd($e);
+                if($request->ajax()){
+                    $error[][] = 'Something went to wrong';
+                    return Helper::ajaxresponse(false, $role_tab, $error);
+                }
             } finally { 
                 \DB::commit();
                 
                 // $message = trans('general.role.updated');
             }
 
+        }
+        if($request->ajax()){
+            return Helper::ajaxresponse(true, trans('general.community.messages.save_edits'), $role_tab);
         }            
 
         return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('success', trans('general.community.messages.save_edits'));

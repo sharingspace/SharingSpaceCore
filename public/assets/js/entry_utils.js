@@ -283,6 +283,7 @@ function deleteEntry (object) {
 }
 
 function displayFlashMessage (status, message) {
+    $('#submission_error').hide();
     if ('success' == status) {
         $('#submission_error i').addClass("fa-check").removeClass("fa-exclamation-circle");
     }
@@ -292,6 +293,8 @@ function displayFlashMessage (status, message) {
 
     $('#submission_error').append(message);
     $('#submission_error').addClass("alert-" + status).show();
+    $('#submission_error').show();
+
 }
 
 function restorePlaceholder (element, ph_text) {

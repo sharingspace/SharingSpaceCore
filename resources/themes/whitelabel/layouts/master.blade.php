@@ -62,6 +62,7 @@
     <link rel="stylesheet" href="/assets/css/compiled/app.css?v={{ date('U') }}" type="text/css">
     <link href="/assets/css/color_scheme/{{$whitelabel_group->color}}.css" rel="stylesheet" type="text/css"/>
 
+    <link rel="stylesheet" type="text/css" href="/assets/css/loader.css">
 @yield('custom_css')
 
 <!-- Leaflet and WRLD Maps -->
@@ -138,7 +139,7 @@ mixpanel.init("0c8964feac7aebf9f40b95e1cfe55030");</script><!-- end Mixpanel -->
     <div id="share_content">@yield('content')</div>
 </main>
     <footer>@include('partials.footer')</footer>
-
+    @include('partials.loader')
 </div> <!-- /wrapper -->
 
 @if (isset($whitelabel_group))
@@ -155,9 +156,25 @@ mixpanel.init("0c8964feac7aebf9f40b95e1cfe55030");</script><!-- end Mixpanel -->
     @javascript('mapLat', $whitelabel_group->latitude ?: '')
     @javascript('mapLng', $whitelabel_group->longitude ?: '')
 @endif
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function startLoader() {
+        $("#loaderModal").modal('show');
+    }
+    function closeLoader() {
+        $("#loaderModal").modal('hide');
+    }
+            
+    // startLoader();
+    // $(document).ready(function(){
+    //     closeLoader();
+    // });
+</script>
 
 @yield('custom_js')
 
 @include('partials.geo-lookup')
+
 </body>
 </html>

@@ -10,6 +10,7 @@
 @section('content')
 
 <!-- -->
+<div class="message1"></div>
 <section>
 	<div class="container margin-top-20">
     <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.user.change_settings')}}</h1>
@@ -85,7 +86,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div>
 
 						<div class="col-md-12 form-group">
-							<button class="btn btn-colored pull-right">{{trans('general.user.save_personal_info')}}</button>
+							<button class="btn btn-colored pull-right submit">{{trans('general.user.save_personal_info')}}</button>
 						</div>
           </form>
 				</div> <!-- /PERSONAL INFO TAB -->
@@ -161,7 +162,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div> <!-- col-md-12 -->
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-colored pull-right">{{trans('general.user.save_socials')}}</button>
+							<button class="btn btn-colored pull-right submit">{{trans('general.user.save_socials')}}</button>
 						</div>
           </form>
   			</div> <!-- /SOCIAL TAB -->
@@ -204,7 +205,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
   					</div> <!-- row -->
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-colored pull-right">
+  						<button class="btn btn-colored pull-right submit">
                 {{trans('general.user.save_avatar')}}
               </button>
   					</div>
@@ -231,7 +232,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 						</div>
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-colored pull-right">{{trans('general.user.save_password')}}</button>
+							<button class="btn btn-colored pull-right submit">{{trans('general.user.save_password')}}</button>
 						</div>
           </form>
 				</div>
@@ -267,7 +268,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div>
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-colored pull-right">{{trans('general.user.save_privacy')}}</button>
+  						<button class="btn btn-colored pull-right submit">{{trans('general.user.save_privacy')}}</button>
   					</div>
           </form>
         </div> <!-- /PRIVACY TAB -->
@@ -283,7 +284,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">{{ Auth::user()->location }}</h3>
       </div>
       <a href="{{ route('user.profile', ['userId'=>Auth::user()->id]) }}">
-        <button class="btn btn-sm btn-colored">{{trans('general.settings.view_profile')}}</button>
+        <button class="btn btn-sm btn-colored submit">{{trans('general.settings.view_profile')}}</button>
       </a>
     </div>
 	</div> <!-- container -->
@@ -293,6 +294,59 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 <script type="text/javascript">
 
 $( document ).ready(function() {
+  $(document).on("click",".submit", function (e) {
+    e.preventDefault();
+    data = $(this).parents('form').serialize();
+    callUrl = $(this).parents('form').attr('action');
+   
+    $.ajax({
+      url: callUrl,
+      method: 'POST',
+      data: data,
+      dataType: "json",
+      success: function (result) {
+          if(result.status == true){
+            $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
+                                <i class="fa fa-check"></i>\n\
+                            <strong>Success:</strong> '+result.message+'\n\
+                          </div>');
+            $(".message1").show();
+            $('html,body').scrollTop(0);
+          } else {
+            var a = '';
+            for(key in result){
+              a += result[key][0] + '</br>';
+            }
+            $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+            $(".message1").show();
+            $('html,body').scrollTop(0);
+
+          }
+      },
+      error: function (error) {
+        var a = '';
+        for(key in error.responseJSON){
+          a += error.responseJSON[key][0] + '</br>';
+        }
+        $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+        $(".message1").show();
+            $('html,body').scrollTop(0);
+        
+      }
+    });
+  });
+
+
+
   $("#remove_img_button").hide();
   $("#delete_img_checkbox_label").hide();
 
@@ -355,7 +409,6 @@ $( document ).ready(function() {
         $("#delete_img_checkbox_label").show();
       }
     }
-
     return false;
   });
 
