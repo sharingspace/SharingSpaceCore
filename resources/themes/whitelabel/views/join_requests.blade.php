@@ -91,6 +91,8 @@ $(document).ready(function() {
     data={displayName:name, user_id:user_id};
     $.get("accept", data, function (replyData)
     {
+      startLoader();
+
       if (replyData.success) {
         $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
@@ -124,9 +126,14 @@ $(document).ready(function() {
         // displayFlashMessage('danger', replyData);
         // console.log("accept: fail");
       }
+      closeLoader();
     }).fail(function (jqxhr,errorStatus) {
       console.log("fail");
+      closeLoader();
+
     }).always(function() {
+      closeLoader();
+
     });
   }
 
@@ -142,8 +149,15 @@ $(document).ready(function() {
     data={displayName:name, user_id:user_id};
     $.get("reject", data, function (replyData)
     {
+      startLoader();
       if (replyData.success) {
-        displayFlashMessage('success', replyData);
+        $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
+                                <i class="fa fa-check"></i>\n\
+                            <strong>Success:</strong> '+replyData.message+'\n\
+                          </div>');
+        $(".message1").show();
+        // displayFlashMessage('success', replyData);
 
         // now remove this request entry from our table
         $('#request_'+replyData.user_id).fadeOut(600, function() {
@@ -159,11 +173,21 @@ $(document).ready(function() {
         }
       } 
       else {
+        $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+replyData.message+'\n\
+                          </div>');
+        $(".message1").show();
+        $('html,body').scrollTop(0);
         console.log("reject: fail");
       }
+      closeLoader();
     }).fail(function (jqxhr,errorStatus) {
       console.log("reject: fail");
+      closeLoader();
     }).always(function() {
+      closeLoader();
     });
   }
 
