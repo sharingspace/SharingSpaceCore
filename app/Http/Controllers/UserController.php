@@ -356,7 +356,7 @@ class UserController extends Controller
             }
             else {
                 return response()->json(['success'=>false, 'alert_class' => 'danger', 'message'=>'Unable to join', 'user_id'=>Input::get('user_id')]);
-                return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
+               // return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
             }
         }
         else {
