@@ -350,6 +350,38 @@ class CommunitiesController extends Controller
         }
     }
 
+    public function createDefaultRoles($request) {
+        
+
+
+        \DB::beginTransaction();
+        try { 
+
+            $name = $request->whitelabel_group->name.'_Administrator';
+            $role_exist = Role::where('name',$name)
+                                    ->where('community_id',$request->whitelabel_group->id)
+                                    ->first();
+            
+            if(empty($role_exist)) {
+                    
+                $role = Role::create([
+                    'name' => $name,
+                    'guard_name' => 'web',
+                    'display_name' => 'Administrator',
+                    'community_id' =>  $request->whitelabel_group->id
+                ]);
+
+                foreach (P::all() as $key => $permission) {
+                    $role->givePermissionTo($permission->id);
+                }
+            }
+            
+        } catch (\Exception $e) {                
+            \DB::rollback();          
+        }
+        \DB::commit();
+    }
+
     /**
      * Returns a view that makes a form to edit community details.
      *
@@ -360,6 +392,8 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
+        $this->createDefaultRoles($request);
+
         if(!Permission::checkPermission('edit-sharing-network-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
@@ -381,7 +415,7 @@ class CommunitiesController extends Controller
         if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
-        
+            
         
         $data['permissions'] = P::all();
         $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)->get();
