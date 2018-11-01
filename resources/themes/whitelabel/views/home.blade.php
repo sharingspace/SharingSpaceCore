@@ -260,11 +260,13 @@
             }
 
             function masonryLayout (data) {
+                
                 var count = data['total'];
                 var item, contents, postType;
 
                 for (var i = 0; i < count; i++) {
                     item = $(".clone").clone().appendTo("#entry_browse_grid").removeClass('clone hidden');
+                    console.log(item);
                     postType = data['rows'][i]['post_type'];
                     natural_post_type = data['rows'][i]['natural_post_type'];
                     author_name = data['rows'][i]['author_name'];
@@ -303,7 +305,8 @@
 
                     $(item).addClass(postType.toLowerCase() + '_color');
                     $(item).attr('id', 'entry-' + entry_id);
-                    $(item).html(contents);
+                    
+                    $(item).append(contents);
                 }
 
                 fadeOutSpinner();
@@ -313,11 +316,11 @@
             }
 
 
-            function getEntries (entries) {
+            function getEntries (offset = '', limit = '') {
                 $.ajax({
                     type: "GET",
                     _token: CSRF_TOKEN,
-                    url: "{{ route('json.browse') }}",
+                    url: "{{ route('json.browse') }}?offset="+offset+"&limit="+limit,
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         entryRows = data;
@@ -368,8 +371,17 @@
                     }
                 });
             }
-
-            getEntries();
+            var offset = 0; 
+            var limit = 10;
+            getEntries(offset, limit); //initial content load
+            $(window).scroll(function() { //detect page scroll
+                if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
+                    offset = offset+10;
+                    limit = limit+10;
+                    getEntries(offset, limit);   
+                }
+            });
+            
 
             // we off screen the table headers as they are obvious.
             $('table').on("click", '[id^=delete_entry_]', function () {

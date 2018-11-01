@@ -713,12 +713,12 @@ class EntriesController extends Controller
             $offset = 0;
         }
 
-        //if (Input::has('limit')) { pagination stuff and we may need it one day - dsl
-        //    $limit = e(Input::get('limit'));
-        //}
-        //else {
-        //    $limit = 50;
-        //}
+        if (Input::has('limit')) { 
+           $limit = e(Input::get('limit'));
+        }
+        else {
+           $limit = 10;
+        }
 
         $allowed_columns = [
             'title',
@@ -734,9 +734,11 @@ class EntriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
 
-        $entries = $entries->orderBy($sort, $order)->get();
+        $entries = $entries->orderBy($sort, $order)->paginate($offset, $limit)->get();
         $count = $entries->count();
-        // $entries = $entries->skip($offset)->take($limit)->get(); pagination stuff and we may need it one day - dsl
+
+
+        
 
         $rows = [];
 
