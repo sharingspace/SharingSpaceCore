@@ -59,6 +59,15 @@
             <div class="grid-item clone hidden"></div>
         </div>
         <!-- End entries grid -->
+        <div class="row">
+            <div class="col-md-6">
+                <button class="pull-left btn btn-default prev">Prev</button>
+            </div>
+
+            <div class="col-md-6">
+                <button class="pull-right btn btn-default next">Next</button>
+            </div>
+        </div>
         <!-- Begin entries map -->
     @include('partials.map', ['size' => '720'])
     <!-- End entries map -->
@@ -260,13 +269,11 @@
             }
 
             function masonryLayout (data) {
-                
                 var count = data['total'];
                 var item, contents, postType;
 
                 for (var i = 0; i < count; i++) {
                     item = $(".clone").clone().appendTo("#entry_browse_grid").removeClass('clone hidden');
-                    console.log(item);
                     postType = data['rows'][i]['post_type'];
                     natural_post_type = data['rows'][i]['natural_post_type'];
                     author_name = data['rows'][i]['author_name'];
@@ -314,17 +321,29 @@
 
                 bindSearch(gridSearch);
             }
+            var totalpages;
 
-
-            function getEntries (offset = '', limit = '') {
+            function getEntries (entries) {
+                startLoader();
+                if(entries == 1){
+                    $('.prev').hide();
+                } else {
+                    $('.prev').show();
+                }
                 $.ajax({
                     type: "GET",
                     _token: CSRF_TOKEN,
-                    url: "{{ route('json.browse') }}?offset="+offset+"&limit="+limit,
+                    url: "{{ route('json.browse') }}?page="+entries,
+                    // ?offset="+offset+"&limit="+limit,
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         entryRows = data;
-
+                        totalpages = data.entries/10;
+                        if(entries > totalpages){
+                            $('.next').hide();
+                        } else {
+                            $('.next').show();
+                        }
                         if (data['viewType'] === 'G') {
                             masonryLayout(data);
                             $('#listView').addClass("dim-icon");
@@ -370,18 +389,38 @@
                         }
                     }
                 });
+                closeLoader();
             }
-            var offset = 0; 
-            var limit = 10;
-            getEntries(offset, limit); //initial content load
-            $(window).scroll(function() { //detect page scroll
-                if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
-                    offset = offset+10;
-                    limit = limit+10;
-                    getEntries(offset, limit);   
+            // var offset = 0; 
+            // var limit = 10;
+            // getEntries(offset, limit); //initial content load
+            // $(window).scroll(function() { //detect page scroll
+            //     if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
+            //         offset = offset+10;
+            //         limit = limit+10;
+            //         getEntries(offset, limit);   
+            //     }
+            // });
+            var prev = 1;
+            if(prev == 1){
+                $('.prev').hide();
+            }
+            getEntries(prev);
+            $('.prev').click(function(){
+                startLoader();
+                if(prev > 1){
+                    prev--;
+                    getEntries(prev);
                 }
+                closeLoader();
             });
-            
+
+            $('.next').click(function(){
+                startLoader();
+                prev++;
+                getEntries(prev);
+                closeLoader();
+            })
 
             // we off screen the table headers as they are obvious.
             $('table').on("click", '[id^=delete_entry_]', function () {
