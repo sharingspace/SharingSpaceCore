@@ -706,19 +706,19 @@ class EntriesController extends Controller
             $entries->textSearch(e(Input::get('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        }
-        else {
-            $offset = 0;
-        }
+        // if (Input::has('offset')) {
+        //     $offset = e(Input::get('offset'));
+        // }
+        // else {
+        //     $offset = 0;
+        // }
 
-        //if (Input::has('limit')) { pagination stuff and we may need it one day - dsl
+        // if (Input::has('limit')) { 
         //    $limit = e(Input::get('limit'));
-        //}
-        //else {
-        //    $limit = 50;
-        //}
+        // }
+        // else {
+        //    $limit = 10;
+        // }
 
         $allowed_columns = [
             'title',
@@ -734,9 +734,10 @@ class EntriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
 
-        $entries = $entries->orderBy($sort, $order)->get();
-        $count = $entries->count();
-        // $entries = $entries->skip($offset)->take($limit)->get(); pagination stuff and we may need it one day - dsl
+        // $entries = $entries->orderBy($sort, $order)->paginate($offset, $limit)->get();
+
+        $entries = $entries->orderBy($sort, $order)->pagination(10);
+        $count = $entries->count();        
 
         $rows = [];
 
@@ -908,6 +909,7 @@ class EntriesController extends Controller
             'rows'     => $rows,
             'pois'     => $allPois,
             'viewType' => $entryLayout,
+            'entries'  => $entries->total(),
         ];
     }
 

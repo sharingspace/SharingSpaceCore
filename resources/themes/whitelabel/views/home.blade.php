@@ -59,6 +59,15 @@
             <div class="grid-item clone hidden"></div>
         </div>
         <!-- End entries grid -->
+        <div class="row">
+            <div class="col-md-6">
+                <button class="pull-left btn btn-default prev">Prev</button>
+            </div>
+
+            <div class="col-md-6">
+                <button class="pull-right btn btn-default next">Next</button>
+            </div>
+        </div>
         <!-- Begin entries map -->
     @include('partials.map', ['size' => '720'])
     <!-- End entries map -->
@@ -303,7 +312,8 @@
 
                     $(item).addClass(postType.toLowerCase() + '_color');
                     $(item).attr('id', 'entry-' + entry_id);
-                    $(item).html(contents);
+                    
+                    $(item).append(contents);
                 }
 
                 fadeOutSpinner();
@@ -311,17 +321,29 @@
 
                 bindSearch(gridSearch);
             }
-
+            var totalpages;
 
             function getEntries (entries) {
+                startLoader();
+                if(entries == 1){
+                    $('.prev').hide();
+                } else {
+                    $('.prev').show();
+                }
                 $.ajax({
                     type: "GET",
                     _token: CSRF_TOKEN,
-                    url: "{{ route('json.browse') }}",
+                    url: "{{ route('json.browse') }}?page="+entries,
+                    // ?offset="+offset+"&limit="+limit,
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
                         entryRows = data;
-
+                        totalpages = data.entries/10;
+                        if(entries > totalpages){
+                            $('.next').hide();
+                        } else {
+                            $('.next').show();
+                        }
                         if (data['viewType'] === 'G') {
                             masonryLayout(data);
                             $('#listView').addClass("dim-icon");
@@ -367,9 +389,38 @@
                         }
                     }
                 });
+                closeLoader();
             }
+            // var offset = 0; 
+            // var limit = 10;
+            // getEntries(offset, limit); //initial content load
+            // $(window).scroll(function() { //detect page scroll
+            //     if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
+            //         offset = offset+10;
+            //         limit = limit+10;
+            //         getEntries(offset, limit);   
+            //     }
+            // });
+            var prev = 1;
+            if(prev == 1){
+                $('.prev').hide();
+            }
+            getEntries(prev);
+            $('.prev').click(function(){
+                startLoader();
+                if(prev > 1){
+                    prev--;
+                    getEntries(prev);
+                }
+                closeLoader();
+            });
 
-            getEntries();
+            $('.next').click(function(){
+                startLoader();
+                prev++;
+                getEntries(prev);
+                closeLoader();
+            })
 
             // we off screen the table headers as they are obvious.
             $('table').on("click", '[id^=delete_entry_]', function () {
