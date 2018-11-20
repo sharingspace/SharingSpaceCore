@@ -8,7 +8,7 @@
 
 {{-- Page content --}}
 @section('content')
-
+    @if(Permission::checkPermission('view-entry-details-permission', $whitelabel_group))
     <section class="container padding-top-15 padding-bottom-25">
         <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
         <div class="row">
@@ -26,53 +26,54 @@
             </div>
         </div>
     </section>
+    
+        <!-- Begin entries table -->
+        <section id="browse_table" class="container">
+            <table class="table table-condensed"
+                   name="communityListings"
+                   id="entry_browse_table"
+                   data-sort-name="created_at"
+                   data-sort-order="desc"
+                   data-cookie="true"
+                   data-cookie-id-table="communityListingv1-{{ $whitelabel_group->id }}">
+                <thead>
+                <tr>
+                    <th data-sortable="false" data-field="image">{{ trans('general.members.image')}}</th>
+                    <th data-sortable="true" data-field="post_type_link">{{ trans('general.type') }}</th>
+                    <th data-sortable="true" data-field="title_link" class="title_link">{{ trans('general.entry') }}</th>
+                    <th data-sortable="true" data-field="display_name" class="hidden-xs">{{ trans('general.entries.posted_by') }}</th>
+                    <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
+                    <th data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
+                    <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
+                    <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.keywords') }}</th>
+                    <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.actions') }}</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- End entries table -->
+        </section>
 
-    <!-- Begin entries table -->
-    <section id="browse_table" class="container">
-        <table class="table table-condensed"
-               name="communityListings"
-               id="entry_browse_table"
-               data-sort-name="created_at"
-               data-sort-order="desc"
-               data-cookie="true"
-               data-cookie-id-table="communityListingv1-{{ $whitelabel_group->id }}">
-            <thead>
-            <tr>
-                <th data-sortable="false" data-field="image">{{ trans('general.members.image')}}</th>
-                <th data-sortable="true" data-field="post_type_link">{{ trans('general.type') }}</th>
-                <th data-sortable="true" data-field="title_link" class="title_link">{{ trans('general.entry') }}</th>
-                <th data-sortable="true" data-field="display_name" class="hidden-xs">{{ trans('general.entries.posted_by') }}</th>
-                <th data-sortable="false" data-field="exchangeTypes">{{ trans('general.entries.exchange') }}</th>
-                <th data-sortable="true" data-field="location">{{ trans('general.location') }}</th>
-                <th data-sortable="true" data-field="created_at">{{ trans('general.entries.created_at') }}</th>
-                <th class="hidden-xs" data-sortable="false" data-field="tags" data-visible="false">{{ trans('general.keywords') }}</th>
-                <th data-sortable="false" data-field="actions" data-visible="false">{{ trans('general.actions') }}</th>
-            </tr>
-            </thead>
-        </table>
-        <!-- End entries table -->
-    </section>
 
-    <section class="container margin-y-0 padding-y-0">
-        <!-- Begin entries grid -->
-        <div id="entry_browse_grid" class="grid">
-            <div class="grid-item clone hidden"></div>
-        </div>
-        <!-- End entries grid -->
-        <div class="row">
-            <div class="col-md-6">
-                <button class="pull-left btn btn-default prev">Prev</button>
+        <section class="container margin-y-0 padding-y-0">
+            <!-- Begin entries grid -->
+            <div id="entry_browse_grid" class="grid">
+                <div class="grid-item clone hidden"></div>
             </div>
+            <!-- End entries grid -->
+            {{-- <div class="row">
+                <div class="col-md-6">
+                    <button class="pull-left btn btn-default prev">Prev</button>
+                </div>
 
-            <div class="col-md-6">
-                <button class="pull-right btn btn-default next">Next</button>
-            </div>
-        </div>
-        <!-- Begin entries map -->
-    @include('partials.map', ['size' => '720'])
-    <!-- End entries map -->
-    </section>
-
+                <div class="col-md-6">
+                    <button class="pull-right btn btn-default next">Next</button>
+                </div>
+            </div> --}}
+            <!-- Begin entries map -->
+        @include('partials.map', ['size' => '720'])
+        <!-- End entries map -->
+        </section>
+    @endif
     @include('./progress')
 @stop
 
@@ -333,7 +334,8 @@
                 $.ajax({
                     type: "GET",
                     _token: CSRF_TOKEN,
-                    url: "{{ route('json.browse') }}?page="+entries,
+                    url: "{{ route('json.browse') }}",
+                    // ?page="+entries
                     // ?offset="+offset+"&limit="+limit,
                     dataType: "json",
                     success: function (data, textStatus, jqXHR) {
@@ -393,7 +395,7 @@
             }
             // var offset = 0; 
             // var limit = 10;
-            // getEntries(offset, limit); //initial content load
+            getEntries(); //initial content load
             // $(window).scroll(function() { //detect page scroll
             //     if($(window).scrollTop() + $(window).height() >= $(document).height()) { //if user scrolled from top to bottom of the page
             //         offset = offset+10;
@@ -401,26 +403,26 @@
             //         getEntries(offset, limit);   
             //     }
             // });
-            var prev = 1;
-            if(prev == 1){
-                $('.prev').hide();
-            }
-            getEntries(prev);
-            $('.prev').click(function(){
-                startLoader();
-                if(prev > 1){
-                    prev--;
-                    getEntries(prev);
-                }
-                closeLoader();
-            });
+            // var prev = 1;
+            // if(prev == 1){
+            //     $('.prev').hide();
+            // }
+            // getEntries(prev);
+            // $('.prev').click(function(){
+            //     startLoader();
+            //     if(prev > 1){
+            //         prev--;
+            //         getEntries(prev);
+            //     }
+            //     closeLoader();
+            // });
 
-            $('.next').click(function(){
-                startLoader();
-                prev++;
-                getEntries(prev);
-                closeLoader();
-            })
+            // $('.next').click(function(){
+            //     startLoader();
+            //     prev++;
+            //     getEntries(prev);
+            //     closeLoader();
+            // })
 
             // we off screen the table headers as they are obvious.
             $('table').on("click", '[id^=delete_entry_]', function () {

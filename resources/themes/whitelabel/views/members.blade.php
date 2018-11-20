@@ -41,10 +41,11 @@
                   <i class="fa fa-star text-warning"></i>
                 @endif
 
-                @if ($member->pivot->custom_label!='')
+                {{-- @if ($member->pivot->custom_label!='')
                     <span class="label label-primary">{{ $member->pivot->custom_label }}</span>
-                @endif
-
+                @endif --}}
+                <span class="label label-primary">{{Permission::getSelectedRoleName($member, $whitelabel_group)}}</span>
+                
                 </td>
                 <td>{{$member->location}}</td>
                 <td>
