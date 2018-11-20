@@ -22,6 +22,7 @@ use Auth;
 use Validator;
 use Input;
 use Redirect;
+// use Permission;
 use Helper;
 use Log;
 use App\Models\Entry;
@@ -155,7 +156,9 @@ class EntriesController extends Controller
     public function getCreate(Request $request)
     {
         //log::debug("getCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
+        if(!\Permission::checkPermission('add-entry-permission', $request->whitelabel_group)) {
+            return view('errors.403');       
+        }
         $post_types = ['want' => 'I want', 'have' => 'I have'];
 
         $request->session()->put('upload_key', str_random(15));
@@ -354,7 +357,9 @@ class EntriesController extends Controller
      */
     public function getEdit(Request $request, $entryID)
     {
-
+        if(!\Permission::checkPermission('edit-any-entry-permission', $request->whitelabel_group)) {
+            return view('errors.403');       
+        }
         //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         // This should be pulled into a helper or macro
@@ -583,7 +588,7 @@ class EntriesController extends Controller
      * @param $entryID
      * @return String JSON
      */
-    public function postAjaxDelete($entryID)
+    public function postAjaxDelete(Request $request,$entryID)
     {
         try {
             $entry = $this->dispatchNow(new DeleteEntry($entryID));
@@ -610,8 +615,11 @@ class EntriesController extends Controller
      * @param $entryID
      * @return Redirect
      */
-    public function postDelete($entryID)
+    public function postDelete(Request $request, $entryID)
     {
+        if(!\Permission::checkPermission('delete-any-entry-permission', $request->whitelabel_group)) {
+            return view('errors.401');       
+        }
         try {
             $this->dispatchNow(new DeleteEntry($entryID));
         } catch (ModelNotFoundException $exception) {
@@ -736,8 +744,10 @@ class EntriesController extends Controller
 
         // $entries = $entries->orderBy($sort, $order)->paginate($offset, $limit)->get();
 
-        $entries = $entries->orderBy($sort, $order)->pagination(10);
-        $count = $entries->count();        
+        $entries = $entries->orderBy($sort, $order)->get();
+        // $count = $entries->count(); 
+        $count = count($entries);        
+               
 
         $rows = [];
 
@@ -909,7 +919,7 @@ class EntriesController extends Controller
             'rows'     => $rows,
             'pois'     => $allPois,
             'viewType' => $entryLayout,
-            'entries'  => $entries->total(),
+            // 'entries'  => $entries->total(),
         ];
     }
 

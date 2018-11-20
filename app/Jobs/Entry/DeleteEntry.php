@@ -43,16 +43,18 @@ class DeleteEntry implements ShouldQueue
      */
     public function handle()
     {
+
         if (!$entry = Entry::find($this->entryID)) {
             log::error("postDelete: invalid entry Id = " . $this->entryID);
             throw new ModelNotFoundException(trans('general.entries.messages.invalid'));
         }
-
+        
         // First we check if user can edit the entry.
         // If users can't do it, we throw an error.
-        if (!Auth::user()->can('delete', $entry)) {
-            throw new AuthorizationException(trans('general.entries.messages.delete_not_allowed'));
-        }
+        // if (!Auth::user()->can('delete', $entry)) {
+
+        //     throw new AuthorizationException(trans('general.entries.messages.delete_not_allowed'));
+        // }
 
         // Try to delete the entry.
         if (!$entry->delete()) {

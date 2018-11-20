@@ -51,4 +51,12 @@ class Permission
 		
 		return 0;
 	}	
+
+	public static function getSelectedRoleName($user , $community){
+		$role = $user->roles()->where('community_id', $community->id)->first();
+		
+		if($role) {
+			return $role->display_name;
+		}
+	}
 }

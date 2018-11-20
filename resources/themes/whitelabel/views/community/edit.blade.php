@@ -411,7 +411,7 @@
                                                             <tbody>
                                                             @foreach ($roles as $role)
                                                                 <tr>
-                                                                    <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->display_name }}</a></td>
+                                                                    <td class="col-md-3"> <a  role-id="{{$role->id}}" class="role" href="javascript:void(0);">{{ $role->display_name }}</a></td>
                                                                     <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
                                                                     <td class="col-md-1">
                                                                         <a href="{{ route('admin.role.delete', $role->id) }}">
