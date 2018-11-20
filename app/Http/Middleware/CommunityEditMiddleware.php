@@ -22,14 +22,13 @@ class CommunityEditMiddleware
         }
         
         if (!Auth::user()) {
-
+            
 
             //log::debug('CommunityEditMiddleware: not logged in');
             return redirect('home');
         }
 
         else if (!(Auth::user()->isSuperAdmin() || Auth::user()->isAdminOfCommunity($request->whitelabel_group))) {
-
             //log::debug('CommunityEditMiddleware: user is login in but not an admin (share or super)');
             return redirect('home');
         }
