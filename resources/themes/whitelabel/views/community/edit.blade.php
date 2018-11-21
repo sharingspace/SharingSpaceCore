@@ -684,6 +684,13 @@
                             }
                         });
                     });
+                    var status = $(".checkall").length;
+                    var check = $(".checkall:checked").length;
+                    if(status == check){
+                        $('input[id=permissions]').prop('checked',true);
+                    } else {
+                        $('input[id=permissions]').prop('checked',false);
+                    }
                 }
             });
         });

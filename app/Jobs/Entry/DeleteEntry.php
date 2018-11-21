@@ -51,10 +51,11 @@ class DeleteEntry implements ShouldQueue
         
         // First we check if user can edit the entry.
         // If users can't do it, we throw an error.
-        // if (!Auth::user()->can('delete', $entry)) {
 
-        //     throw new AuthorizationException(trans('general.entries.messages.delete_not_allowed'));
-        // }
+        if (!$entry->created_by == Auth::user()->id) {
+            
+            throw new AuthorizationException(trans('general.entries.messages.delete_not_allowed'));
+        }
 
         // Try to delete the entry.
         if (!$entry->delete()) {

@@ -357,6 +357,8 @@ class EntriesController extends Controller
      */
     public function getEdit(Request $request, $entryID)
     {
+            
+
         if(!\Permission::checkPermission('edit-any-entry-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
@@ -367,11 +369,10 @@ class EntriesController extends Controller
 
         if ($entry = Entry::find($entryID)) {
             $user = Auth::user();
-
-            if ($request->user()->cannot('update-entry', $entry)) {
+            if ($request->user()->cannot('update-entry', [$entry, $request->whitelabel_group])) {
+                
                 return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
             }
-
             $image = \DB::table('media')
                 ->where('entry_id', '=', $entryID)
                 ->first();
@@ -493,12 +494,13 @@ class EntriesController extends Controller
      */
     public function postEdit(Request $request, $entryID)
     {
+        
         //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         if ($entry = Entry::find($entryID)) {
             $user = Auth::user();
 
-            if ($request->user()->cannot('update-entry', $entry)) {
+            if ($request->user()->cannot('update-entry', [$entry, $request->whitelabel_group])) {
                 abort(403);
             }
 
