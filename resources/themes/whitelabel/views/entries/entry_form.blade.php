@@ -182,6 +182,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12 ">
+                    
                     <button class="btn btn-colored pull-right" @if ($entry->getKey()) id="ajaxSubmit" name="ajaxSubmit" value="ajaxSubmit" @endif onclick="mixpanel.track('New Entry',{'user_id': '<?=Auth::user()->id?>', 'title': $('#title').val()});">
                         {{ trans('general.entries.save_entry') }}
                         

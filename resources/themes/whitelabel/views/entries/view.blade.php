@@ -84,7 +84,8 @@
                                 @endif
 
                             <!-- if user is admin or owner -->
-                                @can('update-entry', $entry)
+                           
+                                @can('update-entry', [$entry, $whitelabel_group])
                                     <div class="margin-bottom-3">
                                         @if($entry->created_by == Auth::user()->id || Permission::checkPermission('edit-any-entry-permission', $whitelabel_group))
                                             <div class="margin-top-10 listing-actions">
