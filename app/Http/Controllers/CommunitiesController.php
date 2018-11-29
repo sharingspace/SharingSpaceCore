@@ -765,7 +765,9 @@ class CommunitiesController extends Controller
     public function getApiDetail(Request $request)
     {
         
+        
         $data['oauth_client'] = Community::find($request->whitelabel_group->id)->community_apis->first();
+
         
         return view('apis.view',$data);
     }
@@ -774,6 +776,7 @@ class CommunitiesController extends Controller
     {       
         \DB::beginTransaction();
         try { 
+
 
             $oauth_client = oAuthClient::create([
                             'user_id' => \Auth::user()->id, 

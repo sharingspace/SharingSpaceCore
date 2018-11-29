@@ -25,7 +25,8 @@
                         </label>
                     </div>
                 </div>
-                @if(count($oauth_client))
+            
+                @if(isset($oauth_client))
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-3">
                             <div class="col-sm-3">

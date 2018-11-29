@@ -25,8 +25,10 @@ class EntriesController extends Controller
      */
     public function all(Request $request)
     {
+
         $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
-        $community_id = $jwt->getClaim('community')->id;
+
+        $community_id = $jwt->getClaim('community')->community_id;
         
         if ($request->has('per_page')) {
             $per_page = $request->input('per_page');
