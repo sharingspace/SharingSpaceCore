@@ -114,15 +114,17 @@
         </a>
 
         @if (Auth::check() && Auth::user()->isMemberOfCommunity($whitelabel_group, false))
-        <div class="navbar-header pull-right">
-          <ul class="nav navbar-nav">
-            <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
-              <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
-              </a>
-            </li>
-          </ul>
-        </div>
+          @if(Permission::checkPermission('add-entry-permission', $whitelabel_group))
+            <div class="navbar-header pull-right">
+              <ul class="nav navbar-nav">
+                <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
+                  <a href="{{ route('entry.create.form') }}">
+                    <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          @endif
         @endif
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">

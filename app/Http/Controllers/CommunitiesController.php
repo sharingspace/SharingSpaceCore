@@ -351,8 +351,6 @@ class CommunitiesController extends Controller
     }
 
     public function createDefaultRoles($request) {
-        
-
 
         \DB::beginTransaction();
         try { 
@@ -361,7 +359,7 @@ class CommunitiesController extends Controller
             $role_exist = Role::where('name',$name)
                                     ->where('community_id',$request->whitelabel_group->id)
                                     ->first();
-            
+
             if(empty($role_exist)) {
                     
                 $role = Role::create([
@@ -373,6 +371,11 @@ class CommunitiesController extends Controller
 
                 foreach (P::all() as $key => $permission) {
                     $role->givePermissionTo($permission->id);
+                }
+            } else {
+                \DB::table('role_has_permissions')->where('role_id',$role_exist->id)->delete();
+                foreach (P::all() as $key => $permission) {
+                    $role_exist->givePermissionTo($permission->id);
                 }
             }
             
@@ -675,9 +678,9 @@ class CommunitiesController extends Controller
     public function getAskPermissionList(Request $request)
     {
 
-        if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $data['asks'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->get();
 
@@ -687,9 +690,9 @@ class CommunitiesController extends Controller
     public function getAskPermissionView($id)
     {
 
-        if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $data['ask'] = AskPermission::findorfail($id);
         
@@ -701,9 +704,9 @@ class CommunitiesController extends Controller
     public function postAskPermissionGranted(Request $request)
     {
 
-        if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $message = '';
         // dd($request->all());
