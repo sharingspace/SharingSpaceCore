@@ -134,7 +134,6 @@ class RolesController extends Controller
     }
 
     public function getEditRoleData($id, Request $request) {
-
         $data['id'] = $id;
         $data['model'] = Role::where('community_id', $request->whitelabel_group->id)->findorfail($id);
         $data['role_permissions'] = $data['model']->permissions()->pluck('id')->toArray();

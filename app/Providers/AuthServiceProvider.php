@@ -144,8 +144,12 @@ class AuthServiceProvider extends ServiceProvider
 
 
         // Check if the user can update an entry
-        $gate->define('update-entry', function ($user, $entry) {
+        $gate->define('update-entry', function ($user, $entry, $community) {
+            
             //log::debug("update-entry: ".$user->id ."   ". $entry->id);
+            if ($user->isAdminOfCommunity($community)) {
+                return true;
+            }
             return $user->id === $entry->created_by;
         });
 

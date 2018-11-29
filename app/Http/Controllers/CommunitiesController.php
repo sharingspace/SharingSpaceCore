@@ -350,6 +350,41 @@ class CommunitiesController extends Controller
         }
     }
 
+    public function createDefaultRoles($request) {
+
+        \DB::beginTransaction();
+        try { 
+
+            $name = $request->whitelabel_group->name.'_Administrator';
+            $role_exist = Role::where('name',$name)
+                                    ->where('community_id',$request->whitelabel_group->id)
+                                    ->first();
+
+            if(empty($role_exist)) {
+                    
+                $role = Role::create([
+                    'name' => $name,
+                    'guard_name' => 'web',
+                    'display_name' => 'Administrator',
+                    'community_id' =>  $request->whitelabel_group->id
+                ]);
+
+                foreach (P::all() as $key => $permission) {
+                    $role->givePermissionTo($permission->id);
+                }
+            } else {
+                \DB::table('role_has_permissions')->where('role_id',$role_exist->id)->delete();
+                foreach (P::all() as $key => $permission) {
+                    $role_exist->givePermissionTo($permission->id);
+                }
+            }
+            
+        } catch (\Exception $e) {                
+            \DB::rollback();          
+        }
+        \DB::commit();
+    }
+
     /**
      * Returns a view that makes a form to edit community details.
      *
@@ -360,6 +395,8 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
+        $this->createDefaultRoles($request);
+
         if(!Permission::checkPermission('edit-sharing-network-permission', $request->whitelabel_group)) {
             return view('errors.403');       
         }
@@ -381,7 +418,7 @@ class CommunitiesController extends Controller
         if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
-        
+            
         
         $data['permissions'] = P::all();
         $data['roles'] = Role::where('community_id', $request->whitelabel_group->id)->get();
@@ -461,8 +498,10 @@ class CommunitiesController extends Controller
         if (Input::hasFile('logo')) {
             $community->uploadImage(Auth::user(), Input::file('logo'), 'community-logos');
         }
-
         if (!$community->save()) {
+            if($request->ajax()){
+                return Helper::ajaxresponse(false, 'Failed', $community->getErrors());
+            }
             return Redirect::back()->withInput()->withErrors($community->getErrors());
         }
 
@@ -475,7 +514,8 @@ class CommunitiesController extends Controller
         if(!Permission::checkPermission('manage-role', $request->whitelabel_group)) {
             return view('errors.403');       
         }
-
+        
+        $role_tab = '';
         if($request->rolename != ""){
             $role_tab = 'role';
             $role_name = $request->whitelabel_group->name.'_'.$request->rolename;
@@ -486,9 +526,17 @@ class CommunitiesController extends Controller
                             ->first();
             
             if($unique) {
+                if($request->ajax()){
+                    $error[][] = trans('general.role.error.unique');
+                    return Helper::ajaxresponse(false, $role_tab, $error);
+                }
                 return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('error', trans('general.role.error.unique'));
             }
             if($request->permissions == '') {
+                if($request->ajax()){
+                    $error[][] = trans('general.role.error.role-select');
+                    return Helper::ajaxresponse(false, $role_tab, $error);
+                }
                 return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('error', trans('general.role.error.role-select'));
             }
             \DB::beginTransaction();
@@ -520,14 +568,20 @@ class CommunitiesController extends Controller
             } catch (\Exception $e) {    
 
                 \DB::rollback();  
-                dd($e);  
-            
+                // dd($e);
+                if($request->ajax()){
+                    $error[][] = 'Something went to wrong';
+                    return Helper::ajaxresponse(false, $role_tab, $error);
+                }
             } finally { 
                 \DB::commit();
                 
                 // $message = trans('general.role.updated');
             }
 
+        }
+        if($request->ajax()){
+            return Helper::ajaxresponse(true, trans('general.community.messages.save_edits'), $role_tab);
         }            
 
         return Redirect::route('_edit_share', array('role_tab' => $role_tab))->with('success', trans('general.community.messages.save_edits'));
@@ -624,9 +678,9 @@ class CommunitiesController extends Controller
     public function getAskPermissionList(Request $request)
     {
 
-        if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $data['asks'] = AskPermission::latest()->where('community_id',$request->whitelabel_group->id)->get();
 
@@ -636,9 +690,9 @@ class CommunitiesController extends Controller
     public function getAskPermissionView($id)
     {
 
-        if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $data['ask'] = AskPermission::findorfail($id);
         
@@ -650,9 +704,9 @@ class CommunitiesController extends Controller
     public function postAskPermissionGranted(Request $request)
     {
 
-        if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
-            return view('errors.403');       
-        }
+        // if(!Permission::checkPermission('request-membership-permission', $request->whitelabel_group)) {
+        //     return view('errors.403');       
+        // }
 
         $message = '';
         // dd($request->all());
@@ -714,7 +768,9 @@ class CommunitiesController extends Controller
     public function getApiDetail(Request $request)
     {
         
+        
         $data['oauth_client'] = Community::find($request->whitelabel_group->id)->community_apis->first();
+
         
         return view('apis.view',$data);
     }
@@ -723,6 +779,7 @@ class CommunitiesController extends Controller
     {       
         \DB::beginTransaction();
         try { 
+
 
             $oauth_client = oAuthClient::create([
                             'user_id' => \Auth::user()->id, 

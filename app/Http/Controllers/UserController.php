@@ -74,10 +74,10 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postSettings()
+    public function postSettings(Request $request)
     {
         if ($user = User::find(Auth::user()->id)) {
-
+            
             $user->first_name = e(Input::get('first_name'));
             $user->last_name = e(Input::get('last_name'));
             $user->email = e(Input::get('email'));
@@ -97,13 +97,21 @@ class UserController extends Controller
 
 
             if (!$user->save()) {
+                if($request->ajax()){
+                    return $user->getErrors();
+                }
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
-
+            if($request->ajax()){
+                return Helper::ajaxresponse(true, 'Saved!');
+            }
             return redirect()->route('user.settings.view')->with('success', 'Saved!');
 
         }
 
+        if($request->ajax()){
+            return [0=>['Invalid user']];
+        }
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
 
@@ -117,7 +125,7 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postUpdateSocial()
+    public function postUpdateSocial(Request $request)
     {
 
         if ($user = User::find(Auth::user()->id)) {
@@ -129,12 +137,19 @@ class UserController extends Controller
             $user->youtube = e(Input::get('youtube'));
 
             if (!$user->save()) {
+                if($request->ajax()){
+                    return $user->getErrors();
+                }
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
-
+            if($request->ajax()){
+                return Helper::ajaxresponse(true,  trans('general.user.social_success'));
+            }
             return redirect()->route('user.settings.view')->with('success', trans('general.user.social_success'));
         }
-
+        if($request->ajax()){
+            return [0=>[trans('general.user.social_failure')]];
+        }
         // Damn, that user was an imposter!
         return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.social_failure'));
     }
@@ -147,30 +162,45 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postUpdateAvatar()
+    public function postUpdateAvatar(Request $request)
     {
-        if ($user = User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {            
             if (Input::hasFile('avatar_img')) {
                 LOG::debug("postUpdateAvatar: have image, preparing to upload");
                 $user->uploadImage($user, Input::file('avatar_img'), 'users');
                 LOG::debug("postUpdateAvatar: upload complete");
+                if($request->ajax()){
+                    return Helper::ajaxresponse(true, trans('general.user.avatar_success'));
+                }
                 return redirect()->route('user.settings.view')->with('success', trans('general.user.avatar_success'));
             }
             else if(Input::get('delete_img')) {
                 if (User::deleteAvatar($user->id)) {
+                    if($request->ajax()){
+                        return Helper::ajaxresponse(true, 'delete okay');
+                    }
                     return redirect()->route('user.settings.view')->with('success', 'delete okay');
                 }
                 else {
+                    if($request->ajax()){
+                        return Helper::ajaxresponse(true, 'delete fail');
+                    }
                     return redirect()->route('user.settings.view')->with('success', 'delete fail');
                 }
             }
+            if($request->ajax()){
+                return Helper::ajaxresponse(true, 'Your changes successfully saved');
+            }
         }
         else {
+
             // That user wasn't valid
             LOG::debug("postUpdateAvatar: invalid user");
-
+            if($request->ajax()){
+                return [0=>[trans('general.user.avatar_failure')]];
+            }
             return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.avatar_failure'));
-        }
+        }        
     }
 
     /**
@@ -181,20 +211,28 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postUpdatePassword()
+    public function postUpdatePassword(Request $request)
     {
         if ($user = User::find(Auth::user()->id)) {
 
             $user->password = e(Input::get('password'));
 
             if (!$user->save()) {
+                if($request->ajax()){
+                    return $user->getErrors();
+                }
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
 
+            if($request->ajax()){
+                return Helper::ajaxresponse(true, 'Saved!');
+            }
             return redirect()->route('user.settings.view')->with('success', 'Saved!');
 
         }
-
+        if($request->ajax()){
+            return [0=>['Invalid user']];
+        }
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
     }
@@ -317,11 +355,12 @@ class UserController extends Controller
                 return response()->json(['success'=>true, 'alert_class' => 'success', 'message'=>e(Input::get('displayName')). ' has joined '.ucfirst($request->whitelabel_group->name).'!', 'user_id'=>Input::get('user_id')]);
             }
             else {
-
-                return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
+                return response()->json(['success'=>false, 'alert_class' => 'danger', 'message'=>'Unable to join', 'user_id'=>Input::get('user_id')]);
+               // return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
             }
         }
         else {
+            return response()->json(['success'=>false, 'alert_class' => 'danger', 'message'=>'user not found', 'user_id'=>Input::get('user_id')]);
             return redirect()->route('home')->withInput()->with('error', 'user not found');
         }
     }
@@ -422,7 +461,6 @@ class UserController extends Controller
     {
         $communities = Auth::user()->communities()->get();
         return view('account.community_memberships')->with('communities',$communities);
-
     }
 
 }

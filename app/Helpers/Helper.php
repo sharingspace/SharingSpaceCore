@@ -200,4 +200,12 @@ class Helper
             return date('F Y', $ts);
         }
     }
+
+    public static function ajaxResponse($status,$message,$responseData = []){
+        $data = [];
+        $data['status'] = $status;
+        $data['message'] = $message;
+        $data['data'] = $responseData;
+        return json_encode($data);
+    }
 }

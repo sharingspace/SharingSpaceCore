@@ -248,7 +248,7 @@ class User extends Authenticatable implements AuthenticatableContract, CanResetP
     {
         if (!empty($this->avatar_img)) {
             //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
-            return config('services.cdn.default') . "/uploads/users/" . $this->id . "/" . $this->avatar_img;
+            return config('services.cdn.default') . "/assets/uploads/users/" . $this->id . "/" . $this->avatar_img;
         }
         else {
             if (!empty($this->gravatar)) {

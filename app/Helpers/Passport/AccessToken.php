@@ -32,11 +32,21 @@ class AccessToken extends PassportAccessToken {
     public function getCommunity() {
         $user = oAuthClient::find($this->getClient()->getIdentifier());
 
-        $community_id = $user->community_apis->first()->id;
 
-        return [
-            'community_id' => $community_id,
-            'user_id'      => $user->id
-        ];
+        $community = $user->community_apis->first();
+
+        if(!empty($community)) {
+            return [
+                'community_id' => $community->id,
+                'user_id'      => $user->id
+            ];
+        }
+            return [
+                'community_id' => 0,
+                'user_id'      => $user->id
+            ];
+
+
+        
     }
 }

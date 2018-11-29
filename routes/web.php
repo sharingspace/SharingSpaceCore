@@ -13,6 +13,20 @@
 | As such, it shouldn't use the apiguard middleware.
 |--------------------------------------------------------------------------
 */
+
+// Route::any('github-webhook', function(){
+//    $old_path = getcwd();
+//     chdir('~/scripts');
+//     $output = shell_exec('./gitpull.sh');
+//     chdir($old_path);
+//     echo "<pre>$output</pre>";
+
+//     $data = exec('cd ~/scripts && ./gitpull.sh 2>&1');
+//     return $data;
+// });
+
+
+
 Route::group(
     array('prefix' => 'api/v1/slack'),
     function () {
@@ -518,8 +532,6 @@ Route::group(
                 Route::get('ask-permission','CommunitiesController@getAskPermission')->name('ask.permission');
 
                 Route::post('ask-permission/post','CommunitiesController@postAskPermission')->name('ask.permission.post');
-
-
             }
         );
 

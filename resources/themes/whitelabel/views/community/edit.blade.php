@@ -1,4 +1,4 @@
-@extends('layouts/master')
+@extends('layouts.master')
 
 {{-- Page title --}}
 @section('title')
@@ -8,6 +8,8 @@
 
 {{-- Page content --}}
 @section('content')
+
+    <div class="message1"></div>
     <section class="container">
         <div id="edit_wrapper" class="container margin-top-20">
             <div class="row">
@@ -33,7 +35,7 @@
                         <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="6144000"/>
                         <input type="hidden" id="cover_image_delete" name="cover_image_delete" value=''>
                         <input type="hidden" id="logo_image_delete" name="logo_image_delete" value=''>
-
+                        
                         <div class="tab-content margin-top-20">
                             <!-- PERSONAL INFO TAB -->
                             <div class="tab-pane fade in active" id="info">
@@ -399,15 +401,17 @@
                                                 @if(isset($roles) && count($roles) > 0)
                                                     <div class="table-responsive">
                                                         <table class="table table-condensed" id="members">
-                                                            <tbody>
+                                                            <thead>
                                                                 <tr>
                                                                   <th class="col-md-3">{{ trans('general.role.name') }}</th>
                                                                   <th class="col-md-2">{{ trans('general.role.permission') }}</th>
                                                                   <th class="col-md-2">{{ trans('general.action') }}</th>
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody>
                                                             @foreach ($roles as $role)
                                                                 <tr>
-                                                                    <td role-id="{{$role->id}}" class="role col-md-3"> <a  href="javascript:void(0);">{{ $role->display_name }}</a></td>
+                                                                    <td class="col-md-3"> <a  role-id="{{$role->id}}" class="role" href="javascript:void(0);">{{ $role->display_name }}</a></td>
                                                                     <td class="col-md-2"> {{ $role->permissions()->count() }}</td>
                                                                     <td class="col-md-1">
                                                                         <a href="{{ route('admin.role.delete', $role->id) }}">
@@ -430,7 +434,7 @@
                         </div> <!-- tab-content -->
 
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-                            <button class="btn btn-colored">{{ trans('general.community.save') }}</button>
+                            <button class="btn btn-colored submit">{{ trans('general.community.save') }}</button>
                         </div>
                     </div> <!-- col-10 -->
                 </form>
@@ -543,6 +547,74 @@
         var reader = new FileReader(); // instance of the FileReader
 
         $(document).ready(function () {
+            $(document).on("click",".submit", function (e) {
+              e.preventDefault();
+              startLoader();
+              data = $(this).parents('form').serialize();
+              callUrl = $(this).parents('form').attr('action');
+             
+              $.ajax({
+                url: callUrl,
+                method: 'POST',
+                data: data,
+                dataType: "json",
+                success: function (result) {
+                    if(result.status == true){
+                      $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
+                                <i class="fa fa-check"></i>\n\
+                            <strong>Success:</strong> '+result.message+'\n\
+                          </div>');
+                      $(".message1").show();
+                      if(result.data == 'role'){
+                        $('a[href="#roles"]').click();
+                      }
+                      $('html,body').scrollTop(0);
+                    } else {
+                      var a = '';
+                      var i = 0;
+                      for(key in result.data){
+                        if(i == 0){
+                            a = result.data[key][0] + '</br>';
+                        }
+                        i++;
+                      }
+                      $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+                      $(".message1").show();
+                      $('html,body').scrollTop(0);
+                      if(result.message == 'role'){
+                        $('a[href="#roles"]').click();
+                      }
+                    }
+                closeLoader();
+                },
+                error: function (error) {
+                  var a = '';
+                  var i = 0;
+                  for(key in error.responseJSON){
+                    if(i == 0){
+                        a = error.responseJSON[key][0] + '</br>';                   
+                    }
+                    i++;
+                  }
+                  $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+                  $(".message1").show();
+                  $('html,body').scrollTop(0);
+
+                }
+
+              });
+              closeLoader();
+            });
+            
             if(window.location.search.substring(1) == 'role_tab=role'){
                 $('a[href="#roles"]').click();
             }
@@ -612,6 +684,13 @@
                             }
                         });
                     });
+                    var status = $(".checkall").length;
+                    var check = $(".checkall:checked").length;
+                    if(status == check){
+                        $('input[id=permissions]').prop('checked',true);
+                    } else {
+                        $('input[id=permissions]').prop('checked',false);
+                    }
                 }
             });
         });

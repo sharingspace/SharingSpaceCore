@@ -1,4 +1,4 @@
-@extends('layouts/master')
+@extends('layouts.master')
 
 {{-- Page title --}}
 @section('title')
@@ -8,7 +8,7 @@
 
 {{-- Page content --}}
 @section('content')
-
+@if(Permission::checkPermission('view-entry-details-permission', $whitelabel_group))
     <!-- -->
     <section>
         <div id="entry_view" class="container padding-top-0">
@@ -84,7 +84,8 @@
                                 @endif
 
                             <!-- if user is admin or owner -->
-                                @can('update-entry', $entry)
+                           
+                                @can('update-entry', [$entry, $whitelabel_group])
                                     <div class="margin-bottom-3">
                                         @if($entry->created_by == Auth::user()->id || Permission::checkPermission('edit-any-entry-permission', $whitelabel_group))
                                             <div class="margin-top-10 listing-actions">
@@ -252,6 +253,7 @@
                     </div>
             </div> <!-- container -->
     </section>
+@endif
 @stop
 
 @section('custom_js')
@@ -262,7 +264,6 @@
 
     <script>
         $(document).ready(function () {
-
             initializeEntryMap(window.entry, window.community, {
                 editable: false,
             })

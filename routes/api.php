@@ -22,7 +22,7 @@ Route::get('/user', function(Request $request) {
 
 Route::group(['namespace' => 'V1','prefix' => 'v1/entries', 'middleware' => 'client'], function () {
 	
-    Route::get('/', '\App\Http\Controllers\Api\V1\EntriesController@all');
+    Route::get('/all', '\App\Http\Controllers\Api\V1\EntriesController@all');
     Route::post('/create','\App\Http\Controllers\Api\V1\EntriesController@create');
     Route::get('{id}', '\App\Http\Controllers\Api\V1\EntriesController@show');
 });
