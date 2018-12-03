@@ -9,9 +9,11 @@ use App\Http\Transformers\UserTransformer;
 
 class MemberController extends Controller
 {
+    /*-------------------------------------------------------------------  
+     * Old Apis (We will delete later)
+     ------------------------------------------------------------------*/
 
-    public function show(Request $request, $member_id)
-    {
+    public function show(Request $request, $member_id){
         $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
         $community_id = $jwt->getClaim('community')->community_id;
 
@@ -26,8 +28,7 @@ class MemberController extends Controller
         }
     }
 
-    public function all(Request $request)
-    {
+    public function all(Request $request){
         $jwt = (new \Lcobucci\JWT\Parser())->parse($request->bearerToken());
         $community_id = $jwt->getClaim('community')->community_id;
 
@@ -46,6 +47,47 @@ class MemberController extends Controller
         } catch (Exception $e) {
 
         }
+    }
+
+
+    /*-------------------------------------------------------------------  
+     * NEW Apis STARTING POINT
+     ------------------------------------------------------------------*/
+
+    /*
+     * Get all permissions assosiated with the authenticated member
+     */
+
+    public function getAllMemberPermissions(Request $request, $community_id) {
+        
+        $user = auth('api')->user();
+
+        $community = getCommunity($community_id);
+        
+        if ($user->isAdminOfCommunity($community)) {
+            return $this->sendResponse(true, '', ['is_super_admin'=>true]);
+        }
+        return $this->sendResponse(true, '', $user->permissions);
+    }
+
+    /*
+     * Get all members for single sharing space
+     * Improvement: later need to add the role per member
+     * Improvement: later need to add pagination
+     */
+    public function getMembers($community_id) {
+
+        $community = getCommunity($community_id);
+        $members = $community->members()->get();
+        return $this->sendResponse(true, '', $members);
+    }
+
+
+    /* 
+     * Assign Single role to member.
+     */
+    public function assignRoletoMember() {
+        
     }
 
 
