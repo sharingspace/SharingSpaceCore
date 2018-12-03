@@ -8,7 +8,7 @@
 
 {{-- Page content --}}
 @section('content')
-@if(Permission::checkPermission('view-entry-details-permission', $whitelabel_group))
+
     <!-- -->
     <section>
         <div id="entry_view" class="container padding-top-0">
@@ -253,7 +253,7 @@
                     </div>
             </div> <!-- container -->
     </section>
-@endif
+
 @stop
 
 @section('custom_js')

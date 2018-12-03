@@ -8,7 +8,7 @@
 
 {{-- Page content --}}
 @section('content')
-    @if(Permission::checkPermission('view-entry-details-permission', $whitelabel_group))
+    
     <section class="container padding-top-15 padding-bottom-25">
         <h1 class="sr-only">{{trans('general.entries.browse_entries')}}</h1>
         <div class="row">
@@ -73,7 +73,7 @@
         @include('partials.map', ['size' => '720'])
         <!-- End entries map -->
         </section>
-    @endif
+    
     @include('./progress')
 @stop
 
@@ -145,6 +145,7 @@
             }
 
             function masonryInit () {
+                
                 GRID_WIDTH = parseInt($('.grid-item').css('width').replace(/[^-\d\.]/g, ''));
                 GRID = $('#entry_browse_grid').isotope({
                     // options
