@@ -82,7 +82,7 @@ Route::group(
         | Authentication and Authorization Routes
         |--------------------------------------------------------------------------
         */
-Route::get('/test', '\App\Http\Controllers\Api\V1\SharingController@getAllCommunities'); 
+ 
 
         Auth::routes();
 

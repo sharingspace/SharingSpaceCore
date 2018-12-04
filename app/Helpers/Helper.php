@@ -213,7 +213,7 @@ class Helper
     /*
      * Get single community with the community_id
      */
-    public function getCommunity($community_id) {
+    public static function getCommunity($community_id) {
         return Community::findorfail($community_id);
     }
 
@@ -223,7 +223,7 @@ class Helper
      * message = suceess of failed message
      * data = array of response
      */
-    public function sendResponse($status, $message, $data = []) {
+    public static function sendResponse($status, $message, $data = []) {
         return response()->json([$status, $message, $data]);
     }
 }

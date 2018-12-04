@@ -6,64 +6,59 @@ use App\Models\Community;
 use Illuminate\Http\Request;
 use App\Models\User;
 use \App\Http\Transformers\EntriesTransformer;
+use Helper;
 
-
-class CommunityController extends Controller
+class ApiCommunityController extends Controller
 {
 
-	/*
-     * Get All Community of authenticated user
-     * Improvement: later need to add pagination
+	
+    /* 
+     *  Send request to join the open community
      */
-    public function getAllCommunities(Request $request) {
+    public function joinCommunity(Request $request, $community_id) {
+
+        $community = Helper::getCommunity($community_id);
+         \DB::beginTransaction();
+        try { 
+            if ($request->whitelabel_group->isOpen()) {
+                auth('api')->user()->communities()->attach([$community->id]);
+
+            }
+            else {
+
+                return view('request-access', ['error'=>'closed', 'name' => $community->name] );
+            }
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+                return Helper::sendResponse(false, 'Unable to join '.$community->name);
         
-        $user = auth('api')->user();
-        return $this->sendResponse(true, '', $user->communities()->get());
-    }
-
-    public function joinCommunity() {
-        
-    }
-
-    public function leaveCommunity() {
-
-    }
-
-    /*---------------------------------------------------------------------
-	 * Frontend Apis 
-	 --------------------------------------------------------------------*/
-
-
-     public function registerMember(Request $request;) {
-
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
-            'email' => 'required|email', 
-            'password' => 'required', 
-            'password_confirmation' => 'required|same:password', 
-        ]);
-
-        if ($validator->fails()) { 
-            return $this->sendResponse(false, $validator->errors(), []);        
+        } finally { 
+            \DB::commit();
+                return Helper::sendResponse(true, 'You have joined '.$community->name.'!');
         }
+    }
 
-        $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
+    /*
+     * Leave a community
+     */
+    public function leaveCommunity(Request $request, $community_id) {
 
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
+            
+            $community = Helper::getCommunity($community_id);
+           
+            if (isset($community)) {
+                if (Auth::user()->communities()->detach($community->id)) {
+                    return Helper::sendResponse(true, 'You have left the Share, "'.$community->name.'"');
+                }
+                else {
+                    return Helper::sendResponse(false, 'Unable to leave the Share, "'.$community->name.'"');
+                   
+                }
+            }
         
-        $token->save();
-
-        return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
-        ]);
-     }
+        return Helper::sendResponse(false, 'Unable to leave the Share, "'.$community->name.'"');
+    }
     
     /*
      * Start sharing network with the payment method

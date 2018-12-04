@@ -5,9 +5,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Community;
 use Illuminate\Http\Request;
 use App\Http\Transformers\UserTransformer;
+use Helper;
+use \App\Http\Transformers\GlobalTransformer;
 
 
-class MemberController extends Controller
+
+class ApiMemberController extends Controller
 {
     /*-------------------------------------------------------------------  
      * Old Apis (We will delete later)
@@ -62,12 +65,12 @@ class MemberController extends Controller
         
         $user = auth('api')->user();
 
-        $community = getCommunity($community_id);
+        $community = Helper::getCommunity($community_id);
         
         if ($user->isAdminOfCommunity($community)) {
-            return $this->sendResponse(true, '', ['is_super_admin'=>true]);
+            return Helper::sendResponse(true, '', ['is_super_admin'=>true]);
         }
-        return $this->sendResponse(true, '', $user->permissions);
+        return Helper::sendResponse(true, '', $user->permissions);
     }
 
     /*
@@ -75,11 +78,19 @@ class MemberController extends Controller
      * Improvement: later need to add the role per member
      * Improvement: later need to add pagination
      */
-    public function getMembers($community_id) {
+    public function getMembers(Request $request,$community_id) {
 
-        $community = getCommunity($community_id);
-        $members = $community->members()->get();
-        return $this->sendResponse(true, '', $members);
+        $community = Helper::getCommunity($community_id);
+    
+        if ($request->has('per_page')) {
+            $per_page = $request->input('per_page');
+        } else {
+            $per_page = 20;
+        }
+
+        $members = $community->members()->orderBy('created_at','desc')->paginate($per_page);
+        $trnsform = GlobalTransformer::transformall_members($members, $community_id);
+        return Helper::sendResponse(true, '', $trnsform);
     }
 
 
@@ -89,6 +100,5 @@ class MemberController extends Controller
     public function assignRoletoMember() {
         
     }
-
 
 }
