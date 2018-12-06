@@ -6,7 +6,9 @@ use App\Models\Community;
 use Illuminate\Http\Request;
 use App\Models\User;
 use \App\Http\Transformers\EntriesTransformer;
+use \App\Http\Transformers\GlobalTransformer;
 use Helper;
+use Input;
 
 class ApiCommunityController extends Controller
 {
@@ -20,7 +22,7 @@ class ApiCommunityController extends Controller
         $community = Helper::getCommunity($community_id);
          \DB::beginTransaction();
         try { 
-            if ($request->whitelabel_group->isOpen()) {
+            if ($community->isOpen()) {
                 auth('api')->user()->communities()->attach([$community->id]);
 
             }
@@ -48,7 +50,7 @@ class ApiCommunityController extends Controller
             $community = Helper::getCommunity($community_id);
            
             if (isset($community)) {
-                if (Auth::user()->communities()->detach($community->id)) {
+                if (auth('api')->user()->communities()->detach($community->id)) {
                     return Helper::sendResponse(true, 'You have left the Share, "'.$community->name.'"');
                 }
                 else {
@@ -78,13 +80,13 @@ class ApiCommunityController extends Controller
         $community->name = e($request->input('name'));
         $community->subdomain = strtolower(e($request->input('subdomain')));
         $community->group_type = e($request->input('group_type'));
-        $community->created_by = Auth::user()->id;
+        $community->created_by = auth('api')->user()->id;
 
         if ($community->isInvalid()) {
             return $this->sendResponse(false, $community->getErrors(), []);
         }
 
-        $customer = Auth::user();
+        $customer = auth('api')->user();
         $metadata = [
             'name'      => $customer->name,
             'subdomain' => strtolower(e(Input::get('subdomain'))) . config('session.domain'),
@@ -164,7 +166,7 @@ class ApiCommunityController extends Controller
             $subscription->community_id = $community->id;
             $subscription->save();
 
-            $community->members()->attach(Auth::user(), ['is_admin' => true]);
+            $community->members()->attach(auth('api')->user(), ['is_admin' => true]);
             $community->exchangeTypes()->saveMany(\App\Models\ExchangeType::all());
 
             Mail::send(
@@ -179,4 +181,137 @@ class ApiCommunityController extends Controller
     }
 
 
+     /*
+      * Get basic setting of community
+      * Refere page is this /share/edit
+      */
+    public function defaultExchangeTypes(Request $request, $community_id) {
+        $community = Helper::getCommunity($community_id);
+        $trnsform = GlobalTransformer::transform_allexchnge_types(\App\Models\ExchangeType::all());
+
+        return Helper::sendResponse(true, '', $trnsform);
+    }
+
+     /*
+      * Get basic setting of community
+      * Refere page is this /share/edit
+      */
+    public function getBasicSetting(Request $request, $community_id) {
+        $community = Helper::getCommunity($community_id);
+
+        $data['themes'] = \App\Models\Pagetheme::select('name')->where('public', '=', 1)->get()->pluck('name');
+
+        $exchanges = $community->exchangeTypes;
+
+        $data['allowed_exchanges'] = $exchanges->mapWithKeys(function ($exc) {
+            return [$exc->getKey() => $exc->getKey()];
+        })->toArray();
+
+        $data['all_exchange_types'] = \App\Models\ExchangeType::all();
+
+        $data['poisets'] = ($community->wrld3d && $community->wrld3d->get('dev_token'))
+            ? (new PoiManager($community))->getPoisets()
+            : collect([]);
+        $data['community'] = $community;
+
+        return $data;
+    }
+     /*
+      * Post basic setting of community
+      * Refere page is this /share/edit
+      */
+    public function postBasicSetting(Request $request, $community_id) {
+        $community = Helper::getCommunity($community_id);
+
+        if (Input::has('cover_image_delete')) {
+            //log::debug("postEdit: delete_cover_image: " . $community->cover_img);
+            $community->deleteCover();
+        }
+        if (Input::has('logo_image_delete')) {
+            //log::debug("postEdit: delete_logo_image: " . $community->logo);
+            $community->deleteLogo();
+        }
+        $community->name = e(Input::get('name'));
+        $community->subdomain = e(Input::get('subdomain'));
+        $community->group_type = e(Input::get('group_type'));
+        $community->about = e(Input::get('about'));
+        $community->location = e(Input::get('location'));
+        $latlong = (Input::get('location')) ? collect(Helper::latlong(Input::get('location'))) : collect([]);
+        $community->latitude = $latlong->get('lat');
+        $community->longitude = $latlong->get('lng');
+        $community->color = e(Input::get('theme_color'));
+        $community->entry_layout = e(Input::get('entry_layout'));
+        if (Input::has('exchange_types')) {
+            $community->exchangeTypes()->sync(Input::get('exchange_types'));
+        } else {
+            $community->exchangeTypes()->sync(ExchangeType::all());
+        }
+
+        if (!$community->save()) {
+                return Helper::sendResponse(false, '',$community->getErrors());
+        }
+        return Helper::sendResponse(true, trans('general.community.messages.save_edits'));
+    }
+
+     /*
+      * Post image setting of community
+      * Refere page is this /share/edit
+      */
+    public function postImageSetting(Request $request, $community_id) {
+        $community = Helper::getCommunity($community_id);
+
+        if (Input::hasFile('cover_img')) {
+            $community->uploadImage(auth('api')->user(), Input::file('cover_img'), 'community-covers');
+        }
+
+        if (Input::hasFile('logo')) {
+            $community->uploadImage(auth('api')->user(), Input::file('logo'), 'community-logos');
+        }
+
+        if (Input::hasFile('profile_img')) {
+            $community->uploadImage(auth('api')->user(), Input::file('profile_img'), 'community-profiles');
+        }
+
+        if (!$community->save()) {
+            return Helper::sendResponse(false, '',$community->getErrors());
+        }
+        return Helper::sendResponse(true, trans('general.community.messages.save_edits'));
+        
+    }
+
+     /*
+      * Post advance setting of community
+      * Refere page is this /share/edit
+      */
+    public function postAdvanceSetting(Request $request, $community_id) {
+        $community = Helper::getCommunity($community_id);
+
+        $community->welcome_text = e(Input::get('welcome_text'));
+        $community->slack_endpoint = e(Input::get('slack_endpoint'));
+        $community->slack_botname = e(Input::get('slack_botname'));
+        $community->slack_channel = e(Input::get('slack_channel'));
+        $community->slack_slash_want_token = e(Input::get('slack_slash_want_token'));
+        $community->slack_slash_have_token = e(Input::get('slack_slash_have_token'));
+        $community->slack_slash_members_token = e(Input::get('slack_slash_members_token'));
+        $community->ga = e(Input::get('ga'));
+        $community->show_info_bar = e(Input::get('show_info_bar'));
+
+        // Get the WRLD3D Data
+        $wrld3dApiKey = explode(' - ', e(Input::get('wrld3d.api_key')));
+
+        $community->wrld3d = collect([
+            'dev_token' => e(Input::get('wrld3d.dev_token')),
+            'api_key'   => count($wrld3dApiKey) === 2 ? $wrld3dApiKey[1] : null,
+            'poiset'    => count($wrld3dApiKey) === 2 ? intval($wrld3dApiKey[0]) : null,
+        ]);
+
+        if ($community->show_info_bar == null) {
+            $community->show_info_bar = 1;
+        }
+
+        if (!$community->save()) {
+            return Helper::sendResponse(false, '',$community->getErrors());
+        }
+        return Helper::sendResponse(true, trans('general.community.messages.save_edits'));
+    }
 }

@@ -284,7 +284,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
         <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted">{{ Auth::user()->location }}</h3>
       </div>
       <a href="{{ route('user.profile', ['userId'=>Auth::user()->id]) }}">
-        <button class="btn btn-sm btn-colored submit">{{trans('general.settings.view_profile')}}</button>
+        <button class="btn btn-sm btn-colored">{{trans('general.settings.view_profile')}}</button>
       </a>
     </div>
 	</div> <!-- container -->

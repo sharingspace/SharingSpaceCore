@@ -6,11 +6,13 @@ use App\Models\Community;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Transformers\UserTransformer;
+use Input;
+use Validator;
 use Helper;
 use Laravel\Passport\Client;
 use GuzzleHttp\Client as GuzzleHttp;
 use \App\Http\Transformers\GlobalTransformer;
-
+use Log;
 
 class ApiUserController extends Controller
 {
@@ -61,9 +63,9 @@ class ApiUserController extends Controller
 	 --------------------------------------------------------------------*/
 
      /*
-     * Get All Community of authenticated user
-     * Improvement: later need to add pagination
-     */
+      * Get All Community of authenticated user
+      * Improvement: later need to add pagination
+      */
     public function getAllCommunities(Request $request) {
         
         $user = auth('api')->user();
@@ -73,6 +75,9 @@ class ApiUserController extends Controller
         return Helper::sendResponse(true, '', $transform);
     }
 
+    /*
+     * Leave a community
+     */
     public function leaveCommunity(Request $request, $community_id) {
     	if ($community_id) {
             $community = auth('api')->user()->communities()->where('community_id', $community_id)->first();
@@ -88,4 +93,109 @@ class ApiUserController extends Controller
         }
     }
 
+ /*-------------------------------------------------------------------------------
+  * User Profile methods
+  *-------------------------------------------------------------------------------/    
+
+    /*
+     * Profile info save
+     */
+    public function updateProfile(Request $request, $community_id){
+
+        if ($user = User::find(auth('api')->user()->id)) {
+
+            $user->first_name = e(Input::get('first_name'));
+            $user->last_name = e(Input::get('last_name'));
+            $user->email = e(Input::get('email'));
+            $user->display_name = e(Input::get('display_name'));
+            $user->website = e(Input::get('website'));
+            $user->bio = e(Input::get('bio'));
+            $user->location = e(Input::get('location'));
+
+            if (Input::get('location')) {
+                $latlong = Helper::latlong(Input::get('location'));
+            }
+
+            if ((isset($latlong)) && (is_array($latlong)) && (isset($latlong['lat']))) {
+                $user->latitude         = $latlong['lat'];
+                $user->longitude         = $latlong['lng'];
+            }
+
+
+            if (!$user->save()) {
+                return $user->getErrors();
+            }
+            return Helper::sendResponse(true, 'Saved!');
+        }
+
+        return Helper::sendResponse(false, 'Invalid user');
+    }
+
+    /*
+     * Social info save
+     */
+    public function updateSocial(Request $request, $community_id){
+
+        if ($user = User::find(auth('api')->user()->id)) {
+
+            $user->fb_url = $request->fb_url;
+            $user->twitter = $request->twitter;
+            $user->google = $request->google;
+            $user->pinterest = $request->pinterest;
+            $user->youtube = $request->youtube;
+
+            if (!$user->save()) {
+                    return $user->getErrors();
+            }
+            return Helper::sendResponse(true,  trans('general.user.social_success'));
+        }
+        return Helper::sendResponse(false, trans('general.user.social_failure'));
+    }
+
+    /*
+     * Avtar info save
+     */
+    public function updateAvatar(Request $request, $community_id){
+        if ($user = User::find(auth('api')->user()->id)) {            
+            if (Input::hasFile('avatar_img')) {
+                LOG::debug("postUpdateAvatar: have image, preparing to upload");
+                $user->uploadImage($user, Input::file('avatar_img'), 'users');
+                LOG::debug("postUpdateAvatar: upload complete");
+                return Helper::sendResponse(true, trans('general.user.avatar_success'));
+            }
+            else if(Input::get('delete_img')) {
+                if (User::deleteAvatar($user->id)) {
+                    return Helper::sendResponse(true, 'delete okay');
+                }
+                else {
+                    return Helper::sendResponse(true, 'delete fail');
+                }
+            }
+            return Helper::sendResponse(true, 'Your changes successfully saved');
+        }
+        else {
+
+            // That user wasn't valid
+            LOG::debug("postUpdateAvatar: invalid user");
+            return Helper::sendResponse(false, trans('general.user.avatar_failure'));
+        }
+    }
+
+    /*
+     * Profile info save
+     */
+    public function ChangePassword(Request $request, $community_id){
+        if ($user = User::find(auth('api')->user()->id)) {
+
+            $user->password = \Hash::make(e(Input::get('password')));
+
+            if (!$user->save()) {
+                return $user->getErrors();
+            }
+
+            return Helper::sendResponse(true, 'Saved!');
+
+        }
+        return Helper::sendResponse(false, 'Invalid user');
+    }
 }

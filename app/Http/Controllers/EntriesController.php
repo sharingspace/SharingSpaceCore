@@ -177,7 +177,6 @@ class EntriesController extends Controller
     public function postAjaxCreate(Request $request)
     {
         //log::debug("postAjaxCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
         $entry = new Entry();
 
         $entry->title = e(Input::get('title'));

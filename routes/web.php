@@ -597,7 +597,6 @@ Route::group(
 
 
 
-
             Route::get('assigned-role','RolesController@getListAssignedRole')->name('admin.assigned-role');
 
             Route::post('assign-role/store','RolesController@postAssignRoleCreate')->name('admin.assign-role.store');

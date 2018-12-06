@@ -12,6 +12,7 @@ use App\Models\Community;
 use App\Helpers\Wrld3D\PoiManager;
 use \App\Http\Transformers\EntriesTransformer;
 use \App\Http\Transformers\GlobalTransformer;
+use App\Jobs\Entry\DeleteEntry;
 
 class ApiEntriesController extends Controller
 {
@@ -36,13 +37,15 @@ class ApiEntriesController extends Controller
         try {
             $entries = Community::findOrFail($community_id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
 
-                $trnsform = GlobalTransformer::transform_entries($entries);
-            return response()->json($trnsform);     
+            $trnsform = GlobalTransformer::transform_entries($entries);
+            return Helper::sendResponse(true, '', $trnsform); 
         } catch (Exception $e) {
                 
         }
     }
-
+     /*
+      * Create entry for single sharing space
+      */
     public function create(Request $request, $community_id){
         $community = Helper::getCommunity($community_id);
         $user = auth('api')->user();
@@ -60,7 +63,7 @@ class ApiEntriesController extends Controller
 
         $validator = Validator::make($request->all(), $entry->getRules());
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'errors' => $validator->messages()]);
+            return Helper::sendResponse(false, $validator->messages()); 
         }
 
         if ($user->isSuperAdmin() && !$user->isMemberOfCommunity($request->whitelabel_group, true)) {
@@ -73,10 +76,7 @@ class ApiEntriesController extends Controller
         }
 
         if (empty($exchange_types)) {
-            return response()->json([
-                'success' => false,
-                'error'   => trans('general.entries.messages.no_exchange_types'),
-            ]);
+            return Helper::sendResponse(false, trans('general.entries.messages.no_exchange_types'));
         }
 
         if (Input::get('location')) {
@@ -117,10 +117,7 @@ class ApiEntriesController extends Controller
                 }
 
                 if (!$entry->uploadImage($user, Input::file('file'), 'entries', $rotation)) {
-                    return response()->json([
-                        'success' => false,
-                        'error'   => trans('general.entries.messages.rotation_failed'),
-                    ]);
+                    return Helper::sendResponse(false, trans('general.entries.messages.rotation_failed')); 
                 }
             }
             else {
@@ -136,9 +133,9 @@ class ApiEntriesController extends Controller
 
             if ($uploaded) {
                 //log::debug("postAjaxCreate: image uploaded successfully, returning success");
-                return response()->json([
-                    'success'        => true,
-                    'create'         => true,
+                 $data = [
+                    // 'success'        => true,
+                    // 'create'         => true,
                     'entry_id'       => $entry->id,
                     'title'          => $entry->title,
                     'description'    => $entry->description,
@@ -147,17 +144,25 @@ class ApiEntriesController extends Controller
                     'exchange_types' => $types,
                     'tags'           => $entry->tags,
                     'typeIds'        => $typeIds,
-                ]);
+                ];
+                return Helper::sendResponse(true, 'Created successfully', $data); 
+
             }
             else {
-                return response()->json([
-                    'success' => false,
-                    'error'   => trans('general.entries.messages.upload_failed'),
-                ]);
+                return Helper::sendResponse(false, trans('general.entries.messages.upload_failed')); 
             }
         }
+        return Helper::sendResponse(false, trans('general.entries.messages.save_failed'));
+    }
 
-        return response()->json(['success' => false, 'error' => trans('general.entries.messages.save_failed')]);
+    /*
+     * Get all Exechange types of single sharing space
+     */
+    public function getExchangeTypes(Request $request, $community_id) {
+        $community = Helper::getCommunity($community_id);
+        $trnsform = GlobalTransformer::transform_allexchnge_types($community->exchangeTypes);
+
+        return Helper::sendResponse(true, '', $trnsform);
     }
 
     /*-------------------------------------------------------------------  
@@ -165,8 +170,8 @@ class ApiEntriesController extends Controller
      ------------------------------------------------------------------*/
 
      /*
-     * Get all entries of single sharing space
-     */
+      * Get all entries of single sharing space
+      */
 
     public function getEntries(Request $request, $community_id) {
 
@@ -212,7 +217,7 @@ class ApiEntriesController extends Controller
             $user = auth('api')->user();
 
             if ($user->cannot('update-entry', [$entry,$community])) {
-                return response()->json(['success' => false, 'error' => trans('general.entries.messages.not_allowed')]);
+                return Helper::sendResponse(false, trans('general.entries.messages.not_allowed'));
             }
 
             $entry->title = e(Input::get('title'));
@@ -233,11 +238,11 @@ class ApiEntriesController extends Controller
             }
 
             if (!$entry->save()) {
-                return response()->json(['success' => false, 'error' => trans('general.entries.messages.save_failed')]);
+                return Helper::sendResponse(false, trans('general.entries.messages.save_failed'));
             }
 
             if (Input::hasFile('file')) {
-                $entry->uploadImage(Auth::user(), Input::file('file'), 'entries', $rotation);
+                $entry->uploadImage(auth('api')->user(), Input::file('file'), 'entries', $rotation);
             }
             else {
                 if (Input::has('deleteImage')) {
@@ -247,10 +252,7 @@ class ApiEntriesController extends Controller
                 else {
                     if (Input::has('rotation')) {
                         if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                            return response()->json([
-                                'success' => false,
-                                'error'   => trans('general.entries.messages.save_failed'),
-                            ]);
+                            return Helper::sendResponse(false, trans('general.entries.messages.save_failed'));
                         }
                     }
                 }
@@ -265,9 +267,9 @@ class ApiEntriesController extends Controller
                 array_push($typeIds, $et->id);
             }
 
-            return response()->json([
-                'success'        => true,
-                'create'         => false,
+            $data = [
+                // 'success'        => true,
+                // 'create'         => false,
                 'entry_id'       => $entry->id,
                 'title'          => $entry->title,
                 'description'    => $entry->description,
@@ -276,15 +278,45 @@ class ApiEntriesController extends Controller
                 'exchange_types' => $types,
                 'typeIds'        => $typeIds,
                 'tags'           => $entry->tags,
-            ]);
+            ];
+            return Helper::sendResponse(true, "Updated successfully", $data);
+
         }
 
-        //log::error("postAjaxEdit: invalid entry Id = " . $entry_id);
-        return response()->json(['success' => false, 'error' => trans('general.entries.messages.invalid')]);
+        return Helper::sendResponse(false, trans('general.entries.messages.invalid'));
     }
 
-    public function deleteEntry() {
+    public function deleteEntry(Request $request, $community_id, $entryID) {
+        // if(!\Permission::checkPermission('delete-any-entry-permission', $request->whitelabel_group)) {
+        //     return view('errors.401');       
+        // }
+        $community = Helper::getCommunity($community_id);
 
+        if (!$entry = Entry::find($entryID)) {
+            return Helper::sendResponse(false, trans('general.entries.messages.invalid'));  
+        }
+        
+        // First we check if user can edit the entry.
+        // If users can't do it, we throw an error.
+
+        if (!$entry->created_by == auth('api')->user()->id) {
+            return Helper::sendResponse(false, trans('general.entries.messages.delete_not_allowed'));  
+        }
+
+        // Try to delete the entry.
+        if (!$entry->delete()) {
+            return Helper::sendResponse(false, trans('general.entries.messages.delete_failed'));  
+        }
+
+        $entry->exchangeTypes()->detach();
+
+        // Remove Wrld3D POI
+        $community = $entry->communities()->first();
+
+        if ($community->wrld3d && $community->wrld3d->get('api_key') && $entry->wrld3d && $entry->wrld3d->get('poi_id')) {
+            (new PoiManager($community))->deletePoi($entry->wrld3d->get('poi_id'));
+        }
+        return Helper::sendResponse(true, trans('general.entries.messages.delete_success'));            
     }
 
     public function getSettings() {

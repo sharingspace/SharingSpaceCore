@@ -80,12 +80,12 @@ class ApiRoleController extends Controller
             
         if($unique) {
             $error = trans('general.role.error.unique');
-            return Helper::ajaxresponse(false, $error);
+            return Helper::sendResponse(false, $error);
         }
 
         if($request->permissions == '') {
             $error = trans('general.role.error.role-select');
-            return Helper::ajaxresponse(false, $error);
+            return Helper::sendResponse(false, $error);
         }
 
         \DB::beginTransaction();
@@ -105,7 +105,7 @@ class ApiRoleController extends Controller
 
             \DB::rollback();  
                 $error = 'Something went to wrong';
-                return Helper::ajaxresponse(false, $error);
+                return Helper::sendResponse(false, $error);
         } finally { 
             \DB::commit();
 
@@ -119,7 +119,7 @@ class ApiRoleController extends Controller
 	 * Get all roles
 	 * Request Type: get
 	 */
-	public function getRole(Request $request, $community_id) {
+	public function getAllRole(Request $request, $community_id) {
 		$community = Helper::getCommunity($community_id);
 
 		// if(!P::checkPermission('manage-role', $community)) {
@@ -157,12 +157,12 @@ class ApiRoleController extends Controller
             
         if($unique) {
             $error = trans('general.role.error.unique');
-            return Helper::ajaxresponse(false, $error);
+            return Helper::sendResponse(false, $error);
         }
 
         if($request->permissions == '') {
             $error = trans('general.role.error.role-select');
-            return Helper::ajaxresponse(false, $error);
+            return Helper::sendResponse(false, $error);
         }
         
         \DB::beginTransaction();
@@ -226,5 +226,14 @@ class ApiRoleController extends Controller
 
         }
 	}
+
+     /*
+      * Get all permissions
+      */
+    public function getAllPermissions($community_id) {
+        $trnsform = GlobalTransformer::transformgetAllPermissions(Permission::all());
+        return Helper::sendResponse(true, '', $trnsform);
+        
+    }
 
 }

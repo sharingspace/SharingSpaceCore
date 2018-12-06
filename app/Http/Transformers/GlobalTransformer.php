@@ -30,6 +30,22 @@ class GlobalTransformer
         return $communities_array;
 
 	}
+    public static function transform_allexchnge_types($exchangeTypes) {
+        $exchange_types = array();
+        foreach ($exchangeTypes as $value) {
+            $exchange_types[$value->id] = $value->name;
+        }
+        return $exchange_types;
+
+    }
+    public static function transformgetAllPermissions($permissions) {
+        foreach ($permissions as $permission) {
+            $permissions_array[$permission->id] = $permission->display_name;
+        }
+
+        return $permissions_array;
+
+    }
 
 	/*
 	 * Transform the database to array of entries
