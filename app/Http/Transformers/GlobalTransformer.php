@@ -13,7 +13,7 @@ class GlobalTransformer
 		$communities_array = array();
         foreach ($communities as $community) {
             $communities_array[] = [
-                'id' => e($community->hubgroup_id),
+                'id' => e($community->id),
 	            'name' => e($community->name),
 	            'about' => e($community->about),
 		            'location' =>
