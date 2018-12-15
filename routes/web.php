@@ -82,7 +82,7 @@ Route::group(
         | Authentication and Authorization Routes
         |--------------------------------------------------------------------------
         */
-
+ 
 
         Auth::routes();
 
@@ -594,7 +594,6 @@ Route::group(
 
             Route::get('/role/delete/{id}', 'RolesController@getDeleteRole')
                         ->name('admin.role.delete');
-
 
 
 

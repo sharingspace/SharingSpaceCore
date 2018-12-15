@@ -37,19 +37,34 @@ class Authenticate
     public function handle($request, Closure $next)
     {
 
-        
-        if ($this->auth->guest()) {
-            
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            }
-            else if($request->whitelabel_group && $request->whitelabel_group->group_type != 'S') {
-                return $next($request);
-            }
-            else {
-                return redirect()->guest('login')->with('info', trans('auth.must_login'));
+       
+        if(!$request->wantsJson()) {
+
+            if ($this->auth->guest()) {
+
+                if ($request->ajax()) {
+                    return response('Unauthorized.', 401);
+                }
+                else if($request->whitelabel_group && $request->whitelabel_group->group_type != 'S') {
+                    return $next($request);
+                }
+                else {
+                    return redirect()->guest('login')->with('info', trans('auth.must_login'));
+                }
+            } 
+        } else {
+            if($request->is('api/*')) {
+                if( empty(auth('api')->user())) {
+                    return response('Unauthorized.', 401);
+                 }
             }
         }
+
+
+        
+        
+
+        // 
 
         return $next($request);
     }
