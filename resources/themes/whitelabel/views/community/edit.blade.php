@@ -550,13 +550,15 @@
             $(document).on("click",".submit", function (e) {
               e.preventDefault();
               startLoader();
-              data = $(this).parents('form').serialize();
+              // var formData = new FormData($('#edit_share')[0]);
+              // console.log(formData);
+              formData = $(this).parents('form').serialize();
               callUrl = $(this).parents('form').attr('action');
              
               $.ajax({
                 url: callUrl,
                 method: 'POST',
-                data: data,
+                data: formData,
                 dataType: "json",
                 success: function (result) {
                     if(result.status == true){

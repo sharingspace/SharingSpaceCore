@@ -6,11 +6,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class UserTransformer
 {
 
-    public function transform(LengthAwarePaginator $users)
+    public function transform(LengthAwarePaginator $users,$community_id)
     {
+
         $users_array = array();
         foreach ($users as $user) {
-
+            $role_name = '';
+            $role = $user->roles()->where('community_id', $community_id)->first();
+            if(!empty($role)) {
+                $role_name = $role->display_name;
+            }
             $users_array[] = [
                 'id' => e($user->id),
                 'profile_images' =>
@@ -30,6 +35,7 @@ class UserTransformer
                     ],
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
+                'role' => $role->display_name
 
             ];
         }

@@ -9,44 +9,48 @@ use League\OAuth2\Server\CryptKey;
 use Illuminate\Http\Request;
 use App\Models\oAuthClient;
 
+
 class AccessToken extends PassportAccessToken {
 
-    public function convertToJWT(CryptKey $privateKey)
-    {
+    // public function convertToJWT(CryptKey $privateKey)
+    // {
 
-        return (new Builder())
-            ->setAudience($this->getClient()->getIdentifier())
-            ->setId($this->getIdentifier(), true)
-            ->setIssuedAt(time())
-            ->setNotBefore(time())
-            ->setExpiration($this->getExpiryDateTime()->getTimestamp())
-            ->setSubject($this->getUserIdentifier())
-            ->set('scopes', $this->getScopes())
-            ->set('community', $this->getCommunity()) // my custom claims
-            ->sign(new Sha256(), new Key($privateKey->getKeyPath(), $privateKey->getPassPhrase()))
-            ->getToken();
-    }
+    //     return (new Builder())
+    //         ->setAudience($this->getClient()->getIdentifier())
+    //         ->setId($this->getIdentifier(), true)
+    //         ->setIssuedAt(time())
+    //         ->setNotBefore(time())
+    //         ->setExpiration($this->getExpiryDateTime()->getTimestamp())
+    //         ->setSubject($this->getUserIdentifier())
+    //         ->set('scopes', $this->getScopes())
+    //         ->set('community', $this->getDefaultSettings()) // my custom claims
+    //         ->sign(new Sha256(), new Key($privateKey->getKeyPath(), $privateKey->getPassPhrase()))
+    //         ->getToken();
+    // }
 
-    // my custom claims for roles
-    // Just an example.
-    public function getCommunity() {
-        $user = oAuthClient::find($this->getClient()->getIdentifier());
+   
+    // public function getCommunity() {
+    //     $user = oAuthClient::find($this->getClient()->getIdentifier());
 
+        
+    //     $community = $user->community_apis->first();
 
-        $community = $user->community_apis->first();
-
-        if(!empty($community)) {
-            return [
-                'community_id' => $community->id,
-                'user_id'      => $user->id
-            ];
-        }
-            return [
-                'community_id' => 0,
-                'user_id'      => $user->id
-            ];
+    //     if(!empty($community)) {    
+    //         return [
+    //             'community_id' => $community->id,
+    //             'user_id'      => $user->id
+    //         ];
+    //     }
+    //         return [
+    //             'community_id' => 0,
+    //             'user_id'      => $user->id
+    //         ];
 
 
         
-    }
+    // }
+
+    // public function getDefaultSettings() {
+        
+    // }
 }

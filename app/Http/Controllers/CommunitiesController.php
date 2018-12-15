@@ -41,6 +41,7 @@ class CommunitiesController extends Controller
 
     public function __construct(Community $community)
     {
+
         $this->community = $community;
     }
 
@@ -53,6 +54,7 @@ class CommunitiesController extends Controller
      */
     public function getHomepage()
     {
+
         return view('home');
     }
 
@@ -395,6 +397,7 @@ class CommunitiesController extends Controller
      */
     public function getEdit(Request $request)
     {
+        
         $this->createDefaultRoles($request);
 
         if(!Permission::checkPermission('edit-sharing-network-permission', $request->whitelabel_group)) {
