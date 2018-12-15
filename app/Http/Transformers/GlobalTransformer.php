@@ -112,6 +112,7 @@ class GlobalTransformer
                 'updated_at' => $user->updated_at,
                 'total' => $users->total(),
                 'lastpage' => $users->lastpage(),
+                'role_name' => $role_name
 
             ];
         }
