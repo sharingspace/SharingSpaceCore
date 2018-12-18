@@ -6,9 +6,12 @@
     <div class="section pb-10">
         <div class="container">
             <div class="row">
-              <div class="mb-7 text-center">
+              <div class="col-md-12 text-center">
                 <h3 class="heading text-center fw-normal fz-34">{{$module_subtitle}}</h3>
               </div>
+              <div class="clearfix">&nbsp;</div>
+              @include("includes/message")
+
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
                 <div class="table-responsive">
                   <table class="table table-condensed" id="members">
@@ -30,8 +33,7 @@
                         <td> {{ $page->meta_description }}</td>
                         <td> {{ $page->meta_keywords }}</td>
                         <td> {{ $page->status }}</td>
-                        <td> 
-                          
+                        <td>
                           <a href="{{ route('frontend.get.control.delete', $page->id) }}">
                             Delete
                           </a>
