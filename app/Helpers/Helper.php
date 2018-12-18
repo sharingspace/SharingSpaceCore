@@ -224,6 +224,6 @@ class Helper
      * data = array of response
      */
     public static function sendResponse($status, $message, $data = []) {
-        return response()->json([$status, $message, $data]);
+        return response()->json(["meta" => ["code" => $status, "message" => $message], "data" => $data]);
     }
 }

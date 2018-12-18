@@ -47,12 +47,12 @@ class ApiRoleController extends Controller
             
         } catch (\Exception $e) {                
             \DB::rollback();  
-        	return Helper::sendResponse(false, 'Role assign unable to updated  '.$community->name);
+        	return Helper::sendResponse(502, 'Role assign unable to updated  '.$community->name);
         } finally { 
             \DB::commit();
 
             $message = trans('general.assign_role.updated');
-        	return Helper::sendResponse(true, $message."".$community->name);
+        	return Helper::sendResponse(200, $message."".$community->name);
 
         }
 
@@ -80,12 +80,12 @@ class ApiRoleController extends Controller
             
         if($unique) {
             $error = trans('general.role.error.unique');
-            return Helper::sendResponse(false, $error);
+            return Helper::sendResponse(422, $error);
         }
 
         if($request->permissions == '') {
             $error = trans('general.role.error.role-select');
-            return Helper::sendResponse(false, $error);
+            return Helper::sendResponse(422, $error);
         }
 
         \DB::beginTransaction();
@@ -104,13 +104,13 @@ class ApiRoleController extends Controller
         } catch (\Exception $e) {    
 
             \DB::rollback();  
-                $error = 'Something went to wrong';
-                return Helper::sendResponse(false, $error);
+                $error = 'Something went to wrong!';
+                return Helper::sendResponse(502, $error);
         } finally { 
             \DB::commit();
 
             $message = trans('general.role.created');
-        	return Helper::sendResponse(true, $message.' '.$community->name);
+        	return Helper::sendResponse(200, $message.' '.$community->name);
 
         }
 	}
@@ -129,7 +129,7 @@ class ApiRoleController extends Controller
         $roles = Role::where('community_id', $community->id)->paginate(20);
         $trnsform = GlobalTransformer::transformall_allroles($roles);
 
-    	return Helper::sendResponse(true, '',$trnsform);
+    	return Helper::sendResponse(200, '',$trnsform);
 
 	}
 
@@ -157,12 +157,12 @@ class ApiRoleController extends Controller
             
         if($unique) {
             $error = trans('general.role.error.unique');
-            return Helper::sendResponse(false, $error);
+            return Helper::sendResponse(422, $error);
         }
 
         if($request->permissions == '') {
             $error = trans('general.role.error.role-select');
-            return Helper::sendResponse(false, $error);
+            return Helper::sendResponse(422, $error);
         }
         
         \DB::beginTransaction();
@@ -181,13 +181,13 @@ class ApiRoleController extends Controller
             } 
         } catch (\Exception $e) {                
             \DB::rollback();  
-        	return Helper::sendResponse(false, 'Role unable to update '.$community->name);
+        	return Helper::sendResponse(502, 'Role unable to update '.$community->name);
         	
         } finally { 
             \DB::commit();
             
             $message = trans('general.role.updated');
-	    	return Helper::sendResponse(true, $message);
+	    	return Helper::sendResponse(200, $message);
 
         }
 	}
@@ -215,14 +215,14 @@ class ApiRoleController extends Controller
 
         } catch (\Exception $e) {                
             \DB::rollback();  
-        	return Helper::sendResponse(false, 'Role unable to delete '.$community->name);
+        	return Helper::sendResponse(502, 'Role unable to delete '.$community->name);
 
         	
         } finally { 
             \DB::commit();
 
             $message = trans('general.role.deleted');
-        	return Helper::sendResponse(true, $message.' '.$community->name);
+        	return Helper::sendResponse(200, $message.' '.$community->name);
 
         }
 	}
@@ -232,7 +232,7 @@ class ApiRoleController extends Controller
       */
     public function getAllPermissions($community_id) {
         $trnsform = GlobalTransformer::transformgetAllPermissions(Permission::all());
-        return Helper::sendResponse(true, '', $trnsform);
+        return Helper::sendResponse(200, '', $trnsform);
         
     }
 

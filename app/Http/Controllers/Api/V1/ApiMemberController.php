@@ -23,12 +23,16 @@ class ApiMemberController extends Controller
         try {
             $member = Community::findOrFail($community_id)->members()->where('users.id','=',$member_id)->paginate(1);
             $trnsform = new UserTransformer;
-            return response()->json($trnsform->transform($member));
+            // return response()->json($trnsform->transform($member));
           //  return $this->response->withItem($member, new UserTransformer);
 
         } catch (ModelNotFoundException $e) {
             //return $this->response->errorNotFound();
+            return Helper::sendResponse(502, 'Something went wrong');
+
         }
+        return Helper::sendResponse(200, '', $trnsform->transform($member));
+
     }
 
     public function all(Request $request){
@@ -45,11 +49,14 @@ class ApiMemberController extends Controller
 
             $members = Community::findOrFail($community_id)->members()->orderBy('created_at','desc')->paginate($per_page);
             $trnsform = new UserTransformer;
-            return response()->json($trnsform->transform($members));
+            // return response()->json($trnsform->transform($members));
 
         } catch (Exception $e) {
+            return Helper::sendResponse(502, 'Something went wrong');
 
         }
+        return Helper::sendResponse(200, '', $trnsform->transform($members));
+        
     }
 
 
@@ -68,9 +75,9 @@ class ApiMemberController extends Controller
         $community = Helper::getCommunity($community_id);
         
         if ($user->isAdminOfCommunity($community)) {
-            return Helper::sendResponse(true, '', ['is_super_admin'=>true]);
+            return Helper::sendResponse(200, '', ['is_super_admin'=>true]);
         }
-        return Helper::sendResponse(true, '', $user->permissions);
+        return Helper::sendResponse(200, '', $user->permissions);
     }
 
     /*
@@ -90,7 +97,7 @@ class ApiMemberController extends Controller
 
         $members = $community->members()->orderBy('created_at','desc')->paginate($per_page);
         $trnsform = GlobalTransformer::transformall_members($members, $community_id);
-        return Helper::sendResponse(true, '', $trnsform);
+        return Helper::sendResponse(200, '', $trnsform);
     }
 
 
