@@ -33,11 +33,11 @@ class ApiCommunityController extends Controller
 
         } catch (\Exception $e) {                
             \DB::rollback();  
-                return Helper::sendResponse(false, 'Unable to join '.$community->name);
+                return Helper::sendResponse(502, 'Unable to join '.$community->name);
         
         } finally { 
             \DB::commit();
-                return Helper::sendResponse(true, 'You have joined '.$community->name.'!');
+                return Helper::sendResponse(200, 'You have joined '.$community->name.'!');
         }
     }
 
@@ -51,15 +51,15 @@ class ApiCommunityController extends Controller
            
             if (isset($community)) {
                 if (auth('api')->user()->communities()->detach($community->id)) {
-                    return Helper::sendResponse(true, 'You have left the Share, "'.$community->name.'"');
+                    return Helper::sendResponse(200, 'You have left the Share, "'.$community->name.'"');
                 }
                 else {
-                    return Helper::sendResponse(false, 'Unable to leave the Share, "'.$community->name.'"');
+                    return Helper::sendResponse(502, 'Unable to leave the Share, "'.$community->name.'"');
                    
                 }
             }
         
-        return Helper::sendResponse(false, 'Unable to leave the Share, "'.$community->name.'"');
+        return Helper::sendResponse(422, 'Unable to leave the Share, "'.$community->name.'"');
     }
     
     /*
@@ -72,7 +72,7 @@ class ApiCommunityController extends Controller
 
         // No stripe token - something went wrong :(
         if (!isset($token)) {
-            return $this->sendResponse(false, 'Something went wrong. Please make sure javascript is enabled in your browser.', []);
+            return Helper::sendResponse(502, 'Something went wrong. Please make sure javascript is enabled in your browser.', []);
         }
         //log::debug("postCreate: token = " . $token);
 
@@ -83,7 +83,7 @@ class ApiCommunityController extends Controller
         $community->created_by = auth('api')->user()->id;
 
         if ($community->isInvalid()) {
-            return $this->sendResponse(false, $community->getErrors(), []);
+            return Helper::sendResponse(502, $community->getErrors(), []);
         }
 
         $customer = auth('api')->user();
@@ -124,14 +124,14 @@ class ApiCommunityController extends Controller
 
         if (!$customer->save()) {
 
-            return $this->sendResponse(false, 'Something went wrong.', []);
+            return Helper::sendResponse(502, 'Something went wrong.', $customer->getErrors());
         }
 
         try {
             $card = $customer->card()->makeDefault()->create($token);
         } catch (\Exception $e) {
             
-            return $this->sendResponse(false, 'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '', []);
+            return Helper::sendResponse(502, 'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '', []);
 
         }
 
@@ -148,11 +148,11 @@ class ApiCommunityController extends Controller
                 try {
                     $customer->applyStripeDiscount(e($request->input('coupon')));
                 } catch (\Exception $e) {
-                    return $this->sendResponse(false, 'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '', []);
+                    return Helper::sendResponse(502, 'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '', []);
                 }
             }
         } catch (\Exception $e) {
-            return $this->sendResponse(false, 'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '', []);
+            return Helper::sendResponse(502, 'Something went wrong while trying to authorise your card: ' . $e->getMessage() . '', []);
         }
 
         $customer->subscription()->syncWithStripe();
@@ -176,7 +176,7 @@ class ApiCommunityController extends Controller
                     $message->to($data['email'], $data['name'])->subject('Welcome to AnyShare!');
                 }
             );
-            return $this->sendResponse(true, trans('general.community.save_success'), []);
+            return Helper::sendResponse(200, trans('general.community.save_success'), []);
         }
     }
 
@@ -189,7 +189,7 @@ class ApiCommunityController extends Controller
         $community = Helper::getCommunity($community_id);
         $trnsform = GlobalTransformer::transform_allexchnge_types(\App\Models\ExchangeType::all());
 
-        return Helper::sendResponse(true, '', $trnsform);
+        return Helper::sendResponse(200, '', $trnsform);
     }
 
      /*
@@ -214,7 +214,8 @@ class ApiCommunityController extends Controller
             : collect([]);
         $data['community'] = $community;
 
-        return $data;
+        return Helper::sendResponse(200, '', $data);
+        // return $data;
     }
      /*
       * Post basic setting of community
@@ -248,9 +249,9 @@ class ApiCommunityController extends Controller
         }
 
         if (!$community->save()) {
-                return Helper::sendResponse(false, '',$community->getErrors());
+                return Helper::sendResponse(502, '',$community->getErrors());
         }
-        return Helper::sendResponse(true, trans('general.community.messages.save_edits'));
+        return Helper::sendResponse(200, trans('general.community.messages.save_edits'));
     }
 
      /*
@@ -273,9 +274,9 @@ class ApiCommunityController extends Controller
         }
 
         if (!$community->save()) {
-            return Helper::sendResponse(false, '',$community->getErrors());
+            return Helper::sendResponse(502, '',$community->getErrors());
         }
-        return Helper::sendResponse(true, trans('general.community.messages.save_edits'));
+        return Helper::sendResponse(200, trans('general.community.messages.save_edits'));
         
     }
 
@@ -310,8 +311,8 @@ class ApiCommunityController extends Controller
         }
 
         if (!$community->save()) {
-            return Helper::sendResponse(false, '',$community->getErrors());
+            return Helper::sendResponse(502, '',$community->getErrors());
         }
-        return Helper::sendResponse(true, trans('general.community.messages.save_edits'));
+        return Helper::sendResponse(200, trans('general.community.messages.save_edits'));
     }
 }
