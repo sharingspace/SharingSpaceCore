@@ -10,6 +10,7 @@
 @section('content')
 
 <!-- -->
+<div class="message1"></div>
 <section>
 	<div class="container margin-top-20">
     <h1 class="margin-bottom-0 size-24 text-center">{{trans('general.user.change_settings')}}</h1>
@@ -85,7 +86,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div>
 
 						<div class="col-md-12 form-group">
-							<button class="btn btn-colored pull-right">{{trans('general.user.save_personal_info')}}</button>
+							<button class="btn btn-colored pull-right submit">{{trans('general.user.save_personal_info')}}</button>
 						</div>
           </form>
 				</div> <!-- /PERSONAL INFO TAB -->
@@ -161,21 +162,21 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div> <!-- col-md-12 -->
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-colored pull-right">{{trans('general.user.save_socials')}}</button>
+							<button class="btn btn-colored pull-right submit">{{trans('general.user.save_socials')}}</button>
 						</div>
           </form>
   			</div> <!-- /SOCIAL TAB -->
 
 				<!-- AVATAR TAB -->
 				<div class="tab-pane fade" id="avatar">
-          <form role="form" method="post" action="{{ route('user.avatar.save') }}" enctype='multipart/form-data'>
+          <form role="form" method="post" action="{{ route('user.avatar.save') }}" files='true' enctype='multipart/form-data'>
             {{ csrf_field() }}
 						<div class="row">
               <!-- file upload -->
               <div class="col-md-8 margin-bottom-10">
                 <div class="fancy-file-upload fancy-file-info">
                   <i class="fa fa-picture-o"></i>
-                  <input id="choose-file" type="file" class="form-control"  accept="image/jpg,image/png,image/jpeg,image/gif"  name="avatar_img" onchange="jQuery(this).next('input').val(this.value);" />
+                  <input id="choose-file" type="file" class="form-control" accept="image/jpg,image/png,image/jpeg,image/gif" name="avatar_img" onchange="jQuery(this).next('input').val(this.value);" />
                   <input id="shadow_input" type="text" class="form-control" placeholder="{{ trans('general.entries.file_placeholder')}}" readonly="" />
                   <span class="button">{{ trans('general.uploads.choose_file') }}</span>
                 </div>  <!-- fancy -->
@@ -204,7 +205,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
   					</div> <!-- row -->
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-colored pull-right">
+  						<button class="btn btn-colored pull-right upload">
                 {{trans('general.user.save_avatar')}}
               </button>
   					</div>
@@ -231,7 +232,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 						</div>
 
             <div class="col-md-12 form-group">
-							<button class="btn btn-colored pull-right">{{trans('general.user.save_password')}}</button>
+							<button class="btn btn-colored pull-right submit">{{trans('general.user.save_password')}}</button>
 						</div>
           </form>
 				</div>
@@ -267,7 +268,7 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
             </div>
 
             <div class="col-md-12 form-group">
-  						<button class="btn btn-colored pull-right">{{trans('general.user.save_privacy')}}</button>
+  						<button class="btn btn-colored pull-right submit">{{trans('general.user.save_privacy')}}</button>
   					</div>
           </form>
         </div> <!-- /PRIVACY TAB -->
@@ -293,6 +294,132 @@ https://anyshare.freshdesk.com/support/solutions/articles/17000035463-using-mark
 <script type="text/javascript">
 
 $( document ).ready(function() {
+  $(document).on("click",".submit", function (e) {
+    e.preventDefault();
+    startLoader();
+    data = $(this).parents('form').serialize();
+    callUrl = $(this).parents('form').attr('action');
+   
+    $.ajax({
+      url: callUrl,
+      method: 'POST',
+      data: data,
+      dataType: "json",
+      success: function (result) {
+          if(result.status == true){
+            $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
+                                <i class="fa fa-check"></i>\n\
+                            <strong>Success:</strong> '+result.message+'\n\
+                          </div>');
+            $(".message1").show();
+            $('html,body').scrollTop(0);
+          } else {
+            var a = '';
+            var i = 0;
+            for(key in result){
+              if(i == 0){
+                a = result[key][0] + '</br>';
+              }
+              i++;
+            }
+            $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+            $(".message1").show();
+            $('html,body').scrollTop(0);
+
+          }
+      closeLoader();
+      },
+      error: function (error) {
+        var a = '';
+        var i = 0;
+        for(key in error.responseJSON){
+          if(i == 0){
+            a = error.responseJSON[key][0] + '</br>';
+          }
+          i++;
+        }
+        $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+        $(".message1").show();
+            $('html,body').scrollTop(0);
+      }
+    });
+    closeLoader();
+  });
+
+  $(document).on("click",".upload", function (e) {
+    e.preventDefault();
+    startLoader();
+    var file_data = $('#choose-file').prop('files')[0];
+    var form_data = new FormData($(this).parents('form')[0]);
+    form_data.append('avatar_img', file_data);
+    form_data.append('_token', '{{csrf_token()}}');
+    callUrl = $(this).parents('form').attr('action');
+   
+    $.ajax({
+      url: callUrl,
+      method: 'POST',
+      data: form_data,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+      success: function (result) {
+          if(result.status == true){
+            $(".message1").html('<div class="alert alert-success alert-dismissable fadeOut">\n\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\n\
+                                <i class="fa fa-check"></i>\n\
+                            <strong>Success:</strong> '+result.message+'\n\
+                          </div>');
+            $(".message1").show();
+            $('html,body').scrollTop(0);
+          } else {
+            var a = '';
+            var i = 0;
+            for(key in result){
+              if(i == 0){
+                a = result[key][0] + '</br>';
+              }
+              i++;
+            }
+            $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+            $(".message1").show();
+            $('html,body').scrollTop(0);
+          }
+      closeLoader();
+      },
+      error: function (error) {
+        var a = '';
+        var i = 0;
+        for(key in error.responseJSON){
+          if(i == 0){
+            a = error.responseJSON[key][0] + '</br>';
+          }
+          i++;
+        }
+        $(".message1").html('<div class="alert alert-danger alert-dismissable">\n\
+                            <button type="button" class="close" data-dismiss="alert">×</button>\n\
+                            <i class="fa fa-exclamation-circle"></i>\n\
+                            <strong>Error: </strong> '+a+'\n\
+                          </div>');
+        $(".message1").show();
+        $('html,body').scrollTop(0);
+      }
+    });
+    closeLoader();
+  });
+
   $("#remove_img_button").hide();
   $("#delete_img_checkbox_label").hide();
 
@@ -310,7 +437,10 @@ $( document ).ready(function() {
   });
 
   $('#choose-file').change( function() {
-    var maxSize = $('#MAX_FILE_SIZE').val();
+
+    var maxSize = 6000000;
+    console.log(maxSize);
+    console.log($("#choose-file")[0].files[0].size);
     $('#shadow_input').val($(this).val().replace("C:\\fakepath\\", ""));
 
     if ($("#choose-file")[0].files[0].size > maxSize) {
@@ -355,7 +485,6 @@ $( document ).ready(function() {
         $("#delete_img_checkbox_label").show();
       }
     }
-
     return false;
   });
 

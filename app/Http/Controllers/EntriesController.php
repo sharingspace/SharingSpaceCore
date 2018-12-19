@@ -22,11 +22,13 @@ use Auth;
 use Validator;
 use Input;
 use Redirect;
+// use Permission;
 use Helper;
 use Log;
 use App\Models\Entry;
 use Illuminate\Support\Facades\Route;
 use App\Helpers\CommunityEntries;
+use App\Helpers\Permission;
 
 //use Session;
 
@@ -45,8 +47,10 @@ class EntriesController extends Controller
 
     public function getEntry(Request $request, $entryID)
     {
+           
         //log::debug("getEntry: entered >>>>>>>>>>>>>>>>>> ".Route::currentRouteName()."  ".$entryID);
         if ($entry = \App\Models\Entry::find($entryID)) {
+            
             if ($request->user()) {
                 // user logged in
                 if ($request->user()->cannot('view-entry', $request->whitelabel_group)) {
@@ -152,7 +156,9 @@ class EntriesController extends Controller
     public function getCreate(Request $request)
     {
         //log::debug("getCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
+        if(!\Permission::checkPermission('add-entry-permission', $request->whitelabel_group)) {
+            return view('errors.403');       
+        }
         $post_types = ['want' => 'I want', 'have' => 'I have'];
 
         $request->session()->put('upload_key', str_random(15));
@@ -171,7 +177,6 @@ class EntriesController extends Controller
     public function postAjaxCreate(Request $request)
     {
         //log::debug("postAjaxCreate: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
         $entry = new Entry();
 
         $entry->title = e(Input::get('title'));
@@ -260,6 +265,7 @@ class EntriesController extends Controller
             }
 
             if ($uploaded) {
+                //log::debug("postAjaxCreate: image uploaded successfully, returning success");
                 return response()->json([
                     'success'        => true,
                     'create'         => true,
@@ -292,9 +298,10 @@ class EntriesController extends Controller
      * @since  [v1.0]
      * @return Redirect
      */
-    /*
+
     public function postCreate(Request $request)
     {
+               
         $entry = new \App\Models\Entry();
         $entry->title    = e(Input::get('title'));
         $entry->post_type    = e(Input::get('post_type'));
@@ -337,7 +344,7 @@ class EntriesController extends Controller
         }
         return redirect()->back()->with('error', trans('general.entries.messages.save_failed'));
 
-    }*/
+    }
 
     /**
      * Returns a form view to edit an entry
@@ -349,6 +356,11 @@ class EntriesController extends Controller
      */
     public function getEdit(Request $request, $entryID)
     {
+            
+
+        if(!\Permission::checkPermission('edit-any-entry-permission', $request->whitelabel_group)) {
+            return view('errors.403');       
+        }
         //log::debug("getEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         // This should be pulled into a helper or macro
@@ -356,11 +368,10 @@ class EntriesController extends Controller
 
         if ($entry = Entry::find($entryID)) {
             $user = Auth::user();
-
-            if ($request->user()->cannot('update-entry', $entry)) {
+            if ($request->user()->cannot('update-entry', [$entry, $request->whitelabel_group])) {
+                
                 return redirect()->route('home')->with('error', trans('general.entries.messages.not_allowed'));
             }
-
             $image = \DB::table('media')
                 ->where('entry_id', '=', $entryID)
                 ->first();
@@ -482,12 +493,13 @@ class EntriesController extends Controller
      */
     public function postEdit(Request $request, $entryID)
     {
+        
         //log::debug("postEdit: entered >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         if ($entry = Entry::find($entryID)) {
             $user = Auth::user();
 
-            if ($request->user()->cannot('update-entry', $entry)) {
+            if ($request->user()->cannot('update-entry', [$entry, $request->whitelabel_group])) {
                 abort(403);
             }
 
@@ -577,7 +589,7 @@ class EntriesController extends Controller
      * @param $entryID
      * @return String JSON
      */
-    public function postAjaxDelete($entryID)
+    public function postAjaxDelete(Request $request,$entryID)
     {
         try {
             $entry = $this->dispatchNow(new DeleteEntry($entryID));
@@ -604,8 +616,11 @@ class EntriesController extends Controller
      * @param $entryID
      * @return Redirect
      */
-    public function postDelete($entryID)
+    public function postDelete(Request $request, $entryID)
     {
+        if(!\Permission::checkPermission('delete-any-entry-permission', $request->whitelabel_group)) {
+            return view('errors.401');       
+        }
         try {
             $this->dispatchNow(new DeleteEntry($entryID));
         } catch (ModelNotFoundException $exception) {
@@ -628,6 +643,7 @@ class EntriesController extends Controller
      */
     public function ajaxUpload()
     {
+        //log::debug("ajaxUpload: uploading image");
         $entry = null;
         if (Input::has('entry_id')) {
             $entryID = Input::get('entry_id');
@@ -653,15 +669,18 @@ class EntriesController extends Controller
                     Input::get('upload_key'),
                     $rotation
                 );
+                //log::debug("ajaxUpload: no existing entry, save it as a temp image, filename is ".$uploaded);
             }
             if ($uploaded) {
                 return response()->json(['success' => true]);
             }
             else {
+                //log::error("ajaxUpload: upload_fail");
                 return response()->json(['success' => false, 'error' => trans('general.entries.messages.upload_fail')]);
             }
         }
         else {
+            //log::error("ajaxUpload: no image");
             return response()->json(['success' => false, 'error' => trans('general.entries.messages.no_image')]);
         }
     }
@@ -676,6 +695,7 @@ class EntriesController extends Controller
      */
     public function getEntriesDataView(Request $request, $user_id = null)
     {
+        
         $entries = new CommunityEntries($request->whitelabel_group);
         $user = Auth::check() ? Auth::user() : null;
 
@@ -695,19 +715,19 @@ class EntriesController extends Controller
             $entries->textSearch(e(Input::get('search')));
         }
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        }
-        else {
-            $offset = 0;
-        }
+        // if (Input::has('offset')) {
+        //     $offset = e(Input::get('offset'));
+        // }
+        // else {
+        //     $offset = 0;
+        // }
 
-        //if (Input::has('limit')) { pagination stuff and we may need it one day - dsl
+        // if (Input::has('limit')) { 
         //    $limit = e(Input::get('limit'));
-        //}
-        //else {
-        //    $limit = 50;
-        //}
+        // }
+        // else {
+        //    $limit = 10;
+        // }
 
         $allowed_columns = [
             'title',
@@ -723,9 +743,12 @@ class EntriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'entries.created_at';
         $order = Input::get('order') == 'asc' ? 'asc' : 'desc';
 
+        // $entries = $entries->orderBy($sort, $order)->paginate($offset, $limit)->get();
+
         $entries = $entries->orderBy($sort, $order)->get();
-        $count = $entries->count();
-        // $entries = $entries->skip($offset)->take($limit)->get(); pagination stuff and we may need it one day - dsl
+        // $count = $entries->count(); 
+        $count = count($entries);        
+               
 
         $rows = [];
 
@@ -771,8 +794,10 @@ class EntriesController extends Controller
                 $imageTag = '<a href="' . route('entry.view', $entry->id) . '"><img src="/assets/uploads/entries/' . $entry->id . '/' . $imageName . '" class="entry_image"></a>';
                 $image_url = '/assets/uploads/entries/' . $entry->id . '/' . $imageName;
                 $url = url('/');
+
                 $aspect_ratio = 1;
                 $parsed = parse_url($url); // analyse the URL
+
                 if (isset($parsed['scheme']) && strtolower($parsed['scheme']) == 'https') {
                     // If it is https, change it to http
                     $url = 'http://' . substr($url, 8);
@@ -895,6 +920,7 @@ class EntriesController extends Controller
             'rows'     => $rows,
             'pois'     => $allPois,
             'viewType' => $entryLayout,
+            // 'entries'  => $entries->total(),
         ];
     }
 

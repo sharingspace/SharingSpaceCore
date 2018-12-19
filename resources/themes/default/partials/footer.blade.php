@@ -8,7 +8,7 @@
                 </p>
             </div>
 
-            <div class="col-12 col-md-7">
+            <!-- <div class="col-12 col-md-7">
                 <ul class="nav nav-primary nav-hero">
                     <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('coop')}}">Coop</a></li>
@@ -16,14 +16,15 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('privacy')}}">Privacy</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('tos')}}">Terms</a></li>
                 </ul>
-            </div>
+            </div> -->
 
-            <div class="col-md-3 hidden-sm-down">
-                <div class="social text-center text-lg-right">
-                    <a class="social-facebook" href="https://www.facebook.com/anyshare.coop"><i class="fa fa-facebook"></i></a>
-                    <a class="social-twitter" href="https://twitter.com/anyshare_coop"><i class="fa fa-twitter"></i></a>
-                    <a class="social-youtube" href="https://www.youtube.com/user/MassMosaic"><i class="fa fa-youtube"></i></a>
-                    <a class="social-github" href="https://github.com/anyshare"><i class="fa fa-github"></i></a>
+            <div class="col-7">
+            </div>
+            <div class="col-3 hidden-sm-down">
+                <div class="social text-center text-lg-right pull-right">
+                    <a class="social-facebook" href="https://www.facebook.com/our.sharing.space/"><i class="fa fa-facebook"></i></a>
+                    <a class="social-twitter" href="https://twitter.com/oursharingspace"><i class="fa fa-twitter"></i></a>
+                    <a class="social-github" href="https://github.com/sharingspace"><i class="fa fa-github"></i></a>
                 </div>
             </div>
         </div>
@@ -86,10 +87,9 @@
         <hr/>
 
         <div class="social social-boxed social-rounded text-center">
-            <a class="social-facebook" href="https://www.facebook.com/anyshare.coop/"><i class="fa fa-facebook"></i></a>
-            <a class="social-twitter" href="https://twitter.com/anyshare_coop"><i class="fa fa-twitter"></i></a>
-            <a class="social-youtube" href="https://www.youtube.com/user/MassMosaic"><i class="fa fa-youtube"></i></a>
-            <a class="social-github" href="https://github.com/anyshare"><i class="fa fa-github"></i></a>
+            <a class="social-facebook" href="https://www.facebook.com/our.sharing.space/"><i class="fa fa-facebook"></i></a>
+            <a class="social-twitter" href="https://twitter.com/oursharingspace"><i class="fa fa-twitter"></i></a>
+            <a class="social-github" href="https://github.com/sharingspace"><i class="fa fa-github"></i></a>
         </div>
         <br/>
 

@@ -58,9 +58,12 @@ class SubdomainMiddleware
         //LOG::debug('SubdomainMiddleware: entered: path = '.$request->path());
         
         $parsed_url = parse_url($request->url());
+
         $subdomain = extract_subdomains($parsed_url['host']);
         $now = Carbon::now();
+
         if (0) {
+
             if ((strpos($request->path(), 'register') !== FALSE) && $subdomain) {
                 // if someone is registering from a  whitelabel, redirect them to register
                 // on the corporate site. 
@@ -79,7 +82,10 @@ class SubdomainMiddleware
         }
 
         // FIXME - add   ->where('subdomain_expires_at', '>', $now) back in
-        if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api')) {
+
+        if (($subdomain!='') && ($subdomain!='www') && ($subdomain!='api') && ($subdomain!='app')) {
+
+
             $group = Community::where('subdomain', '=', $subdomain)
             ->whereNotNull('subdomain')->first();
 
@@ -91,16 +97,52 @@ class SubdomainMiddleware
                 view()->share('valid_whitelabel', $request->valid_whitelabel);
 
             } else {
+
+
                 $request->valid_whitelabel = false;
                 $request->corporate_default = false;
                 return redirect(config('app.url'));
             }
 
         } else {
+
             $request->valid_whitelabel = false;
             $request->corporate_default = true;
 
         }
+
+            if(!\Auth::check()) {
+                if (($subdomain =='') || ($subdomain =='www') || ($subdomain =='app')) {
+
+                    $domain = extract_domain($parsed_url['host']); 
+
+                    if(isset($parsed_url['path'])) {
+                        
+                        $app_url = $parsed_url['scheme'].'://'.'app.'.$domain.$parsed_url['path'];
+                    } else {
+                        $app_url  = $parsed_url['scheme'].'://'.'app.'.$domain.'/login';
+                    }
+                    
+                    if($app_url != $request->url()) {
+                        return redirect($app_url);
+                    }
+                }
+            } else {
+                
+                if (($subdomain =='') || ($subdomain =='www')) {
+                    $domain = 'app.'.extract_domain($parsed_url['host']);
+                    $url = $parsed_url['scheme'].'://'.$domain;
+
+                    if(isset($parsed_url['path'])) {
+                        $url = $parsed_url['scheme'].'://'.$domain.$parsed_url['path'];
+                    }
+                    
+                     if($url != $request->url()) {
+                        return redirect($url);
+                    }
+                }
+                
+            }
 
         return $next($request);
     }

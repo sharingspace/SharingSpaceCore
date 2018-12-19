@@ -16,13 +16,15 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
       <div class="table-responsive">
         <table class="table table-condensed" id="members">
-          <tbody>
+          <thead>
             <tr>
               <th class="col-md-3">{{ trans('general.share') }}</th>
               <th class="col-md-2">{{ trans('general.location') }}</th>
               <th class="col-md-6">{{ trans('general.about') }}</th>
               <th class="col-md-1 text-center">{{ trans('general.action') }}</th>
-            </th>
+            </tr>
+          </thead>
+          <tbody>
           @foreach ($communities as $community)
             <tr>
               <td class="col-md-3"> <a href="https://{{ $community->subdomain }}.{{config('app.domain')}}">{{ $community->name }}</td>

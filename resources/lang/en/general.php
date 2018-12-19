@@ -15,6 +15,8 @@ return [
     'token_expired'              => 'Oops! Your security token has expired. Please try reloading the page and trying again.',
     'terms'                      => 'Terms',
     'create'                     => 'Create',
+    'view'                       => 'View',
+    'edit'                       => 'Edit',
     'about'                      => 'About',
     'stats'                      => 'Stats',
     'options'                    => 'Options',
@@ -79,6 +81,7 @@ return [
     'create_account'             => 'Create an AnyShare account',
     'create_account'             => 'Create an AnyShare account',
     'click_here'                 => 'Click here',
+    'delete'                     => 'Delete',
     'wrld3d'                     => [
         'label'          => 'WRLD3D',
         'info'           => '',
@@ -86,6 +89,7 @@ return [
         'dev_token'      => 'DEVELOPER TOKEN',
         'api_key_select' => ':: Select a API Key ::',
     ],
+
 
     'nav'      => [
         'browse'          => 'Browse',
@@ -106,6 +110,7 @@ return [
         'share+'          => '+ Share',
         'new_messages'    => 'new messages',
         'view_all'        => 'View all messages',
+        'roles'           => 'Roles',
     ],
     'color'    => [
         'color_theme'  => 'Choose a color palette',
@@ -257,6 +262,7 @@ return [
         'social_failure'        => 'Something went wrong. Your social settings have not been saved',
         'save_avatar'           => 'Save Avatar Changes',
         'avatar_success'        => 'Your avatar has been updated',
+        'avatar_failure'        => 'Something went wrong. Your social settings have not been saved',
         'login_by_email'        => 'Sign-in with email',
         'login_by_social'       => 'or with a social network',
         'signup_by_email'       => 'Sign-up with email',
@@ -402,6 +408,7 @@ return [
     'members'   => [
         'image'        => 'Image',
         'bio'          => 'Bio',
+        'assigned-role'=> 'Assigned Role',
         'member_since' => 'Joined',
     ],
 
@@ -438,5 +445,71 @@ return [
         'about_us'    => 'About Us',
         'learn_about' => 'Learn about AnyShare Society',
         'product'     => '"Sharing Networks" help a group or community exchange.',
+    ],
+
+    'role' => [
+        'roles' => 'Roles',
+        'create' => 'Create Role',
+        'edit' => 'Role Edit',
+        'name'   => 'Role Name',
+        'name_placeholder' => 'Enter Role Name',
+        'name' => 'Name',
+        'permission' => 'Permission',
+        'created'   => 'Role successfully created',
+        'updated'   => 'Role successfully updated',
+        'deleted'   => 'Role successfully deleted',
+
+        'list'  =>'Role List',
+
+        'error' => [
+            'unique'  => 'Role name already exsist, Please use unique role name',
+            'role-select' => 'Please select atleast One Role...',
+        ]
+    ],
+
+    'assign_role' => [
+        'assign-role' => 'Assign Role',
+        'assigned-roles' => 'Assigned Roles',
+        'create' => 'Create Assign Role',
+        'edit' => 'Assign Role Edit',
+        'role-name'   => 'Assign Role Name',
+        'name_placeholder' => 'Enter Assign Role Name',
+        'user-name' => 'User Name',
+        'permission' => 'Total Permission',
+        'created'   => 'Assign role successfully created',
+        'updated'   => 'Assign role successfully updated',
+        'deleted'   => 'Role has been successfully removed from the user',
+
+        'list'  =>'Assigned Role List',
+        'error' => [
+            'oneroleallowed' => 'You can assign only one role to one user',
+        ]
+    ],
+
+    'ask_permission' => [
+        'list' => 'Ask Permissions List',
+        'view-request' => 'View Request',
+        'create' => 'Create Ask Permission',
+        'permissions' => 'Permissions',
+        'permission-text' => 'Choose a level of access when using this Sharing Network.',
+        'created' =>'Your request has been sent to admin.',
+        'update_accepted' => 'Request permission successfully Accepted.',
+        'update_rejected' => 'Request permission successfully Rejected.',
+        'request_type' => 'Request Type',
+        'requested_by' => 'Requested By',
+        'requested_role' => 'Requested Role',
+        'accepted' => 'Accept',
+        'rejected' => 'Reject',
+        'message' => 'Message',
+        'already_done' => 'You have alredy done for this request',
+    ],
+
+    'apis' => [
+        'list' => 'Apis',
+        'create' => 'Access Apis',
+        'apis-text' => 'Now, you can access your community over API, let get started',
+        'enable-api' => 'Enable API',
+        'created' =>'Your API detail has been done successfully.',
+
     ],
 ];

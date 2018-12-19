@@ -41,6 +41,7 @@ trait UploadableFileTrait
 
     public function uploadImage(Models\User $user, UploadedFile $file, $layoutType, $rotation = null)
     {
+        //log::debug("uploadImage entered: layoutType = ".$layoutType);
         $path = public_path() . '/assets/uploads/' . $layoutType . '/' . $this->id . '/';
         $aws_path = 'assets/uploads/' . $layoutType . '/' . $this->id;
         return self::moveAndStoreImage($user, $file, $path, $aws_path, $layoutType, $rotation, $this->id, null);
@@ -48,7 +49,7 @@ trait UploadableFileTrait
 
     public static function uploadTmpImage(Models\User $user, UploadedFile $file, $layoutType, $upload_key, $rotation = null)
     {
-        LOG::debug("uploadTmpImage entered");
+        //log::debug("uploadTmpImage entered: layoutType = ".$layoutType);
 
         $path = public_path() . '/assets/uploads/' . $layoutType . '/user-' . $user->id . '-tmp';
         return self::moveAndStoreImage($user, $file, $path, null, $layoutType, $rotation, null, $upload_key);
@@ -66,22 +67,26 @@ trait UploadableFileTrait
     {
         $filename = $name . '.' . $ext;
         $thumb = $name . '_thumb.' . $ext;
-        $img_path = $path . $filename;
+        $img_path = $path ."/". $filename;
         $thumb_path = $path . $thumb;
 
+        //log::debug("createThumbnailImage: entered");
         // Only create the thumbnail once
         if (is_file(public_path().'/assets/uploads/' . $layoutType .'/' . $id . '/' . $thumb)) {
             return;
         }
 
-        // make a new image from the current image
+        //log::debug("createThumbnailImage: thumb does not exist".$img_path);
+        // open the current image
         if ($thumb = \Image::make($img_path)) {
+            //log::debug("createThumbnailImage: made image from ".$img_path);
+
             // resize image
             $thumb->resize(self::$uploadableImgs[$layoutType]['thumb-width'], self::$uploadableImgs[$layoutType]['thumb-height'], function ($constraint) {
                     $constraint->aspectRatio();
                 });
             $thumb->save($thumb_path);
-            echo "&nbsp;&nbsp;&nbsp;&nbsp;Entry " . $id . " has new thumbnail at " . $thumb_path . "<br><br>";
+            //echo "&nbsp;&nbsp;&nbsp;&nbsp;Entry " . $id . " has new thumbnail at " . $thumb_path . "<br><br>";
         }
     }
 
@@ -93,6 +98,7 @@ trait UploadableFileTrait
      */
     public static function moveAndStoreImage(Models\User $user, UploadedFile $file, $path, $aws_path, $layoutType, $rotation, $id = null, $upload_key = null)
     {
+        //log::debug("moveAndStoreImage: entered");
         // Make the directory if it doesn't exist
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
@@ -103,11 +109,12 @@ trait UploadableFileTrait
         $filename = $rand_filename . '.' . $ext;
         $img_path = $path . '/' . $filename;
 
-        // move file to specified path and rename it to specified file name
+        // move file to specified path and rename it to specified filename
         if ($file->move($path, $filename)) { 
+            //log::debug("moveAndStoreImage: moved image to " . $path ."/". $filename);
 
             if ($id && $layoutType == 'entries') {
-                log::debug("moveAndStoreImage moved path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  entry_id = ' . $id);
+                //log::debug("moveAndStoreImage (entry exists) path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  entry_id = ' . $id);
 
                 $entry = Models\Entry::find($id);
                 if (!empty($entry) && $entry->media()->count()) {
@@ -121,7 +128,7 @@ trait UploadableFileTrait
             }
             else {
                 // self::saveImageToDB can be Community (banner, logo), User (avatar), Enrty (entries)
-                log::debug("moveAndStoreImage moved path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  id = ' . $id);
+                //log::debug("moveAndStoreImage (entry does not exist) path = " . $path . ", filename = " . $filename . ", layoutType = " . $layoutType . ',  id = ' . $id);
                 self::saveImageToDB($id, $filename, $layoutType, $user->id, $upload_key);
             }
 
@@ -137,8 +144,7 @@ trait UploadableFileTrait
                             }
                         }
 
-                        if ('entries' == $layoutType) {
-                            // if it's an entry image then create a thumbnail
+                        if ('entries' == $layoutType) { // if it's an entry image then create a thumbnail
                             self::createThumbnailImage($rand_filename, $ext, $path, $layoutType, $id);
                         }
                         
@@ -151,14 +157,13 @@ trait UploadableFileTrait
                     }
                 } catch (Exception $e) {
                     log::error("Exception caught in moveAndStore Trait, in resize section: " . $e->getMessage());
-                    echo 'Caught exception: ', $e->getMessage(), "\n";
                     return false;
                 }
             }
 
             return $filename;
         }
-        log::debug("moveAndStoreImage moved filename failed, " . $filename);
+        log::error("moveAndStoreImage moved filename failed, " . $filename);
 
         return false;
     }
@@ -185,14 +190,13 @@ trait UploadableFileTrait
 
             if (!Media::is_animated_gif($file)) {
                 try {
-                    if ($img = \Image::make($file)) {
+                    if ($img = \Image::make($file)) { 
                         $img->rotate($rotation);
                         $img->save($file);
                         return true;
                     }
                 } catch (Exception $e) {
-                    Log::error("Exception caught in rotateImage Trait: " . $e->getMessage());
-                    echo 'Caught exception: ', $e->getMessage(), "\n";
+                    log::error("Exception caught in rotateImage Trait: " . $e->getMessage());
                     return false;
                 }
             }
@@ -234,7 +238,7 @@ trait UploadableFileTrait
      */
     public static function moveImagesForNewTile(Models\User $user, $entry_id, $upload_key = null)
     {
-        Log::debug("moveImagesForNewTile. " . $entry_id . ",  " . $upload_key);
+        //log::debug("moveImagesForNewTile. " . $entry_id . ",  " . $upload_key);
 
         $tmp_images = \DB::table('media')
             ->where('upload_key', '=', $upload_key)
@@ -246,7 +250,7 @@ trait UploadableFileTrait
 
         foreach ($tmp_images as $tmp_image) {
             $filename = $tmp_image->filename;
-            Log::debug("moveImagesForNewTile. filename = " . $filename);
+            log::debug("moveImagesForNewTile. filename = " . $filename);
             $src = $src_path . '/' . $filename;
             $dest = $dest_path . '/' . $filename;
 
@@ -258,12 +262,12 @@ trait UploadableFileTrait
             $success = rename($src, $dest);
 
             if (!$success) {
-                Log::error("moveImagesForNewTile. Error renaming file from $src to $dest: " . $error);
+                log::error("moveImagesForNewTile. Error renaming file from $src to $dest: " . $error);
                 return false; // note only processing one image here before returning
             }
 
             // update the media entry
-            Log::error("moveImagesForNewTile. Success renaming file from $src to $dest");
+            //log::debug("moveImagesForNewTile. Success renaming file from $src to $dest");
             self::updateImageToDB($user->id, $upload_key, $entry_id);
         }
         return true;

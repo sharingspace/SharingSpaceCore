@@ -93,4 +93,13 @@ class CommunityEntries
     {
         return $this->query->get();
     }
+
+    public function paginate($offset, $limit) {
+        return $this->query->offset($offset)
+                ->limit($limit);
+    }
+
+    public function pagination($per_page) {
+        return $this->query->paginate($per_page);
+    }
 }

@@ -114,24 +114,28 @@
         </a>
 
         @if (Auth::check() && Auth::user()->isMemberOfCommunity($whitelabel_group, false))
-        <div class="navbar-header pull-right">
-          <ul class="nav navbar-nav">
-            <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
-              <a href="{{ route('entry.create.form') }}">
-                <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
-              </a>
-            </li>
-          </ul>
-        </div>
+          @if(Permission::checkPermission('add-entry-permission', $whitelabel_group))
+            <div class="navbar-header pull-right">
+              <ul class="nav navbar-nav">
+                <li class="add_entry_button {!! (Route::is('entry.create.form') ? ' active' : '') !!}">
+                  <a href="{{ route('entry.create.form') }}">
+                    <button type="button" class="btn btn-sm btn-colored" title="Add entry"><i class="fa fa-plus"></i><span class="hidden-xs"> {{ trans('general.entries.create_entry') }}</span></button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          @endif
         @endif
         <div class="margin-left-10 navbar-collapse pull-right nav-main-collapse collapse">
           <nav class="nav-main">
             <ul id="topMain" class="nav nav-pills nav-main nav-onepage">
+
             @if ( Auth::check() && !Auth::user()->isMemberOfCommunity($whitelabel_group) )
               <!-- logged in in but not a member -->
               <li>
               @if ($whitelabel_group->group_type == 'O')
                <a href="{{ route('join-community') }}">
+              
               @else
                 <a href="{{ route('community.request-access.form') }}">
               @endif
@@ -151,13 +155,19 @@
                 </a>
               </li>
               @endif
+
+             
               @if ($whitelabel_group->viewMembers())
-              <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
-                <a href="{{ route('members') }}">
-                  {{ trans('general.our_members') }}
-                  {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
-                </a>
-              </li>
+
+                @if(Permission::checkPermission('view-members-permission', $whitelabel_group)) 
+                
+                  <li {!! (Route::is('members') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('members') }}">
+                      {{ trans('general.our_members') }}
+                      {!! (Route::is('members') ? '<span class="sr-only">(current)</span>' : '') !!}
+                    </a>
+                  </li>
+                @endif
               @endif
               <li {!! (Route::is('about') ? ' class="active"' : '') !!}>
                 <a href="" data-toggle="modal" data-target="#aboutModal">{{ trans('general.about') }}</a>
@@ -170,16 +180,22 @@
               @endcan
             @endif
 
-            @can('update-community', $whitelabel_group)
-              <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
-                <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
-              </li>
-              @if ($whitelabel_group->requestCount())
-              <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
-                <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
-              </li>
+            {{-- @can('update-community', $whitelabel_group) --}}
+              @if(Permission::checkPermission('edit-sharing-network-permission', $whitelabel_group))
+                <li{!! (Route::is('_edit_share') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('_edit_share')}}"><i class="fa fa-lg fa-cog"></i></a>
+                </li>
               @endif
-            @endcan
+              @if(Permission::checkPermission('approve-new-member-permission', $whitelabel_group))
+                @if ($whitelabel_group->requestCount())
+                <li id="numberRequests" {!! (Route::is('join-requests') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('join-requests')}}"><i class="fa fa-lg fa-user-plus"></i> (<span>{{$whitelabel_group->requestCount()}}</span>)</a>
+                </li>
+                @endif
+              @endif
+            
+            {{-- @endcan --}}
+
 					</ul>
 
 					</nav>

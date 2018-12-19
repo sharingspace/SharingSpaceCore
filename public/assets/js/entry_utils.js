@@ -13,37 +13,35 @@ function finish_submit (data = null) {
     // start the create or save ajax call off
     $.post(post_url, $('#entry_form').serialize(), function (data) {
         if (data.success) {
-            window.location.href = '/entry/' + data.entry_id
-
             // var exchanges = null;
-            // $('#error-list').remove();
-            // $('#submission_error').hide();
+            $('#error-list').remove();
+            $('#submission_error').hide();
             //
-            // if ($('#create_table tr').length == 1) {
-            //     $('#create_table').show();
-            // }
-            //
-            // resetForm();
-            // // clear all checkboxes and then select the ones we want
-            // $('input:checkbox[class=exchanges]').prop('checked', false);
-            // jQuery.each(data.typeIds, function (index, item) {
-            //     $('input:checkbox[class=exchanges][value=' + item + ']').prop('checked', true);
-            // });
-            //
-            // if (data.exchange_types) {
-            //     exchanges = data.exchange_types.join(", ");
-            // }
-            //
-            // if (data.typeIds.length) {
-            //     exchangeIds = data.typeIds.join(",");
-            // }
-            //
-            // if (data.create) {
-            //     addTableRow(data, exchanges, exchangeIds);
-            // }
-            // else {
-            //     updateTableRow(data, exchanges, exchangeIds)
-            // }
+            if ($('#create_table tr').length == 1) {
+                 $('#create_table').show();
+            }
+            
+            resetForm();
+            // clear all checkboxes and then select the ones we want
+            $('input:checkbox[class=exchanges]').prop('checked', false);
+            jQuery.each(data.typeIds, function (index, item) {
+                 $('input:checkbox[class=exchanges][value=' + item + ']').prop('checked', true);
+            });
+            
+            if (data.exchange_types) {
+                exchanges = data.exchange_types.join(", ");
+            }
+            
+            if (data.typeIds.length) {
+                exchangeIds = data.typeIds.join(",");
+            }
+            
+            if (data.create) {
+               addTableRow(data, exchanges, exchangeIds);
+            }
+            else {
+                updateTableRow(data, exchanges, exchangeIds)
+            }
         }
         else {
             var errorHtml;
@@ -75,14 +73,17 @@ function finish_submit (data = null) {
 }
 
 // Catch the form submit and upload the files
-function uploadFiles () {
+function uploadFiles()
+{
+    var CSRF_TOKEN = $('meta[name="ajax-csrf-token"]').attr('content');
+
     // Create a formdata object and add the files
     var data = new FormData();
     var image = $('input[type=file]')[0].files[0];
     var upload_key = Math.random().toString(36).substring(7);
     $('#upload_key').val(upload_key);
 
-    data.append('_token', $('input[name=_token]').val());
+    data.append('_token', CSRF_TOKEN);
     data.append('image', image);
     data.append('upload_key', upload_key);
     data.append('rotation', $('#rotation').val());
@@ -97,37 +98,38 @@ function uploadFiles () {
     }).append("<div class='percent_caption'>File upload: 0%</span>").show();
 
     $.ajax(
-        {
-            url: 'uploadimage',
-            type: 'POST',
-            data: data,
-            dataType: 'json',
-            processData: false, // Don't process the files
-            contentType: false, // Set content type to false as jQuery will tell the server if it
-                                // is a query string request. This is why we can't use $.post here
-            timeout: 60000, // 60 second timeout
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) {
-                    myXhr.upload.addEventListener('progress', progress, false);
-                }
-                return myXhr;
-            },
-            success: function (data, textStatus, jqXHR) {
-                if (data.success) {
-                    // Success so call finish_submit to process rest of form
-                    finish_submit(data);
-                }
-                else {
-                    // Handle errors here
-                    displayFlashMessage("danger", data.error);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
+    {
+        url: 'uploadimage',   // calls EntriesController@ajaxUpload
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        processData: false, // Don't process the files
+        contentType: false, // Set content type to false as jQuery will tell the server if it
+                            // is a query string request. This is why we can't use $.post here
+        timeout: 60000, // 60 second timeout
+        xhr: function () {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                 myXhr.upload.addEventListener('progress', progress, false);
+            }
+            return myXhr;
+        },
+       success: function (data, textStatus, jqXHR) {
+            if (data.success) {
+                // Success so call finish_submit to process rest of form
+                finish_submit(data);
+            }
+            else {
                 // Handle errors here
                 displayFlashMessage("danger", textStatus);
             }
-        });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // Handle errors here
+            alert(errorThrown);
+            displayFlashMessage("danger", textStatus);
+        }
+    });
 }
 
 $("#entry_image, #cover_image, #logo_image").change(function () {
@@ -179,7 +181,8 @@ $(document).on("click", ".exchanges", function (e) {
     $('#select_all').prop('checked', false);
 });
 
-function progress (e) {
+function progress (e)
+{
     if (e.lengthComputable) {
         var max = e.total;
 
@@ -280,6 +283,7 @@ function deleteEntry (object) {
 }
 
 function displayFlashMessage (status, message) {
+    $('#submission_error').hide();
     if ('success' == status) {
         $('#submission_error i').addClass("fa-check").removeClass("fa-exclamation-circle");
     }
@@ -289,6 +293,8 @@ function displayFlashMessage (status, message) {
 
     $('#submission_error').append(message);
     $('#submission_error').addClass("alert-" + status).show();
+    $('#submission_error').show();
+
 }
 
 function restorePlaceholder (element, ph_text) {

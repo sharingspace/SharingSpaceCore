@@ -74,10 +74,10 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postSettings()
+    public function postSettings(Request $request)
     {
         if ($user = User::find(Auth::user()->id)) {
-
+            
             $user->first_name = e(Input::get('first_name'));
             $user->last_name = e(Input::get('last_name'));
             $user->email = e(Input::get('email'));
@@ -97,13 +97,21 @@ class UserController extends Controller
 
 
             if (!$user->save()) {
+                if($request->ajax()){
+                    return $user->getErrors();
+                }
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
-
+            if($request->ajax()){
+                return Helper::ajaxresponse(true, 'Saved!');
+            }
             return redirect()->route('user.settings.view')->with('success', 'Saved!');
 
         }
 
+        if($request->ajax()){
+            return [0=>['Invalid user']];
+        }
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
 
@@ -117,7 +125,7 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postUpdateSocial()
+    public function postUpdateSocial(Request $request)
     {
 
         if ($user = User::find(Auth::user()->id)) {
@@ -129,12 +137,19 @@ class UserController extends Controller
             $user->youtube = e(Input::get('youtube'));
 
             if (!$user->save()) {
+                if($request->ajax()){
+                    return $user->getErrors();
+                }
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
-
+            if($request->ajax()){
+                return Helper::ajaxresponse(true,  trans('general.user.social_success'));
+            }
             return redirect()->route('user.settings.view')->with('success', trans('general.user.social_success'));
         }
-
+        if($request->ajax()){
+            return [0=>[trans('general.user.social_failure')]];
+        }
         // Damn, that user was an imposter!
         return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.social_failure'));
     }
@@ -147,30 +162,45 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postUpdateAvatar()
+    public function postUpdateAvatar(Request $request)
     {
-        if ($user = User::find(Auth::user()->id)) {
+        if ($user = User::find(Auth::user()->id)) {            
             if (Input::hasFile('avatar_img')) {
                 LOG::debug("postUpdateAvatar: have image, preparing to upload");
                 $user->uploadImage($user, Input::file('avatar_img'), 'users');
                 LOG::debug("postUpdateAvatar: upload complete");
+                if($request->ajax()){
+                    return Helper::ajaxresponse(true, trans('general.user.avatar_success'));
+                }
                 return redirect()->route('user.settings.view')->with('success', trans('general.user.avatar_success'));
             }
             else if(Input::get('delete_img')) {
                 if (User::deleteAvatar($user->id)) {
+                    if($request->ajax()){
+                        return Helper::ajaxresponse(true, 'delete okay');
+                    }
                     return redirect()->route('user.settings.view')->with('success', 'delete okay');
                 }
                 else {
+                    if($request->ajax()){
+                        return Helper::ajaxresponse(true, 'delete fail');
+                    }
                     return redirect()->route('user.settings.view')->with('success', 'delete fail');
                 }
             }
+            if($request->ajax()){
+                return Helper::ajaxresponse(true, 'Your changes successfully saved');
+            }
         }
         else {
+
             // That user wasn't valid
             LOG::debug("postUpdateAvatar: invalid user");
-
+            if($request->ajax()){
+                return [0=>[trans('general.user.avatar_failure')]];
+            }
             return redirect()->route('user.settings.view')->withInput()->with('error', trans('general.user.avatar_failure'));
-        }
+        }        
     }
 
     /**
@@ -181,20 +211,28 @@ class UserController extends Controller
     * @since  [v1.0]
     * @return Redirect
     */
-    public function postUpdatePassword()
+    public function postUpdatePassword(Request $request)
     {
         if ($user = User::find(Auth::user()->id)) {
 
             $user->password = e(Input::get('password'));
 
             if (!$user->save()) {
+                if($request->ajax()){
+                    return $user->getErrors();
+                }
                 return redirect()->route('user.settings.view')->withInput()->withErrors($user->getErrors());
             }
 
+            if($request->ajax()){
+                return Helper::ajaxresponse(true, 'Saved!');
+            }
             return redirect()->route('user.settings.view')->with('success', 'Saved!');
 
         }
-
+        if($request->ajax()){
+            return [0=>['Invalid user']];
+        }
         // That user wasn't valid
         return redirect()->route('user.settings.view')->withInput()->with('error', 'Invalid user');
     }
@@ -282,10 +320,13 @@ class UserController extends Controller
     */
     public function getAcceptUser(Request $request)
     {
-        if ($user = User::findOrFail(Input::get('user_id'))) {
 
-            if ($user->communities()->sync([$request->whitelabel_group->id])) {
-                // mark user as accepted
+        if ($user = User::findOrFail(Input::get('user_id'))) {
+            
+            $has_community = $user->communities()->find($request->whitelabel_group->id);
+            if(empty($has_community)) {
+                $user->communities()->attach([$request->whitelabel_group->id]);
+            
                 $request->whitelabel_group->acceptUser(Auth::user()->id, Input::get('user_id'), $request->whitelabel_group->id);
 
                 // send an email to the user letting them know
@@ -314,10 +355,12 @@ class UserController extends Controller
                 return response()->json(['success'=>true, 'alert_class' => 'success', 'message'=>e(Input::get('displayName')). ' has joined '.ucfirst($request->whitelabel_group->name).'!', 'user_id'=>Input::get('user_id')]);
             }
             else {
-                return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
+                return response()->json(['success'=>false, 'alert_class' => 'danger', 'message'=>'Unable to join', 'user_id'=>Input::get('user_id')]);
+               // return redirect()->route('home')->withInput()->with('error', 'Unable to join website');
             }
         }
         else {
+            return response()->json(['success'=>false, 'alert_class' => 'danger', 'message'=>'user not found', 'user_id'=>Input::get('user_id')]);
             return redirect()->route('home')->withInput()->with('error', 'user not found');
         }
     }
@@ -348,22 +391,33 @@ class UserController extends Controller
     */
     public function getJoinCommunity(Request $request)
     {
-        //LOG::debug('getJoinCommunity: entered');
-        if ($request->whitelabel_group->isOpen()) {
-            if (Auth::user()->communities()->sync([$request->whitelabel_group->id])) {
-                LOG::debug("getJoinCommunity: joined open share successfully");
-                return back()->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
+        \DB::beginTransaction();
+        try { 
+
+            if ($request->whitelabel_group->isOpen()) {
+                Auth::user()->communities()->attach([$request->whitelabel_group->id]);
+
             }
             else {
-                LOG::debug("getJoinCommunity: error joining open share");
+                LOG::debug("getJoinCommunity: share is closed");
+                return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
+            }
+
+        } catch (\Exception $e) {                
+            \DB::rollback();  
+            LOG::debug("getJoinCommunity: error joining open share");
 
                 return back()->withInput()->with('error', 'Unable to join '.$request->whitelabel_group->name);
-            }
+        
+        } finally { 
+            \DB::commit();
+
+            LOG::debug("getJoinCommunity: joined open share successfully");
+                return back()->withInput()->with('success', 'You have joined '.$request->whitelabel_group->name.'!');
         }
-        else {
-            LOG::debug("getJoinCommunity: share is closed");
-            return view('request-access', ['error'=>'closed', 'name' => $request->whitelabel_group->name] );
-        }
+
+        //LOG::debug('getJoinCommunity: entered');
+        
     }
 
 
@@ -407,7 +461,6 @@ class UserController extends Controller
     {
         $communities = Auth::user()->communities()->get();
         return view('account.community_memberships')->with('communities',$communities);
-
     }
 
 }

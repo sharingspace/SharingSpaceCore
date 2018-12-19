@@ -551,4 +551,16 @@ class Community extends Model
     {
         return $this->wrld3d && $this->wrld3d->get('poiset');
     }
+
+   public function api()
+    {       
+         return $this->belongsToMany('App\Models\oAuthClient', 'community_apis','community_id', 'oauth_clients_id');
+    }
+    // }
+
+
+    public function community_apis()
+    {       
+         return $this->belongsToMany('App\Models\oAuthClient', 'community_apis', 'community_id','oauth_clients_id');
+    }
 }

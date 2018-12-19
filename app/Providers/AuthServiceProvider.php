@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Laravel\Passport\Passport;
 use App\Models\Entry;
 use App\Policies\EntryPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -29,7 +30,13 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(GateContract $gate)
     {
+
         $this->registerPolicies($gate);
+
+        
+        \Route::group(['middleware' => 'cors'], function() {
+			Passport::routes();
+		});
 
 
         // --------------------------------
@@ -43,26 +50,32 @@ class AuthServiceProvider extends ServiceProvider
         // --------------------------------
         // If the user is a super admin, let them through no matter what
         $gate->before(function ($user) {
+
+            if ($user->isSuperAdmin()) {
+
+                return true;
+            }
+
+        });
+
+        // Check if the user can see the community entries
+        $gate->define('admin', function ($user) {
+
             if ($user->isSuperAdmin()) {
                 return true;
             }
         });
 
-        // Check if the user can see the community entries
-        $gate->define('admin', function ($user) {
-            if ($user->isSuperAdmin()) {
-                return true;
-            }
-        });
 
         // --------------------------------
         // COMMUNTIY GATES
         // --------------------------------
 
+        
         // Check if the user can see the community entries
         $gate->define('view-browse', function ($user, $community) {
-            //log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
-
+            // log::debug("view-browse ************** view-browse entered user id = ".$user->id.',   community id = '.$community->id.$community->name);
+            
             if ($user->canSeeCommunity($community) || $community->group_type != 'S') {
                 //log::debug("view-browse ************** can view view-browse");
                 return true;
@@ -132,8 +145,12 @@ class AuthServiceProvider extends ServiceProvider
 
 
         // Check if the user can update an entry
-        $gate->define('update-entry', function ($user, $entry) {
+        $gate->define('update-entry', function ($user, $entry, $community) {
+            
             //log::debug("update-entry: ".$user->id ."   ". $entry->id);
+            if ($user->isAdminOfCommunity($community)) {
+                return true;
+            }
             return $user->id === $entry->created_by;
         });
 
@@ -171,5 +188,6 @@ class AuthServiceProvider extends ServiceProvider
 
             return $user->isMemberOfCommunity($community);;
         });
+        
     }
 }

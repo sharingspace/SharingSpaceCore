@@ -22,6 +22,7 @@
               <th data-sortable="true" class="name">{{trans('general.name')}}</th>
               <th data-sortable="true" class="location">{{trans('general.location')}}</th>
               <th data-sortable="false" class="bio">{{trans('general.members.bio')}}</th>
+              <th data-sortable="true" class="assigned-role">{{trans('general.members.assigned-role')}}</th>
               <th data-sortable="true">{{trans('general.members.member_since')}}</th>
             </tr>
           </thead>
@@ -40,14 +41,31 @@
                   <i class="fa fa-star text-warning"></i>
                 @endif
 
-                @if ($member->pivot->custom_label!='')
+                {{-- @if ($member->pivot->custom_label!='')
                     <span class="label label-primary">{{ $member->pivot->custom_label }}</span>
-                @endif
-
+                @endif --}}
+                <span class="label label-primary">{{Permission::getSelectedRoleName($member, $whitelabel_group)}}</span>
+                
                 </td>
                 <td>{{$member->location}}</td>
                 <td>
                   <a href="{{ route('user.profile', [$member->id]) }}">{{ ((strlen($member->bio) > 150) ? substr_replace($member->bio, '&hellip;', 150) : $member->bio)}}</a>
+                </td>
+                <td>
+
+                @if (Permission::adminRole($member, $whitelabel_group))
+                  <p align="center"> <strong> ---- </strong></p>
+                @else
+                  @if(Permission::checkPermission('assign-role-permission', $whitelabel_group))
+                    {!! Form::open(['route' => 'admin.assign-role.update', 'method' => 'post', 'role'=>'form','class'=>'role_form']) !!}
+                    
+                      {{ Form::select('role_id', $roles, Permission::getSelectedRole($member, $whitelabel_group) ,['class' => 'form-control assignRole']) }}
+                      <input type="hidden" name="user_id" value="{{$member->id}}">
+                    {{ Form::close() }}
+                    @else
+                      <p align="center"> <strong> ---- </strong></p>
+                    @endif
+                @endif
                 </td>
                 <td>{{date("Y", strtotime($member->created_at))}}</td>
   						</tr>
@@ -91,6 +109,10 @@ $(document).ready(function() {
 
 });
 
-</script>
+$(document).on("change",".assignRole",function(){
+  $(this).parent(".role_form").submit();
+});
 
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @stop

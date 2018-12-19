@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Community;
+use Illuminate\Http\Request;
 /**
  * This contains some static helpers for
  * the AnyShare application.
@@ -63,6 +66,23 @@ class Helper
     }
 
 
+    /**
+    * Returns injected element of select
+    *
+    * @author [Dhaval] [<dhaval48@gmail.com>]
+    * @since  [v1.0]
+    * @return Array
+    */
+
+    public static function injectselect($data,$element = false) { 
+        
+        if($element == '') {
+            $data['0'] = 'Select Item';
+        } else {
+            $data[''] = $element;
+        }       
+        return $data;
+    }
 
     /**
     * Returns the latitude and longitude of an address
@@ -179,5 +199,31 @@ class Helper
             }
             return date('F Y', $ts);
         }
+    }
+
+    public static function ajaxResponse($status,$message,$responseData = []){
+        $data = [];
+        $data['status'] = $status;
+        $data['message'] = $message;
+        $data['data'] = $responseData;
+        return json_encode($data);
+    }
+
+
+    /*
+     * Get single community with the community_id
+     */
+    public static function getCommunity($community_id) {
+        return Community::findorfail($community_id);
+    }
+
+    /*
+     * API Helper to generate the rensponse
+     * status = true or false
+     * message = suceess of failed message
+     * data = array of response
+     */
+    public static function sendResponse($status, $message, $data = []) {
+        return response()->json(["meta" => ["code" => $status, "message" => $message], "data" => $data]);
     }
 }

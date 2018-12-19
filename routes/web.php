@@ -13,6 +13,20 @@
 | As such, it shouldn't use the apiguard middleware.
 |--------------------------------------------------------------------------
 */
+
+// Route::any('github-webhook', function(){
+//    $old_path = getcwd();
+//     chdir('~/scripts');
+//     $output = shell_exec('./gitpull.sh');
+//     chdir($old_path);
+//     echo "<pre>$output</pre>";
+
+//     $data = exec('cd ~/scripts && ./gitpull.sh 2>&1');
+//     return $data;
+// });
+
+
+
 Route::group(
     array('prefix' => 'api/v1/slack'),
     function () {
@@ -22,39 +36,39 @@ Route::group(
 );
 
 
-Route::group(
-    array('prefix' => 'api/v1', 'middleware' => 'apiguard'),
-    function () {
+// Route::group(
+//     array('prefix' => 'api/v1', 'middleware' => 'apiguard'),
+//     function () {
 
         /*
         |--------------------------------------------------------------------------
         | API Member Routes
         |--------------------------------------------------------------------------
         */
-        Route::group(
-            array('prefix' => 'members'),
-            function () {
-                Route::get('{id}', '\App\Http\Controllers\Api\UsersController@show');
-                Route::get('/', '\App\Http\Controllers\Api\UsersController@all');
-            }
-        );
+        // Route::group(
+        //     array('prefix' => 'members'),
+        //     function () {
+        //         Route::get('{id}', '\App\Http\Controllers\Api\UsersController@show');
+        //         Route::get('/', '\App\Http\Controllers\Api\UsersController@all');
+        //     }
+        // );
 
         /*
         |--------------------------------------------------------------------------
         | API Entry Routes
         |--------------------------------------------------------------------------
         */
-        Route::group(
-            array('prefix' => 'entries'),
-            function () {
-                Route::get('{id}', '\App\Http\Controllers\Api\EntriesController@show');
-                Route::get('/', '\App\Http\Controllers\Api\EntriesController@all');
-            }
-        );
+        // Route::group(
+        //     array('prefix' => 'entries'),
+        //     function () {
+        //         Route::get('{id}', '\App\Http\Controllers\Api\EntriesController@show');
+        //         Route::get('/', '\App\Http\Controllers\Api\EntriesController@all');
+        //     }
+        // );
 
 
-    }
-);
+    // }
+// );
 
 Route::group(
     ['prefix' => LaravelLocalization::setLocale()],
@@ -68,7 +82,7 @@ Route::group(
         | Authentication and Authorization Routes
         |--------------------------------------------------------------------------
         */
-
+ 
 
         Auth::routes();
 
@@ -515,6 +529,9 @@ Route::group(
                     ]
                 )->name('_update_share_pois');
 
+                Route::get('ask-permission','CommunitiesController@getAskPermission')->name('ask.permission');
+
+                Route::post('ask-permission/post','CommunitiesController@postAskPermission')->name('ask.permission.post');
             }
         );
 
@@ -558,6 +575,53 @@ Route::group(
         );
 
         /*
+         *  Roles Module for Community
+         */
+
+        Route::group(['prefix' => 'admin', 'middleware' => 'community-auth'], function(){
+
+            Route::get('/roles', 'RolesController@getAllRoles')->name('admin.roles');
+
+            Route::get('/role/create', 'RolesController@getRoleCreate')->name('admin.role.create');
+
+            Route::post('/role/post', 'RolesController@postRoleCreate')->name('admin.role.store');
+
+            Route::get('/role/edit/{id}', 'RolesController@getEditRole')->name('admin.role.edit');
+
+            Route::get('/role/get-role-data/{id}', 'RolesController@getEditRoleData')->name('admin.role.edit');
+
+            Route::post('/role/update', 'RolesController@postEditRole')->name('admin.role.update');
+
+            Route::get('/role/delete/{id}', 'RolesController@getDeleteRole')
+                        ->name('admin.role.delete');
+
+
+
+            Route::get('assigned-role','RolesController@getListAssignedRole')->name('admin.assigned-role');
+
+            Route::post('assign-role/store','RolesController@postAssignRoleCreate')->name('admin.assign-role.store');
+
+            Route::get('assign-role/{id}','RolesController@getAssignRoleEdit')->name('admin.assign-role.edit');
+
+            Route::post('assign-role/update','RolesController@postAssignRoleEdit')->name('admin.assign-role.update');
+
+
+
+            Route::get('member/requests','CommunitiesController@getAskPermissionList')->name('admin.member.requests');
+
+            Route::get('member/request/{id}','CommunitiesController@getAskPermissionView')->name('admin.member.request.view');
+
+            Route::post('member/requests/granted','CommunitiesController@postAskPermissionGranted')->name('admin.member.request.granted');
+
+            Route::get('apis','CommunitiesController@getApiDetail')->name('admin.apis');
+            Route::post('apis/store','CommunitiesController@postApiDetail')->name('admin.apis.store');
+
+
+            // Route::get('member/request/oauth','CommunitiesController@getAskOauthList')->name('admin.member.oauth');
+
+        });
+
+        /*
         |--------------------------------------------------------------------------
         | Admin routes
         |--------------------------------------------------------------------------
@@ -580,6 +644,8 @@ Route::group(
                         'uses'       => 'AdminController@createThumbnails',
                     )
                 );
+
+                
             });
 
         /*
@@ -760,4 +826,13 @@ Route::group(
         );
     }
 );
+
+/* 
+ * Frontend routess
+ */
+
+Route::group(['namespace' => 'Frontend'], function () {
+    require (__DIR__ . '/Frontend/route.php');
+});
+
 

@@ -48,7 +48,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            $("#ajaxSubmit").removeAttr('disabled'); //enable add button now page has loaded
             initializeEntryMap(window.entry, window.community, {
                 editable: true,
             })
@@ -60,7 +60,7 @@
                 $('#image_container').show();
             }
 
-            $("#ajaxSubmit").removeAttr('disabled'); //enable add button now page has loaded
+            
         })
     </script>
 

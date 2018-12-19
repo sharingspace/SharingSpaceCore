@@ -10,7 +10,8 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -29,10 +30,11 @@ use App\Models\Message;
 use App\Models\Conversation;
 use DB;
 use Log;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
+class User extends Authenticatable implements AuthenticatableContract, CanResetPasswordContract, BillableContract, SluggableInterface
 {
-    use Authenticatable, CanResetPassword, Billable, Authorizable;
+    use HasApiTokens, CanResetPassword, Billable, Authorizable, HasRoles;
     use SluggableTrait;
     use ValidatingTrait;
     use UploadableFileTrait;
@@ -220,6 +222,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function canSeeCommunity($community)
     {
+        
         LOG::debug("canSeeCommunity: entered user id = " . $this->id . ",  user name = " . $this->display_name . ", community id = " . $community->id . ",  community name = " . $community->name);
 
         if ($this->isMemberOfCommunity($community) || $this->isSuperAdmin() || $community->group_type == 'O') {
@@ -245,7 +248,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         if (!empty($this->avatar_img)) {
             //LOG::debug("Using ".config('services.cdn.default')."/uploads/users/".$this->id."/".$this->avatar_img);
-            return config('services.cdn.default') . "/uploads/users/" . $this->id . "/" . $this->avatar_img;
+            return config('services.cdn.default') . "/assets/uploads/users/" . $this->id . "/" . $this->avatar_img;
         }
         else {
             if (!empty($this->gravatar)) {
@@ -569,4 +572,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
         return false;
     }
+
+    public static function get_oauth_client(){
+      return $this->accessToken->client;
+    }
+
+    
 }
