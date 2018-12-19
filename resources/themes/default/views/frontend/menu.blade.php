@@ -13,16 +13,16 @@
                         @include('includes/side') 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active fade show" id="Page">
+                            <div class="tab-pane active fade show" id="Menu">
                                 <div class="col-sm-12">
                                     <div>
                                         <div  class="text-center">
-                                            <h3 class="heading fw-normal fz-34">{{$module_subtitle}}</h3>
+                                            <h3 class="heading fw-normal fz-34">{{$module_subtitle_menu}}</h3>
                                         </div>
                                         <div class="clearfix">&nbsp;&nbsp;</div>
                                         <div class="row">
                                             <div class="col-sm-12" style="margin-left: 15px">
-                                                <a href="{{ route('frontend.admin.control.page.create') }}" class="btn btn-primary btn-sm btn-flat"> 
+                                                <a href="{{ route('frontend.admin.control.menu.create') }}" class="btn btn-primary btn-sm btn-flat"> 
                                                     <span class="glyphicon glyphicon-plus"></span> Add
                                                 </a>
                                             </div>
@@ -38,24 +38,31 @@
                                                           <table class="table table-condensed" id="members">
                                                             <thead>
                                                               <tr>
-                                                                <th>Title</th>
-                                                                <th>Slug</th>
-                                                                <th>Meta Description</th>
-                                                                <th>Meta Keywords</th>
-                                                                <th>Status</th>
+                                                                <th>Name</th>
+                                                                <th>Page Name</th>
+                                                                <th>Order</th>
                                                                 <th>Action</th>
                                                               </tr>
                                                             </thead>
                                                             <tbody>
-                                                            @foreach ($pages as $page)
+                                                            @foreach ($menus as $menu)
                                                               <tr>
-                                                                <td> <a href="{{route('frontend.get.control.edit',$page->id)}}">{{ $page->title }}</a></td>
-                                                                <td> {{ $page->slug }}</td>
-                                                                <td> {{ $page->meta_description }}</td>
-                                                                <td> {{ $page->meta_keywords }}</td>
-                                                                <td> {{ $page->status }}</td>
+                                                                <td> <a href="{{route('frontend.get.control.menu.edit',$menu->id)}}">{{ $menu->name }}</a></td>
+                                                                <td> {{ $menu->page->title }}</td>
+                                                                <td> {{ $menu->order }}</td>
                                                                 <td>
-                                                                    <a href="{{ route('frontend.get.control.delete', $page->id) }}" class="trash_btn genericdelete" id="{{$page->id}}"><i class="glyphicon glyphicon-trash" style="color: red;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>Delete</a>
+                                                                    <div class="dropdown">
+                                                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Action &nbsp;
+                                                                        <span class="caret"></span></button>
+                                                                        <ul class="dropdown-menu drop">
+                                                                            <li>
+                                                                                <a href="{{route('frontend.get.control.menu.edit',$menu->id)}}"><i class="glyphicon glyphicon-edit" style="color: green;" data-toggle="tooltip" data-placement="top" data-original-title="Edit"></i>Edit</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="{{ route('frontend.get.control.menu.delete', $menu->id) }}" class="trash_btn genericdelete" id="{{$menu->id}}"><i class="glyphicon glyphicon-trash" style="color: red;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>Delete</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </td>
                                                               </tr>
                                                             @endforeach
@@ -68,7 +75,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -78,10 +86,10 @@
 </div>
 @endsection
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
 <script type="text/javascript">
+    
     $(document).on("click",".trash_btn", function (e) {
         e.preventDefault();         
         

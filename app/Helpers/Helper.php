@@ -79,7 +79,7 @@ class Helper
         if($element == '') {
             $data['0'] = 'Select Item';
         } else {
-            $data['0'] = $element;
+            $data[''] = $element;
         }       
         return $data;
     }

@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="/frontend/css/style.css" type="text/css" media="all"/>
         <link rel="stylesheet" href="/frontend/css/custom.css" type="text/css" media="all"/>
         <link href="//fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900%7CLibre+Baskerville:400,400i,700" rel="stylesheet"/>
+        <link rel="stylesheet" href="/frontend/css/sweetalert.css">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -58,6 +59,7 @@
     <a id="backtotop" class="scrollup scrollup--fixed"><i class="fa fa-angle-up"></i></a>
 
     <!-- LOAD JQUERY LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/frontend/js/jquery.min.js"></script>
     <script src="/frontend/js/jquery-migrate.min.js"></script>
     <script src="/frontend/js/bootstrap.min.js"></script>
@@ -87,8 +89,18 @@
     <script src="/frontend/js/extensions/revolution.extension.navigation.min.js"></script>
     <script src="/frontend/js/extensions/revolution.extension.migration.min.js"></script>
     <script src="/frontend/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="/frontend/js/swal.min.js"></script>
+    <script src="/frontend/js/sweetalert.min.js"></script>
+    
     @yield('scripts')
+    <script type="text/javascript">
 
+        $(document).ready(function(){
+            $(document).on("click",".active_tab", function (e) {
+                window.location.href = $(this).attr("route");
+            }); 
+        });
+    </script>
 </body>
 
 </html>

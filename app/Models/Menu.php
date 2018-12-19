@@ -12,7 +12,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class Menu extends Model
 {
 
     /**
@@ -20,12 +20,13 @@ class Page extends Model
      *
      * @var string
      */
-    protected $table = 'pages';
+    protected $table = 'menus';
 
-    protected $fillable = ['title', 'body', 'slug', 'meta_description', 'meta_keywords', 'status'];
+    protected $fillable = ['name', 'page_id', 'order'];
 
-    public function menu()
+
+    public function page()
     {
-        return $this->hasMany('App\Models\Menu', 'page_id', 'id');
+        return $this->belongsTo('App\Models\Page', 'page_id', 'id');
     }
 }
