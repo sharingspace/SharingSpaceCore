@@ -32,7 +32,7 @@ class ApiUserController extends Controller
         ]);
 
         if ($validator->fails()) { 
-            return Helper::sendResponse(false, $validator->errors(), []);        
+            return Helper::sendResponse(422, $validator->errors(), []);        
         }
 
         $request['email'] = trim($request['email']);
@@ -54,7 +54,6 @@ class ApiUserController extends Controller
 	        'scope'         => null,
 		    ],
 		]);
-        
         return json_decode((string) $response->getBody(), true);
     }
 
@@ -72,7 +71,7 @@ class ApiUserController extends Controller
         $communities = $user->communities()->paginate(20);
         $transform = GlobalTransformer::transform_allcommunities($communities);
 
-        return Helper::sendResponse(true, '', $transform);
+        return Helper::sendResponse(200, '', $transform);
     }
 
     /*
@@ -84,12 +83,13 @@ class ApiUserController extends Controller
            
             if (isset($community)) {
                 if (auth('api')->user()->communities()->detach($community->id)) {
-                	return Helper::sendResponse(true, 'You have left the Share, "'.$community->name.'"');
+                	return Helper::sendResponse(200, 'You have left the Share, "'.$community->name.'"');
                 }
                 else {
-                	return Helper::sendResponse(false, 'Unable to leave the Share, "'.$community->name.'"');
+                	return Helper::sendResponse(502, 'Unable to leave the Share, "'.$community->name.'"');
                 }
             }
+            return Helper::sendResponse(404, 'Unable to find this community, "'.$community->name.'"');
         }
     }
 
@@ -123,12 +123,13 @@ class ApiUserController extends Controller
 
 
             if (!$user->save()) {
-                return $user->getErrors();
+                // return $user->getErrors();
+                return Helper::sendResponse(502, $user->getErrors());
             }
-            return Helper::sendResponse(true, 'Saved!');
+            return Helper::sendResponse(200, 'Saved!');
         }
 
-        return Helper::sendResponse(false, 'Invalid user');
+        return Helper::sendResponse(404, 'Invalid user');
     }
 
     /*
@@ -145,11 +146,11 @@ class ApiUserController extends Controller
             $user->youtube = $request->youtube;
 
             if (!$user->save()) {
-                    return $user->getErrors();
+                return Helper::sendResponse(502,  $user->getErrors());
             }
-            return Helper::sendResponse(true,  trans('general.user.social_success'));
+            return Helper::sendResponse(200,  trans('general.user.social_success'));
         }
-        return Helper::sendResponse(false, trans('general.user.social_failure'));
+        return Helper::sendResponse(404, trans('general.user.social_failure'));
     }
 
     /*
@@ -161,23 +162,23 @@ class ApiUserController extends Controller
                 LOG::debug("postUpdateAvatar: have image, preparing to upload");
                 $user->uploadImage($user, Input::file('avatar_img'), 'users');
                 LOG::debug("postUpdateAvatar: upload complete");
-                return Helper::sendResponse(true, trans('general.user.avatar_success'));
+                return Helper::sendResponse(200, trans('general.user.avatar_success'));
             }
             else if(Input::get('delete_img')) {
                 if (User::deleteAvatar($user->id)) {
-                    return Helper::sendResponse(true, 'delete okay');
+                    return Helper::sendResponse(200, 'delete okay');
                 }
                 else {
-                    return Helper::sendResponse(true, 'delete fail');
+                    return Helper::sendResponse(502, 'delete fail');
                 }
             }
-            return Helper::sendResponse(true, 'Your changes successfully saved');
+            return Helper::sendResponse(200, 'Your changes successfully saved');
         }
         else {
 
             // That user wasn't valid
-            LOG::debug("postUpdateAvatar: invalid user");
-            return Helper::sendResponse(false, trans('general.user.avatar_failure'));
+            // LOG::debug("postUpdateAvatar: invalid user");
+            return Helper::sendResponse(404, trans('general.user.avatar_failure'));
         }
     }
 
@@ -190,12 +191,13 @@ class ApiUserController extends Controller
             $user->password = \Hash::make(e(Input::get('password')));
 
             if (!$user->save()) {
-                return $user->getErrors();
+                // return $user->getErrors();
+                return Helper::sendResponse(502, $user->getErrors());
             }
 
-            return Helper::sendResponse(true, 'Saved!');
+            return Helper::sendResponse(200, 'Saved!');
 
         }
-        return Helper::sendResponse(false, 'Invalid user');
+        return Helper::sendResponse(404, 'Invalid user');
     }
 }

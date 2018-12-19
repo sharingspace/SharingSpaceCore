@@ -79,7 +79,7 @@ class Helper
         if($element == '') {
             $data['0'] = 'Select Item';
         } else {
-            $data['0'] = $element;
+            $data[''] = $element;
         }       
         return $data;
     }
@@ -224,6 +224,6 @@ class Helper
      * data = array of response
      */
     public static function sendResponse($status, $message, $data = []) {
-        return response()->json([$status, $message, $data]);
+        return response()->json(["meta" => ["code" => $status, "message" => $message], "data" => $data]);
     }
 }

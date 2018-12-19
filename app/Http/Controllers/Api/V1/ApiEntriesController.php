@@ -38,10 +38,11 @@ class ApiEntriesController extends Controller
             $entries = Community::findOrFail($community_id)->entries()->with('author')->notCompleted()->orderBy('created_at','desc')->paginate($per_page);
 
             $trnsform = GlobalTransformer::transform_entries($entries);
-            return Helper::sendResponse(true, '', $trnsform); 
         } catch (Exception $e) {
-                
+            return Helper::sendResponse(502, 'Something went wrong!, Try again after sometime');
         }
+        return Helper::sendResponse(200, '', $trnsform); 
+
     }
      /*
       * Create entry for single sharing space
@@ -63,7 +64,7 @@ class ApiEntriesController extends Controller
 
         $validator = Validator::make($request->all(), $entry->getRules());
         if ($validator->fails()) {
-            return Helper::sendResponse(false, $validator->messages()); 
+            return Helper::sendResponse(422, $validator->messages()); 
         }
 
         if ($user->isSuperAdmin() && !$user->isMemberOfCommunity($request->whitelabel_group, true)) {
@@ -76,7 +77,7 @@ class ApiEntriesController extends Controller
         }
 
         if (empty($exchange_types)) {
-            return Helper::sendResponse(false, trans('general.entries.messages.no_exchange_types'));
+            return Helper::sendResponse(422, trans('general.entries.messages.no_exchange_types'));
         }
 
         if (Input::get('location')) {
@@ -117,7 +118,7 @@ class ApiEntriesController extends Controller
                 }
 
                 if (!$entry->uploadImage($user, Input::file('file'), 'entries', $rotation)) {
-                    return Helper::sendResponse(false, trans('general.entries.messages.rotation_failed')); 
+                    return Helper::sendResponse(502, trans('general.entries.messages.rotation_failed')); 
                 }
             }
             else {
@@ -145,14 +146,14 @@ class ApiEntriesController extends Controller
                     'tags'           => $entry->tags,
                     'typeIds'        => $typeIds,
                 ];
-                return Helper::sendResponse(true, 'Created successfully', $data); 
+                return Helper::sendResponse(200, 'Created successfully', $data); 
 
             }
             else {
-                return Helper::sendResponse(false, trans('general.entries.messages.upload_failed')); 
+                return Helper::sendResponse(502, trans('general.entries.messages.upload_failed')); 
             }
         }
-        return Helper::sendResponse(false, trans('general.entries.messages.save_failed'));
+        return Helper::sendResponse(502, trans('general.entries.messages.save_failed'));
     }
 
     /*
@@ -162,7 +163,7 @@ class ApiEntriesController extends Controller
         $community = Helper::getCommunity($community_id);
         $trnsform = GlobalTransformer::transform_allexchnge_types($community->exchangeTypes);
 
-        return Helper::sendResponse(true, '', $trnsform);
+        return Helper::sendResponse(200, '', $trnsform);
     }
 
     /*-------------------------------------------------------------------  
@@ -187,7 +188,7 @@ class ApiEntriesController extends Controller
 
         $trnsform = GlobalTransformer::transform_entries($entries);
         
-        return Helper::sendResponse(true, '', $trnsform);   
+        return Helper::sendResponse(200, '', $trnsform);   
     }
 
     /*
@@ -206,7 +207,7 @@ class ApiEntriesController extends Controller
                    
         $transform = GlobalTransformer::transform_entries($entry);
 
-        return Helper::sendResponse(true, '', $transform);    
+        return Helper::sendResponse(200, '', $transform);    
     }
 
     public function updateEntry(Request $request, $community_id) {
@@ -217,7 +218,7 @@ class ApiEntriesController extends Controller
             $user = auth('api')->user();
 
             if ($user->cannot('update-entry', [$entry,$community])) {
-                return Helper::sendResponse(false, trans('general.entries.messages.not_allowed'));
+                return Helper::sendResponse(404, trans('general.entries.messages.not_allowed'));
             }
 
             $entry->title = e(Input::get('title'));
@@ -238,7 +239,7 @@ class ApiEntriesController extends Controller
             }
 
             if (!$entry->save()) {
-                return Helper::sendResponse(false, trans('general.entries.messages.save_failed'));
+                return Helper::sendResponse(502, trans('general.entries.messages.save_failed'));
             }
 
             if (Input::hasFile('file')) {
@@ -252,7 +253,7 @@ class ApiEntriesController extends Controller
                 else {
                     if (Input::has('rotation')) {
                         if (!Entry::rotateImage($user->id, $entry->id, 'entries', (int)Input::get('rotation'))) {
-                            return Helper::sendResponse(false, trans('general.entries.messages.save_failed'));
+                            return Helper::sendResponse(502, trans('general.entries.messages.save_failed'));
                         }
                     }
                 }
@@ -279,11 +280,11 @@ class ApiEntriesController extends Controller
                 'typeIds'        => $typeIds,
                 'tags'           => $entry->tags,
             ];
-            return Helper::sendResponse(true, "Updated successfully", $data);
+            return Helper::sendResponse(200, "Updated successfully", $data);
 
         }
 
-        return Helper::sendResponse(false, trans('general.entries.messages.invalid'));
+        return Helper::sendResponse(404, trans('general.entries.messages.invalid'));
     }
 
     public function deleteEntry(Request $request, $community_id, $entryID) {
@@ -293,19 +294,19 @@ class ApiEntriesController extends Controller
         $community = Helper::getCommunity($community_id);
 
         if (!$entry = Entry::find($entryID)) {
-            return Helper::sendResponse(false, trans('general.entries.messages.invalid'));  
+            return Helper::sendResponse(422, trans('general.entries.messages.invalid'));  
         }
         
         // First we check if user can edit the entry.
         // If users can't do it, we throw an error.
 
         if (!$entry->created_by == auth('api')->user()->id) {
-            return Helper::sendResponse(false, trans('general.entries.messages.delete_not_allowed'));  
+            return Helper::sendResponse(422, trans('general.entries.messages.delete_not_allowed'));  
         }
 
         // Try to delete the entry.
         if (!$entry->delete()) {
-            return Helper::sendResponse(false, trans('general.entries.messages.delete_failed'));  
+            return Helper::sendResponse(422, trans('general.entries.messages.delete_failed'));  
         }
 
         $entry->exchangeTypes()->detach();
@@ -316,7 +317,7 @@ class ApiEntriesController extends Controller
         if ($community->wrld3d && $community->wrld3d->get('api_key') && $entry->wrld3d && $entry->wrld3d->get('poi_id')) {
             (new PoiManager($community))->deletePoi($entry->wrld3d->get('poi_id'));
         }
-        return Helper::sendResponse(true, trans('general.entries.messages.delete_success'));            
+        return Helper::sendResponse(200, trans('general.entries.messages.delete_success'));            
     }
 
     public function getSettings() {

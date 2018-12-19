@@ -827,7 +827,12 @@ Route::group(
     }
 );
 
+/* 
+ * Frontend routess
+ */
 
-
+Route::group(['namespace' => 'Frontend'], function () {
+    require (__DIR__ . '/Frontend/route.php');
+});
 
 

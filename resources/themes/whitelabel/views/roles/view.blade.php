@@ -30,7 +30,7 @@
       {!! Form::open(['route' => 'admin.role.store', 'method' => 'post', 'role'=>'form','id'=>'form','files'=>true]) !!}
     @endif
       @include("roles.html")
-    {{ Form::close() }}
+      {{ Form::close() }}
 @stop
 
 @section('custom_js')
