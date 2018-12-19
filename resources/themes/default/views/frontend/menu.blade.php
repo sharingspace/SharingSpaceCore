@@ -47,7 +47,7 @@
                                                             <tbody>
                                                             @foreach ($menus as $menu)
                                                               <tr>
-                                                                <td> <a href="{{route('frontend.get.control.menu.edit',$menu->id)}}">{{ $menu->name }}</a></td>
+                                                                <td> {{ $menu->name }}</td>
                                                                 <td> {{ $menu->page->title }}</td>
                                                                 <td> {{ $menu->order }}</td>
                                                                 <td>

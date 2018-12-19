@@ -9,27 +9,9 @@
                 <div class="col-sm-12">
                     <div class="tabs vertical-tab mb-4">
                         <!-- Nav tabs -->
-                        <div class="nav-tabs-wrapper">
-                            <ul class="nav nav-tabs">
-                                <li>
-                                    <a href="#dashboard" data-toggle="tab">Dashboard</a>
-                                </li>
-                                <li>
-                                    <a class="" href="#tab-content-11" data-toggle="tab">Pages</a>
-                                </li>
-                                <li>
-                                    <a class="active" href="#tab-content-13" data-toggle="tab">Menus</a>
-                                </li>
-                                <li>
-                                    <a href="#tab-content-13" data-toggle="tab">Tab 03</a>
-                                </li>
-                            </ul>
-                        </div>
+                        @include('includes/side')
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane fade" id="dashboard">
-                                <p>Dashboard is here</p>
-                            </div>
                             <div class="tab-pane active fade show" id="tab-content-11">
                                 <div class="col-sm-12">
                                     <div>
@@ -65,11 +47,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="tab-content-13">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </div>
                         </div>
                     </div>

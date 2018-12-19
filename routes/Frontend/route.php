@@ -2,6 +2,7 @@
 <?php
 
 Route::get('/home','PageController@viewHomePage')->name('frontend.home');
+Route::get('/home/{slug}','PageController@viewSlugPage')->name('frontend.slug');
 Route::get('admin/control/dashboard','PageController@dashboard')->name('frontend.admin.dashboard');
 
 Route::get('admin/control/pages','PageController@adminControl')->name('frontend.admin.control');

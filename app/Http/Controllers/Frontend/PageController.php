@@ -11,7 +11,15 @@ class PageController extends Controller
 {
 
     public function viewHomePage(){
-        return view('frontend.page');
+        $data = Page::orderBy("created_at", 'desc')->first();
+        return view('frontend.home',$data);
+        // return view('frontend.page');
+    }
+
+    public function viewSlugPage($slug){
+        $data = Page::where("slug", $slug)->first();
+        return view('frontend.home',$data);
+        // return view('frontend.page');
     }
 
     public function dashboard(){
