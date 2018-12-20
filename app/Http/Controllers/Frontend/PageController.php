@@ -11,23 +11,34 @@ class PageController extends Controller
 {
 
     public function viewHomePage(){
-        $data = Page::orderBy("created_at", 'desc')->first();
+        $data['menus'] = Menu::orderBy('order','asc')->get();
+        $data["menu"] = Menu::where("name", 'home')->first();
         return view('frontend.home',$data);
         // return view('frontend.page');
     }
 
     public function viewSlugPage($slug){
-        $data = Page::where("slug", $slug)->first();
-        return view('frontend.home',$data);
-        // return view('frontend.page');
+        $data['menus'] = Menu::orderBy('order','asc')->get();
+        $page = Page::where("slug", $slug)->first();
+        if($page){
+            $data['menu'] = Menu::where("page_id", $page->id)->first();
+            if($slug == 'home'){
+                return redirect(url('/'));
+            }
+            return view('frontend.custom-home',$data);
+        } else {
+            return view('errors.404');
+        }
     }
 
     public function dashboard(){
+        $data['menus'] = Menu::orderBy('order','asc')->get();
         $data['module_subtitle'] = 'Dashboard';
         return view('frontend.dashboard',$data);
     }
 
     public function adminControl(){
+        $data['menus'] = Menu::orderBy('order','asc')->get();
         $data['module_subtitle'] = 'Page List';
         $data['module_subtitle_menu'] = 'Menu List';
         $data['pages'] = Page::latest()->paginate(10);
@@ -36,6 +47,7 @@ class PageController extends Controller
     }
 
     public function adminControlCreate(){
+        $data['menus'] = Menu::orderBy('order','asc')->get();
         $data['module_subtitle'] = 'Create Page';        
         return view('frontend.control-view',$data);
     }
@@ -49,7 +61,10 @@ class PageController extends Controller
             "meta_keywords" => "required",
             "status" => "required",
         ]);
-        
+        $page = Page::where("slug", $request->slug)->first();
+        if($page){
+            throw new GeneralException("This title already exist please choose different title!");
+        }
         \DB::beginTransaction();
         try {   
                 $item = Page::create($request->all());
@@ -65,6 +80,7 @@ class PageController extends Controller
     }
 
     public function getControlEdit($id, Request $request) {
+        $data['menus'] = Menu::orderBy('order','asc')->get();
         $data['module_subtitle'] = 'Edit Page';
         $data['model'] = Page::findorfail($id);
         
@@ -80,7 +96,10 @@ class PageController extends Controller
             "meta_keywords" => "required",
             "status" => "required",
         ]);
-        
+        $page = Page::where("slug", $request->slug)->where('id','!=',$request->id)->first();
+        if($page){
+            throw new GeneralException("This title already exist please choose different title!");
+        }
         \DB::beginTransaction();
         try {   
                 Page::findorfail($request->id)->update($request->all());
@@ -102,12 +121,26 @@ class PageController extends Controller
     }
 
     public function indexMenu(){
-        $data['module_subtitle_menu'] = 'Menu List';
-        $data['menus'] = Menu::latest()->paginate(10);
-        return view('frontend.menu',$data);
+        $data['menus'] = Menu::orderBy('order','asc')->get();
+        $data['module_subtitle_menu'] = 'Arrange Menu';
+        $data['menus_data'] = Menu::orderBy('order','asc')->get();
+        return view('frontend.drag-menu',$data);
     }
 
+    public function postMenuOrder(Request $request) {
+        $str = $request->data;
+        preg_match_all('!\d+!', $str, $matches);
+
+        $i = 1;
+        foreach ($matches[0] as $key => $value) {
+            $menu = Menu::findorfail($value);
+            $menu->update(['order' => $i]);            
+            $i++;
+        }
+        return Helper::sendResponse(true, 'Menu items arraged!');
+    }
     public function createMenu(){
+        $data['menus'] = Menu::orderBy('order','asc')->get();
         $data['module_subtitle'] = 'Create Menu';
         $menu = Menu::pluck('page_id')->toarray();
         $data['pages'] = Helper::injectselect(Page::whereNotIn('id',$menu)->pluck('title','id'),'Select Page Name');        
@@ -135,6 +168,7 @@ class PageController extends Controller
     }
 
     public function editMenu($id, Request $request) {
+        $data['menus'] = Menu::orderBy('order','asc')->get();
         $data['module_subtitle'] = 'Edit Menu';
         $menu = Menu::where('id',"!=", $id)->pluck('page_id')->toarray();
 
@@ -165,8 +199,14 @@ class PageController extends Controller
     }
 
     public function deleteMenu($id, Request $request) {
-        Menu::findorfail($id)->delete();
- 
+        $menu = Menu::findorfail($id);
+        if($menu){
+            if(ucfirst($menu->name) == "Home" ){
+                throw new GeneralException("You cannot delete");
+            } else {
+                $menu->delete();
+            }
+        }
         return redirect()->back()->withFlashSuccess('Menu Deleteed!');
     }
 }

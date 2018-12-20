@@ -48,28 +48,28 @@
                                                             </thead>
                                                             <tbody>
                                                             @foreach ($pages as $page)
-                                                              <tr>
-                                                                <td> {{ $page->title }}</td>
-                                                                <td> {{ $page->slug }}</td>
-                                                                <td> {{ $page->meta_description }}</td>
-                                                                <td> {{ $page->meta_keywords }}</td>
-                                                                <td> {{ $page->status }}</td>
-                                                                <td>
-                                                                    <div class="dropdown">
-                                                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Action &nbsp;
-                                                                        <span class="caret"></span></button>
-                                                                        <ul class="dropdown-menu drop">
-                                                                            <li>
-                                                                                <a href="{{route('frontend.get.control.edit',$page->id)}}"><i class="glyphicon glyphicon-edit" style="color: green;" data-toggle="tooltip" data-placement="top" data-original-title="Edit"></i>Edit</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="{{ route('frontend.get.control.delete', $page->id) }}" class="trash_btn genericdelete" id="{{$page->id}}"><i class="glyphicon glyphicon-trash" style="color: red;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>Delete</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </td>
-                                                              </tr>
+                                                                <tr>
+                                                                    <td> {{ $page->title }}</td>
+                                                                    <td> {{ $page->slug }}</td>
+                                                                    <td> {{ $page->meta_description }}</td>
+                                                                    <td> {{ $page->meta_keywords }}</td>
+                                                                    <td> {{ $page->status == '1' ? Active : Inactive}}</td>
+                                                                    <td>
+                                                                        <div class="dropdown">
+                                                                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Action &nbsp;
+                                                                            <span class="caret"></span></button>
+                                                                            <ul class="dropdown-menu drop">
+                                                                                <li>
+                                                                                    <a href="{{route('frontend.get.control.edit',$page->id)}}"><i class="glyphicon glyphicon-edit" style="color: green;" data-toggle="tooltip" data-placement="top" data-original-title="Edit"></i>Edit</a>
+                                                                                </li>
+                                                                                <li>
+                                                                                    <a href="{{ route('frontend.get.control.delete', $page->id) }}" class="trash_btn genericdelete" id="{{$page->id}}"><i class="glyphicon glyphicon-trash" style="color: red;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>Delete</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        
+                                                                    </td>
+                                                                </tr>
                                                             @endforeach
                                                             </tbody>
                                                           </table>

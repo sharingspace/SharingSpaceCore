@@ -3,6 +3,6 @@
 @section('content')
 
 <div id="main">
-    {!! $body !!}
+    {!! $menu->page->body !!}
 </div>
 @endsection

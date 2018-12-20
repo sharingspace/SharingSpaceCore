@@ -34,42 +34,14 @@
                                             <div class="col-sm-12">
                                                 <div class="contact-form-wrapper">
                                                     @include("includes/message")
+                                                    
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-20">
-                                                        <div class="table-responsive">
-                                                          <table class="table table-condensed" id="members">
-                                                            <thead>
-                                                              <tr>
-                                                                <th>Name</th>
-                                                                <th>Page Name</th>
-                                                                <th>Order</th>
-                                                                <th>Action</th>
-                                                              </tr>
-                                                            </thead>
-                                                            <tbody>
+                                                        <div class="message"></div>
+                                                        <ul id="sortable">
                                                             @foreach ($menus_data as $menu)
-                                                              <tr>
-                                                                <td> {{ $menu->name }}</td>
-                                                                <td> {{ $menu->page->title }}</td>
-                                                                <td> {{ $menu->order }}</td>
-                                                                <td>
-                                                                    <div class="dropdown">
-                                                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Action &nbsp;
-                                                                        <span class="caret"></span></button>
-                                                                        <ul class="dropdown-menu drop">
-                                                                            <li>
-                                                                                <a href="{{route('frontend.get.control.menu.edit',$menu->id)}}"><i class="glyphicon glyphicon-edit" style="color: green;" data-toggle="tooltip" data-placement="top" data-original-title="Edit"></i>Edit</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="{{ route('frontend.get.control.menu.delete', $menu->id) }}" class="trash_btn genericdelete" id="{{$menu->id}}"><i class="glyphicon glyphicon-trash" style="color: red;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i>Delete</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                              </tr>
+                                                                <li class="ui-state-default" id="item-{{$menu->id}}"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{$menu->name}}</li>
                                                             @endforeach
-                                                            </tbody>
-                                                          </table>
-                                                        </div> <!-- table responsive -->
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,11 +64,33 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $( function() {
-            $( "#sortable" ).sortable();
-            $( "#sortable" ).disableSelection();
-        } );
+        $('ul').sortable({
+            axis: 'y',
+            update: function (event, ui) {
+                var data = $(this).sortable('serialize');
+                // POST to server using $.post or $.ajax
+                $.ajax({
+                    data: {
+                            "_token": "{{ csrf_token() }}",
+                            data
+                        },
+                    type: 'POST',
+                    url: '{{route("frontend.admin.control.menu.order")}}',
+                    success: function(response){
+                        if(response.meta.code){
+                            $('.message').html('<div class="alert alert-success">'+response.meta.message+'</div>');
+                        } else {
+                            $('.message').html('<div class="alert alert-danger">Something wrong</div>');
+                        }
+                    },
+                    error: function(){
+                        $('.message').html('<div class="alert alert-danger">Something wrong!</div>');
+                    }
+                });
+            }
+        });
     });
+
     $(document).on("click",".trash_btn", function (e) {
         e.preventDefault();         
         
