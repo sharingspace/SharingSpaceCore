@@ -1,6 +1,16 @@
 
 <?php
+// Route::get('/home','Frontend\PageController@viewHomePage')->name('frontend.home');
+// Route::get('/{slug}','Frontend\PageController@viewSlugPage')->name('frontend.slug');
 
+
+Route::get('/home','PageController@viewHomePage')->name('frontend.home');
+Route::get('/features','PageController@viewFeatures')->name('frontend.features');
+Route::get('/about','PageController@viewAbout')->name('frontend.about');
+Route::get('/pricing','PageController@viewPricing')->name('frontend.pricing');
+Route::get('/privacy','PageController@viewPrivacy')->name('frontend.privacy');
+Route::get('/terms','PageController@viewTerms')->name('frontend.terms');
+Route::get('/contact','PageController@viewContact')->name('frontend.contact');
 
 Route::get('admin/control/dashboard','PageController@dashboard')->name('frontend.admin.dashboard');
 

@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Models\Community;
 use App\Models\User;
+use Helper;
 
 class GlobalTransformer
 {
@@ -30,6 +31,29 @@ class GlobalTransformer
         return $communities_array;
 
 	}
+
+    public static function transform_userallcommunities($communities) {
+        $communities_array = array();
+        foreach ($communities as $community) {
+            $communities_array[] = [
+                'id' => e($community->id),
+                'name' => e($community->name),
+                'about' => e($community->about),
+                'cover_img' => e($community->cover_img),
+                'profile_img' => e($community->profile_img),
+                'logo' => e($community->logo),
+                    'location' =>
+                    [
+                      'name' => e($community->location),
+                      'latitude' => e($community->latitude),
+                      'longitude' => e($community->longitude),
+                    ],
+            ];
+        }
+        return $communities_array;
+
+    }
+
     public static function transform_allexchnge_types($exchangeTypes) {
         $exchange_types = array();
         foreach ($exchangeTypes as $value) {
@@ -86,6 +110,7 @@ class GlobalTransformer
 	public static function transformall_members($users, $community_id) {
 		$users_array = array();
         foreach ($users as $user) {
+            
             $role_name = '';
             $role = $user->roles()->where('community_id', $community_id)->first();
             if(!empty($role)) {
@@ -112,8 +137,8 @@ class GlobalTransformer
                 'updated_at' => $user->updated_at,
                 'total' => $users->total(),
                 'lastpage' => $users->lastpage(),
-                'role_name' => $role_name
-
+                'role_name' => $role_name,
+                'communities'=> GlobalTransformer::transform_userallcommunities($user->communities),
             ];
         }
         return $users_array;

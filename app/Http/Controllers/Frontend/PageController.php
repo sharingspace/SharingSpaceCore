@@ -17,6 +17,30 @@ class PageController extends Controller
         // return view('frontend.page');
     }
 
+    public function viewFeatures(){
+        return view('frontend.features');
+    }
+
+    public function viewAbout(){
+        return view('frontend.about');
+    }
+
+    public function viewPricing(){
+        return view('frontend.pricing');
+    }
+
+    public function viewPrivacy(){
+        return view('frontend.privacy');
+    }
+
+    public function viewTerms(){
+        return view('frontend.terms');
+    }
+
+    public function viewContact(){
+        return view('frontend.contact');
+    }
+
     public function viewSlugPage($slug){
         $data['menus'] = Menu::orderBy('order','asc')->get();
         $page = Page::where("slug", $slug)->first();

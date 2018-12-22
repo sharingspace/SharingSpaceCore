@@ -25,8 +25,11 @@
 //     return $data;
 // });
 
-Route::get('/','Frontend\PageController@viewHomePage')->name('frontend.home');
-Route::get('/{slug}','Frontend\PageController@viewSlugPage')->name('frontend.slug');
+
+
+
+// Route::get('/home','Frontend\PageController@viewHomePage')->name('frontend.home');
+// Route::get('/{slug}','Frontend\PageController@viewSlugPage')->name('frontend.slug');
 
 
 Route::group(
