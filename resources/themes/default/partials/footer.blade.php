@@ -8,7 +8,7 @@
                 </p>
             </div>
 
-            <!-- <div class="col-12 col-md-7">
+            {{-- <div class="col-12 col-md-7">
                 <ul class="nav nav-primary nav-hero">
                     <li class="nav-item"><a class="nav-link" href="{{ route('about')}}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('coop')}}">Coop</a></li>
@@ -16,7 +16,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('privacy')}}">Privacy</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('tos')}}">Terms</a></li>
                 </ul>
-            </div> -->
+            </div> --}}
 
             <div class="col-7">
             </div>
@@ -74,12 +74,12 @@
         <br/>
 
         <ul class="nav nav-primary flex-column">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('memberships') }}">Memberships</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('about') }}">About Us</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('coop') }}">Coop</a>
             </li>

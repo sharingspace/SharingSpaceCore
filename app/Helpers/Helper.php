@@ -217,6 +217,11 @@ class Helper
         return Community::findorfail($community_id);
     }
 
+
+    public static function getAllCommunity($user_id) {
+        // communities
+        // Community::where('user_id',$user_id);
+    }
     /*
      * API Helper to generate the rensponse
      * status = true or false

@@ -86,7 +86,6 @@ class ApiMemberController extends Controller
      * Improvement: later need to add pagination
      */
     public function getMembers(Request $request,$community_id) {
-
         $community = Helper::getCommunity($community_id);
     
         if ($request->has('per_page')) {

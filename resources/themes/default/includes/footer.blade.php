@@ -1,4 +1,4 @@
-<footer class="footer pt-12 pb-14">
+<!-- <footer class="footer pt-12 pb-14">
     <div class="footer-inner">
         <div class="container">
             <div class="row">
@@ -53,5 +53,27 @@
                 </div>
             </div>
         </div>
+    </div>
+</footer> -->
+
+<footer class="footer-modern bg-dark pt48 pb40 pr-xs-15 pl-xs-15">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-3 col-sm-4 text-center-xs">
+                        <span class="sub mb8"><a>NC-SA</a>  AnyShare Society</span>
+                        <span class="sub">
+                            <a href="{{route('pricing')}}">Pricing</a> 
+                            <a href="{{route('privacy')}}">Privacy</a> 
+                            <a href="{{route('terms')}}">Terms</a>
+                            <a href="{{route('contact')}}">Contact</a></span>
+        </div>
+        <div class="col-sm-4 text-center mt-xx-24 mb-xx-24">
+            <a href="{{route('home')}}">
+                <img alt="Sharing Space" class="image-s fade-hover" src="/frontend/wp-content/uploads/2018/12/sharing-space-logo-1.png" />
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-4 text-right text-center-xs">
+            <ul class="list-inline social-list mb16"><li><a href="https://github.com/sharingspace" target="_blank"><i class="ti-github"></i></a></li><li><a href="https://twitter.com/oursharingspace" target="_blank"><i class="ti-twitter"></i></a></li><li><a href="https://www.facebook.com/our.sharing.space/" target="_blank"><i class="ti-facebook"></i></a></li></ul>
+                        <span class="sub">info@sharing.space</span>
+                    </div>
     </div>
 </footer>

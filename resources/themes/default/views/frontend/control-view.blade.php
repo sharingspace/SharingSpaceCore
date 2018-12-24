@@ -12,9 +12,6 @@
                         @include('includes/side') 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane fade" id="dashboard">
-                                <p>Dashboard is here</p>
-                            </div>
                             <div class="tab-pane active fade show" id="tab-content-11">
                                 <div class="col-sm-12">
                                     <div>
@@ -50,11 +47,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="tab-content-13">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 @extends('layouts/frontend-master')
 
 @section('content')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <div id="main">
     <div class="clearfix">&nbsp;&nbsp;&nbsp;</div>
@@ -45,9 +46,9 @@
                                                               </tr>
                                                             </thead>
                                                             <tbody>
-                                                            @foreach ($menus as $menu)
+                                                            @foreach ($menus_data as $menu)
                                                               <tr>
-                                                                <td> <a href="{{route('frontend.get.control.menu.edit',$menu->id)}}">{{ $menu->name }}</a></td>
+                                                                <td> {{ $menu->name }}</td>
                                                                 <td> {{ $menu->page->title }}</td>
                                                                 <td> {{ $menu->order }}</td>
                                                                 <td>
@@ -86,10 +87,16 @@
 </div>
 @endsection
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
-    
+    $(document).ready(function () {
+        $( function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        } );
+    });
     $(document).on("click",".trash_btn", function (e) {
         e.preventDefault();         
         
