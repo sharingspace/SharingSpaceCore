@@ -61,13 +61,13 @@
         <div class="col-md-offset-1 col-md-3 col-sm-4 text-center-xs">
                         <span class="sub mb8"><a>NC-SA</a>  AnyShare Society</span>
                         <span class="sub">
-                            <a href="{{route('frontend.pricing')}}">Pricing</a> 
-                            <a href="{{route('frontend.privacy')}}">Privacy</a> 
-                            <a href="{{route('frontend.terms')}}">Terms</a>
-                            <a href="{{route('frontend.contact')}}">Contact</a></span>
+                            <a href="{{route('pricing')}}">Pricing</a> 
+                            <a href="{{route('privacy')}}">Privacy</a> 
+                            <a href="{{route('terms')}}">Terms</a>
+                            <a href="{{route('contact')}}">Contact</a></span>
         </div>
         <div class="col-sm-4 text-center mt-xx-24 mb-xx-24">
-            <a href="{{route('frontend.home')}}">
+            <a href="{{route('home')}}">
                 <img alt="Sharing Space" class="image-s fade-hover" src="/frontend/wp-content/uploads/2018/12/sharing-space-logo-1.png" />
             </a>
         </div>

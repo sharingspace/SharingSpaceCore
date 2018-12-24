@@ -235,6 +235,7 @@ Route::group(
                         'uses' => 'UserController@postUpdateNotifications',
                     )
                 );
+               
             }
         );
 
@@ -829,6 +830,13 @@ Route::group(
                 return redirect('/');
             }
         );
+        Route::get('/home','Frontend\PageController@viewHomePage')->name('home');
+        Route::get('/features','Frontend\PageController@viewFeatures')->name('features');
+        Route::get('/about','Frontend\PageController@viewAbout')->name('about');
+        Route::get('/pricing','Frontend\PageController@viewPricing')->name('pricing');
+        Route::get('/privacy','Frontend\PageController@viewPrivacy')->name('privacy');
+        Route::get('/terms','Frontend\PageController@viewTerms')->name('terms');
+        Route::get('/contact','Frontend\PageController@viewContact')->name('contact');
     }
 );
 

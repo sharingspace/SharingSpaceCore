@@ -6,7 +6,7 @@
 							<div class="container"><div class="row"><div class="col-sm-12 text-center">
 					        	<h1 class="heading-title mb0">Contact Us</h1>
 					        	<p class="lead fade-color mb0"></p>
-							</div></div></div><ol class="breadcrumb breadcrumb-style"><li><a href="../index.html" class="home-link" rel="home">Home</a></li><li class="active">Contact Us</li></ol></section><div class="tlg-page-wrapper">
+							</div></div></div><ol class="breadcrumb breadcrumb-style"><li><a href="{{route('home')}}" class="home-link" rel="home">Home</a></li><li class="active">Contact Us</li></ol></section><div class="tlg-page-wrapper">
 	<a id="home" href="#"></a>
 	<section class="vc_row wpb_row vc_row-fluid bg-light not-equal not-color"><div class=" container "><div class="row "><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner "><div class="wpb_wrapper"><div role="form" class="wpcf7" id="wpcf7-f251-p111-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"></div>
