@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en-US">
-
-<!-- Mirrored from sharing.space/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Dec 2018 10:55:02 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,10 +97,10 @@ var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_ur
 })('indexf6b0.html?wordfence_lh=1&amp;hid=A8E96CBEF09861620E7DB713462D697E');
     </script>   <noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
         <meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
-    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="http://sharing.space//frontend/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><link rel="icon" href="/frontend/wp-content/uploads/2018/11/sharing-space-favicon.png" sizes="32x32" />
+    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="/frontend/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><link rel="icon" href="/frontend/wp-content/uploads/2018/11/sharing-space-favicon.png" sizes="32x32" />
     <link rel="icon" href="/frontend/wp-content/uploads/2018/11/sharing-space-favicon.png" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="/frontend/wp-content/uploads/2018/11/sharing-space-favicon.png" />
-    <meta name="msapplication-TileImage" content="http://sharing.space//frontend/wp-content/uploads/2018/11/sharing-space-favicon.png" />
+    <meta name="msapplication-TileImage" content="/frontend/wp-content/uploads/2018/11/sharing-space-favicon.png" />
 
     <!-- BEGIN ExactMetrics v5.3.7 Universal Analytics - https://exactmetrics.com/ -->
     <script>
